@@ -44,6 +44,8 @@
     </src-comment>
   </active*>
 
+  <assign|hlink-tm|<macro|body|target|<hlink|<arg|body>|<merge|<arg|target>|.tm>>>>
+
   <\active*>
     <\src-comment>
       Other customizations
@@ -65,6 +67,8 @@
   <assign|tmhtml-menu-extra|<macro|body|\<rightarrow\><menu-item|<arg|body>>>>
 
   <assign|tmhtml-markup|<macro|body|<html-class|tmweb-markup|<arg|body>>>>
+
+  <assign|tmhtml-hlink-tm|<macro|body|target|<hlink|<arg|body>|<merge|<arg|target>|.texmacs>>>>
 </body>
 
 <initial|<\collection>

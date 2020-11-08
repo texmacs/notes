@@ -9,7 +9,7 @@
 
   This example is taken from a presentation of Miguel de Benito
 
-  The TeXmacs source <hlink|<code*|tetris-with-tables.tm>|./resources/tetris/tetris-with-tables.texmacs>
+  The TeXmacs source <hlink-tm|tetris-with-tables.tm|./resources/tetris/tetris-with-tables>
   loads the scheme file <hlink|tetris-with-tables.scm|./resources/tetris/tetris-with-tables.scm>
   which defines the procedures needed to play tetris. The game surface is
   implemented via a document table and the tiles by changing the color of the
@@ -56,7 +56,7 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|index.tm>>
+    <associate|auto-1|<tuple|?|?>>
   </collection>
 </references>
 
