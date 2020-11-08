@@ -9,7 +9,7 @@
 
   <hlink|[index]|./index.tm>
 
-  <section*|Implementing previews for link targets>
+  <chapter*|Implementing previews for link targets>
 
   [last revision: 2020.11.9]
 
