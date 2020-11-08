@@ -3,7 +3,7 @@
 <style|notes>
 
 <\body>
-  <chapter*|A TeXmacs blog>
+  <hrule><chapter*|A TeXmacs blog>
 
   <section*|Contents>
 
