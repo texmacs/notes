@@ -633,8 +633,12 @@ tt, .verbatim {
 /******************************************************************************
 * Further hacks
 ******************************************************************************/
+code {
+    font-size: 90%;
+}
 
 .tmweb-code {
+    font-size: 90%;
     background-color: #E0E0FF;
     border-width: 1px;
     border-color: #4040C0;
@@ -659,4 +663,10 @@ tt, .verbatim {
 
 .tmweb-menu {
     font-size: 92%;
+}
+
+.tmweb-markup {
+    color: blue;
+    font-size: 90%;
+    font-family: sans-serif;
 }
