@@ -13,6 +13,8 @@
 
   <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
 
+  <hlink|A TikZ example with the <name|Graph> plugin|./a-tikz-example.tm>\ 
+
   \;
 
   <section*|Contributing>
