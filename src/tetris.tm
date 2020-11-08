@@ -5,7 +5,7 @@
 <\body>
   <hlink|[index]|./index.tm><chapter*|Tetris with <TeXmacs> tables>
 
-  <image|../docs/tetris/screenshot.png|600px|||>
+  <image|./resources/tetris/screenshot.png|600px|||>
 
   This example is taken from a presentation of Miguel de Benito
 
