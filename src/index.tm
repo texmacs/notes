@@ -11,6 +11,8 @@
 
   <hlink|Awesome <TeXmacs>|./awesome-texmacs.tm>
 
+  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
+
   \;
 
   <section*|Contributing>
