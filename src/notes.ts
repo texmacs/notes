@@ -27,7 +27,7 @@
 
   <assign|html-title|TeXmacs notes: Preview>
 
-  <assign|html-css|<tuple|../resources/notes-base.css>>
+  <assign|html-css|<tuple|./resources/notes-base.css>>
 
   <\active*>
     <\src-comment>
