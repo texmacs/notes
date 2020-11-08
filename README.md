@@ -3,9 +3,13 @@ Notes about TeXmacs
 
 This is an attempt to a blog/wiki about [TeXmacs](http://www.texmacs.org). It aims to be a container for articles, snippets, comments, developer docs, proposals, ... 
 
-The `src/`directory hosts the TeXmacs sources for the website. 
+The site is served at https://texmacs.github.io/notes/ 
 
-The `docs/`directory hosts the HTML code for the website together with all the necessary resources which have to be served (fonts, css styles, etc...).
+Structure of the repository:
+
+ * The `src/`directory hosts the TeXmacs sources for the website. 
+
+ * The `docs/`directory hosts the HTML code for the website together with all the necessary resources which have to be served (fonts, css styles, etc...).
 
 All the HTML code is automatically generated from the TeXmacs sources which are the primary source of content. Since TeXmacs itself takes care of the conversion there is essentially no need for an external software like Jekyll.
 
