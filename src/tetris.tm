@@ -9,7 +9,7 @@
 
   This example is taken from a presentation of Miguel de Benito
 
-  The TeXmacs source <hlink|<code*|tetris.tm>|./resources/tetris/tetris.tm#>
+  The TeXmacs source <hlink|<code*|tetris-with-tables.tm>|./resources/tetris/tetris-with-tables.texmacs>
   loads the scheme file <hlink|tetris-with-tables.scm|./resources/tetris/tetris-with-tables.scm>
   which defines the procedures needed to play tetris. The game surface is
   implemented via a document table and the tiles by changing the color of the
