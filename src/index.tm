@@ -13,6 +13,22 @@
 
   \;
 
+  <section*|Contributing>
+
+  <\small>
+    Clone the repository at <hlink|<hlink|https://github.com/texmacs/notes|https://github.com/texmacs/notes>|<quotation|https://github.com/texmacs/notes\<gtr\>>>
+    \| Make your modifications (typically add new articles in the
+    <code*|src/>directory and modify accordingly <code*|index.tm>, this file)
+    \| Make a pull request on github to ask the maintainers to integrated
+    your changes into the public repository \| Once the changes are pulled in
+    they will become immediately publicly visible on the website.
+
+    To automatically regenerate all the web pages use
+    \ `Tools-\<gtr\>Web-\<gtr\>Create/Update web site` within <TeXmacs> and
+    choose <code*|src/> as source and <code*|docs/> as destination
+    directories.
+  </small>
+
   <hrule>
 
   \;
