@@ -5,17 +5,25 @@
 <\body>
   <hrule><chapter*|A TeXmacs blog>
 
-  <section*|Contents>
+  <section*|Collections >
 
-  <hlink|Implementing previews for link targets|./previews.tm>
+  <with|font-shape|italic|<tiny|These articles contain collections of stuff,
+  edit and augment them at will.>>
+
+  <hlink|Wishlist and additional functionalities|./wishlist.tm>
 
   <hlink|Awesome <TeXmacs>|./awesome-texmacs.tm>
 
-  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
+  <section*|Miscellanea>
+
+  <with|font-shape|italic|<tiny|Self-contained, one shot, material on various
+  topics. \ Most recent articles on top.>>
 
   <hlink|A TikZ example with the <name|Graph> plugin|./a-tikz-example.tm>\ 
 
-  \;
+  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
+
+  <hlink|Implementing previews for link targets|./previews.tm>
 
   <section*|Contributing>
 
@@ -68,6 +76,7 @@
     <associate|auto-1|<tuple|?|?>>
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
+    <associate|auto-4|<tuple|?|?>>
   </collection>
 </references>
 
