@@ -16,7 +16,10 @@
   It is realized by star operation: \\cite{paper1,*paper2,*paper3}. Three
   papers will be collected in References under single number [1].\ 
 
-  <hrule>
+  Some more context on collapsing multiple citations in <LaTeX> here:
+  <hlink|http://www.texfaq.org/FAQ-mcite|http://www.texfaq.org/FAQ-mcite>.
+
+  \ <hrule>
 
   \;
 </body>
