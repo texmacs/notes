@@ -3,7 +3,17 @@
 <style|<tuple|notes|html-font-size>>
 
 <\body>
-  <hrule><chapter*|A TeXmacs blog>
+  <hrule>
+
+  <\wide-tabular>
+    <tformat|<cwith|1|1|1|1|cell-halign|c>|<table|<row|<\cell>
+      <image|resources/texmacs-blog-transparent.png|40pt|||>
+    </cell>>>>
+  </wide-tabular>
+
+  <chapter*|A TeXmacs blog>
+
+  \;
 
   <section*|Collections >
 
@@ -87,11 +97,14 @@
       TeXmacs blog> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
-      Contents <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      Collections \ <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
 
-      Contributing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      Miscellanea <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
+
+      Contributing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-4>
     </associate>
   </collection>
 </auxiliary>
