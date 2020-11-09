@@ -38,12 +38,22 @@
 
   <section*|For Users>
 
+  <subsection|Documents written with TeXmacs>
+
   <\itemize>
     <item><hlink|richi235's Bachelor Thesis on Link Aggregation
     Tunneling|https://github.com/richi235/bachelor-thesis-link-aggregation-tunneling>
+  </itemize>
 
+  <subsection|User-contributed style files>
+
+  <\itemize>
     <item><hlink|Algorithmic style for Texmacs|https://gitlab.com/syedahmad/algorithmacs>
+  </itemize>
 
+  <subsection|TeXmacs for package management systems>
+
+  <\itemize>
     <item><hlink|GNU TeXmacs package for Chocolatey|https://chocolatey.org/packages/texmacs>
 
     <item><hlink|GNU TeXmacs package for Archlinux|https://www.archlinux.org/packages/extra/x86_64/texmacs/>
@@ -69,11 +79,14 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|../../../.TeXmacs/texts/scratch/no_name_2.tm>>
-    <associate|auto-2|<tuple|?|?|../../../.TeXmacs/texts/scratch/no_name_2.tm>>
-    <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|../../../.TeXmacs/texts/scratch/no_name_2.tm>>
-    <associate|auto-4|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|../../../.TeXmacs/texts/scratch/no_name_2.tm>>
-    <associate|auto-5|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|../../../.TeXmacs/texts/scratch/no_name_2.tm>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-2|<tuple|?|?>>
+    <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-4|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-5|<tuple|1|?>>
+    <associate|auto-6|<tuple|2|?>>
+    <associate|auto-7|<tuple|3|?>>
+    <associate|auto-8|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
   </collection>
 </references>
 
