@@ -22,8 +22,36 @@ To automatically regenerate all the web pages  use `Tools->Web->Create/Update we
 
 Once the repository is pushed on github it becomes visible. 
 
-**To contribute:** Clone the repository. Make your modifications (typically add new articles in the `src/`directory and modify accordingly `index.tm`). Make a pull request on github to ask the maintainers to integrated your changes into the public repository. Once the changes are pulled in they will become immediately publicly visible on the website.
+**To contribute:**
+It is necessary to perform a few actions using the terminal. The sequence is fork-clone-modify-add-commit-push- and finally make a pull request; people that use git are familiar with these commands. Here are some hints for those that are using git for the first time (a basic tutorial is available at https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/).
 
+  * fork the repository (it can be done through the web interface)
+  * clone it locally (within a suitable directory execute the command `git clone https://github.com/texmacs/notes.git`: a subdirectory named `notes` will appear, where you will be able to work on the files)
+  * make your modifications
+  * add the modified files to git (command `git add`)
+  * commit with `git commit`
+    * the first time you do this, git will ask you to set your identity with the commands `git config --global user.email` and `git config --global user.name`
+    * the `--global` switch can be omitted; in this case the identity will be set for the current repository only
+  * push the modifications to your forked repository using `git push`
+    * git asks for username and password
+  * now you can make a pull request through the web interface, at `https://github.com/texmacs/notes/pulls` (green button `New pull request`).
+    * The web interface gives further helpful hints. Follow the link `compare across forks` above the pulldown menus to have them show forks, from which you can select yours.
+  * The pull request on github asks the maintainers to integrate your changes into the public repository.
+
+**To keep your fork up to date:**
+  * Configure the upstream remote repository with `git remote add upstream https://github.com/texmacs/notes.git` (instructions at https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork)
+  * follow the steps at https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork, that is:
+    * make sure you are working on the branch you want to work on (e.g. `git checkout main`, where git might answer you 
+    ```
+    Already on 'main'
+    Your branch is up to date with 'origin/main'.
+    ```
+    )
+    * fetch upstream
+    * merge upstream/main
+    * push
+    
+Typically it should just be necessary to modify or add to only the `.tm` sources in the src/directory---and modify accordingly index.tm. The html files are then generated automatically after the pull request is merged. Once the changes are pulled in they will become immediately publicly visible on the website.
 
 Enjoy TeXmacs!
 
