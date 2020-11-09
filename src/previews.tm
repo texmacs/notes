@@ -7,7 +7,7 @@
     \;
   </hide-preamble>
 
-  <hlink|[index]|./index.tm>
+  <notes-header>
 
   <chapter*|Implementing previews for link targets>
 
@@ -289,9 +289,9 @@
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      Implementing previews for link targets
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-1>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Implementing
+      previews for link targets> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <pageref|auto-1><vspace|0.5fn>
     </associate>
   </collection>
 </auxiliary>

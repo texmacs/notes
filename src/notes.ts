@@ -46,6 +46,18 @@
 
   <assign|hlink-tm|<macro|body|target|<hlink|<arg|body>|<merge|<arg|target>|.tm>>>>
 
+  <assign|notes-header|<\macro>
+    <\wide-tabular>
+      <tformat|<cwith|1|1|1|1|cell-halign|c>|<cwith|1|1|1|1|cell-width|30pt>|<cwith|1|1|1|1|cell-hmode|exact>|<cwith|1|1|1|-1|cell-valign|c>|<table|<row|<\cell>
+        <image|resources/texmacs-blog-transparent.png|20pt|||>
+      </cell>|<\cell>
+        <hlink|[index]|./index.tm>
+      </cell>>>>
+    </wide-tabular>
+  </macro>>
+
+  <assign|tmhtml-notes-header|<macro|<html-div-class|notes-header|<image|resources/texmacs-blog-transparent.png|20pt|||><space|2pt><hlink|[index]|./index.tm>>>>
+
   <\active*>
     <\src-comment>
       Other customizations

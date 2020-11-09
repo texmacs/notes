@@ -3,7 +3,7 @@
 <style|notes>
 
 <\body>
-  [<hlink|index]|./index.tm>
+  <notes-header>
 
   <chapter*|Wishlist>
 

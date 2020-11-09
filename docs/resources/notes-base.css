@@ -191,6 +191,10 @@ a:active, a:focus, a:hover {
 * Headers
 ******************************************************************************/
 
+.notes-header img {
+    vertical-align: middle;
+}
+
 .tmweb-pad-below {
     padding-bottom: 20px;
 }

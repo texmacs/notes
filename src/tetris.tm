@@ -3,7 +3,7 @@
 <style|notes>
 
 <\body>
-  <hlink|[index]|./index.tm><chapter*|Tetris with <TeXmacs> tables>
+  <notes-header><chapter*|Tetris with <TeXmacs> tables>
 
   <image|./resources/tetris/screenshot.png|600px|||>
 
