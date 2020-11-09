@@ -22,7 +22,8 @@ To automatically regenerate all the web pages  use `Tools->Web->Create/Update we
 
 Once the repository is pushed on github it becomes visible. 
 
-**To contribute:** Clone the repository. Make your modifications (typically add new articles in the `src/`directory and modify accordingly `index.tm`). Make a pull request on github to ask the maintainers to integrated your changes into the public repository. Once the changes are pulled in they will become immediately publicly visible on the website.
+**To contribute:** Fork the repository. Make your modifications (typically add new articles in the `src/`directory and modify accordingly `index.tm`). Make a pull request on github to ask the maintainers to integrated your changes into the public repository. Once the changes are pulled in they will become immediately publicly visible on the website.
+A tutorial on how to work with git is at https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/. It shows how to work with one's own repositories. Pull requests can be then sent through the "New pull request" button at https://github.com/texmacs/notes/pulls (the interface then help the user with the following steps).
 
 
 Enjoy TeXmacs!
