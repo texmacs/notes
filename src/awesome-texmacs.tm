@@ -38,20 +38,20 @@
 
   <section*|For Users>
 
-  <subsection|Documents written with TeXmacs>
+  <subsection*|Documents written with TeXmacs>
 
   <\itemize>
     <item><hlink|richi235's Bachelor Thesis on Link Aggregation
     Tunneling|https://github.com/richi235/bachelor-thesis-link-aggregation-tunneling>
   </itemize>
 
-  <subsection|User-contributed style files>
+  <subsection*|User-contributed style files>
 
   <\itemize>
     <item><hlink|Algorithmic style for Texmacs|https://gitlab.com/syedahmad/algorithmacs>
   </itemize>
 
-  <subsection|TeXmacs for package management systems>
+  <subsection*|TeXmacs for package management systems>
 
   <\itemize>
     <item><hlink|GNU TeXmacs package for Chocolatey|https://chocolatey.org/packages/texmacs>
@@ -83,9 +83,9 @@
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
     <associate|auto-4|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
-    <associate|auto-5|<tuple|1|?>>
-    <associate|auto-6|<tuple|2|?>>
-    <associate|auto-7|<tuple|3|?>>
+    <associate|auto-5|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-6|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-7|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
     <associate|auto-8|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
   </collection>
 </references>
@@ -106,8 +106,20 @@
       For Users <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>
 
+      <with|par-left|<quote|1tab>|1.<space|2spc>Documents written with
+      TeXmacs <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5>>
+
+      <with|par-left|<quote|1tab>|2.<space|2spc>User-contributed style files
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-6>>
+
+      <with|par-left|<quote|1tab>|3.<space|2spc>TeXmacs for package
+      management systems <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-7>>
+
       Blog & Forums & Chat Room <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5>
+      <no-break><pageref|auto-8>
     </associate>
   </collection>
 </auxiliary>
