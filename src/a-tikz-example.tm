@@ -3,7 +3,8 @@
 <style|notes>
 
 <\body>
-  <notes-header><chapter*|Example of TikZ embedding with the Graph plugin>
+  <notes-header><chapter*|Example of TikZ figure generation with the Graph
+  plugin>
 
   The <name|Graph> plugin collect the interface to some useful image
   generation programs. Whenever possible a vector image in the
