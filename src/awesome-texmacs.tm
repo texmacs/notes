@@ -33,7 +33,8 @@
 
     <item><hlink|Hummus PDF Writer|https://github.com/galkahana/PDF-Writer>
 
-    <item><hlink|A Jupyter cliet for GNU TeXmacs|https://github.com/mgubi/tm_jupyter>
+    <item><hlink|A Jupyter client for GNU
+    TeXmacs|https://github.com/mgubi/tm_jupyter>
 
     <item><hlink|A Converter to Markdown|https://bitbucket.org/mdbenito/tm2md/src/master/>
   </itemize>
@@ -76,8 +77,11 @@
   </itemize>
 </body>
 
-<initial|<\collection>
-</collection>>
+<\initial>
+  <\collection>
+    <associate|preamble|false>
+  </collection>
+</initial>
 
 <\references>
   <\collection>
