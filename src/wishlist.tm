@@ -44,9 +44,8 @@
   <hrule>
 
   Being able to adjust the math typesetting parameters. For example, by
-  default, I find formulas too compact, and I really like to have more space
-  around (in)equality signs, so I always include 0.2em spaces around them.
-  Looks nice, but semantically horrible.
+  default, one may find formulas too compact, and would like to have more
+  space around (in)equality signs.
 
   <hrule>
 
@@ -56,36 +55,21 @@
 
   <hrule>
 
-  Configuration option for pasting / drag-dropping images as integrated
-  images, not mere links to external file.
-
-  <hrule>
-
-  More complete menus : some objects are accessible only by keyboard, and
-  some took litteraly years to find them by accident or by chance in the
-  documentation.
-
-  <hrule>
-
   A set of shortcuts for common colors (red, dark green, blue, grey).
 
   <hrule>
 
-  A set of shotcuts for commonly used unicode symbols, such as
-  \<Rightarrow\>, \<rightarrow\>, <text-dots>
-
-  <hrule>
-
-  Performance : Editing large documents is a pain on a not-very-recent
-  computer.
+  A set of shotcuts for commonly used unicode symbols in text mode, such as
+  \<Rightarrow\>, \<rightarrow\>, <text-dots> similar to shortcuts that exist
+  in math mode.
 
   <hrule>
 
   The "draw image" feature is heavily bugged. It may be wiser to not loose
   developement time on it. This may be the job of external programs such as
-  Inkscape. A killer feature would be to place inline formulas and text
+  Inkscape. A useful feature would be to place inline formulas and text
   floating (with relative positions/sizes) on top of figures, movable by
-  mouse. This would eliminiate the use of, eg., latexit in Inkscape.
+  mouse. This would eliminiate the use of, for example, latexit in Inkscape.
 </body>
 
 <initial|<\collection>
