@@ -51,7 +51,7 @@
       <tformat|<cwith|1|1|1|1|cell-halign|c>|<cwith|1|1|1|1|cell-width|30pt>|<cwith|1|1|1|1|cell-hmode|exact>|<cwith|1|1|1|-1|cell-valign|c>|<table|<row|<\cell>
         <image|resources/texmacs-blog-transparent.png|20pt|||>
       </cell>|<\cell>
-        <arg|body>
+        <space|0pt><arg|body>
       </cell>>>>
     </wide-tabular>
   </macro>>
