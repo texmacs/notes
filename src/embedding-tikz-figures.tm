@@ -217,7 +217,8 @@
   press <key|Return> to obtain a larger version of the figure (from which the
   initial script is again accessible)<todo|but latex gets stuck when
   executing it: it gets stuck in all examples now, that is approximately
-  after playing with the image size/position>
+  after playing with the image size/position. Stopping and restarting TeXmacs
+  changes nothing>
 
   <\script-output|tikz|default>
     \\begin{tikzpicture}
@@ -288,8 +289,9 @@
   As in the <name|Graph> plugin session, one can execute more complex
   <value|tikz> programs that depend on other <LaTeX> packages. In this case
   one should insert in the executable field the whole <LaTeX> document (the
-  preferred class is standalone). Here is the same example as in
-  <hlink|Example of TikZ figure generation with the Graph
+  preferred class is standalone). Here is the same code (copied from this
+  <hlink|TeX StackExchange question|https://tex.stackexchange.com/questions/164155/2d-and-3d-vectors-in-tikz>)
+  as in <hlink|Example of TikZ figure generation with the Graph
   plugin|./a-tikz-example.tm>:
 
   <\script-input|tikz|default>
@@ -297,9 +299,15 @@
 
     \\usepackage{tikz-3dplot}
 
+    \;
+
     \\begin{document}
 
+    \;
+
     \\tdplotsetmaincoords{60}{120}
+
+    \;
 
     \\begin{tikzpicture}[
 
@@ -313,13 +321,19 @@
 
     vector guide/.style={dashed,red,thick}]
 
+    \;
+
     %standard tikz coordinate definition using x, y, z coords
 
     \\coordinate (O) at (0,0,0);
 
+    \;
+
     %tikz-3dplot coordinate definition using r, theta, phi coords
 
     \\tdplotsetcoord{P}{.8}{55}{60};
+
+    \;
 
     %draw axes
 
@@ -329,15 +343,21 @@
 
     \\draw[axis] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
 
+    \;
+
     %draw a vector from O to P
 
     \\draw[vector] (O) -- (P);
+
+    \;
 
     %draw guide lines to components
 
     \\draw[vector guide] (O) -- (Pxy);
 
     \\draw[vector guide] (Pxy) -- (P);
+
+    \;
 
     \\end{tikzpicture}
   </script-input|<script-busy>>
@@ -376,10 +396,10 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|a-tikz-example.tm>>
-    <associate|auto-2|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|a-tikz-example.tm>>
-    <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|a-tikz-example.tm>>
-    <associate|auto-4|<tuple|1|?|a-tikz-example.tm>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-2|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-4|<tuple|1|?>>
   </collection>
 </references>
 
