@@ -15,7 +15,7 @@
 
   Let us see how Joris implemented a preview for link target in
   <hlink|r13081|https://svn.savannah.gnu.org/viewvc/texmacs?view=revision&revision=13081>.
-  This requires adding new functionatilities at several levels.
+  This requires adding new functionalities at several levels.
 
   Preview have to be shown in a popup balloon as soon as the user hovers the
   associate reference locus with the mouse. So we need to modify the
@@ -87,46 +87,43 @@
   called without notifying the user.
 
   <\scm-code>
-    <\code>
-      (tm-define (preview-reference body body*)
+    (tm-define (preview-reference body body*)
 
-      \ \ (:secure #t)
+    \ \ (:secure #t)
 
-      \ \ (and-with ref (tree-up body)
+    \ \ (and-with ref (tree-up body)
 
-      \ \ \ \ (with (x1 y1 x2 y2) (tree-bounding-rectangle ref)
+    \ \ \ \ (with (x1 y1 x2 y2) (tree-bounding-rectangle ref)
 
-      \ \ \ \ \ \ (and-let* ((packs (get-style-list))
+    \ \ \ \ \ \ (and-let* ((packs (get-style-list))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (pre (document-get-preamble
-      (buffer-tree)))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (pre (document-get-preamble
+    (buffer-tree)))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (id (and (tree-atomic? body*)\ 
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (id (and (tree-atomic? body*)\ 
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (tree-\<gtr\>string
-      body*)))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (tree-\<gtr\>string
+    body*)))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (balloon (ref-preview id))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (balloon (ref-preview id))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (zf (get-window-zoom-factor))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (zf (get-window-zoom-factor))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (sf (/ 4.0 zf))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (sf (/ 4.0 zf))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (mag (number-\<gtr\>string (/ zf
-      1.5)))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (mag (number-\<gtr\>string (/ zf 1.5)))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (balloon* `(with "magnification" ,mag
-      ,balloon))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (balloon* `(with "magnification" ,mag
+    ,balloon))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (w (widget-texmacs-output
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (w (widget-texmacs-output
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(surround (hide-preamble
-      ,pre) "" ,balloon*)
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(surround (hide-preamble ,pre)
+    "" ,balloon*)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(style (tuple ,@packs)))))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(style (tuple ,@packs)))))
 
-      \ \ \ \ \ \ \ \ (show-balloon w x1 (- y1 1280))))))
-    </code>
+    \ \ \ \ \ \ \ \ (show-balloon w x1 (- y1 1280))))))
   </scm-code>
 
   This procedure invoke <scm|show-balloon> to display a popup to the user
@@ -136,49 +133,44 @@
   <scm|ref-preview> :
 
   <\scm-code>
-    <\code>
-      (tm-define (ref-preview id)
+    (tm-define (ref-preview id)
 
-      \ \ (and-with l (and-nnull? (search-label (buffer-tree) id))
+    \ \ (and-with l (and-nnull? (search-label (buffer-tree) id))
 
-      \ \ \ \ (label-preview (car l))))
-    </code>
+    \ \ \ \ (label-preview (car l))))
   </scm-code>
 
   which in turn calls the helper procedure <scm|label-preview> (internal to
   the module):
 
   <\scm-code>
-    <\code>
-      (define (label-preview t)
+    (define (label-preview t)
 
-      \ \ (and-with doc (tree-search-upwards t preview-context?)
+    \ \ (and-with doc (tree-search-upwards t preview-context?)
 
-      \ \ \ \ (with math? (tree-search-upwards t math-context?)
+    \ \ \ \ (with math? (tree-search-upwards t math-context?)
 
-      \ \ \ \ \ \ (when (and (tree-up doc) (tree-up (tree-up doc))
+    \ \ \ \ \ \ (when (and (tree-up doc) (tree-up (tree-up doc))
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (tree-is? (tree-up doc) 'document)
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (tree-is? (tree-up doc) 'document)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (preview-expand-context? (tree-up
-      (tree-up doc))))
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (preview-expand-context? (tree-up
+    (tree-up doc))))
 
-      \ \ \ \ \ \ \ \ (set! doc (tree-up doc)))
+    \ \ \ \ \ \ \ \ (set! doc (tree-up doc)))
 
-      \ \ \ \ \ \ (when (tm-is? doc 'row)
+    \ \ \ \ \ \ (when (tm-is? doc 'row)
 
-      \ \ \ \ \ \ \ \ (set! doc (apply tmconcat (map uncell (tm-children
-      doc)))))
+    \ \ \ \ \ \ \ \ (set! doc (apply tmconcat (map uncell (tm-children
+    doc)))))
 
-      \ \ \ \ \ \ (set! doc (clean-preview doc))
+    \ \ \ \ \ \ (set! doc (clean-preview doc))
 
-      \ \ \ \ \ \ (when math?
+    \ \ \ \ \ \ (when math?
 
-      \ \ \ \ \ \ \ \ (set! doc `(with ``math-display'' ``true'' (math
-      ,doc))))
+    \ \ \ \ \ \ \ \ (set! doc `(with ``math-display'' ``true'' (math ,doc))))
 
-      \ \ \ \ \ \ `(preview-balloon ,doc))))
-    </code>
+    \ \ \ \ \ \ `(preview-balloon ,doc))))
   </scm-code>
 
   The construction of the preview content is performed by the snippet
@@ -205,13 +197,11 @@
   leaf of a <markup|document> tag:
 
   <\scm-code>
-    <\code>
-      (define (preview-context? t)
+    (define (preview-context? t)
 
-      \ \ (or (tree-is? t 'row)
+    \ \ (or (tree-is? t 'row)
 
-      \ \ \ \ \ \ (and (tree-up t) (tree-is? (tree-up t) 'document))))
-    </code>
+    \ \ \ \ \ \ (and (tree-up t) (tree-is? (tree-up t) 'document))))
   </scm-code>
 
   We want also to include some major markup in the preview, e.g. theorems,
@@ -234,41 +224,36 @@
   source snippet:
 
   <\scm-code>
-    <\code>
-      (define (clean-preview t)
+    (define (clean-preview t)
 
-      \ \ (cond ((tm-is? t 'document)
+    \ \ (cond ((tm-is? t 'document)
 
-      \ \ \ \ \ \ \ \ \ `(document ,@(map clean-preview (tm-children t))))
+    \ \ \ \ \ \ \ \ \ `(document ,@(map clean-preview (tm-children t))))
 
-      \ \ \ \ \ \ \ \ ((tm-is? t 'concat)
+    \ \ \ \ \ \ \ \ ((tm-is? t 'concat)
 
-      \ \ \ \ \ \ \ \ \ (apply tmconcat (map clean-preview (tm-children t))))
+    \ \ \ \ \ \ \ \ \ (apply tmconcat (map clean-preview (tm-children t))))
 
-      \ \ \ \ \ \ \ \ ((tm-in? t (section-tag-list))
+    \ \ \ \ \ \ \ \ ((tm-in? t (section-tag-list))
 
-      \ \ \ \ \ \ \ \ \ (with l (symbol-append (tm-label t) '*)
+    \ \ \ \ \ \ \ \ \ (with l (symbol-append (tm-label t) '*)
 
-      \ \ \ \ \ \ \ \ \ \ \ `(,l ,@(tm-children t))))
+    \ \ \ \ \ \ \ \ \ \ \ `(,l ,@(tm-children t))))
 
-      \ \ \ \ \ \ \ \ ((tm-in? t '(label item item*\ 
+    \ \ \ \ \ \ \ \ ((tm-in? t '(label item item*\ 
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bibitem bibitem*
-      eq-number)) "")
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bibitem bibitem*
+    eq-number)) "")
 
-      \ \ \ \ \ \ \ \ ((or (tm-func? t 'equation 1) (tm-func? t 'equation*
-      1))
+    \ \ \ \ \ \ \ \ ((or (tm-func? t 'equation 1) (tm-func? t 'equation* 1))
 
-      \ \ \ \ \ \ \ \ \ `(equation* ,(clean-preview (tm-ref t 0))))
+    \ \ \ \ \ \ \ \ \ `(equation* ,(clean-preview (tm-ref t 0))))
 
-      \ \ \ \ \ \ \ \ ((tm-in? t '(eqnarray eqnarray* tformat table row
-      cell))
+    \ \ \ \ \ \ \ \ ((tm-in? t '(eqnarray eqnarray* tformat table row cell))
 
-      \ \ \ \ \ \ \ \ \ `(,(tm-label t) ,@(map clean-preview (tm-children
-      t))))
+    \ \ \ \ \ \ \ \ \ `(,(tm-label t) ,@(map clean-preview (tm-children t))))
 
-      \ \ \ \ \ \ \ \ (else t)))
-    </code>
+    \ \ \ \ \ \ \ \ (else t)))
   </scm-code>
 
   \;
@@ -277,6 +262,7 @@
 <\initial>
   <\collection>
     <associate|page-medium|papyrus>
+    <associate|preamble|false>
   </collection>
 </initial>
 
