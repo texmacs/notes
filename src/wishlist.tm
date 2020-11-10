@@ -37,15 +37,9 @@
 
   <hrule>
 
-  Being able to easily create macros, at least non-parametrical ones, with a
-  single menu action. It is already possible, but the syntax not easy for
-  begginers (and non-programmers in general).
-
-  <hrule>
-
-  Being able to adjust the math typesetting parameters. For example, by
-  default, one may find formulas too compact, and would like to have more
-  space around (in)equality signs.
+  Being able to adjust the math typesetting parameters. For example, one may
+  find formulas too compact by default, and would like to have more space
+  around (in)equality signs.
 
   <hrule>
 
@@ -53,23 +47,11 @@
   currently <verbatim|\<less\>resize\<gtr\>> can be used but it is slow to
   use and content can't be really modified afterwards.
 
-  <hrule>
-
-  A set of shortcuts for common colors (red, dark green, blue, grey).
-
-  <hrule>
-
-  A set of shotcuts for commonly used unicode symbols in text mode, such as
-  \<Rightarrow\>, \<rightarrow\>, <text-dots> similar to shortcuts that exist
-  in math mode.
-
-  <hrule>
-
-  The "draw image" feature is heavily bugged. It may be wiser to not loose
-  developement time on it. This may be the job of external programs such as
-  Inkscape. A useful feature would be to place inline formulas and text
-  floating (with relative positions/sizes) on top of figures, movable by
-  mouse. This would eliminiate the use of, for example, latexit in Inkscape.
+  <\equation*>
+    <big|sum><rsub|i>f<around*|(|i|)>*<wide*|g<around*|(|i|)>|\<wide-underbrace\>><rsub|<text|lorem
+    ipsum>>*h<around*|(|i|)><space|1em>\<longrightarrow\><space|1em><big|sum><rsub|i>f<around*|(|i|)>*<wide*|g<around*|(|i|)>|\<wide-underbrace\>><rsub|<text|<resize|lorem
+    ipsum|<plus|1l|5ex>||<plus|1r|-5ex>|>>>*h<around*|(|i|)>
+  </equation*>
 </body>
 
 <initial|<\collection>
