@@ -28,7 +28,7 @@
 
   (there are more options under <menu|Insert-\<gtr\>Fold-\<gtr\>Executable>,
   but <name|Graph> is the most recent plugin with the most flexible
-  functionality.
+  functionality).
 
   This results in a yellow-colored field, introduced by the \P<samp|Graph>\Q
   title on a gray background:
