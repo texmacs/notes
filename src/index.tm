@@ -40,8 +40,9 @@
   The blog can be read offline within TeXmacs. Just open one of the documents
   in the source directory and click on the links: they point to the local .tm
   files. Browse back-forward with the buttons
-  <image|resources/tm_back.xpm|18pt|18pt||> and
-  <image|resources/tm_forward.xpm|18pt|18pt||> on the top toolbar.
+  <image|resources/contribution-guide/tm_back.png|18pt|18pt||-0.5em> and
+  <image|resources/contribution-guide/tm_forward.png|18pt|18pt||-0.5em> on
+  the top toolbar.
 
   To automatically regenerate all the web pages use
   \ `Tools-\<gtr\>Web-\<gtr\>Create/Update web site` within <TeXmacs> and
@@ -51,7 +52,7 @@
 
   <\small>
     Make a pull request: detailed instructions on how to make one are in
-    \ <hlink|this document|./contribution-guide.tm>
+    <hlink|this document|./contribution-guide.tm>
 
     Typically it should just be necessary to modify or add to only the
     <code*|.tm> sources in the src/directory---and modify accordingly

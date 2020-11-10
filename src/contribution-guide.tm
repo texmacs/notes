@@ -10,8 +10,9 @@
   The blog can be read offline within TeXmacs. Just open one of the documents
   in the source directory and click on the links: they point to the local .tm
   files. Browse back-forward with the buttons
-  <image|resources/tm_back.xpm|18pt|18pt||> and
-  <image|resources/tm_forward.xpm|18pt|18pt||> on the top toolbar.
+  <image|resources/contribution-guide/tm_back.png|18pt|18pt||-0.5em> and
+  <image|resources/contribution-guide/tm_forward.png|18pt|18pt||-0.5em> on
+  the top toolbar.
 
   Typically it should just be necessary to modify or add to only the
   <code*|.tm> sources in the <code*|src/> directory\Vand modify accordingly
@@ -65,11 +66,15 @@
       <item>the first time you do this, git will ask you to set your identity
       with the commands
 
-      <code*|git config --global user.email>
+      <\shell-code>
+        git config --global user.email
+      </shell-code>
 
       and
 
-      <code*|git config --global user.name>
+      <\shell-code>
+        git config --global user.name
+      </shell-code>
 
       <item>the<nbsp><code*|--global><nbsp>switch can be omitted; in this
       case the identity will be set for the current repository only
@@ -97,36 +102,42 @@
   <\itemize>
     <item>Configure the upstream remote repository with
 
-    <code*|git remote add upstream https://github.com/texmacs/notes.git>
+    <\shell-code>
+      git remote add upstream https://github.com/texmacs/notes.git
+    </shell-code>
 
     (instructions at<nbsp><hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork>)
 
-    <item>follow the steps at<nbsp><hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>,
+    <item>Follow the steps at<nbsp><hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>,
     that is:
 
     <\itemize>
-      <item>make sure you are working on the branch you want to work on
+      <item>Make sure you are working on the branch you want to work on, e.g.
 
-      e.g.
-
-      <code*|git checkout main>
+      <\shell-code>
+        git checkout main
+      </shell-code>
 
       where git might answer you
+
+      <\shell-code>
+        Already on 'main'
+
+        Your branch is up to date with 'origin/main'.
+      </shell-code>
+
+      <item>Then do
+
+      <\shell-code>
+        <code*|git fetch upstream>
+
+        <code*|git merge upstream/main>
+
+        <code*|git push>
+      </shell-code>
     </itemize>
 
-    <code|<\code*>
-      Already on 'main'
-
-      Your branch is up to date with 'origin/main'.
-    </code*>>
-
-    <\itemize>
-      <item><code*|git fetch upstream>
-
-      <item><code*|git merge upstream/main>
-
-      <item><code*|git push>
-    </itemize>
+    \;
   </itemize>
 </body>
 
@@ -138,47 +149,16 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|awesome-texmacs.tm>>
-    <associate|auto-2|<tuple|?|?|awesome-texmacs.tm>>
-    <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|awesome-texmacs.tm>>
-    <associate|auto-4|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|awesome-texmacs.tm>>
-    <associate|auto-5|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|awesome-texmacs.tm>>
-    <associate|auto-6|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|awesome-texmacs.tm>>
-    <associate|auto-7|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|awesome-texmacs.tm>>
-    <associate|auto-8|<tuple|<with|mode|<quote|math>|\<bullet\>>|?|awesome-texmacs.tm>>
+    <associate|auto-1|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Awesome
-      GNU TeXmacs> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Contribution
+      guide> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
-
-      Plugins <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2>
-
-      For Developers <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-3>
-
-      For Users <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4>
-
-      <with|par-left|<quote|1tab>|Documents written with TeXmacs
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5>>
-
-      <with|par-left|<quote|1tab>|User-contributed style files
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-6>>
-
-      <with|par-left|<quote|1tab>|TeXmacs for package management systems
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-7>>
-
-      Blog & Forums & Chat Room <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-8>
     </associate>
   </collection>
 </auxiliary>
