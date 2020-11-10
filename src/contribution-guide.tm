@@ -63,8 +63,13 @@
 
     <\itemize>
       <item>the first time you do this, git will ask you to set your identity
-      with the commands<nbsp><code*|git config --global
-      user.email><nbsp>and<nbsp><code*|git config --global user.name>
+      with the commands
+
+      <code*|git config --global user.email>
+
+      and
+
+      <code*|git config --global user.name>
 
       <item>the<nbsp><code*|--global><nbsp>switch can be omitted; in this
       case the identity will be set for the current repository only
@@ -90,25 +95,30 @@
   <strong|To keep your fork up to date:>
 
   <\itemize>
-    <item>Configure the upstream remote repository with<nbsp><code*|git
-    remote add upstream https://github.com/texmacs/notes.git><nbsp>(instructions
-    at<nbsp><hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork>)
+    <item>Configure the upstream remote repository with
+
+    <code*|git remote add upstream https://github.com/texmacs/notes.git>
+
+    (instructions at<nbsp><hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork>)
 
     <item>follow the steps at<nbsp><hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>,
     that is:
 
-    <itemize|<item>make sure you are working on the branch you want to work
-    on (e.g.<nbsp><code*|git checkout main>, where git might answer you>
+    <\itemize>
+      <item>make sure you are working on the branch you want to work on
+
+      e.g.
+
+      <code*|git checkout main>
+
+      where git might answer you
+    </itemize>
 
     <code|<\code*>
       Already on 'main'
 
       Your branch is up to date with 'origin/main'.
-
-      \;
     </code*>>
-
-    )
 
     <\itemize>
       <item><code*|git fetch upstream>
