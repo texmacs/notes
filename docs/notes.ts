@@ -58,9 +58,9 @@
     </wide-tabular>
   </macro>>
 
-  <assign|notes-header|<macro|<notes-header-table|<hlink|[index]|./index.tm>>>>
+  <assign|notes-header|<macro|<notes-header-table|<hlink|[main]|./main.tm>>>>
 
-  <assign|tmhtml-notes-header|<macro|<html-div-class|notes-header|<image|../resources/texmacs-blog-transparent.png|20pt|||><space|2pt><hlink|[index]|./index.tm>>>>
+  <assign|tmhtml-notes-header|<macro|<html-div-class|notes-header|<image|../resources/texmacs-blog-transparent.png|20pt|||><space|2pt><hlink|[main]|./main.tm>>>>
 
   <\active*>
     <\src-comment>
