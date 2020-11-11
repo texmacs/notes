@@ -23,7 +23,7 @@
 
   <section*|Collections >
 
-  <with|font-shape|italic|<tiny|These articles contain collections of stuff,
+  <with|font-shape|italic|<small|These articles contain collections of stuff,
   additions are welcome.>>
 
   <hlink|Wishlist and additional functionalities|./wishlist.tm>
@@ -32,8 +32,8 @@
 
   <section*|Miscellanea>
 
-  <with|font-shape|italic|<tiny|Self-contained, one shot, material on various
-  topics. Roughly, most recent articles on top.>>
+  <with|font-shape|italic|<small|Self-contained, one shot, material on
+  various topics. Roughly, most recent articles on top.>>
 
   <hlink|Editorial guidelines|editorial-guidelines.tm>
 
