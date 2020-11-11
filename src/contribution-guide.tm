@@ -32,8 +32,12 @@
   html in the web site).
 
   You can download and install locally the style file <code*|notes.ts> (in
-  <code*|src/>). If the document style is set to Notes, the local generation
-  of the website will be done with the same css as the web version.
+  <code*|src/>). Besides formatting the document with the blog style,
+  <code*|notes.ts> provides the macro <inactive|<hybrid|menu>> to format menu
+  choices (as in <menu|Tools-\<gtr\>Web>).
+
+  If the document style is set to Notes, the local generation of the website
+  will be done with the same css as the web version.
 
   <strong|To contribute:>\ 
 
@@ -158,11 +162,16 @@
   <\collection>
     <associate|auto-1|<tuple|?|?>>
     <associate|auto-2|<tuple|?|?>>
+    <associate|auto-3|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
+    <\associate|idx>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Tools>|<with|font-family|<quote|ss>|Web>|<with|font-family|<quote|ss>|Create/Update
+      web site>>|<pageref|auto-2>>
+    </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Contribution
       guide> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
