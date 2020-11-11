@@ -143,6 +143,9 @@
 
     \;
   </itemize>
+
+  Please check also the <hlink|editorial guidelines|editorial-guidelines.tm>
+  for preparing your content.
 </body>
 
 <\initial>
