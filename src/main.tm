@@ -11,7 +11,7 @@
     </cell>>>>
   </wide-tabular>
 
-  <chapter*|A TeXmacs blog>
+  <chapter*|Notes on TeXmacs>
 
   This is a blog/wiki about<nbsp><hlink|TeXmacs|http://www.texmacs.org/>. It
   aims to be a container for articles, snippets, comments, developer docs,
