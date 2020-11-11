@@ -18,9 +18,26 @@
 /*
 @import url('https://fonts.googleapis.com/css?family=Barlow');
 @import url('https://fonts.googleapis.com/css?family=PS+Sans');
+@import url('https://fonts.googleapis.com/css?family=Belleza');
 */
 
-@import url('https://fonts.googleapis.com/css?family=Belleza');
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url("./fonts/LinLibertine_R.otf") format("opentype");
+}
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url("./fonts/LinLibertine_RI.otf") format("opentype");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url("./fonts/LinLibertine_RB.otf") format("opentype");
+    font-weight: bold;
+}
 
 @font-face {
     font-family: 'Linux Biolinum';
@@ -75,7 +92,7 @@ body {
     background-color: white;
     color: black;
     font-size: 20px;
-    font-family: 'Linux Biolinum', 'Belleza', 'Optima';
+    font-family: 'Linux Libertine', 'Optima';
     /* font-family: Optima; */
     /* font-family: Barlow; */
     /* font-family: 'PT Sans', sans-serif; */
@@ -634,14 +651,15 @@ a:active, a:focus, a:hover {
 
 tt, .verbatim {
     font-family: 'Liberation Mono', monospace;
-    font-size: 90%;
+    font-size: 80%;
 }
 
 /******************************************************************************
 * Further hacks
 ******************************************************************************/
 code {
-    font-size: 90%;
+    font-size: 80%;
+    font-family: 'Liberation Mono', monospace;
 }
 
 .tmweb-code {
@@ -674,6 +692,5 @@ code {
 
 .tmweb-markup {
     color: blue;
-    font-size: 90%;
-    font-family: sans-serif;
+    font-family: 'Linux Biolinum', sans-serif;
 }
