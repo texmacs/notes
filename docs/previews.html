@@ -4,7 +4,7 @@
   <head>
     <title>TeXmacs notes</title>
     <meta content="TeXmacs 1.99.14" name="generator"></meta>
-    <link href="./resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
   </head>
   <body>
     <div class="toggle" style="display: none">
@@ -13,7 +13,7 @@
       </p>
     </div>
     <div class="notes-header">
-      <img class="image" src="resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./index.html">[index]</a>
+      <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./index.html">[index]</a>
     </div>
     <h1 id="auto-1">Implementing previews for link targets<span style="margin-left: 1em"></span></h1>
     <p>
@@ -21,7 +21,7 @@
     </p>
     <p>
       Let us see how Joris implemented a preview for link target in <a href="https://svn.savannah.gnu.org/viewvc/texmacs?view=revision&amp;revision=13081">r13081</a>.
-      This requires adding new functionatilities at several levels.
+      This requires adding new functionalities at several levels.
     </p>
     <p>
       Preview have to be shown in a popup balloon as soon as the user hovers
@@ -141,7 +141,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<pre class="verbatim" xml:space="preserve">(tm-define (preview-reference body body*)
+(tm-define (preview-reference body body*)
   (:secure #t)
   (and-with ref (tree-up body)
     (with (x1 y1 x2 y2) (tree-bounding-rectangle ref)
@@ -157,7 +157,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
                  (w (widget-texmacs-output
                      &lsquo;(surround (hide-preamble ,pre) &quot;&quot; ,balloon*)
                      &lsquo;(style (tuple ,@packs)))))
-        (show-balloon w x1 (- y1 1280))))))</pre></pre>
+        (show-balloon w x1 (- y1 1280))))))</pre>
     </div>
     <p>
       This procedure invoke <tt class="verbatim">show-balloon</tt> to display a popup to
@@ -168,9 +168,9 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<pre class="verbatim" xml:space="preserve">(tm-define (ref-preview id)
+(tm-define (ref-preview id)
   (and-with l (and-nnull? (search-label (buffer-tree) id))
-    (label-preview (car l))))</pre></pre>
+    (label-preview (car l))))</pre>
     </div>
     <p>
       which in turn calls the helper procedure <tt class="verbatim">label-preview</tt>
@@ -178,7 +178,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<pre class="verbatim" xml:space="preserve">(define (label-preview t)
+(define (label-preview t)
   (and-with doc (tree-search-upwards t preview-context?)
     (with math? (tree-search-upwards t math-context?)
       (when (and (tree-up doc) (tree-up (tree-up doc))
@@ -190,7 +190,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
       (set! doc (clean-preview doc))
       (when math?
         (set! doc &lsquo;(with &lsquo;&lsquo;math-display'' &lsquo;&lsquo;true'' (math ,doc))))
-      &lsquo;(preview-balloon ,doc))))</pre></pre>
+      &lsquo;(preview-balloon ,doc))))</pre>
     </div>
     <p>
       The construction of the preview content is performed by the snippet <tt
@@ -245,9 +245,9 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<pre class="verbatim" xml:space="preserve">(define (preview-context? t)
+(define (preview-context? t)
   (or (tree-is? t 'row)
-      (and (tree-up t) (tree-is? (tree-up t) 'document))))</pre></pre>
+      (and (tree-up t) (tree-is? (tree-up t) 'document))))</pre>
     </div>
     <p>
       We want also to include some major markup in the preview, e.g. theorems,
@@ -268,7 +268,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<pre class="verbatim" xml:space="preserve">(define (clean-preview t)
+(define (clean-preview t)
   (cond ((tm-is? t 'document)
          &lsquo;(document ,@(map clean-preview (tm-children t))))
         ((tm-is? t 'concat)
@@ -282,7 +282,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
          &lsquo;(equation* ,(clean-preview (tm-ref t 0))))
         ((tm-in? t '(eqnarray eqnarray* tformat table row cell))
          &lsquo;(,(tm-label t) ,@(map clean-preview (tm-children t))))
-        (else t)))</pre></pre>
+        (else t)))</pre>
     </div>
     <p>
       

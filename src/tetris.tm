@@ -5,12 +5,12 @@
 <\body>
   <notes-header><chapter*|Tetris with <TeXmacs> tables>
 
-  <image|./resources/tetris/screenshot.png|600px|||>
+  <image|../resources/tetris/screenshot.png|600px|||>
 
   This example is taken from a presentation of Miguel de Benito
 
-  The TeXmacs source <hlink-tm|tetris-with-tables.tm|./resources/tetris/tetris-with-tables>
-  loads the scheme file <hlink|tetris-with-tables.scm|./resources/tetris/tetris-with-tables.scm>
+  The TeXmacs source <hlink-tm|tetris-with-tables.tm|../resources/tetris/tetris-with-tables>
+  loads the scheme file <hlink|tetris-with-tables.scm|../resources/tetris/tetris-with-tables.scm>
   which defines the procedures needed to play tetris. The game surface is
   implemented via a document table and the tiles by changing the color of the
   cells. This is not the most efficient implementation but it is a nice

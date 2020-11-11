@@ -38,7 +38,7 @@
 
   <assign|html-title|TeXmacs notes>
 
-  <assign|html-css|<tuple|./resources/notes-base.css>>
+  <assign|html-css|<tuple|../resources/notes-base.css>>
 
   <\active*>
     <\src-comment>
@@ -51,7 +51,7 @@
   <assign|notes-header-table|<\macro|body>
     <\wide-tabular>
       <tformat|<cwith|1|1|1|1|cell-halign|c>|<cwith|1|1|1|1|cell-width|30pt>|<cwith|1|1|1|1|cell-hmode|exact>|<cwith|1|1|1|-1|cell-valign|c>|<table|<row|<\cell>
-        <image|resources/texmacs-blog-transparent.png|20pt|||>
+        <image|../resources/texmacs-blog-transparent.png|20pt|||>
       </cell>|<\cell>
         <space|0pt><arg|body>
       </cell>>>>
@@ -60,7 +60,7 @@
 
   <assign|notes-header|<macro|<notes-header-table|<hlink|[index]|./index.tm>>>>
 
-  <assign|tmhtml-notes-header|<macro|<html-div-class|notes-header|<image|resources/texmacs-blog-transparent.png|20pt|||><space|2pt><hlink|[index]|./index.tm>>>>
+  <assign|tmhtml-notes-header|<macro|<html-div-class|notes-header|<image|../resources/texmacs-blog-transparent.png|20pt|||><space|2pt><hlink|[index]|./index.tm>>>>
 
   <\active*>
     <\src-comment>

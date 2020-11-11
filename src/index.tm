@@ -7,7 +7,7 @@
 
   <\wide-tabular>
     <tformat|<cwith|1|1|1|1|cell-halign|c>|<table|<row|<\cell>
-      <image|resources/texmacs-blog-transparent.png|40pt|||>
+      <image|../resources/texmacs-blog-transparent.png|40pt|||>
     </cell>>>>
   </wide-tabular>
 
