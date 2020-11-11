@@ -15,8 +15,11 @@
 
   This is a blog/wiki about<nbsp><hlink|TeXmacs|http://www.texmacs.org/>. It
   aims to be a container for articles, snippets, comments, developer docs,
-  proposals, user's pages, etc<text-dots> Contributions are welcome, please
-  check the <hlink|guidelines|editorial-guidelines.tm> before.
+  proposals, user's pages, etc<text-dots>\ 
+
+  You can find the source <tt|git> repository at
+  <hlink|github|https://github.com/texmacs/notes>. Contributions are welcome,
+  please check the <hlink|guidelines|editorial-guidelines.tm> before.
 
   <section*|Collections >
 
