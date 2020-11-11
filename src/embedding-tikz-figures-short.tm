@@ -14,9 +14,9 @@
   document, so that they are displayed as an image (without the code and the
   plugin prompt), while keeping them editable.
 
-  See <menu|Help-\<gtr\>Manual-\<gtr\>Use TeXmacs as an interface> and its
-  section 4: <strong|Plug-ins as scripting language> for a general
-  description of the facility.
+  See <menu|Help|Manual|Use TeXmacs as an interface> and its Section<nbsp>4:
+  <strong|Plug-ins as scripting language> for a general description of the
+  facility.
 
   Let us see here how to use the <name|Fold> environment to embed an editable
   <value|tikz> picture in a TeXmacs document, making in this way <value|tikz>
@@ -24,10 +24,10 @@
 
   The first step is inserting an executable field using the menu:
 
-  <menu|Insert-\<gtr\>Fold-\<gtr\>Executable-\<gtr\>Graph>
+  <menu|Insert|Fold|Executable|Graph>
 
-  (there are more options under <menu|Insert-\<gtr\>Fold-\<gtr\>Executable>,
-  but <name|Graph> is the most recent plugin with the most flexible
+  (there are more options under <menu|Insert|Fold|Executable>, but
+  <name|Graph> is the most recent plugin with the most flexible
   functionality).
 
   This results in a yellow-colored field, introduced by the \P<samp|Graph>\Q
@@ -41,9 +41,8 @@
   possible to type code, the effects of the keys change: <key|S-Return>
   itself executes the code (generates the image), while <key|Return> inserts
   a new line (the behaviour of the <key|Return> and <key|S-Return> key
-  combinations is described in the Manual at
-  <menu|Help-\<gtr\>Manual-\<gtr\>Use TeXmacs as an interface> in its
-  Section<nbsp>3).
+  combinations is described in the Manual at <menu|Help|Manual|Use TeXmacs as
+  an interface> in its Section<nbsp>3).
 
   As a first example, let us choose one based on <value|tikz> only, that does
   not need any further <LaTeX> packages, taking it from the guide \PA very
@@ -509,6 +508,7 @@
     <associate|auto-6|<tuple|1|?>>
     <associate|auto-7|<tuple|1|?>>
     <associate|auto-8|<tuple|1|?>>
+    <associate|auto-9|<tuple|1|?>>
   </collection>
 </references>
 

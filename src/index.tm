@@ -30,7 +30,7 @@
   <section*|Miscellanea>
 
   <with|font-shape|italic|<tiny|Self-contained, one shot, material on various
-  topics. \ Roughly, most recent articles on top.>>
+  topics. Roughly, most recent articles on top.>>
 
   <hlink|Editorial guidelines|editorial-guidelines.tm>
 
@@ -40,7 +40,13 @@
 
   <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
 
+  <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
+
+  <section*|Developers' notes>
+
   <hlink|Implementing previews for link targets|./previews.tm>
+
+  \;
 
   <section*|Contributing>
 
@@ -94,6 +100,7 @@
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
+    <associate|auto-5|<tuple|?|?>>
   </collection>
 </references>
 
