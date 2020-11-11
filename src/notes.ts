@@ -20,7 +20,7 @@
     </src-title>
   </active*>
 
-  <use-package|tmmanual|html-font-size>
+  <use-package|tmmanual|html-font-size|libertine-font>
 
   <\active*>
     <\src-comment>
@@ -29,6 +29,8 @@
   </active*>
 
   <assign|full-screen-mode|false>
+
+  <assign|font-base-size|12>
 
   <assign|page-medium|papyrus>
 

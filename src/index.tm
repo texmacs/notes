@@ -1,6 +1,6 @@
 <TeXmacs|1.99.14>
 
-<style|<tuple|notes|html-font-size>>
+<style|<tuple|notes|html-font-size|libertine-font>>
 
 <\body>
   <hrule>
@@ -68,6 +68,7 @@
 
 <\initial>
   <\collection>
+    <associate|font-base-size|12>
     <associate|preamble|false>
   </collection>
 </initial>
@@ -117,8 +118,11 @@
       Miscellanea <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
 
-      Contributing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      Developers' notes <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>
+
+      Contributing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5>
     </associate>
   </collection>
 </auxiliary>
