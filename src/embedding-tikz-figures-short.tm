@@ -293,8 +293,8 @@
   As in the <name|Graph> plugin session, one can execute more complex
   <value|tikz> programs that depend on other <LaTeX> packages. In this case
   one should insert in the executable field the whole <LaTeX> document (the
-  preferred class is standalone); the first line in this case must consist of
-  the characters <verbatim|%pdflatex> .
+  preferred class is <verbatim|standalone>); the first line in this case must
+  consist of the characters <verbatim|%pdflatex> .
 
   Here is the same code (copied from this <hlink|TeX StackExchange
   question|https://tex.stackexchange.com/questions/164155/2d-and-3d-vectors-in-tikz>)
