@@ -13,12 +13,15 @@
 
   <chapter*|A TeXmacs blog>
 
-  \;
+  This is a blog/wiki about<nbsp><hlink|TeXmacs|http://www.texmacs.org/>. It
+  aims to be a container for articles, snippets, comments, developer docs,
+  proposals, user's pages, etc<text-dots> Contributions are welcome, please
+  check the <hlink|guidelines|editorial-guidelines.tm> before.
 
   <section*|Collections >
 
   <with|font-shape|italic|<tiny|These articles contain collections of stuff,
-  edit and augment them at will.>>
+  additions are welcome.>>
 
   <hlink|Wishlist and additional functionalities|./wishlist.tm>
 
@@ -27,7 +30,11 @@
   <section*|Miscellanea>
 
   <with|font-shape|italic|<tiny|Self-contained, one shot, material on various
-  topics. \ Most recent articles on top.>>
+  topics. \ Roughly, most recent articles on top.>>
+
+  <hlink|Editorial guidelines|editorial-guidelines.tm>
+
+  <hlink|Contribution guide|contribution-guide.tm>
 
   <hlink|A TikZ example with the <name|Graph> plugin|./a-tikz-example.tm>\ 
 
@@ -87,7 +94,6 @@
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
-    <associate|auto-5|<tuple|?|?>>
   </collection>
 </references>
 
@@ -104,11 +110,8 @@
       Miscellanea <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
 
-      Reading the blog offline <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4>
-
       Contributing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5>
+      <no-break><pageref|auto-4>
     </associate>
   </collection>
 </auxiliary>
