@@ -72,7 +72,7 @@
   (since <verbatim|point> is a symbol, it fits well within the quasiquote
   that also defines the list).
 
-  Using <verbatim|pt> we shall now define a few points.
+  Using the <verbatim|pt> function we shall now define a few points.
 
   The Scheme interpreter expects one expression per prompt (evaluates only
   the first one it finds in each prompt), so we enter the expressions we need
@@ -331,20 +331,23 @@
 <\auxiliary>
   <\collection>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-2>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help-\<gtr\>Manual-\<gtr\>Creating
+      technical pictures>>|<pageref|auto-2>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-3>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Program bracket
-      matching>>|<pageref|auto-3>>
+      matching>>|<pageref|auto-4>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-4>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert text field
-      below>>|<pageref|auto-5>>
+      below>>|<pageref|auto-6>>
     </associate>
     <\associate|toc>
-      Composing TeXmacs graphics with Scheme
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-1>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Composing
+      TeXmacs graphics with Scheme> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <pageref|auto-1><vspace|0.5fn>
     </associate>
   </collection>
 </auxiliary>
