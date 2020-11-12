@@ -29,6 +29,18 @@
 
   \ <hrule>
 
+  <with|font-shape|italic|Easy:> Implement a <name|Lilipond> backend for the
+  <name|Graph> plugin. See this <hlink|post in the
+  forum|http://forum.texmacs.cn/t/write-music-in-texmacs/167>. There is an
+  open bug for this at [<hlink|bug#59001|https://savannah.gnu.org/bugs/?59001>].
+
+  <hrule>
+
+  Modify the way circles are created in the graphical editor. See
+  [<hlink|bug#57882|https://savannah.gnu.org/bugs/?57882>].
+
+  <hrule>
+
   \;
 </body>
 
