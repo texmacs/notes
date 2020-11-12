@@ -216,6 +216,10 @@ a:active, a:focus, a:hover {
     vertical-align: middle;
 }
 
+.notes-header-name {
+    float: right;
+}
+
 .tmweb-pad-below {
     padding-bottom: 20px;
 }

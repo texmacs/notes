@@ -528,14 +528,14 @@
       </surround>|<pageref|auto-6>>
     </associate>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Help-\<gtr\>Manual-\<gtr\>Use
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Manual>|<with|font-family|<quote|ss>|Use
       TeXmacs as an interface>>|<pageref|auto-2>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Fold-\<gtr\>Executable-\<gtr\>Graph>>|<pageref|auto-3>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>|<with|font-family|<quote|ss>|Graph>>|<pageref|auto-3>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Fold-\<gtr\>Executable>>|<pageref|auto-4>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-4>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Help-\<gtr\>Manual-\<gtr\>Use
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Manual>|<with|font-family|<quote|ss>|Use
       TeXmacs as an interface>>|<pageref|auto-5>>
     </associate>
     <\associate|toc>
