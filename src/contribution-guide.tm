@@ -31,25 +31,26 @@
   (as said above, the maintainers are going to take care of the conversion to
   html in the web site).
 
-  You can download and install locally the style file <code*|notes.ts> (in
-  <code*|src/>). If the document style is set to Notes, the local generation
-  of the website will be done with the same css as the web version.
-
-  <strong|To contribute:>\ 
+  This <hlink|template file|./template.tm> can be used for new articles.
 
   If you do not have commit rights (that is, write permission) on the
   repository, you can make a pull request starting from a fork of the
   repository.
 
   It is necessary to perform a few actions using the terminal. The sequence
-  is fork-clone-modify-add-commit-push- and finally make a pull request;
-  people that use git are familiar with these commands. Here are some hints
-  for those that are using git for the first time (a basic tutorial on how to
-  work on one's own repositories using git is available
-  at<nbsp><hlink|https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/|https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/>).
+  is fork\Uclone\Umodify\Uadd\Ucommit\Upush and finally make a pull request.
+  People that use <name|Git> are familiar with these commands. Here are some
+  hints for those that are using <name|Git> for the first time. A basic
+  tutorial on how to work on one's own repositories using <name|Git> is
+  available at
 
-  <\itemize>
-    <item>Fork the repository. This can be done through the web interface.
+  <hlink|https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/|https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/>
+
+  <\enumerate>
+    <item>Fork the repository at <name|Github>. This can be done through the
+    web interface there. You need to have a <name|Github> account. This
+    operation creates a complete copy of the main repository in your
+    <name|Github> account.
 
     <item>Clone it locally. Within a suitable directory execute the command
 
@@ -58,17 +59,19 @@
     </shell-code>
 
     a subdirectory named <code*|notes> will appear, where you will be able to
-    work on the files.
+    work on the files. Now you have a complete copy of the main repository on
+    your computer. You can browse the site also locally by pointing the
+    browser to <tt|index.html>.
 
-    <item>Make your modifications.
+    <item>Make your modifications locally.
 
     <item>Add the modified files to git (command <code*|git add>).
 
     <item>Commit with <code*|git commit>
 
     <\itemize>
-      <item>the first time you do this, git will ask you to set your identity
-      with the commands
+      <item>the first time you do this, git might ask you to set your
+      identity with the commands
 
       <\shell-code>
         git config --global user.email
@@ -80,39 +83,44 @@
         git config --global user.name
       </shell-code>
 
-      the<nbsp><code*|--global><nbsp>switch can be omitted; in this case the
-      identity will be set for the current repository only
+      the <code*|--global> switch can be omitted; in this case the identity
+      will be set for the current repository only.
     </itemize>
 
     <item>Push the modifications to your forked repository using <code*|git
-    push>
+    push>. <name|Git> might then ask for username and password.
 
-    <itemize|<item>git asks for username and password>
+    <item>Now you can make a pull request through the web interface, at
 
-    <item>Now you can make a pull request through the web interface,
-    at<nbsp><code*|https://github.com/texmacs/notes/pulls><nbsp>(green
-    button<nbsp><code*|New pull request>).
+    \ <hlink|https://github.com/texmacs/notes/pulls|https://github.com/texmacs/notes/pulls>
 
-    <itemize|<item>The web interface gives further helpful hints. Follow the
-    link<nbsp><code*|compare across forks><nbsp>above the pulldown menus to
-    have them show forks, from which you can select yours.>
+    (green button <code*|New pull request>). The web interface gives further
+    helpful hints. Follow the link <code*|compare across forks> above the
+    pulldown menus to have them show forks, from which you can select yours.
 
     <item>The pull request on github asks the maintainers to integrate your
     changes into the public repository.
-  </itemize>
+
+    <item>Go to step 3.
+  </enumerate>
 
   <strong|To keep your fork up to date:>
 
-  <\itemize>
+  <\enumerate>
     <item>Configure the upstream remote repository with
 
     <\shell-code>
       git remote add upstream https://github.com/texmacs/notes.git
     </shell-code>
 
-    (instructions at <hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork>).
+    Detailed instructions at:
 
-    <item>Follow the steps at <hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>,
+    <hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork>
+
+    <item>Follow the steps at\ 
+
+    <hlink|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork|https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>
+
     that is:
 
     <\itemize>
@@ -142,7 +150,7 @@
     </itemize>
 
     \;
-  </itemize>
+  </enumerate>
 
   Please check also the <hlink|editorial guidelines|editorial-guidelines.tm>
   for preparing your content.
@@ -163,6 +171,10 @@
 
 <\auxiliary>
   <\collection>
+    <\associate|idx>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Tools>|<with|font-family|<quote|ss>|Web>|<with|font-family|<quote|ss>|Create/Update
+      web site>>|<pageref|auto-2>>
+    </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Contribution
       guide> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
