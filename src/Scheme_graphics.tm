@@ -134,8 +134,8 @@
   TeXmacs graphics, we need to insert them in a canvas with the
   <inactive|<hybrid|graphics>> primitive, entered in Scheme as
   <verbatim|graphics>. The Scheme expression that starts with
-  <verbatim|graphics> contains afetr the symbol <verbatim|graphics> a list of
-  graphical objects; we will then write the canvas with our points as
+  <verbatim|graphics> contains, after the symbol <verbatim|graphics>, a list
+  of graphical objects; we will then write the canvas with our points as
   <verbatim|`(graphics ,pA ,pB ,pC)> with proper quasi- and unquoting
   (slightly different in the final form of the expression). Since
   <inactive|<hybrid|graphics>> by itself yields a rather large canvas, we
