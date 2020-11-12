@@ -7,25 +7,34 @@
 
   <chapter*|Composing TeXmacs graphics with Scheme>
 
-  Let us generate a drawing with TeXmacs graphic primitives using Scheme. In
-  this note, we assume that the reader is familiar with simple Scheme syntax.
-  Two possible web sources for learning Scheme are the Wikipedia book
-  <hlink|Scheme programming|https://en.wikibooks.org/wiki/Scheme_Programming>
+  TeXmacs provides a set of graphic primitives, which can be accessed both
+  directly through the TeXmacs source code (TeXmacs trees) or through Scheme
+  (as Scheme trees). The manual at <menu|Help-\<gtr\>Manual-\<gtr\>Creating
+  technical pictures> describes interactive generation and editing of
+  drawings.
+
+  In this note, we shall step through the generation of a simple drawing
+  starting from Scheme code and translating it into a TeXmacs tree which then
+  displays the graphics. We assume that the reader is familiar with simple
+  Scheme syntax. Two possible web resources for learning Scheme are the
+  Wikipedia book <hlink|Scheme programming|https://en.wikibooks.org/wiki/Scheme_Programming>
   and <hlink|Yet Another Scheme Tutorial|http://www.shido.info/lisp/idx_scm_e.html>
   by Takafumi Shido.
 
   We want to draw a triangle inscribed inside a semicircle, mark its vertices
   with letters and decorate the drawing with the text <TeXmacs>.
 
-  The most comfortable way of generating a drawing is in a Scheme session, so
-  that is the first way we'll take. Once we have our graphics through a
-  Scheme session, we'll see as well how to blend it in a document.
+  The most comfortable way of generating a drawing with Scheme is within a
+  session, so that is the way we'll take in this note. We'll see in other
+  notes how to blend seamlessly graphics in a document and generate it
+  through external source files.
 
-  The first step is opening the session, with
-  <menu|Insert-\<gtr\>Session-\<gtr\>Scheme>. It is convenient to select
-  <menu|Program bracket matching> in the preferences box under
-  <menu|Edit-\<gtr\>Preferences-\<gtr\>Other>; this helps coding in Scheme by
-  highlighting the parenthesis that matches the one next to the cursor.
+  The first step in working with a session is opening it, with
+  <menu|Insert-\<gtr\>Session-\<gtr\>Scheme>. As a side step, it is
+  convenient to select <menu|Program bracket matching> in the preferences box
+  under <menu|Edit-\<gtr\>Preferences-\<gtr\>Other>; this helps coding in
+  Scheme by highlighting the parenthesis that matches the one next to the
+  cursor.
 
   Now we will insert our commands at the prompt. We place small comments them
   within text fields inserted by choosing <menu|Insert text field below> in
@@ -64,7 +73,7 @@
   <verbatim|point> (since <verbatim|point> is a symbol, it fits well within
   the quasiquote that also defines the list).
 
-  Using <verbatim|pt> we shall now define a few points.
+  Using the <verbatim|pt> function we shall now define a few points.
 
   The Scheme interpreter expects one expression per prompt (evaluates only
   the first one it finds in each prompt), so we enter the expressions we need
@@ -239,7 +248,7 @@
   We are ready to compose our drawing; as usual the syntax is\ 
 
   <\scm-code>
-    (graphics object_1 object_2 <text-dots> objectn_)
+    (graphics object_1 object_2 <text-dots> object_n)
   </scm-code>
 
   properly enclosed in other constructs, with the appropriate sequence of
@@ -316,26 +325,30 @@
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
     <associate|auto-5|<tuple|?|?>>
+    <associate|auto-6|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-2>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help-\<gtr\>Manual-\<gtr\>Creating
+      technical pictures>>|<pageref|auto-2>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-3>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Program bracket
-      matching>>|<pageref|auto-3>>
+      matching>>|<pageref|auto-4>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-4>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert text field
-      below>>|<pageref|auto-5>>
+      below>>|<pageref|auto-6>>
     </associate>
     <\associate|toc>
-      Composing TeXmacs graphics with Scheme
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-1>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Composing
+      TeXmacs graphics with Scheme> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <pageref|auto-1><vspace|0.5fn>
     </associate>
   </collection>
 </auxiliary>
