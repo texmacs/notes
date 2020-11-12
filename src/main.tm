@@ -37,6 +37,8 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
+  <hlink|An overview of <TeXmacs> from altitude|overview.tm>
+
   <hlink|Editorial guidelines|editorial-guidelines.tm>
 
   <hlink|Contribution guide|contribution-guide.tm>
