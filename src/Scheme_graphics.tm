@@ -162,8 +162,11 @@
     </unfolded-io>
 
     <\textput>
-      We can modify the appearance of the points enclosing each of them in
-      the <inactive|<with|>> (Scheme symbol <verbatim|with>) primitive
+      This example, with constructs boxed inside each other, is typical of
+      Scheme and illustrates one characteristic of functional programming:
+      programs are compositions of functions.We can modify the appearance of
+      the points enclosing each of them in the <inactive|<with|>> (Scheme
+      symbol <verbatim|with>) primitive
     </textput>
 
     <\unfolded-io|Scheme] >
@@ -188,6 +191,9 @@
       \;
     </input>
   </session>
+
+  This example, with constructs boxed inside each other, is typical of
+  Scheme: we compose a list out of other lists.
 
   The next step is composing more complex graphical objects using the points
   we defined.
@@ -235,10 +241,6 @@
       \;
     </input>
   </session>
-
-  This example, with constructs boxed inside each other, is typical of Scheme
-  and illustrates one characteristic of functional programming: programs are
-  compositions of functions.
 
   We are ready to compose our drawing; as usual the syntax is\ 
 
