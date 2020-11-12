@@ -202,11 +202,11 @@
   </cell>|<cell|<verbatim|(arc point<rsub|1> point<rsub|2>
   point<rsub|3>)>>>|<row|<cell|<verbatim|line>>|<\cell>
     a polyline, defined by two or more points
-  </cell>|<cell|<verbatim|(line point<rsub|1> point<rsub|2> <text-dots>
-  point<rsub|n>)>>>|<row|<cell|<verbatim|cline>>|<\cell>
+  </cell>|<cell|<verbatim|(line point<rsub|1> point<rsub|2> [<text-dots>
+  point<rsub|n>])>>>|<row|<cell|<verbatim|cline>>|<\cell>
     a closed polyline, defined by three or more points
-  </cell>|<cell|<verbatim|(cline point<rsub|1> point<rsub|2>
-  point<rsub|3><text-dots> point<rsub|n>)>>>|<row|<cell|<verbatim|text-at>>|<\cell>
+  </cell>|<cell|<verbatim|(cline point<rsub|1> point<rsub|2> point<rsub|3>
+  [<text-dots> point<rsub|n>])>>>|<row|<cell|<verbatim|text-at>>|<\cell>
     a text box, whose position is defined with a single point
   </cell>|<cell|<verbatim|(text-at string point)>>>>>>
 
