@@ -7,34 +7,34 @@
 
   <chapter*|Composing TeXmacs graphics with Scheme>
 
-  TeXmacs provides a set of graphic primitives, which can be accessed in
+  <TeXmacs> provides a set of graphic primitives, which can be accessed in
   several ways: interactively with the Texmacs editor, directly through the
-  TeXmacs source code (TeXmacs trees) or through Scheme (as Scheme trees).
-  The manual at <menu|Help-\<gtr\>Manual-\<gtr\>Creating technical pictures>
-  describes interactive generation and editing of drawings.
+  <TeXmacs> source code (<TeXmacs> trees) or through <name|Scheme> (as
+  <name|Scheme> trees). The manual at <menu|Help|Manual|Creating technical
+  pictures> describes interactive generation and editing of drawings.
 
   In this note, we shall step through the generation of a simple drawing
-  starting from Scheme code and translating it into a TeXmacs tree which then
-  displays the graphics. We assume that the reader is familiar with simple
-  Scheme syntax. Two possible web resources for learning Scheme are the
-  Wikipedia book <hlink|Scheme programming|https://en.wikibooks.org/wiki/Scheme_Programming>
-  and <hlink|Yet Another Scheme Tutorial|http://www.shido.info/lisp/idx_scm_e.html>
+  starting from Scheme code and translating it into a <TeXmacs> tree which
+  then displays the graphics. We assume that the reader is familiar with
+  simple Scheme syntax. Two possible web resources for learning <name|Scheme>
+  are the <name|Wikipedia> book <hlink|Scheme
+  programming|https://en.wikibooks.org/wiki/Scheme_Programming> and
+  <hlink|Yet Another Scheme Tutorial|http://www.shido.info/lisp/idx_scm_e.html>
   by Takafumi Shido.
 
   We want to draw a triangle inscribed inside a semicircle, mark its vertices
   with letters and decorate the drawing with the text <TeXmacs>.
 
-  The most comfortable way of generating a drawing with Scheme is within a
-  session, so that is the way we'll take in this note. We'll see in other
-  notes how to blend seamlessly graphics in a document and generate it
+  The most comfortable way of generating a drawing with <name|Scheme> is
+  within a session, so that is the way we'll take in this note. We'll see in
+  other notes how to blend seamlessly graphics in a document and generate it
   through external source files.
 
   The first step in working with a session is opening it, with
-  <menu|Insert-\<gtr\>Session-\<gtr\>Scheme>. As a side step, it is
-  convenient to select <menu|Program bracket matching> in the preferences box
-  under <menu|Edit-\<gtr\>Preferences-\<gtr\>Other>; this helps coding in
-  Scheme by highlighting the parenthesis that matches the one next to the
-  cursor.
+  <menu|Insert|Session|Scheme>. As a side step, it is convenient to select
+  <menu|Program bracket matching> in the preferences box under
+  <menu|Edit|Preferences|Other>; this helps coding in <name|Scheme> by
+  highlighting the parenthesis that matches the one next to the cursor.
 
   Now we will insert our commands at the prompt. We place small comments them
   within text fields inserted by choosing <menu|Insert text field below> in
@@ -61,21 +61,21 @@
     </input>
   </session>
 
-  The Scheme function <verbatim|pt> we just defined generates a TeXmacs
-  graphics point parametrized by its x- and y- coordinates.
+  The Scheme function <scm|pt> we just defined generates a TeXmacs graphics
+  point parametrized by its <scm|x> and <scm|y> coordinates.
 
-  <inactive|<point|>> is a TeXmacs graphics primitive that represents a point
-  and expects two strings. It is represented in Scheme with a list of three
-  elements, the first element in the list being the symbol <verbatim|point>
-  (since <verbatim|point> is a Scheme symbol, it fits well within the
+  <markup|point> is a <TeXmacs> graphics primitive that represents a point
+  and expects two strings. It is represented in <name|Scheme> with a list of
+  three elements, the first element in the list being the symbol <scm|point>
+  (since <scm|point> is a <name|Scheme> symbol, it fits well within the
   quasiquote that also defines the list).
 
-  Using the <verbatim|pt> function we shall now define a few points.
+  Using the <scm|pt> function we shall now define a few points.
 
-  The Scheme interpreter expects one expression per prompt (evaluates only
-  the first one it finds in each prompt), so we enter the expressions we need
-  in separate prompts; the code in external Scheme programs is\Vof
-  course\Vmore compact.
+  The <name|Scheme> interpreter expects one expression per prompt (evaluates
+  only the first one it finds in each prompt), so we enter the expressions we
+  need in separate prompts; the code in external <name|Scheme> programs
+  is\Vof course\Vmore compact.
 
   <\session|scheme|default>
     <\textput>
@@ -93,7 +93,7 @@
 
     <\textput>
       Then the third point of the triangle, on the circumference, defined
-      with the help of two variables <verbatim|xC> and <verbatim|yC>:
+      with the help of two variables <scm|xC> and <scm|yC>:
     </textput>
 
     <\input|Scheme] >
@@ -131,20 +131,19 @@
   </session>
 
   Let us take a look at the points we just defined. To display them as a
-  TeXmacs graphics, we need to insert them in a canvas with the
-  <inactive|<hybrid|graphics>> primitive, entered in Scheme as
-  <verbatim|graphics>. The Scheme expression that starts with
+  <TeXmacs> graphics, we need to insert them in a canvas with the
+  <markup|graphics> primitive, entered in <name|Scheme> as
+  <verbatim|graphics>. The <name|Scheme> expression that starts with
   <verbatim|graphics> contains, after the symbol <verbatim|graphics>, a list
   of graphical objects; we will then write the canvas with our points as
-  <verbatim|`(graphics ,pA ,pB ,pC)> with proper quasi- and unquoting
-  (slightly different in the final form of the expression). Since
-  <inactive|<hybrid|graphics>> by itself yields a rather large canvas, we
-  size it down enclosing it in a <inactive|<with|>> primitive which specifies
-  the geometry. The <verbatim|(with <text-dots> (graphics <text-dots>)>
-  construct needs to be quasiquoted as <verbatim|with> and
-  <verbatim|graphics> are Scheme symbols, so that the <verbatim|pA>,
-  <verbatim|pB> and <verbatim|pC> variables, which represent the points, must
-  be unquoted. Finally, everything has to be wrapped in the
+  <scm|`(graphics ,pA ,pB ,pC)> with proper quasi- and unquoting (slightly
+  different in the final form of the expression). Since <markup|graphics> by
+  itself yields a rather large canvas, we size it down enclosing it in a
+  <markup|with> primitive which specifies the geometry. The <scm|(with
+  <text-dots> (graphics <text-dots>))> construct needs to be quasiquoted as
+  <scm|with> and <verbatim|graphics> are Scheme symbols, so that the
+  <verbatim|pA>, <verbatim|pB> and <verbatim|pC> variables, which represent
+  the points, must be unquoted. Finally, everything has to be wrapped in the
   <verbatim|stree-\<gtr\>tree> function to become a TeXmacs tree. The result
   is a graphical representation of the three points:
 
@@ -152,37 +151,37 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+      `(with "gr-geometry"\ 
 
-      \ \ \ (graphics ,pA ,pB ,pC
+      \ \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
-      \ \ \ \ )))
+      \ \ \ \ \ (graphics ,pA ,pB ,pC)))
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>>
     </unfolded-io>
 
     <\textput>
       This example, with constructs boxed inside each other, is typical of
-      Scheme and illustrates one characteristic of functional programming:
-      programs are compositions of functions.We can modify the appearance of
-      the points enclosing each of them in the <inactive|<with|>> (Scheme
-      symbol <verbatim|with>) primitive
+      <name|Scheme> and illustrates one characteristic of functional
+      programming: programs are compositions of functions.We can modify the
+      appearance of the points enclosing each of them in the <markup|with>
+      (<name|Scheme> symbol <scm|with>) primitive
     </textput>
 
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+      \ `(with "gr-geometry"\ 
+
+      \ \ \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
       \ \ \ (graphics\ 
 
-      \ \ \ \ (with "color" "blue" ,pA)
+      \ \ \ \ \ \ (with "color" "blue" ,pA)
 
-      \ \ \ \ (with "color" "red" ,pB)
+      \ \ \ \ \ \ (with "color" "red" ,pB)
 
-      \ \ \ \ (with "color" "green" ,pC)
-
-      \ \ \ \ )))
+      \ \ \ \ \ \ (with "color" "green" ,pC))))
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|blue|<point|-2|0>>|<with|color|red|<point|2|0>>|<with|color|green|<point|-1.0|1.73205080756888>>>>>
     </unfolded-io>
@@ -193,48 +192,48 @@
   </session>
 
   This example, with constructs boxed inside each other, is typical of
-  Scheme: we compose a list out of other lists. In this case we pass then the
-  list, made of lists, symbols and strings, to the function
-  <verbatim|stree-\<gtr\>tree> that turns it into a TeXmacs tree.
+  <name|Scheme>: we compose a list out of other lists. In this case we pass
+  then the list, made of lists, symbols and strings, to the function
+  <scm|stree-\<gtr\>tree> that turns it into a <TeXmacs> tree.
 
   The next step is composing more complex graphical objects using the points
   we defined.
 
-  We will use the TeXmacs graphical objects <verbatim|arc>, <verbatim|line>,
-  <verbatim|cline> and <verbatim|text-at>. Their meaning and Scheme syntax is
+  We will use the <TeXmacs> graphical objects <scm|arc>, <scm|line>,
+  <scm|cline> and <scm|text-at>. Their meaning and <name|Scheme> syntax is
   described in the following table:
 
   <tabular|<tformat|<cwith|2|-1|2|2|cell-hyphen|t>|<twith|table-width|1par>|<twith|table-hmode|exact>|<cwith|1|1|1|-1|cell-bsep|3sep>|<cwith|1|1|1|-1|cell-tborder|1ln>|<cwith|1|1|1|-1|cell-bborder|1ln>|<cwith|2|2|1|-1|cell-tborder|1ln>|<cwith|1|1|1|1|cell-lborder|0ln>|<cwith|1|1|3|3|cell-rborder|0ln>|<cwith|1|1|1|-1|cell-tsep|3sep>|<table|<row|<cell|object>|<cell|description>|<cell|Scheme
-  syntax>>|<row|<cell|<verbatim|arc>>|<\cell>
+  syntax>>|<row|<cell|<scm|arc>>|<\cell>
     an arc of circle, defined by three points
-  </cell>|<cell|<verbatim|(arc point<rsub|1> point<rsub|2>
-  point<rsub|3>)>>>|<row|<cell|<verbatim|line>>|<\cell>
+  </cell>|<cell|<scm|(arc point<rsub|1> point<rsub|2>
+  point<rsub|3>)>>>|<row|<cell|<scm|line>>|<\cell>
     a polyline, defined by two or more points
-  </cell>|<cell|<verbatim|(line point<rsub|1> point<rsub|2> [<text-dots>
-  point<rsub|n>])>>>|<row|<cell|<verbatim|cline>>|<\cell>
+  </cell>|<cell|<scm|(line point<rsub|1> point<rsub|2> [<text-dots>
+  point<rsub|n>])>>>|<row|<cell|<scm|cline>>|<\cell>
     a closed polyline, defined by three or more points
-  </cell>|<cell|<verbatim|(cline point<rsub|1> point<rsub|2> point<rsub|3>
-  [<text-dots> point<rsub|n>])>>>|<row|<cell|<verbatim|text-at>>|<\cell>
+  </cell>|<cell|<scm|(cline point<rsub|1> point<rsub|2> point<rsub|3>
+  [<text-dots> point<rsub|n>])>>>|<row|<cell|<scm|text-at>>|<\cell>
     a text box, whose position is defined with a single point
-  </cell>|<cell|<verbatim|(text-at string point)>>>>>>
+  </cell>|<cell|<scm|(text-at string point)>>>>>>
 
   Before composing the full drawing, let us take a look at one of the
-  constructs; as an example we choose <verbatim|cline>. We place it as usual
-  inside the <verbatim|graphics> primitive, which is in turn enclosed in a
-  <verbatim|with> and <verbatim|stree-\<gtr\>tree> primitives, while being
-  itself enclosed in its own <verbatim|with> primitive:\ 
+  constructs; as an example we choose <scm|cline>. We place it as usual
+  inside a <scm|with> construct to select the color and wrap it up in the
+  <scm|graphics> primitive, which is in turn enclosed in a <scm|with> which
+  sets the <scm|"gr-geometry"> property of the graphics object:\ 
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+      \ `(with "gr-geometry"\ 
 
-      \ \ \ (graphics
+      \ \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
-      (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+      \ \ \ \ \ (graphics
 
-      )))
+      \ \ \ \ \ \ \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC)))))
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>>>>
     </unfolded-io>
@@ -257,7 +256,9 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+      `(with "gr-geometry"\ 
+
+      \ \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
       \ \ \ (graphics
 
@@ -292,11 +293,11 @@
     </input>
   </session>
 
-  In follow-up tutorials we will see how to embed seamlessly Scheme graphics
-  in a document using the <name|Fold> <name|Executable> environment and how
+  In follow-up tutorials we will see how to embed seamlessly <name|Scheme>
+  graphics in a document using the <menu|Fold|Executable> environment and how
   to generate them from external files.
 
-  As a conclusion of this note, here is a collection of TeXmacs graphical
+  As a conclusion of this note, here is a collection of <TeXmacs> graphical
   objects, illustrating a few possibilities:
 
   <with|gr-mode|<tuple|group-edit|edit-props>|gr-frame|<tuple|scale|1cm|<tuple|0.5gw|0.5gh>>|gr-geometry|<tuple|geometry|1par|0.6par>45|<graphics|<\document-at>
@@ -325,6 +326,8 @@
     <associate|auto-4|<tuple|?|?>>
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
+    <associate|auto-7|<tuple|?|?>>
+    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
