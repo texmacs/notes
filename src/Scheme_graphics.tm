@@ -58,10 +58,11 @@
   <inactive|<point|>> is a TeXmacs graphics primitive that represents a point
   and expects two strings<todo|which types does TeXmacs expect? Maybe the
   conversion to string in Scheme is necessary only because of the subsequent
-  stree-\<gtr\>tree?>. It is represented in Scheme with a list of three
-  elements, the first element in the list being the symbol <verbatim|point>
-  (since <verbatim|point> is a symbol, it fits well within the quasiquote
-  that also defines the list).
+  stree-\<gtr\>tree? Yes: point is part of the markup of texmacs which is
+  made up of strings and trees<text-dots>>. It is represented in Scheme with
+  a list of three elements, the first element in the list being the symbol
+  <verbatim|point> (since <verbatim|point> is a symbol, it fits well within
+  the quasiquote that also defines the list).
 
   Using <verbatim|pt> we shall now define a few points.
 
