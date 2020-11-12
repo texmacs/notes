@@ -65,12 +65,10 @@
   graphics point parametrized by its x- and y- coordinates.
 
   <inactive|<point|>> is a TeXmacs graphics primitive that represents a point
-  and expects two strings<todo|which types does TeXmacs expect? Maybe the
-  conversion to string in Scheme is necessary only because of the subsequent
-  stree-\<gtr\>tree?>. It is represented in Scheme with a list of three
+  and expects two strings. It is represented in Scheme with a list of three
   elements, the first element in the list being the symbol <verbatim|point>
-  (since <verbatim|point> is a symbol, it fits well within the quasiquote
-  that also defines the list).
+  (since <verbatim|point> is a Scheme symbol, it fits well within the
+  quasiquote that also defines the list).
 
   Using the <verbatim|pt> function we shall now define a few points.
 
@@ -134,23 +132,21 @@
 
   Let us take a look at the points we just defined. To display them as a
   TeXmacs graphics, we need to insert them in a canvas with the
-  <inactive|<hybrid|graphics>> primitive <mouse-over-balloon|(how to show
-  this in blue?)||left|Bottom>, entered in Scheme as <verbatim|graphics>. The
-  Scheme expression that starts with <verbatim|graphics>
-  <mouse-over-balloon|this is a Scheme tree, but I do not have clear what is
-  the status in Scheme of the symbol graphics: is it a function, or only a
-  symbol?||left|Bottom> is a list of graphical objects, so that we will write
-  the canvas with our points as <verbatim|`(graphics ,pA ,pB ,pC)> with
-  proper quoting (slightly different in the final form of the expression).
-  Since <inactive|<hybrid|graphics>> by itself yields a rather large canvas,
-  we size it down enclosing it in a <inactive|<with|>> primitive which
-  specifies the geometry. The <verbatim|with> <text-dots> <verbatim|graphics>
-  construct needs to be quasiquoted as <verbatim|with> and
-  <verbatim|graphics> are Scheme symbols, so that the <verbatim|pA>,
-  <verbatim|pB> and <verbatim|pC> variables, which represent the points, must
-  be unquoted. Finally, everything has to be wrapped in the
-  <verbatim|stree-\<gtr\>tree> function to become a TeXmacs tree. The result
-  is a graphical representation of the three points:
+  <inactive|<hybrid|graphics>> primitive, entered in Scheme as
+  <verbatim|graphics>. The Scheme expression that starts with
+  <verbatim|graphics> contains afetr the symbol <verbatim|graphics> a list of
+  graphical objects; we will then write the canvas with our points as
+  <verbatim|`(graphics ,pA ,pB ,pC)> with proper quasi- and unquoting
+  (slightly different in the final form of the expression). Since
+  <inactive|<hybrid|graphics>> by itself yields a rather large canvas, we
+  size it down enclosing it in a <inactive|<with|>> primitive which specifies
+  the geometry. The <verbatim|with> <text-dots> <verbatim|graphics> construct
+  needs to be quasiquoted as <verbatim|with> and <verbatim|graphics> are
+  Scheme symbols, so that the <verbatim|pA>, <verbatim|pB> and <verbatim|pC>
+  variables, which represent the points, must be unquoted. Finally,
+  everything has to be wrapped in the <verbatim|stree-\<gtr\>tree> function
+  to become a TeXmacs tree. The result is a graphical representation of the
+  three points:
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
