@@ -216,10 +216,10 @@
   </cell>|<cell|<verbatim|(text-at string point)>>>>>>
 
   Before composing the full drawing, let us take a look at one of the
-  constructs; as an example we choose <verbatim|cline>. We place it as usual
-  inside the <verbatim|graphics> primitive, which is in turn enclosed in
-  <verbatim|with> and <verbatim|stree-\<gtr\>tree> primitives, while being
-  itself enclosed in its own <verbatim|with> primitive:\ 
+  constructs; as an example we choose <verbatim|cline>. We enclose it in a
+  <verbatim|with> primitive which we place inside the <verbatim|graphics>
+  primitive, which is in turn enclosed in its own <verbatim|with> primitive
+  and finally the <verbatim|stree-\<gtr\>tree> function:\ 
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
