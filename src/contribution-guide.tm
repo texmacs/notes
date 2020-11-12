@@ -166,6 +166,7 @@
   <\collection>
     <associate|auto-1|<tuple|?|?>>
     <associate|auto-2|<tuple|?|?>>
+    <associate|auto-3|<tuple|?|?>>
   </collection>
 </references>
 
