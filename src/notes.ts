@@ -48,19 +48,39 @@
 
   <assign|hlink-tm|<macro|body|target|<hlink|<arg|body>|<merge|<arg|target>|.tm>>>>
 
+  <assign|notes-header-name|Notes on TeXmacs>
+
+  <assign|notes-header-image|<image|../resources/texmacs-blog-transparent.png|20pt|||>>
+
+  <assign|notes-header-links|<macro|<hlink|[main]|./main.tm>>>
+
   <assign|notes-header-table|<\macro|body>
     <\wide-tabular>
-      <tformat|<cwith|1|1|1|1|cell-halign|c>|<cwith|1|1|1|1|cell-width|30pt>|<cwith|1|1|1|1|cell-hmode|exact>|<cwith|1|1|1|-1|cell-valign|c>|<table|<row|<\cell>
-        <image|../resources/texmacs-blog-transparent.png|20pt|||>
+      <tformat|<cwith|1|1|1|1|cell-halign|c>|<cwith|1|1|1|1|cell-width|30pt>|<cwith|1|1|1|1|cell-hmode|exact>|<cwith|1|1|1|-1|cell-valign|c>|<cwith|1|1|3|3|cell-halign|r>|<table|<row|<\cell>
+        <notes-header-image>
       </cell>|<\cell>
         <space|0pt><arg|body>
+      </cell>|<\cell>
+        <em|<notes-header-name>>
       </cell>>>>
     </wide-tabular>
   </macro>>
 
-  <assign|notes-header|<macro|<notes-header-table|<hlink|[main]|./main.tm>>>>
+  <assign|notes-header|<macro|<notes-header-table|<notes-header-links>>>>
 
-  <assign|tmhtml-notes-header|<macro|<html-div-class|notes-header|<image|../resources/texmacs-blog-transparent.png|20pt|||><space|2pt><hlink|[main]|./main.tm>>>>
+  <assign|tmhtml-notes-header-table|<\macro|body>
+    <\html-div-class|notes-header>
+      <notes-header-image><space|2pt><arg|body><html-class|notes-header-name|<em|<notes-header-name>>>
+    </html-div-class>
+  </macro>>
+
+  <assign|tmhtml-notes-header-xxx|<macro|<html-div-class|notes-header|<notes-header-image><space|2pt><notes-header-links><html-div-class|notes-header-name|<notes-header-name>>>>>
+
+  <assign|notes-abstract|<macro|body|<small|<arg|body>>>>
+
+  <assign|tmhtml-notes-abstract|<\macro|body>
+    <style-with|src-compact|all|<html-div-class|notes-abstract|<arg|body>>>
+  </macro>>
 
   <\active*>
     <\src-comment>

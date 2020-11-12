@@ -1,5 +1,5 @@
-# notes
-Notes about TeXmacs
+# ![site icon](./resources/blog-icon.png) notes
+*Notes about TeXmacs*
 
 This is an attempt to a blog/wiki about [TeXmacs](http://www.texmacs.org). It aims to be a container for articles, snippets, comments, developer docs, proposals, ... 
 
