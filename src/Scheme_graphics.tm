@@ -36,7 +36,7 @@
   Scheme by highlighting the parenthesis that matches the one next to the
   cursor.
 
-  Now we will insert our commands at the prompt. We place small comments them
+  Now we will insert our commands at the prompt. We place small comments
   within text fields inserted by choosing <menu|Insert text field below> in
   the contextual menu, while longer explanations fit better in breaks between
   sessions.
@@ -140,7 +140,7 @@
   (slightly different in the final form of the expression). Since
   <inactive|<hybrid|graphics>> by itself yields a rather large canvas, we
   size it down enclosing it in a <inactive|<with|>> primitive which specifies
-  the geometry. The <verbatim|(with <text-dots> (graphics <text-dots>)>
+  the geometry. The <verbatim|(with <text-dots> (graphics <text-dots>))>
   construct needs to be quasiquoted as <verbatim|with> and
   <verbatim|graphics> are Scheme symbols, so that the <verbatim|pA>,
   <verbatim|pB> and <verbatim|pC> variables, which represent the points, must
@@ -162,11 +162,8 @@
     </unfolded-io>
 
     <\textput>
-      This example, with constructs boxed inside each other, is typical of
-      Scheme and illustrates one characteristic of functional programming:
-      programs are compositions of functions.We can modify the appearance of
-      the points enclosing each of them in the <inactive|<with|>> (Scheme
-      symbol <verbatim|with>) primitive
+      We can modify the appearance of the points enclosing each of them in
+      the <inactive|<with|>> (Scheme symbol <verbatim|with>) primitive
     </textput>
 
     <\unfolded-io|Scheme] >
@@ -220,7 +217,7 @@
 
   Before composing the full drawing, let us take a look at one of the
   constructs; as an example we choose <verbatim|cline>. We place it as usual
-  inside the <verbatim|graphics> primitive, which is in turn enclosed in a
+  inside the <verbatim|graphics> primitive, which is in turn enclosed in
   <verbatim|with> and <verbatim|stree-\<gtr\>tree> primitives, while being
   itself enclosed in its own <verbatim|with> primitive:\ 
 
@@ -319,12 +316,12 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?>>
-    <associate|auto-2|<tuple|?|?>>
-    <associate|auto-3|<tuple|?|?>>
-    <associate|auto-4|<tuple|?|?>>
-    <associate|auto-5|<tuple|?|?>>
-    <associate|auto-6|<tuple|?|?>>
+    <associate|auto-1|<tuple|?|3>>
+    <associate|auto-2|<tuple|?|3>>
+    <associate|auto-3|<tuple|?|3>>
+    <associate|auto-4|<tuple|?|3>>
+    <associate|auto-5|<tuple|?|3>>
+    <associate|auto-6|<tuple|?|3>>
   </collection>
 </references>
 
