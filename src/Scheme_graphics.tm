@@ -7,11 +7,11 @@
 
   <chapter*|Composing TeXmacs graphics with Scheme>
 
-  TeXmacs provides a set of graphic primitives, which can be accessed both
-  directly through the TeXmacs source code (TeXmacs trees) or through Scheme
-  (as Scheme trees). The manual at <menu|Help-\<gtr\>Manual-\<gtr\>Creating
-  technical pictures> describes interactive generation and editing of
-  drawings.
+  TeXmacs provides a set of graphic primitives, which can be accessed in
+  several ways: interactively with the Texmacs editor, directly through the
+  TeXmacs source code (TeXmacs trees) or through Scheme (as Scheme trees).
+  The manual at <menu|Help-\<gtr\>Manual-\<gtr\>Creating technical pictures>
+  describes interactive generation and editing of drawings.
 
   In this note, we shall step through the generation of a simple drawing
   starting from Scheme code and translating it into a TeXmacs tree which then
