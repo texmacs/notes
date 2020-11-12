@@ -140,13 +140,13 @@
   (slightly different in the final form of the expression). Since
   <inactive|<hybrid|graphics>> by itself yields a rather large canvas, we
   size it down enclosing it in a <inactive|<with|>> primitive which specifies
-  the geometry. The <verbatim|with> <text-dots> <verbatim|graphics> construct
-  needs to be quasiquoted as <verbatim|with> and <verbatim|graphics> are
-  Scheme symbols, so that the <verbatim|pA>, <verbatim|pB> and <verbatim|pC>
-  variables, which represent the points, must be unquoted. Finally,
-  everything has to be wrapped in the <verbatim|stree-\<gtr\>tree> function
-  to become a TeXmacs tree. The result is a graphical representation of the
-  three points:
+  the geometry. The <verbatim|(with <text-dots> (graphics <text-dots>)>
+  construct needs to be quasiquoted as <verbatim|with> and
+  <verbatim|graphics> are Scheme symbols, so that the <verbatim|pA>,
+  <verbatim|pB> and <verbatim|pC> variables, which represent the points, must
+  be unquoted. Finally, everything has to be wrapped in the
+  <verbatim|stree-\<gtr\>tree> function to become a TeXmacs tree. The result
+  is a graphical representation of the three points:
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
