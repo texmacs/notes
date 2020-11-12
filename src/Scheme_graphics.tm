@@ -193,7 +193,9 @@
   </session>
 
   This example, with constructs boxed inside each other, is typical of
-  Scheme: we compose a list out of other lists.
+  Scheme: we compose a list out of other lists. In this case we pass then the
+  list, made of lists, symbols and strings, to the function
+  <verbatim|stree-\<gtr\>tree> that turns it into a TeXmacs tree.
 
   The next step is composing more complex graphical objects using the points
   we defined.
