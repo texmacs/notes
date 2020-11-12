@@ -161,11 +161,8 @@
     </unfolded-io>
 
     <\textput>
-      This example, with constructs boxed inside each other, is typical of
-      <name|Scheme> and illustrates one characteristic of functional
-      programming: programs are compositions of functions.We can modify the
-      appearance of the points enclosing each of them in the <markup|with>
-      (<name|Scheme> symbol <scm|with>) primitive
+      We can modify the appearance of the points enclosing each of them in
+      the <markup|with> (<name|Scheme> symbol <scm|with>) primitive
     </textput>
 
     <\unfolded-io|Scheme] >
@@ -325,25 +322,26 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|?|?>>
-    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Help-\<gtr\>Manual-\<gtr\>Creating
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Manual>|<with|font-family|<quote|ss>|Creating
       technical pictures>>|<pageref|auto-2>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-3>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Session>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-3>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Program bracket
       matching>>|<pageref|auto-4>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-5>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Edit>|<with|font-family|<quote|ss>|Preferences>|<with|font-family|<quote|ss>|Other>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert text field
       below>>|<pageref|auto-6>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-7>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Composing
