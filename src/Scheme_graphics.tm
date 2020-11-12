@@ -24,7 +24,7 @@
   We want to draw a triangle inscribed inside a semicircle, mark its vertices
   with letters and decorate the drawing with the text <TeXmacs>.
 
-  The most comfortable way of generating a drawing with Scheme is within
+  The most comfortable way of generating a drawing with Scheme is within a
   session, so that is the way we'll take in this note. We'll see in other
   notes how to blend seamlessly graphics in a document and generate it
   through external source files.
