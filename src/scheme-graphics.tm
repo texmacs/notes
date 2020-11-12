@@ -256,41 +256,40 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      `(with "gr-geometry"\ 
+      \ `(with "gr-geometry"\ 
 
-      \ \ \ \ \ (tuple "geometry" "400px" "300px" "center")
+      \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
-      \ \ \ (graphics
+      \ \ \ \ (graphics
 
-      ;; the arc and the line together make the semicircle
+      \ \ \ \ \ \ ;; the arc and the line together make the semicircle
 
-      (with "color" "black" (arc ,pA ,pC ,pB))
+      \ \ \ \ \ \ (with "color" "black" (arc ,pA ,pC ,pB))
 
-      (with "color" "black" (line ,pA ,pB))
+      \ \ \ \ \ \ (with "color" "black" (line ,pA ,pB))
 
-      ;; a closed polyline for the triangle
+      \ \ \ \ \ \ ;; a closed polyline for the triangle
 
-      (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+      \ \ \ \ \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC))
 
-      ;; add letters using text-at
+      \ \ \ \ \ \ ;; add letters using text-at
 
-      (with "color" "black" (text-at "A" ,tA)) \ 
+      \ \ \ \ \ \ (with "color" "black" (text-at "A" ,tA)) \ 
 
-      (with "color" "black" (text-at "B" ,tB)) \ 
+      \ \ \ \ \ \ (with "color" "black" (text-at "B" ,tB)) \ 
 
-      (with "color" "black" (text-at "C" ,tC))
+      \ \ \ \ \ \ (with "color" "black" (text-at "C" ,tC))
 
-      ;; finally decorate with the TeXmacs symbol
+      \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
 
-      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
-      close all of the parentheses!!!
+      \ \ \ \ \ \ (with "color" "blue" \ 
+
+      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\ 
+
+      ;; and close all of the parentheses!!!
     <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
-    </unfolded-io>
-
-    <\input|Scheme] >
       \;
-    </input>
+    </unfolded-io>
   </session>
 
   In follow-up tutorials we will see how to embed seamlessly <name|Scheme>
@@ -327,25 +326,26 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|?|?>>
-    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Help-\<gtr\>Manual-\<gtr\>Creating
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Manual>|<with|font-family|<quote|ss>|Creating
       technical pictures>>|<pageref|auto-2>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-3>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Session>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-3>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Program bracket
       matching>>|<pageref|auto-4>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-5>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Edit>|<with|font-family|<quote|ss>|Preferences>|<with|font-family|<quote|ss>|Other>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert text field
       below>>|<pageref|auto-6>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-7>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Composing
