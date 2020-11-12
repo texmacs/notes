@@ -3,7 +3,9 @@
 <style|<tuple|notes|old-lengths|framed-session>>
 
 <\body>
-  <section*|Composing TeXmacs graphics with Scheme>
+  <notes-header>
+
+  <chapter*|Composing TeXmacs graphics with Scheme>
 
   TeXmacs provides a set of graphic primitives, which can be accessed both
   directly through the TeXmacs source code (TeXmacs trees) or through Scheme
@@ -329,15 +331,20 @@
 <\auxiliary>
   <\collection>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-1>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert-\<gtr\>Session-\<gtr\>Scheme>>|<pageref|auto-2>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Program bracket
-      matching>>|<pageref|auto-2>>
+      matching>>|<pageref|auto-3>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-3>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Edit-\<gtr\>Preferences-\<gtr\>Other>>|<pageref|auto-4>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert text field
-      below>>|<pageref|auto-4>>
+      below>>|<pageref|auto-5>>
+    </associate>
+    <\associate|toc>
+      Composing TeXmacs graphics with Scheme
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-1>
     </associate>
   </collection>
 </auxiliary>
