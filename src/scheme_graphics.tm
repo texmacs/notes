@@ -36,7 +36,7 @@
   <menu|Edit|Preferences|Other>; this helps coding in <name|Scheme> by
   highlighting the parenthesis that matches the one next to the cursor.
 
-  Now we will insert our commands at the prompt. We place small comments them
+  Now we will insert our commands at the prompt. We place small comments
   within text fields inserted by choosing <menu|Insert text field below> in
   the contextual menu, while longer explanations fit better in breaks between
   sessions.
