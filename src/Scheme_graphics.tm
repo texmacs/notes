@@ -287,11 +287,11 @@
   objects, illustrating a few possibilities:
 
   <with|gr-mode|<tuple|group-edit|edit-props>|gr-frame|<tuple|scale|1cm|<tuple|0.5gw|0.5gh>>|gr-geometry|<tuple|geometry|1par|0.6par>45|<graphics|<\document-at>
-    <rotate|45|linee>
+    <rotate|45|lines>
 
-    testo
+    in a multiline
 
-    multilinea
+    text
   </document-at|<point|3.91686187855536|2.66778808493186>>|<point|-5.81987|3.09112>|<line|<point|-5.81220898678082|1.98182238174751>|<point|-3.44152757389552|1.98182423913605>|<point|-1.79051553526607|2.5109947643378>>|<with|color|red|<cline|<point|-5.69287|0.318263>|<point|-4.06302090223575|-0.295574811483>|<point|-5.2906965207038|-0.930579441725096>|<point|-6.22203664505887|-0.761244873660537>>>|<with|color|blue|<spline|<point|-5.50236|-1.84075>|<point|-2.58134343167086|-1.58675089297526>|<point|-1.71350377033999|-0.210907527450721>|<point|-1.45950191824315|-0.295574811483>>>|<with|color|orange|fill-color|yellow|line-width|2ln|<cspline|<point|0.640072419501616|2.97694937121585>|<point|0.44063081569717|0.83552077293348>|<point|1.7500743167287|1.74000719130103>|<point|2.48612943100676|1.96478314344897>>>|<with|dash-style|zigzag|color|magenta|<arc|<point|-0.231826|-2.49692>|<point|0.382011509458923|-1.54441725095912>|<point|-0.274159941791242|-1.14224765180579>>>|<with|color|green|line-width|2ln|<carc|<point|1.3133556158222|-1.33274516920228>|<point|2.13886073951581|-2.07358797645192>|<point|3.40887|-0.888246>>>|<text-at|<rotate|45|text>text|<point|-5.5447|-3.2166>>|<math-at|<rotate|45|\<alpha\>+\<beta\>=\<gamma\>>\<alpha\>+\<beta\>=\<gamma\>|<point|-2.81418|-3.25893>>>>
 </body>
 
@@ -306,10 +306,10 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|Scheme_graphics.tm>>
-    <associate|auto-2|<tuple|?|?|Scheme_graphics.tm>>
-    <associate|auto-3|<tuple|?|?|Scheme_graphics.tm>>
-    <associate|auto-4|<tuple|?|?|Scheme_graphics.tm>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-2|<tuple|?|?>>
+    <associate|auto-3|<tuple|?|?>>
+    <associate|auto-4|<tuple|?|?>>
   </collection>
 </references>
 
