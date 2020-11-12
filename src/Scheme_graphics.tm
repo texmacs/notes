@@ -3,6 +3,8 @@
 <style|<tuple|notes|old-lengths|framed-session>>
 
 <\body>
+  <section*|Composing TeXmacs graphics with Scheme>
+
   Let us generate a drawing with TeXmacs graphic primitives using Scheme. In
   this note, we assume that the reader is familiar with simple Scheme syntax.
   Two possible web sources for learning Scheme are the Wikipedia book
@@ -310,6 +312,7 @@
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
+    <associate|auto-5|<tuple|?|?>>
   </collection>
 </references>
 
