@@ -41,7 +41,7 @@
   the contextual menu, while longer explanations fit better in breaks between
   sessions.
 
-  <\session|scheme|default>
+  <\program|scheme|default>
     <\input|Scheme] >
       (define pi (acos -1))
     </input>
@@ -59,7 +59,9 @@
     <\input|Scheme] >
       \;
     </input>
-  </session>
+
+    \;
+  </program>
 
   The Scheme function <scm|pt> we just defined generates a TeXmacs graphics
   point parametrized by its <scm|x> and <scm|y> coordinates.
@@ -288,7 +290,7 @@
 
       ;; and close all of the parentheses!!!
     <|unfolded-io>
-      \;
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
   </session>
 
