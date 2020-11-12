@@ -76,7 +76,11 @@
 
   <assign|tmhtml-notes-header-xxx|<macro|<html-div-class|notes-header|<notes-header-image><space|2pt><notes-header-links><html-div-class|notes-header-name|<notes-header-name>>>>>
 
-  \;
+  <assign|notes-abstract|<macro|body|<small|<arg|body>>>>
+
+  <assign|tmhtml-notes-abstract|<\macro|body>
+    <style-with|src-compact|all|<html-div-class|notes-abstract|<arg|body>>>
+  </macro>>
 
   <\active*>
     <\src-comment>

@@ -7,8 +7,8 @@
 
   <chapter*|TeXmacs and HTML>
 
-  <small|In this article we discuss question related to conversion from/to
-  <name|HTML>.>
+  <notes-abstract|In this article we discuss question related to conversion
+  from/to <name|HTML>.>
 
   Since <TeXmacs> 1.99.14 we support an improved converter to <name|HTML>.
   The new converter is stylable using <name|CSS>, which should allow you to
@@ -61,16 +61,20 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|wishlist.tm>>
-    <associate|auto-2|<tuple|?|?|wishlist.tm>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-2|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
+    <\associate|idx>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Preferences<hspace|0.3333spc>.<hspace|0.3333spc>.<hspace|0.3333spc>.<hspace|0.3333spc>>|<with|font-family|<quote|ss>|Convert>|<with|font-family|<quote|ss>|Html>|<with|font-family|<quote|ss>|CSS
+      style sheet>>|<pageref|auto-2>>
+    </associate>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Wishlist>
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|TeXmacs
+      and HTML> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
     </associate>
   </collection>

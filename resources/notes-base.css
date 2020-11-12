@@ -115,7 +115,7 @@ h1 {
     font-weight: bold;
     font-size: 1.4em;
     margin-top: 1em;
-    margin-bottom: 0.5em;
+    margin-bottom: 2em;
     text-align: center;
 }
 
@@ -219,6 +219,12 @@ a:active, a:focus, a:hover {
 .notes-header-name {
     float: right;
 }
+
+.notes-abstract {
+    font-size: 80%;
+    font-style: italic;
+}
+
 
 .tmweb-pad-below {
     padding-bottom: 20px;

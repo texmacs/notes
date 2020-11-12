@@ -11,7 +11,11 @@
 
   <chapter*|Template article>
 
-  <small|This file provides a template for typical notes/articles.>
+  <notes-abstract|This file provides a template for typical notes/articles.
+  You can use the tag <markup|notes-abstract> to provide a small summary of
+  the content, as exemplified by this very text.>
+
+  \;
 
   <hlink|Lorem ipsum|https://en.wikipedia.org/wiki/Lorem_ipsum> dolor sit
   amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -38,8 +42,8 @@
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Implementing
-      previews for link targets> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Template
+      article> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
     </associate>
   </collection>

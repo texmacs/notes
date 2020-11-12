@@ -7,12 +7,12 @@
 
   <chapter*|Wishlist>
 
-  <small|This wishlist collects suggestions for improvements and nice ideas
-  for addition to TeXmacs. These should be of limited scope and somewhat
-  reasonable technical difficulty. It is mostly meant for developers or
-  technically savyy users to collect good ideas. It should be clear that the
-  functionality is not already provided in some form. This wishlist must not
-  be used for very broad and vague requests (e.g. ``make the program more
+  <notes-abstract|This wishlist collects suggestions for improvements and
+  nice ideas for addition to TeXmacs. These should be of limited scope and
+  somewhat reasonable technical difficulty. It is mostly meant for developers
+  or technically savyy users to collect good ideas. It should be clear that
+  the functionality is not already provided in some form. This wishlist must
+  not be used for very broad and vague requests (e.g. ``make the program more
   versatile and powerful").>
 
   <hrule>
