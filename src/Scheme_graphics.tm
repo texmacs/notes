@@ -247,7 +247,7 @@
   We are ready to compose our drawing; as usual the syntax is\ 
 
   <\scm-code>
-    (graphics object_1 object_2 <text-dots> objectn_)
+    (graphics object_1 object_2 <text-dots> object_n)
   </scm-code>
 
   properly enclosed in other constructs, with the appropriate sequence of
