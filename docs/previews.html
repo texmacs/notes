@@ -5,6 +5,9 @@
     <title>TeXmacs notes</title>
     <meta content="TeXmacs 1.99.15" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <script src="../resources/highlight.pack.js" language="javascript"></script>
+    <script language="javascript">document.addEventListener('DOMContentLoaded',function(event){document.querySelectorAll('pre').forEach(function(block){
+    hljs.highlightBlock(block);});});</script>
     <link href="../resources/blog-icon.png" rel="icon"></link>
   </head>
   <body>
@@ -35,13 +38,11 @@
       source <code>src/Typeset/Env/env_default.cpp</code> with
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim cpp" xml:space="preserve">
 tree ln3 (LINK, &quot;hyperlink&quot;, copy (ref_id), copy (dest_ref));
-
 env (&quot;reference&quot;) = tree (MACRO, &quot;Id&quot;, 
                                  tree (LOCUS, copy (ref_id), 
                                               ln3, reftxt));
-
 env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;, 
                                tree (LOCUS, copy (ref_id), 
                                             copy (ln3), preftxt));</pre>
@@ -123,28 +124,28 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </div>
     <p>
       Note the use of the <font class="tmweb-markup">use-module</font> tag to indicate that
-      the <class style="font-variant: small-caps">Scheme</class> module <tt class="verbatim">(link ref-edit)</tt>
+      the <class style="font-variant: small-caps">Scheme</class> module <tt class="verbatim scheme">(link ref-edit)</tt>
       must be made available to TeXmacs beforehand in order to be able to call
-      the <class style="font-variant: small-caps">Scheme</class> procedure <tt class="verbatim">preview-reference</tt>.
-      The module <tt class="verbatim">(link ref-edit)</tt>, defined in the <class style="font-variant: small-caps">Scheme</class>
+      the <class style="font-variant: small-caps">Scheme</class> procedure <tt class="verbatim scheme">preview-reference</tt>.
+      The module <tt class="verbatim scheme">(link ref-edit)</tt>, defined in the <class style="font-variant: small-caps">Scheme</class>
       source <code>/progs/link/ref-edit.scm</code>, being with
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (texmacs-module (link ref-edit)
   (:use (generic generic-edit)
         (generic document-part)
         (text text-drd)))</pre>
     </div>
     <p>
-      and contains the definition of <tt class="verbatim">preview-reference</tt> as a
-      <tt class="verbatim">tm-define</tt> (i.e. a global symbol visible in all the
-      program). Note the <tt class="verbatim">(:secure #t)</tt> which indicates to
+      and contains the definition of <tt class="verbatim scheme">preview-reference</tt> as a
+      <tt class="verbatim scheme">tm-define</tt> (i.e. a global symbol visible in all the
+      program). Note the <tt class="verbatim scheme">(:secure #t)</tt> which indicates to
       TeXmacs that this producedure does not perform any <i>dangerous</i>
       operation and therefore can be called without notifying the user.
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (preview-reference body body*)
   (:secure #t)
   (and-with ref (tree-up body)
@@ -164,24 +165,24 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
         (show-balloon w x1 (- y1 1280))))))</pre>
     </div>
     <p>
-      This procedure invoke <tt class="verbatim">show-balloon</tt> to display a popup to
+      This procedure invoke <tt class="verbatim scheme">show-balloon</tt> to display a popup to
       the user which contains a widget to output TeXmacs documents (built via
-      <tt class="verbatim">widget-texmacs-output</tt>) after suitably scaling it via a
+      <tt class="verbatim scheme">widget-texmacs-output</tt>) after suitably scaling it via a
       <font class="tmweb-markup">magnification</font> tag. The content itself is produced by
-      the procedure <tt class="verbatim">ref-preview</tt> :
+      the procedure <tt class="verbatim scheme">ref-preview</tt> :
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (ref-preview id)
   (and-with l (and-nnull? (search-label (buffer-tree) id))
     (label-preview (car l))))</pre>
     </div>
     <p>
-      which in turn calls the helper procedure <tt class="verbatim">label-preview</tt>
+      which in turn calls the helper procedure <tt class="verbatim scheme">label-preview</tt>
       (internal to the module):
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (define (label-preview t)
   (and-with doc (tree-search-upwards t preview-context?)
     (with math? (tree-search-upwards t math-context?)
@@ -198,7 +199,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </div>
     <p>
       The construction of the preview content is performed by the snippet <tt
-      class="verbatim">&lsquo;(preview-balloon ,doc)</tt> which evaluates to a TeXmacs
+      class="verbatim scheme">&lsquo;(preview-balloon ,doc)</tt> which evaluates to a TeXmacs
       s-tree containing a singe <font class="tmweb-markup">preview-balloon</font> tag for
       the rendering of the preview. This is defined at the macro language
       level in <code>packages/standard/std-fold.ts</code> as
@@ -239,16 +240,16 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </p>
     <p>
       The <font color="brown"><i>body</i></font> argument is feed with a meaningful
-      snippet of the source of the link. This is determined by the <tt class="verbatim">label-preview</tt>
+      snippet of the source of the link. This is determined by the <tt class="verbatim scheme">label-preview</tt>
       procedure by navigating the document tree from the source position (as
-      indicated by the <tt class="verbatim">t</tt> parameter) towards higher levels of
-      the structure hierarchy via <tt class="verbatim">(tree-search-upwards t
-      preview-context?)</tt>. The predicate <tt class="verbatim">preview-context?</tt>
+      indicated by the <tt class="verbatim scheme">t</tt> parameter) towards higher levels of
+      the structure hierarchy via <tt class="verbatim scheme">(tree-search-upwards t
+      preview-context?)</tt>. The predicate <tt class="verbatim scheme">preview-context?</tt>
       looks for meaningful context: a row of a table or a leaf of a <font
       class="tmweb-markup">document</font> tag:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (define (preview-context? t)
   (or (tree-is? t 'row)
       (and (tree-up t) (tree-is? (tree-up t) 'document))))</pre>
@@ -259,7 +260,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
       style="margin-left: 0.16665em"></span>
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (define (preview-expand-context? t)
   (tree-in? t '(theorem proposition lemma corollary conjecture
                 theorem* proposition* lemma* corollary* conjecture*
@@ -267,11 +268,11 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
                 definition* axiom*)))</pre>
     </div>
     <p>
-      The procedure <tt class="verbatim">clean-preview</tt> preforms some recursive
+      The procedure <tt class="verbatim scheme">clean-preview</tt> preforms some recursive
       cleaning on the source snippet:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (define (clean-preview t)
   (cond ((tm-is? t 'document)
          &lsquo;(document ,@(map clean-preview (tm-children t))))
