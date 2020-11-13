@@ -72,10 +72,10 @@
 
   Using the <scm|pt> function we shall now define a few points.
 
-  The <name|Scheme> interpreter expects one expression per prompt (evaluates
-  only the first one it finds in each prompt), so we enter the expressions we
-  need in separate prompts; the code in external <name|Scheme> programs
-  is\Vof course\Vmore compact.
+  The <name|Scheme> interpreter expects one expression per prompt (it
+  evaluates only the first one it finds in each prompt), so we enter the
+  expressions we need in separate prompts; the code in external <name|Scheme>
+  programs is\Vof course\Vmore compact.
 
   <\session|scheme|default>
     <\textput>
@@ -141,7 +141,7 @@
   itself yields a rather large canvas, we size it down enclosing it in a
   <markup|with> primitive which specifies the geometry. The <scm|(with
   <text-dots> (graphics <text-dots>))> construct needs to be quasiquoted as
-  <scm|with> and <verbatim|graphics> are Scheme symbols, so that the
+  <scm|with> and <verbatim|graphics> are <name|Scheme> symbols, so that the
   <verbatim|pA>, <verbatim|pB> and <verbatim|pC> variables, which represent
   the points, must be unquoted. Finally, everything has to be wrapped in the
   <verbatim|stree-\<gtr\>tree> function to become a TeXmacs tree. The result
@@ -216,9 +216,10 @@
 
   Before composing the full drawing, let us take a look at one of the
   constructs; as an example we choose <scm|cline>. We place it as usual
-  inside a <scm|with> construct to select the color and wrap it up in the
-  <scm|graphics> primitive, which is in turn enclosed in a <scm|with> which
-  sets the <scm|"gr-geometry"> property of the graphics object:\ 
+  inside a <scm|with> construct to select the color and we wrap the
+  <scm|with> up in the <scm|graphics> primitive, which is in turn enclosed in
+  its own <scm|with> which sets the <scm|"gr-geometry"> property of the
+  graphics object:\ 
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >

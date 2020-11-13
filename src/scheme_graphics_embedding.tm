@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|<tuple|notes|old-lengths|framed-session>>
 
@@ -27,8 +27,8 @@
   For reading convenience, let us list here all of the code we will use in
   the module in a code box. It is the code that in the <hlink|previous
   note|./scheme_graphics.tm> defines the points, with small modifications and
-  introduced by a <scm|texmacs-module> command which makes the module
-  available to <TeXmacs>:
+  introduced by a <scm|texmacs-module> command which <TeXmacs> needs for
+  interfacing with it:
 
   <\scm-code>
     (texmacs-module (graphics embeddedGraphics embedGraphics))
@@ -91,21 +91,24 @@
   that functions and variables may be imported from a <TeXmacs> document.
 
   We make the module available to TeXmacs by executing the primitive
-  <markup|use-module> parametrized with the path of our <name|Scheme> module,
-  in the case of this document
+  <markup|use-module> parametrized with the path of our <name|Scheme> module
+  relative to the <verbatim|.TeXmacs> directory, in the case of this document
 
   <markup|use-module(<scm|(graphics embeddedGraphics embedGraphics)>)>
 
   where <verbatim|graphics/embeddedGraphics/embedGraphics.scm> is the path of
-  the module I have used when writing the document relative to the
-  <verbatim|.TeXmacs> directory (please substitute your path for that).
+  the module (relative to the <verbatim|.TeXmacs> directory) I have used when
+  writing the document (please substitute your path for that); the same path,
+  with the same syntax, should be present as an argument of the initial
+  <scm|texmacs-module> function in the <name|Scheme> module.
 
   The <markup|use-module> primitive can be conveniently placed in the
   document preamble (<menu|Document|Part|Create preamble>) so as to be
   invisible when writing the document and generating a printable copy. We did
-  that in this document and now the points <scm|pA>, <scm|pB>, <scm|pC>,
-  <scm|tA>, <scm|tB> and <scm|tC> are available: we can use them inside a
-  <name|Scheme> <name|Executable> environment.
+  that in this document when composing it with <TeXmacs> and now the points
+  <scm|pA>, <scm|pB>, <scm|pC>, <scm|tA>, <scm|tB> and <scm|tC> are
+  available: we can use them inside a <name|Scheme> <name|Executable>
+  environment.
 
   We open the environment with <menu|Insert|Fold|Executable|Scheme> and we
   obtain the yellow box we got used to in the note on <hlink|embedding TikZ
@@ -271,8 +274,15 @@
   <\collection>
     <\associate|figure>
       <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
-        \;
-      </surround>|<pageref|auto-6>>
+        A drawing generated with <with|font-shape|<quote|small-caps>|Scheme>,
+        embedded in a <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|big-figure>
+        <mark|<arg|body>|<inline-tag|<with|mode|<quote|src>|color|<quote|dark
+        green>|font-shape|<quote|italic>|>>>environment
+      </surround>|<pageref|auto-7>>
+
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
+        The code re-opened after compilation and ready for re-editing.
+      </surround>|<pageref|auto-8>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-2>>
@@ -284,6 +294,9 @@
       preamble>>|<pageref|auto-4>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-5>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Image>|<with|font-family|<quote|ss>|Big
+      figure>>|<pageref|auto-6>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Embedding
