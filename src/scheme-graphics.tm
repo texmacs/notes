@@ -41,7 +41,7 @@
   the contextual menu, while longer explanations fit better in breaks between
   sessions.
 
-  <\session|scheme|default>
+  <\program|scheme|default>
     <\input|Scheme] >
       (define pi (acos -1))
     </input>
@@ -59,7 +59,9 @@
     <\input|Scheme] >
       \;
     </input>
-  </session>
+
+    \;
+  </program>
 
   The Scheme function <scm|pt> we just defined generates a TeXmacs graphics
   point parametrized by its <scm|x> and <scm|y> coordinates.
@@ -72,10 +74,10 @@
 
   Using the <scm|pt> function we shall now define a few points.
 
-  The <name|Scheme> interpreter expects one expression per prompt (it
-  evaluates only the first one it finds in each prompt), so we enter the
-  expressions we need in separate prompts; the code in external <name|Scheme>
-  programs is\Vof course\Vmore compact.
+  The <name|Scheme> interpreter expects one expression per prompt (evaluates
+  only the first one it finds in each prompt), so we enter the expressions we
+  need in separate prompts; the code in external <name|Scheme> programs
+  is\Vof course\Vmore compact.
 
   <\session|scheme|default>
     <\textput>
@@ -141,7 +143,7 @@
   itself yields a rather large canvas, we size it down enclosing it in a
   <markup|with> primitive which specifies the geometry. The <scm|(with
   <text-dots> (graphics <text-dots>))> construct needs to be quasiquoted as
-  <scm|with> and <verbatim|graphics> are <name|Scheme> symbols, so that the
+  <scm|with> and <verbatim|graphics> are Scheme symbols, so that the
   <verbatim|pA>, <verbatim|pB> and <verbatim|pC> variables, which represent
   the points, must be unquoted. Finally, everything has to be wrapped in the
   <verbatim|stree-\<gtr\>tree> function to become a TeXmacs tree. The result
@@ -254,32 +256,37 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+      \ `(with "gr-geometry"\ 
 
-      \ \ \ (graphics
+      \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
-      ;; the arc and the line together make the semicircle
+      \ \ \ \ (graphics
 
-      (with "color" "black" (arc ,pA ,pC ,pB))
+      \ \ \ \ \ \ ;; the arc and the line together make the semicircle
 
-      (with "color" "black" (line ,pA ,pB))
+      \ \ \ \ \ \ (with "color" "black" (arc ,pA ,pC ,pB))
 
-      ;; a closed polyline for the triangle
+      \ \ \ \ \ \ (with "color" "black" (line ,pA ,pB))
 
-      (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+      \ \ \ \ \ \ ;; a closed polyline for the triangle
 
-      ;; add letters using text-at
+      \ \ \ \ \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC))
 
-      (with "color" "black" (text-at "A" ,tA)) \ 
+      \ \ \ \ \ \ ;; add letters using text-at
 
-      (with "color" "black" (text-at "B" ,tB)) \ 
+      \ \ \ \ \ \ (with "color" "black" (text-at "A" ,tA)) \ 
 
-      (with "color" "black" (text-at "C" ,tC))
+      \ \ \ \ \ \ (with "color" "black" (text-at "B" ,tB)) \ 
 
-      ;; finally decorate with the TeXmacs symbol
+      \ \ \ \ \ \ (with "color" "black" (text-at "C" ,tC))
 
-      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
-      close all of the parentheses!!!
+      \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
+
+      \ \ \ \ \ \ (with "color" "blue" \ 
+
+      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\ 
+
+      ;; and close all of the parentheses!!!
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
@@ -323,6 +330,7 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|?|?>>
+    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
