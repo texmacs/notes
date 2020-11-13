@@ -53,9 +53,9 @@
 
     (tm-define pB (pt 2 0))
 
-    (tm-define xC (- (* 2 (cos (/ pi 3)))));x-coordinate for point C
+    (tm-define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
 
-    (tm-define yC (* 2 (sin (/ pi 3))));y-coordinate for point C
+    (tm-define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
 
     (tm-define pC (pt xC yC))
 
@@ -107,7 +107,7 @@
   <scm|tA>, <scm|tB> and <scm|tC> are available: we can use them inside a
   <name|Scheme> <name|Executable> environment.
 
-  We open the environment with \ <menu|Insert|Fold|Executable|Scheme> and we
+  We open the environment with <menu|Insert|Fold|Executable|Scheme> and we
   obtain the yellow box we got used to in the note on <hlink|embedding TikZ
   graphics|./embedding-tikz-figures-short.tm>, in this case introduced by a
   <samp|Scheme> title on a gray background:
@@ -154,7 +154,7 @@
 
   The last step is pressing <key|S-Return> to execute the code and generate
   the drawing. We do it in a <markup|big-figure> environment
-  (<menu|Insert|Image|Big figure>), to demonstrate seamless embedding:
+  (<menu|Insert|Image|Big figure>) to demonstrate seamless embedding:
 
   <\big-figure>
     <\script-output|scheme|default>
