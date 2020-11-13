@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|<tuple|notes|old-lengths|framed-session>>
 
@@ -27,8 +27,9 @@
 
   The most comfortable way of generating a drawing with <name|Scheme> is
   within a session, so that is the way we'll take in this note. We'll see in
-  other notes how to blend seamlessly graphics in a document and generate it
-  through external source files.
+  other notes how to <hlink|blend seamlessly graphics in a
+  document|./scheme-graphics-embedding.tm> and generate it through external
+  source files.
 
   The first step in working with a session is opening it, with
   <menu|Insert|Session|Scheme>. As a side step, it is convenient to select
@@ -330,7 +331,6 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|?|?>>
-    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
