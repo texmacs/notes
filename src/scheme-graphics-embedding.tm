@@ -48,7 +48,7 @@
 
   Press <key|S-Return> and type or paste the graphics command; in this note
   let us copy the same commands that generate the drawing in the
-  <hlink|previous note|./scheme_graphics.tm>, wrapping everything in a
+  <hlink|previous note|./scheme-graphics.tm>, wrapping everything in a
   <scm|begin> form as we already said:
 
   <\script-input|scheme|default>
