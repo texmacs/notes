@@ -97,7 +97,8 @@
   <markup|use-module(<scm|(graphics embeddedGraphics embedGraphics)>)>
 
   where <verbatim|graphics/embeddedGraphics/embedGraphics.scm> is the path of
-  the module.
+  the module I have used when writing the document relative to the
+  <verbatim|.TeXmacs> directory (please substitute your path for that).
 
   The <markup|use-module> primitive can be conveniently placed in the
   document preamble (<menu|Document|Part|Create preamble>) so as to be
@@ -108,13 +109,14 @@
 
   We open the environment with \ <menu|Insert|Fold|Executable|Scheme> and we
   obtain the yellow box we got used to in the note on <hlink|embedding TikZ
-  graphics|./embedding-tikz-figures-short.tm>:
+  graphics|./embedding-tikz-figures-short.tm>, in this case introduced by a
+  <samp|Scheme> title on a gray background:
 
   <script-input|scheme|default||>
 
-  Press <key|S-Return> and type the graphics commands (we copy the same
-  command that generates the drawing in the <hlink|previous
-  note|./scheme_graphics.tm>):
+  Press <key|S-Return> and type or paste the graphics command (in this note
+  let us copy the same command that generates the drawing in the
+  <hlink|previous note|./scheme_graphics.tm>):
 
   <\script-input|scheme|default>
     (stree-\<gtr\>tree
@@ -146,6 +148,9 @@
     (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
     close all of the parentheses!!!
   </script-input|>
+
+  \ Scheme will execute only one command and because of this we placed all of
+  the other commands in the external module.
 
   The last step is pressing <key|S-Return> to execute the code and generate
   the drawing. We do it in a <markup|big-figure> environment
