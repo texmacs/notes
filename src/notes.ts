@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|source>
 
@@ -39,6 +39,10 @@
   <assign|html-title|TeXmacs notes>
 
   <assign|html-css|<tuple|../resources/notes-base.css>>
+
+  <assign|html-head-favicon|../resources/blog-icon.png>
+
+  \;
 
   <\active*>
     <\src-comment>
