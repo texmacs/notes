@@ -3,10 +3,6 @@
 <style|<tuple|notes|old-lengths|framed-session>>
 
 <\body>
-  <\hide-preamble>
-    <use-module|(graphics embedded-graphics embed-graphics)>
-  </hide-preamble>
-
   <notes-header>
 
   <chapter*|Embedding graphics composed with Scheme into documents>
@@ -20,55 +16,12 @@
   <menu|Insert|Fold|Executable> (and then choose the <name|Scheme> option).
 
   Since in each <name|Executable> environment it is possible to execute one
-  Scheme instruction only, we shall combine it with a <name|Scheme> module
-  (that is realized in a <verbatim|.scm> file), which we will import through
-  the <markup|use-module> primitive.
+  Scheme instruction only, we will wrap all of the code inside a <scm|begin>
+  instruction.
 
-  For reading convenience, let us list here all of the code we will use in
-  the module in a code box. It is the code that in the <hlink|previous
-  note|./scheme_graphics.tm> defines the points, with small modifications and
-  introduced by a <scm|texmacs-module> command which <TeXmacs> needs for
-  interfacing with it:
-
-  <\scm-code>
-    (texmacs-module (graphics embedded-graphics embed-graphics))
-
-    \;
-
-    (define pi (acos -1))
-
-    \;
-
-    ;; a function for generating TeXmacs points
-
-    (tm-define (pt x y)
-
-    \ \ `(point ,(number-\<gtr\>string x) ,(number-\<gtr\>string y)))
-
-    \;
-
-    ;; points for the triangle
-
-    (tm-define pA (pt -2 0))
-
-    (tm-define pB (pt 2 0))
-
-    (tm-define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
-
-    (tm-define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
-
-    (tm-define pC (pt xC yC))
-
-    \;
-
-    ;; points for the letters
-
-    (tm-define tA (pt -2.3 -0.5))
-
-    (tm-define tB (pt 2.1 -0.5))
-
-    (tm-define tC (pt (- xC 0.2) (+ yC 0.2)))
-  </scm-code>
+  For more complex drawings users may feel the need of more efficient
+  facilities to compose, test and deploy into TeXmacs their code. We are
+  going to discuss some available tools in a future post.
 
   A synthetic discussion of <TeXmacs> graphics primitives and how to code
   them in <name|Scheme> is in the <hlink|previous note|./scheme_graphics.tm>
@@ -77,39 +30,14 @@
   graphical objects, each made by the application of a graphical primitive,
   inside a <markup|graphics> primitive.
 
-  In the code in the module we introduce a function <scm|pt> that generates
-  <markup|point> primitives, (which are parametrized by two numbers,
-  expressed as strings), and with it we generate points that we will use in
-  the <name|Executable> to build other primitives (<markup|arc>,
-  <markup|line>, <markup|cline> and <markup|text-at>).
+  In the code introduce a function <scm|pt> that generates <markup|point>
+  primitives, (which are parametrized by two numbers, expressed as strings),
+  and with it we generate points that we will use to build other primitives
+  (<markup|arc>, <markup|line>, <markup|cline> and <markup|text-at>).
 
   In turn, <TeXmacs> will use the primitives to represent the triangle, the
   half-circle and the decorations, that is the drawing that we will embed in
   the document.
-
-  In the module, we have used <scm|tm-define> rather than <scm|define> so
-  that functions and variables may be imported from a <TeXmacs> document.
-
-  We make the module available to TeXmacs by executing the primitive
-  <markup|use-module> parametrized with the path of our <name|Scheme> module
-  relative to the <verbatim|.TeXmacs/progs> directory, in the case of this
-  document
-
-  <markup|use-module(<scm|(graphics embedded-graphics embed-graphics)>)>
-
-  where <verbatim|graphics/embedded-graphics/embed-graphics.scm> is the path
-  of the module (relative to the <verbatim|.TeXmacs/progs> directory) I have
-  used when writing the document (please substitute your path for that); the
-  same path, with the same syntax, should be present as an argument of the
-  initial <scm|texmacs-module> function in the <name|Scheme> module.
-
-  The <markup|use-module> primitive can be conveniently placed in the
-  document preamble (<menu|Document|Part|Create preamble>) so as to be
-  invisible when writing the document and generating a printable copy. We did
-  that in this document when composing it with <TeXmacs> and now the points
-  <scm|pA>, <scm|pB>, <scm|pC>, <scm|tA>, <scm|tB> and <scm|tC> are
-  available: we can use them inside a <name|Scheme> <name|Executable>
-  environment.
 
   We open the environment with <menu|Insert|Fold|Executable|Scheme> and we
   obtain the yellow box we got used to in the note on <hlink|embedding TikZ
@@ -118,11 +46,50 @@
 
   <script-input|scheme|default||>
 
-  Press <key|S-Return> and type or paste the graphics command (in this note
-  let us copy the same command that generates the drawing in the
-  <hlink|previous note|./scheme_graphics.tm>):
+  Press <key|S-Return> and type or paste the graphics command; in this note
+  let us copy the same commands that generate the drawing in the
+  <hlink|previous note|./scheme_graphics.tm>, wrapping everything in a
+  <scm|begin> function as we already said:
 
   <\script-input|scheme|default>
+    (begin
+
+    (define pi (acos -1))
+
+    \;
+
+    ;; a function for generating TeXmacs points
+
+    (define (pt x y)
+
+    \ \ `(point ,(number-\<gtr\>string x) ,(number-\<gtr\>string y)))
+
+    \;
+
+    ;; points for the triangle
+
+    (define pA (pt -2 0))
+
+    (define pB (pt 2 0))
+
+    (define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
+
+    (define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
+
+    (define pC (pt xC yC))
+
+    \;
+
+    ;; points for the letters
+
+    (define tA (pt -2.3 -0.5))
+
+    (define tB (pt 2.1 -0.5))
+
+    (define tC (pt (- xC 0.2) (+ yC 0.2)))
+
+    \;
+
     (stree-\<gtr\>tree
 
     `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
@@ -149,12 +116,9 @@
 
     ;; finally decorate with the TeXmacs symbol
 
-    (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
+    (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))) ; and
     close all of the parentheses!!!
-  </script-input|>
-
-  Scheme will execute only one command and because of this we placed all of
-  the other commands in the external module.
+  </script-input|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
 
   The last step is pressing <key|S-Return> to execute the code and generate
   the drawing. We do it in a <markup|big-figure> environment
@@ -162,6 +126,44 @@
 
   <\big-figure>
     <\script-output|scheme|default>
+      (begin
+
+      (define pi (acos -1))
+
+      \;
+
+      ;; a function for generating TeXmacs points
+
+      (define (pt x y)
+
+      \ \ `(point ,(number-\<gtr\>string x) ,(number-\<gtr\>string y)))
+
+      \;
+
+      ;; points for the triangle
+
+      (define pA (pt -2 0))
+
+      (define pB (pt 2 0))
+
+      (define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
+
+      (define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
+
+      (define pC (pt xC yC))
+
+      \;
+
+      ;; points for the letters
+
+      (define tA (pt -2.3 -0.5))
+
+      (define tB (pt 2.1 -0.5))
+
+      (define tC (pt (- xC 0.2) (+ yC 0.2)))
+
+      \;
+
       (stree-\<gtr\>tree
 
       `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
@@ -188,7 +190,7 @@
 
       ;; finally decorate with the TeXmacs symbol
 
-      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
+      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))) ; and
       close all of the parentheses!!!
     </script-output|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
 
@@ -206,6 +208,44 @@
 
   <\big-figure>
     <\script-input|scheme|default>
+      (begin
+
+      (define pi (acos -1))
+
+      \;
+
+      ;; a function for generating TeXmacs points
+
+      (define (pt x y)
+
+      \ \ `(point ,(number-\<gtr\>string x) ,(number-\<gtr\>string y)))
+
+      \;
+
+      ;; points for the triangle
+
+      (define pA (pt -2 0))
+
+      (define pB (pt 2 0))
+
+      (define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
+
+      (define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
+
+      (define pC (pt xC yC))
+
+      \;
+
+      ;; points for the letters
+
+      (define tA (pt -2.3 -0.5))
+
+      (define tB (pt 2.1 -0.5))
+
+      (define tC (pt (- xC 0.2) (+ yC 0.2)))
+
+      \;
+
       (stree-\<gtr\>tree
 
       `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
@@ -232,9 +272,9 @@
 
       ;; finally decorate with the TeXmacs symbol
 
-      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
+      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))) ; and
       close all of the parentheses!!!
-    </script-input|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
+    </script-input|<errput|Unbound variable: defin>>
 
     \;
   <|big-figure>
@@ -265,9 +305,8 @@
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
     <associate|auto-5|<tuple|?|?>>
-    <associate|auto-6|<tuple|?|?>>
-    <associate|auto-7|<tuple|1|?>>
-    <associate|auto-8|<tuple|2|?>>
+    <associate|auto-6|<tuple|1|?>>
+    <associate|auto-7|<tuple|2|?>>
   </collection>
 </references>
 
@@ -279,11 +318,11 @@
         embedded in a <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|big-figure>
         <mark|<arg|body>|<inline-tag|<with|mode|<quote|src>|color|<quote|dark
         green>|font-shape|<quote|italic>|>>>environment
-      </surround>|<pageref|auto-7>>
+      </surround>|<pageref|auto-6>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
         The code re-opened after compilation and ready for re-editing.
-      </surround>|<pageref|auto-8>>
+      </surround>|<pageref|auto-7>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-2>>
@@ -291,13 +330,10 @@
       <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Manual>|<with|font-family|<quote|ss>|Creating
       technical pictures>>|<pageref|auto-3>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Document>|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Create
-      preamble>>|<pageref|auto-4>>
-
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-5>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-4>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Image>|<with|font-family|<quote|ss>|Big
-      figure>>|<pageref|auto-6>>
+      figure>>|<pageref|auto-5>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Embedding
