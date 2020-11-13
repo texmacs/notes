@@ -74,12 +74,12 @@
   them in <name|Scheme> is in the <hlink|previous note|./scheme_graphics.tm>
   (see also the manual, in <menu|Help|Manual|Creating technical pictures>).
   Here let us just remind that <TeXmacs> graphics are composed by listing
-  graphical objects, each made by the application of a graphics primitive,
+  graphical objects, each made by the application of a graphical primitive,
   inside a <markup|graphics> primitive.
 
   In the code in the module we introduce a function <scm|pt> that generates
   <markup|point> primitives, (which are parametrized by two numbers,
-  expressed as strings), and we use it to generate points that we will use in
+  expressed as strings), and with it we generate points that we will use in
   the <name|Executable> to build other primitives (<markup|arc>,
   <markup|line>, <markup|cline> and <markup|text-at>).
 
@@ -101,16 +101,58 @@
 
   The <markup|use-module> primitive can be conveniently placed in the
   document preamble (<menu|Document|Part|Create preamble>) so as to be
-  invisible when writing the document and generating a printable copy.
+  invisible when writing the document and generating a printable copy. We did
+  that in this document and now the points <scm|pA>, <scm|pB>, <scm|pC>,
+  <scm|tA>, <scm|tB> and <scm|tC> are available: we can use them inside a
+  <name|Scheme> <name|Executable> environment.
 
-  We did that in\ 
+  We open the environment with \ <menu|Insert|Fold|Executable|Scheme> and we
+  obtain the yellow box we got used to in the note on <hlink|embedding TikZ
+  graphics|./embedding-tikz-figures-short.tm>:
 
-  <\session|scheme|default>
-    <\input|Scheme] >
-      (use-modules (graphics embeddedGraphics embedGraphics))
-    </input>
+  <script-input|scheme|default||>
 
-    <\unfolded-io|Scheme] >
+  Press <key|S-Return> and type the graphics commands (we copy the same
+  command that generates the drawing in the <hlink|previous
+  note|./scheme_graphics.tm>):
+
+  <\script-input|scheme|default>
+    (stree-\<gtr\>tree
+
+    `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+
+    \ \ \ (graphics
+
+    ;; the arc and the line together make the semicircle
+
+    (with "color" "black" (arc ,pA ,pC ,pB))
+
+    (with "color" "black" (line ,pA ,pB))
+
+    ;; a closed polyline for the triangle
+
+    (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+
+    ;; add letters using text-at
+
+    (with "color" "black" (text-at "A" ,tA)) \ 
+
+    (with "color" "black" (text-at "B" ,tB)) \ 
+
+    (with "color" "black" (text-at "C" ,tC))
+
+    ;; finally decorate with the TeXmacs symbol
+
+    (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
+    close all of the parentheses!!!
+  </script-input|>
+
+  The last step is pressing <key|S-Return> to execute the code and generate
+  the drawing. We do it in a <markup|big-figure> environment
+  (<menu|Insert|Image|Big figure>), to demonstrate seamless embedding:
+
+  <\big-figure>
+    <\script-output|scheme|default>
       (stree-\<gtr\>tree
 
       `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
@@ -139,29 +181,26 @@
 
       (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
       close all of the parentheses!!!
-    <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
-    </unfolded-io>
+    </script-output|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
 
-    <\input|Scheme] >
-      \;
-    </input>
-  </session>
+    \;
+  <|big-figure>
+    A drawing generated with <name|Scheme>, embedded in a <markup|big-figure>
+    <inactive|<compound|>>environment
+  </big-figure>
 
-  In follow-up tutorials we will see how to embed seamlessly <name|Scheme>
-  graphics in a document using the <menu|Fold|Executable> environment and how
-  to generate them from external files.
+  The drawing we generated is editable in two different ways. Placing the
+  cursor at the drawing (just after or just before, the drawing is then
+  surrounded by a thin cyan frame) and pressing <key|Return> brings back the
+  yellow edit window, where the code can be changed and re-executed into a
+  new drawing.
 
-  As a conclusion of this note, here is a collection of <TeXmacs> graphical
-  objects, illustrating a few possibilities:
-
-  <with|gr-mode|<tuple|group-edit|edit-props>|gr-frame|<tuple|scale|1cm|<tuple|0.5gw|0.5gh>>|gr-geometry|<tuple|geometry|1par|0.6par>45|<graphics|<\document-at>
-    <rotate|45|lines>
-
-    in a multiline
-
-    text
-  </document-at|<point|3.91686187855536|2.66778808493186>>|<point|-5.81987|3.09112>|<line|<point|-5.81220898678082|1.98182238174751>|<point|-3.44152757389552|1.98182423913605>|<point|-1.79051553526607|2.5109947643378>>|<with|color|red|<cline|<point|-5.69287|0.318263>|<point|-4.06302090223575|-0.295574811483>|<point|-5.2906965207038|-0.930579441725096>|<point|-6.22203664505887|-0.761244873660537>>>|<with|color|blue|<spline|<point|-5.50236|-1.84075>|<point|-2.58134343167086|-1.58675089297526>|<point|-1.71350377033999|-0.210907527450721>|<point|-1.45950191824315|-0.295574811483>>>|<with|color|orange|fill-color|yellow|line-width|2ln|<cspline|<point|0.640072419501616|2.97694937121585>|<point|0.44063081569717|0.83552077293348>|<point|1.7500743167287|1.74000719130103>|<point|2.48612943100676|1.96478314344897>>>|<with|dash-style|zigzag|color|magenta|<arc|<point|-0.231826|-2.49692>|<point|0.382011509458923|-1.54441725095912>|<point|-0.274159941791242|-1.14224765180579>>>|<with|color|green|line-width|2ln|<carc|<point|1.3133556158222|-1.33274516920228>|<point|2.13886073951581|-2.07358797645192>|<point|3.40887|-0.888246>>>|<text-at|<rotate|45|text>text|<point|-5.5447|-3.2166>>|<math-at|<rotate|45|\<alpha\>+\<beta\>=\<gamma\>>\<alpha\>+\<beta\>=\<gamma\>|<point|-2.81418|-3.25893>>>>
+  It is also possible to edit the drawing with the interactive (point and
+  click) facilities. In this case too it is always possible to return to the
+  text-editing mode of the <name|Executable> environment by pressing
+  <key|Return> with the cursor at the drawing, but if one does that, the
+  interactive modifications are lost, i.e. one gets back to the <name|Scheme>
+  code one had typed into the <name|Executable> environment.
 </body>
 
 <\initial>
@@ -180,18 +219,29 @@
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
     <associate|auto-5|<tuple|?|?>>
+    <associate|auto-6|<tuple|?|?>>
+    <associate|auto-7|<tuple|1|?>>
+    <associate|auto-8|<tuple|1|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
+    <\associate|figure>
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
+        \;
+      </surround>|<pageref|auto-6>>
+    </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-2>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Manual>|<with|font-family|<quote|ss>|Creating
       technical pictures>>|<pageref|auto-3>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-4>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Document>|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Create
+      preamble>>|<pageref|auto-4>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-5>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Embedding
