@@ -7,7 +7,7 @@
 
   <chapter*|Embedding graphics composed with Scheme into documents>
 
-  In a <hlink|previous note|./scheme_graphics.tm>, we have shown an example
+  In a <hlink|previous note|./scheme-graphics.tm>, we have shown an example
   of <TeXmacs> native graphics generated with <name|Scheme>, a triangle
   inscribed in a half-circle.
 
@@ -24,7 +24,7 @@
   going to discuss some available tools in a future post.
 
   A synthetic discussion of <TeXmacs> graphics primitives and how to code
-  them in <name|Scheme> is in the <hlink|previous note|./scheme_graphics.tm>
+  them in <name|Scheme> is in the <hlink|previous note|./scheme-graphics.tm>
   (see also the manual, in <menu|Help|Manual|Creating technical pictures>).
   Here let us just remind that <TeXmacs> graphics are composed by listing
   graphical objects, each made by the application of a graphical primitive,
@@ -207,81 +207,77 @@
   yellow edit window, where the code can be changed and re-executed into a
   new drawing.
 
-  <\big-figure>
-    <\script-input|scheme|default>
-      (begin
+  <\script-input|scheme|default>
+    (begin
 
-      (define pi (acos -1))
-
-      \;
-
-      ;; a function for generating TeXmacs points
-
-      (define (pt x y)
-
-      \ \ `(point ,(number-\<gtr\>string x) ,(number-\<gtr\>string y)))
-
-      \;
-
-      ;; points for the triangle
-
-      (define pA (pt -2 0))
-
-      (define pB (pt 2 0))
-
-      (define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
-
-      (define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
-
-      (define pC (pt xC yC))
-
-      \;
-
-      ;; points for the letters
-
-      (define tA (pt -2.3 -0.5))
-
-      (define tB (pt 2.1 -0.5))
-
-      (define tC (pt (- xC 0.2) (+ yC 0.2)))
-
-      \;
-
-      (stree-\<gtr\>tree
-
-      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
-
-      \ \ \ (graphics
-
-      \ \ ;; the arc and the line together make the semicircle
-
-      \ \ (with "color" "black" (arc ,pA ,pC ,pB))
-
-      \ \ (with "color" "black" (line ,pA ,pB))
-
-      \ \ ;; a closed polyline for the triangle
-
-      \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC))
-
-      \ \ ;; add letters using text-at
-
-      \ \ (with "color" "black" (text-at "A" ,tA)) \ 
-
-      \ \ (with "color" "black" (text-at "B" ,tB)) \ 
-
-      \ \ (with "color" "black" (text-at "C" ,tC))
-
-      \ \ ;; finally decorate with the TeXmacs symbol
-
-      \ \ ;; and close all of the parentheses!!!
-
-      \ \ (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))))
-    </script-input|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
+    (define pi (acos -1))
 
     \;
-  <|big-figure>
-    The code re-opened after compilation and ready for re-editing.
-  </big-figure>
+
+    ;; a function for generating TeXmacs points
+
+    (define (pt x y)
+
+    \ \ `(point ,(number-\<gtr\>string x) ,(number-\<gtr\>string y)))
+
+    \;
+
+    ;; points for the triangle
+
+    (define pA (pt -2 0))
+
+    (define pB (pt 2 0))
+
+    (define xC (- (* 2 (cos (/ pi 3))))); x-coordinate for point C
+
+    (define yC (* 2 (sin (/ pi 3)))); y-coordinate for point C
+
+    (define pC (pt xC yC))
+
+    \;
+
+    ;; points for the letters
+
+    (define tA (pt -2.3 -0.5))
+
+    (define tB (pt 2.1 -0.5))
+
+    (define tC (pt (- xC 0.2) (+ yC 0.2)))
+
+    \;
+
+    (stree-\<gtr\>tree
+
+    `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+
+    \ \ \ (graphics
+
+    \ \ ;; the arc and the line together make the semicircle
+
+    \ \ (with "color" "black" (arc ,pA ,pC ,pB))
+
+    \ \ (with "color" "black" (line ,pA ,pB))
+
+    \ \ ;; a closed polyline for the triangle
+
+    \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+
+    \ \ ;; add letters using text-at
+
+    \ \ (with "color" "black" (text-at "A" ,tA)) \ 
+
+    \ \ (with "color" "black" (text-at "B" ,tB)) \ 
+
+    \ \ (with "color" "black" (text-at "C" ,tC))
+
+    \ \ ;; finally decorate with the TeXmacs symbol
+
+    \ \ ;; and close all of the parentheses!!!
+
+    \ \ (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))))
+  </script-input|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
+
+  \;
 
   It is also possible to edit the drawing with the interactive (point and
   click) facilities. In this case too it is always possible to return to the

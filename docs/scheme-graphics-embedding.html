@@ -15,7 +15,7 @@
     </div>
     <h1 id="auto-1">Embedding graphics composed with Scheme into documents<span style="margin-left: 1em"></span></h1>
     <p>
-      In a <a href="./scheme_graphics.html">previous note</a>, we have shown an example of TeXmacs
+      In a <a href="./scheme-graphics.html">previous note</a>, we have shown an example of TeXmacs
       native graphics generated with <class style="font-variant: small-caps">Scheme</class>, a triangle
       inscribed in a half-circle.
     </p>
@@ -38,7 +38,7 @@
     </p>
     <p>
       A synthetic discussion of TeXmacs graphics primitives and how to code
-      them in <class style="font-variant: small-caps">Scheme</class> is in the <a href="./scheme_graphics.html">previous
+      them in <class style="font-variant: small-caps">Scheme</class> is in the <a href="./scheme-graphics.html">previous
       note</a> (see also the manual, in <class class="tmweb-menu" style="font-family: sans-serif">Help</class>&rarr;<class
       class="tmweb-menu" style="font-family: sans-serif">Manual</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Creating
       technical pictures</class><a id="auto-3"></a>). Here let us just remind that
@@ -76,7 +76,7 @@
     <p>
       Press <font class="tmweb-key">&#x21E7;Return</font> and type or paste the graphics
       command; in this note let us copy the same commands that generate the
-      drawing in the <a href="./scheme_graphics.html">previous note</a>, wrapping everything in a <tt
+      drawing in the <a href="./scheme-graphics.html">previous note</a>, wrapping everything in a <tt
       class="verbatim">begin</tt> form as we already said:
     </p>
     <p>
@@ -159,16 +159,13 @@
       brings back the yellow edit window, where the code can be changed and
       re-executed into a new drawing.
     </p>
-    <div style="margin-top: 1em; margin-bottom: 1em">
-      <table style="width: 100%">
+    <p>
+      <font color="grey"><table style="display: inline-table; vertical-align: middle">
         <tbody><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><p>
-            <font color="grey"><table style="display: inline-table; vertical-align: middle">
-              <tbody><tr>
-                <td style="border-left: 0.5px solid; border-right: 0.5px solid; border-bottom: 0.5px solid; border-top: 0.5px solid; background-color: #8080A0; padding-bottom: 0.15em; padding-top: 0.15em; text-align: center"><font style="font-size: 90.0%"><class style="font-family: sans-serif"><font color="white">Scheme</font></class></font></td>
-              </tr><tr>
-                <td style="border-left: 0.5px solid; border-right: 0.5px solid; border-bottom: 0.5px solid; border-top: 0.5px solid; background-color: #ffff0020; width: 100%; padding-top: 0.3em; padding-bottom: 0.3em"><font color="black"><div class="compact-block">
-                  <pre class="verbatim" xml:space="preserve">
+          <td style="border-left: 0.5px solid; border-right: 0.5px solid; border-bottom: 0.5px solid; border-top: 0.5px solid; background-color: #8080A0; padding-bottom: 0.15em; padding-top: 0.15em; text-align: center"><font style="font-size: 90.0%"><class style="font-family: sans-serif"><font color="white">Scheme</font></class></font></td>
+        </tr><tr>
+          <td style="border-left: 0.5px solid; border-right: 0.5px solid; border-bottom: 0.5px solid; border-top: 0.5px solid; background-color: #ffff0020; width: 100%; padding-top: 0.3em; padding-bottom: 0.3em"><font color="black"><div class="compact-block">
+            <pre class="verbatim" xml:space="preserve">
 (begin
 (define pi (acos -1))
 
@@ -203,24 +200,13 @@
   ;; finally decorate with the TeXmacs symbol
   ;; and close all of the parentheses!!!
   (with &quot;color&quot; &quot;blue&quot;  (text-at (TeXmacs) ,(pt -0.55 -0.75)))))))</pre>
-                </div></font></td>
-              </tr></tbody>
-            </table></font>
-          </p><p>
-            
-          </p></td>
-        </tr><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
-        </tr><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em; padding-left: 1.5em; padding-right: 1.5em"><div class="caption">
-            <font style="font-size: 90.0%"><p>
-              <b>Figure 2. </b><a id="auto-7"></a>The code re-opened after compilation
-              and ready for re-editing.
-            </p></font>
-          </div></td>
+          </div></font></td>
         </tr></tbody>
-      </table>
-    </div>
+      </table></font>
+    </p>
+    <p>
+      
+    </p>
     <p>
       It is also possible to edit the drawing with the interactive (point and
       click) facilities. In this case too it is always possible to return to
