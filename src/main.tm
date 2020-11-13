@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -36,6 +36,9 @@
 
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
+
+  <hlink|Embedding graphics composed with Scheme into
+  documents|scheme-graphics-embedding.tm>
 
   <hlink|Composing TeXmacs graphics with Scheme|scheme-graphics.tm>
 

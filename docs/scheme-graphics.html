@@ -5,7 +5,6 @@
     <title>TeXmacs notes</title>
     <meta content="TeXmacs 1.99.15" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
   </head>
   <body>
     <div class="notes-header">
@@ -303,10 +302,7 @@ Scheme] </pre></font></td>
     <div class="compact-block" style="text-indent: 0em">
       <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
         <p>
-          This example, with constructs boxed inside each other, is typical of
-          <class style="font-variant: small-caps">Scheme</class> and illustrates one characteristic of
-          functional programming: programs are compositions of functions.We
-          can modify the appearance of the points enclosing each of them in
+          We can modify the appearance of the points enclosing each of them in
           the <font class="tmweb-markup">with</font> (<class style="font-variant: small-caps">Scheme</class> symbol
           <tt class="verbatim">with</tt>) primitive
         </p>
@@ -409,9 +405,10 @@ Scheme] </pre></font></td>
       Before composing the full drawing, let us take a look at one of the
       constructs; as an example we choose <tt class="verbatim">cline</tt>. We place it
       as usual inside a <tt class="verbatim">with</tt> construct to select the color and
-      wrap it up in the <tt class="verbatim">graphics</tt> primitive, which is in turn
-      enclosed in a <tt class="verbatim">with</tt> which sets the <tt class="verbatim">&quot;gr-geometry&quot;</tt>
-      property of the graphics object: 
+      we wrap the <tt class="verbatim">with</tt> up in the <tt class="verbatim">graphics</tt>
+      primitive, which is in turn enclosed in its own <tt class="verbatim">with</tt>
+      which sets the <tt class="verbatim">&quot;gr-geometry&quot;</tt> property of the
+      graphics object: 
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
@@ -490,7 +487,7 @@ Scheme] </pre></font></td>
         </table>
       </div>
     </div>
-    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+    <div class="compact-block" style="text-indent: 0em">
       <p>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
@@ -500,6 +497,17 @@ Scheme] </pre></font></td>
           </div>
         </div></tt>
       </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
+        <table style="width: 100%">
+          <tbody><tr>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
+            <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+</pre></td>
+          </tr></tbody>
+        </table>
+      </div>
     </div>
     <p>
       In follow-up tutorials we will see how to embed seamlessly <class style="font-variant: small-caps">Scheme</class>
