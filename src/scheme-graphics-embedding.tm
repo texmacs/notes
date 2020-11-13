@@ -4,7 +4,7 @@
 
 <\body>
   <\hide-preamble>
-    <use-module|(graphics embeddedGraphics embedGraphics)>
+    <use-module|(graphics embedded-graphics embed-graphics)>
   </hide-preamble>
 
   <notes-header>
@@ -31,7 +31,7 @@
   interfacing with it:
 
   <\scm-code>
-    (texmacs-module (graphics embeddedGraphics embedGraphics))
+    (texmacs-module (graphics embedded-graphics embed-graphics))
 
     \;
 
@@ -94,12 +94,12 @@
   <markup|use-module> parametrized with the path of our <name|Scheme> module
   relative to the <verbatim|.TeXmacs> directory, in the case of this document
 
-  <markup|use-module(<scm|(graphics embeddedGraphics embedGraphics)>)>
+  <markup|use-module(<scm|(graphics embedded-graphics embed-graphics)>)>
 
-  where <verbatim|graphics/embeddedGraphics/embedGraphics.scm> is the path of
-  the module (relative to the <verbatim|.TeXmacs> directory) I have used when
-  writing the document (please substitute your path for that); the same path,
-  with the same syntax, should be present as an argument of the initial
+  where <verbatim|graphics/embedded-graphics/embed-graphics.scm> is the path
+  of the module (relative to the <verbatim|.TeXmacs> directory) I have used
+  when writing the document (please substitute your path for that); the same
+  path, with the same syntax, should be present as an argument of the initial
   <scm|texmacs-module> function in the <name|Scheme> module.
 
   The <markup|use-module> primitive can be conveniently placed in the
