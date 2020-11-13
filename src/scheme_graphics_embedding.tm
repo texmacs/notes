@@ -149,7 +149,7 @@
     close all of the parentheses!!!
   </script-input|>
 
-  \ Scheme will execute only one command and because of this we placed all of
+  Scheme will execute only one command and because of this we placed all of
   the other commands in the external module.
 
   The last step is pressing <key|S-Return> to execute the code and generate
@@ -200,6 +200,43 @@
   yellow edit window, where the code can be changed and re-executed into a
   new drawing.
 
+  <\big-figure>
+    <\script-input|scheme|default>
+      (stree-\<gtr\>tree
+
+      `(with "gr-geometry" (tuple "geometry" "400px" "300px" "center")
+
+      \ \ \ (graphics
+
+      ;; the arc and the line together make the semicircle
+
+      (with "color" "black" (arc ,pA ,pC ,pB))
+
+      (with "color" "black" (line ,pA ,pB))
+
+      ;; a closed polyline for the triangle
+
+      (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+
+      ;; add letters using text-at
+
+      (with "color" "black" (text-at "A" ,tA)) \ 
+
+      (with "color" "black" (text-at "B" ,tB)) \ 
+
+      (with "color" "black" (text-at "C" ,tC))
+
+      ;; finally decorate with the TeXmacs symbol
+
+      (with "color" "blue" \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ; and
+      close all of the parentheses!!!
+    </script-input|<text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>>
+
+    \;
+  <|big-figure>
+    The code re-opened after compilation and ready for re-editing.
+  </big-figure>
+
   It is also possible to edit the drawing with the interactive (point and
   click) facilities. In this case too it is always possible to return to the
   text-editing mode of the <name|Executable> environment by pressing
@@ -226,7 +263,7 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|1|?>>
-    <associate|auto-8|<tuple|1|?>>
+    <associate|auto-8|<tuple|2|?>>
   </collection>
 </references>
 
