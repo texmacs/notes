@@ -197,7 +197,7 @@
     \;
   <|big-figure>
     A drawing generated with <name|Scheme>, embedded in a <markup|big-figure>
-    <inactive|<compound|>>environment
+    environment
   </big-figure>
 
   The drawing we generated is editable in two different ways. Placing the
