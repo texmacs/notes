@@ -163,11 +163,8 @@
     </unfolded-io>
 
     <\textput>
-      This example, with constructs boxed inside each other, is typical of
-      <name|Scheme> and illustrates one characteristic of functional
-      programming: programs are compositions of functions.We can modify the
-      appearance of the points enclosing each of them in the <markup|with>
-      (<name|Scheme> symbol <scm|with>) primitive
+      We can modify the appearance of the points enclosing each of them in
+      the <markup|with> (<name|Scheme> symbol <scm|with>) primitive
     </textput>
 
     <\unfolded-io|Scheme] >
@@ -221,9 +218,10 @@
 
   Before composing the full drawing, let us take a look at one of the
   constructs; as an example we choose <scm|cline>. We place it as usual
-  inside a <scm|with> construct to select the color and wrap it up in the
-  <scm|graphics> primitive, which is in turn enclosed in a <scm|with> which
-  sets the <scm|"gr-geometry"> property of the graphics object:\ 
+  inside a <scm|with> construct to select the color and we wrap the
+  <scm|with> up in the <scm|graphics> primitive, which is in turn enclosed in
+  its own <scm|with> which sets the <scm|"gr-geometry"> property of the
+  graphics object:\ 
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
@@ -292,6 +290,10 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
+
+    <\input|Scheme] >
+      \;
+    </input>
   </session>
 
   In follow-up tutorials we will see how to embed seamlessly <name|Scheme>
@@ -328,6 +330,7 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|?|?>>
+    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
