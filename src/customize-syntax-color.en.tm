@@ -5,6 +5,8 @@
 <\body>
   <notes-header>
 
+  <chapter*|Customizing the color of code snippets>
+
   By default, the preprocessor directives in C++ code snippets are rendered
   in green:
 
@@ -156,26 +158,31 @@
 
 <\initial>
   <\collection>
-    <associate|page-medium|paper>
+    <associate|page-medium|papyrus>
   </collection>
 </initial>
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|1|1>>
-    <associate|auto-2|<tuple|2|2>>
+    <associate|auto-1|<tuple|?|1>>
+    <associate|auto-2|<tuple|1|2>>
+    <associate|auto-3|<tuple|2|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|toc>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|>
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <pageref|auto-1><vspace|0.5fn>
+
       <with|par-left|<quote|4tab>|Decolorize
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-1><vspace|0.15fn>>
+      <no-break><pageref|auto-2><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Reset <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2><vspace|0.15fn>>
+      <no-break><pageref|auto-3><vspace|0.15fn>>
     </associate>
   </collection>
 </auxiliary>

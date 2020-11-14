@@ -11,10 +11,10 @@
     </cell>>>>
   </wide-tabular>
 
-  <chapter*|Notes on TeXmacs>
+  <chapter*|Notes on <TeXmacs>>
 
-  This is a blog/wiki about<nbsp><hlink|TeXmacs|http://www.texmacs.org/>. It
-  aims to be a container for articles, snippets, comments, developer docs,
+  This is a blog/wiki about<nbsp><hlink|<TeXmacs>|http://www.texmacs.org/>.
+  It aims to be a container for articles, snippets, comments, developer docs,
   proposals, user's pages, etc<text-dots>\ 
 
   You can find the <hlink|source repository|https://github.com/texmacs/notes>
@@ -40,7 +40,7 @@
   <hlink|Embedding graphics composed with Scheme into
   documents|scheme-graphics-embedding.tm>
 
-  <hlink|Composing TeXmacs graphics with Scheme|scheme-graphics.tm>
+  <hlink|Composing <TeXmacs> graphics with Scheme|scheme-graphics.tm>
 
   <hlink|An overview of <TeXmacs> from altitude|overview.tm>
 
@@ -54,13 +54,13 @@
 
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
 
+  <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
+
   <section*|Developers' notes>
 
   <hlink|Implementing previews for link targets|./previews.tm>
 
-  <hlink|TeXmacs and HTML|tm-and-html.tm>
-
-  \;
+  <hlink|<TeXmacs> and HTML|tm-and-html.tm>
 
   <section*|Contributing>
 
