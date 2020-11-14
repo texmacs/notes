@@ -37,6 +37,8 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
+  <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
+
   <hlink|Embedding graphics composed with Scheme into
   documents|scheme-graphics-embedding.tm>
 
@@ -53,8 +55,6 @@
   <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
 
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
-
-  <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
 
   <section*|Developers' notes>
 
@@ -125,7 +125,8 @@
   <\collection>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Notes
-      on TeXmacs> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      on T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>>
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
       Collections \ <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
