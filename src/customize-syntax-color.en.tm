@@ -5,8 +5,8 @@
 <\body>
   <notes-header>
 
-  By default, the preprocessor directives in C++ code snippets is rendered in
-  green:
+  By default, the preprocessor directives in C++ code snippets are rendered
+  in green:
 
   <\cpp-code>
     #include "stdio.h"
