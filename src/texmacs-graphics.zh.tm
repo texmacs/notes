@@ -1,8 +1,10 @@
-<TeXmacs|1.99.5>
+<TeXmacs|1.99.15>
 
-<style|<tuple|book|chinese|doc>>
+<style|<tuple|notes|chinese|doc|old-spacing|old-dots|old-lengths>>
 
 <\body>
+  <notes-header>
+
   \;
 
   <\doc-data|<doc-title|<TeXmacs>\<#56FE\>\<#5F62\>\<#7F16\>\<#7A0B\>>>
@@ -635,6 +637,7 @@
     <associate|auto-25|<tuple|4.1.1|?>>
     <associate|auto-26|<tuple|4.1.2|?>>
     <associate|auto-27|<tuple|4.2|?>>
+    <associate|auto-28|<tuple|1.4.2|?>>
     <associate|auto-3|<tuple|2|3>>
     <associate|auto-4|<tuple|2.1|3>>
     <associate|auto-5|<tuple|1|3>>
@@ -643,6 +646,27 @@
     <associate|auto-8|<tuple|2|5>>
     <associate|auto-9|<tuple|2.3|6>>
     <associate|footnote-1|<tuple|1|3>>
+    <associate|footnote-1.1|<tuple|1.1|?>>
+    <associate|footnote-1.10|<tuple|1.10|?>>
+    <associate|footnote-1.11|<tuple|1.11|?>>
+    <associate|footnote-1.12|<tuple|1.12|?>>
+    <associate|footnote-1.13|<tuple|1.13|?>>
+    <associate|footnote-1.14|<tuple|1.14|?>>
+    <associate|footnote-1.15|<tuple|1.15|?>>
+    <associate|footnote-1.16|<tuple|1.16|?>>
+    <associate|footnote-1.17|<tuple|1.17|?>>
+    <associate|footnote-1.18|<tuple|1.18|?>>
+    <associate|footnote-1.19|<tuple|1.19|?>>
+    <associate|footnote-1.2|<tuple|1.2|?>>
+    <associate|footnote-1.20|<tuple|1.20|?>>
+    <associate|footnote-1.21|<tuple|1.21|?>>
+    <associate|footnote-1.3|<tuple|1.3|?>>
+    <associate|footnote-1.4|<tuple|1.4|?>>
+    <associate|footnote-1.5|<tuple|1.5|?>>
+    <associate|footnote-1.6|<tuple|1.6|?>>
+    <associate|footnote-1.7|<tuple|1.7|?>>
+    <associate|footnote-1.8|<tuple|1.8|?>>
+    <associate|footnote-1.9|<tuple|1.9|?>>
     <associate|footnote-10|<tuple|10|?>>
     <associate|footnote-11|<tuple|11|?>>
     <associate|footnote-12|<tuple|12|?>>
@@ -664,6 +688,19 @@
     <associate|footnote-8|<tuple|8|7>>
     <associate|footnote-9|<tuple|9|7>>
     <associate|footnr-1|<tuple|1|3>>
+    <associate|footnr-1.1|<tuple|1.1|?>>
+    <associate|footnr-1.14|<tuple|1.14|?>>
+    <associate|footnr-1.15|<tuple|1.15|?>>
+    <associate|footnr-1.18|<tuple|1.18|?>>
+    <associate|footnr-1.19|<tuple|1.19|?>>
+    <associate|footnr-1.2|<tuple|1.2|?>>
+    <associate|footnr-1.20|<tuple|1.20|?>>
+    <associate|footnr-1.21|<tuple|1.21|?>>
+    <associate|footnr-1.3|<tuple|1.3|?>>
+    <associate|footnr-1.4|<tuple|1.4|?>>
+    <associate|footnr-1.5|<tuple|1.5|?>>
+    <associate|footnr-1.6|<tuple|1.6|?>>
+    <associate|footnr-1.9|<tuple|1.9|?>>
     <associate|footnr-14|<tuple|14|?>>
     <associate|footnr-15|<tuple|15|?>>
     <associate|footnr-18|<tuple|18|?>>
@@ -682,123 +719,123 @@
 <\auxiliary>
   <\collection>
     <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|\<#63D2\>\<#5165\>>|<with|font-family|<quote|ss>|\<#8FDB\>\<#7A0B\>>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-3>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|\<#63D2\>\<#5165\>>|<with|font-family|<quote|ss>|\<#4F1A\>\<#8BDD\>>|<with|font-family|<quote|ss>|Scheme>>|<pageref|auto-3>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|\<#5E2E\>\<#52A9\>>|<with|font-family|<quote|ss>|\<#7528\>\<#6237\>\<#624B\>\<#518C\>>|<with|font-family|<quote|ss>|\<#5185\>\<#7F6E\>\<#4F5C\>\<#56FE\>\<#5DE5\>\<#5177\>>>|<pageref|auto-8>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|\<#5DE5\>\<#5177\>>|<with|font-family|<quote|ss>|\<#5F00\>\<#53D1\>\<#83DC\>\<#5355\>>>|<pageref|auto-23>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Developer>|<with|font-family|<quote|ss>|Export
+      <tuple|<tuple|<with|font-family|<quote|ss>|\<#5F00\>\<#53D1\>\<#8005\>>|<with|font-family|<quote|ss>|Export
       Sessions...>>|<pageref|auto-24>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|\<#8F6C\>\<#5230\>>|<with|font-family|<quote|ss>|\<#65E0\>\<#6807\>\<#9898\>\<#6587\>\<#4EF6\>>>|<pageref|auto-25>>
     </associate>
     <\associate|table>
-      <tuple|normal|<\surround|<hidden|<tuple>>|>
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
         \;
       </surround>|<pageref|auto-5>>
 
-      <tuple|normal|<surround|<hidden|<tuple>>||\<#90E8\>\<#5206\>\<#5BF9\>\<#8C61\>\<#5C5E\>\<#6027\>>|<pageref|auto-7>>
+      <tuple|normal|<surround|<hidden-binding|<tuple>|2>||\<#90E8\>\<#5206\>\<#5BF9\>\<#8C61\>\<#5C5E\>\<#6027\>>|<pageref|auto-7>>
     </associate>
     <\associate|toc>
-      1<space|2spc>\<#7B80\>\<#4ECB\> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      1.<space|2spc>\<#7B80\>\<#4ECB\> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-1>
 
-      2<space|2spc>\<#57FA\>\<#672C\>\<#539F\>\<#7406\>
+      2.<space|2spc>\<#57FA\>\<#672C\>\<#539F\>\<#7406\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
 
-      <with|par-left|<quote|1tab>|2.1<space|2spc>\<#539F\>\<#8BED\>
+      <with|par-left|<quote|1tab>|2.1.<space|2spc>\<#539F\>\<#8BED\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>>
 
-      <with|par-left|<quote|1tab>|2.2<space|2spc>\<#64CD\>\<#7EB5\>\<#6837\>\<#5F0F\>\<#5C5E\>\<#6027\>
+      <with|par-left|<quote|1tab>|2.2.<space|2spc>\<#64CD\>\<#7EB5\>\<#6837\>\<#5F0F\>\<#5C5E\>\<#6027\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-6>>
 
-      <with|par-left|<quote|1tab>|2.3<space|2spc>\<#6446\>\<#5F04\>\<#753B\>\<#5E03\>
+      <with|par-left|<quote|1tab>|2.3.<space|2spc>\<#6446\>\<#5F04\>\<#753B\>\<#5E03\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-9>>
 
-      3<space|2spc>\<#753B\>\<#5ECA\> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      3.<space|2spc>\<#753B\>\<#5ECA\> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-10>
 
-      <with|par-left|<quote|1tab>|3.1<space|2spc>\<#91D1\>\<#521A\>\<#77F3\>\<#56FE\>\<#6848\>
+      <with|par-left|<quote|1tab>|3.1.<space|2spc>\<#91D1\>\<#521A\>\<#77F3\>\<#56FE\>\<#6848\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-11>>
 
-      <with|par-left|<quote|1tab>|3.2<space|2spc>\<#5706\>\<#73AF\>\<#56FE\>\<#6848\>
+      <with|par-left|<quote|1tab>|3.2.<space|2spc>\<#5706\>\<#73AF\>\<#56FE\>\<#6848\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-12>>
 
-      <with|par-left|<quote|1tab>|3.3<space|2spc>\<#80BE\>\<#5F62\>\<#56FE\>\<#6848\>
+      <with|par-left|<quote|1tab>|3.3.<space|2spc>\<#80BE\>\<#5F62\>\<#56FE\>\<#6848\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-13>>
 
-      <with|par-left|<quote|1tab>|3.4<space|2spc>\<#5FC3\>\<#810F\>\<#5F62\>\<#56FE\>\<#6848\>
+      <with|par-left|<quote|1tab>|3.4.<space|2spc>\<#5FC3\>\<#810F\>\<#5F62\>\<#56FE\>\<#6848\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-14>>
 
-      <with|par-left|<quote|1tab>|3.5<space|2spc>\<#5206\>\<#5F62\>\<#56FE\>\<#6848\>
+      <with|par-left|<quote|1tab>|3.5.<space|2spc>\<#5206\>\<#5F62\>\<#56FE\>\<#6848\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-15>>
 
-      <with|par-left|<quote|2tab>|3.5.1<space|2spc>\<#6811\>
+      <with|par-left|<quote|2tab>|3.5.1.<space|2spc>\<#6811\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-16>>
 
-      <with|par-left|<quote|2tab>|3.5.2<space|2spc>Koch
-      snowflake<assign|footnote-nr|7><hidden|<tuple>><\float|footnote|>
-        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%35EE6338-36566658>|<link|hyperlink|<id|%35EE6338-36566658>|<url|#footnr-7>>|7>.
-        |<hidden|<tuple|footnote-7>><htab|0fn|first>>
-          <locus|<id|%35EE6338-365665C8>|<link|hyperlink|<id|%35EE6338-365665C8>|<url|https://en.wikipedia.org/wiki/Koch_snowflake>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Koch_snowflake>>
+      <with|par-left|<quote|2tab>|3.5.2.<space|2spc>Koch
+      snowflake<assign|footnote-nr|7><hidden-binding|<tuple>|7><\float|footnote|>
+        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%-5C930DA38-11538DBF8>|<link|hyperlink|<id|%-5C930DA38-11538DBF8>|<url|#footnr-7>>|7>.
+        |<hidden-binding|<tuple|footnote-7>|7><specific|texmacs|<htab|0fn|first>>>
+          <locus|<id|%-5C930DA38-11538E8C8>|<link|hyperlink|<id|%-5C930DA38-11538E8C8>|<url|https://en.wikipedia.org/wiki/Koch_snowflake>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Koch_snowflake>>
         </surround>>>
       </float><space|0spc><rsup|<with|font-shape|<quote|right>|<reference|footnote-7>>>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-17>>
 
-      <with|par-left|<quote|2tab>|3.5.3<space|2spc>Sierpinski
-      carpet<assign|footnote-nr|10><hidden|<tuple>><\float|footnote|>
-        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%35EE6338-36456C50>|<link|hyperlink|<id|%35EE6338-36456C50>|<url|#footnr-10>>|10>.
-        |<hidden|<tuple|footnote-10>><htab|0fn|first>>
-          <locus|<id|%35EE6338-36545368>|<link|hyperlink|<id|%35EE6338-36545368>|<url|https://en.wikipedia.org/wiki/Sierpinski_carpet>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Sierpinski_carpet>>
+      <with|par-left|<quote|2tab>|3.5.3.<space|2spc>Sierpinski
+      carpet<assign|footnote-nr|10><hidden-binding|<tuple>|10><\float|footnote|>
+        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%-5C930DA38-11538E7B0>|<link|hyperlink|<id|%-5C930DA38-11538E7B0>|<url|#footnr-10>>|10>.
+        |<hidden-binding|<tuple|footnote-10>|10><specific|texmacs|<htab|0fn|first>>>
+          <locus|<id|%-5C930DA38-115389530>|<link|hyperlink|<id|%-5C930DA38-115389530>|<url|https://en.wikipedia.org/wiki/Sierpinski_carpet>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Sierpinski_carpet>>
         </surround>>>
       </float><space|0spc><rsup|<with|font-shape|<quote|right>|<reference|footnote-10>>>
-      and triangle<assign|footnote-nr|11><hidden|<tuple>><\float|footnote|>
-        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%35EE6338-36559FB0>|<link|hyperlink|<id|%35EE6338-36559FB0>|<url|#footnr-11>>|11>.
-        |<hidden|<tuple|footnote-11>><htab|0fn|first>>
-          <locus|<id|%35EE6338-36568EB8>|<link|hyperlink|<id|%35EE6338-36568EB8>|<url|https://en.wikipedia.org/wiki/Sierpinski_triangle>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Sierpinski_triangle>>
+      and triangle<assign|footnote-nr|11><hidden-binding|<tuple>|11><\float|footnote|>
+        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%-5C930DA38-1150DE9A0>|<link|hyperlink|<id|%-5C930DA38-1150DE9A0>|<url|#footnr-11>>|11>.
+        |<hidden-binding|<tuple|footnote-11>|11><specific|texmacs|<htab|0fn|first>>>
+          <locus|<id|%-5C930DA38-11538EAD0>|<link|hyperlink|<id|%-5C930DA38-11538EAD0>|<url|https://en.wikipedia.org/wiki/Sierpinski_triangle>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Sierpinski_triangle>>
         </surround>>>
       </float><space|0spc><rsup|<with|font-shape|<quote|right>|<reference|footnote-11>>>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-18>>
 
-      <with|par-left|<quote|2tab>|3.5.4<space|2spc>Mandelbrot
-      set<assign|footnote-nr|16><hidden|<tuple>><\float|footnote|>
-        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%35EE6338-36568CB0>|<link|hyperlink|<id|%35EE6338-36568CB0>|<url|#footnr-16>>|16>.
-        |<hidden|<tuple|footnote-16>><htab|0fn|first>>
-          <locus|<id|%35EE6338-36569160>|<link|hyperlink|<id|%35EE6338-36569160>|<url|https://en.wikipedia.org/wiki/Mandelbrot_set>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Mandelbrot_set>>
+      <with|par-left|<quote|2tab>|3.5.4.<space|2spc>Mandelbrot
+      set<assign|footnote-nr|16><hidden-binding|<tuple>|16><\float|footnote|>
+        <with|font-size|<quote|0.771>|<with|par-mode|<quote|justify>|par-left|<quote|0cm>|par-right|<quote|0cm>|font-shape|<quote|right>|dummy|<quote|1.0fn>|dummy|<quote|7.5fn>|<\surround|<locus|<id|%-5C930DA38-115389D90>|<link|hyperlink|<id|%-5C930DA38-115389D90>|<url|#footnr-16>>|16>.
+        |<hidden-binding|<tuple|footnote-16>|16><specific|texmacs|<htab|0fn|first>>>
+          <locus|<id|%-5C930DA38-11538C798>|<link|hyperlink|<id|%-5C930DA38-11538C798>|<url|https://en.wikipedia.org/wiki/Mandelbrot_set>>|<with|font-family|<quote|tt>|language|<quote|verbatim>|https://en.wikipedia.org/wiki/Mandelbrot_set>>
         </surround>>>
       </float><space|0spc><rsup|<with|font-shape|<quote|right>|<reference|footnote-16>>>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-19>>
 
-      4<space|2spc>\<#9644\>\<#5F55\> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      4.<space|2spc>\<#9644\>\<#5F55\> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-20>
 
-      <with|par-left|<quote|1tab>|4.1<space|2spc>\<#5C0F\>\<#8D34\>\<#58EB\>
+      <with|par-left|<quote|1tab>|4.1.<space|2spc>\<#5C0F\>\<#8D34\>\<#58EB\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-21>>
 
-      <with|par-left|<quote|2tab>|4.1.1<space|2spc>\<#5BF9\>\<#672C\>\<#6587\>\<#6240\>\<#6709\>\<#7684\><with|font-shape|<quote|small-caps>|Scheme>\<#8868\>\<#8FBE\>\<#5F0F\>\<#6C42\>\<#503C\>
+      <with|par-left|<quote|2tab>|4.1.1.<space|2spc>\<#5BF9\>\<#672C\>\<#6587\>\<#6240\>\<#6709\>\<#7684\><with|font-shape|<quote|small-caps>|Scheme>\<#8868\>\<#8FBE\>\<#5F0F\>\<#6C42\>\<#503C\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-22>>
 
-      <with|par-left|<quote|2tab>|4.1.2<space|2spc>\<#9006\>\<#5411\>\<#5DE5\>\<#7A0B\>
+      <with|par-left|<quote|2tab>|4.1.2.<space|2spc>\<#9006\>\<#5411\>\<#5DE5\>\<#7A0B\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-26>>
 
-      <with|par-left|<quote|1tab>|4.2<space|2spc>\<#53C2\>\<#8003\>\<#8D44\>\<#6599\>
+      <with|par-left|<quote|1tab>|4.2.<space|2spc>\<#53C2\>\<#8003\>\<#8D44\>\<#6599\>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-27>>
     </associate>
