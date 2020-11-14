@@ -13,8 +13,8 @@
 
   <chapter*|Notes on <TeXmacs>>
 
-  This is a blog/wiki about<nbsp><hlink|<TeXmacs>|http://www.texmacs.org/>.
-  It aims to be a container for articles, snippets, comments, developer docs,
+  This is a blog/wiki about <hlink|<TeXmacs>|http://www.texmacs.org/>. It
+  aims to be a container for articles, snippets, comments, developer docs,
   proposals, user's pages, etc<text-dots>\ 
 
   You can find the <hlink|source repository|https://github.com/texmacs/notes>

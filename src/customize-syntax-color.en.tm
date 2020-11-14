@@ -7,8 +7,8 @@
 
   <chapter*|Customizing the color of code snippets>
 
-  By default, the preprocessor directives in C++ code snippets are rendered
-  in green:
+  By default, the preprocessor directives in <name|C++> code snippets are
+  rendered in green:
 
   <\cpp-code>
     #include "stdio.h"
@@ -173,8 +173,8 @@
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|>
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Customizing
+      the color of code snippets> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
       <with|par-left|<quote|4tab>|Decolorize
