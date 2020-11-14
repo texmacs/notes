@@ -90,7 +90,7 @@
     </input>
   </session>
 
-  Restart <TeXmacs> and type some C++ code below:
+  Restart <TeXmacs> or type some C++ code below to trigger recoloring:
 
   <\cpp-code>
     #include "stdio.h"
@@ -141,6 +141,8 @@
     </input>
   </session>
 
+  Restart <TeXmacs> or type something below to see the effects:
+
   <\cpp-code>
     #include "stdio.h"
 
@@ -150,10 +152,6 @@
 
     }
   </cpp-code>
-
-  \;
-
-  \;
 </body>
 
 <\initial>
@@ -164,7 +162,20 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|1|?>>
-    <associate|auto-2|<tuple|2|?>>
+    <associate|auto-1|<tuple|1|1>>
+    <associate|auto-2|<tuple|2|2>>
   </collection>
 </references>
+
+<\auxiliary>
+  <\collection>
+    <\associate|toc>
+      <with|par-left|<quote|4tab>|Decolorize
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-1><vspace|0.15fn>>
+
+      <with|par-left|<quote|4tab>|Reset <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-2><vspace|0.15fn>>
+    </associate>
+  </collection>
+</auxiliary>
