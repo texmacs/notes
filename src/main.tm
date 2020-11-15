@@ -58,6 +58,8 @@
 
   <section*|Developers' notes>
 
+  <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
+
   <hlink|Implementing previews for link targets|./previews.tm>
 
   <hlink|<TeXmacs> and HTML|tm-and-html.tm>
