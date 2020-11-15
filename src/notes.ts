@@ -42,10 +42,7 @@
 
   <assign|html-head-favicon|../resources/blog-icon.png>
 
-  <assign|html-head-javascript-src|../resources/highlight.pack.js>
-
-  <assign|html-head-javascript|document.addEventListener('DOMContentLoaded',function(event){document.querySelectorAll('pre').forEach(function(block){
-  hljs.highlightBlock(block);});});>
+  <assign|html-extra-javascript-src|<tuple|../resources/highlight.pack.js|../resources/notes-base.js>>
 
   \;
 
