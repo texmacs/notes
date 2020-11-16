@@ -38,9 +38,13 @@
 
   <assign|html-title|TeXmacs notes>
 
-  <assign|html-css|<tuple|../resources/notes-base.css>>
+  <assign|html-css|../resources/notes-base.css>
 
   <assign|html-head-favicon|../resources/blog-icon.png>
+
+  <assign|html-extra-javascript-src|<tuple|../resources/highlight.pack.js|../resources/notes-base.js>>
+
+  \;
 
   \;
 
@@ -109,6 +113,10 @@
   <assign|tmhtml-markup|<macro|body|<html-class|tmweb-markup|<arg|body>>>>
 
   <assign|tmhtml-hlink-tm|<macro|body|target|<hlink|<arg|body>|<merge|<arg|target>|.texmacs>>>>
+
+  <assign|tmhtml-cpp|<macro|body|<html-class|cpp|<with|mode|prog|prog-language|cpp|font-family|rm|<arg|body>>>>>
+
+  <assign|tmhtml-scm|<macro|body|<html-class|scheme|<with|mode|prog|prog-language|scheme|font-family|rm|<arg|body>>>>>
 </body>
 
 <initial|<\collection>

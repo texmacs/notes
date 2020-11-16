@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|notes>
 
@@ -38,6 +38,16 @@
 
   Modify the way circles are created in the graphical editor. See
   [<hlink|bug#57882|https://savannah.gnu.org/bugs/?57882>].
+
+  <hrule>
+
+  Add possibility for automatic line numbers (even approximate) for easy
+  refeering.
+
+  See <slink|https://texblog.org/2012/02/08/adding-line-numbers-to-documents/>
+
+  (Seem complicate, maybe need adding appropriate hooks in the typesetter, to
+  detect line breaks)
 
   <hrule>
 

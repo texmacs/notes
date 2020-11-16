@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|notes>
 
@@ -26,8 +26,6 @@
   <\cpp-code>
     tree ln3 (LINK, "hyperlink", copy (ref_id), copy (dest_ref));
 
-    \;
-
     env ("reference") = tree (MACRO, "Id",\ 
 
     \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tree
@@ -35,8 +33,6 @@
 
     \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ln3,
     reftxt));
-
-    \;
 
     env ("pageref") = tree (MACRO, "Id",\ 
 

@@ -6,6 +6,8 @@
     <meta content="TeXmacs 1.99.15" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
   </head>
   <body>
     <div class="toggle" style="display: none">
@@ -415,7 +417,7 @@
     </ol>
     <h2 id="auto-10"> Menus<span style="margin-left: 1em"></span></h2>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (menu-bind file-menu
   (&quot;New&quot; (new-buffer))
   (&quot;Load&quot; (choose-file load-buffer &quot;Load file&quot; &quot;&quot;))
@@ -426,7 +428,7 @@
       can be easily extended from user code:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (menu-bind insert-menu
   (former)
   &ndash;&ndash;&ndash;
@@ -442,7 +444,7 @@
       Keybindings
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (kbd-map
   (&quot;D e f .&quot; (make 'definition))
   (&quot;L e m .&quot; (make 'lemma))
@@ -454,7 +456,7 @@
       buffer is loaded, it allows some specific customizations. For example:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (if (not (buffer-has-name? (current-buffer)))
     (begin
       (init-style &quot;article&quot;)
@@ -532,7 +534,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
         color="black">Piet</font><font color="blue">&gt;</font>
       </p>
     </div>
-    <h2 id="auto-14">The <tt class="verbatim">tm-define</tt> macro<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-14">The <tt class="verbatim scheme">tm-define</tt> macro<span style="margin-left: 1em"></span></h2>
     <p>
       <i>Contextual overloading</i> 
     </p>
@@ -541,17 +543,17 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       editor mode). This allows to develop modular user interfaces.
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (hello) (insert &quot;Hello&quot;))
 (tm-define (hello) (:require (in-math?)) (insert-go-to &quot;hello()&quot; '(6)))</pre>
     </div>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (hello)
   (if (in-math?) (insert-go-to &quot;hello()&quot; '(6)) (former)))</pre>
     </div>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (my-replace what by)
   default-implementation)
 
@@ -561,7 +563,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
     </div>
     <h2 id="auto-15">Meta informations<span style="margin-left: 1em"></span></h2>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (square x)
   (:synopsis &quot;Compute the square of @x&quot;)
   (:argument x &quot;A number&quot;)
@@ -569,14 +571,14 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
   (* x x))</pre>
     </div>
     <p>
-      Used via e.g. <tt class="verbatim">(help square)</tt>. Allows for interactive
+      Used via e.g. <tt class="verbatim scheme">(help square)</tt>. Allows for interactive
       input of parameters: typing <font class="tmweb-key">&#x2318;&#x2303;&#x21E7;X</font>
-      followed by <tt class="verbatim">square</tt> and <font class="tmweb-key">&#x21A9;</font> and
+      followed by <tt class="verbatim scheme">square</tt> and <font class="tmweb-key">&#x21A9;</font> and
       you will be prompted for &ldquo;A number&rdquo; on the footer (or in a
       dialog). Tab-completion.
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-property (choose-file fun text type)
   (:interactive #t))</pre>
     </div>
@@ -584,14 +586,14 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       to indicate interactive commands in menu items like:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (&quot;Load&quot; (choose-file load-buffer &quot;Load file&quot; &quot;&quot;))</pre>
     </div>
     <p>
       Check-marks for menu items:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (toggle-session-math-input)
   (:check-mark &quot;v&quot; session-math-input?)
   (session-use-math-input (not (session-math-input?))))</pre>
@@ -600,7 +602,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define mouse-unfold
   (:secure #t)
   (with-action t
@@ -631,7 +633,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
           is typically represented by
         </p>
         <div class="tmweb-code">
-          <pre class="verbatim" xml:space="preserve">
+          <pre class="verbatim scheme" xml:space="preserve">
 (frac (concat &quot;a&quot; (rsup &quot;2&quot;)) &quot;b+c&quot;)</pre>
         </div>
         <p>
@@ -689,7 +691,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (swap-numerator-denominator t)
   (:require (tree-is? t 'frac))
   (with p (tree-cursor-path t)
@@ -701,12 +703,12 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       
     </p>
     <p>
-      To be called as <tt class="verbatim">(swap-numerator-denominator
+      To be called as <tt class="verbatim scheme">(swap-numerator-denominator
       (focus-tree))</tt>, or just add it as a structured variant to <font
       class="tmweb-markup">frac</font>
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (tm-define (variant-circulate t forward?)
   (:require (tree-is? t 'frac))
   (swap-numerator-denominator t))</pre>
@@ -719,7 +721,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       
     </p>
     <p>
-      TeXmacs implements the routines <tt class="verbatim">match?</tt> and <tt class="verbatim">select</tt>
+      TeXmacs implements the routines <tt class="verbatim scheme">match?</tt> and <tt class="verbatim scheme">select</tt>
       for matching regular expressions and selecting subexpressions along a
       &ldquo;path&rdquo;. For instance:  in the current buffer search all
       expressions of the form
@@ -745,7 +747,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       <b>User preferences</b>
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (define-preferences
   (&quot;Gnu's hair color&quot; &quot;brown&quot; notify-gnu-hair-change)
   (&quot;Snail's cruising speed&quot; &quot;1mm/sec&quot; notify-Achilles))</pre>
@@ -757,7 +759,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       <b>New data formats and converters</b>
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (define-format blablah
   (:name &quot;Blablah&quot;)
   (:suffix &quot;bla&quot;))
@@ -831,7 +833,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
         </tr></tbody>
       </table>
     </div>
-    <h2 id="auto-23"><tt class="verbatim">tree-view</tt><span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-23"><tt class="verbatim scheme">tree-view</tt><span style="margin-left: 1em"></span></h2>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <table style="width: 100%">
         <tbody><tr>
@@ -960,7 +962,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       <tt class="verbatim">example.scm</tt> defined as follows:
     </p>
     <div class="tmweb-code">
-      <pre class="verbatim" xml:space="preserve">
+      <pre class="verbatim scheme" xml:space="preserve">
 (texmacs-module (bibtex example)
   (:use (bibtex bib-utils)))
 

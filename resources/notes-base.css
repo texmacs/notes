@@ -10,7 +10,17 @@
 ******************************************************************************/
 
 
+/*@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.2/styles/default.min.css');*/
+@import url('./highlight-github.css');
 
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background-color: initial ;
+}
+
+  
 /******************************************************************************
 * Font setup
 ******************************************************************************/

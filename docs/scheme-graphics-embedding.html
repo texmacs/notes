@@ -5,6 +5,9 @@
     <title>TeXmacs notes</title>
     <meta content="TeXmacs 1.99.15" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
   </head>
   <body>
     <div class="notes-header">
@@ -29,7 +32,7 @@
     <p>
       Since in each <class style="font-variant: small-caps">Executable</class> environment it is
       possible to execute one Scheme instruction only, we will wrap all of the
-      code inside a <tt class="verbatim">begin</tt> form.
+      code inside a <tt class="verbatim scheme">begin</tt> form.
     </p>
     <p>
       For more complex drawings users may feel the need of more efficient
@@ -47,7 +50,7 @@
       primitive.
     </p>
     <p>
-      In the code introduce a function <tt class="verbatim">pt</tt> that generates <font
+      In the code introduce a function <tt class="verbatim scheme">pt</tt> that generates <font
       class="tmweb-markup">point</font> primitives, (which are parametrized by two numbers,
       expressed as strings), and with it we generate points that we will use
       to build other primitives (<font class="tmweb-markup">arc</font>, <font class="tmweb-markup">line</font>,
@@ -77,7 +80,7 @@
       Press <font class="tmweb-key">&#x21E7;Return</font> and type or paste the graphics
       command; in this note let us copy the same commands that generate the
       drawing in the <a href="./scheme-graphics.html">previous note</a>, wrapping everything in a <tt
-      class="verbatim">begin</tt> form as we already said:
+      class="verbatim scheme">begin</tt> form as we already said:
     </p>
     <p>
       <font color="grey"><table style="display: inline-table; vertical-align: middle">
