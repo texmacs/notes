@@ -16,8 +16,8 @@
   <menu|Insert|Fold|Executable> (and then choose the <name|Scheme> option).
 
   Since in each <name|Executable> environment it is possible to execute one
-  Scheme instruction only, we will wrap all of the code inside a <scm|begin>
-  form.
+  <name|Scheme> instruction only, we will wrap all of the code inside a
+  <scm|begin> form.
 
   For more complex drawings users may feel the need of more efficient
   facilities to compose, test and deploy into TeXmacs their code. We are
@@ -30,10 +30,11 @@
   graphical objects, each made by the application of a graphical primitive,
   inside a <markup|graphics> primitive.
 
-  In the code introduce a function <scm|pt> that generates <markup|point>
-  primitives, (which are parametrized by two numbers, expressed as strings),
-  and with it we generate points that we will use to build other primitives
-  (<markup|arc>, <markup|line>, <markup|cline> and <markup|text-at>).
+  In the code we ue in this note, we introduce a function <scm|pt> that
+  generates <markup|point> primitives, (which are parametrized by two
+  numbers, expressed as strings), and with it we generate points that we will
+  use to build other primitives (<markup|arc>, <markup|line>, <markup|cline>
+  and <markup|text-at>).
 
   In turn, <TeXmacs> will use the primitives to represent the triangle, the
   half-circle and the decorations, that is the drawing that we will embed in
@@ -198,14 +199,15 @@
     \;
   <|big-figure>
     A drawing generated with <name|Scheme>, embedded in a <markup|big-figure>
-    <inactive|<compound|>>environment
+    environment
   </big-figure>
 
-  The drawing we generated is editable in two different ways. Placing the
-  cursor at the drawing (just after or just before, the drawing is then
-  surrounded by a thin cyan frame) and pressing <key|Return> brings back the
-  yellow edit window, where the code can be changed and re-executed into a
-  new drawing.
+  The drawing we generated is editable in two different ways.
+
+  Placing the cursor at the drawing (just after or just before, the drawing
+  is then surrounded by a thin cyan frame) and pressing <key|Return> brings
+  back the yellow edit window, where the code can be changed and re-executed
+  into a new drawing.
 
   <\script-input|scheme|default>
     (begin
@@ -304,7 +306,6 @@
     <associate|auto-4|<tuple|?|?>>
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|1|?>>
-    <associate|auto-7|<tuple|2|?>>
   </collection>
 </references>
 
@@ -314,13 +315,8 @@
       <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
         A drawing generated with <with|font-shape|<quote|small-caps>|Scheme>,
         embedded in a <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|big-figure>
-        <mark|<arg|body>|<inline-tag|<with|mode|<quote|src>|color|<quote|dark
-        green>|font-shape|<quote|italic>|>>>environment
+        environment
       </surround>|<pageref|auto-6>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
-        The code re-opened after compilation and ready for re-editing.
-      </surround>|<pageref|auto-7>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Fold>|<with|font-family|<quote|ss>|Executable>>|<pageref|auto-2>>

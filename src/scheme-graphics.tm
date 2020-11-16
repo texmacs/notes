@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.15>
 
 <style|<tuple|notes|old-lengths|framed-session>>
 
@@ -27,8 +27,9 @@
 
   The most comfortable way of generating a drawing with <name|Scheme> is
   within a session, so that is the way we'll take in this note. We'll see in
-  other notes how to blend seamlessly graphics in a document and generate it
-  through external source files.
+  other notes how to <hlink|blend seamlessly graphics in a
+  document|./scheme-graphics-embedding.tm> and generate it through external
+  source files.
 
   The first step in working with a session is opening it, with
   <menu|Insert|Session|Scheme>. As a side step, it is convenient to select
@@ -249,8 +250,9 @@
     (graphics object_1 object_2 <text-dots> object_n)
   </scm-code>
 
-  properly enclosed in other constructs, with the appropriate sequence of
-  quasiquoting and unquotings:
+  properly enclosed in other constructs (we change the linewidth as well as
+  the color and we set the font shape for the whole graphics to italics),
+  with the appropriate sequence of quasiquoting and unquotings:
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
@@ -260,35 +262,37 @@
 
       \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
+      \ \ \ \ "font-shape" "italic"
+
       \ \ \ \ (graphics
 
       \ \ \ \ \ \ ;; the arc and the line together make the semicircle
 
-      \ \ \ \ \ \ (with "color" "black" (arc ,pA ,pC ,pB))
+      \ \ \ \ \ \ (with "color" "black" \ (arc ,pA ,pC ,pB))
 
-      \ \ \ \ \ \ (with "color" "black" (line ,pA ,pB))
+      \ \ \ \ \ \ (with "color" "black" \ (line ,pA ,pB))
 
       \ \ \ \ \ \ ;; a closed polyline for the triangle
 
-      \ \ \ \ \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+      \ \ \ \ \ \ (with "color" "red" "line-width" "1pt" (cline ,pA ,pB ,pC))
 
       \ \ \ \ \ \ ;; add letters using text-at
 
-      \ \ \ \ \ \ (with "color" "black" (text-at "A" ,tA)) \ 
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA)) \ 
 
-      \ \ \ \ \ \ (with "color" "black" (text-at "B" ,tB)) \ 
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB)) \ 
 
-      \ \ \ \ \ \ (with "color" "black" (text-at "C" ,tC))
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "C" ,tC))
 
       \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
 
-      \ \ \ \ \ \ (with "color" "blue" \ 
+      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"\ 
 
       \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\ 
 
       ;; and close all of the parentheses!!!
     <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
 
     <\input|Scheme] >
@@ -296,9 +300,10 @@
     </input>
   </session>
 
-  In follow-up tutorials we will see how to embed seamlessly <name|Scheme>
-  graphics in a document using the <menu|Fold|Executable> environment and how
-  to generate them from external files.
+  In follow-up tutorials we will see how to <hlink|embed seamlessly
+  <name|Scheme> graphics in a document|./scheme-graphics-embedding.tm> using
+  the <menu|Fold|Executable> environment and how to generate them from
+  external files.
 
   As a conclusion of this note, here is a collection of <TeXmacs> graphical
   objects, illustrating a few possibilities:
@@ -330,7 +335,6 @@
     <associate|auto-5|<tuple|?|?>>
     <associate|auto-6|<tuple|?|?>>
     <associate|auto-7|<tuple|?|?>>
-    <associate|auto-8|<tuple|?|?>>
   </collection>
 </references>
 
