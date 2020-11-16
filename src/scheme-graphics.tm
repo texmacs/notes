@@ -251,7 +251,8 @@
   </scm-code>
 
   properly enclosed in other constructs (we change the linewidth as well as
-  the color), with the appropriate sequence of quasiquoting and unquotings:
+  the color and we set the font shape for the whole graphics to italics),
+  with the appropriate sequence of quasiquoting and unquotings:
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
