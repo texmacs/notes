@@ -299,9 +299,10 @@
     </input>
   </session>
 
-  In follow-up tutorials we will see how to embed seamlessly <name|Scheme>
-  graphics in a document using the <menu|Fold|Executable> environment and how
-  to generate them from external files.
+  In follow-up tutorials we will see how to <hlink|embed seamlessly
+  <name|Scheme> graphics in a document|./scheme-graphics-embedding.tm> using
+  the <menu|Fold|Executable> environment and how to generate them from
+  external files.
 
   As a conclusion of this note, here is a collection of <TeXmacs> graphical
   objects, illustrating a few possibilities:
