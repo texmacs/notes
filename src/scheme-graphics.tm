@@ -250,8 +250,8 @@
     (graphics object_1 object_2 <text-dots> object_n)
   </scm-code>
 
-  properly enclosed in other constructs, with the appropriate sequence of
-  quasiquoting and unquotings:
+  properly enclosed in other constructs (we change the linewidth as well as
+  the color), with the appropriate sequence of quasiquoting and unquotings:
 
   <\session|scheme|default>
     <\unfolded-io|Scheme] >
