@@ -261,35 +261,37 @@
 
       \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
+      \ \ \ \ "font-shape" "italic"
+
       \ \ \ \ (graphics
 
       \ \ \ \ \ \ ;; the arc and the line together make the semicircle
 
-      \ \ \ \ \ \ (with "color" "black" (arc ,pA ,pC ,pB))
+      \ \ \ \ \ \ (with "color" "black" \ (arc ,pA ,pC ,pB))
 
-      \ \ \ \ \ \ (with "color" "black" (line ,pA ,pB))
+      \ \ \ \ \ \ (with "color" "black" \ (line ,pA ,pB))
 
       \ \ \ \ \ \ ;; a closed polyline for the triangle
 
-      \ \ \ \ \ \ (with "color" "red" \ \ (cline ,pA ,pB ,pC))
+      \ \ \ \ \ \ (with "color" "red" "line-width" "1pt" (cline ,pA ,pB ,pC))
 
       \ \ \ \ \ \ ;; add letters using text-at
 
-      \ \ \ \ \ \ (with "color" "black" (text-at "A" ,tA)) \ 
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA)) \ 
 
-      \ \ \ \ \ \ (with "color" "black" (text-at "B" ,tB)) \ 
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB)) \ 
 
-      \ \ \ \ \ \ (with "color" "black" (text-at "C" ,tC))
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "C" ,tC))
 
       \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
 
-      \ \ \ \ \ \ (with "color" "blue" \ 
+      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"\ 
 
       \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\ 
 
       ;; and close all of the parentheses!!!
     <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
 
     <\input|Scheme] >
