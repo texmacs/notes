@@ -28,6 +28,8 @@
 
   <hlink|Wishlist and additional functionalities|./wishlist.tm>
 
+  <hlink|Wishlist for blog tutorials|./article-wishes.tm>
+
   <hlink|Awesome <TeXmacs>|./awesome-texmacs.tm>
 
   <hlink|Community links|community.tm>
