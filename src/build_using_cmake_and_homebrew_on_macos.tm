@@ -31,6 +31,29 @@
   (<menu|Insert|Session|Shell>). Yes, if you are browsing this guide using
   <TeXmacs>, the commands can be executed.
 
+  <paragraph|Global Variables>
+
+  <\session|shell|default>
+    <\input|Shell] >
+      GROUP_DIR=$HOME/texmacs
+    </input>
+
+    <\input|Shell] >
+      T_HOMEBREW_DIR=$GROUP_DIR/homebrew
+    </input>
+
+    <\input|Shell] >
+      T_TEXMACS_DIR=$GROUP_DIR/texmacs
+    </input>
+
+    <\input|Shell] >
+      \;
+    </input>
+  </session>
+
+  These global variables should be executed manually every time you use this
+  note.
+
   <paragraph|Check Homebrew installation>
 
   <\session|shell|default>
@@ -73,15 +96,7 @@
 
   <\session|shell|default>
     <\unfolded-io|Shell] >
-      brew install cmake
-    <|unfolded-io>
-      brew install cmake
-
-      [31mError:[0m Unknown command: -q
-    </unfolded-io>
-
-    <\unfolded-io|Shell] >
-      cmake --version
+      cmake --version \|\| brew install cmake
     <|unfolded-io>
       cmake version 3.18.1
 
@@ -100,14 +115,6 @@
   <paragraph|Clone <shell|texmacs/homebrew>>
 
   <\session|shell|default>
-    <\input|Shell] >
-      GROUP_DIR=$HOME/texmacs
-    </input>
-
-    <\input|Shell] >
-      T_HOMEBREW_DIR=$GROUP_DIR/homebrew
-    </input>
-
     <\unfolded-io|Shell] >
       [[ -d "$T_HOMEBREW_DIR" ]] && echo "texmacs/homebrew is cloned" \|\|
       echo "Please clone texmacs/homebrew first"
@@ -254,8 +261,6 @@
     <\unfolded-io|Shell] >
       qmake --version
     <|unfolded-io>
-      qmake --version
-
       QMake version 2.01a
 
       Using Qt version 4.8.7 in /usr/local/lib
@@ -280,14 +285,8 @@
   <subsection*|Install Ghostscript>
 
   <\session|shell|default>
-    <\input>
-      Shell]\ 
-    <|input>
-      brew install ghostscript
-    </input>
-
     <\unfolded-io|Shell] >
-      gs --version
+      gs --version \|\| brew install ghostscript
     <|unfolded-io>
       gs --version
 
@@ -309,10 +308,6 @@
 
   <\session|shell|default>
     <\input|Shell] >
-      T_TEXMACS_DIR=$GROUP_DIR/texmacs
-    </input>
-
-    <\input|Shell] >
       [[ ! -d $T_TEXMACS_DIR ]] && git clone
       git@github.com:texmacs/texmacs.git $T_TEXMACS_DIR
     </input>
@@ -325,146 +320,7 @@
       cd $T_TEXMACS_DIR/build && cmake -DQT_QMAKE_EXECUTABLE=/usr/local/Cellar/qt@4/4.8.7_6/bin/qmake
       -DCMAKE_INSTALL_PREFIX=./TeXmacs.app/Contents/Resources ..
     <|folded-io>
-      CMake Warning (dev) at /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/FindPackageHandleStandardArgs.cmake:273
-      (message):
-
-      \ \ The package name passed to `find_package_handle_standard_args`
-      (SQLITE3)
-
-      \ \ does not match the name of the calling package (SQLite3). \ This
-      can lead to
-
-      \ \ problems in calling code that expects `find_package` result
-      variables
-
-      \ \ (e.g., `_FOUND`) to follow a certain pattern.
-
-      Call Stack (most recent call first):
-
-      \ \ cmake/FindSQLite3.cmake:26 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
-
-      \ \ CMakeLists.txt:75 (find_package)
-
-      This warning is for project developers. \ Use -Wno-dev to suppress it.
-
       \;
-
-      -- Check if we are on a 64-bits computer
-
-      -- \<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>/usr/local/lib/libguile.dylib
-
-      -- \<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>/usr/local/lib/libgmp.dylib
-
-      -- \<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libm.tbd
-
-      -- \<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>\<gtr\>/usr/local/lib/libltdl.dylib
-
-      -- Using GUILE_C: 1.8.8
-
-      -- Checking whether ... arguments behave correctly
-
-      -- Performing Test _guile_dots_test
-
-      -- Performing Test _guile_dots_test - Failed
-
-      -- Enabling experimental \ Qt port
-
-      -- Enabling experimental Cocoa port
-
-      CMake Warning (dev) at /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/FindThreads.cmake:57
-      (include):
-
-      \ \ File /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/FindThreads.cmake
-
-      \ \ includes /Users/rendong/texmacs/texmacs/cmake/CheckCSourceCompiles.cmake
-
-      \ \ (found via CMAKE_MODULE_PATH) which shadows
-
-      \ \ /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/CheckCSourceCompiles.cmake.
-
-      \ \ This may cause errors later on .
-
-      \;
-
-      \ \ Policy CMP0017 is not set: Prefer files from the CMake module
-      directory
-
-      \ \ when including from there. \ Run "cmake --help-policy CMP0017" for
-      policy
-
-      \ \ details. \ Use the cmake_policy command to set the policy and
-      suppress this
-
-      \ \ warning.
-
-      Call Stack (most recent call first):
-
-      \ \ tests/gtest/googletest/cmake/internal_utils.cmake:65 (find_package)
-
-      \ \ tests/gtest/googletest/CMakeLists.txt:93
-      (config_compiler_and_linker)
-
-      This warning is for project developers. \ Use -Wno-dev to suppress it.
-
-      \;
-
-      -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
-
-      -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
-
-      CMake Warning (dev) at /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/FindThreads.cmake:57
-      (include):
-
-      \ \ File /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/FindThreads.cmake
-
-      \ \ includes /Users/rendong/texmacs/texmacs/cmake/CheckCSourceCompiles.cmake
-
-      \ \ (found via CMAKE_MODULE_PATH) which shadows
-
-      \ \ /usr/local/Cellar/cmake/3.18.1/share/cmake/Modules/CheckCSourceCompiles.cmake.
-
-      \ \ This may cause errors later on .
-
-      \;
-
-      \ \ Policy CMP0017 is not set: Prefer files from the CMake module
-      directory
-
-      \ \ when including from there. \ Run "cmake --help-policy CMP0017" for
-      policy
-
-      \ \ details. \ Use the cmake_policy command to set the policy and
-      suppress this
-
-      \ \ warning.
-
-      Call Stack (most recent call first):
-
-      \ \ tests/gtest/googletest/cmake/internal_utils.cmake:65 (find_package)
-
-      \ \ tests/gtest/googlemock/CMakeLists.txt:70
-      (config_compiler_and_linker)
-
-      This warning is for project developers. \ Use -Wno-dev to suppress it.
-
-      \;
-
-      -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
-
-      -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
-
-      -- TeXmacs_Libraries/usr/local/lib/libguile.dylib/usr/local/lib/libgmp.dylib/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libm.tbd/usr/local/lib/libltdl.dylib/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libz.tbd/usr/local/lib/libjpeg.dylib/usr/local/lib/libpng.dylib/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libz.tbd-lpthread/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/lib/libsqlite3.tbd/usr/local/lib/libfreetype.dylib/usr/local/lib/QtGui.framework/usr/local/lib/QtCore.framework-framework
-      ApplicationServices-framework CoreFoundation-framework
-      Security-framework Carbon-framework AppKit-framework Cocoa-framework
-      IOKit-framework CoreGraphics-framework CoreServices-framework
-      CoreText-framework Foundation-framework ImageIO
-
-      -- Configuring done
-
-      -- Generating done
-
-      -- Build files have been written to:
-      /Users/rendong/texmacs/texmacs/build
     </folded-io>
 
     <\input|Shell] >
@@ -499,12 +355,8 @@
       cd $T_TEXMACS_DIR/build && make -j8
     </input>
 
-    <\input|Shell] >
-      brew install ccache
-    </input>
-
     <\unfolded-io|Shell] >
-      ccache --version
+      ccache --version \|\| brew install ccache
     <|unfolded-io>
       ccache version 3.7.11
 
@@ -539,19 +391,29 @@
 
   <section*|Testing>
 
+  <paragraph|Running the C++ Unit Tests>
+
   <\session|shell|default>
     <\input|Shell] >
       cd $T_TEXMACS_DIR/build && ctest
     </input>
 
+    <\input|Shell] >
+      \;
+    </input>
+  </session>
+
+  <paragraph|Testing the binary>
+
+  <\session|shell|default>
     <\unfolded-io|Shell] >
       $T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs --version
     <|unfolded-io>
       \;
 
-      TeXmacs version 1.99.15
+      TeXmacs version 1.99.16
 
-      SVN version 1.99.15
+      SVN version 1.99.16
 
       (c) 1999-2020 by Joris van der Hoeven and others
 
@@ -609,6 +471,14 @@
     </unfolded-io>
 
     <\input|Shell] >
+      \;
+    </input>
+  </session>
+
+  <paragraph|Testing the App>
+
+  <\session|shell|default>
+    <\input|Shell] >
       open $T_TEXMACS_DIR/build # click the app to test it as a user
     </input>
 
@@ -616,8 +486,6 @@
       \;
     </input>
   </session>
-
-  \;
 
   \;
 
@@ -638,29 +506,32 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|1>>
-    <associate|auto-10|<tuple|1|2>>
-    <associate|auto-11|<tuple|2|2>>
-    <associate|auto-12|<tuple|2|2>>
-    <associate|auto-13|<tuple|1|2>>
-    <associate|auto-14|<tuple|2|?>>
-    <associate|auto-15|<tuple|2|?>>
-    <associate|auto-16|<tuple|2|?>>
-    <associate|auto-17|<tuple|2|?>>
-    <associate|auto-18|<tuple|1|?>>
-    <associate|auto-19|<tuple|2|?>>
-    <associate|auto-2|<tuple|?|1>>
-    <associate|auto-20|<tuple|2|?>>
-    <associate|auto-21|<tuple|2|?>>
-    <associate|auto-22|<tuple|2|?>>
-    <associate|auto-23|<tuple|3|?>>
-    <associate|auto-3|<tuple|?|1>>
-    <associate|auto-4|<tuple|?|1>>
-    <associate|auto-5|<tuple|?|1>>
-    <associate|auto-6|<tuple|1|1>>
-    <associate|auto-7|<tuple|2|1>>
-    <associate|auto-8|<tuple|3|1>>
-    <associate|auto-9|<tuple|3|2>>
+    <associate|auto-1|<tuple|?|3>>
+    <associate|auto-10|<tuple|4|4>>
+    <associate|auto-11|<tuple|1|4>>
+    <associate|auto-12|<tuple|2|4>>
+    <associate|auto-13|<tuple|2|4>>
+    <associate|auto-14|<tuple|1|5>>
+    <associate|auto-15|<tuple|2|6>>
+    <associate|auto-16|<tuple|2|6>>
+    <associate|auto-17|<tuple|2|6>>
+    <associate|auto-18|<tuple|2|6>>
+    <associate|auto-19|<tuple|1|6>>
+    <associate|auto-2|<tuple|?|3>>
+    <associate|auto-20|<tuple|2|6>>
+    <associate|auto-21|<tuple|2|7>>
+    <associate|auto-22|<tuple|2|8>>
+    <associate|auto-23|<tuple|1|?>>
+    <associate|auto-24|<tuple|2|?>>
+    <associate|auto-25|<tuple|3|?>>
+    <associate|auto-26|<tuple|3|?>>
+    <associate|auto-3|<tuple|?|3>>
+    <associate|auto-4|<tuple|?|3>>
+    <associate|auto-5|<tuple|?|3>>
+    <associate|auto-6|<tuple|1|3>>
+    <associate|auto-7|<tuple|2|3>>
+    <associate|auto-8|<tuple|3|3>>
+    <associate|auto-9|<tuple|4|4>>
   </collection>
 </references>
 
@@ -668,91 +539,100 @@
   <\collection>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Scheme
-      extensions>>|<pageref|auto-5>>
+      extensions>>|<pageref|auto-4>>
 
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Session>|<with|font-family|<quote|ss>|Shell>>|<pageref|auto-6>>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Session>|<with|font-family|<quote|ss>|Shell>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Focus>|<with|font-family|<quote|ss>|Output
-      options>|<with|font-family|<quote|ss>|Show timings>>|<pageref|auto-22>>
+      options>|<with|font-family|<quote|ss>|Show timings>>|<pageref|auto-20>>
     </associate>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Devnotes
-      on macOS> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Build
+      T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>
+      using CMake and Homebrew > <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
-      Build using CMake <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      Install build tools and necessary dependencies
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
 
-      <with|par-left|<quote|1tab>|Install build tools and necessary
-      dependencies <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-3>>
-
-      <with|par-left|<quote|2tab>|Install Homebrew and build essentials
+      <with|par-left|<quote|1tab>|Install Homebrew and build essentials
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4>>
+      <no-break><pageref|auto-3>>
 
       <with|par-left|<quote|4tab>|Check Homebrew installation
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-7><vspace|0.15fn>>
+      <no-break><pageref|auto-6><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Check Xcode Command Line Tools installation
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-8><vspace|0.15fn>>
+      <no-break><pageref|auto-7><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Install CMake and check
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-9><vspace|0.15fn>>
+      <no-break><pageref|auto-8><vspace|0.15fn>>
 
-      <with|par-left|<quote|2tab>|Install GNU Guile 1.8
+      <with|par-left|<quote|1tab>|Install GNU Guile 1.8
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-10>>
+      <no-break><pageref|auto-9>>
 
       <with|par-left|<quote|4tab>|Clone <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|texmacs/homebrew>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-11><vspace|0.15fn>>
+      <no-break><pageref|auto-10><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Install guile 1.8 using
       <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|brew>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-12><vspace|0.15fn>>
+      <no-break><pageref|auto-11><vspace|0.15fn>>
 
-      <with|par-left|<quote|2tab>|Install Qt
+      <with|par-left|<quote|1tab>|Install Qt
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-13>>
+      <no-break><pageref|auto-12>>
 
       <with|par-left|<quote|4tab>|Install Qt 4
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-14><vspace|0.15fn>>
+      <no-break><pageref|auto-13><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Switch between Qt 4 and Qt 5
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-15><vspace|0.15fn>>
+      <no-break><pageref|auto-14><vspace|0.15fn>>
 
-      <with|par-left|<quote|2tab>|Install Ghostscript
+      <with|par-left|<quote|1tab>|Install Ghostscript
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-15>>
+
+      <with|par-left|<quote|1tab>|Missing dependencies
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-16>>
 
-      <with|par-left|<quote|2tab>|Missing dependencies
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-17>>
-
-      <with|par-left|<quote|1tab>|Build <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-18>>
+      Build <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-17>
 
       <with|par-left|<quote|4tab>|Clone <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|texmacs/texmacs>
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-19><vspace|0.15fn>>
-
-      <with|par-left|<quote|4tab>|Test it
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-20><vspace|0.15fn>>
+      and build it <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-18><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Use ccache for faster build
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-21><vspace|0.15fn>>
+      <no-break><pageref|auto-19><vspace|0.15fn>>
+
+      Testing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-21>
+
+      <with|par-left|<quote|4tab>|Running the C++ Unit Tests
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-22><vspace|0.15fn>>
+
+      <with|par-left|<quote|4tab>|Testing the binary
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-23><vspace|0.15fn>>
+
+      <with|par-left|<quote|4tab>|Testing the App
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-24><vspace|0.15fn>>
 
       \ <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-23>
+      <no-break><pageref|auto-25>
     </associate>
   </collection>
 </auxiliary>
