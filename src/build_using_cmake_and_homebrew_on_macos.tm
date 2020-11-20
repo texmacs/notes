@@ -300,7 +300,7 @@
 
   <subsection*|Missing dependencies>
 
-  Please tell me by creating PR for any missing dependencies.
+  Please create PRs for any missing dependencies to update this note.
 
   <section*|Build>
 
