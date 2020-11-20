@@ -5,19 +5,17 @@
 <\body>
   <notes-header>
 
-  <chapter*|Devnotes on macOS>
+  <chapter*|Build <TeXmacs> using CMake and Homebrew >
 
   <notes-abstract|This article serves as a guide for <TeXmacs> contributors
-  and developers using macOS. We talk about how to build, test, package GNU
-  <TeXmacs> on macOS.>
-
-  <section*|Build using CMake>
+  and developers on macOS. We talk about how to build and test GNU <TeXmacs>
+  on macOS using CMake and Homebrew.>
 
   Here is a detailed guide to build GNU <TeXmacs> using CMake and Homebrew.
 
-  <subsection*|Install build tools and necessary dependencies>
+  <section*|Install build tools and necessary dependencies>
 
-  <subsubsection*|Install Homebrew and build essentials>
+  <subsection*|Install Homebrew and build essentials>
 
   Homebrew is a package manger for macOS. Typically, we install Homebrew
   first, and then use the <shell|brew> command line to install build tools
@@ -39,17 +37,11 @@
     <\unfolded-io|Shell] >
       brew --version
     <|unfolded-io>
-      Homebrew 2.5.6-82-g6d8978e
+      Homebrew 2.5.10-18-ge945b1c
 
       Homebrew/homebrew-core (git revision b86ad9; last commit 2020-08-01)
 
-      Homebrew/homebrew-cask (git revision 1ce1c7; last commit 2020-10-20)
-    </unfolded-io>
-
-    <\unfolded-io|Shell] >
-      alias install="brew install -q"
-    <|unfolded-io>
-      alias install="brew install -q"
+      Homebrew/homebrew-cask (git revision c4d66; last commit 2020-11-14)
     </unfolded-io>
 
     <\input|Shell] >
@@ -103,16 +95,14 @@
     </input>
   </session>
 
-  <subsubsection*|Install GNU Guile 1.8>
+  <subsection*|Install GNU Guile 1.8>
 
   <paragraph|Clone <shell|texmacs/homebrew>>
 
   <\session|shell|default>
-    <\unfolded-io|Shell] >
+    <\input|Shell] >
       GROUP_DIR=$HOME/texmacs
-    <|unfolded-io>
-      <timing|52 msec>
-    </unfolded-io>
+    </input>
 
     <\input|Shell] >
       T_HOMEBREW_DIR=$GROUP_DIR/homebrew
@@ -154,7 +144,7 @@
     </input>
   </session>
 
-  <subsubsection*|Install Qt>
+  <subsection*|Install Qt>
 
   <paragraph|Install Qt 4>
 
@@ -287,7 +277,7 @@
     </input>
   </session>
 
-  <subsubsection*|Install Ghostscript>
+  <subsection*|Install Ghostscript>
 
   <\session|shell|default>
     <\input>
@@ -309,20 +299,18 @@
     </input>
   </session>
 
-  <subsubsection*|Missing dependencies>
+  <subsection*|Missing dependencies>
 
   Please tell me by creating PR for any missing dependencies.
 
-  <subsection*|Build>
+  <section*|Build>
 
-  <paragraph|Clone <shell|texmacs/texmacs>>and build it
+  <paragraph|Clone <shell|texmacs/texmacs> and build it>
 
   <\session|shell|default>
-    <\unfolded-io|Shell] >
+    <\input|Shell] >
       T_TEXMACS_DIR=$GROUP_DIR/texmacs
-    <|unfolded-io>
-      <timing|40 msec>
-    </unfolded-io>
+    </input>
 
     <\input|Shell] >
       [[ ! -d $T_TEXMACS_DIR ]] && git clone
@@ -484,7 +472,72 @@
     </input>
   </session>
 
-  <paragraph|Test it>
+  <paragraph|Use ccache for faster build>
+
+  Toggle the menu entry <menu|Focus|Output options|Show timings> as checked.
+
+  <\session|shell|default>
+    <\unfolded-io|Shell] >
+      sleep 2
+    <|unfolded-io>
+      <timing|2.015 sec>
+    </unfolded-io>
+
+    <\input|Shell] >
+      \;
+    </input>
+  </session>
+
+  Execute the sleep command, and you will find the timings are listed on the
+  right side.
+
+  Compile <TeXmacs> without or with ccache, the elapse time should be reduced
+  with ccache.
+
+  <\session|shell|default>
+    <\input|Shell] >
+      cd $T_TEXMACS_DIR/build && make -j8
+    </input>
+
+    <\input|Shell] >
+      brew install ccache
+    </input>
+
+    <\unfolded-io|Shell] >
+      ccache --version
+    <|unfolded-io>
+      ccache version 3.7.11
+
+      \;
+
+      Copyright (C) 2002-2007 Andrew Tridgell
+
+      Copyright (C) 2009-2020 Joel Rosdahl
+
+      \;
+
+      This program is free software; you can redistribute it and/or modify it
+      under
+
+      the terms of the GNU General Public License as published by the Free
+      Software
+
+      Foundation; either version 3 of the License, or (at your option) any
+      later
+
+      version.
+
+      <timing|40 msec>
+    </unfolded-io>
+
+    <\input|Shell] >
+      cd $T_TEXMACS_DIR/build && make -j8
+    </input>
+  </session>
+
+  As long as ccache is available, CMake will use it to boost the compilation.
+
+  <section*|Testing>
 
   <\session|shell|default>
     <\input|Shell] >
@@ -555,81 +608,16 @@
       \;
     </unfolded-io>
 
-    <\unfolded-io|Shell] >
+    <\input|Shell] >
       open $T_TEXMACS_DIR/build # click the app to test it as a user
-    <|unfolded-io>
-      <timing|137 msec>
-    </unfolded-io>
+    </input>
 
     <\input|Shell] >
       \;
     </input>
   </session>
 
-  <paragraph|Use ccache for faster build>
-
-  Toggle the menu entry <menu|Focus|Output options|Show timings> as checked.
-
-  <\session|shell|default>
-    <\unfolded-io|Shell] >
-      sleep 2
-    <|unfolded-io>
-      <timing|2.015 sec>
-    </unfolded-io>
-
-    <\input|Shell] >
-      \;
-    </input>
-  </session>
-
-  Execute the sleep command, and you will find the timings are listed on the
-  right side.
-
-  Compile <TeXmacs> without or with ccache, the elapse time should be reduced
-  with ccache.
-
-  <\session|shell|default>
-    <\input|Shell] >
-      cd $T_TEXMACS_DIR/build && make -j8
-    </input>
-
-    <\input|Shell] >
-      brew install ccache
-    </input>
-
-    <\unfolded-io|Shell] >
-      ccache --version
-    <|unfolded-io>
-      ccache version 3.7.11
-
-      \;
-
-      Copyright (C) 2002-2007 Andrew Tridgell
-
-      Copyright (C) 2009-2020 Joel Rosdahl
-
-      \;
-
-      This program is free software; you can redistribute it and/or modify it
-      under
-
-      the terms of the GNU General Public License as published by the Free
-      Software
-
-      Foundation; either version 3 of the License, or (at your option) any
-      later
-
-      version.
-
-      <timing|40 msec>
-    </unfolded-io>
-
-    <\input|Shell] >
-      cd $T_TEXMACS_DIR/build && make -j8
-    </input>
-  </session>
-
-  As long as ccache is available, CMake will use it to boost the compilation.
+  \;
 
   \;
 
@@ -651,27 +639,27 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|1>>
-    <associate|auto-10|<tuple|3|2>>
-    <associate|auto-11|<tuple|1|2>>
+    <associate|auto-10|<tuple|1|2>>
+    <associate|auto-11|<tuple|2|2>>
     <associate|auto-12|<tuple|2|2>>
-    <associate|auto-13|<tuple|2|2>>
-    <associate|auto-14|<tuple|1|?>>
+    <associate|auto-13|<tuple|1|2>>
+    <associate|auto-14|<tuple|2|?>>
     <associate|auto-15|<tuple|2|?>>
     <associate|auto-16|<tuple|2|?>>
     <associate|auto-17|<tuple|2|?>>
-    <associate|auto-18|<tuple|2|?>>
-    <associate|auto-19|<tuple|1|?>>
+    <associate|auto-18|<tuple|1|?>>
+    <associate|auto-19|<tuple|2|?>>
     <associate|auto-2|<tuple|?|1>>
     <associate|auto-20|<tuple|2|?>>
-    <associate|auto-21|<tuple|3|?>>
-    <associate|auto-22|<tuple|3|?>>
+    <associate|auto-21|<tuple|2|?>>
+    <associate|auto-22|<tuple|2|?>>
     <associate|auto-23|<tuple|3|?>>
     <associate|auto-3|<tuple|?|1>>
     <associate|auto-4|<tuple|?|1>>
     <associate|auto-5|<tuple|?|1>>
-    <associate|auto-6|<tuple|?|1>>
-    <associate|auto-7|<tuple|1|1>>
-    <associate|auto-8|<tuple|2|1>>
+    <associate|auto-6|<tuple|1|1>>
+    <associate|auto-7|<tuple|2|1>>
+    <associate|auto-8|<tuple|3|1>>
     <associate|auto-9|<tuple|3|2>>
   </collection>
 </references>
@@ -683,6 +671,9 @@
       extensions>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Session>|<with|font-family|<quote|ss>|Shell>>|<pageref|auto-6>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Focus>|<with|font-family|<quote|ss>|Output
+      options>|<with|font-family|<quote|ss>|Show timings>>|<pageref|auto-22>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Devnotes
@@ -752,8 +743,16 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-19><vspace|0.15fn>>
 
+      <with|par-left|<quote|4tab>|Test it
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-20><vspace|0.15fn>>
+
+      <with|par-left|<quote|4tab>|Use ccache for faster build
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-21><vspace|0.15fn>>
+
       \ <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-20>
+      <no-break><pageref|auto-23>
     </associate>
   </collection>
 </auxiliary>
