@@ -1,4 +1,4 @@
-<TeXmacs|1.99.15>
+<TeXmacs|1.99.16>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -28,7 +28,7 @@
 
   <hlink|Wishlist and additional functionalities|./wishlist.tm>
 
-  <hlink|Wishlist for blog tutorials|./article-wishes.tm>
+  <hlink|Wishlist for blog tutorials|./articles-wishes.tm>
 
   <hlink|Awesome <TeXmacs>|./awesome-texmacs.tm>
 
