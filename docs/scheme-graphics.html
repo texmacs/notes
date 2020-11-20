@@ -42,8 +42,8 @@
     <p>
       The most comfortable way of generating a drawing with <class style="font-variant: small-caps">Scheme</class>
       is within a session, so that is the way we'll take in this note. We'll
-      see in other notes how to blend seamlessly graphics in a document and
-      generate it through external source files.
+      see in other notes how to <a href="./scheme-graphics-embedding.html">blend seamlessly graphics in a
+      document</a> and generate it through external source files.
     </p>
     <p>
       The first step in working with a session is opening it, with <class
@@ -459,8 +459,9 @@ Scheme] </pre></font></td>
 (graphics object_1 object_2 <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> object_n)</pre>
     </div>
     <p>
-      properly enclosed in other constructs, with the appropriate sequence of
-      quasiquoting and unquotings:
+      properly enclosed in other constructs (we change the linewidth as well
+      as the color and we set the font shape for the whole graphics to
+      italics), with the appropriate sequence of quasiquoting and unquotings:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
@@ -472,18 +473,19 @@ Scheme] </pre></font></td>
 (stree-&gt;tree
  &lsquo;(with &quot;gr-geometry&quot; 
     (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
+    &quot;font-shape&quot; &quot;italic&quot;
     (graphics
       ;; the arc and the line together make the semicircle
-      (with &quot;color&quot; &quot;black&quot; (arc ,pA ,pC ,pB))
-      (with &quot;color&quot; &quot;black&quot; (line ,pA ,pB))
+      (with &quot;color&quot; &quot;black&quot;  (arc ,pA ,pC ,pB))
+      (with &quot;color&quot; &quot;black&quot;  (line ,pA ,pB))
       ;; a closed polyline for the triangle
-      (with &quot;color&quot; &quot;red&quot;   (cline ,pA ,pB ,pC))
+      (with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot; (cline ,pA ,pB ,pC))
       ;; add letters using text-at
-      (with &quot;color&quot; &quot;black&quot; (text-at &quot;A&quot; ,tA))  
-      (with &quot;color&quot; &quot;black&quot; (text-at &quot;B&quot; ,tB))  
-      (with &quot;color&quot; &quot;black&quot; (text-at &quot;C&quot; ,tC))
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))  
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))  
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;C&quot; ,tC))
       ;; finally decorate with the TeXmacs symbol
-      (with &quot;color&quot; &quot;blue&quot;  
+      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot; 
         (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) 
 ;; and close all of the parentheses!!!</pre></td>
           </tr></tbody>
@@ -495,7 +497,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <img src="scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img>
+              <i><img src="scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
@@ -513,10 +515,10 @@ Scheme] </pre></font></td>
       </div>
     </div>
     <p>
-      In follow-up tutorials we will see how to embed seamlessly <class style="font-variant: small-caps">Scheme</class>
-      graphics in a document using the <class class="tmweb-menu" style="font-family: sans-serif">Fold</class>&rarr;<class
-      class="tmweb-menu" style="font-family: sans-serif">Executable</class><a id="auto-7"></a> environment and how to
-      generate them from external files.
+      In follow-up tutorials we will see how to <a href="./scheme-graphics-embedding.html">embed seamlessly
+      <class style="font-variant: small-caps">Scheme</class> graphics in a document</a> using the <class
+      class="tmweb-menu" style="font-family: sans-serif">Fold</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Executable</class><a
+      id="auto-7"></a> environment and how to generate them from external files.
     </p>
     <p>
       As a conclusion of this note, here is a collection of TeXmacs graphical
