@@ -58,6 +58,9 @@
 
   <section*|Developers' notes>
 
+  <hlink|Build <TeXmacs> using CMake and Homebrew on
+  macOS|build-using-cmake-and-homebrew-on-macos.tm>
+
   <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
 
   <hlink|Implementing previews for link targets|./previews.tm>
