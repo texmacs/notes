@@ -11,7 +11,8 @@
     </input>
 
     <\input|Scheme] >
-      (define dest-dir (url-expand (url-append (current-buffer) \ "../src")))
+      (define dest-dir (url-expand (url-append (current-buffer)
+      \ "../docs")))
     </input>
 
     <\input|Scheme] >
@@ -24,11 +25,13 @@
   </session>
 
   <\session|scheme|default>
-    <\input>
-      Scheme]\ 
-    <|input>
+    <\input|Scheme] >
       (tmweb-update-dir (url-\<gtr\>string src-dir) (url-\<gtr\>string
       dest-dir))
+    </input>
+
+    <\input|Scheme] >
+      \;
     </input>
   </session>
 
