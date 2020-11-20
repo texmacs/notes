@@ -59,7 +59,7 @@
   <section*|Developers' notes>
 
   <hlink|Build <TeXmacs> using CMake and Homebrew on
-  macOS|build_using_cmake_and_homebrew_on_macos.tm>
+  macOS|build-using-cmake-and-homebrew-on-macos.tm>
 
   <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
 
