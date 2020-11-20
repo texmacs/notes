@@ -300,7 +300,7 @@
 
   <subsection*|Missing dependencies>
 
-  Please create PRs for any missing dependencies to update this note.
+  Please create PRs to update this note for any missing dependencies.
 
   <section*|Build>
 
@@ -544,7 +544,7 @@
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Session>|<with|font-family|<quote|ss>|Shell>>|<pageref|auto-5>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Focus>|<with|font-family|<quote|ss>|Output
-      options>|<with|font-family|<quote|ss>|Show timings>>|<pageref|auto-20>>
+      options>|<with|font-family|<quote|ss>|Show timings>>|<pageref|auto-21>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Build
@@ -560,79 +560,83 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>>
 
-      <with|par-left|<quote|4tab>|Check Homebrew installation
+      <with|par-left|<quote|4tab>|Global Variables
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-6><vspace|0.15fn>>
 
-      <with|par-left|<quote|4tab>|Check Xcode Command Line Tools installation
+      <with|par-left|<quote|4tab>|Check Homebrew installation
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-7><vspace|0.15fn>>
 
-      <with|par-left|<quote|4tab>|Install CMake and check
+      <with|par-left|<quote|4tab>|Check Xcode Command Line Tools installation
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-8><vspace|0.15fn>>
 
+      <with|par-left|<quote|4tab>|Install CMake and check
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-9><vspace|0.15fn>>
+
       <with|par-left|<quote|1tab>|Install GNU Guile 1.8
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-9>>
+      <no-break><pageref|auto-10>>
 
       <with|par-left|<quote|4tab>|Clone <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|texmacs/homebrew>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-10><vspace|0.15fn>>
+      <no-break><pageref|auto-11><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Install guile 1.8 using
       <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|brew>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-11><vspace|0.15fn>>
+      <no-break><pageref|auto-12><vspace|0.15fn>>
 
       <with|par-left|<quote|1tab>|Install Qt
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-12>>
+      <no-break><pageref|auto-13>>
 
       <with|par-left|<quote|4tab>|Install Qt 4
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-13><vspace|0.15fn>>
+      <no-break><pageref|auto-14><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Switch between Qt 4 and Qt 5
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-14><vspace|0.15fn>>
+      <no-break><pageref|auto-15><vspace|0.15fn>>
 
       <with|par-left|<quote|1tab>|Install Ghostscript
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-15>>
+      <no-break><pageref|auto-16>>
 
       <with|par-left|<quote|1tab>|Missing dependencies
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-16>>
+      <no-break><pageref|auto-17>>
 
       Build <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-17>
+      <no-break><pageref|auto-18>
 
       <with|par-left|<quote|4tab>|Clone <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|texmacs/texmacs>
       and build it <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-18><vspace|0.15fn>>
+      <no-break><pageref|auto-19><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Use ccache for faster build
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-19><vspace|0.15fn>>
+      <no-break><pageref|auto-20><vspace|0.15fn>>
 
       Testing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-21>
+      <no-break><pageref|auto-22>
 
       <with|par-left|<quote|4tab>|Running the C++ Unit Tests
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-22><vspace|0.15fn>>
+      <no-break><pageref|auto-23><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Testing the binary
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-23><vspace|0.15fn>>
+      <no-break><pageref|auto-24><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Testing the App
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-24><vspace|0.15fn>>
+      <no-break><pageref|auto-25><vspace|0.15fn>>
 
       \ <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-25>
+      <no-break><pageref|auto-26>
     </associate>
   </collection>
 </auxiliary>
