@@ -13,15 +13,19 @@
   First, set the paths.
 
   <\session|scheme|default>
-    <\input|Scheme] >
-      (define (src-dir) (url-\<gtr\>string (url-expand (url-append
-      (current-buffer) \ "../src"))))
-    </input>
+    <\unfolded-io|Scheme] >
+      (tm-define (src-dir) (:secure #t) (url-\<gtr\>string (url-expand
+      (url-append (current-buffer) \ "../src"))))
+    <|unfolded-io>
+      ((() #t))
+    </unfolded-io>
 
-    <\input|Scheme] >
-      (define (dest-dir) (url-\<gtr\>string (url-expand (url-append
-      (current-buffer) \ "../docs"))))
-    </input>
+    <\unfolded-io|Scheme] >
+      (tm-define (dest-dir) (:secure #t) (url-\<gtr\>string (url-expand
+      (url-append (current-buffer) \ "../docs-build"))))
+    <|unfolded-io>
+      ((() #t))
+    </unfolded-io>
 
     <\input|Scheme] >
       \;
@@ -59,11 +63,12 @@
   Run this command to regenerate the full site:
 
   <\session|scheme|default>
-    <\input>
-      Scheme]\ 
-    <|input>
-      (tmweb-convert-dir (url-\<gtr\>string src-dir) (url-\<gtr\>string
-      dest-dir))
+    <\input|Scheme] >
+      (tmweb-convert-dir (src-dir) (dest-dir))
+    </input>
+
+    <\input|Scheme] >
+      \;
     </input>
   </session>
 
