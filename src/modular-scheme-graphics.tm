@@ -46,8 +46,7 @@
     <no-break><pageref|auto-10>
   </table-of-contents>
 
-  <hlink|https://stackoverflow.com/questions/15801316/scheme-how-can-i-apply-the-function-to-every-sublist-in-a-list|https://stackoverflow.com/questions/15801316/scheme-how-can-i-apply-the-function-to-every-sublist-in-a-list><chapter*|Modular
-  graphics with <name|Scheme>>
+  <chapter*|Modular graphics with <name|Scheme>>
 
   <TeXmacs> graphics provide a set of elementary objects (points, polylines,
   splines and so on). It would be nice to have at hand functions to deal with
@@ -876,15 +875,15 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|3>>
-    <associate|auto-10|<tuple|3|13>>
+    <associate|auto-10|<tuple|3|14>>
     <associate|auto-2|<tuple|1|3>>
     <associate|auto-3|<tuple|1|3>>
     <associate|auto-4|<tuple|2|5>>
     <associate|auto-5|<tuple|3|7>>
-    <associate|auto-6|<tuple|4|7>>
-    <associate|auto-7|<tuple|2|8>>
-    <associate|auto-8|<tuple|1|8>>
-    <associate|auto-9|<tuple|2|10>>
+    <associate|auto-6|<tuple|4|8>>
+    <associate|auto-7|<tuple|2|9>>
+    <associate|auto-8|<tuple|1|9>>
+    <associate|auto-9|<tuple|2|11>>
   </collection>
 </references>
 
