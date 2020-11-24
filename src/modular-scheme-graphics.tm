@@ -827,19 +827,24 @@
 
       \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle
+      \ \ \ (apply-property
+
+      \ \ \ triangle
 
       \ \ "dash-style" "101010")
 
-      \ \ delta))
+      \ \ \ "line-width" (string-join\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(,(number-\<gtr\>string (- 1 delta))
+      "pt") ""))
+
+      \ \ `(,(* 1.0 delta) ,(* -1.5 delta))))
     </input>
 
     <\input|Scheme] >
       (define delta-lst
 
-      \ \ (map (lambda (x) `(,(* 1.0 x) ,(* -1.5 x)))
-
-      \ \ \ \ \ \ \ '(0.2 0.4 0.6 0.8 1.0)))
+      \ \ \ \ \ \ \ '(0.2 0.4 0.6 0.8)))
     </input>
 
     <\input|Scheme] >
@@ -855,12 +860,8 @@
 
       ,shifted-triangles))
     <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.8|-0.3>|<point|-0.8|1.43205080756888>|<point|2.2|-0.3>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.8|-0.3>|<point|2.2|-0.3>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.8|-0.3>|<point|2.2|-0.3>|<point|-0.8|1.43205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-2.1|-0.8>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.3|-0.8>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-1.0|1.63205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.6|-0.6>|<point|-0.6|1.13205080756888>|<point|2.4|-0.6>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.6|-0.6>|<point|2.4|-0.6>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.6|-0.6>|<point|2.4|-0.6>|<point|-0.6|1.13205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.9|-1.1>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.5|-1.1>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.8|1.33205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.4|-0.9>|<point|-0.4|0.83205080756888>|<point|2.6|-0.9>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.4|-0.9>|<point|2.6|-0.9>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.4|-0.9>|<point|2.6|-0.9>|<point|-0.4|0.83205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.7|-1.4>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.7|-1.4>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.6|1.03205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.2|-1.2>|<point|-0.2|0.53205080756888>|<point|2.8|-1.2>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.2|-1.2>|<point|2.8|-1.2>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.2|-1.2>|<point|2.8|-1.2>|<point|-0.2|0.53205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.5|-1.7>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.9|-1.7>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.4|0.73205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.3|-2.0>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|3.1|-2.0>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.2|0.43205080756888>>>>>>>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.8pt|<cline|<point|-1.8|-0.3>|<point|2.2|-0.3>|<point|-0.8|1.43205080756888>>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.6pt|<cline|<point|-1.6|-0.6>|<point|2.4|-0.6>|<point|-0.6|1.13205080756888>>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.4pt|<cline|<point|-1.4|-0.9>|<point|2.6|-0.9>|<point|-0.4|0.83205080756888>>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.2pt|<cline|<point|-1.2|-1.2>|<point|2.8|-1.2>|<point|-0.2|0.53205080756888>>>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <with|color|red|<small|Examine <scm|with> lists (for input checking:
