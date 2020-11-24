@@ -840,7 +840,7 @@
     </textput>
 
     <\input|Scheme] >
-      (define (translate-triangle d)
+      (define (blend-in-triangle d)
 
       \ \ (translate-element\ 
 
@@ -873,9 +873,9 @@
     </input>
 
     <\input|Scheme] >
-      (define blend-in-triangles
+      (define blend-in-triangle-series
 
-      \ \ (map translate-triangle d-lst))
+      \ \ (map blend-in-triangle d-lst))
     </input>
 
     <\textput>
@@ -886,7 +886,7 @@
     <\unfolded-io|Scheme] >
       (scheme-graphics "400px" "300px" "center" `(
 
-      ,blend-in-triangles
+      ,blend-in-triangle-series
 
       ,triangle-in-half-circle
 
