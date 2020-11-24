@@ -822,8 +822,11 @@
   </session>
 
   We can play further. Let's blend the triangle inside the half-circle
-  stepwise (our functions are not sophisticated enough to target a subunit of
-  a complex object, so we take one of the units we defined).
+  stepwise. Our functions are not sophisticated enough to target a subunit of
+  a complex object: applying a line-width to the whole drawing of the
+  triangle in the half-circle would eliminate the different line-widths for
+  the triangle and arc; for this reason, we use as an example of blending in
+  the triangle alone, which is one of the units we defined.
 
   <\session|scheme|default>
     <\textput>
