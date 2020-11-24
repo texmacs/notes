@@ -830,7 +830,7 @@
 
   <\session|scheme|default>
     <\textput>
-      The <scm|translate-triangle> function shifts the triangle by
+      The <scm|blend-in-triangle> function shifts the triangle by
       <scm|d><marginal-note|normal|c|<small|<with|color|red|<scm|d> should be
       <scm|delta> and the <scm|delta> of the translation function should be
       something else>>> in the direction <scm|(1.0 -1.5)>, applies dashing
