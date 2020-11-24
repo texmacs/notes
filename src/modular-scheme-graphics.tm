@@ -219,7 +219,9 @@
   <paragraph|Definition of basic graphical objects>
 
   Let us define a function for generating points, and use that to define some
-  graphical objects:
+  graphical objects. We will then combine these objects in a complex unit and
+  show that <TeXmacs> draws it using our <scm|denestify-conditional>
+  function.
 
   <\session|scheme|default>
     <\input|Scheme] >
@@ -570,9 +572,11 @@
     <\unfolded-io|Scheme] >
       (scheme-graphics "400px" "300px" "center"\ 
 
-      `(,triangle-in-half-circle)))
+      `(,triangle-in-half-circle
+
+      \ \ ,caption)))
     <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>>>>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
 
     <\textput>
@@ -600,8 +604,11 @@
 
   <paragraph|Manipulate object properties>
 
-  We write a simple function which wraps each elementary object in a
-  <scm|with>, placing it inside with respect to any other <scm|with>
+  <\footnote>
+    note for me only (to be removed in version for web)
+    <hlink|https://stackoverflow.com/questions/15801316/scheme-how-can-i-apply-the-function-to-every-sublist-in-a-list|https://stackoverflow.com/questions/15801316/scheme-how-can-i-apply-the-function-to-every-sublist-in-a-list>
+  </footnote>We write a simple function which wraps each elementary object in
+  a <scm|with>, placing it inside with respect to any other <scm|with>
   construct the object might be already placed in. This function, applied a
   few times, generates deeply nested lists that may be difficult to read; a
   more refined function would check if the object is already inside a
@@ -814,6 +821,44 @@
     </unfolded-io>
 
     <\input|Scheme] >
+      (define (translate-triangle delta)
+
+      \ \ (translate-element\ 
+
+      \ \ (apply-property
+
+      \ \ \ triangle-in-half-circle
+
+      \ \ "dash-style" "101010")
+
+      \ \ delta))
+    </input>
+
+    <\input|Scheme] >
+      (define delta-lst
+
+      \ \ (map (lambda (x) `(,(* 1.0 x) ,(* -1.5 x)))
+
+      \ \ \ \ \ \ \ '(0.2 0.4 0.6 0.8 1.0)))
+    </input>
+
+    <\input|Scheme] >
+      (define shifted-triangles
+
+      \ \ (map translate-triangle delta-lst))
+    </input>
+
+    <\unfolded-io|Scheme] >
+      (scheme-graphics "400px" "300px" "center" `(
+
+      ,triangle-in-half-circle
+
+      ,shifted-triangles))
+    <|unfolded-io>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.8|-0.3>|<point|-0.8|1.43205080756888>|<point|2.2|-0.3>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.8|-0.3>|<point|2.2|-0.3>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.8|-0.3>|<point|2.2|-0.3>|<point|-0.8|1.43205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-2.1|-0.8>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.3|-0.8>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-1.0|1.63205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.6|-0.6>|<point|-0.6|1.13205080756888>|<point|2.4|-0.6>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.6|-0.6>|<point|2.4|-0.6>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.6|-0.6>|<point|2.4|-0.6>|<point|-0.6|1.13205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.9|-1.1>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.5|-1.1>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.8|1.33205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.4|-0.9>|<point|-0.4|0.83205080756888>|<point|2.6|-0.9>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.4|-0.9>|<point|2.6|-0.9>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.4|-0.9>|<point|2.6|-0.9>|<point|-0.4|0.83205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.7|-1.4>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.7|-1.4>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.6|1.03205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.2|-1.2>|<point|-0.2|0.53205080756888>|<point|2.8|-1.2>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.2|-1.2>|<point|2.8|-1.2>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.2|-1.2>|<point|2.8|-1.2>|<point|-0.2|0.53205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.5|-1.7>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|2.9|-1.7>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.4|0.73205080756888>>>>|<with|color|black|<with|dash-style|101010|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>>|<with|color|black|<with|dash-style|101010|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>>|<with|color|black|<with|dash-style|101010|<text-at|A|<point|-1.3|-2.0>>>>|<with|color|black|<with|dash-style|101010|<text-at|B|<point|3.1|-2.0>>>>|<with|color|black|<with|dash-style|101010|<text-at|C|<point|-0.2|0.43205080756888>>>>>>>
+    </unfolded-io>
+
+    <\input|Scheme] >
       \;
     </input>
   </session>
@@ -835,32 +880,6 @@
   setting up <name|Scheme> functions pays off: one constructs a powerful
   graphical language in which arbitrarily complex graphics are treated
   uniformly.
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
 </body>
 
 <\initial>
@@ -884,6 +903,8 @@
     <associate|auto-7|<tuple|2|9>>
     <associate|auto-8|<tuple|1|9>>
     <associate|auto-9|<tuple|2|11>>
+    <associate|footnote-1|<tuple|1|11>>
+    <associate|footnr-1|<tuple|1|11>>
   </collection>
 </references>
 
