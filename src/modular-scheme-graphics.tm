@@ -750,22 +750,28 @@
   building blocks combine together well.
 
   <\session|scheme|default>
-    <\input|Scheme] >
+    <\unfolded-io|Scheme] >
       (define translated-triangle-in-half-circle-short-dashes
 
-      \ \ (translate-element \ \ (apply-property
+      \ \ (translate-element
 
-      \ \ \ (apply-property
+      \ \ \ \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle \ \ "dash-style" "11100")
+      \ \ \ \ \ \ \ (apply-property \ triangle-in-half-circle\ 
 
-      \ \ "dash-style" "101010")
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "dash-style" "11100")
 
-      \ \ '(1.0 -1.5)))
-    </input>
+      \ \ \ \ \ \ \ \ "dash-style" "101010")
+
+      \ \ \ \ \ '(1.0 -1.5)))
+    <|unfolded-io>
+      \;
+    </unfolded-io>
 
     <\input|Scheme] >
-      (define translated-caption (translate-element caption '(1.0 -1.5)))
+      (define translated-caption\ 
+
+      \ \ (translate-element caption '(1.0 -1.5)))
     </input>
 
     <\textput>

@@ -1121,17 +1121,30 @@ Scheme] </pre></font></td>
       <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
         <table style="width: 100%">
           <tbody><tr>
-            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
+Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (define translated-triangle-in-half-circle-short-dashes
-  (translate-element   (apply-property
-   (apply-property
-   triangle-in-half-circle   &quot;dash-style&quot; &quot;11100&quot;)
-  &quot;dash-style&quot; &quot;101010&quot;)
-  '(1.0 -1.5)))</pre></td>
+  (translate-element
+     (apply-property
+       (apply-property  triangle-in-half-circle 
+                        &quot;dash-style&quot; &quot;11100&quot;)
+        &quot;dash-style&quot; &quot;101010&quot;)
+     '(1.0 -1.5)))</pre></td>
           </tr></tbody>
         </table>
       </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><div align="justify">
+          <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
+            <p>
+              
+            </p>
+          </div>
+        </div></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
@@ -1139,7 +1152,8 @@ Scheme] </pre></font></td>
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define translated-caption (translate-element caption '(1.0 -1.5)))</pre></td>
+(define translated-caption 
+  (translate-element caption '(1.0 -1.5)))</pre></td>
           </tr></tbody>
         </table>
       </div>
