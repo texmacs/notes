@@ -19,7 +19,7 @@
 
   In order to reach this goal we choose the format of a blog more than a
   wiki. Contributions are welcome in the form of pull requests (PR) to the
-  main <tt|git> repository at <tt|github>.<space|1em>There is a \Psmall and
+  main <tt|git> repository at <tt|github>. There is a \Psmall and
   opinionated\Q group of admin which will review the contributions, edit them
   and integrate them in the site.\ 
 
@@ -70,6 +70,7 @@
 
 <\initial>
   <\collection>
+    <associate|page-screen-margin|false>
     <associate|preamble|false>
   </collection>
 </initial>
