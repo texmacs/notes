@@ -1,4 +1,4 @@
-<TeXmacs|1.99.15>
+<TeXmacs|1.99.16>
 
 <style|notes>
 
@@ -9,44 +9,59 @@
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
     <pageref|auto-1><vspace|0.5fn>
 
+    <with|par-left|4tab|To do <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+    <no-break><pageref|auto-2><vspace|0.15fn>>
+
     1.<space|2spc>Composing complex objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-2>
+    <no-break><pageref|auto-4>
 
     <with|par-left|4tab|Flattening nested lists of graphical objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-3><vspace|0.15fn>>
+    <no-break><pageref|auto-5><vspace|0.15fn>>
 
     <with|par-left|4tab|Definition of basic graphical objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-4><vspace|0.15fn>>
+    <no-break><pageref|auto-6><vspace|0.15fn>>
 
     <with|par-left|4tab|Combination of individual graphical objects into
     complex objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-5><vspace|0.15fn>>
+    <no-break><pageref|auto-7><vspace|0.15fn>>
 
     <with|par-left|4tab|A function for complex graphics
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-6><vspace|0.15fn>>
+    <no-break><pageref|auto-8><vspace|0.15fn>>
 
     2.<space|2spc>Manipulation of complex objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-7>
+    <no-break><pageref|auto-9>
 
     <with|par-left|4tab|Translate complex objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-8><vspace|0.15fn>>
+    <no-break><pageref|auto-10><vspace|0.15fn>>
 
     <with|par-left|4tab|Manipulate object properties
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-9><vspace|0.15fn>>
+    <no-break><pageref|auto-11><vspace|0.15fn>>
 
     3.<space|2spc><with|font-shape|small-caps|Scheme> expressions that show
     what we mean <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-10>
+    <no-break><pageref|auto-12>
   </table-of-contents>
 
   <chapter*|Modular graphics with <name|Scheme>>
+
+  This post is a part of a series of <name|Scheme> graphics in <TeXmacs>.
+  Other posts in the same series are <hlink|Composing TeXmacs graphics with
+  Scheme|./scheme-graphics.tm> and <hlink|Embedding graphics composed with
+  Scheme into documents|./scheme-graphics-embedding.tm>; we also plan to
+  write a post on how to generate <name|Scheme> graphics with external files.
+
+  Like in the other posts of the series, we assume that the reader is
+  familiar with simple Scheme syntax. We link again to the <name|Wikipedia>
+  book <hlink|Scheme programming|https://en.wikibooks.org/wiki/Scheme_Programming>
+  and to <hlink|Yet Another Scheme Tutorial|http://www.shido.info/lisp/idx_scm_e.html>
+  by Takafumi Shido as two possible web resources for learning <name|Scheme>.
 
   <TeXmacs> graphics provide a set of elementary objects (points, polylines,
   splines and so on). It would be nice to have at hand functions to deal with
@@ -61,9 +76,15 @@
   we deal with them\Vand for example we use them as building blocks of even
   more complex objects.
 
-  In this post, we show how to compose and use in a drawing complex graphical
-  objects, how to shift them and how to set properties of already-existing
-  complex objects.
+  In <TeXmacs> there is a partially-implemented interface for dealing with
+  complex graphics objects \ (see <menu|Help|Scheme extensions|Scheme
+  interface for the graphical mode> and the <verbatim|.scm> files in the
+  <verbatim|progs/graphics/> directory in the <TeXmacs> distribution). In
+  particular, graphics can be grouped using the primitive <markup|gr-group>.
+
+  In this post, we will develop a small interface of our own; we will show
+  how to compose and use in a drawing complex graphical objects, how to shift
+  them and how to set properties of already-existing complex objects.
 
   <section|Composing complex objects>
 
@@ -135,7 +156,8 @@
       sure that <scm|denestify-conditional> is not redundant; if <scm|(car
       lst)> is an atom perhaps I do not need to check that it stops
       flattening, but I need just to <scm|cons> it. Need to check corner
-      cases (if it is the first element of the top list for example)>>>
+      cases (if it is the first element of the top list for example); I think
+      in this case I need the check!>>>
 
       <scm|denestify-conditional> is not tail-recursive; we write it in this
       way as it is simpler than the tail-recursive version and it will work
@@ -815,10 +837,14 @@
 
       ,translated-triangle-in-half-circle-short-dashes
 
-      ,translated-captionw))
+      ,translated-caption))
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>>>|<with|color|red|line-width|1pt|<with|dash-style|11100|<with|dash-style|101010|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|A|<point|-1.3|-2.0>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|B|<point|3.1|-2.0>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|C|<point|-0.2|0.43205080756888>>>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|0.45|-2.25>>>>>>
     </unfolded-io>
+
+    <\input|Scheme] >
+      \;
+    </input>
   </session>
 
   We can play further. Let's blend the triangle inside the half-circle
@@ -879,8 +905,8 @@
     </input>
 
     <\textput>
-      Here is the triangle blending in the half-circle <text-dots> or fading
-      away!
+      Here is the triangle blending in into the half-circle <text-dots> or
+      fading away!
     </textput>
 
     <\unfolded-io|Scheme] >
@@ -906,14 +932,15 @@
   There are more possibilities. One is to find intersections of lines which
   define objects, and assign them to new objects. Another is to define styles
   as shortcuts to set several properties of a graphical object with a single
-  operation. For examples, styles could be defined as lists of name-value
-  pairs (this might allow easier error-checking), which can be inserted into
-  <scm|with> constructs by a function which first flattens the pairs then
-  appends the resulting list into a <scm|'(with ... object)> list at the
-  position we indicated with the dots to apply all of the properties to
-  <scm|object>. Never mind that the <name|Scheme> syntax to achieve what we
-  want is slightly different from the description I gave, it is close enough
-  that I hope it is convincing.
+  operation; this is among the functions in the yet-to-be completed <TeXmacs>
+  <name|Scheme> graphics code. For examples, styles could be defined as lists
+  of name-value pairs, maybe association lists (this might allow easier
+  error-checking), which can be inserted into <scm|with> constructs by a
+  function which first flattens the pairs then appends the resulting list
+  into a <scm|'(with ... object)> list at the position we indicated with the
+  dots to apply all of the properties to <scm|object>. Never mind that the
+  <name|Scheme> syntax to achieve what we want is slightly different from the
+  description I gave, it is close enough that I hope it is convincing.
 
   About persuasion. I hope that I convinced you that the initial effort of
   setting up <name|Scheme> functions pays off: one constructs a powerful
@@ -933,15 +960,18 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|3>>
-    <associate|auto-10|<tuple|3|14>>
-    <associate|auto-2|<tuple|1|3>>
+    <associate|auto-10|<tuple|2|9>>
+    <associate|auto-11|<tuple|3|11>>
+    <associate|auto-12|<tuple|3|14>>
+    <associate|auto-13|<tuple|3|?>>
+    <associate|auto-2|<tuple|?|3>>
     <associate|auto-3|<tuple|1|3>>
-    <associate|auto-4|<tuple|2|5>>
-    <associate|auto-5|<tuple|3|7>>
-    <associate|auto-6|<tuple|4|8>>
-    <associate|auto-7|<tuple|2|9>>
-    <associate|auto-8|<tuple|1|9>>
-    <associate|auto-9|<tuple|2|11>>
+    <associate|auto-4|<tuple|1|3>>
+    <associate|auto-5|<tuple|2|4>>
+    <associate|auto-6|<tuple|3|5>>
+    <associate|auto-7|<tuple|4|7>>
+    <associate|auto-8|<tuple|2|8>>
+    <associate|auto-9|<tuple|1|9>>
     <associate|footnote-1|<tuple|1|11>>
     <associate|footnr-1|<tuple|1|11>>
   </collection>
@@ -949,47 +979,55 @@
 
 <\auxiliary>
   <\collection>
+    <\associate|idx>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Scheme
+      extensions>|<with|font-family|<quote|ss>|Scheme interface for the
+      graphical mode>>|<pageref|auto-3>>
+    </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Modular
       graphics with <with|font-shape|<quote|small-caps>|Scheme>>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
+      <with|par-left|<quote|4tab>|To do <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-2><vspace|0.15fn>>
+
       1.<space|2spc>Composing complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2>
+      <no-break><pageref|auto-4>
 
       <with|par-left|<quote|4tab>|Flattening nested lists of graphical
       objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-3><vspace|0.15fn>>
+      <no-break><pageref|auto-5><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Definition of basic graphical objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4><vspace|0.15fn>>
+      <no-break><pageref|auto-6><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Combination of individual graphical objects
       into complex objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5><vspace|0.15fn>>
+      <no-break><pageref|auto-7><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|A function for complex graphics
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-6><vspace|0.15fn>>
+      <no-break><pageref|auto-8><vspace|0.15fn>>
 
       2.<space|2spc>Manipulation of complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-7>
+      <no-break><pageref|auto-9>
 
       <with|par-left|<quote|4tab>|Translate complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-8><vspace|0.15fn>>
+      <no-break><pageref|auto-10><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Manipulate object properties
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-9><vspace|0.15fn>>
+      <no-break><pageref|auto-11><vspace|0.15fn>>
 
       3.<space|2spc><with|font-shape|<quote|small-caps>|Scheme> expressions
       that show what we mean <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-10>
+      <no-break><pageref|auto-12>
     </associate>
   </collection>
 </auxiliary>
