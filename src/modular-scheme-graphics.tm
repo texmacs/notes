@@ -7,6 +7,18 @@
 
   <chapter*|Modular graphics with <name|Scheme>>
 
+  This post is a part of a series of <name|Scheme> graphics in <TeXmacs>.
+  Other posts in the same series are <hlink|Composing TeXmacs graphics with
+  Scheme|./scheme-graphics.tm> and <hlink|Embedding graphics composed with
+  Scheme into documents|./scheme-graphics-embedding.tm>; we also plan to
+  write a post on how to generate <name|Scheme> graphics with external files.
+
+  Like in the other posts of the series, we assume that the reader is
+  familiar with simple Scheme syntax. We link again to the <name|Wikipedia>
+  book <hlink|Scheme programming|https://en.wikibooks.org/wiki/Scheme_Programming>
+  and to <hlink|Yet Another Scheme Tutorial|http://www.shido.info/lisp/idx_scm_e.html>
+  by Takafumi Shido as two possible web resources for learning <name|Scheme>.
+
   <TeXmacs> graphics provide a set of elementary objects (points, polylines,
   splines and so on). It would be nice to have at hand functions to deal with
   complex objects, which can be seen as unions of elementary objects: for
@@ -20,9 +32,15 @@
   we deal with them\Vand for example we use them as building blocks of even
   more complex objects.
 
-  In this post, we show how to compose and use in a drawing complex graphical
-  objects, how to shift them and how to set properties of already-existing
-  complex objects.
+  In <TeXmacs> there is a partially-implemented interface for dealing with
+  complex graphics objects \ (see <menu|Help|Scheme extensions|Scheme
+  interface for the graphical mode> and the <verbatim|.scm> files in the
+  <verbatim|progs/graphics/> directory in the <TeXmacs> distribution). In
+  particular, graphics can be grouped using the primitive <markup|gr-group>.
+
+  In this post, we will develop a small interface of our own; we will show
+  how to compose and use in a drawing complex graphical objects, how to shift
+  them and how to set properties of already-existing complex objects.
 
   <section|Composing complex objects>
 
@@ -59,18 +77,18 @@
       We build it up from an <scm|object-test>, which check membership in
       <scm|object-list>. <scm|object-test> itself will help later too, in a
       function that applies properties to all of the elementary components of
-      an object.\ 
+      an object.\
     </textput>
 
     <\input|Scheme] >
-      (define objects-list '(point line cline spline arc\ 
+      (define objects-list '(point line cline spline arc\
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ carc text-at math-at
       document-at))
     </input>
 
     <\input|Scheme] >
-      (define (object-test expr)\ 
+      (define (object-test expr)\
 
       \ \ (not (equal?
 
@@ -92,11 +110,7 @@
     <\textput>
       <scm|denestify-conditional> flattens a list recursively, stopping the
       recursion if it meets one of the symbols in <scm|objects-list> or the
-      symbol <scm|with>.<marginal-note|normal|c|<small|<with|color|red|make
-      sure that <scm|denestify-conditional> is not redundant; if <scm|(car
-      lst)> is an atom perhaps I do not need to check that it stops
-      flattening, but I need just to <scm|cons> it. Need to check corner
-      cases (if it is the first element of the top list for example)>>>
+      symbol <scm|with>.
 
       <scm|denestify-conditional> is not tail-recursive; we write it in this
       way as it is simpler than the tail-recursive version and it will work
@@ -108,7 +122,7 @@
     </textput>
 
     <\input|Scheme] >
-      ;; start from the answer https://stackoverflow.com/a/33338401\ 
+      ;; start from the answer https://stackoverflow.com/a/33338401\
 
       ;; to the Stack Overflow question
 
@@ -141,11 +155,11 @@
 
       \ \ \ \ \ \ \ \ \ \ ((pair? (car lst))
 
-      \ \ \ \ \ \ \ \ \ \ \ ; If the car of (car lst) is 'with or another\ 
+      \ \ \ \ \ \ \ \ \ \ \ ; If the car of (car lst) is 'with or another\
 
       \ \ \ \ \ \ \ \ \ \ \ ; of the symbols in denest-test, we cons it
 
-      \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))\ 
+      \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))\
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
 
@@ -161,7 +175,7 @@
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; the flattened rest of the list, in
       this
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; way flattening the combination of the\ 
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; way flattening the combination of the\
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; two lists
 
@@ -172,10 +186,10 @@
 
       \ \ \ \ \ \ \ \ \ \ ;; (car lst) is an atom
 
-      \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst))\ 
+      \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst))\
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; test presence of (car lst) in the
-      list\ 
+      list\
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; of symbols that stop denestification
 
@@ -197,7 +211,9 @@
   <paragraph|Definition of basic graphical objects>
 
   Let us define a function for generating points, and use that to define some
-  graphical objects:
+  graphical objects (the same objects of our previous posts). We will then
+  combine these objects in a complex unit and show that <TeXmacs> draws it
+  using our <scm|denestify-conditional> function.
 
   <\session|scheme|default>
     <\input|Scheme] >
@@ -272,7 +288,7 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      \ `(with "gr-geometry"\ 
+      \ `(with "gr-geometry"\
 
       \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
@@ -292,17 +308,17 @@
 
       \ \ \ \ \ \ ;; add letters using text-at
 
-      \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA)) \ 
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA)) \
 
-      \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB)) \ 
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB)) \
 
       \ \ \ \ \ \ (with "color" "black" \ (text-at "C" ,tC))
 
       \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
 
-      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"\ 
+      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"\
 
-      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\ 
+      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\
 
       ;; and close all of the parentheses!!!
     <|unfolded-io>
@@ -367,7 +383,7 @@
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,caption))))
 
-      \ 
+      \
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
@@ -424,19 +440,19 @@
   the symbol <scm|point>), we need to translate each point which the list is
   composed of.
 
-  We do it by mapping a translation function
-  recursively<marginal-note|normal|c|<small|<with|color|red|do I need to
-  mention that my functions for translation and property setting are not
-  tail-recursive?>>> onto the list that represents a complex object; in this
+  We do it by mapping a translation function recursively<\footnote>
+    Neither the function for translation nor the one for property-setting are
+    tail-recursive, but they are sufficient for our examples. Moreover the
+    stack dimension in the calls to these function is determined by how much
+    lists are nested, which keeps the stack dimension small.
+  </footnote> onto the list that represents a complex object; in this
   recursive mapping we distinguish between expressions that represent points
   (that have to be translated) and expressions that represent something else
   (that have to be left as they are).
 
   The distinction is made when the recursion either gets to a point or gets
-  to an atom: if it does get to an atom, then it is
-  transformed<marginal-note|normal|c|<small|<with|color|red|I need a better
-  expression here: to keep immutability evident in the sentence>>> into
-  itself. Here is the algorithm applied to a list:
+  to an atom: if it does get to an atom, then the translation function acts
+  as the identity function. Here is the algorithm applied to a list:
 
   <\itemize>
     <item>If the list starts with <scm|point>, we apply the function that
@@ -454,13 +470,13 @@
     </textput>
 
     <\input|Scheme] >
-      (define (translate-point point delta)
+      (define (translate-point point delta-vect)
 
       \ \ (let ((coord (map string-\<gtr\>number (cdr point))))
 
-      \ \ \ \ (pt (+ (car coord) (car delta))
+      \ \ \ \ (pt (+ (car coord) (car delta-vect))
 
-      \ \ \ \ \ \ \ \ (+ (cadr coord) (cadr delta)))))
+      \ \ \ \ \ \ \ \ (+ (cadr coord) (cadr delta-vect)))))
     </input>
 
     <\textput>
@@ -470,16 +486,16 @@
     </textput>
 
     <\input|Scheme] >
-      (define (translate-element element delta)
+      (define (translate-element element delta-vect)
 
       \ \ (cond ((list? element)
 
       \ \ \ \ \ \ \ \ \ (if (equal? (car element) 'point)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ (translate-point element delta)
+      \ \ \ \ \ \ \ \ \ \ \ \ \ (translate-point element delta-vect)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ (map (lambda (x) (translate-element x delta))
-      element)))
+      \ \ \ \ \ \ \ \ \ \ \ \ \ (map (lambda (x) (translate-element x
+      delta-vect)) element)))
 
       \ \ \ \ \ \ \ \ (else
 
@@ -536,11 +552,13 @@
     </textput>
 
     <\unfolded-io|Scheme] >
-      (scheme-graphics "400px" "300px" "center"\ 
+      (scheme-graphics "400px" "300px" "center"\
 
-      `(,triangle-in-half-circle)))
+      `(,triangle-in-half-circle
+
+      \ \ ,caption)))
     <|unfolded-io>
-      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>>>>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
 
     <\textput>
@@ -591,7 +609,7 @@
     <\input|Scheme] >
       (define (apply-property element name value)
 
-      \ \ (cond\ 
+      \ \ (cond\
 
       \ \ \ \ ((list? element)
 
@@ -602,7 +620,7 @@
       \ \ \ \ \ \ \ \ \ (map (lambda (x) (apply-property x name value))
       element)))
 
-      \ \ \ \ \ (else element))) \ \ \ \ \ \ \ \ 
+      \ \ \ \ \ (else element))) \ \ \ \ \ \ \ \
     </input>
 
     <\textput>
@@ -676,11 +694,11 @@
 
       ,triangle-in-half-circle
 
-      ,(translate-element\ 
+      ,(translate-element\
 
       \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle\ 
+      \ \ \ triangle-in-half-circle\
 
       \ \ "dash-style" "11100")
 
@@ -704,13 +722,13 @@
 
       ,triangle-in-half-circle
 
-      ,(translate-element\ 
+      ,(translate-element\
 
       \ \ (apply-property
 
       \ \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle\ 
+      \ \ \ triangle-in-half-circle\
 
       \ \ "dash-style" "11100")
 
@@ -726,8 +744,7 @@
 
   <section|<name|Scheme> expressions that show what we mean>
 
-  We apply again the idea of modularity<marginal-note|normal|c|<small|<with|color|red|or
-  is it abstraction in this case?>>> by assigning to a variable the object
+  We apply again the idea of modularity by assigning to a variable the object
   which we obtain after translation and application of dashing, and using the
   variable to build a drawing. Our code again shows that in <name|Scheme>
   building blocks combine together well.
@@ -736,19 +753,19 @@
     <\input|Scheme] >
       (define translated-triangle-in-half-circle-short-dashes
 
-      \ \ (translate-element\ 
+      \ \ (translate-element\
 
       \ \ (apply-property
 
       \ \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle\ 
+      \ \ \ triangle-in-half-circle\
 
       \ \ "dash-style" "11100")
 
       \ \ "dash-style" "101010")
 
-      \ \ '(1.0 -1.5))) \ 
+      \ \ '(1.0 -1.5))) \
     </input>
 
     <\input|Scheme] >
@@ -774,49 +791,103 @@
     </unfolded-io>
   </session>
 
-  <with|color|red|<small|Examine <scm|with> lists (for input checking:
-  <hlink|https://stackoverflow.com/a/13377695|https://stackoverflow.com/a/13377695>)>>
+  We can play further. Let's blend the triangle inside the half-circle
+  stepwise. Our functions are not sophisticated enough to target a subunit of
+  a complex object: applying a line-width to the whole drawing of the
+  triangle in the half-circle would eliminate the different line-widths for
+  the triangle and arc; for this reason, we use as an example of blending in
+  the triangle alone, which is one of the units we defined.
 
-  Another possibility is to define styles as shortcuts to set several
-  properties of a graphical object with a single operation. For examples,
-  styles could be defined as lists of name-value pairs (this might allow
-  easier error-checking), which can be inserted into <scm|with> constructs by
-  a function which first flattens the pairs then appends the resulting list
+  <\session|scheme|default>
+    <\textput>
+      The <scm|blend-in-triangle> function shifts the triangle by <scm|delta>
+      times the vector <scm|(1.0 -1.5)>, applies dashing and a linewidth
+      which is thicker as the triangle is closer to being inscribed in the
+      half-circle (we are going to use this function for values of
+      <scm|delta> which yield positive values of the line thickness).
+    </textput>
+
+    <\input|Scheme] >
+      (define (blend-in-triangle delta)
+
+      \ \ (translate-element\
+
+      \ \ (apply-property
+
+      \ \ \ (apply-property
+
+      \ \ \ triangle
+
+      \ \ "dash-style" "101010")
+
+      \ \ \ "line-width" (string-join\
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(,(number-\<gtr\>string (- 1 delta))
+      "pt") ""))
+
+      \ \ `(,(* 1.0 delta) ,(* -1.5 delta))))
+    </input>
+
+    <\textput>
+      Let's map this function on a list of <scm|d> values, and let us name
+      the object it returns (all lists of objects will be flattened by the
+      conditional flattener) in a meaningful way:
+    </textput>
+
+    <\input|Scheme] >
+      (define delta-lst
+
+      \ \ \ \ \ \ \ '(0.2 0.4 0.6 0.8)))
+    </input>
+
+    <\input|Scheme] >
+      (define blend-in-triangle-series
+
+      \ \ (map blend-in-triangle delta-lst))
+    </input>
+
+    <\textput>
+      Here is the triangle blending in into the half-circle <text-dots> or
+      fading away!
+    </textput>
+
+    <\unfolded-io|Scheme] >
+      (scheme-graphics "400px" "300px" "center" `(
+
+      ,blend-in-triangle-series
+
+      ,triangle-in-half-circle
+
+      ,translated-caption))
+    <|unfolded-io>
+      <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.8pt|<cline|<point|-1.8|-0.3>|<point|2.2|-0.3>|<point|-0.8|1.43205080756888>>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.6pt|<cline|<point|-1.6|-0.6>|<point|2.4|-0.6>|<point|-0.6|1.13205080756888>>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.4pt|<cline|<point|-1.4|-0.9>|<point|2.6|-0.9>|<point|-0.4|0.83205080756888>>>>>|<with|color|red|line-width|1pt|<with|dash-style|101010|<with|line-width|0.2pt|<cline|<point|-1.2|-1.2>|<point|2.8|-1.2>|<point|-0.2|0.53205080756888>>>>>|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|0.45|-2.25>>>>>>
+    </unfolded-io>
+
+    <\input|Scheme] >
+      \;
+    </input>
+  </session>
+
+  One could wish for more actions. For example, one could wish to find
+  intersections of lines which define objects, and assign them to new
+  objects. Another example is to define styles as shortcuts to set several
+  properties of a graphical object with a single operation; this is among the
+  functions in the yet-to-be completed <TeXmacs> <name|Scheme> graphics code.
+  <name|Scheme> is promising for implementing each of them.
+
+  As a sketch of an implementation, styles could be defined as lists of
+  name-value pairs, maybe association lists (this might allow easier
+  error-checking), which can be inserted into <scm|with> constructs by a
+  function which first flattens the pairs then appends the resulting list
   into a <scm|'(with ... object)> list at the position we indicated with the
   dots to apply all of the properties to <scm|object>. Never mind that the
-  <name|Scheme> syntax to achieve what we want is slightly different from our
-  description, it is close enough that I hope it is convincing.
+  <name|Scheme> syntax to achieve what we want is slightly different from the
+  description I gave, it is close enough that I hope it is convincing.
 
   About persuasion. I hope that I convinced you that the initial effort of
   setting up <name|Scheme> functions pays off: one constructs a powerful
   graphical language in which arbitrarily complex graphics are treated
   uniformly.
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
-
-  \;
 </body>
 
 <\initial>
@@ -831,20 +902,30 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|3>>
-    <associate|auto-10|<tuple|3|14>>
-    <associate|auto-2|<tuple|1|3>>
+    <associate|auto-10|<tuple|2|11>>
+    <associate|auto-11|<tuple|3|14>>
+    <associate|auto-2|<tuple|?|3>>
     <associate|auto-3|<tuple|1|3>>
-    <associate|auto-4|<tuple|2|5>>
-    <associate|auto-5|<tuple|3|7>>
-    <associate|auto-6|<tuple|4|8>>
-    <associate|auto-7|<tuple|2|9>>
-    <associate|auto-8|<tuple|1|9>>
-    <associate|auto-9|<tuple|2|11>>
+    <associate|auto-4|<tuple|1|4>>
+    <associate|auto-5|<tuple|2|5>>
+    <associate|auto-6|<tuple|3|7>>
+    <associate|auto-7|<tuple|4|8>>
+    <associate|auto-8|<tuple|2|9>>
+    <associate|auto-9|<tuple|1|9>>
+    <associate|footnote-1|<tuple|1|9>>
+    <associate|footnote-2|<tuple|2|?>>
+    <associate|footnr-1|<tuple|1|9>>
+    <associate|footnr-2|<tuple|2|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
+    <\associate|idx>
+      <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Scheme
+      extensions>|<with|font-family|<quote|ss>|Scheme interface for the
+      graphical mode>>|<pageref|auto-2>>
+    </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Modular
       graphics with <with|font-shape|<quote|small-caps>|Scheme>>
@@ -853,39 +934,39 @@
 
       1.<space|2spc>Composing complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2>
+      <no-break><pageref|auto-3>
 
       <with|par-left|<quote|4tab>|Flattening nested lists of graphical
       objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-3><vspace|0.15fn>>
+      <no-break><pageref|auto-4><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Definition of basic graphical objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4><vspace|0.15fn>>
+      <no-break><pageref|auto-5><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Combination of individual graphical objects
       into complex objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5><vspace|0.15fn>>
+      <no-break><pageref|auto-6><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|A function for complex graphics
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-6><vspace|0.15fn>>
+      <no-break><pageref|auto-7><vspace|0.15fn>>
 
       2.<space|2spc>Manipulation of complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-7>
+      <no-break><pageref|auto-8>
 
       <with|par-left|<quote|4tab>|Translate complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-8><vspace|0.15fn>>
+      <no-break><pageref|auto-9><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Manipulate object properties
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-9><vspace|0.15fn>>
+      <no-break><pageref|auto-10><vspace|0.15fn>>
 
       3.<space|2spc><with|font-shape|<quote|small-caps>|Scheme> expressions
       that show what we mean <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-10>
+      <no-break><pageref|auto-11>
     </associate>
   </collection>
 </auxiliary>
