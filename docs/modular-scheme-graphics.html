@@ -18,6 +18,21 @@
     </div>
     <h1 id="auto-1">Modular graphics with <class style="font-variant: small-caps">Scheme</class><span style="margin-left: 1em"></span></h1>
     <p>
+      This post is a part of a series of <class style="font-variant: small-caps">Scheme</class> graphics
+      in TeXmacs. Other posts in the same series are <a href="./scheme-graphics.html">Composing
+      TeXmacs graphics with Scheme</a> and <a href="./scheme-graphics-embedding.html">Embedding graphics
+      composed with Scheme into documents</a>; we also plan to write a post on
+      how to generate <class style="font-variant: small-caps">Scheme</class> graphics with external
+      files.
+    </p>
+    <p>
+      Like in the other posts of the series, we assume that the reader is
+      familiar with simple Scheme syntax. We link again to the <class style="font-variant: small-caps">Wikipedia</class>
+      book <a href="https://en.wikibooks.org/wiki/Scheme_Programming">Scheme programming</a> and to <a href="http://www.shido.info/lisp/idx_scm_e.html">Yet Another Scheme
+      Tutorial</a> by Takafumi Shido as two possible web resources for
+      learning <class style="font-variant: small-caps">Scheme</class>.
+    </p>
+    <p>
       TeXmacs graphics provide a set of elementary objects (points, polylines,
       splines and so on). It would be nice to have at hand functions to deal
       with complex objects, which can be seen as unions of elementary objects:
@@ -33,11 +48,21 @@
       building blocks of even more complex objects.
     </p>
     <p>
-      In this post, we show how to compose and use in a drawing complex
-      graphical objects, how to shift them and how to set properties of
-      already-existing complex objects.
+      In TeXmacs there is a partially-implemented interface for dealing with
+      complex graphics objects  (see <class class="tmweb-menu" style="font-family: sans-serif">Help</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Scheme extensions</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Scheme
+      interface for the graphical mode</class><a id="auto-2"></a> and the <tt class="verbatim">.scm</tt>
+      files in the <tt class="verbatim">progs/graphics/</tt> directory in the TeXmacs
+      distribution). In particular, graphics can be grouped using the
+      primitive <font class="tmweb-markup">gr-group</font>.
     </p>
-    <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Composing complex objects<span style="margin-left: 1em"></span></h2>
+    <p>
+      In this post, we will develop a small interface of our own; we will show
+      how to compose and use in a drawing complex graphical objects, how to
+      shift them and how to set properties of already-existing complex
+      objects.
+    </p>
+    <h2 id="auto-3">1.<span style="margin-left: 1em"></span>Composing complex objects<span style="margin-left: 1em"></span></h2>
     <p>
       In <class style="font-variant: small-caps">Scheme</class>, a natural way of composing complex
       objects is joining the building blocks into a list. To get TeXmacs to
@@ -69,7 +94,7 @@
     </p>
     <p>
       <div style="display: inline">
-        <a id="auto-3"></a>
+        <a id="auto-4"></a>
       </div>
       <h5>Flattening nested lists of graphical objects<span style="margin-left: 1em"></span></h5>
     </p>
@@ -84,7 +109,7 @@
           We build it up from an <tt class="verbatim scheme">object-test</tt>, which check
           membership in <tt class="verbatim scheme">object-list</tt>. <tt class="verbatim scheme">object-test</tt>
           itself will help later too, in a function that applies properties to
-          all of the elementary components of an object. 
+          all of the elementary components of an object.
         </p>
       </div>
     </div>
@@ -94,8 +119,7 @@
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define objects-list '(point line cline spline arc 
-                     carc text-at math-at document-at))</pre></td>
+(define objects-list '(point line cline spline arc                      carc text-at math-at document-at))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -106,8 +130,7 @@
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define (object-test expr) 
-  (not (equal?
+(define (object-test expr)   (not (equal?
         (filter (lambda (x) (equal? x expr)) objects-list)
         '())))</pre></td>
           </tr></tbody>
@@ -154,8 +177,7 @@
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-;; start from the answer https://stackoverflow.com/a/33338401 
-;; to the Stack Overflow question
+;; start from the answer https://stackoverflow.com/a/33338401 ;; to the Stack Overflow question
 ;; https://stackoverflow.com/questions/33338078/flattening-a-list-in-scheme:
 
 ;;(define (denestify lst)
@@ -170,22 +192,17 @@
   (define (denestify-conditional lst)
     (cond ((null? lst) '())
           ((pair? (car lst))
-           ; If the car of (car lst) is 'with or another 
-           ; of the symbols in denest-test, we cons it
-           (if (denest-test (car (car lst))) 
-               (cons (car lst)
+           ; If the car of (car lst) is 'with or another            ; of the symbols in denest-test, we cons it
+           (if (denest-test (car (car lst)))                (cons (car lst)
                      (denestify-conditional (cdr lst)))
                ;; otherwise we flatten it with recursion,
                ;; obtaining a flat list, and append it to
                ;; the flattened rest of the list, in this
-               ;; way flattening the combination of the 
-               ;; two lists
+               ;; way flattening the combination of the                ;; two lists
                (append (denestify-conditional (car lst))
                        (denestify-conditional (cdr lst)))))
           ;; (car lst) is an atom
-          (else (if (denest-test (car lst)) 
-                ; test presence of (car lst) in the list 
-                ; of symbols that stop denestification
+          (else (if (denest-test (car lst))                 ; test presence of (car lst) in the list                 ; of symbols that stop denestification
                     lst ;; we leave lst as it is
                ;; otherwise we cons (car lst) onto the
                ;; flattened version of (cdr lst)
@@ -207,13 +224,15 @@
     </div>
     <p>
       <div style="display: inline">
-        <a id="auto-4"></a>
+        <a id="auto-5"></a>
       </div>
       <h5>Definition of basic graphical objects<span style="margin-left: 1em"></span></h5>
     </p>
     <p>
       Let us define a function for generating points, and use that to define
-      some graphical objects:
+      some graphical objects (the same objects of our previous posts). We will
+      then combine these objects in a complex unit and show that TeXmacs draws
+      it using our <tt class="verbatim scheme">denestify-conditional</tt> function.
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
@@ -379,8 +398,7 @@
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (stree-&gt;tree
- &lsquo;(with &quot;gr-geometry&quot; 
-    (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
+ &lsquo;(with &quot;gr-geometry&quot;     (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
     &quot;font-shape&quot; &quot;italic&quot;
     (graphics
       ;; the arc and the line together make the semicircle
@@ -389,13 +407,9 @@ Scheme] </pre></font></td>
       ;; a closed polyline for the triangle
       (with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot; (cline ,pA ,pB ,pC))
       ;; add letters using text-at
-      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))  
-      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))  
-      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;C&quot; ,tC))
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))       (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))       (with &quot;color&quot; &quot;black&quot;  (text-at &quot;C&quot; ,tC))
       ;; finally decorate with the TeXmacs symbol
-      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot; 
-        (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) 
-;; and close all of the parentheses!!!</pre></td>
+      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot;         (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ;; and close all of the parentheses!!!</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -413,7 +427,7 @@ Scheme] </pre></font></td>
     </div>
     <p>
       <div style="display: inline">
-        <a id="auto-5"></a>
+        <a id="auto-6"></a>
       </div>
       <h5>Combination of individual graphical objects into complex
       objects<span style="margin-left: 1em"></span></h5>
@@ -487,8 +501,7 @@ Scheme] </pre></font></td>
                              ,triangle
                              ,letters
                              ,half-circle
-                             ,caption))))
- </pre></td>
+                             ,caption))))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -506,7 +519,7 @@ Scheme] </pre></font></td>
     </div>
     <p>
       <div style="display: inline">
-        <a id="auto-6"></a>
+        <a id="auto-7"></a>
       </div>
       <h5>A function for complex graphics<span style="margin-left: 1em"></span></h5>
     </p>
@@ -563,7 +576,7 @@ Scheme] </pre></font></td>
         </div></tt>
       </p>
     </div>
-    <h2 id="auto-7">2.<span style="margin-left: 1em"></span>Manipulation of complex objects<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-8">2.<span style="margin-left: 1em"></span>Manipulation of complex objects<span style="margin-left: 1em"></span></h2>
     <p>
       We would like to manipulate complex objects as units. Let's see how to
       translate them; one can in a similar way rotate and stretch them
@@ -573,7 +586,7 @@ Scheme] </pre></font></td>
     </p>
     <p>
       <div style="display: inline">
-        <a id="auto-8"></a>
+        <a id="auto-9"></a>
       </div>
       <h5>Translate complex objects<span style="margin-left: 1em"></span></h5>
     </p>
@@ -583,16 +596,35 @@ Scheme] </pre></font></td>
       the list is composed of.
     </p>
     <p>
-      We do it by mapping a translation function recursively onto the list
-      that represents a complex object; in this recursive mapping we
-      distinguish between expressions that represent points (that have to be
-      translated) and expressions that represent something else (that have to
-      be left as they are).
+      We do it by mapping a translation function recursively
+      <div class="footnote">
+        <font style="font-size: 80.0%"><div align="justify">
+          <div style="margin-left: 0px">
+            <div style="margin-right: 0px">
+              <class style="font-style: normal"><p>
+                1. Neither the function for translation nor the one for
+                property-setting are tail-recursive, but they are sufficient
+                for our examples. Moreover the stack dimension in the calls to
+                these function is determined by how much lists are nested,
+                which keeps the stack dimension small.
+              </p></class>
+            </div>
+          </div>
+        </div></font>
+      </div>
+      <span style="margin-left: 0em"></span>
+      <a id="footnr-1"></a>
+      <sup><class style="font-style: normal"><a href="#footnote-1">1</a></class></sup>
+      onto the list that represents a complex object; in this recursive
+      mapping we distinguish between expressions that represent points (that
+      have to be translated) and expressions that represent something else
+      (that have to be left as they are).
     </p>
     <p>
       The distinction is made when the recursion either gets to a point or
-      gets to an atom: if it does get to an atom, then it is transformed into
-      itself. Here is the algorithm applied to a list:
+      gets to an atom: if it does get to an atom, then the translation
+      function acts as the identity function. Here is the algorithm applied to
+      a list:
     </p>
     <ul>
       <li>
@@ -626,10 +658,10 @@ Scheme] </pre></font></td>
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define (translate-point point delta)
+(define (translate-point point delta-vect)
   (let ((coord (map string-&gt;number (cdr point))))
-    (pt (+ (car coord) (car delta))
-        (+ (cadr coord) (cadr delta)))))</pre></td>
+    (pt (+ (car coord) (car delta-vect))
+        (+ (cadr coord) (cadr delta-vect)))))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -649,11 +681,11 @@ Scheme] </pre></font></td>
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define (translate-element element delta)
+(define (translate-element element delta-vect)
   (cond ((list? element)
          (if (equal? (car element) 'point)
-             (translate-point element delta)
-             (map (lambda (x) (translate-element x delta)) element)))
+             (translate-point element delta-vect)
+             (map (lambda (x) (translate-element x delta-vect)) element)))
         (else
           element)))</pre></td>
           </tr></tbody>
@@ -747,8 +779,8 @@ Scheme] </pre></font></td>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; 
-&lsquo;(,triangle-in-half-circle)))</pre></td>
+(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(,triangle-in-half-circle
+  ,caption)))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -758,7 +790,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="modular-scheme-graphics-3.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+              <i><img src="modular-scheme-graphics-1.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
@@ -792,7 +824,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="modular-scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+              <i><img src="modular-scheme-graphics-3.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
@@ -800,7 +832,7 @@ Scheme] </pre></font></td>
     </div>
     <p>
       <div style="display: inline">
-        <a id="auto-9"></a>
+        <a id="auto-10"></a>
       </div>
       <h5>Manipulate object properties<span style="margin-left: 1em"></span></h5>
     </p>
@@ -840,12 +872,11 @@ Scheme] </pre></font></td>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (define (apply-property element name value)
-  (cond 
-    ((list? element)
+  (cond     ((list? element)
      (if (object-test (car element))
          &lsquo;(with ,name ,value ,element)
          (map (lambda (x) (apply-property x name value)) element)))
-     (else element)))         </pre></td>
+     (else element)))        </pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -969,7 +1000,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="modular-scheme-graphics-5.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+              <i><img src="modular-scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
@@ -994,10 +1025,8 @@ Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(
 ,triangle-in-half-circle
-,(translate-element 
-  (apply-property
-   triangle-in-half-circle 
-  &quot;dash-style&quot; &quot;11100&quot;)
+,(translate-element   (apply-property
+   triangle-in-half-circle   &quot;dash-style&quot; &quot;11100&quot;)
   '(1.0 -1.5))
 ,(translate-element caption '(1.0 -1.5))))</pre></td>
           </tr></tbody>
@@ -1009,7 +1038,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="modular-scheme-graphics-5.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+              <i><img src="modular-scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
@@ -1036,11 +1065,9 @@ Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(
 ,triangle-in-half-circle
-,(translate-element 
-  (apply-property
+,(translate-element   (apply-property
    (apply-property
-   triangle-in-half-circle 
-  &quot;dash-style&quot; &quot;11100&quot;)
+   triangle-in-half-circle   &quot;dash-style&quot; &quot;11100&quot;)
   &quot;dash-style&quot; &quot;101010&quot;)
   '(1.0 -1.5))
 ,(translate-element caption '(1.0 -1.5))))</pre></td>
@@ -1053,13 +1080,13 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="modular-scheme-graphics-6.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+              <i><img src="modular-scheme-graphics-5.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
       </p>
     </div>
-    <h2 id="auto-10">3.<span style="margin-left: 1em"></span><class style="font-variant: small-caps">Scheme</class> expressions
+    <h2 id="auto-11">3.<span style="margin-left: 1em"></span><class style="font-variant: small-caps">Scheme</class> expressions
     that show what we mean<span style="margin-left: 1em"></span></h2>
     <p>
       We apply again the idea of modularity by assigning to a variable the
@@ -1074,13 +1101,11 @@ Scheme] </pre></font></td>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (define translated-triangle-in-half-circle-short-dashes
-  (translate-element 
-  (apply-property
+  (translate-element   (apply-property
    (apply-property
-   triangle-in-half-circle 
-  &quot;dash-style&quot; &quot;11100&quot;)
+   triangle-in-half-circle   &quot;dash-style&quot; &quot;11100&quot;)
   &quot;dash-style&quot; &quot;101010&quot;)
-  '(1.0 -1.5)))  </pre></td>
+  '(1.0 -1.5)))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -1125,72 +1150,154 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="modular-scheme-graphics-6.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+              <i><img src="modular-scheme-graphics-5.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
             </p>
           </div>
         </div></tt>
       </p>
     </div>
     <p>
-      <font color="red"><font style="font-size: 90.0%">Examine <tt class="verbatim scheme">with</tt> lists (for input
-      checking: <a href="https://stackoverflow.com/a/13377695">https://stackoverflow.com/a/13377695</a>)</font></font>
+      We can play further. Let's blend the triangle inside the half-circle
+      stepwise. Our functions are not sophisticated enough to target a subunit
+      of a complex object: applying a line-width to the whole drawing of the
+      triangle in the half-circle would eliminate the different line-widths
+      for the triangle and arc; for this reason, we use as an example of
+      blending in the triangle alone, which is one of the units we defined.
+    </p>
+    <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+      <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
+        <p>
+          The <tt class="verbatim scheme">blend-in-triangle</tt> function shifts the triangle
+          by <tt class="verbatim scheme">delta</tt> times the vector <tt class="verbatim scheme">(1.0
+          -1.5)</tt>, applies dashing and a linewidth which is thicker as the
+          triangle is closer to being inscribed in the half-circle (we are
+          going to use this function for values of <tt class="verbatim scheme">delta</tt> which
+          yield positive values of the line thickness).
+        </p>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
+        <table style="width: 100%">
+          <tbody><tr>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
+            <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+(define (blend-in-triangle delta)
+  (translate-element   (apply-property
+   (apply-property
+   triangle
+  &quot;dash-style&quot; &quot;101010&quot;)
+   &quot;line-width&quot; (string-join 
+         &lsquo;(,(number-&gt;string (- 1 delta)) &quot;pt&quot;) &quot;&quot;))
+         &lsquo;(,(* 1.0 delta) ,(* -1.5 delta))))</pre></td>
+          </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
+        <p>
+          Let's map this function on a list of <tt class="verbatim scheme">d</tt> values, and
+          let us name the object it returns (all lists of objects will be
+          flattened by the conditional flattener) in a meaningful way:
+        </p>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
+        <table style="width: 100%">
+          <tbody><tr>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
+            <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+(define delta-lst
+       '(0.2 0.4 0.6 0.8)))</pre></td>
+          </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
+        <table style="width: 100%">
+          <tbody><tr>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
+            <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+(define blend-in-triangle-series
+  (map blend-in-triangle delta-lst))</pre></td>
+          </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
+        <p>
+          Here is the triangle blending in into the half-circle <span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> or fading
+          away!
+        </p>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
+        <table style="width: 100%">
+          <tbody><tr>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
+Scheme] </pre></font></td>
+            <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(
+,blend-in-triangle-series
+,triangle-in-half-circle
+,translated-caption))</pre></td>
+          </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><div align="justify">
+          <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
+            <p>
+              <i><img src="modular-scheme-graphics-6.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></i>
+            </p>
+          </div>
+        </div></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
+        <table style="width: 100%">
+          <tbody><tr>
+            <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
+            <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+</pre></td>
+          </tr></tbody>
+        </table>
+      </div>
+    </div>
+    <p>
+      One could wish for more actions. For example, one could wish to find
+      intersections of lines which define objects, and assign them to new
+      objects. Another example is to define styles as shortcuts to set several
+      properties of a graphical object with a single operation; this is among
+      the functions in the yet-to-be completed TeXmacs <class style="font-variant: small-caps">Scheme</class>
+      graphics code. <class style="font-variant: small-caps">Scheme</class> is promising for
+      implementing each of them.
     </p>
     <p>
-      Another possibility is to define styles as shortcuts to set several
-      properties of a graphical object with a single operation. For examples,
-      styles could be defined as lists of name-value pairs (this might allow
-      easier error-checking), which can be inserted into <tt class="verbatim scheme">with</tt>
+      As a sketch of an implementation, styles could be defined as lists of
+      name-value pairs, maybe association lists (this might allow easier
+      error-checking), which can be inserted into <tt class="verbatim scheme">with</tt>
       constructs by a function which first flattens the pairs then appends the
       resulting list into a <tt class="verbatim scheme">'(with &hellip; object)</tt> list at
       the position we indicated with the dots to apply all of the properties
       to <tt class="verbatim scheme">object</tt>. Never mind that the <class style="font-variant: small-caps">Scheme</class>
-      syntax to achieve what we want is slightly different from our
-      description, it is close enough that I hope it is convincing.
+      syntax to achieve what we want is slightly different from the
+      description I gave, it is close enough that I hope it is convincing.
     </p>
     <p>
       About persuasion. I hope that I convinced you that the initial effort of
       setting up <class style="font-variant: small-caps">Scheme</class> functions pays off: one
       constructs a powerful graphical language in which arbitrarily complex
       graphics are treated uniformly.
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <p>
-      
     </p>
   </body>
 </html>

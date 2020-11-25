@@ -77,20 +77,17 @@
       We build it up from an <scm|object-test>, which check membership in
       <scm|object-list>. <scm|object-test> itself will help later too, in a
       function that applies properties to all of the elementary components of
-      an object.\
+      an object.
     </textput>
 
     <\input|Scheme] >
-      (define objects-list '(point line cline spline arc\
-
+      (define objects-list '(point line cline spline arc
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ carc text-at math-at
       document-at))
     </input>
 
     <\input|Scheme] >
-      (define (object-test expr)\
-
-      \ \ (not (equal?
+      (define (object-test expr) \ \ (not (equal?
 
       \ \ \ \ \ \ \ \ (filter (lambda (x) (equal? x expr)) objects-list)
 
@@ -122,9 +119,8 @@
     </textput>
 
     <\input|Scheme] >
-      ;; start from the answer https://stackoverflow.com/a/33338401\
-
-      ;; to the Stack Overflow question
+      ;; start from the answer https://stackoverflow.com/a/33338401 ;; to the
+      Stack Overflow question
 
       ;; https://stackoverflow.com/questions/33338078/flattening-a-list-in-scheme:
 
@@ -155,12 +151,10 @@
 
       \ \ \ \ \ \ \ \ \ \ ((pair? (car lst))
 
-      \ \ \ \ \ \ \ \ \ \ \ ; If the car of (car lst) is 'with or another\
-
+      \ \ \ \ \ \ \ \ \ \ \ ; If the car of (car lst) is 'with or another
       \ \ \ \ \ \ \ \ \ \ \ ; of the symbols in denest-test, we cons it
 
-      \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))\
-
+      \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (denestify-conditional (cdr
@@ -175,8 +169,7 @@
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; the flattened rest of the list, in
       this
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; way flattening the combination of the\
-
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; way flattening the combination of the
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; two lists
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (append (denestify-conditional (car lst))
@@ -186,12 +179,10 @@
 
       \ \ \ \ \ \ \ \ \ \ ;; (car lst) is an atom
 
-      \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst))\
-
+      \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst))
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; test presence of (car lst) in the
-      list\
-
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; of symbols that stop denestification
+      list \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; of symbols that stop
+      denestification
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lst ;; we leave lst as it is
 
@@ -288,9 +279,8 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      \ `(with "gr-geometry"\
-
-      \ \ \ \ (tuple "geometry" "400px" "300px" "center")
+      \ `(with "gr-geometry" \ \ \ \ (tuple "geometry" "400px" "300px"
+      "center")
 
       \ \ \ \ "font-shape" "italic"
 
@@ -308,19 +298,15 @@
 
       \ \ \ \ \ \ ;; add letters using text-at
 
-      \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA)) \
-
-      \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB)) \
-
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA))
+      \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB))
       \ \ \ \ \ \ (with "color" "black" \ (text-at "C" ,tC))
 
       \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
 
-      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"\
-
-      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))\
-
-      ;; and close all of the parentheses!!!
+      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"
+      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ;; and close
+      all of the parentheses!!!
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
@@ -382,8 +368,6 @@
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,half-circle
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ,caption))))
-
-      \
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
@@ -552,9 +536,7 @@
     </textput>
 
     <\unfolded-io|Scheme] >
-      (scheme-graphics "400px" "300px" "center"\
-
-      `(,triangle-in-half-circle
+      (scheme-graphics "400px" "300px" "center" `(,triangle-in-half-circle
 
       \ \ ,caption)))
     <|unfolded-io>
@@ -609,9 +591,7 @@
     <\input|Scheme] >
       (define (apply-property element name value)
 
-      \ \ (cond\
-
-      \ \ \ \ ((list? element)
+      \ \ (cond \ \ \ \ ((list? element)
 
       \ \ \ \ \ (if (object-test (car element))
 
@@ -620,7 +600,7 @@
       \ \ \ \ \ \ \ \ \ (map (lambda (x) (apply-property x name value))
       element)))
 
-      \ \ \ \ \ (else element))) \ \ \ \ \ \ \ \
+      \ \ \ \ \ (else element))) \ \ \ \ \ \ \ 
     </input>
 
     <\textput>
@@ -694,13 +674,9 @@
 
       ,triangle-in-half-circle
 
-      ,(translate-element\
+      ,(translate-element \ \ (apply-property
 
-      \ \ (apply-property
-
-      \ \ \ triangle-in-half-circle\
-
-      \ \ "dash-style" "11100")
+      \ \ \ triangle-in-half-circle \ \ "dash-style" "11100")
 
       \ \ '(1.0 -1.5))
 
@@ -722,15 +698,11 @@
 
       ,triangle-in-half-circle
 
-      ,(translate-element\
-
-      \ \ (apply-property
+      ,(translate-element \ \ (apply-property
 
       \ \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle\
-
-      \ \ "dash-style" "11100")
+      \ \ \ triangle-in-half-circle \ \ "dash-style" "11100")
 
       \ \ "dash-style" "101010")
 
@@ -753,19 +725,15 @@
     <\input|Scheme] >
       (define translated-triangle-in-half-circle-short-dashes
 
-      \ \ (translate-element\
-
-      \ \ (apply-property
+      \ \ (translate-element \ \ (apply-property
 
       \ \ \ (apply-property
 
-      \ \ \ triangle-in-half-circle\
-
-      \ \ "dash-style" "11100")
+      \ \ \ triangle-in-half-circle \ \ "dash-style" "11100")
 
       \ \ "dash-style" "101010")
 
-      \ \ '(1.0 -1.5))) \
+      \ \ '(1.0 -1.5)))
     </input>
 
     <\input|Scheme] >
@@ -810,9 +778,7 @@
     <\input|Scheme] >
       (define (blend-in-triangle delta)
 
-      \ \ (translate-element\
-
-      \ \ (apply-property
+      \ \ (translate-element \ \ (apply-property
 
       \ \ \ (apply-property
 
@@ -820,12 +786,11 @@
 
       \ \ "dash-style" "101010")
 
-      \ \ \ "line-width" (string-join\
+      \ \ \ "line-width" (string-join\ 
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(,(number-\<gtr\>string (- 1 delta))
-      "pt") ""))
+      \ \ \ \ \ \ \ \ \ `(,(number-\<gtr\>string (- 1 delta)) "pt") ""))
 
-      \ \ `(,(* 1.0 delta) ,(* -1.5 delta))))
+      \ \ \ \ \ \ \ \ \ `(,(* 1.0 delta) ,(* -1.5 delta))))
     </input>
 
     <\textput>
@@ -913,9 +878,7 @@
     <associate|auto-8|<tuple|2|9>>
     <associate|auto-9|<tuple|1|9>>
     <associate|footnote-1|<tuple|1|9>>
-    <associate|footnote-2|<tuple|2|?>>
     <associate|footnr-1|<tuple|1|9>>
-    <associate|footnr-2|<tuple|2|?>>
   </collection>
 </references>
 
