@@ -120,11 +120,13 @@
     </textput>
 
     <\input|Scheme] >
+      \;
+
       ;; start from the answer https://stackoverflow.com/a/33338401\ 
 
       ;; to the Stack Overflow question
 
-      ;; https://stackoverflow.com/questions/33338078/flattening-a-list-in-scheme:
+      ;; https://stackoverflow.com/q/33338078/flattening-a-list-in-scheme
 
       \;
 
@@ -142,8 +144,9 @@
 
       \;
 
-      ;; This function is not tail-recursive; see
-      https://stackoverflow.com/a/33338608
+      ;; This function is not tail-recursive;\ 
+
+      ;; see https://stackoverflow.com/a/33338608
 
       ;; for a tail-recursive function
 
@@ -158,6 +161,7 @@
       \ \ \ \ \ \ \ \ \ \ \ ;; of the symbols in denest-test, we cons it
 
       \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))
+
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (denestify-conditional (cdr
@@ -195,8 +199,12 @@
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; flattened version of (cdr lst)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
-      (denestify-conditional (cdr lst)))))))
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (denestify-conditional\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cdr
+      lst)))))))
     </input>
 
     <\input|Scheme] >
@@ -284,8 +292,9 @@
     <\unfolded-io|Scheme] >
       (stree-\<gtr\>tree
 
-      \ `(with "gr-geometry" \ \ \ \ (tuple "geometry" "400px" "300px"
-      "center")
+      \ `(with "gr-geometry" \ \ \ \ 
+
+      \ \ \ \ \ \ (tuple "geometry" "400px" "300px" "center")
 
       \ \ \ \ "font-shape" "italic"
 
@@ -332,8 +341,9 @@
 
   <\session|scheme|default>
     <\input|Scheme] >
-      (define triangle `(with "color" "red" "line-width" "1pt" (cline ,pA ,pB
-      ,pC)))
+      (define triangle `(with "color" "red" "line-width" "1pt"
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cline ,pA ,pB ,pC)))
     </input>
 
     <\input|Scheme] >
@@ -355,10 +365,11 @@
     </input>
 
     <\input|Scheme] >
-      (define caption `((with "color" "blue" \ "font-shape" "upright"
+      (define caption `((with "color" "blue" \ 
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt
-      -0.55 -0.75)))))
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "font-shape" "upright"
+
+      \ \ \ \ \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))
     </input>
 
     <\unfolded-io|Scheme] >
@@ -395,11 +406,15 @@
 
       \ \ (stree-\<gtr\>tree
 
-      \ \ \ `(with "gr-geometry" (tuple "geometry" ,x-size ,y-size alignment)
+      \ \ \ `(with "gr-geometry"\ 
 
-      \ \ \ \ \ \ "font-shape" "italic"
+      \ \ \ \ \ \ \ \ (tuple "geometry" ,x-size ,y-size alignment)
 
-      \ \ \ \ \ \ ,(denestify-conditional `(graphics ,graphics-list)))))
+      \ \ \ \ \ \ \ \ "font-shape" "italic"
+
+      \ \ \ \ \ \ \ \ ,(denestify-conditional\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ `(graphics ,graphics-list)))))
     </input>
 
     <\textput>
@@ -485,16 +500,17 @@
 
       \ \ (cond ((list? element)
 
-      \ \ \ \ \ \ \ \ \ (if (equal? (car element) 'point)
+      \ \ \ \ \ (if (equal? (car element) 'point)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ (translate-point element delta-vect)
+      \ \ \ \ \ \ \ \ (translate-point element delta-vect)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ (map (lambda (x) (translate-element x
-      delta-vect)) element)))
+      \ \ \ \ \ \ \ \ (map (lambda (x)\ 
 
-      \ \ \ \ \ \ \ \ (else
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (translate-element x delta-vect))\ 
 
-      \ \ \ \ \ \ \ \ \ \ element)))
+      \ \ \ \ \ \ \ \ \ \ \ \ \ element)))
+
+      \ \ \ \ \ \ \ \ (else element)))
     </input>
 
     <\textput>
@@ -530,15 +546,13 @@
 
   <\session|scheme|default>
     <\input|Scheme] >
-      (define triangle-in-half-circle
+      (define triangle-in-half-circle \ `(
 
-      \ \ `(
+      \ \ \ ,half-circle
 
-      ,half-circle
+      \ \ \ ,triangle
 
-      ,triangle
-
-      ,letters))
+      \ \ \ ,letters))
     </input>
 
     <\textput>
@@ -547,9 +561,9 @@
     </textput>
 
     <\unfolded-io|Scheme] >
-      (scheme-graphics "400px" "300px" "center" `(,triangle-in-half-circle
+      (scheme-graphics "400px" "300px" "center"\ 
 
-      \ \ ,caption)))
+      \ \ \ \ \ \ `(,triangle-in-half-circle ,caption)))
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
@@ -561,13 +575,13 @@
     </textput>
 
     <\unfolded-io|Scheme] >
-      (scheme-graphics "400px" "300px" "center" `(
+      (scheme-graphics "400px" "300px" "center"\ 
 
-      ,triangle-in-half-circle
+      `( ,triangle-in-half-circle
 
-      ,(translate-element triangle-in-half-circle '(1.0 -1.5))
+      \ \ \ ,(translate-element triangle-in-half-circle '(1.0 -1.5))
 
-      ,(translate-element caption '(1.0 -1.5))))
+      \ \ \ ,(translate-element caption '(1.0 -1.5))))
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>|<with|color|black|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>|<with|color|red|line-width|1pt|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>|<with|color|black|<text-at|A|<point|-1.3|-2.0>>>|<with|color|black|<text-at|B|<point|3.1|-2.0>>>|<with|color|black|<text-at|C|<point|-0.2|0.43205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|0.45|-2.25>>>>>>
     </unfolded-io>
@@ -602,14 +616,17 @@
     <\input|Scheme] >
       (define (apply-property element name value)
 
-      \ \ (cond \ \ \ \ ((list? element)
+      \ \ (cond\ 
 
-      \ \ \ \ \ (if (object-test (car element))
+      \ \ \ \ ((list? element)
 
-      \ \ \ \ \ \ \ \ \ `(with ,name ,value ,element)
+      \ \ \ \ \ \ \ \ (if (object-test (car element))
 
-      \ \ \ \ \ \ \ \ \ (map (lambda (x) (apply-property x name value))
-      element)))
+      \ \ \ \ \ \ \ \ \ \ \ \ `(with ,name ,value ,element)
+
+      \ \ \ \ \ \ \ \ \ \ \ \ (map (lambda (x) (apply-property x name value))
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ element)))
 
       \ \ \ \ \ (else element))) \ \ \ \ \ \ \ 
     </input>
@@ -709,7 +726,7 @@
 
       ,triangle-in-half-circle
 
-      ,(translate-element \ \ (apply-property
+      ,(translate-element (apply-property
 
       \ \ \ (apply-property
 

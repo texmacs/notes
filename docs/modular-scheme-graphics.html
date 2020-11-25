@@ -178,9 +178,10 @@
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
+
 ;; start from the answer https://stackoverflow.com/a/33338401 
 ;; to the Stack Overflow question
-;; https://stackoverflow.com/questions/33338078/flattening-a-list-in-scheme:
+;; https://stackoverflow.com/q/33338078/flattening-a-list-in-scheme
 
 ;;(define (denestify lst)
 ;;  (cond ((null? lst) '())
@@ -189,14 +190,16 @@
 ;;                 (denestify (cdr lst))))
 ;;        (else (cons (car lst) (denestify (cdr lst))))))
 
-;; This function is not tail-recursive; see https://stackoverflow.com/a/33338608
+;; This function is not tail-recursive; 
+;; see https://stackoverflow.com/a/33338608
 ;; for a tail-recursive function
   (define (denestify-conditional lst)
     (cond ((null? lst) '())
           ((pair? (car lst))
            ;; If the car of (car lst) is 'with or another
            ;; of the symbols in denest-test, we cons it
-           (if (denest-test (car (car lst)))                (cons (car lst)
+           (if (denest-test (car (car lst)))
+               (cons (car lst)
                      (denestify-conditional (cdr lst)))
                ;; otherwise we flatten it with recursion,
                ;; obtaining a flat list, and append it to
@@ -212,7 +215,9 @@
                     lst ;; we leave lst as it is
                ;; otherwise we cons (car lst) onto the
                ;; flattened version of (cdr lst)
-                    (cons (car lst) (denestify-conditional (cdr lst)))))))</pre></td>
+                    (cons (car lst) 
+                          (denestify-conditional 
+                             (cdr lst)))))))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -404,7 +409,8 @@
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (stree-&gt;tree
- &lsquo;(with &quot;gr-geometry&quot;     (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
+ &lsquo;(with &quot;gr-geometry&quot;     
+      (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
     &quot;font-shape&quot; &quot;italic&quot;
     (graphics
       ;; the arc and the line together make the semicircle
@@ -454,7 +460,8 @@ Scheme] </pre></font></td>
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define triangle &lsquo;(with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot; (cline ,pA ,pB ,pC)))</pre></td>
+(define triangle &lsquo;(with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot;
+                        (cline ,pA ,pB ,pC)))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -491,8 +498,9 @@ Scheme] </pre></font></td>
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define caption &lsquo;((with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot;
-                        (text-at (TeXmacs) ,(pt -0.55 -0.75)))))</pre></td>
+(define caption &lsquo;((with &quot;color&quot; &quot;blue&quot;  
+                        &quot;font-shape&quot; &quot;upright&quot;
+            (text-at (TeXmacs) ,(pt -0.55 -0.75)))))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -546,9 +554,11 @@ Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (define (scheme-graphics x-size y-size alignment graphics-list)
   (stree-&gt;tree
-   &lsquo;(with &quot;gr-geometry&quot; (tuple &quot;geometry&quot; ,x-size ,y-size alignment)
-      &quot;font-shape&quot; &quot;italic&quot;
-      ,(denestify-conditional &lsquo;(graphics ,graphics-list)))))</pre></td>
+   &lsquo;(with &quot;gr-geometry&quot; 
+        (tuple &quot;geometry&quot; ,x-size ,y-size alignment)
+        &quot;font-shape&quot; &quot;italic&quot;
+        ,(denestify-conditional 
+            &lsquo;(graphics ,graphics-list)))))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -694,11 +704,12 @@ Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (define (translate-element element delta-vect)
   (cond ((list? element)
-         (if (equal? (car element) 'point)
-             (translate-point element delta-vect)
-             (map (lambda (x) (translate-element x delta-vect)) element)))
-        (else
-          element)))</pre></td>
+     (if (equal? (car element) 'point)
+        (translate-point element delta-vect)
+        (map (lambda (x) 
+               (translate-element x delta-vect)) 
+             element)))
+        (else element)))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -766,11 +777,10 @@ Scheme] </pre></font></td>
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define triangle-in-half-circle
-  &lsquo;(
-,half-circle
-,triangle
-,letters))</pre></td>
+(define triangle-in-half-circle  &lsquo;(
+   ,half-circle
+   ,triangle
+   ,letters))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -790,8 +800,8 @@ Scheme] </pre></font></td>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(,triangle-in-half-circle
-  ,caption)))</pre></td>
+(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; 
+      &lsquo;(,triangle-in-half-circle ,caption)))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -822,10 +832,10 @@ Scheme] </pre></font></td>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(
-,triangle-in-half-circle
-,(translate-element triangle-in-half-circle '(1.0 -1.5))
-,(translate-element caption '(1.0 -1.5))))</pre></td>
+(scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; 
+&lsquo;( ,triangle-in-half-circle
+   ,(translate-element triangle-in-half-circle '(1.0 -1.5))
+   ,(translate-element caption '(1.0 -1.5))))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -883,10 +893,12 @@ Scheme] </pre></font></td>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (define (apply-property element name value)
-  (cond     ((list? element)
-     (if (object-test (car element))
-         &lsquo;(with ,name ,value ,element)
-         (map (lambda (x) (apply-property x name value)) element)))
+  (cond 
+    ((list? element)
+        (if (object-test (car element))
+            &lsquo;(with ,name ,value ,element)
+            (map (lambda (x) (apply-property x name value))
+                 element)))
      (else element)))        </pre></td>
           </tr></tbody>
         </table>
@@ -1076,7 +1088,7 @@ Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (scheme-graphics &quot;400px&quot; &quot;300px&quot; &quot;center&quot; &lsquo;(
 ,triangle-in-half-circle
-,(translate-element   (apply-property
+,(translate-element (apply-property
    (apply-property
    triangle-in-half-circle   &quot;dash-style&quot; &quot;11100&quot;)
   &quot;dash-style&quot; &quot;101010&quot;)
