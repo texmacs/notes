@@ -9,44 +9,41 @@
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
     <pageref|auto-1><vspace|0.5fn>
 
-    <with|par-left|4tab|To do <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-2><vspace|0.15fn>>
-
     1.<space|2spc>Composing complex objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-4>
+    <no-break><pageref|auto-3>
 
     <with|par-left|4tab|Flattening nested lists of graphical objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-5><vspace|0.15fn>>
+    <no-break><pageref|auto-4><vspace|0.15fn>>
 
     <with|par-left|4tab|Definition of basic graphical objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-6><vspace|0.15fn>>
+    <no-break><pageref|auto-5><vspace|0.15fn>>
 
     <with|par-left|4tab|Combination of individual graphical objects into
     complex objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-7><vspace|0.15fn>>
+    <no-break><pageref|auto-6><vspace|0.15fn>>
 
     <with|par-left|4tab|A function for complex graphics
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-8><vspace|0.15fn>>
+    <no-break><pageref|auto-7><vspace|0.15fn>>
 
     2.<space|2spc>Manipulation of complex objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-9>
+    <no-break><pageref|auto-8>
 
     <with|par-left|4tab|Translate complex objects
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-10><vspace|0.15fn>>
+    <no-break><pageref|auto-9><vspace|0.15fn>>
 
     <with|par-left|4tab|Manipulate object properties
     <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-11><vspace|0.15fn>>
+    <no-break><pageref|auto-10><vspace|0.15fn>>
 
     3.<space|2spc><with|font-shape|small-caps|Scheme> expressions that show
     what we mean <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-12>
+    <no-break><pageref|auto-11>
   </table-of-contents>
 
   <chapter*|Modular graphics with <name|Scheme>>
@@ -152,12 +149,7 @@
     <\textput>
       <scm|denestify-conditional> flattens a list recursively, stopping the
       recursion if it meets one of the symbols in <scm|objects-list> or the
-      symbol <scm|with>.<marginal-note|normal|c|<small|<with|color|red|make
-      sure that <scm|denestify-conditional> is not redundant; if <scm|(car
-      lst)> is an atom perhaps I do not need to check that it stops
-      flattening, but I need just to <scm|cons> it. Need to check corner
-      cases (if it is the first element of the top list for example); I think
-      in this case I need the check!>>>
+      symbol <scm|with>.
 
       <scm|denestify-conditional> is not tail-recursive; we write it in this
       way as it is simpler than the tail-recursive version and it will work
@@ -482,19 +474,19 @@
   the symbol <scm|point>), we need to translate each point which the list is
   composed of.
 
-  We do it by mapping a translation function
-  recursively<marginal-note|normal|c|<small|<with|color|red|do I need to
-  mention that my functions for translation and property setting are not
-  tail-recursive?>>> onto the list that represents a complex object; in this
+  We do it by mapping a translation function recursively<\footnote>
+    Neither the function for translation nor the one for property-setting are
+    tail-recursive, but they are sufficient for our examples. Moreover the
+    stack dimension in the calls to these function is determined by how much
+    lists are nested, which keeps the stack dimension small.
+  </footnote> onto the list that represents a complex object; in this
   recursive mapping we distinguish between expressions that represent points
   (that have to be translated) and expressions that represent something else
   (that have to be left as they are).
 
   The distinction is made when the recursion either gets to a point or gets
-  to an atom: if it does get to an atom, then it is
-  transformed<marginal-note|normal|c|<small|<with|color|red|I need a better
-  expression here: to keep immutability evident in the sentence>>> into
-  itself. Here is the algorithm applied to a list:
+  to an atom: if it does get to an atom, then the translation function acts
+  as the identity function. Here is the algorithm applied to a list:
 
   <\itemize>
     <item>If the list starts with <scm|point>, we apply the function that
@@ -512,13 +504,13 @@
     </textput>
 
     <\input|Scheme] >
-      (define (translate-point point delta)
+      (define (translate-point point delta-vect)
 
       \ \ (let ((coord (map string-\<gtr\>number (cdr point))))
 
-      \ \ \ \ (pt (+ (car coord) (car delta))
+      \ \ \ \ (pt (+ (car coord) (car delta-vect))
 
-      \ \ \ \ \ \ \ \ (+ (cadr coord) (cadr delta)))))
+      \ \ \ \ \ \ \ \ (+ (cadr coord) (cadr delta-vect)))))
     </input>
 
     <\textput>
@@ -528,16 +520,16 @@
     </textput>
 
     <\input|Scheme] >
-      (define (translate-element element delta)
+      (define (translate-element element delta-vect)
 
       \ \ (cond ((list? element)
 
       \ \ \ \ \ \ \ \ \ (if (equal? (car element) 'point)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ (translate-point element delta)
+      \ \ \ \ \ \ \ \ \ \ \ \ \ (translate-point element delta-vect)
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ (map (lambda (x) (translate-element x delta))
-      element)))
+      \ \ \ \ \ \ \ \ \ \ \ \ \ (map (lambda (x) (translate-element x
+      delta-vect)) element)))
 
       \ \ \ \ \ \ \ \ (else
 
@@ -626,11 +618,8 @@
 
   <paragraph|Manipulate object properties>
 
-  <\footnote>
-    note for me only (to be removed in version for web)
-    <hlink|https://stackoverflow.com/questions/15801316/scheme-how-can-i-apply-the-function-to-every-sublist-in-a-list|https://stackoverflow.com/questions/15801316/scheme-how-can-i-apply-the-function-to-every-sublist-in-a-list>
-  </footnote>We write a simple function which wraps each elementary object in
-  a <scm|with>, placing it inside with respect to any other <scm|with>
+  We write a simple function which wraps each elementary object in a
+  <scm|with>, placing it inside with respect to any other <scm|with>
   construct the object might be already placed in. This function, applied a
   few times, generates deeply nested lists that may be difficult to read; a
   more refined function would check if the object is already inside a
@@ -856,17 +845,15 @@
 
   <\session|scheme|default>
     <\textput>
-      The <scm|blend-in-triangle> function shifts the triangle by
-      <scm|d><marginal-note|normal|c|<small|<with|color|red|<scm|d> should be
-      <scm|delta> and the <scm|delta> of the translation function should be
-      something else>>> in the direction <scm|(1.0 -1.5)>, applies dashing
-      and a linewidth which is thicker as the triangle is closer to being
-      inscribed in the half-circle (we are going to use this function for
-      values of <scm|d> which yield positive values of the line thickness).
+      The <scm|blend-in-triangle> function shifts the triangle by <scm|delta>
+      times the vector <scm|(1.0 -1.5)>, applies dashing and a linewidth
+      which is thicker as the triangle is closer to being inscribed in the
+      half-circle (we are going to use this function for values of
+      <scm|delta> which yield positive values of the line thickness).
     </textput>
 
     <\input|Scheme] >
-      (define (blend-in-triangle d)
+      (define (blend-in-triangle delta)
 
       \ \ (translate-element\ 
 
@@ -880,10 +867,10 @@
 
       \ \ \ "line-width" (string-join\ 
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(,(number-\<gtr\>string (- 1 d))
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ `(,(number-\<gtr\>string (- 1 delta))
       "pt") ""))
 
-      \ \ `(,(* 1.0 d) ,(* -1.5 d))))
+      \ \ `(,(* 1.0 delta) ,(* -1.5 delta))))
     </input>
 
     <\textput>
@@ -893,7 +880,7 @@
     </textput>
 
     <\input|Scheme] >
-      (define d-lst
+      (define delta-lst
 
       \ \ \ \ \ \ \ '(0.2 0.4 0.6 0.8)))
     </input>
@@ -901,7 +888,7 @@
     <\input|Scheme] >
       (define blend-in-triangle-series
 
-      \ \ (map blend-in-triangle d-lst))
+      \ \ (map blend-in-triangle delta-lst))
     </input>
 
     <\textput>
@@ -926,15 +913,15 @@
     </input>
   </session>
 
-  <with|color|red|<small|Examine <scm|with> lists (for input checking:
-  <hlink|https://stackoverflow.com/a/13377695|https://stackoverflow.com/a/13377695>)>>
+  One could wish for more actions. For example, one could wish to find
+  intersections of lines which define objects, and assign them to new
+  objects. Another example is to define styles as shortcuts to set several
+  properties of a graphical object with a single operation; this is among the
+  functions in the yet-to-be completed <TeXmacs> <name|Scheme> graphics code.
+  <name|Scheme> is promising for implementing each of them.
 
-  There are more possibilities. One is to find intersections of lines which
-  define objects, and assign them to new objects. Another is to define styles
-  as shortcuts to set several properties of a graphical object with a single
-  operation; this is among the functions in the yet-to-be completed <TeXmacs>
-  <name|Scheme> graphics code. For examples, styles could be defined as lists
-  of name-value pairs, maybe association lists (this might allow easier
+  As a sketch of an implementation, styles could be defined as lists of
+  name-value pairs, maybe association lists (this might allow easier
   error-checking), which can be inserted into <scm|with> constructs by a
   function which first flattens the pairs then appends the resulting list
   into a <scm|'(with ... object)> list at the position we indicated with the
@@ -960,20 +947,20 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|3>>
-    <associate|auto-10|<tuple|2|9>>
-    <associate|auto-11|<tuple|3|11>>
-    <associate|auto-12|<tuple|3|14>>
-    <associate|auto-13|<tuple|3|?>>
+    <associate|auto-10|<tuple|2|11>>
+    <associate|auto-11|<tuple|3|14>>
     <associate|auto-2|<tuple|?|3>>
     <associate|auto-3|<tuple|1|3>>
-    <associate|auto-4|<tuple|1|3>>
-    <associate|auto-5|<tuple|2|4>>
-    <associate|auto-6|<tuple|3|5>>
-    <associate|auto-7|<tuple|4|7>>
-    <associate|auto-8|<tuple|2|8>>
+    <associate|auto-4|<tuple|1|4>>
+    <associate|auto-5|<tuple|2|5>>
+    <associate|auto-6|<tuple|3|7>>
+    <associate|auto-7|<tuple|4|8>>
+    <associate|auto-8|<tuple|2|9>>
     <associate|auto-9|<tuple|1|9>>
     <associate|footnote-1|<tuple|1|11>>
+    <associate|footnote-2|<tuple|2|?>>
     <associate|footnr-1|<tuple|1|11>>
+    <associate|footnr-2|<tuple|2|?>>
   </collection>
 </references>
 
@@ -982,7 +969,7 @@
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Help>|<with|font-family|<quote|ss>|Scheme
       extensions>|<with|font-family|<quote|ss>|Scheme interface for the
-      graphical mode>>|<pageref|auto-3>>
+      graphical mode>>|<pageref|auto-2>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Modular
@@ -990,44 +977,41 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
-      <with|par-left|<quote|4tab>|To do <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2><vspace|0.15fn>>
-
       1.<space|2spc>Composing complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4>
+      <no-break><pageref|auto-3>
 
       <with|par-left|<quote|4tab>|Flattening nested lists of graphical
       objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5><vspace|0.15fn>>
+      <no-break><pageref|auto-4><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Definition of basic graphical objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-6><vspace|0.15fn>>
+      <no-break><pageref|auto-5><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Combination of individual graphical objects
       into complex objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-7><vspace|0.15fn>>
+      <no-break><pageref|auto-6><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|A function for complex graphics
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-8><vspace|0.15fn>>
+      <no-break><pageref|auto-7><vspace|0.15fn>>
 
       2.<space|2spc>Manipulation of complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-9>
+      <no-break><pageref|auto-8>
 
       <with|par-left|<quote|4tab>|Translate complex objects
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-10><vspace|0.15fn>>
+      <no-break><pageref|auto-9><vspace|0.15fn>>
 
       <with|par-left|<quote|4tab>|Manipulate object properties
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-11><vspace|0.15fn>>
+      <no-break><pageref|auto-10><vspace|0.15fn>>
 
       3.<space|2spc><with|font-shape|<quote|small-caps>|Scheme> expressions
       that show what we mean <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-12>
+      <no-break><pageref|auto-11>
     </associate>
   </collection>
 </auxiliary>
