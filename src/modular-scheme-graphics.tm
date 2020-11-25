@@ -82,7 +82,8 @@
 
     <\input|Scheme] >
       (define objects-list '(point line cline spline arc
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ carc text-at math-at
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ carc text-at math-at
       document-at))
     </input>
 
@@ -119,8 +120,9 @@
     </textput>
 
     <\input|Scheme] >
-      ;; start from the answer https://stackoverflow.com/a/33338401 ;; to the
-      Stack Overflow question
+      ;; start from the answer https://stackoverflow.com/a/33338401\ 
+
+      ;; to the Stack Overflow question
 
       ;; https://stackoverflow.com/questions/33338078/flattening-a-list-in-scheme:
 
@@ -151,8 +153,9 @@
 
       \ \ \ \ \ \ \ \ \ \ ((pair? (car lst))
 
-      \ \ \ \ \ \ \ \ \ \ \ ; If the car of (car lst) is 'with or another
-      \ \ \ \ \ \ \ \ \ \ \ ; of the symbols in denest-test, we cons it
+      \ \ \ \ \ \ \ \ \ \ \ ;; If the car of (car lst) is 'with or another
+
+      \ \ \ \ \ \ \ \ \ \ \ ;; of the symbols in denest-test, we cons it
 
       \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
@@ -170,6 +173,7 @@
       this
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; way flattening the combination of the
+
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; two lists
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (append (denestify-conditional (car lst))
@@ -180,9 +184,10 @@
       \ \ \ \ \ \ \ \ \ \ ;; (car lst) is an atom
 
       \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst))
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; test presence of (car lst) in the
-      list \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; of symbols that stop
-      denestification
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; test presence of (car lst) in the list
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; of symbols that stop denestification
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lst ;; we leave lst as it is
 
@@ -294,19 +299,25 @@
 
       \ \ \ \ \ \ ;; a closed polyline for the triangle
 
-      \ \ \ \ \ \ (with "color" "red" "line-width" "1pt" (cline ,pA ,pB ,pC))
+      \ \ \ \ \ \ (with "color" "red" "line-width" "1pt"\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ (cline ,pA ,pB ,pC))
 
       \ \ \ \ \ \ ;; add letters using text-at
 
       \ \ \ \ \ \ (with "color" "black" \ (text-at "A" ,tA))
+
       \ \ \ \ \ \ (with "color" "black" \ (text-at "B" ,tB))
+
       \ \ \ \ \ \ (with "color" "black" \ (text-at "C" ,tC))
 
       \ \ \ \ \ \ ;; finally decorate with the TeXmacs symbol
 
-      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"
-      \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ;; and close
-      all of the parentheses!!!
+      \ \ \ \ \ \ (with "color" "blue" \ "font-shape" "upright"\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ (text-at (TeXmacs) ,(pt -0.55 -0.75))))))
+
+      ;; and close all of the parentheses!!!
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>

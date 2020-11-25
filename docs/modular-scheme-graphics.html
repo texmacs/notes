@@ -119,7 +119,8 @@
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-(define objects-list '(point line cline spline arc                      carc text-at math-at document-at))</pre></td>
+(define objects-list '(point line cline spline arc
+                    carc text-at math-at document-at))</pre></td>
           </tr></tbody>
         </table>
       </div>
@@ -177,7 +178,8 @@
           <tbody><tr>
             <td style="text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
-;; start from the answer https://stackoverflow.com/a/33338401 ;; to the Stack Overflow question
+;; start from the answer https://stackoverflow.com/a/33338401 
+;; to the Stack Overflow question
 ;; https://stackoverflow.com/questions/33338078/flattening-a-list-in-scheme:
 
 ;;(define (denestify lst)
@@ -192,17 +194,21 @@
   (define (denestify-conditional lst)
     (cond ((null? lst) '())
           ((pair? (car lst))
-           ; If the car of (car lst) is 'with or another            ; of the symbols in denest-test, we cons it
+           ;; If the car of (car lst) is 'with or another
+           ;; of the symbols in denest-test, we cons it
            (if (denest-test (car (car lst)))                (cons (car lst)
                      (denestify-conditional (cdr lst)))
                ;; otherwise we flatten it with recursion,
                ;; obtaining a flat list, and append it to
                ;; the flattened rest of the list, in this
-               ;; way flattening the combination of the                ;; two lists
+               ;; way flattening the combination of the
+               ;; two lists
                (append (denestify-conditional (car lst))
                        (denestify-conditional (cdr lst)))))
           ;; (car lst) is an atom
-          (else (if (denest-test (car lst))                 ; test presence of (car lst) in the list                 ; of symbols that stop denestification
+          (else (if (denest-test (car lst))
+               ;; test presence of (car lst) in the list
+               ;; of symbols that stop denestification
                     lst ;; we leave lst as it is
                ;; otherwise we cons (car lst) onto the
                ;; flattened version of (cdr lst)
@@ -405,11 +411,16 @@ Scheme] </pre></font></td>
       (with &quot;color&quot; &quot;black&quot;  (arc ,pA ,pC ,pB))
       (with &quot;color&quot; &quot;black&quot;  (line ,pA ,pB))
       ;; a closed polyline for the triangle
-      (with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot; (cline ,pA ,pB ,pC))
+      (with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot; 
+            (cline ,pA ,pB ,pC))
       ;; add letters using text-at
-      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))       (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))       (with &quot;color&quot; &quot;black&quot;  (text-at &quot;C&quot; ,tC))
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;C&quot; ,tC))
       ;; finally decorate with the TeXmacs symbol
-      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot;         (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) ;; and close all of the parentheses!!!</pre></td>
+      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot; 
+            (text-at (TeXmacs) ,(pt -0.55 -0.75))))))
+;; and close all of the parentheses!!!</pre></td>
           </tr></tbody>
         </table>
       </div>
