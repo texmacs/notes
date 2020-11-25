@@ -233,9 +233,9 @@
   <paragraph|Definition of basic graphical objects>
 
   Let us define a function for generating points, and use that to define some
-  graphical objects. We will then combine these objects in a complex unit and
-  show that <TeXmacs> draws it using our <scm|denestify-conditional>
-  function.
+  graphical objects (the same objects of our previous posts). We will then
+  combine these objects in a complex unit and show that <TeXmacs> draws it
+  using our <scm|denestify-conditional> function.
 
   <\session|scheme|default>
     <\input|Scheme] >
@@ -957,9 +957,9 @@
     <associate|auto-7|<tuple|4|8>>
     <associate|auto-8|<tuple|2|9>>
     <associate|auto-9|<tuple|1|9>>
-    <associate|footnote-1|<tuple|1|11>>
+    <associate|footnote-1|<tuple|1|9>>
     <associate|footnote-2|<tuple|2|?>>
-    <associate|footnr-1|<tuple|1|11>>
+    <associate|footnr-1|<tuple|1|9>>
     <associate|footnr-2|<tuple|2|?>>
   </collection>
 </references>
