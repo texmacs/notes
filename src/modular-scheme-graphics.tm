@@ -784,8 +784,7 @@
 
   <section|<name|Scheme> expressions that show what we mean>
 
-  We apply again the idea of modularity<marginal-note|normal|c|<small|<with|color|red|or
-  is it abstraction in this case?>>> by assigning to a variable the object
+  We apply again the idea of modularity by assigning to a variable the object
   which we obtain after translation and application of dashing, and using the
   variable to build a drawing. Our code again shows that in <name|Scheme>
   building blocks combine together well.
