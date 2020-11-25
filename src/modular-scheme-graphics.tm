@@ -1,50 +1,9 @@
-<TeXmacs|1.99.15>
+<TeXmacs|1.99.16>
 
-<style|notes>
+<style|<tuple|notes|framed-session>>
 
 <\body>
-  <\table-of-contents|toc>
-    <vspace*|1fn><with|font-series|bold|math-font-series|bold|font-shape|small-caps|Modular
-    graphics with <with|font-shape|small-caps|Scheme>>
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <pageref|auto-1><vspace|0.5fn>
-
-    1.<space|2spc>Composing complex objects
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-2>
-
-    <with|par-left|4tab|Flattening nested lists of graphical objects
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-3><vspace|0.15fn>>
-
-    <with|par-left|4tab|Definition of basic graphical objects
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-4><vspace|0.15fn>>
-
-    <with|par-left|4tab|Combination of individual graphical objects into
-    complex objects <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-5><vspace|0.15fn>>
-
-    <with|par-left|4tab|A function for complex graphics
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-6><vspace|0.15fn>>
-
-    2.<space|2spc>Manipulation of complex objects
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-7>
-
-    <with|par-left|4tab|Translate complex objects
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-8><vspace|0.15fn>>
-
-    <with|par-left|4tab|Manipulate object properties
-    <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-9><vspace|0.15fn>>
-
-    3.<space|2spc><with|font-shape|small-caps|Scheme> expressions that show
-    what we mean <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-    <no-break><pageref|auto-10>
-  </table-of-contents>
+  <notes-header>
 
   <chapter*|Modular graphics with <name|Scheme>>
 
@@ -104,7 +63,9 @@
     </textput>
 
     <\input|Scheme] >
-      (define objects-list '(point line cline spline arc carc text-at math-at
+      (define objects-list '(point line cline spline arc\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ carc text-at math-at
       document-at))
     </input>
 
@@ -180,8 +141,11 @@
 
       \ \ \ \ \ \ \ \ \ \ ((pair? (car lst))
 
-      \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst))) ; If the car of
-      (car lst) is 'with or another of the symbols in denest-test, we cons it
+      \ \ \ \ \ \ \ \ \ \ \ ; If the car of (car lst) is 'with or another\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ ; of the symbols in denest-test, we cons it
+
+      \ \ \ \ \ \ \ \ \ \ \ (if (denest-test (car (car lst)))\ 
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
 
@@ -189,8 +153,17 @@
       lst)))
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; otherwise we flatten it with
-      recursion, obtaining a flat list, and append it to the flattened rest
-      of the list, in this way flattening the combination of the two lists
+      recursion,
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; obtaining a flat list, and append it
+      to
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; the flattened rest of the list, in
+      this
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; way flattening the combination of the\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; two lists
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (append (denestify-conditional (car lst))
 
@@ -199,13 +172,18 @@
 
       \ \ \ \ \ \ \ \ \ \ ;; (car lst) is an atom
 
-      \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst)) ; test presence
-      of (car lst) in the list of symbols that stop denestification
+      \ \ \ \ \ \ \ \ \ \ (else (if (denest-test (car lst))\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; test presence of (car lst) in the
+      list\ 
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ; of symbols that stop denestification
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lst ;; we leave lst as it is
 
-      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; otherwise we cons (car lst)
-      onto the flattened version of (cdr lst)
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; otherwise we cons (car lst) onto the
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ;; flattened version of (cdr lst)
 
       \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (cons (car lst)
       (denestify-conditional (cdr lst)))))))
@@ -330,10 +308,6 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <paragraph|Combination of individual graphical objects into complex
@@ -397,10 +371,6 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|center>|font-shape|italic|<graphics|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <paragraph|A function for complex graphics>
@@ -438,10 +408,6 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|-0.55|-0.75>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <section|Manipulation of complex objects>
@@ -526,8 +492,10 @@
     </textput>
 
     <\unfolded-io|Scheme] >
-      (translate-element `((line ,(pt 1 2) ,(pt 2 3) ,(pt 3 4)) (text-at
-      TeXmacs ,(pt -1 -1))) '(1 1))
+      (translate-element `((line ,(pt 1 2) ,(pt 2 3) ,(pt 3 4))
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (text-at TeXmacs ,(pt -1 -1))) '(1
+      1))
     <|unfolded-io>
       ((line (point "2" "3") (point "3" "4") (point "4" "5")) (text-at
       TeXmacs (point "0" "0")))
@@ -592,10 +560,6 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>|<with|color|black|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>|<with|color|red|line-width|1pt|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>|<with|color|black|<text-at|A|<point|-1.3|-2.0>>>|<with|color|black|<text-at|B|<point|3.1|-2.0>>>|<with|color|black|<text-at|C|<point|-0.2|0.43205080756888>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|0.45|-2.25>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <paragraph|Manipulate object properties>
@@ -758,10 +722,6 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>>>|<with|color|red|line-width|1pt|<with|dash-style|11100|<with|dash-style|101010|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|A|<point|-1.3|-2.0>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|B|<point|3.1|-2.0>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|C|<point|-0.2|0.43205080756888>>>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|0.45|-2.25>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <section|<name|Scheme> expressions that show what we mean>
@@ -812,10 +772,6 @@
     <|unfolded-io>
       <text|<with|gr-geometry|<tuple|geometry|400px|300px|alignment>|font-shape|italic|<graphics|<with|color|black|<arc|<point|-2|0>|<point|-1.0|1.73205080756888>|<point|2|0>>>|<with|color|black|<line|<point|-2|0>|<point|2|0>>>|<with|color|red|line-width|1pt|<cline|<point|-2|0>|<point|2|0>|<point|-1.0|1.73205080756888>>>|<with|color|black|<text-at|A|<point|-2.3|-0.5>>>|<with|color|black|<text-at|B|<point|2.1|-0.5>>>|<with|color|black|<text-at|C|<point|-1.2|1.93205080756888>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<arc|<point|-1.0|-1.5>|<point|0.0|0.23205080756888>|<point|3.0|-1.5>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<line|<point|-1.0|-1.5>|<point|3.0|-1.5>>>>>|<with|color|red|line-width|1pt|<with|dash-style|11100|<with|dash-style|101010|<cline|<point|-1.0|-1.5>|<point|3.0|-1.5>|<point|0.0|0.23205080756888>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|A|<point|-1.3|-2.0>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|B|<point|3.1|-2.0>>>>>|<with|color|black|<with|dash-style|11100|<with|dash-style|101010|<text-at|C|<point|-0.2|0.43205080756888>>>>>|<with|color|blue|font-shape|upright|<text-at|<TeXmacs>|<point|0.45|-2.25>>>>>>
     </unfolded-io>
-
-    <\input|Scheme] >
-      \;
-    </input>
   </session>
 
   <with|color|red|<small|Examine <scm|with> lists (for input checking:
@@ -865,7 +821,7 @@
 
 <\initial>
   <\collection>
-    <associate|page-medium|paper>
+    <associate|page-medium|papyrus>
     <associate|page-screen-margin|false>
     <associate|preamble|false>
     <associate|prog-scripts|scheme>
