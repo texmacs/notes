@@ -1,6 +1,6 @@
-<TeXmacs|1.99.13>
+<TeXmacs|1.99.16>
 
-<style|notes>
+<style|article>
 
 <\body>
   <\hide-preamble>
@@ -22,7 +22,7 @@
   </big-table>
 
   <\big-table|<tabular|<tformat|<table|<row|<cell|>>>>><tabular|<tformat|<cwith|1|1|1|-1|cell-background|pastel
-  blue>|<table|<row|<cell|Plugin>|<cell|Third-party>|<cell|<TeXmacs>>|<cell|Status>|<cell|Demo>>|<row|<cell|>|<cell|>|<cell|>|<cell|>|<cell|>>>>>>
+  blue>|<table|<row|<cell|Plugin>|<cell|Third-party>|<cell|<TeXmacs>>|<cell|System>|<cell|Status>|<cell|Demo>>|<row|<cell|octave>|<cell|v5.2.0>|<cell|1.99.16>|<cell|10/1909>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/octave/doc/octave-demo.en.tm>>>|<row|<cell|python>|<cell|v3.8.6>|<cell|1.99.16>|<cell|10/1909>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/python/doc/python-demo.en.tm>>>|<row|<cell|gnuplot>|<cell|v5.2>|<cell|1.99.16>|<cell|10/1909>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/gnuplot/doc/gnuplot-demo.en.tm>>>|<row|<cell|graphviz>|<cell|v2.38.0>|<cell|1.99.16>|<cell|10/1909>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/graphviz/doc/graphviz-demo.en.tm>>>|<row|<cell|maxima>|<cell|v5.43.2>|<cell|1.99.16>|<cell|10/1909>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/maxima/doc/maxima-demo.en.tm>>>|<row|<cell|asymptote>|<cell|v2.65>|<cell|1.99.16>|<cell|10/1909>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/asymptote/doc/asymptote-demo.en.tm>>>>>>>
     Plugin Status on Windows
   </big-table>
 
@@ -68,27 +68,28 @@
       </surround>|<pageref|auto-2>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
-        \;
+        Plugin Status on MacOS
       </surround>|<pageref|auto-3>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|3>|>
-        \;
+        Plugin Status on Windows
       </surround>|<pageref|auto-4>>
     </associate>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Status
+      <vspace*|2fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-size|<quote|1.19>|Status
       of Plugins for GNU T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <pageref|auto-1><vspace|0.5fn>
+      <no-break><pageref|auto-1><vspace|1fn>
 
-      1.<space|2spc>Known Limitations <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|1<space|2spc>Known
+      Limitations> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5><vspace|0.5fn>
 
-      <with|par-left|<quote|1tab>|1.1.<space|2spc>shell
+      <with|par-left|<quote|1tab>|1.1<space|2spc>shell
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-6>>
 
-      <with|par-left|<quote|1tab>|1.2.<space|2spc>Maxima
+      <with|par-left|<quote|1tab>|1.2<space|2spc>Maxima
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-7>>
     </associate>
