@@ -21,6 +21,9 @@
   at <tt|github>. Feel free to fork it. Contribution are welcome, please
   check the <hlink|guidelines|editorial-guidelines.tm> before.
 
+  The list of all the articles in the website is
+  <hlink|here|list-articles.tm>.
+
   <section*|Collections >
 
   <with|font-shape|italic|<small|These articles contain collections of stuff,
