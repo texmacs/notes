@@ -37,6 +37,8 @@
 
   <hlink|Community links|community.tm>
 
+  <hlink|Status of plugins for <TeXmacs>|plugin-status.tm>
+
   <section*|Miscellanea>
 
   <with|font-shape|italic|<small|Self-contained, one shot, material on
