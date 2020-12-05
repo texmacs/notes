@@ -112,7 +112,7 @@
 
   A new group of tags <scm|comment-tag> is defined which contains both markup
   elements and they are declared as variants, and also as similar tags
-  <todo|We need to conver the <with|font-shape|italic|variant> and
+  <todo|We need to cover the <with|font-shape|italic|variant> and
   <with|font-shape|italic|similar> concepts in another article>.
 
   On the procedural side, the available actions on comments, is made
@@ -372,7 +372,830 @@
     </surround>>>>>>
   </tm-fragment>
 
-  \;
+  <section*|Gory details>
+
+  Ok, now things get serious. The actual implementation of
+  <markup|hide-comment> require some low-level tinkering in the typesetter.
+  This will be fixed (hopefully) in the future, in such a way that the
+  behaviour of the markup can be controlled via DRD declarations in the
+  stylesheet language. Unfortunately this is not yet the case and we have to
+  modify the C++ code.
+
+  The most basic change is to describe the behaviour of the markup with
+  respect to multi-paragraph material. In <shell|src/Kernel/Types/tree.cpp>
+  we have to modify the <cpp|is_multi_paragraph> function as follows:
+
+  <\small>
+    <\cpp-code>
+      bool
+
+      is_multi_paragraph (tree t) {
+
+      \ \ switch (L(t)) {
+
+      \ \ case DOCUMENT:
+
+      \ \ \ \ return true;
+
+      \ \ case SURROUND:
+
+      \ \ \ \ return is_multi_paragraph (t[2]);
+
+      \ \ case DATOMS:
+
+      \ \ case DLINES:
+
+      \ \ case DPAGES:
+
+      \ \ case WITH:
+
+      \ \ case MARK:
+
+      \ \ case EXPAND_AS:
+
+      \ \ case STYLE_WITH:
+
+      \ \ case VAR_STYLE_WITH:
+
+      \ \ case STYLE_ONLY:
+
+      \ \ case VAR_STYLE_ONLY:
+
+      \ \ case ACTIVE:
+
+      \ \ case VAR_ACTIVE:
+
+      \ \ \ \ return is_multi_paragraph (t[N(t)-1]);
+
+      \ \ case VAR_INCLUDE:
+
+      \ \ \ \ return true;
+
+      \ \ case WITH_PACKAGE:
+
+      \ \ \ \ return is_multi_paragraph (t[N(t)-1]);
+
+      \ \ case LOCUS:
+
+      \ \ case CANVAS:
+
+      \ \ \ \ return is_multi_paragraph (t[N(t)-1]);
+
+      \ \ default:
+
+      \ \ \ \ {
+
+      \ \ \ \ \ \ static hashset\<less\>tree_label\<gtr\> inline_set; //
+      FIXME: use drd
+
+      \ \ \ \ \ \ if (N(inline_set) == 0) {
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("footnote"));
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("footnote-anchor"));
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("note-footnote"));
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("note-footnote*"));
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("hide-comment"));
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("script-input"));
+
+      \ \ \ \ \ \ \ \ inline_set-\<gtr\>insert (make_tree_label
+      ("converter-input"));
+
+      \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ if (L(t) \<less\> START_EXTENSIONS) return false;
+
+      \ \ \ \ \ \ else if (inline_set-\<gtr\>contains (L(t))) return false;
+
+      \ \ \ \ \ \ else {
+
+      \ \ \ \ \ \ \ \ int i, n= N(t);
+
+      \ \ \ \ \ \ \ \ for (i=0; i\<less\>n; i++)
+
+      \ \ \ \ \ \ \ \ \ \ if (is_multi_paragraph (t[i]))
+
+      \ \ \ \ \ \ \ \ \ \ \ \ return true;
+
+      \ \ \ \ \ \ \ \ return false;
+
+      \ \ \ \ \ \ }
+
+      \ \ \ \ }
+
+      \ \ }
+
+      }
+    </cpp-code>
+  </small>
+
+  in particular note the line:
+
+  <\cpp-code>
+    inline_set-\<gtr\>insert (make_tree_label ("hide-comment"));
+  </cpp-code>
+
+  This in order to make <markup|hide-comment> override the default behaviour
+  for non-primitive markup which is to return <cpp|true> if all the arguments
+  returns <cpp|true> to <cpp|is_multi_paragraph>. <todo|Explain consequences
+  of this predicate> \ \ 
+
+  We have also to modify <shell|src/Edit/Replace/edit_select.cpp>:
+
+  <\small>
+    <\cpp-code>
+      path
+
+      edit_select_rep::focus_get (bool skip_flag) {
+
+      \ \ //cout \<less\>\<less\> "Search focus " \<less\>\<less\> focus_p
+      \<less\>\<less\> ", " \<less\>\<less\> skip_flag \<less\>\<less\>
+      "\\n";
+
+      \ \ if (!is_nil (focus_p))
+
+      \ \ \ \ return focus_search (focus_p, skip_flag, false);
+
+      \ \ if (selection_active_any ())
+
+      \ \ \ \ return focus_search (selection_get_path (), skip_flag, false);
+
+      \ \ else {
+
+      \ \ \ \ tree st= subtree (et, path_up (tp));
+
+      \ \ \ \ if (is_compound (st, "draw-over")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "draw-under")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "float")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "wide-float")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "footnote")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "footnote-anchor")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "wide-footnote")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "note-footnote")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "note-footnote*")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "hide-comment")) skip_flag= false;
+
+      \ \ \ \ if (is_compound (st, "cite-detail")) skip_flag= false;
+
+      \ \ \ \ return focus_search (path_up (tp), skip_flag, true);
+
+      \ \ }
+
+      }
+    </cpp-code>
+  </small>
+
+  and <shell|src/Edit/Modify/edit_dynamic.cpp>:
+
+  <\small>
+    <\cpp-code>
+      bool
+
+      edit_dynamic_rep::is_multi_paragraph_macro (tree t, bool pure) {
+
+      \ \ int n= arity (t);
+
+      \ \ if (is_document (t) \|\| is_func (t, PARA) \|\| is_func (t,
+      SURROUND))
+
+      \ \ \ \ return true;
+
+      \ \ if (is_func (t, MACRO) \|\| is_func (t, WITH) \|\|
+
+      \ \ \ \ \ \ is_func (t, LOCUS) \|\|
+
+      \ \ \ \ \ \ is_func (t, CANVAS) \|\| is_func (t, ORNAMENT) \|\| is_func
+      (t, ART_BOX))
+
+      \ \ \ \ return is_multi_paragraph_macro (t [n-1], pure);
+
+      \ \ if (is_extension (t) &&
+
+      \ \ \ \ \ \ !is_compound (t, "footnote") &&
+
+      \ \ \ \ \ \ !is_compound (t, "footnote-anchor") &&
+
+      \ \ \ \ \ \ !is_compound (t, "note-footnote") &&
+
+      \ \ \ \ \ \ !is_compound (t, "note-footnote*") &&
+
+      \ \ \ \ \ \ !is_compound (t, "hide-comment")) {
+
+      \ \ \ \ int i;
+
+      \ \ \ \ for (i=1; i\<less\>n; i++)
+
+      \ \ \ \ \ \ if (is_multi_paragraph_macro (t[i], pure))
+
+      \ \ \ \ \ \ \ \ return true;
+
+      \ \ \ \ tree f= get_env_value (as_string (L(t)));
+
+      \ \ \ \ return is_multi_paragraph_macro (f, pure);
+
+      \ \ }
+
+      \ \ if (!pure)
+
+      \ \ \ \ if (is_func (t, ARG))
+
+      \ \ \ \ \ \ return true;
+
+      \ \ return false;
+
+      }
+    </cpp-code>
+  </small>
+
+  <\small>
+    <\cpp-code>
+      void
+
+      edit_dynamic_rep::make_compound (tree_label l, int n= -1) {
+
+      \ \ //cout \<less\>\<less\> "Make compound " \<less\>\<less\> as_string
+      (l) \<less\>\<less\> ", " \<less\>\<less\> n \<less\>\<less\> "\\n";
+
+      \ \ eval ("(use-modules (generic generic-edit))");
+
+      \ \ if (n == -1) {
+
+      \ \ \ \ for (n=0; true; n++) {
+
+      \ \ \ \ \ \ if (drd-\<gtr\>correct_arity (l, n) &&
+
+      \ \ \ \ \ \ \ \ \ \ ((n\<gtr\>0) \|\| (drd-\<gtr\>get_arity_mode (l) ==
+      ARITY_NORMAL))) break;
+
+      \ \ \ \ \ \ if (n == 100) return;
+
+      \ \ \ \ }
+
+      \ \ }
+
+      \;
+
+      \ \ tree t (l, n);
+
+      \ \ path p (0, 0);
+
+      \ \ int \ acc=0;
+
+      \ \ for (; acc\<less\>n; acc++)
+
+      \ \ \ \ if (drd-\<gtr\>is_accessible_child (t, acc))
+
+      \ \ \ \ \ \ break;
+
+      \ \ if (acc\<less\>n) p-\<gtr\>item= acc;
+
+      \ \ if (n == 0) insert_tree (t, 1);
+
+      \ \ else if (is_with_like (t) && as_bool (call
+      ("with-like-check-insert", t)));
+
+      \ \ else {
+
+      \ \ \ \ string s= as_string (l);
+
+      \ \ \ \ tree f= get_env_value (s);
+
+      \ \ \ \ bool block_macro= (N(f) == 2) && is_multi_paragraph_macro (f,
+      true);
+
+      \ \ \ \ bool large_macro= (N(f) == 2) && is_multi_paragraph_macro (f,
+      false);
+
+      \ \ \ \ bool table_macro= (N(f) == 2) && contains_table_format (f[1],
+      f[0]);
+
+      \ \ \ \ // FIXME: why do we take the precaution N(f) == 2 ?
+
+      \ \ \ \ if (s == "explain") block_macro= true;
+
+      \;
+
+      \ \ \ \ tree sel= "";
+
+      \ \ \ \ if (selection_active_small () \|\|
+
+      \ \ \ \ \ \ \ \ (large_macro && selection_active_normal ()))
+
+      \ \ \ \ \ \ sel= selection_get_cut ();
+
+      \ \ \ \ else if (is_with_like (t) && selection_active_normal ()) {
+
+      \ \ \ \ \ \ sel= selection_get_cut ();
+
+      \ \ \ \ \ \ t[n-1]= sel;
+
+      \ \ \ \ \ \ insert_tree (t, p);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ }
+
+      \ \ \ \ if ((block_macro && (!table_macro)) \|\|
+
+      \ \ \ \ \ \ \ \ (l == make_tree_label ("footnote")) \|\|
+
+      \ \ \ \ \ \ \ \ (l == make_tree_label ("footnote-anchor")) \|\|
+
+      \ \ \ \ \ \ \ \ (l == make_tree_label ("note-footnote")) \|\|
+
+      \ \ \ \ \ \ \ \ (l == make_tree_label ("note-footnote*")) \|\|
+
+      \ \ \ \ \ \ \ \ (l == make_tree_label ("hide-comment")))
+
+      \ \ \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ t[0]= tree (DOCUMENT, "");
+
+      \ \ \ \ \ \ \ \ p \ \ = path (0, 0, 0);
+
+      \ \ \ \ \ \ }
+
+      \ \ \ \ if (!drd-\<gtr\>all_accessible (l))
+
+      \ \ \ \ \ \ if (get_init_string (MODE) != "src" && !inside
+      ("show-preamble")) {
+
+      \ \ \ \ \ \ \ \ t= tree (INACTIVE, t);
+
+      \ \ \ \ \ \ \ \ p= path (0, p);
+
+      \ \ \ \ \ \ }
+
+      \ \ \ \ insert_tree (t, p);
+
+      \ \ \ \ if (table_macro) make_table (1, 1);
+
+      \ \ \ \ if (sel != "") insert_tree (sel, end (sel));
+
+      \ \ \ \ 
+
+      \ \ \ \ tree mess= concat ();
+
+      \ \ \ \ if (drd-\<gtr\>get_arity_mode (l) != ARITY_NORMAL)
+
+      \ \ \ \ \ \ mess= concat (kbd ("A-right"), ": insert argument");
+
+      \ \ \ \ if (!drd-\<gtr\>all_accessible (l)) {
+
+      \ \ \ \ \ \ if (mess != "") mess \<less\>\<less\> ", ";
+
+      \ \ \ \ \ \ mess \<less\>\<less\> kbd ("return") \<less\>\<less\> ":
+      activate";
+
+      \ \ \ \ }
+
+      \ \ \ \ if (mess == concat ()) mess= "Move to the right when finished";
+
+      \ \ \ \ set_message (mess, drd-\<gtr\>get_name (l));
+
+      \ \ }
+
+      }
+    </cpp-code>
+  </small>
+
+  And finally <shell|src/Edit/Modify/edit_delete.cpp>
+
+  <\small>
+    <\cpp-code>
+      void
+
+      edit_text_rep::remove_text_sub (bool forward) {
+
+      \ \ path p;
+
+      \ \ int \ last, rix;
+
+      \ \ tree t, u;
+
+      \ \ get_deletion_point (p, last, rix, t, u, forward);
+
+      \;
+
+      \ \ // multiparagraph delete
+
+      \ \ if (is_document (t)) {
+
+      \ \ \ \ if ((forward && (last \<gtr\>= rix)) \|\| ((!forward) && (last
+      == 0))) {
+
+      \ \ \ \ \ \ if (rp \<less\> p) {
+
+      \ \ \ \ \ \ \ \ tree u= subtree (et, path_up (p));
+
+      \ \ \ \ \ \ \ \ if (is_func (u, _FLOAT) \|\| is_func (u, WITH) \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ is_func (u, STYLE_WITH) \|\| is_func (u,
+      VAR_STYLE_WITH) \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ is_func (u, LOCUS) \|\| is_func (u, INCLUDE)
+      \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ is_extension (u))
+
+      \ \ \ \ \ \ \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ if (is_extension (u) && (N(u) \<gtr\> 1)) {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ int i, n= N(u);
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ bool empty= true;
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ for (i=0; i\<less\>n; i++)
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ empty= empty && ((u[i]=="") \|\|
+      (u[i]==tree (DOCUMENT, "")));
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ if (!empty) {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if (forward) go_to (next_valid (et,
+      tp));
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else go_to (previous_valid (et, tp));
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ \ \ \ \ if (t == tree (DOCUMENT, "")) {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ if (is_func (u, _FLOAT) \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "footnote", 1) \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "footnote-anchor",
+      2) \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "note-footnote")
+      \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "note-footnote*")
+      \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "hide-comment")) {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assign (path_up (p), "");
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ correct (path_up (p, 2));
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ else if (is_document (subtree (et, path_up
+      (p, 2))))
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assign (path_up (p), "");
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ else assign (path_up (p), tree (DOCUMENT,
+      ""));
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ if (is_func (subtree (et, path_up (p, 2)),
+      INACTIVE))
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ remove_structure (forward);
+
+      \ \ \ \ \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ \ \ \ \ else go_to_border (path_up (p), !forward);
+
+      \ \ \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ else if (is_func (u, TABLE) \|\| is_func (u, SUBTABLE)
+      \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_func (u, CELL) \|\| is_func (u,
+      ROW) \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_func (u, TFORMAT)) {
+
+      \ \ \ \ \ \ \ \ \ \ if (t == tree (DOCUMENT, ""))
+
+      \ \ \ \ \ \ \ \ \ \ \ \ back_in_table (u, p, forward);
+
+      \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ else if (is_func (u, DOCUMENT_AT))
+
+      \ \ \ \ \ \ \ \ \ \ back_in_text_at (u, p, forward);
+
+      \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ }
+
+      \ \ \ \ else {
+
+      \ \ \ \ \ \ int l1= forward? last: last-1;
+
+      \ \ \ \ \ \ int l2= forward? last+1: last;
+
+      \ \ \ \ \ \ if (is_multi_paragraph_or_sectional (subtree (et, p * l1))
+      \|\|
+
+      \ \ \ \ \ \ \ \ \ \ is_multi_paragraph_or_sectional (subtree (et, p *
+      l2)))
+
+      \ \ \ \ \ \ \ \ {
+
+      \ \ \ \ \ \ \ \ \ \ if (subtree (et, p * l1) == "") remove (p * l1, 1);
+
+      \ \ \ \ \ \ \ \ \ \ else {
+
+      \ \ \ \ \ \ \ \ \ \ \ \ if (subtree (et, p * l2) == "") remove (p * l2,
+      1);
+
+      \ \ \ \ \ \ \ \ \ \ \ \ if (!forward) go_to_end (p * l1);
+
+      \ \ \ \ \ \ \ \ \ \ \ \ else if (last \<less\> N (subtree (et, p)) - 1)
+      go_to_start (p * l2);
+
+      \ \ \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ else remove_return (p * l1);
+
+      \ \ \ \ }
+
+      \ \ \ \ return;
+
+      \ \ }
+
+      \;
+
+      \ \ // deleting text
+
+      \ \ if (forward && is_atomic (t) && (last != rix)) {
+
+      \ \ \ \ language lan= get_env_language ();
+
+      \ \ \ \ int end= last;
+
+      \ \ \ \ tm_char_forwards (t-\<gtr\>label, end);
+
+      \ \ \ \ remove (p * last, end-last);
+
+      \ \ \ \ correct (path_up (p));
+
+      \ \ \ \ return;
+
+      \ \ }
+
+      \;
+
+      \ \ if ((!forward) && is_atomic (t) && (last != 0)) {
+
+      \ \ \ \ language lan= get_env_language ();
+
+      \ \ \ \ int start= last;
+
+      \ \ \ \ tm_char_backwards (t-\<gtr\>label, start);
+
+      \ \ \ \ remove (p * start, last-start);
+
+      \ \ \ \ correct (path_up (p));
+
+      \ \ \ \ return;
+
+      \ \ }
+
+      \;
+
+      \ \ // deletion governed by parent t
+
+      \ \ if (last == (forward? 0: 1))
+
+      \ \ \ \ switch (L(t)) {
+
+      \ \ \ \ case RAW_DATA:
+
+      \ \ \ \ case HSPACE:
+
+      \ \ \ \ case VAR_VSPACE:
+
+      \ \ \ \ case VSPACE:
+
+      \ \ \ \ case SPACE:
+
+      \ \ \ \ case HTAB:
+
+      \ \ \ \ \ \ back_monolithic (p);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case AROUND:
+
+      \ \ \ \ case VAR_AROUND:
+
+      \ \ \ \ case BIG_AROUND:
+
+      \ \ \ \ \ \ back_around (t, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case LEFT:
+
+      \ \ \ \ case MID:
+
+      \ \ \ \ case RIGHT:
+
+      \ \ \ \ case BIG:
+
+      \ \ \ \ \ \ back_monolithic (p);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case LPRIME:
+
+      \ \ \ \ case RPRIME:
+
+      \ \ \ \ \ \ back_prime (t, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case WIDE:
+
+      \ \ \ \ case VAR_WIDE:
+
+      \ \ \ \ \ \ go_to_border (p * 0, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case TFORMAT:
+
+      \ \ \ \ case TABLE:
+
+      \ \ \ \ case ROW:
+
+      \ \ \ \ case CELL:
+
+      \ \ \ \ case SUBTABLE:
+
+      \ \ \ \ \ \ back_table (p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case WITH:
+
+      \ \ \ \ case STYLE_WITH:
+
+      \ \ \ \ case VAR_STYLE_WITH:
+
+      \ \ \ \ case LOCUS:
+
+      \ \ \ \ \ \ go_to_border (p * (N(t) - 1), forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case VALUE:
+
+      \ \ \ \ case QUOTE_VALUE:
+
+      \ \ \ \ case ARG:
+
+      \ \ \ \ case QUOTE_ARG:
+
+      \ \ \ \ \ \ if (N(t) == 1) back_monolithic (p);
+
+      \ \ \ \ \ \ else back_general (p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ default:
+
+      \ \ \ \ \ \ if (is_compound (t, "separating-space", 1)) back_monolithic
+      (p);
+
+      \ \ \ \ \ \ else if (is_compound (t, "application-space", 1))
+      back_monolithic (p);
+
+      \ \ \ \ \ \ else back_general (p, forward);
+
+      \ \ \ \ \ \ break;
+
+      \ \ \ \ }
+
+      \;
+
+      \ \ // deletion depends on children u
+
+      \ \ if (last == (forward? rix: 0)) {
+
+      \ \ \ \ switch (L (u)) {
+
+      \ \ \ \ case AROUND:
+
+      \ \ \ \ case VAR_AROUND:
+
+      \ \ \ \ case BIG_AROUND:
+
+      \ \ \ \ \ \ back_in_around (u, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case LONG_ARROW:
+
+      \ \ \ \ \ \ back_in_long_arrow (u, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case WIDE:
+
+      \ \ \ \ case VAR_WIDE:
+
+      \ \ \ \ \ \ back_in_wide (u, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case TREE:
+
+      \ \ \ \ \ \ back_in_tree (u, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case TFORMAT:
+
+      \ \ \ \ case TABLE:
+
+      \ \ \ \ case ROW:
+
+      \ \ \ \ case CELL:
+
+      \ \ \ \ case SUBTABLE:
+
+      \ \ \ \ \ \ back_in_table (u, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ case WITH:
+
+      \ \ \ \ case STYLE_WITH:
+
+      \ \ \ \ case VAR_STYLE_WITH:
+
+      \ \ \ \ case LOCUS:
+
+      \ \ \ \ \ \ back_in_with (u, p, forward);
+
+      \ \ \ \ \ \ return;
+
+      \ \ \ \ default:
+
+      \ \ \ \ \ \ if (is_graphical_text (u))
+
+      \ \ \ \ \ \ \ \ back_in_text_at (u, p, forward);
+
+      \ \ \ \ \ \ else if (is_compound (u, "cell-inert") \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "cell-input") \|\|
+
+      \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is_compound (u, "cell-output")) {
+
+      \ \ \ \ \ \ \ \ tree st= subtree (et, path_up (p, 2));
+
+      \ \ \ \ \ \ \ \ back_in_table (u, p, forward);
+
+      \ \ \ \ \ \ }
+
+      \ \ \ \ \ \ else
+
+      \ \ \ \ \ \ \ \ back_in_general (u, p, forward);
+
+      \ \ \ \ \ \ break;
+
+      \ \ \ \ }
+
+      \ \ }
+
+      }
+    </cpp-code>
+  </small>
 
   <hidden|dddd>
 </body>
@@ -391,6 +1214,7 @@
     <associate|auto-3|<tuple|?|?|template.tm>>
     <associate|auto-4|<tuple|?|?|template.tm>>
     <associate|auto-5|<tuple|?|?|template.tm>>
+    <associate|auto-6|<tuple|?|?|template.tm>>
   </collection>
 </references>
 

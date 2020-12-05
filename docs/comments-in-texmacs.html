@@ -258,7 +258,7 @@
     <p>
       A new group of tags <tt class="verbatim scheme">comment-tag</tt> is defined which
       contains both markup elements and they are declared as variants, and
-      also as similar tags <font color="#800000">[We need to conver the <i>variant</i>
+      also as similar tags <font color="#800000">[We need to cover the <i>variant</i>
       and <i>similar</i> concepts in another article]</font>.
     </p>
     <p>
@@ -474,9 +474,426 @@
         color="blue">&gt;</font>
       </p>
     </div>
+    <h2 id="auto-6">Gory details<span style="margin-left: 1em"></span></h2>
     <p>
-      
+      Ok, now things get serious. The actual implementation of <font class="tmweb-markup">hide-comment</font>
+      require some low-level tinkering in the typesetter. This will be fixed
+      (hopefully) in the future, in such a way that the behaviour of the
+      markup can be controlled via DRD declarations in the stylesheet
+      language. Unfortunately this is not yet the case and we have to modify
+      the C++ code.
     </p>
+    <p>
+      The most basic change is to describe the behaviour of the markup with
+      respect to multi-paragraph material. In <tt class="verbatim">src/Kernel/Types/tree.cpp</tt>
+      we have to modify the <tt class="verbatim cpp">is_multi_paragraph</tt> function as
+      follows:
+    </p>
+    <font style="font-size: 90.0%"><div class="tmweb-code">
+      <pre class="verbatim cpp" xml:space="preserve">
+bool
+is_multi_paragraph (tree t) {
+  switch (L(t)) {
+  case DOCUMENT:
+    return true;
+  case SURROUND:
+    return is_multi_paragraph (t[2]);
+  case DATOMS:
+  case DLINES:
+  case DPAGES:
+  case WITH:
+  case MARK:
+  case EXPAND_AS:
+  case STYLE_WITH:
+  case VAR_STYLE_WITH:
+  case STYLE_ONLY:
+  case VAR_STYLE_ONLY:
+  case ACTIVE:
+  case VAR_ACTIVE:
+    return is_multi_paragraph (t[N(t)-1]);
+  case VAR_INCLUDE:
+    return true;
+  case WITH_PACKAGE:
+    return is_multi_paragraph (t[N(t)-1]);
+  case LOCUS:
+  case CANVAS:
+    return is_multi_paragraph (t[N(t)-1]);
+  default:
+    {
+      static hashset&lt;tree_label&gt; inline_set; // FIXME: use drd
+      if (N(inline_set) == 0) {
+        inline_set-&gt;insert (make_tree_label (&quot;footnote&quot;));
+        inline_set-&gt;insert (make_tree_label (&quot;footnote-anchor&quot;));
+        inline_set-&gt;insert (make_tree_label (&quot;note-footnote&quot;));
+        inline_set-&gt;insert (make_tree_label (&quot;note-footnote*&quot;));
+        inline_set-&gt;insert (make_tree_label (&quot;hide-comment&quot;));
+        inline_set-&gt;insert (make_tree_label (&quot;script-input&quot;));
+        inline_set-&gt;insert (make_tree_label (&quot;converter-input&quot;));
+      }
+      if (L(t) &lt; START_EXTENSIONS) return false;
+      else if (inline_set-&gt;contains (L(t))) return false;
+      else {
+        int i, n= N(t);
+        for (i=0; i&lt;n; i++)
+          if (is_multi_paragraph (t[i]))
+            return true;
+        return false;
+      }
+    }
+  }
+}</pre>
+    </div></font>
+    <p>
+      in particular note the line:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim cpp" xml:space="preserve">
+inline_set-&gt;insert (make_tree_label (&quot;hide-comment&quot;));</pre>
+    </div>
+    <p>
+      This in order to make <font class="tmweb-markup">hide-comment</font> override the
+      default behaviour for non-primitive markup which is to return <tt class="verbatim cpp">true</tt>
+      if all the arguments returns <tt class="verbatim cpp">true</tt> to <tt class="verbatim cpp">is_multi_paragraph</tt>.
+      <font color="#800000">[Explain consequences of this predicate]</font>   
+    </p>
+    <p>
+      We have also to modify <tt class="verbatim">src/Edit/Replace/edit_select.cpp</tt>:
+    </p>
+    <font style="font-size: 90.0%"><div class="tmweb-code">
+      <pre class="verbatim cpp" xml:space="preserve">
+path
+edit_select_rep::focus_get (bool skip_flag) {
+  //cout &lt;&lt; &quot;Search focus &quot; &lt;&lt; focus_p &lt;&lt; &quot;, &quot; &lt;&lt; skip_flag &lt;&lt; &quot;\n&quot;;
+  if (!is_nil (focus_p))
+    return focus_search (focus_p, skip_flag, false);
+  if (selection_active_any ())
+    return focus_search (selection_get_path (), skip_flag, false);
+  else {
+    tree st= subtree (et, path_up (tp));
+    if (is_compound (st, &quot;draw-over&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;draw-under&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;float&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;wide-float&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;footnote&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;footnote-anchor&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;wide-footnote&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;note-footnote&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;note-footnote*&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;hide-comment&quot;)) skip_flag= false;
+    if (is_compound (st, &quot;cite-detail&quot;)) skip_flag= false;
+    return focus_search (path_up (tp), skip_flag, true);
+  }
+}</pre>
+    </div></font>
+    <p>
+      and <tt class="verbatim">src/Edit/Modify/edit_dynamic.cpp</tt>:
+    </p>
+    <font style="font-size: 90.0%"><div class="tmweb-code">
+      <pre class="verbatim cpp" xml:space="preserve">
+bool
+edit_dynamic_rep::is_multi_paragraph_macro (tree t, bool pure) {
+  int n= arity (t);
+  if (is_document (t) || is_func (t, PARA) || is_func (t, SURROUND))
+    return true;
+  if (is_func (t, MACRO) || is_func (t, WITH) ||
+      is_func (t, LOCUS) ||
+      is_func (t, CANVAS) || is_func (t, ORNAMENT) || is_func (t, ART_BOX))
+    return is_multi_paragraph_macro (t [n-1], pure);
+  if (is_extension (t) &amp;&amp;
+      !is_compound (t, &quot;footnote&quot;) &amp;&amp;
+      !is_compound (t, &quot;footnote-anchor&quot;) &amp;&amp;
+      !is_compound (t, &quot;note-footnote&quot;) &amp;&amp;
+      !is_compound (t, &quot;note-footnote*&quot;) &amp;&amp;
+      !is_compound (t, &quot;hide-comment&quot;)) {
+    int i;
+    for (i=1; i&lt;n; i++)
+      if (is_multi_paragraph_macro (t[i], pure))
+        return true;
+    tree f= get_env_value (as_string (L(t)));
+    return is_multi_paragraph_macro (f, pure);
+  }
+  if (!pure)
+    if (is_func (t, ARG))
+      return true;
+  return false;
+}</pre>
+    </div></font>
+    <font style="font-size: 90.0%"><div class="tmweb-code">
+      <pre class="verbatim cpp" xml:space="preserve">
+void
+edit_dynamic_rep::make_compound (tree_label l, int n= -1) {
+  //cout &lt;&lt; &quot;Make compound &quot; &lt;&lt; as_string (l) &lt;&lt; &quot;, &quot; &lt;&lt; n &lt;&lt; &quot;\n&quot;;
+  eval (&quot;(use-modules (generic generic-edit))&quot;);
+  if (n == -1) {
+    for (n=0; true; n++) {
+      if (drd-&gt;correct_arity (l, n) &amp;&amp;
+          ((n&gt;0) || (drd-&gt;get_arity_mode (l) == ARITY_NORMAL))) break;
+      if (n == 100) return;
+    }
+  }
+
+  tree t (l, n);
+  path p (0, 0);
+  int  acc=0;
+  for (; acc&lt;n; acc++)
+    if (drd-&gt;is_accessible_child (t, acc))
+      break;
+  if (acc&lt;n) p-&gt;item= acc;
+  if (n == 0) insert_tree (t, 1);
+  else if (is_with_like (t) &amp;&amp; as_bool (call (&quot;with-like-check-insert&quot;, t)));
+  else {
+    string s= as_string (l);
+    tree f= get_env_value (s);
+    bool block_macro= (N(f) == 2) &amp;&amp; is_multi_paragraph_macro (f, true);
+    bool large_macro= (N(f) == 2) &amp;&amp; is_multi_paragraph_macro (f, false);
+    bool table_macro= (N(f) == 2) &amp;&amp; contains_table_format (f[1], f[0]);
+    // FIXME: why do we take the precaution N(f) == 2 ?
+    if (s == &quot;explain&quot;) block_macro= true;
+
+    tree sel= &quot;&quot;;
+    if (selection_active_small () ||
+        (large_macro &amp;&amp; selection_active_normal ()))
+      sel= selection_get_cut ();
+    else if (is_with_like (t) &amp;&amp; selection_active_normal ()) {
+      sel= selection_get_cut ();
+      t[n-1]= sel;
+      insert_tree (t, p);
+      return;
+    }
+    if ((block_macro &amp;&amp; (!table_macro)) ||
+        (l == make_tree_label (&quot;footnote&quot;)) ||
+        (l == make_tree_label (&quot;footnote-anchor&quot;)) ||
+        (l == make_tree_label (&quot;note-footnote&quot;)) ||
+        (l == make_tree_label (&quot;note-footnote*&quot;)) ||
+        (l == make_tree_label (&quot;hide-comment&quot;)))
+      {
+        t[0]= tree (DOCUMENT, &quot;&quot;);
+        p   = path (0, 0, 0);
+      }
+    if (!drd-&gt;all_accessible (l))
+      if (get_init_string (MODE) != &quot;src&quot; &amp;&amp; !inside (&quot;show-preamble&quot;)) {
+        t= tree (INACTIVE, t);
+        p= path (0, p);
+      }
+    insert_tree (t, p);
+    if (table_macro) make_table (1, 1);
+    if (sel != &quot;&quot;) insert_tree (sel, end (sel));
+    
+    tree mess= concat ();
+    if (drd-&gt;get_arity_mode (l) != ARITY_NORMAL)
+      mess= concat (kbd (&quot;A-right&quot;), &quot;: insert argument&quot;);
+    if (!drd-&gt;all_accessible (l)) {
+      if (mess != &quot;&quot;) mess &lt;&lt; &quot;, &quot;;
+      mess &lt;&lt; kbd (&quot;return&quot;) &lt;&lt; &quot;: activate&quot;;
+    }
+    if (mess == concat ()) mess= &quot;Move to the right when finished&quot;;
+    set_message (mess, drd-&gt;get_name (l));
+  }
+}</pre>
+    </div></font>
+    <p>
+      And finally <tt class="verbatim">src/Edit/Modify/edit_delete.cpp</tt>
+    </p>
+    <font style="font-size: 90.0%"><div class="tmweb-code">
+      <pre class="verbatim cpp" xml:space="preserve">
+void
+edit_text_rep::remove_text_sub (bool forward) {
+  path p;
+  int  last, rix;
+  tree t, u;
+  get_deletion_point (p, last, rix, t, u, forward);
+
+  // multiparagraph delete
+  if (is_document (t)) {
+    if ((forward &amp;&amp; (last &gt;= rix)) || ((!forward) &amp;&amp; (last == 0))) {
+      if (rp &lt; p) {
+        tree u= subtree (et, path_up (p));
+        if (is_func (u, _FLOAT) || is_func (u, WITH) ||
+            is_func (u, STYLE_WITH) || is_func (u, VAR_STYLE_WITH) ||
+            is_func (u, LOCUS) || is_func (u, INCLUDE) ||
+            is_extension (u))
+          {
+            if (is_extension (u) &amp;&amp; (N(u) &gt; 1)) {
+              int i, n= N(u);
+              bool empty= true;
+              for (i=0; i&lt;n; i++)
+                empty= empty &amp;&amp; ((u[i]==&quot;&quot;) || (u[i]==tree (DOCUMENT, &quot;&quot;)));
+              if (!empty) {
+                if (forward) go_to (next_valid (et, tp));
+                else go_to (previous_valid (et, tp));
+                return;
+              }
+            }
+            if (t == tree (DOCUMENT, &quot;&quot;)) {
+              if (is_func (u, _FLOAT) ||
+                  is_compound (u, &quot;footnote&quot;, 1) ||
+                  is_compound (u, &quot;footnote-anchor&quot;, 2) ||
+                  is_compound (u, &quot;note-footnote&quot;) ||
+                  is_compound (u, &quot;note-footnote*&quot;) ||
+                  is_compound (u, &quot;hide-comment&quot;)) {
+                assign (path_up (p), &quot;&quot;);
+                correct (path_up (p, 2));
+              }
+              else if (is_document (subtree (et, path_up (p, 2))))
+                assign (path_up (p), &quot;&quot;);
+              else assign (path_up (p), tree (DOCUMENT, &quot;&quot;));
+              if (is_func (subtree (et, path_up (p, 2)), INACTIVE))
+                remove_structure (forward);
+            }
+            else go_to_border (path_up (p), !forward);
+          }
+        else if (is_func (u, TABLE) || is_func (u, SUBTABLE) ||
+                 is_func (u, CELL) || is_func (u, ROW) ||
+                 is_func (u, TFORMAT)) {
+          if (t == tree (DOCUMENT, &quot;&quot;))
+            back_in_table (u, p, forward);
+        }
+        else if (is_func (u, DOCUMENT_AT))
+          back_in_text_at (u, p, forward);
+      }
+      return;
+    }
+    else {
+      int l1= forward? last: last-1;
+      int l2= forward? last+1: last;
+      if (is_multi_paragraph_or_sectional (subtree (et, p * l1)) ||
+          is_multi_paragraph_or_sectional (subtree (et, p * l2)))
+        {
+          if (subtree (et, p * l1) == &quot;&quot;) remove (p * l1, 1);
+          else {
+            if (subtree (et, p * l2) == &quot;&quot;) remove (p * l2, 1);
+            if (!forward) go_to_end (p * l1);
+            else if (last &lt; N (subtree (et, p)) - 1) go_to_start (p * l2);
+          }
+        }
+      else remove_return (p * l1);
+    }
+    return;
+  }
+
+  // deleting text
+  if (forward &amp;&amp; is_atomic (t) &amp;&amp; (last != rix)) {
+    language lan= get_env_language ();
+    int end= last;
+    tm_char_forwards (t-&gt;label, end);
+    remove (p * last, end-last);
+    correct (path_up (p));
+    return;
+  }
+
+  if ((!forward) &amp;&amp; is_atomic (t) &amp;&amp; (last != 0)) {
+    language lan= get_env_language ();
+    int start= last;
+    tm_char_backwards (t-&gt;label, start);
+    remove (p * start, last-start);
+    correct (path_up (p));
+    return;
+  }
+
+  // deletion governed by parent t
+  if (last == (forward? 0: 1))
+    switch (L(t)) {
+    case RAW_DATA:
+    case HSPACE:
+    case VAR_VSPACE:
+    case VSPACE:
+    case SPACE:
+    case HTAB:
+      back_monolithic (p);
+      return;
+    case AROUND:
+    case VAR_AROUND:
+    case BIG_AROUND:
+      back_around (t, p, forward);
+      return;
+    case LEFT:
+    case MID:
+    case RIGHT:
+    case BIG:
+      back_monolithic (p);
+      return;
+    case LPRIME:
+    case RPRIME:
+      back_prime (t, p, forward);
+      return;
+    case WIDE:
+    case VAR_WIDE:
+      go_to_border (p * 0, forward);
+      return;
+    case TFORMAT:
+    case TABLE:
+    case ROW:
+    case CELL:
+    case SUBTABLE:
+      back_table (p, forward);
+      return;
+    case WITH:
+    case STYLE_WITH:
+    case VAR_STYLE_WITH:
+    case LOCUS:
+      go_to_border (p * (N(t) - 1), forward);
+      return;
+    case VALUE:
+    case QUOTE_VALUE:
+    case ARG:
+    case QUOTE_ARG:
+      if (N(t) == 1) back_monolithic (p);
+      else back_general (p, forward);
+      return;
+    default:
+      if (is_compound (t, &quot;separating-space&quot;, 1)) back_monolithic (p);
+      else if (is_compound (t, &quot;application-space&quot;, 1)) back_monolithic (p);
+      else back_general (p, forward);
+      break;
+    }
+
+  // deletion depends on children u
+  if (last == (forward? rix: 0)) {
+    switch (L (u)) {
+    case AROUND:
+    case VAR_AROUND:
+    case BIG_AROUND:
+      back_in_around (u, p, forward);
+      return;
+    case LONG_ARROW:
+      back_in_long_arrow (u, p, forward);
+      return;
+    case WIDE:
+    case VAR_WIDE:
+      back_in_wide (u, p, forward);
+      return;
+    case TREE:
+      back_in_tree (u, p, forward);
+      return;
+    case TFORMAT:
+    case TABLE:
+    case ROW:
+    case CELL:
+    case SUBTABLE:
+      back_in_table (u, p, forward);
+      return;
+    case WITH:
+    case STYLE_WITH:
+    case VAR_STYLE_WITH:
+    case LOCUS:
+      back_in_with (u, p, forward);
+      return;
+    default:
+      if (is_graphical_text (u))
+        back_in_text_at (u, p, forward);
+      else if (is_compound (u, &quot;cell-inert&quot;) ||
+               is_compound (u, &quot;cell-input&quot;) ||
+               is_compound (u, &quot;cell-output&quot;)) {
+        tree st= subtree (et, path_up (p, 2));
+        back_in_table (u, p, forward);
+      }
+      else
+        back_in_general (u, p, forward);
+      break;
+    }
+  }
+}</pre>
+    </div></font>
     <div class="toggle" style="display: none">
       dddd
     </div>
