@@ -9,7 +9,10 @@
 
   <notes-header>
 
-  <chapter*|Status of Plugins for GNU <TeXmacs>>
+  <chapter*|Status of Plugins for <TeXmacs>>
+
+  <notes-abstract|We review the current status and limitations of the various
+  plugins on Windows/Mac/Linux.>
 
   <\big-table|<tabular|<tformat|<cwith|1|1|1|-1|cell-background|pastel
   blue>|<cwith|1|1|1|1|cell-background|pastel
@@ -66,7 +69,7 @@
 
       <space|1em>plugin_version desc,
 
-      <space|1em>system_version desc\
+      <space|1em>system_version desc
     </code*>
   </itemize>
 
