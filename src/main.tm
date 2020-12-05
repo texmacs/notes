@@ -39,6 +39,8 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
+  <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
+
   <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
 
   <hlink|Embedding graphics composed with Scheme into
@@ -59,9 +61,6 @@
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
 
   <section*|Developers' notes>
-
-  <hlink|Build <TeXmacs> using CMake and Homebrew on
-  macOS|build-using-cmake-and-homebrew-on-macos.tm>
 
   <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
 
