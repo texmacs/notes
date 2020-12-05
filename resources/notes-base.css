@@ -715,3 +715,18 @@ code {
     color: blue;
     font-family: 'Linux Biolinum', sans-serif;
 }
+
+
+.tmweb-entry-date {
+    font-size: 70%;
+    float: right;
+    font-style: italic;
+}
+
+.tmweb-entry-abstract {
+    font-size: 50%;
+    color: darkslategrey;
+    padding-left:  5em;
+    display: block;
+    padding-bottom: 1em;
+}

@@ -90,11 +90,25 @@
     <style-with|src-compact|all|<html-div-class|notes-abstract|<arg|body>>>
   </macro>>
 
-  <assign|notes-entry|<\macro|file|title|abs|date>
-    <hlink|<arg|title>|<arg|file>><hflush><compound|small|[<arg|date>]>
+  <assign|notes-entry-date|<macro|date|<hflush><compound|very-small|[<arg|date>]>>>
 
-    <compound|tiny|<arg|abs>>
+  <assign|notes-entry-abstract|<\macro|abs>
+    <\with|color|dark grey|par-left|2fn>
+      <compound|tiny|<arg|abs>>
+    </with>
   </macro>>
+
+  <assign|notes-entry|<\macro|file|title|abs|date>
+    <hlink|<arg|title>|<arg|file>><notes-entry-date|<arg|date>>
+
+    <notes-entry-abstract|<arg|abs>>
+  </macro>>
+
+  \;
+
+  <assign|tmhtml-notes-entry-date|<macro|date|<html-class|tmweb-entry-date|<arg|date>>>>
+
+  <assign|tmhtml-notes-entry-abstract|<macro|abs|<compound|html-div-class|tmweb-entry-abstract|<arg|abs>>>>
 
   <\active*>
     <\src-comment>
@@ -123,6 +137,8 @@
   <assign|tmhtml-cpp|<macro|body|<html-class|cpp|<with|mode|prog|prog-language|cpp|font-family|rm|<arg|body>>>>>
 
   <assign|tmhtml-scm|<macro|body|<html-class|scheme|<with|mode|prog|prog-language|scheme|font-family|rm|<arg|body>>>>>
+
+  \;
 </body>
 
 <initial|<\collection>
