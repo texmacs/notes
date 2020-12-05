@@ -12,20 +12,26 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sat Dec \ 5 18:18:27
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sat Dec \ 5 23:35:41
   2020 UTC>
 
   <notes-entry|comments-in-texmacs.tm|Implementing comments in <TeXmacs>|We
   discuss the implementation of comments in <TeXmacs> documents. This is a
   new feature introduced by Joris in <tt|r13254> with some additions in
   subsequent revisions, the current description is based on revision
-  <tt|r13256>.|Sat Dec \ 5 15:08:36 2020 UTC>
+  <tt|r13256>.|Sat Dec \ 5 23:35:41 2020 UTC>
 
   <notes-entry|modular-scheme-graphics.tm|Modular graphics with
-  <name|Scheme>|(no abstract)|Wed Nov 25 23:41:43 2020 UTC>
+  <name|Scheme>|(no abstract)|Sat Dec \ 5 23:35:37 2020 UTC>
 
   <notes-entry|editorial-guidelines.tm|Editorial scope and author
-  guidelines|(no abstract)|Wed Nov 25 23:09:16 2020 UTC>
+  guidelines|(no abstract)|Sat Dec \ 5 23:35:37 2020 UTC>
+
+  <notes-entry|build-using-cmake-and-homebrew-on-macos.tm|Build <TeXmacs>
+  using CMake and Homebrew |This article serves as a guide for <TeXmacs>
+  contributors and developers on macOS. We talk about how to build and test
+  GNU <TeXmacs> on macOS using CMake and Homebrew.|Sat Dec \ 5 23:35:37 2020
+  UTC>
 
   <notes-entry|articles-wishes.tm|A wishlist for <TeXmacs> articles|It would
   be useful to have some short articles or tutorials covering the topics
@@ -34,13 +40,7 @@
   exercises to improve one own <TeXmacs> knowledge: learning by teaching. In
   case you manage to cover, even partially, one of the topic, please add a
   remark here to point to relevant material. If the topic is covered, move it
-  to the \PAlready covered\Q section.|Wed Nov 25 23:09:16 2020 UTC>
-
-  <notes-entry|build-using-cmake-and-homebrew-on-macos.tm|Build <TeXmacs>
-  using CMake and Homebrew |This article serves as a guide for <TeXmacs>
-  contributors and developers on macOS. We talk about how to build and test
-  GNU <TeXmacs> on macOS using CMake and Homebrew.|Sun Nov 22 23:20:02 2020
-  UTC>
+  to the \PAlready covered\Q section.|Sat Dec \ 5 23:35:37 2020 UTC>
 
   <notes-entry|wishlist.tm|Wishlist|This wishlist collects suggestions for
   improvements and nice ideas for addition to TeXmacs. These should be of
@@ -48,27 +48,27 @@
   meant for developers or technically savyy users to collect good ideas. It
   should be clear that the functionality is not already provided in some
   form. This wishlist must not be used for very broad and vague requests
-  (e.g. ``make the program more versatile and powerful").|Sun Nov 22 23:19:52
-  2020 UTC>
+  (e.g. ``make the program more versatile and powerful").|Sat Dec \ 5
+  23:35:28 2020 UTC>
 
   <notes-entry|website-builder-dialog.tm|Adding a dialog to build websites|In
   this article we document the construction of a user interface to the
-  website building facilities of <TeXmacs>.|Sun Nov 22 23:19:52 2020 UTC>
+  website building facilities of <TeXmacs>.|Sat Dec \ 5 23:35:28 2020 UTC>
 
   <notes-entry|scheme-graphics.tm|Composing TeXmacs graphics with Scheme|(no
-  abstract)|Sun Nov 22 23:19:52 2020 UTC>
+  abstract)|Sat Dec \ 5 23:35:28 2020 UTC>
 
   <notes-entry|scheme-graphics-embedding.tm|Embedding graphics composed with
-  Scheme into documents|(no abstract)|Sun Nov 22 23:19:52 2020 UTC>
+  Scheme into documents|(no abstract)|Sat Dec \ 5 23:35:28 2020 UTC>
 
   <notes-entry|customize-syntax-color.en.tm|Customizing the color of code
-  snippets|(no abstract)|Sun Nov 22 23:19:52 2020 UTC>
+  snippets|(no abstract)|Sat Dec \ 5 23:35:28 2020 UTC>
 
   <notes-entry|previews.tm|Implementing previews for link targets|(no
-  abstract)|Sat Nov 14 08:14:43 2020 UTC>
+  abstract)|Sat Dec \ 5 23:35:15 2020 UTC>
 
   <notes-entry|embedding-tikz-figures-short.tm|Example of TikZ figure
-  embedding within a document|(no abstract)|Sat Nov 14 08:14:43 2020 UTC>
+  embedding within a document|(no abstract)|Sat Dec \ 5 23:35:15 2020 UTC>
 
   <notes-entry|contribution-guide.tm|Contribution guide|(no abstract)|Thu Nov
   12 19:13:07 2020 UTC>
