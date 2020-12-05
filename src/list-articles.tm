@@ -12,7 +12,11 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sat Dec \ 5 23:35:41
+  <notes-entry|plugin-status.en.tm|Status of Plugins for <TeXmacs>|We review
+  the current status and limitations of the various plugins on
+  Windows/Mac/Linux.|Sat Dec \ 5 23:36:31 2020 UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sat Dec \ 5 23:36:31
   2020 UTC>
 
   <notes-entry|comments-in-texmacs.tm|Implementing comments in <TeXmacs>|We
