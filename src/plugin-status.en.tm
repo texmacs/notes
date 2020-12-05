@@ -1,4 +1,4 @@
-<TeXmacs|1.99.13>
+<TeXmacs|1.99.16>
 
 <style|notes>
 
@@ -10,6 +10,9 @@
   <notes-header>
 
   <chapter*|Status of Plugins for GNU <TeXmacs>>
+
+  <notes-abstract|We review the current status and limitations of the various
+  plugins.>
 
   <\big-table|<tabular|<tformat|<cwith|1|1|1|-1|cell-background|pastel
   blue>|<table|<row|<cell|Plugin>|<cell|Third-party>|<cell|<TeXmacs>>|<cell|System>|<cell|Status>|<cell|Demo>>|<row|<cell|asymptote>|<cell|v2.67>|<cell|1.99.16>|<cell|Debian>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/asymptote/doc/asymptote-demo.en.tm>>>|<row|<cell|maxima>|<cell|v5.44.0>|<cell|1.99.16>|<cell|Debian>|<cell|90%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/maxima/doc/maxima-demo.en.tm>>>|<row|<cell|octave>|<cell|v5.1.0>|<cell|1.99.16>|<cell|Debian>|<cell|100%>|<cell|<hlink|demo|$TEXMACS_PATH/plugins/octave/doc/octave-demo.en.tm>>>|<row|<cell|shell>|<cell|v5.1.0(1)-rc2>|<cell|1.99.16>|<cell|Debian>|<cell|90%>|<cell|>>>>>>
@@ -28,7 +31,7 @@
 
   <section|Known Limitations>
 
-  <subsection|shell>
+  <subsection|Shell>
 
   <\itemize>
     <item>Do not support ANSI color escape (1.99.16)
@@ -68,11 +71,11 @@
       </surround>|<pageref|auto-2>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
-        \;
+        Plugin Status on MacOS
       </surround>|<pageref|auto-3>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|3>|>
-        \;
+        Plugin Status on Windows
       </surround>|<pageref|auto-4>>
     </associate>
     <\associate|toc>
