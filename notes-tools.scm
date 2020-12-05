@@ -1,3 +1,17 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; MODULE      : notes-tools.scm
+;; DESCRIPTION : Tools to maintain the "Notes on TeXmacs" website
+;; COPYRIGHT   : (C) 2020 Massimiliano Gubinelli
+;;
+;; This software falls under the GNU general public license version 3 or later.
+;; It comes WITHOUT ANY WARRANTY WHATSOEVER. For details, see the file LICENSE
+;; in the root directory or <http://www.gnu.org/licenses/gpl-3.0.html>.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;(texmacs-module (notes-tools))
+
 (define (collect-articles dir)
   (map 
     (lambda (furl)       
@@ -33,4 +47,25 @@
                 (hrule))))) 
         "/Users/mgubi/t/git-notes/src/list-articles.tm" "texmacs")))
 
+
+(define (src-dir) (url->string (url-expand "$PWD/src")))
+(define (dest-dir) (url->string (url-expand "$PWD/docs")))
+
+(define (notes-run update?)
+    (display* "Source dir :" (src-dir) "\n")
+    (display* "Dest dir   :" (dest-dir) "\n")
+    (display* "* Making article list\n")
+    (make-article-list)
+    (display* "* Updating website\n")
+    (if update? 
+        (begin
+            (display* "* Updating website\n")
+            (tmweb-update-dir (src-dir) (dest-dir)))
+        (begin 
+            (display* "* Building website\n")
+            (tmweb-convert-dir (src-dir) (dest-dir))))
+    (display* "Done."))
+
+(define (notes-update) (notes-run #t))
+(define (notes-build) (notes-run #f))
 

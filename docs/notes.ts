@@ -1,4 +1,4 @@
-<TeXmacs|1.99.15>
+<TeXmacs|1.99.16>
 
 <style|source>
 
@@ -88,6 +88,12 @@
 
   <assign|tmhtml-notes-abstract|<\macro|body>
     <style-with|src-compact|all|<html-div-class|notes-abstract|<arg|body>>>
+  </macro>>
+
+  <assign|notes-entry|<\macro|file|title|abs|date>
+    <hlink|<arg|title>|<arg|file>><hflush><compound|small|[<arg|date>]>
+
+    <compound|tiny|<arg|abs>>
   </macro>>
 
   <\active*>
