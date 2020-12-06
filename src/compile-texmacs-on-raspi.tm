@@ -1,4 +1,4 @@
-<TeXmacs|1.99.16>
+<TeXmacs|1.99.14>
 
 <style|notes>
 
@@ -27,7 +27,7 @@
   building directory:
 
   <\shell-code>
-    makedir texmacs-builddir
+    mkdir texmacs-builddir
   </shell-code>
 
   Change the working directory to it:
@@ -36,9 +36,9 @@
     cd texmacs-builddir
   </shell-code>
 
-  <math|<TeXmacs>> depends on a Guile, so we need to build guile first. For
-  this enter the following commands. Each step might take some time depending
-  on your internet connection and the exact model of the Raspberry Pi.
+  <TeXmacs> depends on a Guile, so we need to build guile first. For this
+  enter the following commands. Each step might take some time depending on
+  your internet connection and the exact model of the Raspberry Pi.
 
   <\shell-code>
     <with|color|blue|<code*|>>wget https://ftp.gnu.org/gnu/guile/guile-1.8.8.tar.gz
