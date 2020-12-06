@@ -1,4 +1,4 @@
-<TeXmacs|1.99.16>
+<TeXmacs|1.99.14>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -44,6 +44,8 @@
 
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
+
+  <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
 
   <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
 
