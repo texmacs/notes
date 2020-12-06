@@ -22,7 +22,8 @@
   check the <hlink|guidelines|editorial-guidelines.tm> before.
 
   The list of all the articles in the website is
-  <hlink|here|list-articles.tm>.
+  <hlink|here|list-articles.tm>, also available as <hlink|Atom
+  feed|../docs/notes.atom>.
 
   <section*|Collections >
 

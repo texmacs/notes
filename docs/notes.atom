@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Atom Feed for Notes on TeXmacs</title>
+  <link href="http://texmacs.github.io/notes"/>
+  <updated>2020-12-06T15:21:44Z</updated>
+  <author>
+    <name>The TeXmacs organisation</name>
+    <uri>http://www.texmacs.org</uri>
+  </author>
+  <id>http://texmacs.github.io/notes</id>
+  <entry>
+    <title><concat>Notes on <TeXmacs/></concat></title>
+    <id>http://texmacs/github/io/notes/main.html</id>
+    <updated>2020-12-06T15:19:58Z</updated>
+  </entry>
+  <entry>
+    <title><concat>Status of Plugins for <TeXmacs/></concat></title>
+    <id>http://texmacs/github/io/notes/plugin-status.en.html</id>
+    <updated>2020-12-05T23:36:31Z</updated>
+    <summary>We review the current status and limitations of the various
+    plugins on Windows/Mac/Linux.</summary>
+  </entry>
+  <entry>
+    <title><concat>Implementing comments in <TeXmacs/></concat></title>
+    <id>http://texmacs/github/io/notes/comments-in-texmacs.html</id>
+    <updated>2020-12-05T23:35:41Z</updated>
+    <summary><concat>We discuss the implementation of comments in <TeXmacs/>
+    documents. This is a new feature introduced by Joris in <tt>r13254</tt>
+    with some additions in subsequent revisions, the current description is
+    based on revision <tt>r13256</tt>.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>Modular graphics with <name>Scheme</name></concat></title>
+    <id>http://texmacs/github/io/notes/modular-scheme-graphics.html</id>
+    <updated>2020-12-05T23:35:37Z</updated>
+  </entry>
+  <entry>
+    <title>Editorial scope and author guidelines</title>
+    <id>http://texmacs/github/io/notes/editorial-guidelines.html</id>
+    <updated>2020-12-05T23:35:37Z</updated>
+  </entry>
+  <entry>
+    <title><concat xml:space="preserve">Build <TeXmacs/> using CMake and Homebrew </concat></title>
+    <id>http://texmacs/github/io/notes/build-using-cmake-and-homebrew-on-macos.html</id>
+    <updated>2020-12-05T23:35:37Z</updated>
+    <summary><concat>This article serves as a guide for <TeXmacs/>
+    contributors and developers on macOS. We talk about how to build and test
+    GNU <TeXmacs/> on macOS using CMake and Homebrew.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>A wishlist for <TeXmacs/> articles</concat></title>
+    <id>http://texmacs/github/io/notes/articles-wishes.html</id>
+    <updated>2020-12-05T23:35:37Z</updated>
+    <summary><concat>It would be useful to have some short articles or
+    tutorials covering the topics listed here below. This article collects
+    them in the hope that someone will contribute them to the blog. They can
+    also be considered interesting exercises to improve one own <TeXmacs/>
+    knowledge: learning by teaching. In case you manage to cover, even
+    partially, one of the topic, please add a remark here to point to relevant
+    material. If the topic is covered, move it to the Already covered
+    section.</concat></summary>
+  </entry>
+  <entry>
+    <title>Wishlist</title>
+    <id>http://texmacs/github/io/notes/wishlist.html</id>
+    <updated>2020-12-05T23:35:28Z</updated>
+    <summary>This wishlist collects suggestions for improvements and nice
+    ideas for addition to TeXmacs. These should be of limited scope and
+    somewhat reasonable technical difficulty. It is mostly meant for
+    developers or technically savyy users to collect good ideas. It should be
+    clear that the functionality is not already provided in some form. This
+    wishlist must not be used for very broad and vague requests (e.g. ``make
+    the program more versatile and powerful").</summary>
+  </entry>
+  <entry>
+    <title>Adding a dialog to build websites</title>
+    <id>http://texmacs/github/io/notes/website-builder-dialog.html</id>
+    <updated>2020-12-05T23:35:28Z</updated>
+    <summary><concat>In this article we document the construction of a user
+    interface to the website building facilities of
+    <TeXmacs/>.</concat></summary>
+  </entry>
+  <entry>
+    <title>Composing TeXmacs graphics with Scheme</title>
+    <id>http://texmacs/github/io/notes/scheme-graphics.html</id>
+    <updated>2020-12-05T23:35:28Z</updated>
+  </entry>
+  <entry>
+    <title>Embedding graphics composed with Scheme into documents</title>
+    <id>http://texmacs/github/io/notes/scheme-graphics-embedding.html</id>
+    <updated>2020-12-05T23:35:28Z</updated>
+  </entry>
+  <entry>
+    <title>Customizing the color of code snippets</title>
+    <id>http://texmacs/github/io/notes/customize-syntax-color.en.html</id>
+    <updated>2020-12-05T23:35:28Z</updated>
+  </entry>
+  <entry>
+    <title>Implementing previews for link targets</title>
+    <id>http://texmacs/github/io/notes/previews.html</id>
+    <updated>2020-12-05T23:35:15Z</updated>
+  </entry>
+  <entry>
+    <title>Example of TikZ figure embedding within a document</title>
+    <id>http://texmacs/github/io/notes/embedding-tikz-figures-short.html</id>
+    <updated>2020-12-05T23:35:15Z</updated>
+  </entry>
+  <entry>
+    <title>Contribution guide</title>
+    <id>http://texmacs/github/io/notes/contribution-guide.html</id>
+    <updated>2020-11-12T19:13:07Z</updated>
+  </entry>
+  <entry>
+    <title>Template article</title>
+    <id>http://texmacs/github/io/notes/template.html</id>
+    <updated>2020-11-12T17:02:53Z</updated>
+    <summary><concat>This file provides a template for typical notes/articles.
+    You can use the tag <markup>notes-abstract</markup> to provide a small
+    summary of the content, as exemplified by this very
+    text.</concat></summary>
+  </entry>
+  <entry>
+    <title>TeXmacs and HTML</title>
+    <id>http://texmacs/github/io/notes/tm-and-html.html</id>
+    <updated>2020-11-12T17:01:05Z</updated>
+    <summary><concat>In this article we discuss question related to conversion
+    from/to <name>HTML</name>.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>An overview of <TeXmacs/> from altitude</concat></title>
+    <id>http://texmacs/github/io/notes/overview.html</id>
+    <updated>2020-11-12T16:58:15Z</updated>
+    <summary><concat>A rapid overview/executive summary of the <TeXmacs/>
+    system.</concat></summary>
+  </entry>
+  <entry>
+    <title>Community links</title>
+    <id>http://texmacs/github/io/notes/community.html</id>
+    <updated>2020-11-12T16:46:51Z</updated>
+    <summary><concat>We gather here links to websites and blogs discussing
+    <TeXmacs/>.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>Tetris with <TeXmacs/> tables</concat></title>
+    <id>http://texmacs/github/io/notes/tetris.html</id>
+    <updated>2020-11-11T18:35:24Z</updated>
+  </entry>
+  <entry>
+    <title>Awesome GNU TeXmacs</title>
+    <id>http://texmacs/github/io/notes/awesome-texmacs.html</id>
+    <updated>2020-11-10T16:49:15Z</updated>
+  </entry>
+  <entry>
+    <title>Example of TikZ figure generation with the Graph plugin</title>
+    <id>http://texmacs/github/io/notes/a-tikz-example.html</id>
+    <updated>2020-11-10T16:49:15Z</updated>
+  </entry>
+</feed>
