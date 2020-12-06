@@ -12,8 +12,13 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun Dec \ 6 15:19:58
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun Dec \ 6 22:26:50
   2020 UTC>
+
+  <notes-entry|compile-texmacs-on-raspi.tm|Compile <TeXmacs> on the Raspberry
+  Pi|Unfortunately, there is no prepackaged <TeXmacs> for RaspberryPi OS,
+  because of its ARM chipset. Likewise there are no precompiled binaries, but
+  it is not hard to built it yourself.|Sun Dec \ 6 22:26:50 2020 UTC>
 
   <notes-entry|plugin-status.en.tm|Status of Plugins for <TeXmacs>|We review
   the current status and limitations of the various plugins on
