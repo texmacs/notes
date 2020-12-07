@@ -25,15 +25,16 @@
             (title (select doc '(:* chapter* :%1)))  
             (abs (select doc '(:* notes-abstract :%1)))
             (mdate (stat:mtime (stat fname)))
+            (cdate (stat:ctime (stat fname)))
             (mdatestr (strftime "%c %Z"  (gmtime mdate))))
-        `(,mdate ,(url->string (url-delta (url-append dir "./") furl)) ,title ,abs)))
+        `(,mdate ,cdate ,(url->string (url-delta (url-append dir "./") furl)) ,title ,abs)))
     (url->list (url-expand (url-complete (url-append dir (url-wildcard "*.tm")) "fr")))))
 
-(define (make-article-list-entry date file title abs)
+(define (make-article-list-entry mdate cdate file title abs)
     `(notes-entry ,file 
         ,(if (null? title) "(no title)" (car title))
         ,(if (null? abs) "(no abstract)" (car abs))
-        ,(strftime "%c %Z"  (gmtime date))))
+        ,(strftime "%c %Z"  (gmtime mdate))))
 
 ;;(car (collect-articles "/Users/mgubi/t/git-notes/src"))
 
@@ -57,12 +58,15 @@
                 (hrule))))) 
         "/Users/mgubi/t/git-notes/src/list-articles.tm" "texmacs"))
 
-(define (make-atom-entry date file title abs)
+(define (make-atom-entry mdate cdate file title abs)
     `(entry 
         (!document 
             (title ,(if (null? title) "(no title)" (car title)))
-            (id ,(string-append "http://texmacs/github/io/notes/" (string-drop-right file 3) ".html" ))
-            (updated ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime date)))
+            (link (@ (rel "alternate") (type "text/html") (hreflang "en") (href 
+                ,(string-append "http://texmacs.github.io/notes/docs/" (string-drop-right file 3) ".html" ))))
+            (id ,(string-append "texmacs.github.io/notes/" file ":" (strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate))))
+            (updated   ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate)))
+            (published ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime cdate)))
             ,@(if (null? abs) '() `((summary ,(car abs)))) 
             )))
 
@@ -70,14 +74,17 @@
     (string-save (serialize-tmml
         `(*TOP* (!document 
             (*PI* xml "version=\"1.0\" encoding=\"utf-8\"") 
-            (feed (@ (xmlns "http://www.w3.org/2005/Atom")) (!document
-                (title "Atom Feed for Notes on TeXmacs")
-                (link (@ (href "http://texmacs.github.io/notes")))
+            (feed (@ (xmlns "http://www.w3.org/2005/Atom") (xml:lang "en")) (!document
+                (title "Notes on TeXmacs")
+                (link (@ (rel "alternate") (type "text/html") (href "http://texmacs.github.io/notes")))
+                (link (@ (rel "self") (type "application/atom+xml") (href "http://texmacs.github.io/notes/docs/notes.atom")))
                 (updated ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime (current-time))))
                 (author (!document
                     (name "The TeXmacs organisation")
                     (uri "http://www.texmacs.org")))
-                (id "http://texmacs.github.io/notes")
+                (id "texmacs.github.io/notes,2020,1")
+                (icon "http://texmacs.github.io/notes/misc/blog-icon.ico")
+                (logo "http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png")
                 ,@(map (lambda (entry) (apply make-atom-entry entry)) articles))))))
         "/Users/mgubi/t/git-notes/docs/notes.atom"))
 
