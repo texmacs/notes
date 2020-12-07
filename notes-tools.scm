@@ -16,6 +16,9 @@
 ;; * avoid to use absolute paths
 ;; * improve conversion of strings (spurious <concat> elements in atom output)
 
+(define (src-dir) (url->string (url-expand "$PWD/src")))
+(define (dest-dir) (url->string (url-expand "$PWD/docs")))
+
 
 (define (collect-articles dir)
   (map 
@@ -27,8 +30,11 @@
             (mdate (stat:mtime (stat fname)))
             (cdate (stat:ctime (stat fname)))
             (mdatestr (strftime "%c %Z"  (gmtime mdate))))
-        `(,mdate ,cdate ,(url->string (url-delta (url-append dir "./") furl)) ,title ,abs)))
-    (url->list (url-expand (url-complete (url-append dir (url-wildcard "*.tm")) "fr")))))
+        `(,mdate ,cdate 
+            ,(url->string (url-delta (url-append dir "./") furl)) 
+            ,title ,abs)))
+    (url->list (url-expand 
+            (url-complete (url-append dir (url-wildcard "*.tm")) "fr")))))
 
 (define (make-article-list-entry mdate cdate file title abs)
     `(notes-entry ,file 
@@ -38,10 +44,14 @@
 
 ;;(car (collect-articles "/Users/mgubi/t/git-notes/src"))
 
-(define (make-article-list)
+(define (make-article-list dir)
     (let* (
-        (material (sort (collect-articles "/Users/mgubi/t/git-notes/src") (lambda (x y) (>= (car x) (car y)))))
-        (material2 (filter (lambda (x) (not (member (second x) '("list-articles.tm" "main.tm")))) material)))
+        (material (sort 
+            (collect-articles dir) 
+            (lambda (x y) (>= (car x) (car y)))))
+        (material2 (filter 
+            (lambda (x) (not (member (second x) '("list-articles.tm" "main.tm")))) 
+            material)))
     material2))
 
 (define (output-article-list-doc articles)
@@ -54,17 +64,20 @@
                 (chapter* "List of all the articles")
                 (notes-abstract "A list of all the articles in the website, ordered by the most recent modification time.")
                 (hrule)
-                ,@(map (lambda (entry) (apply make-article-list-entry entry)) articles)
+                ,@(map (lambda (entry) (apply make-article-list-entry entry)) 
+                        articles)
                 (hrule))))) 
-        "/Users/mgubi/t/git-notes/src/list-articles.tm" "texmacs"))
+        (string-append (src-dir) "/list-articles.tm") "texmacs"))
 
 (define (make-atom-entry mdate cdate file title abs)
     `(entry 
         (!document 
             (title ,(if (null? title) "(no title)" (car title)))
             (link (@ (rel "alternate") (type "text/html") (hreflang "en") (href 
-                ,(string-append "http://texmacs.github.io/notes/docs/" (string-drop-right file 3) ".html" ))))
-            (id ,(string-append "texmacs.github.io/notes/" file ":" (strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate))))
+                ,(string-append "http://texmacs.github.io/notes/docs/" 
+                                (string-drop-right file 3) ".html" ))))
+            (id ,(string-append "texmacs.github.io/notes/" file ":" 
+                                (strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate))))
             (updated   ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate)))
             (published ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime cdate)))
             ,@(if (null? abs) '() `((summary ,(car abs)))) 
@@ -76,8 +89,10 @@
             (*PI* xml "version=\"1.0\" encoding=\"utf-8\"") 
             (feed (@ (xmlns "http://www.w3.org/2005/Atom") (xml:lang "en")) (!document
                 (title "Notes on TeXmacs")
-                (link (@ (rel "alternate") (type "text/html") (href "http://texmacs.github.io/notes")))
-                (link (@ (rel "self") (type "application/atom+xml") (href "http://texmacs.github.io/notes/docs/notes.atom")))
+                (link (@ (rel "alternate") (type "text/html") 
+                         (href "http://texmacs.github.io/notes")))
+                (link (@ (rel "self") (type "application/atom+xml") 
+                         (href "http://texmacs.github.io/notes/docs/notes.atom")))
                 (updated ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime (current-time))))
                 (author (!document
                     (name "The TeXmacs organisation")
@@ -86,15 +101,12 @@
                 (icon "http://texmacs.github.io/notes/misc/blog-icon.ico")
                 (logo "http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png")
                 ,@(map (lambda (entry) (apply make-atom-entry entry)) articles))))))
-        "/Users/mgubi/t/git-notes/docs/notes.atom"))
-
-(define (src-dir) (url->string (url-expand "$PWD/src")))
-(define (dest-dir) (url->string (url-expand "$PWD/docs")))
+        (string-append (dest-dir) "/notes.atom")))
 
 (define (notes-run update?)
     (display* "Source dir :" (src-dir) "\n")
     (display* "Dest dir   :" (dest-dir) "\n")
-    (let ((articles (make-article-list)))
+    (let ((articles (make-article-list (src-dir))))
         (display* "* Making article list\n")
         (output-article-list-doc articles)
         (display* "* Making article feed\n")
