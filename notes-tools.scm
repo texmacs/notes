@@ -40,7 +40,7 @@
 (define (make-article-list)
     (let* (
         (material (sort (collect-articles "/Users/mgubi/t/git-notes/src") (lambda (x y) (>= (car x) (car y)))))
-        (material2 (filter (lambda (x) (not (== (second x) "list-articles.tm"))) material)))
+        (material2 (filter (lambda (x) (not (member (second x) '("list-articles.tm" "main.tm")))) material)))
     material2))
 
 (define (output-article-list-doc articles)

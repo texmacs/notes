@@ -17,9 +17,6 @@
   because of its ARM chipset. Likewise there are no precompiled binaries, but
   it is not hard to built it yourself.|Mon Dec \ 7 07:28:49 2020 UTC>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun Dec \ 6 22:26:50
-  2020 UTC>
-
   <notes-entry|plugin-status.en.tm|Status of Plugins for <TeXmacs>|We review
   the current status and limitations of the various plugins on
   Windows/Mac/Linux.|Sat Dec \ 5 23:36:31 2020 UTC>
