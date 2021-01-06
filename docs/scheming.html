@@ -8,6 +8,7 @@
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
     <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
   </head>
   <body>
     <div class="toggle" style="display: none">
@@ -46,7 +47,7 @@
     </p>
     <p>
       This situation is not very nice and we would like to move forward and
-      remove these problems. Therefore we are currently evaluationg various
+      remove these problems. Therefore we are currently evaluating various
       possible strategies to evolve the way we run Scheme code within TeXmacs.
       The criteria we need to take into account are the following.
     </p>
@@ -87,8 +88,8 @@
         <p>
           TeXmacs do not currently use Unicode for its internal string
           representations but a custom formate (TeXmacs universal
-          representation), so marshalling data to Unicode-aware Schemes is a
-          midly issue for us.
+          representation), so marshaling data to Unicode-aware Schemes is a
+          mildly issue for us.
         </p>
       </li>
     </ul>
@@ -162,7 +163,7 @@
       We performed some test of these alternative implementations to help us
       make a preliminary picture. We used some standard R7RS benchmarks found
       <a href="https://github.com/ecraven/r7rs-benchmarks">here</a> and we got the results shown below on a MacBook Air
-      (2019). They show that S7 is consistenly the fastest interpreter wrt.
+      (2019). They show that S7 is consistently the fastest interpreter wrt.
       Chibi or Guile 1.8, and sometimes runs with similar times as Guile 3.0.4
       (compiled). We also see that, as expected, Chez is among the fastest
       implementations available with consistent timings all across the
@@ -213,7 +214,7 @@
             24.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid"><p>
             0.84
@@ -257,7 +258,7 @@
             2.21
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             7.14
@@ -365,13 +366,13 @@
             20.97
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.71
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.46
@@ -390,7 +391,7 @@
             3.65
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.52
@@ -422,16 +423,16 @@
             44.14
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.96
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -460,16 +461,16 @@
             25.80
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.71
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -504,7 +505,7 @@
             3.59
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             6.87
@@ -542,7 +543,7 @@
             3.32
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             7.69
@@ -561,7 +562,7 @@
             5.39
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             50.09
@@ -574,13 +575,13 @@
             18.56
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.26
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             67.01
@@ -612,13 +613,13 @@
             &ndash;
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.60
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.56
@@ -637,7 +638,7 @@
             4.73
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             24.89
@@ -656,7 +657,7 @@
             2.83
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             18.51
@@ -675,7 +676,7 @@
             2.34
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             13.90
@@ -694,7 +695,7 @@
             3.12
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             8.41
@@ -770,7 +771,7 @@
             2.69
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             28.40
@@ -789,7 +790,7 @@
             3.57
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.82
@@ -802,7 +803,7 @@
             8.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             1.76
@@ -846,7 +847,7 @@
             2.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             5.15
@@ -865,7 +866,7 @@
             2.10
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             10.51
@@ -894,16 +895,16 @@
             earley
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             5.03
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.49
@@ -916,13 +917,13 @@
             127.61
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             2.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             23.03
@@ -935,13 +936,13 @@
             139.28
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.91
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             15.94
@@ -960,7 +961,7 @@
             1.63
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.88
@@ -979,7 +980,7 @@
             1.66
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             4.70
@@ -1017,7 +1018,7 @@
             4.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             19.37
@@ -1030,13 +1031,13 @@
             31.42
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             5.97
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             4.25
@@ -1049,13 +1050,13 @@
             39.44
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.35
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             10.69
@@ -1106,13 +1107,13 @@
             94.00
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.90
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             13.25
@@ -1131,7 +1132,7 @@
             2.55
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             15.14
@@ -1163,13 +1164,13 @@
             &ndash;
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.32
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.31
@@ -1220,13 +1221,13 @@
             20.54
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             1.87
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.51
@@ -1245,7 +1246,7 @@
             13.33
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             10.65
@@ -1264,10 +1265,10 @@
             0.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -1283,7 +1284,7 @@
             2.47
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0206464646464647em; margin-right: -0.0206868686868686em; margin-top: -0.0413737373737374em; vertical-align: -0.0723636363636364em; height: 0.724040404040404em"></img>
+            \(\varnothing\)
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             4.49

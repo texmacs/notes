@@ -31,7 +31,7 @@
   Guile<nbsp>3 seems not yet be supported there.\ 
 
   This situation is not very nice and we would like to move forward and
-  remove these problems. Therefore we are currently evaluationg various
+  remove these problems. Therefore we are currently evaluating various
   possible strategies to evolve the way we run Scheme code within <TeXmacs>.
   The criteria we need to take into account are the following.
 
@@ -58,7 +58,7 @@
 
     <item>TeXmacs do not currently use Unicode for its internal string
     representations but a custom formate (TeXmacs universal representation),
-    so marshalling data to Unicode-aware Schemes is a midly issue for us.
+    so marshaling data to Unicode-aware Schemes is a mildly issue for us.
   </itemize-dot>
 
   The alternatives we are currently considering are the following.
@@ -111,7 +111,7 @@
   a preliminary picture. We used some standard R7RS benchmarks found
   <hlink|here|https://github.com/ecraven/r7rs-benchmarks> and we got the
   results shown below on a MacBook Air (2019). They show that S7 is
-  consistenly the fastest interpreter wrt. Chibi or Guile 1.8, and sometimes
+  consistently the fastest interpreter wrt. Chibi or Guile 1.8, and sometimes
   runs with similar times as Guile 3.0.4 (compiled). We also see that, as
   expected, Chez is among the fastest implementations available with
   consistent timings all across the benchmarks.
@@ -844,15 +844,15 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?|template.tm>>
+    <associate|auto-1|<tuple|?|?>>
   </collection>
 </references>
 
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Template
-      article> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Scheming>
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
     </associate>
   </collection>

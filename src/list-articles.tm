@@ -12,15 +12,15 @@
 
   <hrule>
 
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Wed
-  Jan \ 6 17:32:07 2021 UTC>
-
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Wed Jan \ 6 17:31:49
+  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
+  the Scheme language implementation used in <TeXmacs>.|Wed Jan \ 6 17:38:58
   2021 UTC>
 
-  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
-  the Scheme language implementation used in <TeXmacs>.|Wed Jan \ 6 17:28:50
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Wed
+  Jan \ 6 17:33:42 2021 UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Wed Jan \ 6 17:31:49
   2021 UTC>
 
   <notes-entry|compile-texmacs-on-raspi.tm|Compile <TeXmacs> on the Raspberry
