@@ -31,43 +31,45 @@
       6.1.2021
     </p>
     <p>
-      We are currently using <a href="https://www.gnu.org/software/guile/">GNU Guile</a> version 1.8 as embedded
-      Scheme interpreter. However this has been lately a constant source of
-      problems. On one hand Guile 1.8 is no more supported in standard Linux
-      distributions, this implies that we have either to ship Guile in our
-      codebase or maintain a private repository for Guile 1.8. On the other
-      hand more recent versions of Guile compile the sources to bytecode and
-      introduce a separated expansion and evaluation phases which break part
-      of our codebase. Moreover while Guile 2 has a fine compiler, it has been
-      for some time quite slow in interpreting code and only recently with the
-      introduction of a JIT compiler in Guile 3 the interpreted code runs as
-      fast as in Guile 1.8. Additionally we have some difficulties in
+      In TeXmacs we use <a href="https://www.gnu.org/software/guile/">GNU Guile</a> version 1.8 as embedded Scheme
+      interpreter. Lately, this has been a source of problems, mostly related
+      to packaging. On one hand Guile 1.8 is no more supported in standard
+      Linux distributions. This implies that we have either to ship Guile in
+      our codebase or maintain a private repository for Guile 1.8. On the
+      other hand more recent versions of Guile compile the sources to bytecode
+      and introduce a separated expansion and evaluation phases which break
+      part of our codebase. Moreover while Guile 2 has a fine compiler, it has
+      been for some time quite slow in interpreting code and only recently
+      with the introduction of a JIT compiler in Guile 3 the interpreted code
+      runs as fast as in Guile 1.8. Finally we have some difficulties in
       compiling Guile 2 on Windows and Guile 3 seems not yet be supported
-      there. 
+      there. The <a href="http://lilypond.org">GNU Lilipond</a> project seems to have run into
+      similar issues with Guile and they also remained with Guile 1.8.8 (see
+      <a href="http://lilypond.org/doc/v2.21/Documentation/contributor/requirements-for-running-lilypond">here</a>).
     </p>
     <p>
       This situation is not very nice and we would like to move forward and
       remove these problems. Therefore we are currently evaluating various
       possible strategies to evolve the way we run Scheme code within TeXmacs.
-      The criteria we need to take into account are the following.
+      The following are the criteria we want to take into account.
     </p>
     <ul>
       <li>
         <p>
           We use Scheme as an extension language to run on top of the GUI and
-          typesetting code in order to implement the dynamical and
-          programmable UI. Additionally if the implementation speed allows we
+          the typesetting code in order to implement the dynamical and
+          programmable UI. Additionally, if the implementation speed allows we
           can shift some of the conversion code in Scheme. We have C++ at our
-          disposal anyway so we can always drop there for speed-critical tasks
-          (as it is the case already now).
+          disposal anyway so we can always drop there for speed-critical
+          tasks, but is nicer to be able to write Scheme code instead of C++.
         </p>
       </li>
       <li>
         <p>
-          TeXmacs already need a huge library like <class style="font-variant: small-caps">Qt</class> in
-          order to be cross-platform, so in this respect we would like not to
-          carry over a huge all-purpose Scheme implementation which would come
-          with all its own libraries dependencies.
+          TeXmacs already needs a huge library like <class style="font-variant: small-caps">Qt</class>
+          in order to be cross-platform, so in this respect we would like not
+          to carry over a huge all-purpose Scheme implementation which would
+          come with all its own libraries dependencies (e.g. Guile needs GMP).
         </p>
       </li>
       <li>
@@ -79,9 +81,10 @@
       </li>
       <li>
         <p>
-          Guile 1.8 speed is more than enough. Se we cannot loose performance
-          and even maybe we hope to gain some by using an alternative
-          implementation.
+          Guile 1.8 speed is OK so far. However we cannot loose performance
+          (especially at boot time and for standard operations like moving the
+          cursor around). We could even hope to gain some speed by using an
+          alternative implementation.
         </p>
       </li>
       <li>
@@ -94,14 +97,17 @@
       </li>
     </ul>
     <p>
-      The alternatives we are currently considering are the following.
+      As for the available alternatives, the situation so far is the
+      following.
     </p>
     <ul>
       <li>
         <p>
-          An easy choice would be to just integrate the sources of Guile 1.8
-          (which is not more maintained) in TeXmacs. This would not require
-          changes to our codebase.
+          An easy choice would be to just integrate in our codebase the
+          sources of Guile 1.8 (which is not more maintained) in TeXmacs. This
+          would not require changes to our scheme code. However the packaging
+          problems remains, moreover there are large portions of the library
+          we do not use. 
         </p>
       </li>
       <li>
@@ -139,7 +145,9 @@
           Scheme</class></a> as a compiled system which seems flexible enough
           to be able to be embedded in our setting. Its main features are:
           compactness, speed, industrial quality, open-source (Apache 2.0),
-          cross-platform and with no external dependencies.
+          cross-platform and with no external dependencies. (For an
+          interesting history of this implementation refer to <a href="http://www.cs.indiana.edu/~dyb/pubs/hocs.pdf">this
+          paper</a>.)
         </p>
       </li>
     </ul>

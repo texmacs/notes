@@ -16,70 +16,76 @@
 
   6.1.2021
 
-  We are currently using <hlink|GNU Guile|https://www.gnu.org/software/guile/>
-  version 1.8 as embedded Scheme interpreter. However this has been lately a
-  constant source of problems. On one hand Guile<nbsp>1.8 is no more
-  supported in standard Linux distributions, this implies that we have either
-  to ship Guile in our codebase or maintain a private repository for
+  In <TeXmacs> we use <hlink|GNU Guile|https://www.gnu.org/software/guile/>
+  version 1.8 as embedded Scheme interpreter. Lately, this has been a source
+  of problems, mostly related to packaging. On one hand Guile<nbsp>1.8 is no
+  more supported in standard Linux distributions. This implies that we have
+  either to ship Guile in our codebase or maintain a private repository for
   Guile<nbsp>1.8. On the other hand more recent versions of Guile compile the
   sources to bytecode and introduce a separated expansion and evaluation
   phases which break part of our codebase. Moreover while Guile<nbsp>2 has a
   fine compiler, it has been for some time quite slow in interpreting code
   and only recently with the introduction of a JIT compiler in Guile<nbsp>3
-  the interpreted code runs as fast as in Guile<nbsp>1.8. Additionally we
-  have some difficulties in compiling Guile<nbsp>2 on Windows and
-  Guile<nbsp>3 seems not yet be supported there.\ 
+  the interpreted code runs as fast as in Guile<nbsp>1.8. Finally we have
+  some difficulties in compiling Guile<nbsp>2 on Windows and Guile<nbsp>3
+  seems not yet be supported there. The <hlink|GNU
+  Lilipond|http://lilypond.org> project seems to have run into similar issues
+  with Guile and they also remained with Guile 1.8.8 (see
+  <hlink|here|http://lilypond.org/doc/v2.21/Documentation/contributor/requirements-for-running-lilypond>).
 
   This situation is not very nice and we would like to move forward and
   remove these problems. Therefore we are currently evaluating various
   possible strategies to evolve the way we run Scheme code within <TeXmacs>.
-  The criteria we need to take into account are the following.
+  The following are the criteria we want to take into account.
 
   <\itemize-dot>
     <item>We use Scheme as an extension language to run on top of the GUI and
-    typesetting code in order to implement the dynamical and programmable UI.
-    Additionally if the implementation speed allows we can shift some of the
-    conversion code in Scheme. We have C++ at our disposal anyway so we can
-    always drop there for speed-critical tasks (as it is the case already
-    now).
+    the typesetting code in order to implement the dynamical and programmable
+    UI. Additionally, if the implementation speed allows we can shift some of
+    the conversion code in Scheme. We have C++ at our disposal anyway so we
+    can always drop there for speed-critical tasks, but is nicer to be able
+    to write Scheme code instead of C++.
 
-    <item><TeXmacs> already need a huge library like <name|Qt> in order to be
-    cross-platform, so in this respect we would like not to carry over a huge
-    all-purpose Scheme implementation which would come with all its own
-    libraries dependencies.
+    <item><TeXmacs> already needs a huge library like <name|Qt> in order to
+    be cross-platform, so in this respect we would like not to carry over a
+    huge all-purpose Scheme implementation which would come with all its own
+    libraries dependencies (e.g. Guile needs GMP).
 
     <item>We need to be cross-platform so we would like to minimize the
     problem related to porting the Scheme implementation on the various OSs
     and architectures.
 
-    <item>Guile 1.8 speed is more than enough. Se we cannot loose performance
-    and even maybe we hope to gain some by using an alternative
-    implementation.
+    <item>Guile 1.8 speed is OK so far. However we cannot loose performance
+    (especially at boot time and for standard operations like moving the
+    cursor around). We could even hope to gain some speed by using an
+    alternative implementation.
 
     <item>TeXmacs do not currently use Unicode for its internal string
     representations but a custom formate (TeXmacs universal representation),
     so marshaling data to Unicode-aware Schemes is a mildly issue for us.
   </itemize-dot>
 
-  The alternatives we are currently considering are the following.
+  As for the available alternatives, the situation so far is the following.
 
   <\itemize-dot>
-    <item>An easy choice would be to just integrate the sources of Guile 1.8
-    (which is not more maintained) in <TeXmacs>. This would not require
-    changes to our codebase.
+    <item>An easy choice would be to just integrate in our codebase the
+    sources of Guile 1.8 (which is not more maintained) in <TeXmacs>. This
+    would not require changes to our scheme code. However the packaging
+    problems remains, moreover there are large portions of the library we do
+    not use.\ 
 
-    <item>We can go with Guile<nbsp>3 and get the nice speed improvement wrt.
-    1.8. However this requires more or less extensive changes to our Scheme
-    code. These changes are been implemented in a git development branch and
-    so far the situation seems promising. One drawback of this choice is the
-    fact that support for platforms like Windows is not the primary goal of
-    the Guile developers (as far as we understand) and also that Guile is
-    become a large standalone scheme with many library dependencies, far from
-    its origin as <with|font-shape|italic|extension language>. So the
-    benefits of the compiler should be weighted against the difficulty of
-    packaging and also the stability of the cross-platform support. Also
-    Guile<nbsp>2/3 has encoding-aware strings which poses a (small) problem
-    for us.
+    <item>We can go with Guile<nbsp>3 and get the nice speed improvement
+    wrt.<nbsp>1.8. However this requires more or less extensive changes to
+    our Scheme code. These changes are been implemented in a git development
+    branch and so far the situation seems promising. One drawback of this
+    choice is the fact that support for platforms like Windows is not the
+    primary goal of the Guile developers (as far as we understand) and also
+    that Guile is become a large standalone scheme with many library
+    dependencies, far from its origin as <with|font-shape|italic|extension
+    language>. So the benefits of the compiler should be weighted against the
+    difficulty of packaging and also the stability of the cross-platform
+    support. Also Guile<nbsp>2/3 has encoding-aware strings which poses a
+    (small) problem for us.
 
     <item>An attractive option is to switch to another small, embeddable
     Scheme interpreter like <hlink|<name|Chibi>
@@ -96,10 +102,12 @@
     Scheme>|https://github.com/cisco/chezscheme> as a compiled system which
     seems flexible enough to be able to be embedded in our setting. Its main
     features are: compactness, speed, industrial quality, open-source (Apache
-    2.0), cross-platform and with no external dependencies.
+    2.0), cross-platform and with no external dependencies. (For an
+    interesting history of this implementation refer to <hlink|this
+    paper|http://www.cs.indiana.edu/~dyb/pubs/hocs.pdf>.)
   </itemize-dot>
 
-  The development branches of TeXmacs for Guile 3 and S7 can be found here:
+  The development branches of <TeXmacs> for Guile 3 and S7 can be found here:
 
   <\itemize-dot>
     <item><slink|https://github.com/mgubi/texmacs/tree/s7/src>
