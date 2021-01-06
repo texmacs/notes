@@ -29,7 +29,7 @@
   the interpreted code runs as fast as in Guile<nbsp>1.8. Finally we have
   some difficulties in compiling Guile<nbsp>2 on Windows and Guile<nbsp>3
   seems not yet be supported there. The <hlink|GNU
-  Lilipond|http://lilypond.org> project seems to have run into similar issues
+  Lilypond|http://lilypond.org> project seems to have run into similar issues
   with Guile and they also remained with Guile 1.8.8 (see
   <hlink|here|http://lilypond.org/doc/v2.21/Documentation/contributor/requirements-for-running-lilypond>).
 
@@ -75,17 +75,19 @@
     not use.\ 
 
     <item>We can go with Guile<nbsp>3 and get the nice speed improvement
-    wrt.<nbsp>1.8. However this requires more or less extensive changes to
-    our Scheme code. These changes are been implemented in a git development
-    branch and so far the situation seems promising. One drawback of this
-    choice is the fact that support for platforms like Windows is not the
-    primary goal of the Guile developers (as far as we understand) and also
-    that Guile is become a large standalone scheme with many library
-    dependencies, far from its origin as <with|font-shape|italic|extension
-    language>. So the benefits of the compiler should be weighted against the
-    difficulty of packaging and also the stability of the cross-platform
-    support. Also Guile<nbsp>2/3 has encoding-aware strings which poses a
-    (small) problem for us.
+    wrt.<nbsp>1.8. See <hlink|here|https://www.wingolog.org/archives/2020/06/03/a-baseline-compiler-for-guile>
+    for some updates on the development of Guile. This will require more or
+    less extensive changes to our Scheme code. These changes are been
+    implemented in a git development branch and so far the situation seems
+    promising. One drawback of this choice is the fact that support for
+    platforms like Windows is not the primary goal of the Guile developers
+    (as far as we understand) and also that Guile is become a large
+    standalone scheme with many library dependencies, far from its origin as
+    <with|font-shape|italic|extension language>. So the benefits of the
+    compiler should be weighted against the difficulty of packaging and also
+    the stability of the cross-platform support. Also Guile<nbsp>2/3 has
+    encoding-aware strings which poses a (small) problem for us and would
+    require some hackery to get around.
 
     <item>An attractive option is to switch to another small, embeddable
     Scheme interpreter like <hlink|<name|Chibi>
@@ -119,9 +121,8 @@
   a preliminary picture. We used some standard R7RS benchmarks found
   <hlink|here|https://github.com/ecraven/r7rs-benchmarks> and we got the
   results shown below on a MacBook Air (2019). They show that S7 is
-  consistently the fastest interpreter wrt. Chibi or Guile 1.8, and sometimes
-  runs with similar times as Guile 3.0.4 (compiled). We also see that, as
-  expected, Chez is among the fastest implementations available with
+  consistently the fastest interpreter wrt. Chibi or Guile 1.8. We also see
+  that, as expected, Chez is among the fastest implementations available with
   consistent timings all across the benchmarks.
 
   We currently have working implementations of TeXmacs with Guile 1.8, S7 and

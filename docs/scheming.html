@@ -43,7 +43,7 @@
       with the introduction of a JIT compiler in Guile 3 the interpreted code
       runs as fast as in Guile 1.8. Finally we have some difficulties in
       compiling Guile 2 on Windows and Guile 3 seems not yet be supported
-      there. The <a href="http://lilypond.org">GNU Lilipond</a> project seems to have run into
+      there. The <a href="http://lilypond.org">GNU Lilypond</a> project seems to have run into
       similar issues with Guile and they also remained with Guile 1.8.8 (see
       <a href="http://lilypond.org/doc/v2.21/Documentation/contributor/requirements-for-running-lilypond">here</a>).
     </p>
@@ -113,17 +113,18 @@
       <li>
         <p>
           We can go with Guile 3 and get the nice speed improvement wrt. 1.8.
-          However this requires more or less extensive changes to our Scheme
-          code. These changes are been implemented in a git development branch
-          and so far the situation seems promising. One drawback of this
-          choice is the fact that support for platforms like Windows is not
-          the primary goal of the Guile developers (as far as we understand)
-          and also that Guile is become a large standalone scheme with many
-          library dependencies, far from its origin as <i>extension
-          language</i>. So the benefits of the compiler should be weighted
-          against the difficulty of packaging and also the stability of the
-          cross-platform support. Also Guile 2/3 has encoding-aware strings
-          which poses a (small) problem for us.
+          See <a href="https://www.wingolog.org/archives/2020/06/03/a-baseline-compiler-for-guile">here</a> for some updates on the development of Guile.
+          This will require more or less extensive changes to our Scheme code.
+          These changes are been implemented in a git development branch and
+          so far the situation seems promising. One drawback of this choice is
+          the fact that support for platforms like Windows is not the primary
+          goal of the Guile developers (as far as we understand) and also that
+          Guile is become a large standalone scheme with many library
+          dependencies, far from its origin as <i>extension language</i>. So
+          the benefits of the compiler should be weighted against the
+          difficulty of packaging and also the stability of the cross-platform
+          support. Also Guile 2/3 has encoding-aware strings which poses a
+          (small) problem for us and would require some hackery to get around.
         </p>
       </li>
       <li>
@@ -172,9 +173,8 @@
       make a preliminary picture. We used some standard R7RS benchmarks found
       <a href="https://github.com/ecraven/r7rs-benchmarks">here</a> and we got the results shown below on a MacBook Air
       (2019). They show that S7 is consistently the fastest interpreter wrt.
-      Chibi or Guile 1.8, and sometimes runs with similar times as Guile 3.0.4
-      (compiled). We also see that, as expected, Chez is among the fastest
-      implementations available with consistent timings all across the
+      Chibi or Guile 1.8. We also see that, as expected, Chez is among the
+      fastest implementations available with consistent timings all across the
       benchmarks.
     </p>
     <p>
