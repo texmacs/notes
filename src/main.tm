@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.18>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -69,6 +69,8 @@
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
 
   <section*|Developers' notes>
+
+  <hlink|Scheming|scheming.tm>
 
   <hlink|Implementing comments|comments-in-texmacs.tm>
 

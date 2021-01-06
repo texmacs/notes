@@ -1,4 +1,4 @@
-<TeXmacs|1.99.16>
+<TeXmacs|1.99.18>
 
 <style|notes>
 
@@ -13,16 +13,20 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Mon
-  Dec \ 7 14:40:08 2020 UTC>
+  articles in the website, ordered by the most recent modification time.|Wed
+  Jan \ 6 17:32:07 2021 UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Wed Jan \ 6 17:31:49
+  2021 UTC>
+
+  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
+  the Scheme language implementation used in <TeXmacs>.|Wed Jan \ 6 17:28:50
+  2021 UTC>
 
   <notes-entry|compile-texmacs-on-raspi.tm|Compile <TeXmacs> on the Raspberry
   Pi|Unfortunately, there is no prepackaged <TeXmacs> for RaspberryPi OS,
   because of its ARM chipset. Likewise there are no precompiled binaries, but
   it is not hard to built it yourself.|Mon Dec \ 7 07:28:49 2020 UTC>
-
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun Dec \ 6 22:26:50
-  2020 UTC>
 
   <notes-entry|plugin-status.en.tm|Status of Plugins for <TeXmacs>|We review
   the current status and limitations of the various plugins on
