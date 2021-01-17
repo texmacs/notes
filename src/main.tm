@@ -49,6 +49,9 @@
 
   <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
 
+  <hlink|Build <TeXmacs> using CMake and Homebrew on
+  macOS|build-using-cmake-and-homebrew-on-macos.tm>
+
   <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
 
   <hlink|Embedding graphics composed with Scheme into
