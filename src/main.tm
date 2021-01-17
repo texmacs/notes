@@ -38,7 +38,7 @@
 
   <hlink|Community links|community.tm>
 
-  <hlink|Status of plugins for <TeXmacs>|plugin-status.tm>
+  <hlink|Status of plugins for <TeXmacs>|plugin-status.en.tm>
 
   <section*|Miscellanea>
 
