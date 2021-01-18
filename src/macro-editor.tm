@@ -1,6 +1,6 @@
 <TeXmacs|1.99.18>
 
-<style|<tuple|tmmanual|smart-ref|preview-ref>>
+<style|<tuple|notes|smart-ref|preview-ref>>
 
 <\body>
   <\hide-preamble>
@@ -266,6 +266,8 @@
     <item>The <hlink|<TeXmacs> forum|http://forum.texmacs.cn/>
   </itemize>
 
+  <section|Tests on <markup|compound> macro>
+
   <inactive|<marginal-note|normal|c|>>
 
   test <marginal-note|normal|c|test> test
@@ -336,6 +338,7 @@
     <associate|auto-15|<tuple|9|?>>
     <associate|auto-16|<tuple|10|?>>
     <associate|auto-17|<tuple|3|?>>
+    <associate|auto-18|<tuple|4|?>>
     <associate|auto-2|<tuple|1|1>>
     <associate|auto-3|<tuple|1|1>>
     <associate|auto-4|<tuple|1|1>>
@@ -404,8 +407,20 @@
       </surround>|<pageref|auto-12>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|8>|>
-        \;
+        Editing the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
+        macro in the Macro editor.
       </surround>|<pageref|auto-14>>
+
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|9>|>
+        The source mode representation of the
+        <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
+        macro.
+      </surround>|<pageref|auto-15>>
+
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|10>|>
+        The modified <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
+        macro, now named <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice-right>.
+      </surround>|<pageref|auto-16>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Note>|<with|font-family|<quote|ss>|Marginal
@@ -429,6 +444,9 @@
 
       2.<space|2spc>More choice <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-13>
+
+      3.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-17>
     </associate>
   </collection>
 </auxiliary>
