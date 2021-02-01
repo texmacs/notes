@@ -8,7 +8,12 @@
 
     <inactive|<assign|marginal-note|<macro|hpos|vpos|body|<with|dummy1|<value|marginal-note-width>|dummy2|<value|marginal-note-sep>|<compound|<merge|marginal-|<arg|hpos>|-note>|<arg|vpos>|<small|<with|color|red|<arg|body>>>|<arg|hpos>>>>>>
 
+    red-marginal-note does not work because the compound macro is executed
+    too early
+
     <assign|red-marginal-note|<macro|hpos|vpos|body|<with|dummy1|<value|marginal-note-width>|dummy2|<value|marginal-note-sep>|<compound|<merge|marginal-|<arg|hpos>|-note>|<arg|vpos>|<small|<with|color|red|<arg|body>>>|<arg|hpos>>>>>
+
+    Tests on the compound macro
 
     <assign|x-a-x|<macro|y|<merge|a|<arg|y>|a>>>
 
@@ -20,15 +25,11 @@
 
     <assign|mod-marginal-note|<macro|hpos|vpos|body|<with|dummy1|<value|marginal-note-width>|dummy2|<value|marginal-note-sep>|<compound|<merge|marginal-|<arg|hpos>|-note>|<arg|vpos>|<arg|body>|<arg|hpos>>>>>
 
-    <inactive|<assign|marginal-note|<macro|hpos|vpos|body|<compound|<merge|marginal-|<arg|hpos>|-note>|<arg|vpos>|<arg|body>|<arg|hpos>>>>>
-
     <assign|marginal-notemod|<macro|hpos|vpos|body|<compound|<merge|marginal-|<arg|hpos>|-note>|<arg|vpos>|<arg|body>|<arg|hpos>>>>
 
     <assign|xx-a-xx|<macro|y|z|x|<merge|a|<arg|y>|a>>>
 
-    <assign|marginal-note|<\macro|x|y|z|t>
-      <compound|<merge|xx-|<arg|x>|-xx>|<arg|y>|<arg|z>|<arg|t>>
-    </macro>>
+    The choice-right macro, for the second part of the tutorial.
 
     <assign|choice-right|<macro|x|<math-table-base|<left|.><tformat|<cwith|1|-1|1|-1|cell-swell|<value|table-math-swell>>|<arg|x>><right|}>>>>
   </hide-preamble>
@@ -268,15 +269,17 @@
 
   <section|Tests on <markup|compound> macro>
 
-  <inactive|<marginal-note|normal|c|>>
+  <inactive|<marginal-note|normal|c|test>>
 
   test <marginal-note|normal|c|test> test
 
-  <marginal-note-red|||>
+  <marginal-note-red|normal|c|test>
 
   <inactive|<marginal-note|||>>
 
-  <red-marginal-note|f||>
+  <\red-marginal-note>
+    f
+  </red-marginal-note||>
 
   <ab|a|c>
 
@@ -329,35 +332,35 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|1>>
-    <associate|auto-10|<tuple|6|5>>
-    <associate|auto-11|<tuple|6|5>>
-    <associate|auto-12|<tuple|7|5>>
-    <associate|auto-13|<tuple|2|5>>
-    <associate|auto-14|<tuple|8|6>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-10|<tuple|6|?>>
+    <associate|auto-11|<tuple|6|?>>
+    <associate|auto-12|<tuple|7|?>>
+    <associate|auto-13|<tuple|2|?>>
+    <associate|auto-14|<tuple|8|?>>
     <associate|auto-15|<tuple|9|?>>
     <associate|auto-16|<tuple|10|?>>
     <associate|auto-17|<tuple|3|?>>
     <associate|auto-18|<tuple|4|?>>
-    <associate|auto-2|<tuple|1|1>>
-    <associate|auto-3|<tuple|1|1>>
-    <associate|auto-4|<tuple|1|1>>
-    <associate|auto-5|<tuple|2|2>>
-    <associate|auto-6|<tuple|3|2>>
-    <associate|auto-7|<tuple|4|3>>
-    <associate|auto-8|<tuple|5|3>>
-    <associate|auto-9|<tuple|6|4>>
+    <associate|auto-2|<tuple|1|?>>
+    <associate|auto-3|<tuple|1|?>>
+    <associate|auto-4|<tuple|1|?>>
+    <associate|auto-5|<tuple|2|?>>
+    <associate|auto-6|<tuple|3|?>>
+    <associate|auto-7|<tuple|4|?>>
+    <associate|auto-8|<tuple|5|?>>
+    <associate|auto-9|<tuple|6|?>>
     <associate|eq:choice-macro|<tuple|1|?>>
     <associate|fig:choice_macro_math_mode|<tuple|8|?>>
     <associate|fig:choice_macro_source_mode|<tuple|9|?>>
     <associate|fig:choice_right_macro_source_mode|<tuple|10|?>>
-    <associate|fig:macro-edit-menu|<tuple|2|2>>
-    <associate|fig:macro-editor-window|<tuple|3|2>>
-    <associate|fig:macro-editor-wrench|<tuple|1|1>>
-    <associate|fig:macro-source-mode|<tuple|5|3>>
-    <associate|fig:macro-text-mode|<tuple|4|3>>
-    <associate|fig:preamble|<tuple|7|5>>
-    <associate|fig:wrap-tags|<tuple|6|4>>
+    <associate|fig:macro-edit-menu|<tuple|2|?>>
+    <associate|fig:macro-editor-window|<tuple|3|?>>
+    <associate|fig:macro-editor-wrench|<tuple|1|?>>
+    <associate|fig:macro-source-mode|<tuple|5|?>>
+    <associate|fig:macro-text-mode|<tuple|4|?>>
+    <associate|fig:preamble|<tuple|7|?>>
+    <associate|fig:wrap-tags|<tuple|6|?>>
   </collection>
 </references>
 
@@ -366,9 +369,14 @@
     <\associate|figure>
       <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
         The Macro editor appears among the tools as a wrench icon
-        <error|compound xx-normal-xx> (in this figure and highlighted and
-        connected to the macro with the arrow) when the cursor is in a macro
-        field.
+        <with|dummy1|<quote|2cm>|dummy2|<quote|5mm>|<line-note|<tformat|<tformat|<twith|table-width|2cm>|<twith|table-hmode|exact>|<cwith|1|1|1|1|cell-hyphen|c>|<twith|table-valign|C>|<cwith|1|1|1|1|cell-lsep|0em>|<cwith|1|1|1|1|cell-rsep|0em>|<cwith|1|1|1|1|cell-halign|r>|<table|<row|<\cell>
+          <\with|par-par-sep|<quote|0em>|par-line-sep|<quote|0em>|par-mode|<quote|right>>
+            <with|font-size|<quote|0.841>|<with|color|<quote|red>|get the
+            icon!>>
+          </with>
+        </cell>>>>>|<tmlen|-151181>|0cm><flag|marginal note|dark brown>> (in
+        this figure and highlighted and connected to the macro with the
+        arrow) when the cursor is in a macro field.
       </surround>|<pageref|auto-4>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
@@ -447,6 +455,10 @@
 
       3.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-17>
+
+      4.<space|2spc>Tests on <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|compound>
+      macro <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-18>
     </associate>
   </collection>
 </auxiliary>
