@@ -281,6 +281,8 @@
     f
   </red-marginal-note||>
 
+  A macro based on compound, with two arguments (it works)
+
   <ab|a|c>
 
   <ab|a|s>
@@ -291,7 +293,12 @@
 
   <ab|a|c>
 
-  <mod-marginal-note|||>
+  A macro based on compound, with three arguments (it does not work)
+
+  <markup|compound> is computed too early when there are more than two
+  variables and the name of the macro is not <markup|marginal-note>
+
+  <mod-marginal-note|||c>
 
   <modx-marginal-note|||>
 
@@ -302,9 +309,6 @@
   <abmarg|||>
 
   <inactive|<xx-a-xx|||>>
-
-  <markup|compound> is computed too early when there are more than two
-  variables and the name of the macro is not <markup|marginal-note>
 
   <inactive|<abmarg||>>
 
@@ -324,141 +328,8 @@
 <\initial>
   <\collection>
     <associate|page-screen-margin|false>
-    <associate|preamble|false>
+    <associate|preamble|true>
     <associate|src-compact|normal>
     <associate|src-special|normal>
   </collection>
 </initial>
-
-<\references>
-  <\collection>
-    <associate|auto-1|<tuple|?|?>>
-    <associate|auto-10|<tuple|6|?>>
-    <associate|auto-11|<tuple|6|?>>
-    <associate|auto-12|<tuple|7|?>>
-    <associate|auto-13|<tuple|2|?>>
-    <associate|auto-14|<tuple|8|?>>
-    <associate|auto-15|<tuple|9|?>>
-    <associate|auto-16|<tuple|10|?>>
-    <associate|auto-17|<tuple|3|?>>
-    <associate|auto-18|<tuple|4|?>>
-    <associate|auto-2|<tuple|1|?>>
-    <associate|auto-3|<tuple|1|?>>
-    <associate|auto-4|<tuple|1|?>>
-    <associate|auto-5|<tuple|2|?>>
-    <associate|auto-6|<tuple|3|?>>
-    <associate|auto-7|<tuple|4|?>>
-    <associate|auto-8|<tuple|5|?>>
-    <associate|auto-9|<tuple|6|?>>
-    <associate|eq:choice-macro|<tuple|1|?>>
-    <associate|fig:choice_macro_math_mode|<tuple|8|?>>
-    <associate|fig:choice_macro_source_mode|<tuple|9|?>>
-    <associate|fig:choice_right_macro_source_mode|<tuple|10|?>>
-    <associate|fig:macro-edit-menu|<tuple|2|?>>
-    <associate|fig:macro-editor-window|<tuple|3|?>>
-    <associate|fig:macro-editor-wrench|<tuple|1|?>>
-    <associate|fig:macro-source-mode|<tuple|5|?>>
-    <associate|fig:macro-text-mode|<tuple|4|?>>
-    <associate|fig:preamble|<tuple|7|?>>
-    <associate|fig:wrap-tags|<tuple|6|?>>
-  </collection>
-</references>
-
-<\auxiliary>
-  <\collection>
-    <\associate|figure>
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
-        The Macro editor appears among the tools as a wrench icon
-        <with|dummy1|<quote|2cm>|dummy2|<quote|5mm>|<line-note|<tformat|<tformat|<twith|table-width|2cm>|<twith|table-hmode|exact>|<cwith|1|1|1|1|cell-hyphen|c>|<twith|table-valign|C>|<cwith|1|1|1|1|cell-lsep|0em>|<cwith|1|1|1|1|cell-rsep|0em>|<cwith|1|1|1|1|cell-halign|r>|<table|<row|<\cell>
-          <\with|par-par-sep|<quote|0em>|par-line-sep|<quote|0em>|par-mode|<quote|right>>
-            <with|font-size|<quote|0.841>|<with|color|<quote|red>|get the
-            icon!>>
-          </with>
-        </cell>>>>>|<tmlen|-151181>|0cm><flag|marginal note|dark brown>> (in
-        this figure and highlighted and connected to the macro with the
-        arrow) when the cursor is in a macro field.
-      </surround>|<pageref|auto-4>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
-        The macro editing (\Pwrench\Q) menu.
-      </surround>|<pageref|auto-5>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|3>|>
-        The Macro editor window.
-      </surround>|<pageref|auto-6>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|4>|>
-        The <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|marginal-note>
-        macro in text mode inside the Macro editor.
-      </surround>|<pageref|auto-7>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|5>|>
-        The <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|marginal-note>
-        macro in source mode inside the Macro editor.
-      </surround>|<pageref|auto-8>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|6>|>
-        Wrapping the <with|mode|<quote|src>|color|<quote|brown>|font-shape|<quote|italic>|body>
-        argument in the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|red>
-        and <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|small>
-        tags.
-      </surround>|<pageref|auto-9>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|7>|>
-        The preamble of our document after modifying the
-        <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|marginal-note>
-        macro. The arrow and the oval highlight the
-        T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>
-        mode<with|color|<quote|dark red>|<datoms|<macro|x|<resize|<tabular|<tformat|<cwith|1|1|1|1|cell-background|pastel
-        red>|<cwith|1|1|1|1|cell-lsep|0fn>|<cwith|1|1|1|1|cell-rsep|0fn>|<cwith|1|1|1|1|cell-bsep|0.2fn>|<cwith|1|1|1|1|cell-tsep|0.2fn>|<cwith|1|-1|1|-1|cell-lborder|0ln>|<cwith|1|-1|1|-1|cell-rborder|0ln>|<cwith|1|-1|1|-1|cell-bborder|0ln>|<cwith|1|-1|1|-1|cell-tborder|0ln>|<twith|table-width|>|<twith|table-hmode|auto>|<twith|table-block|no>|<table|<row|<cell|<arg|x>>>>>>|<plus|1l|0fn>|<plus|1b|0.2fn>|<minus|1r|0fn>|<minus|1t|0.2fn>>>|[is
-        it a mode?]>> notification.
-      </surround>|<pageref|auto-12>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|8>|>
-        Editing the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
-        macro in the Macro editor.
-      </surround>|<pageref|auto-14>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|9>|>
-        The source mode representation of the
-        <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
-        macro.
-      </surround>|<pageref|auto-15>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|10>|>
-        The modified <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
-        macro, now named <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice-right>.
-      </surround>|<pageref|auto-16>>
-    </associate>
-    <\associate|idx>
-      <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Note>|<with|font-family|<quote|ss>|Marginal
-      note>>|<pageref|auto-3>>
-
-      <tuple|<tuple|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Show
-      preamble>>|<pageref|auto-10>>
-
-      <tuple|<tuple|<with|font-family|<quote|ss>|Document>|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Show
-      preamble>>|<pageref|auto-11>>
-    </associate>
-    <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|The
-      Macro editor and easy macro modification>
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <pageref|auto-1><vspace|0.5fn>
-
-      1.<space|2spc>Marginal notes in red small font
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-2>
-
-      2.<space|2spc>More choice <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-13>
-
-      3.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-17>
-
-      4.<space|2spc>Tests on <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|compound>
-      macro <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-18>
-    </associate>
-  </collection>
-</auxiliary>
