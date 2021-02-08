@@ -94,6 +94,19 @@
   files. The Macro editor can be used as well to write up a new macro
   starting from an existing macro.
 
+  <section|Colored todo notes>
+
+  <TeXmacs> has a <markup|todo> macro which typesets its arguments (a
+  reminder to self, let's say) with red font on a light red background:
+  <todo|write a helpful blog post>.
+
+  Let us see how to change the macro to have colored notes in different
+  colors. The Macro editor is accessible from macro applications themselves,
+  so we insert a <markup|todo> macro by typing <verbatim|\\todo> obtaining a
+  red \Ptodo\Q field: <todo|>. With the cursor inside the (already typeset)
+  macro field, the Macro editor becomes available in the <TeXmacs> tool
+  ribbons;
+
   <section|A new quote environment>
 
   Wide tabular (wraps and allows padding) inside ornamented
@@ -543,25 +556,30 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|?>>
-    <associate|auto-10|<tuple|5|?>>
-    <associate|auto-11|<tuple|6|?>>
+    <associate|auto-10|<tuple|4|?>>
+    <associate|auto-11|<tuple|5|?>>
     <associate|auto-12|<tuple|6|?>>
     <associate|auto-13|<tuple|6|?>>
-    <associate|auto-14|<tuple|7|?>>
-    <associate|auto-15|<tuple|4|?>>
-    <associate|auto-16|<tuple|8|?>>
-    <associate|auto-17|<tuple|9|?>>
-    <associate|auto-18|<tuple|10|?>>
-    <associate|auto-19|<tuple|5|?>>
+    <associate|auto-14|<tuple|6|?>>
+    <associate|auto-15|<tuple|7|?>>
+    <associate|auto-16|<tuple|5|?>>
+    <associate|auto-17|<tuple|8|?>>
+    <associate|auto-18|<tuple|9|?>>
+    <associate|auto-19|<tuple|10|?>>
     <associate|auto-2|<tuple|1|?>>
     <associate|auto-20|<tuple|6|?>>
+    <associate|auto-21|<tuple|7|?>>
+    <associate|auto-22|<tuple|7|?>>
+    <associate|auto-23|<tuple|10|?>>
+    <associate|auto-24|<tuple|6|?>>
+    <associate|auto-25|<tuple|7|?>>
     <associate|auto-3|<tuple|2|?>>
     <associate|auto-4|<tuple|3|?>>
-    <associate|auto-5|<tuple|3|?>>
-    <associate|auto-6|<tuple|1|?>>
-    <associate|auto-7|<tuple|2|?>>
-    <associate|auto-8|<tuple|3|?>>
-    <associate|auto-9|<tuple|4|?>>
+    <associate|auto-5|<tuple|4|?>>
+    <associate|auto-6|<tuple|4|?>>
+    <associate|auto-7|<tuple|1|?>>
+    <associate|auto-8|<tuple|2|?>>
+    <associate|auto-9|<tuple|3|?>>
     <associate|eq:choice-macro|<tuple|1|?>>
     <associate|fig:choice_macro_math_mode|<tuple|8|?>>
     <associate|fig:choice_macro_source_mode|<tuple|9|?>>

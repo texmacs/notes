@@ -32,6 +32,54 @@
     The choice-right macro, for the second part of the tutorial.
 
     <assign|choice-right|<macro|x|<math-table-base|<left|.><tformat|<cwith|1|-1|1|-1|cell-swell|<value|table-math-swell>>|<arg|x>><right|}>>>>
+
+    <assign|quote-env|<\macro|body>
+      <\padded>
+        <\indent-both|<value|quote-left-indentation>|<value|quote-right-indentation>>
+          <with|par-first|0fn|par-par-sep|<value|quote-interparagraph>|<with|color|red|<arg|body>>>
+        </indent-both>
+      </padded>
+    </macro>>
+
+    <assign|quote-env-ornamented|<\macro|body>
+      <\ornamented>
+        <\indent-both|<times|<value|quote-left-indentation>|0.9>|<times|<value|quote-right-indentation>|0.9>>
+          <with|par-first|0fn|par-par-sep|<value|quote-interparagraph>|<with|color|red|<arg|body>>>
+        </indent-both>
+      </ornamented>
+    </macro>>
+
+    <assign|bothlined|<\macro|body>
+      <padded|<wide-std-bothlined|<with|color|red|<arg|body>>>>
+    </macro>>
+
+    <assign|wide-std-bothlined|<macro|body|<wide-bothlined|<value|overlined-width>|<value|underlined-width>|<value|overlined-sep>|<value|underlined-sep>|<with|color|red|<arg|body>>>>>
+
+    <assign|wide-bothlined|<macro|top-border|bot-border|top-sep|bot-sep|body|<surround|<no-indent>||<tabular|<tformat|<twith|table-width|1par>|<cwith|1|1|1|1|cell-width|1par>|<cwith|1|1|1|1|cell-lsep|0pt>|<cwith|1|1|1|1|cell-rsep|0pt>|<cwith|1|1|1|1|cell-hyphen|t>|<cwith|1|1|1|1|cell-tborder|<arg|top-border>>|<cwith|1|1|1|1|cell-bborder|<arg|bot-border>>|<cwith|1|1|1|1|cell-tsep|<arg|top-sep>>|<cwith|1|1|1|1|cell-bsep|<arg|bot-sep>>|<table|<row|<cell|<with|color|red|<arg|body>>>>>>>>>>
+
+    <assign|indented-bothlined|<macro|top-border|bot-border|top-sep|bot-sep|body|<indent-both|<value|quote-left-indentation>|<value|quote-right-indentation>|<tabular|<tformat|<twith|table-width|1par>|<cwith|1|1|1|1|cell-width|1par>|<cwith|1|1|1|1|cell-lsep|0pt>|<cwith|1|1|1|1|cell-rsep|0pt>|<cwith|1|1|1|1|cell-hyphen|t>|<cwith|1|1|1|1|cell-tborder|<arg|top-border>>|<cwith|1|1|1|1|cell-bborder|<arg|bot-border>>|<cwith|1|1|1|1|cell-tsep|<arg|top-sep>>|<cwith|1|1|1|1|cell-bsep|<arg|bot-sep>>|<table|<row|<cell|<with|color|red|<arg|body>>>>>>>>>>
+
+    <assign|todo-green|<macro|body|<with|todo-bg-color|light
+    green|todo-color|dark green|<render-todo|<value|todo-color>|<value|todo-bg-color>|<arg|body>>>>>
+
+    <assign|todo-orange|<macro|body|<with|todo-bg-color|#fa6|todo-color|dark
+    orange|<render-todo|<value|todo-color>|<value|todo-bg-color>|<arg|body>>>>>
+
+    <assign|todo-blue|<macro|body|<with|todo-bg-color|light
+    blue|todo-color|dark blue|<render-todo|<value|todo-color>|<value|todo-bg-color>|<arg|body>>>>>
+
+    <assign|theorem|<\macro|body>
+      <surround|<compound|next-theorem>||<compound|render-theorem|<compound|theorem-numbered|<compound|theorem-text>|<compound|the-theorem>>|<arg|body>
+      <qed>>>
+    </macro>>
+
+    <assign|verse-emph|<\macro|body>
+      <\ornamented>
+        <\indent-both|<plus|<value|quote-left-indentation>|<value|verse-hangover>>|<value|quote-right-indentation>>
+          <with|par-first|<minus|<value|verse-hangover>>|par-par-sep|0.fn|<surround|<yes-indent>||<with|font-shape|italic|<arg|body>>>>
+        </indent-both>
+      </ornamented>
+    </macro>>
   </hide-preamble>
 
   <chapter*|The Macro editor and easy macro modification>
@@ -46,12 +94,198 @@
   files. The Macro editor can be used as well to write up a new macro
   starting from an existing macro.
 
+  <section|Colored todo notes>
+
+  <TeXmacs> has a <markup|todo> macro which typesets its arguments (a
+  reminder to self, let's say) with red font on a light red background:
+  <todo|write a helpful blog post>.
+
+  Let us see how to change the macro to have colored notes in different
+  colors. The Macro editor is accessible from macro applications themselves,
+  so we insert a <markup|todo> macro by typing <verbatim|\\todo> obtaining a
+  red \Ptodo\Q field: <todo|>. With the cursor inside the (already typeset)
+  macro field, the Macro editor becomes available in the <TeXmacs> tool
+  ribbons;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  \;
+
+  <section|A new quote environment>
+
+  Wide tabular (wraps and allows padding) inside ornamented
+
+  <\quote-env>
+    <with|ornament-shape|rounded|<\ornamented>
+      <\wide-tabular>
+        <tformat|<cwith|1|1|1|1|cell-tsep|4sep>|<cwith|1|1|1|1|cell-bsep|4sep>|<table|<row|<\cell>
+          \PNonsense,\Q Weston denied, with an involuntary nervous shiver.
+          \PThat's completely ridiculous. We had a long discussion at the
+          time we bought Robbie about the First Law of Robotics. You
+          <with|font-shape|italic|know> that it is impossible for a robot to
+          harm a human being; that long before enough can go wrong to alter
+          that First Law, a robot would be completely inoperable. It's a
+          mathematical impossibility. Besides I have an engineer from U.S.
+          Robots here twice a year to give the poor gadget a complete
+          overhaul. Why, there's no more chance of anything at all going
+          wrong with Robbie than there is of you or I suddenly going
+          looney\Vconsiderably less, in fact.
+        </cell>>>>
+      </wide-tabular>
+    </ornamented>>
+  </quote-env>
+
+  <\bothlined>
+    <indent-both|<value|quote-left-indentation>|<value|quote-right-indentation>|test>
+  </bothlined>
+
+  <\wide-std-bothlined>
+    test
+  </wide-std-bothlined>
+
+  <wide-bothlined|2ln|2ln|1sep|1sep|test>
+
+  <\padded>
+    <indented-bothlined|2ln|2ln|3sep|3sep|\PNonsense,\Q Weston denied, with
+    an involuntary nervous shiver. \PThat's completely ridiculous. We had a
+    long discussion at the time we bought Robbie about the First Law of
+    Robotics. You <with|font-shape|italic|know> that it is impossible for a
+    robot to harm a human being; that long before enough can go wrong to
+    alter that First Law, a robot would be completely inoperable. It's a
+    mathematical impossibility. Besides I have an engineer from U.S. Robots
+    here twice a year to give the poor gadget a complete overhaul. Why,
+    there's no more chance of anything at all going wrong with Robbie than
+    there is of you or I suddenly going looney\Vconsiderably less, in fact.>
+  </padded>
+
+  <decorated|test>
+
+  <ornament|<tabular|<tformat|<table|<row|<cell|test>>>>>>
+
+  <\quote-env>
+    \PNonsense,\Q Weston denied, with an involuntary nervous shiver. \PThat's
+    completely ridiculous. We had a long discussion at the time we bought
+    Robbie about the First Law of Robotics. You <with|font-shape|italic|know>
+    that it is impossible for a robot to harm a human being; that long before
+    enough can go wrong to alter that First Law, a robot would be completely
+    inoperable. It's a mathematical impossibility. Besides I have an engineer
+    from U.S. Robots here twice a year to give the poor gadget a complete
+    overhaul. Why, there's no more chance of anything at all going wrong with
+    Robbie than there is of you or I suddenly going looney\Vconsiderably
+    less, in fact.
+  </quote-env>
+
+  <\quote-env-ornamented>
+    \PNonsense,\Q Weston denied, with an involuntary nervous shiver. \PThat's
+    completely ridiculous. We had a long discussion at the time we bought
+    Robbie about the First Law of Robotics. You <with|font-shape|italic|know>
+    that it is impossible for a robot to harm a human being; that long before
+    enough can go wrong to alter that First Law, a robot would be completely
+    inoperable. It's a mathematical impossibility. Besides I have an engineer
+    from U.S. Robots here twice a year to give the poor gadget a complete
+    overhaul. Why, there's no more chance of anything at all going wrong with
+    Robbie than there is of you or I suddenly going looney\Vconsiderably
+    less, in fact.
+  </quote-env-ornamented>
+
+  <section|To do notes>
+
+  <todo|How to write \Ptodo\Q notes>
+
+  <todo-green|A green todo note>
+
+  <todo-orange|An orange todo note>
+
+  <todo-blue|A blue todo note>
+
+  <inactive|<render-todo|||>> <with|color|#fa6|Crashes> if attempt to \PEdit
+  macro\Q
+
+  <\theorem>
+    Theorem text
+  </theorem>
+
+  <assign|theorem|<\macro|body>
+    <surround|<compound|next-theorem>||<compound|render-theorem|<compound|theorem-numbered|<compound|theorem-text>|<compound|the-theorem>>|<arg|body>
+    <qed>>>
+  </macro>>
+
+  <\render-theorem|test>
+    teorema
+
+    <\proof>
+      Consider the triangle
+    </proof>
+  </render-theorem>
+
+  <markup|render-proof>
+
+  <render-proof|Which |body>
+
+  <markup|render-remark>
+
+  <render-remark||test>
+
+  <markup|render-enunciation>
+
+  <render-enunciation|which|body>
+
+  <markup|verse>
+
+  <\verse>
+    Mi chiedo il perché mi chiedo
+
+    perché mi chiedo il perché?
+  </verse>
+
+  <\verse-emph>
+    Mi chiedo il perché mi chiedo
+
+    perché mi chiedo il perchè?
+  </verse-emph>
+
+  <markup|itemize>
+
+  <\itemize>
+    <item>test
+  </itemize>
+
+  <markup|the-item>
+
+  <render-item|<the-item>>
+
+  <\bothlined>
+    \;
+  </bothlined>
+
+  <\wide-std-bothlined>
+    \;
+  </wide-std-bothlined>
+
+  <inactive|<wide-bothlined|||||>>
+
+  <\ornamented>
+    \;
+  </ornamented>
+
   <section|Marginal notes in red small font>
 
   Let us see how to modify marginal notes to display them with a small red
   font instead of their default font. The Macro editor is accessible from
-  macros themselves, so we insert a <markup|marginal-note> macro from the
-  menu (<menu|Insert|Note|Marginal note>), obtaining
+  macro applications themselves, so we insert a <markup|marginal-note> macro
+  from the menu (<menu|Insert|Note|Marginal note>), obtaining
   <inactive|<marginal-note|normal|c|>> (if we had typed up
   <verbatim|\\marginal-note> and we would have obtained
   <inactive|<marginal-note|||>> with empty fields for the horizontal and
@@ -327,6 +561,7 @@
 
 <\initial>
   <\collection>
+    <associate|ornament-shape|rounded>
     <associate|page-screen-margin|false>
     <associate|preamble|false>
     <associate|src-compact|normal>
@@ -336,35 +571,38 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|?>>
-    <associate|auto-10|<tuple|6|?>>
-    <associate|auto-11|<tuple|6|?>>
-    <associate|auto-12|<tuple|7|?>>
-    <associate|auto-13|<tuple|2|?>>
-    <associate|auto-14|<tuple|8|?>>
-    <associate|auto-15|<tuple|9|?>>
-    <associate|auto-16|<tuple|10|?>>
-    <associate|auto-17|<tuple|3|?>>
-    <associate|auto-18|<tuple|4|?>>
-    <associate|auto-2|<tuple|1|?>>
-    <associate|auto-3|<tuple|1|?>>
-    <associate|auto-4|<tuple|1|?>>
-    <associate|auto-5|<tuple|2|?>>
-    <associate|auto-6|<tuple|3|?>>
-    <associate|auto-7|<tuple|4|?>>
-    <associate|auto-8|<tuple|5|?>>
-    <associate|auto-9|<tuple|6|?>>
-    <associate|eq:choice-macro|<tuple|1|?>>
-    <associate|fig:choice_macro_math_mode|<tuple|8|?>>
-    <associate|fig:choice_macro_source_mode|<tuple|9|?>>
-    <associate|fig:choice_right_macro_source_mode|<tuple|10|?>>
-    <associate|fig:macro-edit-menu|<tuple|2|?>>
-    <associate|fig:macro-editor-window|<tuple|3|?>>
-    <associate|fig:macro-editor-wrench|<tuple|1|?>>
-    <associate|fig:macro-source-mode|<tuple|5|?>>
-    <associate|fig:macro-text-mode|<tuple|4|?>>
-    <associate|fig:preamble|<tuple|7|?>>
-    <associate|fig:wrap-tags|<tuple|6|?>>
+    <associate|auto-1|<tuple|?|?|macro-editor-2.tm>>
+    <associate|auto-10|<tuple|4|?|macro-editor-2.tm>>
+    <associate|auto-11|<tuple|5|?|macro-editor-2.tm>>
+    <associate|auto-12|<tuple|6|?|macro-editor-2.tm>>
+    <associate|auto-13|<tuple|6|?|macro-editor-2.tm>>
+    <associate|auto-14|<tuple|6|?|macro-editor-2.tm>>
+    <associate|auto-15|<tuple|7|?|macro-editor-2.tm>>
+    <associate|auto-16|<tuple|5|?|macro-editor-2.tm>>
+    <associate|auto-17|<tuple|8|?|macro-editor-2.tm>>
+    <associate|auto-18|<tuple|9|?|macro-editor-2.tm>>
+    <associate|auto-19|<tuple|10|?|macro-editor-2.tm>>
+    <associate|auto-2|<tuple|1|?|macro-editor-2.tm>>
+    <associate|auto-20|<tuple|6|?|macro-editor-2.tm>>
+    <associate|auto-21|<tuple|7|?|macro-editor-2.tm>>
+    <associate|auto-3|<tuple|2|?|macro-editor-2.tm>>
+    <associate|auto-4|<tuple|3|?|macro-editor-2.tm>>
+    <associate|auto-5|<tuple|4|?|macro-editor-2.tm>>
+    <associate|auto-6|<tuple|4|?|macro-editor-2.tm>>
+    <associate|auto-7|<tuple|1|?|macro-editor-2.tm>>
+    <associate|auto-8|<tuple|2|?|macro-editor-2.tm>>
+    <associate|auto-9|<tuple|3|?|macro-editor-2.tm>>
+    <associate|eq:choice-macro|<tuple|1|?|macro-editor-2.tm>>
+    <associate|fig:choice_macro_math_mode|<tuple|8|?|macro-editor-2.tm>>
+    <associate|fig:choice_macro_source_mode|<tuple|9|?|macro-editor-2.tm>>
+    <associate|fig:choice_right_macro_source_mode|<tuple|10|?|macro-editor-2.tm>>
+    <associate|fig:macro-edit-menu|<tuple|2|?|macro-editor-2.tm>>
+    <associate|fig:macro-editor-window|<tuple|3|?|macro-editor-2.tm>>
+    <associate|fig:macro-editor-wrench|<tuple|1|?|macro-editor-2.tm>>
+    <associate|fig:macro-source-mode|<tuple|5|?|macro-editor-2.tm>>
+    <associate|fig:macro-text-mode|<tuple|4|?|macro-editor-2.tm>>
+    <associate|fig:preamble|<tuple|7|?|macro-editor-2.tm>>
+    <associate|fig:wrap-tags|<tuple|6|?|macro-editor-2.tm>>
   </collection>
 </references>
 
@@ -381,32 +619,32 @@
         </cell>>>>>|<tmlen|-151181>|0cm><flag|marginal note|dark brown>> (in
         this figure and highlighted and connected to the macro with the
         arrow) when the cursor is in a macro field.
-      </surround>|<pageref|auto-4>>
+      </surround>|<pageref|auto-7>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
         The macro editing (\Pwrench\Q) menu.
-      </surround>|<pageref|auto-5>>
+      </surround>|<pageref|auto-8>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|3>|>
         The Macro editor window.
-      </surround>|<pageref|auto-6>>
+      </surround>|<pageref|auto-9>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|4>|>
         The <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|marginal-note>
         macro in text mode inside the Macro editor.
-      </surround>|<pageref|auto-7>>
+      </surround>|<pageref|auto-10>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|5>|>
         The <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|marginal-note>
         macro in source mode inside the Macro editor.
-      </surround>|<pageref|auto-8>>
+      </surround>|<pageref|auto-11>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|6>|>
         Wrapping the <with|mode|<quote|src>|color|<quote|brown>|font-shape|<quote|italic>|body>
         argument in the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|red>
         and <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|small>
         tags.
-      </surround>|<pageref|auto-9>>
+      </surround>|<pageref|auto-12>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|7>|>
         The preamble of our document after modifying the
@@ -416,33 +654,33 @@
         mode<with|color|<quote|dark red>|<datoms|<macro|x|<resize|<tabular|<tformat|<cwith|1|1|1|1|cell-background|pastel
         red>|<cwith|1|1|1|1|cell-lsep|0fn>|<cwith|1|1|1|1|cell-rsep|0fn>|<cwith|1|1|1|1|cell-bsep|0.2fn>|<cwith|1|1|1|1|cell-tsep|0.2fn>|<cwith|1|-1|1|-1|cell-lborder|0ln>|<cwith|1|-1|1|-1|cell-rborder|0ln>|<cwith|1|-1|1|-1|cell-bborder|0ln>|<cwith|1|-1|1|-1|cell-tborder|0ln>|<twith|table-width|>|<twith|table-hmode|auto>|<twith|table-block|no>|<table|<row|<cell|<arg|x>>>>>>|<plus|1l|0fn>|<plus|1b|0.2fn>|<minus|1r|0fn>|<minus|1t|0.2fn>>>|[is
         it a mode?]>> notification.
-      </surround>|<pageref|auto-12>>
+      </surround>|<pageref|auto-15>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|8>|>
         Editing the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
         macro in the Macro editor.
-      </surround>|<pageref|auto-14>>
+      </surround>|<pageref|auto-17>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|9>|>
         The source mode representation of the
         <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
         macro.
-      </surround>|<pageref|auto-15>>
+      </surround>|<pageref|auto-18>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|10>|>
         The modified <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
         macro, now named <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice-right>.
-      </surround>|<pageref|auto-16>>
+      </surround>|<pageref|auto-19>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Insert>|<with|font-family|<quote|ss>|Note>|<with|font-family|<quote|ss>|Marginal
-      note>>|<pageref|auto-3>>
+      note>>|<pageref|auto-6>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Show
-      preamble>>|<pageref|auto-10>>
+      preamble>>|<pageref|auto-13>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Document>|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Show
-      preamble>>|<pageref|auto-11>>
+      preamble>>|<pageref|auto-14>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|The
@@ -450,19 +688,29 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
-      1.<space|2spc>Marginal notes in red small font
-      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      1.<space|2spc>Colored todo notes <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
 
-      2.<space|2spc>More choice <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-13>
+      2.<space|2spc>A new quote environment
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-3>
 
-      3.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-17>
+      3.<space|2spc>To do notes <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-4>
 
-      4.<space|2spc>Tests on <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|compound>
+      4.<space|2spc>Marginal notes in red small font
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5>
+
+      5.<space|2spc>More choice <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-16>
+
+      6.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-20>
+
+      7.<space|2spc>Tests on <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|compound>
       macro <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-18>
+      <no-break><pageref|auto-21>
     </associate>
   </collection>
 </auxiliary>
