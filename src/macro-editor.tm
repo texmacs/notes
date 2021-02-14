@@ -95,17 +95,19 @@
 
   We can check the values of the environment
   variables<marginal-note|normal|c|are these environment variables?> by
-  entering them preceded by a backslash and pressing Return:
-  <src-var|todo-color> evaluates to <value|todo-color> and
-  <src-var|todo-bg-color> to <value|todo-bg-color>. Let us then substitute
-  dark green and pastel green for them with the following steps.
+  entering them preceded by a backslash and pressing Return (for this we can
+  either switch out of the macro editor and use the usual TeXmacs editor or
+  we can set the macro editor to Text mode): <src-var|todo-color> evaluates
+  to <value|todo-color> and <src-var|todo-bg-color> to <value|todo-bg-color>.
+  Let us then substitute dark green and pastel green for them.
 
-  We first click <strong|four> times onto the variable to select its text and
-  the surrounding markup\V clicking twice selects one of the words in the
-  compound name of the variable (between hyphens), clicking three times
-  selects the whole variable name without the <markup|value> markup
-  surrounding it; we then type \Pdark green\Q (without the quotes) in place
-  of <src-var|todo-color> and \Ppastel green\Q (likewise) in place of
+  To type our new text on top of a variable, we first click <strong|four>
+  times onto it to select its text and the surrounding markup\Vclicking twice
+  selects one of the words in the compound name of the variable (between
+  hyphens), clicking three times selects the whole variable name without the
+  <markup|value> markup surrounding it\Vand then we type over it the text
+  that we wish to: \Pdark green\Q (without the quotes) in place of
+  <src-var|todo-color> and \Ppastel green\Q (likewise) in place of
   <src-var|todo-bg-color>.
 
   \;
