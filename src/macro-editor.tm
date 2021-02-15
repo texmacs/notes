@@ -97,12 +97,12 @@
   the two variables <src-var|todo-color> and <src-var|todo-bg-color> as the
   color of the text and the color of the background\Vit looks reasonable, and
   if this does not work, we can check how the macro <markup|render-todo> is
-  composed (in TeXmacs 1.99.18 a bug prevents us to do this for the macro
-  <markup|render-todo> through the macro editor, so if you want to check that
-  macro please use the <menu|Edit source> entry of the \Pwrench\Q menu and
-  the file <verbatim|std-markup.ts> will open at the position of the code for
-  <markup|render-macro>; the discussion of the <markup|todo> example works
-  despite this bug).
+  composed (in <TeXmacs> 1.99.18 a bug prevents us to do this for the macro
+  <markup|render-todo> through the macro editor\Vthe attempt makes <TeXmacs>
+  crash\Vso if you want to check that macro please use the <menu|Edit source>
+  entry of the \Pwrench\Q menu and the file <verbatim|std-markup.ts> will
+  open at the position of the code for <markup|render-macro>; the discussion
+  of the <markup|todo> example works despite this bug).
 
   We can check the values of the environment
   variables<marginal-note|normal|c|are these environment variables?> by
@@ -136,7 +136,9 @@
     times (upper left) and four times (upper right). When clicking three
     times, the <markup|value> markup surrounding the variable name is not
     enclosed in the selection, which does not reach the focus frame
-    (magnified view on the bottom).<label|fig:environment-variable-selected>
+    (magnified view on the bottom); when clicking four times, the selection
+    extends to the whole focus frame and encloses the <markup|value>
+    markup.<label|fig:environment-variable-selected>
   </big-figure>
 
   Clicking the <menu|Ok> or the <menu|Apply> button will save he edited macro
@@ -339,14 +341,10 @@
   <\collection>
     <\associate|figure>
       <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
-        The Macro editor appears among the tools as a wrench icon
-        <with|dummy1|<quote|2cm>|dummy2|<quote|5mm>|<line-note|<tformat|<tformat|<twith|table-width|2cm>|<twith|table-hmode|exact>|<cwith|1|1|1|1|cell-hyphen|c>|<twith|table-valign|C>|<cwith|1|1|1|1|cell-lsep|0em>|<cwith|1|1|1|1|cell-rsep|0em>|<cwith|1|1|1|1|cell-halign|r>|<table|<row|<\cell>
-          <\with|par-par-sep|<quote|0em>|par-line-sep|<quote|0em>|par-mode|<quote|right>>
-            get the icon!
-          </with>
-        </cell>>>>>|<tmlen|-151181>|0cm><flag|marginal note|dark brown>>(in
-        this figure and highlighted and connected to the macro with the
-        arrow) when the cursor is in a macro field.
+        The Macro editor appears among the tools as the
+        <image|<tuple|<#89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF610000000473424954080808087C086488000000097048597300000DD700000DD70142289B780000001974455874536F667477617265007777772E696E6B73636170652E6F72679BEE3C1A0000010349444154388DA592314A03511086BF5985F4162236F100D6010342EA1C42023980D58A1078C32C5A042F91C61B580492C220246029E9D5CE13A491646DDEC218DD8D8953CD1BFE6FE69FE1499EE754859935811468009FC008B854D505C0FE06F81AB80592585A8AC83884B0283452E6204E7E72F04A442E4208F74E7358E52075700E743D9C65590FA8573568B87CA8AA0337F90AB8015E9375AA24566E720AF4E3B356E5600E1CC7BC6D660FC00170E634CFBF1ED1CC4E801970B4C1D5F98F1522FCF807B8A7AAD36F2B38B8EECA1FC00B705AD806EE54750AEE2395C0EF404B55DFCAAC24FF8101F6446467B87030D8152E1A7422B4350C9044710B986C0B037C01A5C064608BFA30900000000049454E44AE426082>|tm_focus_prefs.png>|10pt|10pt||>
+        wrench icon when the cursor is in a macro field (the icon is in this
+        figure highlighted and connected to the macro with the arrow).
       </surround>|<pageref|auto-3>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
@@ -389,10 +387,24 @@
         <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|todo>
         macro. The arrow and the oval highlight the
         T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>
-        mode<with|color|<quote|dark red>|<datoms|<macro|x|<resize|<tabular|<tformat|<cwith|1|1|1|1|cell-background|pastel
-        red>|<cwith|1|1|1|1|cell-lsep|0fn>|<cwith|1|1|1|1|cell-rsep|0fn>|<cwith|1|1|1|1|cell-bsep|0.2fn>|<cwith|1|1|1|1|cell-tsep|0.2fn>|<cwith|1|-1|1|-1|cell-lborder|0ln>|<cwith|1|-1|1|-1|cell-rborder|0ln>|<cwith|1|-1|1|-1|cell-bborder|0ln>|<cwith|1|-1|1|-1|cell-tborder|0ln>|<twith|table-width|>|<twith|table-hmode|auto>|<twith|table-block|no>|<table|<row|<cell|<arg|x>>>>>>|<plus|1l|0fn>|<plus|1b|0.2fn>|<minus|1r|0fn>|<minus|1t|0.2fn>>>|[is
-        it a mode?]>> notification.
+        notification that we are looking at the preamble.
       </surround>|<pageref|auto-17>>
+
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|9>|>
+        Editing the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
+        macro in the Macro editor.
+      </surround>|<pageref|auto-19>>
+
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|10>|>
+        The source mode representation of the
+        <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
+        macro.
+      </surround>|<pageref|auto-20>>
+
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|11>|>
+        The modified <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
+        macro, now named <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice-right>.
+      </surround>|<pageref|auto-21>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Todo bg
@@ -422,6 +434,12 @@
 
       1.<space|2spc>Colored todo notes <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
+
+      2.<space|2spc>More choice <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-18>
+
+      3.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-22>
     </associate>
   </collection>
 </auxiliary>
