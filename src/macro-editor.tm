@@ -11,6 +11,8 @@
 
     <assign|todo-blue|<macro|body|<render-todo|dark blue|pastel
     blue|<arg|body>>>>
+
+    <assign|choice-right|<macro|x|<math-table-base|<left|.><tformat|<cwith|1|-1|1|-1|cell-swell|<value|table-math-swell>>|<arg|x>><right|}>>>>
   </hide-preamble>
 
   <chapter*|The Macro editor and easy macro modification>
@@ -101,8 +103,6 @@
   <markup|render-macro>; the discussion of the <markup|todo> example works
   despite this bug).
 
-  <todo|>
-
   We can check the values of the environment
   variables<marginal-note|normal|c|are these environment variables?> by
   entering them preceded by a backslash and pressing Return (for this we can
@@ -186,7 +186,7 @@
 
   <section|More choice>
 
-  In math mode the macro <markup|choice> inserts a left brace that introduce
+  In math mode the macro <markup|choice> inserts a left brace that introduces
   a vertical list, represented with a table<todo|can I be more precise? What
   is <markup|tformat>?>.
 
@@ -268,8 +268,9 @@
   If the macro looks too complex to be interpreted intuitively, or modifying
   it des not yield the result you expect, you can look for more detailed
   explanations in the manual; link to the manuals in various languages in pdf
-  format are at <hlink|TeXmacs manuals|http://texmacs.org/tmweb/help/book.en.html>
-  and the web version is at <hlink|web manual|https://www.texmacs.org/tmweb/manual/web-manual.en.html>.\ 
+  format are in the <hlink|TeXmacs manuals|http://texmacs.org/tmweb/help/book.en.html>
+  webpage and the web version is at <hlink|web
+  manual|https://www.texmacs.org/tmweb/manual/web-manual.en.html>.\ 
 
   You can also ask for help on
 
