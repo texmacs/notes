@@ -249,7 +249,7 @@
     <markup|choice-right>.<label|fig:choice_right_macro_source_mode>
   </big-figure>
 
-  We have to try it now. Let us type <verbatim|\\choice-right>, then
+  We have to test it now. Let us type <verbatim|\\choice-right>, then
   <key|return> inside a display math environment, next to a <markup|choice>
   and place the same two elements into both constructs:
 
