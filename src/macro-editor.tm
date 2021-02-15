@@ -262,8 +262,8 @@
   <section|Conclusion>
 
   If you want to modify a macro, place your cursor into it and open it with
-  the Macro editor. If you see what to change, change it and look at the
-  result: you might immediately achieve what you want.
+  the Macro editor. If you see a likely candidate to change, change it and
+  look at the result: you might immediately achieve what you want.
 
   If the macro looks too complex to be interpreted intuitively, or modifying
   it des not yield the result you expect, you can look for more detailed
