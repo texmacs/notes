@@ -219,7 +219,7 @@
   The source mode representation of the macro is complex (Figure
   <reference|fig:choice_macro_source_mode>), but maybe we do not need to know
   what is the <markup|math-table-base> macro, nor what are
-  <src-var|cell-swell> and <src-var|table-math-swell>.
+  <src-var|cell-swell> and <src-var|table-math-swell>; let's try.
 
   Let us notice the two paired delimiters <inactive|<left|{>> and
   <inactive|<right|.>>: we have to swap them. Of course, the left brace must
