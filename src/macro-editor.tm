@@ -22,18 +22,18 @@
   which style file or package they are defined.\ 
 
   The tool is called \PMacro editor\Q, and the modifications made via the
-  Macro editor are saved in the document's preamble of the current document,
-  while original definitions of macros are preserved in their respective
-  files. The Macro editor can be used as well to write up a new macro
-  starting from an existing macro.
+  Macro editor are saved in the preamble of the current document, while
+  original definitions of macros are preserved in their respective files. The
+  Macro editor can be used as well to write up a new macro starting from an
+  existing macro.
 
   Let us examine two examples.\ 
 
   <section|Colored todo notes>
 
   <TeXmacs> has a <markup|todo> macro which typesets its arguments (a
-  reminder to self, let's say) with red font on a light red background:
-  <todo|write a helpful blog post>.
+  reminder to self, let's say) with red font on a light red background,
+  surrounded by brackets: <todo|write a helpful blog post>.
 
   Let us see how to change the macro to have colored notes in different
   colors. The Macro editor is accessible from macro applications themselves,
@@ -75,7 +75,7 @@
 
   The first view is the \Ptext view\Q, where the macro is represented in
   typeset form (as in the text mode of <TeXmacs>); in this case it results in
-  a \Ptodo\Q note which displays the name of the variable in the macro
+  a <markup|todo> note which displays the name of the variable in the macro
   definition (<todo|body>). We are interested in the source so we select
   \PSource\Q from the drop-down menu at the bottom left (Figure
   <reference|fig:macro-text-mode>).
@@ -99,21 +99,22 @@
   the two variables <src-var|todo-color> and <src-var|todo-bg-color> as the
   color of the text and the color of the background\Vit looks reasonable, and
   if this does not work, we can check how the macro <markup|render-todo> is
-  composed (in <TeXmacs> 1.99.18 a bug prevents us to do this for the macro
-  <markup|render-todo> through the macro editor\Vthe attempt makes <TeXmacs>
-  crash\Vso if you want to check that macro please use the <menu|Edit source>
-  entry of the \Pwrench\Q menu and the file <verbatim|std-markup.ts> will
-  open at the position of the code for <markup|render-macro>; the discussion
-  of the <markup|todo> example works despite this bug).
+  composed (in <TeXmacs> 1.99.18, which I am using to write this blog post, a
+  bug prevents one to do this for the macro <markup|render-todo> through the
+  macro editor\Vthe attempt makes <TeXmacs> crash\Vso if you want to check
+  that macro please use the <menu|Edit source> entry of the \Pwrench\Q menu
+  and the file <verbatim|std-markup.ts> will open at the position of the code
+  for <markup|render-macro>; the discussion of the <markup|todo> example
+  works despite this bug).
 
   We can check the values of the environment variables (see <hlink|Standard
   environment variables|https://www.texmacs.org/tmweb/manual/webman-env.en.html>
-  for a discussion) by entering them preceded by a backslash and pressing
-  <key|Return> (for this we can either switch out of the macro editor and use
-  the usual TeXmacs editor or we can set the macro editor to Text mode):
-  <src-var|todo-color> evaluates to <value|todo-color> and
-  <src-var|todo-bg-color> to <value|todo-bg-color>. Let us then substitute
-  dark green and pastel green for them.
+  for a general discussion of the environment variables ) by entering them
+  preceded by a backslash and pressing <key|Return> (for this we can either
+  switch out of the macro editor and use the usual TeXmacs editor or we can
+  set the macro editor to Text mode): <src-var|todo-color> evaluates to
+  <value|todo-color> and <src-var|todo-bg-color> to <value|todo-bg-color>.
+  Let us then substitute dark green and pastel green for them.
 
   To type our new text on top of a variable, we first click <strong|four>
   times onto it to select its text and the surrounding markup\Vclicking twice
@@ -346,10 +347,10 @@
   <\collection>
     <\associate|figure>
       <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
-        The Macro editor appears among the tools as the
+        The Macro editor appears among the tools as the wrench icon
         <image|<tuple|<#89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF610000000473424954080808087C086488000000097048597300000DD700000DD70142289B780000001974455874536F667477617265007777772E696E6B73636170652E6F72679BEE3C1A0000010349444154388DA592314A03511086BF5985F4162236F100D6010342EA1C42023980D58A1078C32C5A042F91C61B580492C220246029E9D5CE13A491646DDEC218DD8D8953CD1BFE6FE69FE1499EE754859935811468009FC008B854D505C0FE06F81AB80592585A8AC83884B0283452E6204E7E72F04A442E4208F74E7358E52075700E743D9C65590FA8573568B87CA8AA0337F90AB8015E9375AA24566E720AF4E3B356E5600E1CC7BC6D660FC00170E634CFBF1ED1CC4E801970B4C1D5F98F1522FCF807B8A7AAD36F2B38B8EECA1FC00B705AD806EE54750AEE2395C0EF404B55DFCAAC24FF8101F6446467B87030D8152E1A7422B4350C9044710B986C0B037C01A5C064608BFA30900000000049454E44AE426082>|tm_focus_prefs.png>|10pt|10pt||>
-        wrench icon when the cursor is in a macro field (the icon is in this
-        figure highlighted and connected to the macro with the arrow).
+        when the cursor is in a macro field (the icon is in this figure
+        highlighted and connected to the macro with the arrow).
       </surround>|<pageref|auto-3>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
@@ -376,7 +377,7 @@
         times (upper left) and four times (upper right). When clicking three
         times, the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|value>
         markup surrounding the variable name is not enclosed in the
-        selection, which does not reach the focus frame (magnified view on
+        selection, which does not reach the focus frame (magnified view at
         the bottom); when clicking four times, the selection extends to the
         whole focus frame and encloses the
         <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|value>
