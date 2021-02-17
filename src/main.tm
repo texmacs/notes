@@ -38,7 +38,7 @@
 
   <hlink|Community links|community.tm>
 
-  <hlink|Status of plugins for <TeXmacs>|plugin-status.tm>
+  <hlink|Status of plugins for <TeXmacs>|plugin-status.en.tm>
 
   <section*|Miscellanea>
 
@@ -48,6 +48,9 @@
   <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
 
   <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
+
+  <hlink|Build <TeXmacs> using CMake and Homebrew on
+  macOS|build-using-cmake-and-homebrew-on-macos.tm>
 
   <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
 
