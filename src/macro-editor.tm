@@ -15,7 +15,7 @@
     <assign|choice-right|<macro|x|<math-table-base|<left|.><tformat|<cwith|1|-1|1|-1|cell-swell|<value|table-math-swell>>|<arg|x>><right|}>>>>
   </hide-preamble>
 
-  <chapter*|The Macro editor and easy macro modification>
+  <notes-header><chapter*|The Macro editor and easy macro modification>
 
   The <TeXmacs> editor offers the possibility of examining and modifying
   macro definitions through a \Pshortcut\Q tool, without having to know in
@@ -402,23 +402,23 @@
         macro. The arrow and the oval highlight the
         T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>
         notification that we are looking at the preamble.
-      </surround>|<pageref|auto-17>>
+      </surround>|<pageref|auto-18>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|9>|>
         Editing the <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
         macro in the Macro editor.
-      </surround>|<pageref|auto-19>>
+      </surround>|<pageref|auto-20>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|10>|>
         The source mode representation of the
         <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
         macro.
-      </surround>|<pageref|auto-20>>
+      </surround>|<pageref|auto-21>>
 
       <tuple|normal|<\surround|<hidden-binding|<tuple>|11>|>
         The modified <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice>
         macro, now named <with|mode|<quote|src>|color|<quote|blue>|font-family|<quote|ss>|choice-right>.
-      </surround>|<pageref|auto-21>>
+      </surround>|<pageref|auto-23>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Todo bg
@@ -434,11 +434,15 @@
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Apply>>|<pageref|auto-13>>
 
+      <tuple|<tuple|<with|font-family|<quote|ss>|Ok>>|<pageref|auto-15>>
+
       <tuple|<tuple|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Show
-      preamble>>|<pageref|auto-15>>
+      preamble>>|<pageref|auto-16>>
 
       <tuple|<tuple|<with|font-family|<quote|ss>|Document>|<with|font-family|<quote|ss>|Part>|<with|font-family|<quote|ss>|Show
-      preamble>>|<pageref|auto-16>>
+      preamble>>|<pageref|auto-17>>
+
+      <tuple|<tuple|<with|font-family|<quote|ss>|Ok>>|<pageref|auto-22>>
     </associate>
     <\associate|toc>
       <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|The
@@ -450,10 +454,10 @@
       <no-break><pageref|auto-2>
 
       2.<space|2spc>More choice <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-18>
+      <no-break><pageref|auto-19>
 
       3.<space|2spc>Conclusion <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-22>
+      <no-break><pageref|auto-24>
     </associate>
   </collection>
 </auxiliary>

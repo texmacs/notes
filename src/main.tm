@@ -38,24 +38,20 @@
 
   <hlink|Community links|community.tm>
 
-  <hlink|Status of plugins for <TeXmacs>|plugin-status.en.tm>
+  <hlink|Status of plugins for <TeXmacs>|plugin-status.tm>
 
   <section*|Miscellanea>
 
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
-  <hlink|Build <TeXmacs> using CMake and MXE on WSL for
-  Windows|build-using-cmake-and-mxe-on-wsl.tm>
+  <hlink|The Macro Editor and Easy Macro Modification|macro-editor.tm>
 
   <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
 
   <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
 
-  <hlink|Build <TeXmacs> using CMake and Homebrew on
-  macOS|build-using-cmake-and-homebrew-on-macos.tm>
-
-  <hlink|Customizing the color of code snippets|./customize-syntax-color.en.tm>
+  <hlink|Customizing the color of code snippets|./customize-syntax-color.tm>
 
   <hlink|Embedding graphics composed with Scheme into
   documents|scheme-graphics-embedding.tm>
@@ -75,6 +71,12 @@
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
 
   <section*|Developers' notes>
+
+  <hlink|Build <TeXmacs> using CMake and MXE on WSL for
+  Windows|build-using-cmake-and-mxe-on-wsl.tm>
+
+  <hlink|Build <TeXmacs> using CMake and Homebrew on
+  macOS|build-using-cmake-and-homebrew-on-macos.tm>
 
   <hlink|Scheming|scheming.tm>
 

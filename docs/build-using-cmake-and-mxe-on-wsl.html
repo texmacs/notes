@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta content="TeXmacs 1.99.18" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <p>
+      <a id="auto-1"></a>
+    </p>
+    <h1>Build TeXmacs using CMake and MXE on WSL for Windows <span style="margin-left: 1em"></span></h1>
+    <p>
+      There are three major steps to build TeXmacs on WSL:
+    </p>
+    <h2 id="auto-2">Step 1. Install Ubuntu 18.04 on Windows 10<span style="margin-left: 1em"></span></h2>
+    <p>
+      Ubuntu 18.04 is available in the Windows Store. Just click to install
+      it. For the first time, you will be prompted to provide a username and a
+      password for the installed Ubuntu 18.04 on Windows. The following steps
+      should be executed in the newly-installed Ubuntu 18.04.
+    </p>
+    <h2 id="auto-3">Step 2. Install MXE<span style="margin-left: 1em"></span></h2>
+    <h3 id="auto-4">Download the source code of MXE to <tt class="verbatim">$HOME/github/mxe/mxe</tt><span
+    style="margin-left: 1em"></span></h3>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+mkdir -p $HOME/github/mxe/mxe
+cd $HOME/github/mxe/mxe
+git init
+git remote add origin https://github.com/mxe/mxe.git
+git fetch origin
+git checkout master</pre>
+    </div>
+    <h3 id="auto-5">Install dependencies for MXE<span style="margin-left: 1em"></span></h3>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+sudo apt update
+
+sudo apt-get install autoconf automake autopoint bash \
+ bison bzip2 flex g++ g++-multilib gettext git gperf \
+ intltool libgdk-pixbuf2.0-dev libltdl-dev libssl-dev \
+ libtool-bin libxml-parser-perl lzip make openssl \
+ p7zip-full patch perl python ruby sed unzip wget xz-utils
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
+
+sudo apt install libc6-dev-i386-cross</pre>
+    </div>
+    <h3 id="auto-6">Build qtbase and guile using MXE<span style="margin-left: 1em"></span></h3>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<code>make qtbase guile</code> # use -jN (-j8/-j12) to speed up</pre>
+    </div>
+    <h2 id="auto-7">Step 3: Build GNU TeXmacs<span style="margin-left: 1em"></span></h2>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+export PATH=$PATH:$HOME/github/mxe/mxe/usr/bin
+
+# Download the source code
+mkdir -p $HOME/github/texmacs/texmacs
+cd $HOME/github/texmacs/texmacs
+git init
+git remote add origin https://github.com/texmacs/texmacs.git
+git fetch origin
+git checkout master
+
+# Build
+mkdir build &amp;&amp; cd build/
+i686-w64-mingw32.static-cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/win
+make -j8 &amp;&amp; make install -j8
+
+# Move the built result to the Documents folder
+cp -r $HOME/github/mxe/mxe/usr/i686-w64-mingw32.static/share/guile/1.8/ice-9/ $HOME/win/progs/
+mv $HOME/win /mnt/c/Users/xxxx/Documents/texmacs_build_&lsquo;date +%Y%m%d%H&lsquo;
+
+# please replace xxxx with your Windows user name</pre>
+    </div>
+    <p>
+      To launch the built TeXmacs, just click the <tt class="verbatim">bin/texmacs.exe</tt>.
+    </p>
+    <p>
+      NOTICE: This is a build guide but not a package guide, the binary
+      dependencies (wget.exe/gs.exe/<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+      style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>) of a TeXmacs Windows installation
+      are not automatically prepared in the <tt class="verbatim">bin/</tt> for GNU
+      TeXmacs v1.99.18.
+    </p>
+    <p>
+      
+    </p>
+  </body>
+</html>
