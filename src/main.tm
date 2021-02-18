@@ -45,6 +45,9 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
+  <hlink|Build <TeXmacs> using CMake and MXE on WSL for
+  Windows|build-using-cmake-and-mxe-on-wsl.tm>
+
   <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
 
   <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
