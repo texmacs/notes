@@ -17,6 +17,11 @@
 
   <notes-header><chapter*|The Macro editor and easy macro modification>
 
+  <notes-abstract|The Macro editor is a shortcut tool for examining and
+  modifying macro definitions; it can be used as well to write a new macro
+  starting from an existing macro. We see its use with the help of two
+  examples.>
+
   The <TeXmacs> editor offers the possibility of examining and modifying
   macro definitions through a \Pshortcut\Q tool, without having to know in
   which style file or package they are defined.\ 
