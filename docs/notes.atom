@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-01-06T18:19:41Z</updated>
+  <updated>2021-03-14T21:48:37Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -12,29 +12,68 @@
   <icon>http://texmacs.github.io/notes/misc/blog-icon.ico</icon>
   <logo>http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png</logo>
   <entry>
-    <title>Scheming</title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheming.html"/>
-    <id>texmacs.github.io/notes/scheming.tm:2021-01-06T18:18:54Z</id>
-    <updated>2021-01-06T18:18:54Z</updated>
-    <published>2021-01-06T18:18:54Z</published>
-    <summary><concat>We discuss some aspects of the choice of the Scheme
-    language implementation used in <TeXmacs/>.</concat></summary>
+    <title>Jolly coders</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
+    <id>texmacs.github.io/notes/jolly-coders.tm:2021-03-14T21:48:30Z</id>
+    <updated>2021-03-14T21:48:30Z</updated>
+    <published>2021-03-14T21:48:30Z</published>
+    <summary>This page contain material related to the activities of a group
+    of TeXmacs developers.</summary>
   </entry>
   <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-01-06T17:39:23Z</id>
-    <updated>2021-01-06T17:39:23Z</updated>
-    <published>2021-01-06T17:39:23Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-03-14T21:47:55Z</id>
+    <updated>2021-03-14T21:47:55Z</updated>
+    <published>2021-03-14T21:47:55Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
   </entry>
   <entry>
     <title><concat>Notes on <TeXmacs/></concat></title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
-    <id>texmacs.github.io/notes/main.tm:2021-01-06T17:31:49Z</id>
-    <updated>2021-01-06T17:31:49Z</updated>
-    <published>2021-01-06T17:31:49Z</published>
+    <id>texmacs.github.io/notes/main.tm:2021-03-14T21:47:45Z</id>
+    <updated>2021-03-14T21:47:45Z</updated>
+    <published>2021-03-14T21:47:45Z</published>
+  </entry>
+  <entry>
+    <title><concat>Status of Plugins for <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/plugin-status.html"/>
+    <id>texmacs.github.io/notes/plugin-status.tm:2021-03-14T21:22:45Z</id>
+    <updated>2021-03-14T21:22:45Z</updated>
+    <published>2021-03-14T21:22:45Z</published>
+    <summary>We review the current status and limitations of the various
+    plugins on Windows/Mac/Linux.</summary>
+  </entry>
+  <entry>
+    <title>The Macro editor and easy macro modification</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/macro-editor.html"/>
+    <id>texmacs.github.io/notes/macro-editor.tm:2021-03-14T21:22:45Z</id>
+    <updated>2021-03-14T21:22:45Z</updated>
+    <published>2021-03-14T21:22:45Z</published>
+  </entry>
+  <entry>
+    <title>Customizing the color of code snippets</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/customize-syntax-color.html"/>
+    <id>texmacs.github.io/notes/customize-syntax-color.tm:2021-03-14T21:22:45Z</id>
+    <updated>2021-03-14T21:22:45Z</updated>
+    <published>2021-03-14T21:22:45Z</published>
+  </entry>
+  <entry>
+    <title><concat xml:space="preserve">Build <TeXmacs/> using CMake and MXE on WSL for Windows </concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/build-using-cmake-and-mxe-on-wsl.html"/>
+    <id>texmacs.github.io/notes/build-using-cmake-and-mxe-on-wsl.tm:2021-03-14T21:22:45Z</id>
+    <updated>2021-03-14T21:22:45Z</updated>
+    <published>2021-03-14T21:22:45Z</published>
+  </entry>
+  <entry>
+    <title>Scheming</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheming.html"/>
+    <id>texmacs.github.io/notes/scheming.tm:2021-01-08T16:00:00Z</id>
+    <updated>2021-01-08T16:00:00Z</updated>
+    <published>2021-01-08T16:00:00Z</published>
+    <summary><concat>We discuss some aspects of the choice of the Scheme
+    language implementation used in <TeXmacs/>.</concat></summary>
   </entry>
   <entry>
     <title><concat>Compile <TeXmacs/> on the Raspberry Pi</concat></title>
@@ -46,15 +85,6 @@
     RaspberryPi OS, because of its ARM chipset. Likewise there are no
     precompiled binaries, but it is not hard to built it
     yourself.</concat></summary>
-  </entry>
-  <entry>
-    <title><concat>Status of Plugins for <TeXmacs/></concat></title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/plugin-status.en.html"/>
-    <id>texmacs.github.io/notes/plugin-status.en.tm:2020-12-05T23:36:31Z</id>
-    <updated>2020-12-05T23:36:31Z</updated>
-    <published>2020-12-05T23:36:31Z</published>
-    <summary>We review the current status and limitations of the various
-    plugins on Windows/Mac/Linux.</summary>
   </entry>
   <entry>
     <title><concat>Implementing comments in <TeXmacs/></concat></title>
@@ -141,13 +171,6 @@
     <title>Embedding graphics composed with Scheme into documents</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheme-graphics-embedding.html"/>
     <id>texmacs.github.io/notes/scheme-graphics-embedding.tm:2020-12-05T23:35:28Z</id>
-    <updated>2020-12-05T23:35:28Z</updated>
-    <published>2020-12-05T23:35:28Z</published>
-  </entry>
-  <entry>
-    <title>Customizing the color of code snippets</title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/customize-syntax-color.en.html"/>
-    <id>texmacs.github.io/notes/customize-syntax-color.en.tm:2020-12-05T23:35:28Z</id>
     <updated>2020-12-05T23:35:28Z</updated>
     <published>2020-12-05T23:35:28Z</published>
   </entry>

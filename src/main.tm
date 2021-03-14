@@ -1,4 +1,4 @@
-<TeXmacs|1.99.18>
+<TeXmacs|1.99.19>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -71,6 +71,8 @@
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
 
   <section*|Developers' notes>
+
+  <hlink|Jolly coders|jolly-coders.tm>
 
   <hlink|Build <TeXmacs> using CMake and MXE on WSL for
   Windows|build-using-cmake-and-mxe-on-wsl.tm>

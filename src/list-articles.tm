@@ -1,4 +1,4 @@
-<TeXmacs|1.99.18>
+<TeXmacs|1.99.19>
 
 <style|notes>
 
@@ -12,25 +12,39 @@
 
   <hrule>
 
-  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
-  the Scheme language implementation used in <TeXmacs>.|Wed Jan \ 6 18:18:54
-  2021 UTC>
+  <notes-entry|jolly-coders.tm|Jolly coders|This page contain material
+  related to the activities of a group of TeXmacs developers.|Sun Mar 14
+  21:48:30 2021 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Wed
-  Jan \ 6 17:39:23 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Sun
+  Mar 14 21:47:55 2021 UTC>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Wed Jan \ 6 17:31:49
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun Mar 14 21:47:45
+  2021 UTC>
+
+  <notes-entry|plugin-status.tm|Status of Plugins for <TeXmacs>|We review the
+  current status and limitations of the various plugins on
+  Windows/Mac/Linux.|Sun Mar 14 21:22:45 2021 UTC>
+
+  <notes-entry|macro-editor.tm|The Macro editor and easy macro
+  modification|(no abstract)|Sun Mar 14 21:22:45 2021 UTC>
+
+  <notes-entry|customize-syntax-color.tm|Customizing the color of code
+  snippets|(no abstract)|Sun Mar 14 21:22:45 2021 UTC>
+
+  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
+  CMake and MXE on WSL for Windows |(no abstract)|Sun Mar 14 21:22:45 2021
+  UTC>
+
+  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
+  the Scheme language implementation used in <TeXmacs>.|Fri Jan \ 8 16:00:00
   2021 UTC>
 
   <notes-entry|compile-texmacs-on-raspi.tm|Compile <TeXmacs> on the Raspberry
   Pi|Unfortunately, there is no prepackaged <TeXmacs> for RaspberryPi OS,
   because of its ARM chipset. Likewise there are no precompiled binaries, but
   it is not hard to built it yourself.|Mon Dec \ 7 07:28:49 2020 UTC>
-
-  <notes-entry|plugin-status.en.tm|Status of Plugins for <TeXmacs>|We review
-  the current status and limitations of the various plugins on
-  Windows/Mac/Linux.|Sat Dec \ 5 23:36:31 2020 UTC>
 
   <notes-entry|comments-in-texmacs.tm|Implementing comments in <TeXmacs>|We
   discuss the implementation of comments in <TeXmacs> documents. This is a
@@ -77,9 +91,6 @@
 
   <notes-entry|scheme-graphics-embedding.tm|Embedding graphics composed with
   Scheme into documents|(no abstract)|Sat Dec \ 5 23:35:28 2020 UTC>
-
-  <notes-entry|customize-syntax-color.en.tm|Customizing the color of code
-  snippets|(no abstract)|Sat Dec \ 5 23:35:28 2020 UTC>
 
   <notes-entry|previews.tm|Implementing previews for link targets|(no
   abstract)|Sat Dec \ 5 23:35:15 2020 UTC>
