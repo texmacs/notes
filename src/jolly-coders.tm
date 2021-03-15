@@ -37,9 +37,9 @@
     Current members
   </with>
 
-  Basile Audoly, Massimiliano Gubinelli, \ Joris van der Hoeven, Sebastian
-  Miele, Giovanni Piredda, Joy Yang Qiping, Peter Rap£an, Darcy Shen, Jeroen
-  Wouters.
+  Basile Audoly, Massimiliano Gubinelli, \ Joris van der Hoeven, Pierre-Henri
+  Jondot, Marc Lalaude-Labayle, Sebastian Miele, Giovanni Piredda, Joy Yang
+  Qiping, Peter Rap£an, Darcy Shen, Jeroen Wouters.
 
   \;
 
