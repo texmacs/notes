@@ -11,12 +11,12 @@
 
   <chapter*|Jolly coders>
 
-  <notes-abstract|This page contain material related to the activities of a
-  group of TeXmacs developers.>\ 
+  <notes-abstract|This page gather informations on the activities of the
+  TeXmacs hacking group.>\ 
 
   \;
 
-  <with|font-series|bold|Jolly coders> are a group of people interested in
+  <with|font-series|bold|Jolly coders> is a group of people interested in
   learning, hacking and in general exchanging about TeXmacs internal
   structure. The group started random gatherings in March 2021 and hope to
   continue to meet quasi-regularly for long time. For the moment the focus is
@@ -24,16 +24,26 @@
   codebase, the interaction with external libraries and the various plugins,
   the behaviour of the converters, and many other topics related to TeXmacs.
 
+  \;
+
   Meetings are announced in a private mailing list. Write to
   <hlink|m.gubinelli@gmail.com|mailto:m.gubinelli@gmail.com> to ask to be
   included in the communications. Recordings of the meetings are kept
   whenever possible.
 
-  Current members: Basile Audoly, Massimiliano Gubinelli, \ Joris van der
-  Hoeven, Sebastian Miele, Giovanni Piredda, Joy Yang Qiping, Peter Rap£an,
-  Jeroen Wouters.\ 
+  <\with|font-shape|italic>
+    \;
 
-  Meetings held so far and summary of the topics treated
+    Current members
+  </with>
+
+  Basile Audoly, Massimiliano Gubinelli, \ Joris van der Hoeven, Sebastian
+  Miele, Giovanni Piredda, Joy Yang Qiping, Peter Rap£an, Darcy Shen, Jeroen
+  Wouters.
+
+  \;
+
+  <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
     <item>12.3.2021 \U The Xcode project, working on a bug related to
@@ -48,6 +58,22 @@
   </itemize>
 
   \;
+
+  <with|font-shape|italic|Other sources for technical informations>
+
+  <\itemize>
+    <item>A couple of videos recorded during the 2012 TeXmacs workshop. In
+    <hlink|video 5|http://magix.lix.polytechnique.fr/local/videos/TeXmacs-5.mp4>
+    and <hlink|video 6|http://magix.lix.polytechnique.fr/local/videos/TeXmacs-6.mp4>
+    Joris talks about TeXmacs internals, the C++ and Scheme code and how to
+    write plugins: . There is also \ <hlink|video
+    4|http://magix.lix.polytechnique.fr/local/videos/TeXmacs-4.mp4> \ on the
+    TeXmacs document format, style files, and converters. For all the series
+    go <hlink|here|http://magix.lix.polytechnique.fr/magix/workshop/workshop-videos.en.html>.
+
+    <item>The developer pages in this blog (from the <hlink|main|./main.tm>
+    page)
+  </itemize>
 </body>
 
 <\initial>

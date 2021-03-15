@@ -12,13 +12,12 @@
 
   <hrule>
 
-  <notes-entry|jolly-coders.tm|Jolly coders|This page contain material
-  related to the activities of a group of TeXmacs developers.|Sun Mar 14
-  21:48:30 2021 UTC>
+  <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
+  the activities of the TeXmacs hacking group.|Mon Mar 15 08:18:26 2021 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Sun
-  Mar 14 21:47:55 2021 UTC>
+  Mar 14 21:48:37 2021 UTC>
 
   <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun Mar 14 21:47:45
   2021 UTC>
