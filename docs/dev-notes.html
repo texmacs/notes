@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta content="TeXmacs 1.99.19" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Development resources and ideas<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      This page contains idea and resources pertaining to the development of
+      TeXmacs.
+    </div>
+    <p>
+      [Last update 15.3.2021]
+    </p>
+    <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Incremental computing<span style="margin-left: 1em"></span></h2>
+    <p>
+      Modifications to the documents are incremental, so one would like to
+      take this into account when recomputing both the typesetting and the
+      rendering onscreen. This problem is also relevant when syncronizing
+      live-editing document across a network connection. Some infrastructure
+      is already present in TeXmacs (details?). Here are gathered some
+      approaches to incremental computations in a general context.
+    </p>
+    <ul>
+      <li>
+        <p>
+          The paper &ldquo;Purely Functional Incremental Computing&rdquo; (<a
+          href="http://firsov.ee/incremental/incremental.pdf">PDF</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          A talk on implementing Data-driven incremental UIs (in OCAML) (<a
+          href="https://www.youtube.com/watch?v=R3xX37RGJKE">youtube</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          Adaptive computation library in JS (<a href="https://github.com/rkirov/adapt-comp">link</a>)
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-3">2.<span style="margin-left: 1em"></span>Syntax highlighting<span style="margin-left: 1em"></span></h2>
+    <p>
+      We need syntax highlighting computations when rendering verbatim code
+      snippets and also when exporting to HTML, for example. Currently there
+      is some parsing library written in C++ inside TeXmacs, but this does not
+      cover HTML output. In this blog for example we achieve
+      syntax-highlighting for HTML via an external JavaScript library. It
+      would be useful just to output the appropriate elaborated text (together
+      with a plain-text version for copy/paste). In general it could be maybe
+      interesting to evaluate the use of external libraries for syntax
+      analysis of programming languages. 
+    </p>
+    <ul>
+      <li>
+        <p>
+          Tree-sitter is a recent interesting library for computing
+          incrementally an AST for a piece of text, including error recovery.
+          It is written in C/C++ with no external dependencies (as it is
+          claimed) which make relatively easy an inclusion in TeXmacs. The
+          github <a href="https://tree-sitter.github.io/tree-sitter/">link</a>, and a presentation <a href="https://www.youtube.com/watch?v=Jes3bD6P0To">talk</a> on
+          youtube. 
+        </p>
+      </li>
+    </ul>
+    <p>
+      
+    </p>
+  </body>
+</html>
