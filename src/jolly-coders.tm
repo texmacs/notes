@@ -66,7 +66,7 @@
     <hlink|video 5|http://magix.lix.polytechnique.fr/local/videos/TeXmacs-5.mp4>
     and <hlink|video 6|http://magix.lix.polytechnique.fr/local/videos/TeXmacs-6.mp4>
     Joris talks about TeXmacs internals, the C++ and Scheme code and how to
-    write plugins: . There is also \ <hlink|video
+    write plugins. There is also \ <hlink|video
     4|http://magix.lix.polytechnique.fr/local/videos/TeXmacs-4.mp4> \ on the
     TeXmacs document format, style files, and converters. For all the series
     go <hlink|here|http://magix.lix.polytechnique.fr/magix/workshop/workshop-videos.en.html>.
