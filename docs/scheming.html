@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.18" name="generator"></meta>
+    <meta content="TeXmacs 1.99.19" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -28,7 +28,7 @@
       implementation used in TeXmacs.
     </div>
     <p>
-      6.1.2021
+      [6.1.2021]
     </p>
     <p>
       In TeXmacs we use <a href="https://www.gnu.org/software/guile/">GNU Guile</a> version 1.8 as embedded Scheme
@@ -191,9 +191,6 @@
       that the program exceeded a conventional time limit and was interrupted.
     </p>
     <center>
-      <p>
-        
-      </p>
       <font style="font-size: 90.0%"><table style="width: 100%">
         <tbody><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0px solid; border-bottom: 0.5px solid; padding-bottom: 0.3em; padding-top: 0.3em; border-left: 0px solid"><p>
@@ -1302,6 +1299,67 @@
     </center>
     <p>
       
+    </p>
+    <p>
+      <hr></hr>
+    </p>
+    <p>
+      [8.1.2021]
+    </p>
+    <p>
+      Some more benchmarks. Populating the autocompletion tree (i.e. pressing
+      <font class="tmweb-key" style="font-size: 70.0%">&#x21E5;</font> in a Scheme session within TeXmacs)
+    </p>
+    <center>
+      <font style="font-size: 90.0%"><table style="width: 100%">
+        <tbody><tr>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0px solid; border-bottom: 0.5px solid; padding-bottom: 0.3em; padding-top: 0.3em; border-left: 0px solid"><p>
+            
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0px solid; border-bottom: 0.5px solid"><p>
+            <b>symbols</b>
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0px solid; border-bottom: 0.5px solid"><p>
+            <b>time</b> (msec)
+          </p></td>
+        </tr><tr>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; padding-bottom: 0.3em; padding-top: 0.3em"><p>
+            guile 1.8.8<span style="margin-left: 2em"></span>
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
+            8639
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
+            686
+          </p></td>
+        </tr><tr>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; padding-bottom: 0.3em; padding-top: 0.3em"><p>
+            guile 3.0.5
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
+            10300
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
+            217
+          </p></td>
+        </tr><tr>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; padding-bottom: 0.3em; padding-top: 0.3em"><p>
+            S7
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
+            7360
+          </p></td>
+          <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
+            255
+          </p></td>
+        </tr></tbody>
+      </table></font>
+    </center>
+    <p>
+      
+    </p>
+    <p>
+      <hr></hr>
     </p>
     <p>
       

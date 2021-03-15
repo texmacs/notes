@@ -14,7 +14,7 @@
   <notes-abstract|We discuss some aspects of the choice of the Scheme
   language implementation used in <TeXmacs>.>
 
-  6.1.2021
+  [6.1.2021]
 
   In <TeXmacs> we use <hlink|GNU Guile|https://www.gnu.org/software/guile/>
   version 1.8 as embedded Scheme interpreter. Lately, this has been a source
@@ -138,8 +138,6 @@
   interrupted.
 
   <\with|par-mode|center>
-    \;
-
     <small|<tabular|<tformat|<twith|table-hmode|min>|<twith|table-width|1par>|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|1|9|1|1|cell-bsep|0.3em>|<cwith|1|9|1|1|cell-tsep|0.3em>|<cwith|1|-1|1|-1|cell-tborder|0.5ln>|<cwith|1|-1|1|-1|cell-bborder|0.5ln>|<cwith|1|-1|1|-1|cell-lborder|0ln>|<cwith|1|-1|1|-1|cell-rborder|0ln>|<cwith|1|1|1|-1|cell-tborder|0ln>|<cwith|1|1|1|-1|cell-bborder|0.5ln>|<cwith|2|2|1|-1|cell-tborder|0.5ln>|<cwith|1|1|1|1|cell-lborder|0ln>|<cwith|1|1|6|6|cell-rborder|0ln>|<table|<row|<\cell>
       <with|font-series|bold|test>
     </cell>|<\cell>
@@ -840,6 +838,45 @@
   </with>
 
   \;
+
+  <hrule>
+
+  [8.1.2021]
+
+  Some more benchmarks. Populating the autocompletion tree (i.e. pressing
+  <key|tab> in a Scheme session within <TeXmacs>)
+
+  <\with|par-mode|center>
+    <small|<tabular|<tformat|<twith|table-hmode|min>|<twith|table-width|1par>|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|1|5|1|1|cell-bsep|0.3em>|<cwith|1|5|1|1|cell-tsep|0.3em>|<cwith|1|-1|1|-1|cell-tborder|0.5ln>|<cwith|1|-1|1|-1|cell-bborder|0.5ln>|<cwith|1|-1|1|-1|cell-lborder|0ln>|<cwith|1|-1|1|-1|cell-rborder|0ln>|<cwith|1|1|1|-1|cell-tborder|0ln>|<cwith|1|1|1|-1|cell-bborder|0.5ln>|<cwith|1|1|1|1|cell-lborder|0ln>|<cwith|1|-1|2|-1|cell-halign|c>|<table|<row|<\cell>
+      \;
+    </cell>|<\cell>
+      <with|font-series|bold|symbols>
+    </cell>|<\cell>
+      <with|font-series|bold|time> (msec)
+    </cell>>|<row|<\cell>
+      guile 1.8.8<space|2em>
+    </cell>|<\cell>
+      8639
+    </cell>|<\cell>
+      686
+    </cell>>|<row|<\cell>
+      guile 3.0.5
+    </cell>|<\cell>
+      10300
+    </cell>|<\cell>
+      217
+    </cell>>|<row|<\cell>
+      S7
+    </cell>|<\cell>
+      7360
+    </cell>|<\cell>
+      255
+    </cell>>>>>>
+  </with>
+
+  \;
+
+  <hrule>
 
   \;
 </body>
