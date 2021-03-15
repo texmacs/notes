@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-03-15T00:14:20Z</updated>
+  <updated>2021-03-15T00:21:01Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -14,9 +14,9 @@
   <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-03-15T00:11:47Z</id>
-    <updated>2021-03-15T00:11:47Z</updated>
-    <published>2021-03-15T00:11:47Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-03-15T00:14:20Z</id>
+    <updated>2021-03-15T00:14:20Z</updated>
+    <published>2021-03-15T00:14:20Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
   </entry>
