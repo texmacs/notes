@@ -36,6 +36,22 @@
     recent modification time.</summary>
   </entry>
   <entry>
+    <title><concat>Notes on <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
+    <id>texmacs.github.io/notes/main.tm:2021-03-15T13:57:48Z</id>
+    <updated>2021-03-15T13:57:48Z</updated>
+    <published>2021-03-15T13:57:48Z</published>
+  </entry>
+  <entry>
+    <title><concat>Status of Plugins for <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/plugin-status.html"/>
+    <id>texmacs.github.io/notes/plugin-status.tm:2021-03-14T21:22:45Z</id>
+    <updated>2021-03-14T21:22:45Z</updated>
+    <published>2021-03-14T21:22:45Z</published>
+    <summary>We review the current status and limitations of the various
+    plugins on Windows/Mac/Linux.</summary>
+  </entry>
+  <entry>
     <title>The Macro editor and easy macro modification</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/macro-editor.html"/>
     <id>texmacs.github.io/notes/macro-editor.tm:2021-03-17T14:27:27Z</id>
@@ -227,6 +243,15 @@
     You can use the tag <markup>notes-abstract</markup> to provide a small
     summary of the content, as exemplified by this very
     text.</concat></summary>
+  </entry>
+  <entry>
+    <title>TeXmacs and HTML</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/tm-and-html.html"/>
+    <id>texmacs.github.io/notes/tm-and-html.tm:2020-11-12T17:01:05Z</id>
+    <updated>2020-11-12T17:01:05Z</updated>
+    <published>2020-11-12T17:01:05Z</published>
+    <summary><concat>In this article we discuss question related to conversion
+    from/to <name>HTML</name>.</concat></summary>
   </entry>
   <entry>
     <title><concat>An overview of <TeXmacs/> from altitude</concat></title>

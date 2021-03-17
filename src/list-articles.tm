@@ -56,6 +56,15 @@
   CMake and MXE on WSL for Windows |(no abstract)|Thu Mar \ 4 18:29:12 2021
   UTC>
 
+  <notes-entry|articles-wishes.tm|A wishlist for <TeXmacs> articles|It would
+  be useful to have some short articles or tutorials covering the topics
+  listed here below. This article collects them in the hope that someone will
+  contribute them to the blog. They can also be considered interesting
+  exercises to improve one own <TeXmacs> knowledge: learning by teaching. In
+  case you manage to cover, even partially, one of the topic, please add a
+  remark here to point to relevant material. If the topic is covered, move it
+  to the \PAlready covered\Q section.|Sat Dec \ 5 23:35:37 2020 UTC>
+
   <notes-entry|wishlist.tm|Wishlist|This wishlist collects suggestions for
   improvements and nice ideas for addition to TeXmacs. These should be of
   limited scope and somewhat reasonable technical difficulty. It is mostly
