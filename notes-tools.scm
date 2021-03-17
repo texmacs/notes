@@ -12,6 +12,9 @@
 
 ;;(texmacs-module (notes-tools))
 
+(use-modules (ice-9 popen)) ;; for open-input-pipe
+(use-modules (ice-9 rdelim)) ;; for read-line
+
 ;; TODO:
 ;; * avoid to use absolute paths
 ;; * improve conversion of strings (spurious <concat> elements in atom output)
@@ -19,6 +22,20 @@
 (define (src-dir) (url->string (url-expand "$PWD/src")))
 (define (dest-dir) (url->string (url-expand "$PWD/docs")))
 
+;; git does not preserve modification time for files so we need to retrieve it from the 
+;; commit log. Note we need the "author time", not the "commit time" (in git parlance)
+;; However there is a problem: if the file is not yet commited we get a wrong answer
+;; so we have to commit our modification and *then* generate the digest. 
+;; This requires two commits... However one can just ignore this problem.
+;;
+;; If the file is not in the git log then we get the date from the filesystem.
+
+(define (git-date fname)
+ (let* ((port (open-input-pipe (string-append "git log --pretty=%at " fname " | head -1")))
+                 (str  (read-line port)))
+            (if (equal? 0 (close-pipe port))
+                (string->number str)
+                (stat:mtime (stat fname)))))
 
 (define (collect-articles dir)
   (map 
@@ -27,9 +44,10 @@
             (doc (tmfile-extract (tree-import fname "texmacs") 'body))
             (title (select doc '(:* chapter* :%1)))  
             (abs (select doc '(:* notes-abstract :%1)))
-            (mdate (stat:mtime (stat fname)))
-            (cdate (stat:ctime (stat fname))))
-        `(,mdate ,cdate 
+            (mdate (stat:mtime (stat fname))) ;; not used
+            (gdate (git-date fname)) 
+            (cdate (stat:ctime (stat fname)))) ;; not used
+        `(,gdate ,cdate 
             ,(url->string (url-delta (url-append dir "./") furl)) 
             ,title ,abs)))
     (url->list (url-expand 
