@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-03-17T14:28:17Z</updated>
+  <updated>2021-03-17T14:56:18Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -11,6 +11,30 @@
   <id>texmacs.github.io/notes,2020,1</id>
   <icon>http://texmacs.github.io/notes/misc/blog-icon.ico</icon>
   <logo>http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png</logo>
+  <entry>
+    <title><concat>A wishlist for <TeXmacs/> articles</concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/articles-wishes.html"/>
+    <id>texmacs.github.io/notes/articles-wishes.tm:2021-03-17T14:55:54Z</id>
+    <updated>2021-03-17T14:55:54Z</updated>
+    <published>2021-03-17T14:55:54Z</published>
+    <summary><concat>It would be useful to have some short articles or
+    tutorials covering the topics listed here below. This article collects
+    them in the hope that someone will contribute them to the blog. They can
+    also be considered interesting exercises to improve one own <TeXmacs/>
+    knowledge: learning by teaching. In case you manage to cover, even
+    partially, one of the topic, please add a remark here to point to relevant
+    material. If the topic is covered, move it to the Already covered
+    section.</concat></summary>
+  </entry>
+  <entry>
+    <title>List of all the articles</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-03-17T14:28:17Z</id>
+    <updated>2021-03-17T14:28:17Z</updated>
+    <published>2021-03-17T14:28:17Z</published>
+    <summary>A list of all the articles in the website, ordered by the most
+    recent modification time.</summary>
+  </entry>
   <entry>
     <title>The Macro editor and easy macro modification</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/macro-editor.html"/>
@@ -21,15 +45,6 @@
     macro definitions; it can be used as well to write a new macro starting
     from an existing macro. We look at its use with the help of two
     examples.</summary>
-  </entry>
-  <entry>
-    <title>List of all the articles</title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-03-17T14:25:37Z</id>
-    <updated>2021-03-17T14:25:37Z</updated>
-    <published>2021-03-17T14:25:37Z</published>
-    <summary>A list of all the articles in the website, ordered by the most
-    recent modification time.</summary>
   </entry>
   <entry>
     <title>Scheming</title>
@@ -87,21 +102,6 @@
     <id>texmacs.github.io/notes/build-using-cmake-and-mxe-on-wsl.tm:2021-03-04T18:29:12Z</id>
     <updated>2021-03-04T18:29:12Z</updated>
     <published>2021-03-04T18:29:12Z</published>
-  </entry>
-  <entry>
-    <title><concat>A wishlist for <TeXmacs/> articles</concat></title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/articles-wishes.html"/>
-    <id>texmacs.github.io/notes/articles-wishes.tm:2021-03-01T13:28:41Z</id>
-    <updated>2021-03-01T13:28:41Z</updated>
-    <published>2021-03-01T13:28:41Z</published>
-    <summary><concat>It would be useful to have some short articles or
-    tutorials covering the topics listed here below. This article collects
-    them in the hope that someone will contribute them to the blog. They can
-    also be considered interesting exercises to improve one own <TeXmacs/>
-    knowledge: learning by teaching. In case you manage to cover, even
-    partially, one of the topic, please add a remark here to point to relevant
-    material. If the topic is covered, move it to the Already covered
-    section.</concat></summary>
   </entry>
   <entry>
     <title>Wishlist</title>

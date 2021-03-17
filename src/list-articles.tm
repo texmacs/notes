@@ -12,15 +12,24 @@
 
   <hrule>
 
+  <notes-entry|articles-wishes.tm|A wishlist for <TeXmacs> articles|It would
+  be useful to have some short articles or tutorials covering the topics
+  listed here below. This article collects them in the hope that someone will
+  contribute them to the blog. They can also be considered interesting
+  exercises to improve one own <TeXmacs> knowledge: learning by teaching. In
+  case you manage to cover, even partially, one of the topic, please add a
+  remark here to point to relevant material. If the topic is covered, move it
+  to the \PAlready covered\Q section.|Wed Mar 17 14:55:54 2021 UTC>
+
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Wed
+  Mar 17 14:28:17 2021 UTC>
+
   <notes-entry|macro-editor.tm|The Macro editor and easy macro
   modification|The Macro editor is a shortcut tool for examining and
   modifying macro definitions; it can be used as well to write a new macro
   starting from an existing macro. We look at its use with the help of two
   examples.|Wed Mar 17 14:27:27 2021 UTC>
-
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Wed
-  Mar 17 14:25:37 2021 UTC>
 
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Wed Mar 17 14:17:49
@@ -46,15 +55,6 @@
   <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
   CMake and MXE on WSL for Windows |(no abstract)|Thu Mar \ 4 18:29:12 2021
   UTC>
-
-  <notes-entry|articles-wishes.tm|A wishlist for <TeXmacs> articles|It would
-  be useful to have some short articles or tutorials covering the topics
-  listed here below. This article collects them in the hope that someone will
-  contribute them to the blog. They can also be considered interesting
-  exercises to improve one own <TeXmacs> knowledge: learning by teaching. In
-  case you manage to cover, even partially, one of the topic, please add a
-  remark here to point to relevant material. If the topic is covered, move it
-  to the \PAlready covered\Q section.|Mon Mar \ 1 13:28:41 2021 UTC>
 
   <notes-entry|wishlist.tm|Wishlist|This wishlist collects suggestions for
   improvements and nice ideas for addition to TeXmacs. These should be of
