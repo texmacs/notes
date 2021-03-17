@@ -28,8 +28,7 @@
             (title (select doc '(:* chapter* :%1)))  
             (abs (select doc '(:* notes-abstract :%1)))
             (mdate (stat:mtime (stat fname)))
-            (cdate (stat:ctime (stat fname)))
-            (mdatestr (strftime "%c %Z"  (gmtime mdate))))
+            (cdate (stat:ctime (stat fname))))
         `(,mdate ,cdate 
             ,(url->string (url-delta (url-append dir "./") furl)) 
             ,title ,abs)))
@@ -40,7 +39,7 @@
     `(notes-entry ,file 
         ,(if (null? title) "(no title)" (car title))
         ,(if (null? abs) "(no abstract)" (car abs))
-        ,(strftime "%c %Z"  (gmtime mdate))))
+        ,(strftime "%c %Z"  (localtime mdate "UTC"))))
 
 ;;(car (collect-articles "/Users/mgubi/t/git-notes/src"))
 
@@ -77,9 +76,9 @@
                 ,(string-append "http://texmacs.github.io/notes/docs/" 
                                 (string-drop-right file 3) ".html" ))))
             (id ,(string-append "texmacs.github.io/notes/" file ":" 
-                                (strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate))))
-            (updated   ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime mdate)))
-            (published ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (gmtime cdate)))
+                                (strftime "%Y-%m-%dT%H:%M:%SZ"  (localtime mdate "UTC"))))
+            (updated   ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (localtime mdate "UTC")))
+            (published ,(strftime "%Y-%m-%dT%H:%M:%SZ"  (localtime cdate "UTC")))
             ,@(if (null? abs) '() `((summary ,(car abs)))) 
             )))
 

@@ -77,6 +77,36 @@
     <item>The list of developments resources & ideas
     (<hlink|here|./dev-notes.tm>)\ 
   </itemize>
+
+  <with|font-shape|italic|List of topics of interest to the group members>
+
+  <\itemize>
+    <item>Conversion to HTML/MathML. Creating accessible math content is
+    creating major headaches in many maths departments in the UK , as legal
+    requirements to do so are increasing. Providing HTML with MathML or
+    MathJax is generally considered to be the best way to go, as users can
+    control the font type and size, increase contrast or use screen readers
+    to read out the document (<hlink|URL|]<nbsp><hlink|https://stem-enable.github.io/Accessibility-of-maths-e-resources/index.html|https://stem-enable.github.io/Accessibility-of-maths-e-resources/index.html>>)
+
+    <item>Plugins (Jupyter, Sage, Octave and Python)
+
+    <item>How to write templates for conference paper. and macro writing in
+    general, e.g., how do you write a macro to add a new floating
+    environment? Suggestion: write during a session a new style file, which
+    we could then put somewhere where other people can use it. In addition to
+    templates for conference papers, a style file for a curriculum vitae
+    could be interesting.
+
+    <item>Using TeXmacs is the lack of autocompletion and error correction
+    for English words.
+
+    <item>Get accustomed to TeXmacs codebase, configuring developing tools
+    like Xcode.
+
+    <item>Bugfixing. Example, how to investigate bugs that result in
+    segfaults, e.g. <hlink|bug #<hlink|60125|https://savannah.gnu.org/bugs/?60125>|https://savannah.gnu.org/bugs/?60125>
+    and <hlink|bug #<hlink|60015|https://savannah.gnu.org/bugs/?60015>|https://savannah.gnu.org/bugs/?60125>.
+  </itemize>
 </body>
 
 <\initial>

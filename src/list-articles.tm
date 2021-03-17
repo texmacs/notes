@@ -12,16 +12,16 @@
 
   <hrule>
 
+  <notes-entry|dev-notes.tm|Development resources and ideas|This page
+  contains idea and resources pertaining to the development of TeXmacs.|Wed
+  Mar 17 09:14:09 2021 UTC>
+
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Mon Mar 15 14:53:45 2021 UTC>
+  the activities of the TeXmacs hacking group.|Wed Mar 17 09:05:51 2021 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Mon
-  Mar 15 14:43:22 2021 UTC>
-
-  <notes-entry|dev-notes.tm|Development resources and ideas|This page
-  contains idea and resources pertaining to the development of TeXmacs.|Mon
-  Mar 15 14:10:01 2021 UTC>
+  Mar 15 14:53:57 2021 UTC>
 
   <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Mon Mar 15 13:57:48
   2021 UTC>

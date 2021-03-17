@@ -28,7 +28,7 @@
       TeXmacs.
     </div>
     <p>
-      [Last update 15.3.2021]
+      [Last update 17.3.2021]
     </p>
     <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Incremental computing<span style="margin-left: 1em"></span></h2>
     <p>
@@ -48,8 +48,13 @@
       </li>
       <li>
         <p>
-          A talk on implementing Data-driven incremental UIs (in OCAML) (<a
-          href="https://www.youtube.com/watch?v=R3xX37RGJKE">youtube</a>)
+          Talk on implementing Data-driven incremental UIs (in OCAML) (<a
+          href="https://www.youtube.com/watch?v=R3xX37RGJKE">youtube</a>). And a longer talk with more details (<a href="https://www.youtube.com/watch?v=G6a5G5i4gQU">youtube</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          A blog post at Jane Street (<a href="https://blog.janestreet.com/introducing-incremental/">URL</a>)
         </p>
       </li>
       <li>
@@ -62,8 +67,9 @@
     <p>
       We need syntax highlighting computations when rendering verbatim code
       snippets and also when exporting to HTML, for example. Currently there
-      is some parsing library written in C++ inside TeXmacs, but this does not
-      cover HTML output. In this blog for example we achieve
+      is some parsing library written in C++ inside TeXmacs (see the
+      <tt>src/System/Language</tt> directory), but this does not cover HTML
+      output and it is quite rudimentary. In this blog for example we achieve
       syntax-highlighting for HTML via an external JavaScript library. It
       would be useful just to output the appropriate elaborated text (together
       with a plain-text version for copy/paste). In general it could be maybe
@@ -82,16 +88,78 @@
         </p>
       </li>
     </ul>
-    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Various random material<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Spellchecking and grammar-checking<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      This could be an area where we can improve substantially over
+      LaTeX-based workflows, probably. We need to check what is done in other
+      text-processing software. Some interesting resources
+    </p>
     <ul>
       <li>
         <p>
-          An interesting talk about open source community (<a href="https://www.youtube.com/watch?v=o_4EX4dPppA">video</a>).
+          <a href="https://github.com/languagetool-org/languagetool">Languagetool</a> is a (big) open source Java system for
+          grammar correction in various languages. Maybe it is conceivable to
+          offer the possibility to use it as an external service (on the web
+          or locally).
         </p>
       </li>
       <li>
         <p>
-          <span style="margin-left: 1pt"></span>
+          A list of grammar-checking resources in github: <a href="https://github.com/topics/grammar-checker">URL</a>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Programs that link to Languagetools for LaTeX documents: <a href="https://github.com/sylvainhalle/textidote">texidote</a>,
+          <a href="https://github.com/valentjn/vscode-ltex">vscode-ltex</a>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Spellchecking alternatives: <a href="https://nuspell.github.io">nuspell</a>, <a href="http://hunspell.github.io">hunspell</a>,
+          <a href="https://github.com/wolfgarbe/SymSpell">symspell</a> <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> which to pick, if any? We would
+          need to survey tradeoffs and opportunities.
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-5">4.<span style="margin-left: 1em"></span>General plugin mechanisms<span style="margin-left: 1em"></span></h2>
+    <p>
+      A strategical goal would be to improve support for general mechanisms to
+      talk to external programs:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <a href="https://jupyter.org">Jupyter</a> is a protocol to interface clients to
+          computational kernels (Python, Julia, Haskell,<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>). We
+          already have a very primitive plugin here <a href="https://github.com/mgubi/tm_jupyter">tm_jupyter</a>
+          (written in Python). It could potentially replace many of our
+          various plugins and allow easier maintenance. Moreover it could
+          allow TeXmacs to be an alternative to Jupyter notebooks or <a href="https://github.com/mgubi/tm_jupyter">
+          Jupyter Qt Console</a>. One can look to these projects to understand
+          which features have to be supported.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> allows to connect to various
+          programming language servers to obtain semantic informations, code
+          completions, etc<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> For example it could be useful
+          to provide an interface to theorem provers like <a href="https://leanprover.github.io">Lean</a> or
+          <a href="https://isabelle.in.tum.de">Isabelle/HOL</a>. In general this could be related to
+          literate programming capabilities/projects.
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-6">5.<span style="margin-left: 1em"></span>Random and unsorted resources<span style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          An interesting talk about open source community (<a href="https://www.youtube.com/watch?v=o_4EX4dPppA">video</a>).
         </p>
       </li>
     </ul>
