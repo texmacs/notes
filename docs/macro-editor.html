@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.18" name="generator"></meta>
+    <meta content="TeXmacs 1.99.19" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -34,6 +34,11 @@
       <a id="auto-1"></a>
     </p>
     <h1>The Macro editor and easy macro modification<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      The Macro editor is a shortcut tool for examining and modifying macro
+      definitions; it can be used as well to write a new macro starting from
+      an existing macro. We look at its use with the help of two examples.
+    </div>
     <p>
       The TeXmacs editor offers the possibility of examining and modifying
       macro definitions through a &ldquo;shortcut&rdquo; tool, without having
@@ -191,11 +196,11 @@
       We can check the values of the environment variables (see <a href="https://www.texmacs.org/tmweb/manual/webman-env.en.html">Standard
       environment variables</a> for a general discussion of the environment
       variables ) by typing them preceded by a backslash and pressing <font
-      class="tmweb-key" style="font-size: 70.0%">Return</font> (for this we can either switch out of the
-      macro editor and use the usual TeXmacs editor or we can set the macro
-      editor to Text mode): <font color="#008000"><i>todo-color</i></font> evaluates to
-      dark red and <font color="#008000"><i>todo-bg-color</i></font> to pastel red. Let
-      us then substitute dark green and pastel green for them.
+      class="tmweb-key">Return</font> (for this we can either switch out of the macro
+      editor and use the usual TeXmacs editor or we can set the macro editor
+      to Text mode): <font color="#008000"><i>todo-color</i></font> evaluates to dark
+      red and <font color="#008000"><i>todo-bg-color</i></font> to pastel red. Let us
+      then substitute dark green and pastel green for them.
     </p>
     <p>
       To type our new text in place of either <font color="#008000"><i>todo-color</i></font>
@@ -327,9 +332,8 @@
       that introduces a vertical list, represented with the help of a table.
     </p>
     <p>
-      Here it is, inserted by typing <tt class="verbatim">\choice</tt> <font class="tmweb-key"
-      style="font-size: 70.0%">&#x21A9;</font> inside a display math environment; we placed two
-      elements inside it:
+      Here it is, inserted by typing <tt class="verbatim">\choice</tt> <font class="tmweb-key">Return</font>
+      inside a display math environment; we placed two elements inside it:
     </p>
     <table width="100%">
       <tr>
@@ -427,9 +431,9 @@
     </div>
     <p>
       We have to test it now. Let us type <tt class="verbatim">\choice-right</tt>, then
-      <font class="tmweb-key" style="font-size: 70.0%">&#x21A9;</font> inside a display math environment,
-      next to a <font class="tmweb-markup">choice</font> and place the same two elements
-      into both constructs:
+      <font class="tmweb-key">Return</font> inside a display math environment, next to a
+      <font class="tmweb-markup">choice</font> and place the same two elements into both
+      constructs:
     </p>
     <table width="100%">
       <tr>
