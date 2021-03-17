@@ -1,2 +1,3 @@
+export LC_ALL=POSIX
 TEXMACS_PATH=$HOME/t/svn-src/TeXmacs $HOME/t/svn-src/TeXmacs/bin/texmacs.bin \
   -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
