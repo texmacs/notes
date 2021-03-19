@@ -12,9 +12,15 @@
 
   <hrule>
 
+  <notes-entry|macro-editor.tm|The Macro editor and easy macro
+  modification|The Macro editor is a shortcut tool for examining and
+  modifying macro definitions; it can be used as well to write a new macro
+  starting from an existing macro. We look at its use with the help of two
+  examples.|Wed Mar 17 20:57:33 2021 UTC>
+
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Wed
-  Mar 17 18:26:15 2021 UTC>
+  Mar 17 20:57:33 2021 UTC>
 
   <notes-entry|articles-wishes.tm|A wishlist for <TeXmacs> articles|It would
   be useful to have some short articles or tutorials covering the topics
@@ -23,13 +29,7 @@
   exercises to improve one own <TeXmacs> knowledge: learning by teaching. In
   case you manage to cover, even partially, one of the topic, please add a
   remark here to point to relevant material. If the topic is covered, move it
-  to the \PAlready covered\Q section.|Wed Mar 17 14:57:25 2021 UTC>
-
-  <notes-entry|macro-editor.tm|The Macro editor and easy macro
-  modification|The Macro editor is a shortcut tool for examining and
-  modifying macro definitions; it can be used as well to write a new macro
-  starting from an existing macro. We look at its use with the help of two
-  examples.|Wed Mar 17 14:28:35 2021 UTC>
+  to the \PAlready covered\Q section.|Wed Mar 17 20:57:33 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Wed Mar 17 09:20:38 2021 UTC>

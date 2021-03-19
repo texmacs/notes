@@ -55,6 +55,10 @@
 
     <item>14.3.2021 \U Scheme/C++ interface, patching the S7 Scheme
     interpreter, generation of menus and widgets between C++ and Scheme.
+
+    <item>19.3.2021 \U The build systems. How the makefile works. Demo of the
+    old widget library and of the Guile 3 port. Discussion on the Scheme
+    code, the module system, the differences between Guile 1.8 and Guile 2/3.
   </itemize>
 
   \;
