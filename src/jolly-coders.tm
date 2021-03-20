@@ -59,6 +59,14 @@
     <item>19.3.2021 \U The build systems. How the makefile works. Demo of the
     old widget library and of the Guile 3 port. Discussion on the Scheme
     code, the module system, the differences between Guile 1.8 and Guile 2/3.
+
+    <item>20.3.2021 \U Various aspects of the use of Scheme in TeXmacs,
+    including embedding Scheme, the various dialects and the status of the
+    Guile 3 and Chez Scheme ports. The design and use of tm-define. Features
+    currently absent in TeXmacs like a structured table of contents or a
+    double view on a document. Design choices in TeXmacs' user interface.
+    Joris demonstrated the use of the search tool, including template
+    variables and the filtering option.
   </itemize>
 
   \;
