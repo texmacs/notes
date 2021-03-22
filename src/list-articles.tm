@@ -13,11 +13,11 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Fri
-  Mar 19 17:13:15 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Sat
+  Mar 20 22:03:38 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Fri Mar 19 17:13:15 2021 UTC>
+  the activities of the TeXmacs hacking group.|Sat Mar 20 22:03:38 2021 UTC>
 
   <notes-entry|macro-editor.tm|The Macro editor and easy macro
   modification|The Macro editor is a shortcut tool for examining and

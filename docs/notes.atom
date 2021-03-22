@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-03-20T22:03:20Z</updated>
+  <updated>2021-03-22T21:53:43Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -14,17 +14,17 @@
   <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-03-19T17:13:15Z</id>
-    <updated>2021-03-19T17:13:15Z</updated>
-    <published>2021-03-19T17:11:59Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-03-20T22:03:38Z</id>
+    <updated>2021-03-20T22:03:38Z</updated>
+    <published>2021-03-20T22:03:20Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
   </entry>
   <entry>
     <title>Jolly coders</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
-    <id>texmacs.github.io/notes/jolly-coders.tm:2021-03-19T17:13:15Z</id>
-    <updated>2021-03-19T17:13:15Z</updated>
+    <id>texmacs.github.io/notes/jolly-coders.tm:2021-03-20T22:03:38Z</id>
+    <updated>2021-03-20T22:03:38Z</updated>
     <published>2021-03-20T22:02:49Z</published>
     <summary>This page gather informations on the activities of the TeXmacs
     hacking group.</summary>
@@ -60,7 +60,7 @@
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/dev-notes.html"/>
     <id>texmacs.github.io/notes/dev-notes.tm:2021-03-17T09:20:38Z</id>
     <updated>2021-03-17T09:20:38Z</updated>
-    <published>2021-03-17T09:14:09Z</published>
+    <published>2021-03-22T21:53:00Z</published>
     <summary>This page contains idea and resources pertaining to the
     development of TeXmacs.</summary>
   </entry>

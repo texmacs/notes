@@ -14,7 +14,7 @@
   <notes-abstract|This page contains idea and resources pertaining to the
   development of TeXmacs.>
 
-  [Last update 17.3.2021]
+  [Last update 22.3.2021]
 
   <section|Incremental computing>
 
@@ -62,6 +62,27 @@
     youtube.\ 
   </itemize>
 
+  <section|Parsing Markdown and other languages>
+
+  It could be useful for us to be able to parse the
+  <hlink|Markdown|https://www.markdownguide.org> format. There are various
+  available parsers which could be integrated as plugins in the codebase, for
+  example <hlink|PEG-markdown|https://github.com/jgm/peg-markdown>,
+  <hlink|sundown|https://github.com/vmg/sundown>,
+  <hlink|libsoldout|https://fossil.instinctive.eu/libsoldout/index>,
+  <hlink|md4c|https://github.com/mity/md4c> and also some native scheme
+  implementations like <hlink|lowdown|https://bitbucket.org/DerGuteMoritz/lowdown/src/master/>
+  for Chicken Scheme. Currently in TeXmacs we do not have a generic way to
+  parse external languages: for example internally the parsing of HTML or TeX
+  is done via C++ code without any common parsing substrate (as far as I can
+  see). There is some support for packrat parsing but it is used only in the
+  semantic checking of math formulas and it seems that the packrat parser is
+  not capable of semantic actions, i.e. can only report if a string (or
+  tree?) belongs to some language or not. Tree-sitter could also be an option
+  as generic parsing mechanism. It could be useful to think how to factor and
+  restructure the parsing mechanisms in TeXmacs to avoid duplicating
+  code/efforts/know-how.
+
   <section|Spellchecking and grammar-checking>
 
   This could be an area where we can improve substantially over LaTeX-based
@@ -101,7 +122,9 @@
     allow easier maintenance. Moreover it could allow TeXmacs to be an
     alternative to Jupyter notebooks or <hlink| Jupyter Qt
     Console|https://github.com/mgubi/tm_jupyter>. One can look to these
-    projects to understand which features have to be supported.
+    projects to understand which features have to be supported. Jeroen has
+    improved the tm_jupyter plugin <hlink|here|https://github.com/woutersj/tm_jupyter/commits/master>.
+    \ 
 
     <item><hlink|Language Server Protocol|https://microsoft.github.io/language-server-protocol/>
     allows to connect to various programming language servers to obtain
@@ -139,6 +162,7 @@
     <associate|auto-4|<tuple|3|?>>
     <associate|auto-5|<tuple|4|?>>
     <associate|auto-6|<tuple|5|?>>
+    <associate|auto-7|<tuple|6|?>>
   </collection>
 </references>
 
@@ -156,9 +180,17 @@
       2.<space|2spc>Syntax highlighting <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
 
-      3.<space|2spc>Various random material
+      3.<space|2spc>Spellchecking and grammar-checking
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>
+
+      4.<space|2spc>General plugin mechanisms
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5>
+
+      5.<space|2spc>Random and unsorted resources
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-6>
     </associate>
   </collection>
 </auxiliary>

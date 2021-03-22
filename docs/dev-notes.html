@@ -28,7 +28,7 @@
       TeXmacs.
     </div>
     <p>
-      [Last update 17.3.2021]
+      [Last update 22.3.2021]
     </p>
     <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Incremental computing<span style="margin-left: 1em"></span></h2>
     <p>
@@ -88,7 +88,26 @@
         </p>
       </li>
     </ul>
-    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Spellchecking and grammar-checking<span
+    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Parsing Markdown and other languages<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      It could be useful for us to be able to parse the <a href="https://www.markdownguide.org">Markdown</a>
+      format. There are various available parsers which could be integrated as
+      plugins in the codebase, for example <a href="https://github.com/jgm/peg-markdown">PEG-markdown</a>, <a href="https://github.com/vmg/sundown">sundown</a>,
+      <a href="https://fossil.instinctive.eu/libsoldout/index">libsoldout</a>, <a href="https://github.com/mity/md4c">md4c</a> and also some native scheme
+      implementations like <a href="https://bitbucket.org/DerGuteMoritz/lowdown/src/master/">lowdown</a> for Chicken Scheme. Currently
+      in TeXmacs we do not have a generic way to parse external languages: for
+      example internally the parsing of HTML or TeX is done via C++ code
+      without any common parsing substrate (as far as I can see). There is
+      some support for packrat parsing but it is used only in the semantic
+      checking of math formulas and it seems that the packrat parser is not
+      capable of semantic actions, i.e. can only report if a string (or tree?)
+      belongs to some language or not. Tree-sitter could also be an option as
+      generic parsing mechanism. It could be useful to think how to factor and
+      restructure the parsing mechanisms in TeXmacs to avoid duplicating
+      code/efforts/know-how.
+    </p>
+    <h2 id="auto-5">4.<span style="margin-left: 1em"></span>Spellchecking and grammar-checking<span
     style="margin-left: 1em"></span></h2>
     <p>
       This could be an area where we can improve substantially over
@@ -124,7 +143,7 @@
         </p>
       </li>
     </ul>
-    <h2 id="auto-5">4.<span style="margin-left: 1em"></span>General plugin mechanisms<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-6">5.<span style="margin-left: 1em"></span>General plugin mechanisms<span style="margin-left: 1em"></span></h2>
     <p>
       A strategical goal would be to improve support for general mechanisms to
       talk to external programs:
@@ -140,7 +159,8 @@
           various plugins and allow easier maintenance. Moreover it could
           allow TeXmacs to be an alternative to Jupyter notebooks or <a href="https://github.com/mgubi/tm_jupyter">
           Jupyter Qt Console</a>. One can look to these projects to understand
-          which features have to be supported.
+          which features have to be supported. Jeroen has improved the
+          tm_jupyter plugin <a href="https://github.com/woutersj/tm_jupyter/commits/master">here</a>.  
         </p>
       </li>
       <li>
@@ -155,7 +175,7 @@
         </p>
       </li>
     </ul>
-    <h2 id="auto-6">5.<span style="margin-left: 1em"></span>Random and unsorted resources<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-7">6.<span style="margin-left: 1em"></span>Random and unsorted resources<span style="margin-left: 1em"></span></h2>
     <ul>
       <li>
         <p>
