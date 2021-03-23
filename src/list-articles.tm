@@ -13,8 +13,12 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sat
-  Mar 20 22:03:38 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Mon
+  Mar 22 21:54:12 2021 UTC>
+
+  <notes-entry|dev-notes.tm|Development resources and ideas|This page
+  contains idea and resources pertaining to the development of TeXmacs.|Mon
+  Mar 22 21:54:12 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Mar 20 22:03:38 2021 UTC>
@@ -33,10 +37,6 @@
   case you manage to cover, even partially, one of the topic, please add a
   remark here to point to relevant material. If the topic is covered, move it
   to the \PAlready covered\Q section.|Wed Mar 17 20:57:33 2021 UTC>
-
-  <notes-entry|dev-notes.tm|Development resources and ideas|This page
-  contains idea and resources pertaining to the development of TeXmacs.|Wed
-  Mar 17 09:20:38 2021 UTC>
 
   <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Mon Mar 15 14:43:45
   2021 UTC>

@@ -59,7 +59,11 @@
     make relatively easy an inclusion in TeXmacs. The github
     <hlink|link|https://tree-sitter.github.io/tree-sitter/>, and a
     presentation <hlink|talk|https://www.youtube.com/watch?v=Jes3bD6P0To> on
-    youtube.\ 
+    youtube.
+
+    <item>The KDE project has a syntax-highlighting engine
+    <hlink|here|https://invent.kde.org/frameworks/syntax-highlighting/> where
+    languages descriptions comes in external XML files. \ 
   </itemize>
 
   <section|Parsing Markdown and other languages>
@@ -180,17 +184,21 @@
       2.<space|2spc>Syntax highlighting <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
 
-      3.<space|2spc>Spellchecking and grammar-checking
+      3.<space|2spc>Parsing Markdown and other languages
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>
 
-      4.<space|2spc>General plugin mechanisms
+      4.<space|2spc>Spellchecking and grammar-checking
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-5>
 
-      5.<space|2spc>Random and unsorted resources
+      5.<space|2spc>General plugin mechanisms
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-6>
+
+      6.<space|2spc>Random and unsorted resources
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-7>
     </associate>
   </collection>
 </auxiliary>
