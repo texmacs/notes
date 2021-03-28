@@ -67,6 +67,15 @@
     double view on a document. Design choices in TeXmacs' user interface.
     Joris demonstrated the use of the search tool, including template
     variables and the filtering option.
+
+    <item>28.3.2021 \U Hacking session on improving the navigation of the
+    structure of the document (sections, subsections<text-dots>). We modified
+    the scheme code of the UI to produce properly indented structures for the
+    menu listing all the sections and added some keybindings. Some
+    screenshots in the <hlink|twitter feed|https://twitter.com/gnu_texmacs/status/1376205283102502917>.
+    We had also some (not recorded) discussion on live editing of documents
+    and on versioning of documents. We will discuss these topics also in a
+    further session.
   </itemize>
 
   \;
