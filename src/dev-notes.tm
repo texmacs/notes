@@ -139,6 +139,20 @@
     related to literate programming capabilities/projects.
   </itemize>
 
+  <section|General attachments to documents and to PDF files>
+
+  PDF gives the possibility to embed arbitrary content within the document as
+  \PEmbedded file\Q streams. This possibility is exploited by the <LaTeX>
+  package <hlink|attachfile|https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf>
+  which allows to associate to typesetted parts of the document arbitrary
+  attachments with the possibility to recover it. We could introduce a
+  similar feature in <TeXmacs> documents, i.e. include external content in
+  the document. Another possibility is to include a <TeXmacs> document within
+  a generated PDF file in such a way that it is possible to open the PDF from
+  <TeXmacs> and edit its source. Another use could be to include TeXmacs
+  snippets in copied PDF files so that they could be reopened in TeXmacs and
+  modified.
+
   <section|Random and unsorted resources>
 
   <\itemize>
@@ -167,6 +181,7 @@
     <associate|auto-5|<tuple|4|?>>
     <associate|auto-6|<tuple|5|?>>
     <associate|auto-7|<tuple|6|?>>
+    <associate|auto-8|<tuple|7|?>>
   </collection>
 </references>
 
