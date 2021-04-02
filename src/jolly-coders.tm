@@ -76,6 +76,17 @@
     We had also some (not recorded) discussion on live editing of documents
     and on versioning of documents. We will discuss these topics also in a
     further session.
+
+    <item>2.4.2021 \U Joris explained the use of spreadsheets in <TeXmacs>
+    and how the plugins can produce dynamic content, i.e. content in the
+    typesetted document which change in response to computations in the
+    plugin. He gave an example with <hlink|Mathemagix|http://www.mathemagix.org/www/mmdoc/doc/html/main/index.en.html>
+    (a programming language for computer algebra and analysis). We then also
+    discussed the possibility of embedding documents within PDF and in
+    general the problem of embedding data within documents. Finally some
+    remarks on conservative conversions between various formats, i.e.
+    conversions which can be incrementally updated, e.g. <hlink|Conservative
+    conversion between LaTeX and TeXmacs|http://www.texmacs.org/joris/latexconv/latexconv-abs.html>.
   </itemize>
 
   \;
