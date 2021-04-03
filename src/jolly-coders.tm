@@ -46,36 +46,12 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
-    <item>12.3.2021 \U The Xcode project, working on a bug related to
-    exporting PDF images to the clipboard on a Mac.
-
-    <item>13.3.2021 \U General structure of the C++ codebase, various
-    directories, abstract interfaces to the user interface, handling of
-    events, \ example of the close window event.
-
-    <item>14.3.2021 \U Scheme/C++ interface, patching the S7 Scheme
-    interpreter, generation of menus and widgets between C++ and Scheme.
-
-    <item>19.3.2021 \U The build systems. How the makefile works. Demo of the
-    old widget library and of the Guile 3 port. Discussion on the Scheme
-    code, the module system, the differences between Guile 1.8 and Guile 2/3.
-
-    <item>20.3.2021 \U Various aspects of the use of Scheme in TeXmacs,
-    including embedding Scheme, the various dialects and the status of the
-    Guile 3 and Chez Scheme ports. The design and use of tm-define. Features
-    currently absent in TeXmacs like a structured table of contents or a
-    double view on a document. Design choices in TeXmacs' user interface.
-    Joris demonstrated the use of the search tool, including template
-    variables and the filtering option.
-
-    <item>28.3.2021 \U Hacking session on improving the navigation of the
-    structure of the document (sections, subsections<text-dots>). We modified
-    the scheme code of the UI to produce properly indented structures for the
-    menu listing all the sections and added some keybindings. Some
-    screenshots in the <hlink|twitter feed|https://twitter.com/gnu_texmacs/status/1376205283102502917>.
-    We had also some (not recorded) discussion on live editing of documents
-    and on versioning of documents. We will discuss these topics also in a
-    further session.
+    <item>3.4.2021 \U Discussion on the behaviour of section headers within
+    tables. This become an attempt to fix some suboptimal behaviour of the
+    sectioning macros, and a deep dive on the algorithms <TeXmacs> uses to
+    typeset lines in tables and to determine the size of horizontal cells in
+    tables. A lot of macro code and some C++. <hlink|Twitter
+    post.|https://twitter.com/gnu_texmacs/status/1378382890724175872>
 
     <item>2.4.2021 \U Joris explained the use of spreadsheets in <TeXmacs>
     and how the plugins can produce dynamic content, i.e. content in the
@@ -87,6 +63,39 @@
     remarks on conservative conversions between various formats, i.e.
     conversions which can be incrementally updated, e.g. <hlink|Conservative
     conversion between LaTeX and TeXmacs|http://www.texmacs.org/joris/latexconv/latexconv-abs.html>.
+
+    <item>28.3.2021 \U Hacking session on improving the navigation of the
+    structure of the document (sections, subsections<text-dots>). We modified
+    the scheme code of the UI to produce properly indented structures for the
+    menu listing all the sections and added some keybindings. Some
+    screenshots in the <hlink|twitter feed|https://twitter.com/gnu_texmacs/status/1376205283102502917>.
+    We had also some (not recorded) discussion on live editing of documents
+    and on versioning of documents. We will discuss these topics also in a
+    further session.
+
+    <item>20.3.2021 \U Various aspects of the use of Scheme in TeXmacs,
+    including embedding Scheme, the various dialects and the status of the
+    Guile 3 and Chez Scheme ports. The design and use of tm-define. Features
+    currently absent in TeXmacs like a structured table of contents or a
+    double view on a document. Design choices in TeXmacs' user interface.
+    Joris demonstrated the use of the search tool, including template
+    variables and the filtering option.
+
+    <item>19.3.2021 \U The build systems. How the makefile works. Demo of the
+    old widget library and of the Guile 3 port. Discussion on the Scheme
+    code, the module system, the differences between Guile 1.8 and Guile 2/3.
+
+    <item>14.3.2021 \U Scheme/C++ interface, patching the S7 Scheme
+    interpreter, generation of menus and widgets between C++ and Scheme.
+
+    <item>13.3.2021 \U General structure of the C++ codebase, various
+    directories, abstract interfaces to the user interface, handling of
+    events, \ example of the close window event.
+
+    <item>12.3.2021 \U The Xcode project, working on a bug related to
+    exporting PDF images to the clipboard on a Mac.
+
+    <item>
   </itemize>
 
   \;

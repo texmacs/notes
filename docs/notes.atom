@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-04-02T17:40:53Z</updated>
+  <updated>2021-04-03T20:18:13Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -14,11 +14,20 @@
   <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-03-31T11:53:23Z</id>
-    <updated>2021-03-31T11:53:23Z</updated>
-    <published>2021-03-31T11:48:26Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-04-02T17:41:12Z</id>
+    <updated>2021-04-02T17:41:12Z</updated>
+    <published>2021-04-02T17:40:53Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
+  </entry>
+  <entry>
+    <title>Jolly coders</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
+    <id>texmacs.github.io/notes/jolly-coders.tm:2021-04-02T17:41:12Z</id>
+    <updated>2021-04-02T17:41:12Z</updated>
+    <published>2021-04-03T20:17:54Z</published>
+    <summary>This page gather informations on the activities of the TeXmacs
+    hacking group.</summary>
   </entry>
   <entry>
     <title>Development resources and ideas</title>
@@ -28,15 +37,6 @@
     <published>2021-03-31T11:47:41Z</published>
     <summary>This page contains idea and resources pertaining to the
     development of TeXmacs.</summary>
-  </entry>
-  <entry>
-    <title>Jolly coders</title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
-    <id>texmacs.github.io/notes/jolly-coders.tm:2021-03-28T17:25:45Z</id>
-    <updated>2021-03-28T17:25:45Z</updated>
-    <published>2021-04-02T17:40:28Z</published>
-    <summary>This page gather informations on the activities of the TeXmacs
-    hacking group.</summary>
   </entry>
   <entry>
     <title>The Macro editor and easy macro modification</title>
