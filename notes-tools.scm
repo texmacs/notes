@@ -33,7 +33,7 @@
 (define (git-date fname)
  (let* ((port (open-input-pipe (string-append "git log --pretty=%at " fname " | head -1")))
                  (str  (read-line port)))
-            (if (equal? 0 (close-pipe port))
+            (if (and (equal? 0 (close-pipe port)) (not (eof-object? str)))
                 (string->number str)
                 (stat:mtime (stat fname)))))
 

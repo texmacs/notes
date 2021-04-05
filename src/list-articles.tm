@@ -12,12 +12,18 @@
 
   <hrule>
 
+  <notes-entry|example-documents.tm|A list of documents created with
+  <TeXmacs>|We gather here some examples of documents created with <TeXmacs>
+  to showcase the daily usage of the system. We indicate when sources are
+  included since looking at examples is a great way to learn. |Mon Apr \ 5
+  08:54:53 2021 UTC>
+
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Fri
-  Apr \ 2 17:41:12 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Sat
+  Apr \ 3 20:18:28 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Fri Apr \ 2 17:41:12 2021 UTC>
+  the activities of the TeXmacs hacking group.|Sat Apr \ 3 20:18:28 2021 UTC>
 
   <notes-entry|dev-notes.tm|Development resources and ideas|This page
   contains idea and resources pertaining to the development of TeXmacs.|Wed

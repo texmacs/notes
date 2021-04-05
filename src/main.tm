@@ -30,7 +30,9 @@
   <with|font-shape|italic|<small|These articles contain collections of stuff,
   additions are welcome.>>
 
-  <hlink|A list of development resources and ideas|dev-notes.tm>
+  <hlink|Some documents created with <TeXmacs>|./example-documents.tm>
+
+  <hlink|Some development resources and ideas|dev-notes.tm>
 
   <hlink|Wishlist and additional functionalities|./wishlist.tm>
 
