@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-04-05T09:08:26Z</updated>
+  <updated>2021-04-08T21:15:39Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -12,22 +12,29 @@
   <icon>http://texmacs.github.io/notes/misc/blog-icon.ico</icon>
   <logo>http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png</logo>
   <entry>
-    <title><concat>A list of documents created with
-    <TeXmacs/></concat></title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/example-documents.html"/>
-    <id>texmacs.github.io/notes/example-documents.tm:2021-04-05T08:54:53Z</id>
-    <updated>2021-04-05T08:54:53Z</updated>
-    <published>2021-04-05T08:54:53Z</published>
-    <summary><concat xml:space="preserve">We gather here some examples of documents created with <TeXmacs/> to showcase the daily usage of the system. We indicate when sources are included since looking at examples is a great way to learn. </concat></summary>
+    <title><concat>Notes on <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
+    <id>texmacs.github.io/notes/main.tm:2021-04-05T09:08:55Z</id>
+    <updated>2021-04-05T09:08:55Z</updated>
+    <published>2021-04-08T21:04:22Z</published>
   </entry>
   <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-04-03T20:18:28Z</id>
-    <updated>2021-04-03T20:18:28Z</updated>
-    <published>2021-04-03T20:18:13Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-04-05T09:08:55Z</id>
+    <updated>2021-04-05T09:08:55Z</updated>
+    <published>2021-04-05T09:08:26Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
+  </entry>
+  <entry>
+    <title><concat>A list of documents created with
+    <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/example-documents.html"/>
+    <id>texmacs.github.io/notes/example-documents.tm:2021-04-05T09:08:55Z</id>
+    <updated>2021-04-05T09:08:55Z</updated>
+    <published>2021-04-08T21:15:25Z</published>
+    <summary><concat xml:space="preserve">We gather here some examples of documents created with <TeXmacs/> to showcase the daily usage of the system. We indicate when sources are included since looking at examples is a great way to learn. </concat></summary>
   </entry>
   <entry>
     <title>Jolly coders</title>
@@ -72,13 +79,6 @@
     partially, one of the topic, please add a remark here to point to relevant
     material. If the topic is covered, move it to the Already covered
     section.</concat></summary>
-  </entry>
-  <entry>
-    <title><concat>Notes on <TeXmacs/></concat></title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
-    <id>texmacs.github.io/notes/main.tm:2021-03-15T14:43:45Z</id>
-    <updated>2021-03-15T14:43:45Z</updated>
-    <published>2021-04-05T08:59:10Z</published>
   </entry>
   <entry>
     <title>Scheming</title>
@@ -274,6 +274,6 @@
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/awesome-texmacs.html"/>
     <id>texmacs.github.io/notes/awesome-texmacs.tm:2020-11-10T13:47:46Z</id>
     <updated>2020-11-10T13:47:46Z</updated>
-    <published>2020-11-11T19:44:20Z</published>
+    <published>2021-04-08T21:12:20Z</published>
   </entry>
 </feed>

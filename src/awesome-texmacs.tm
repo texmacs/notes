@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|1.99.19>
 
 <style|notes>
 
@@ -7,46 +7,26 @@
 
   <chapter*|Awesome GNU TeXmacs>
 
-  <section*|Plugins>
+  <section*|General>
 
   <\itemize>
-    <item><hlink|Scala|https://github.com/texmacs/TeXmacs.scala>
-
-    <item><hlink|Haskell|https://github.com/BBratschiKirloskar/TeXmacsGhci>
-
-    <item><hlink|Pure|https://github.com/agraef/pure-lang/wiki/TeXmacs>
-
-    <item><hlink|XSI/CLIPS/COOL|https://github.com/nilqed/xsiTM>
+    <item><hlink|<tt|tm-forge>|https://github.com/texmacs/tm-forge> : a
+    repository of content for <TeXmacs>\ 
   </itemize>
 
-  <section*|For Developers>
+  <section*|Blog & Forums & Chat Room>
 
   <\itemize>
-    <item><hlink|Lorem Ipsum generator|https://github.com/KarlHegbloom/texmacs-lorem-ipsum>
+    <item><hlink|GNU TeXmacs Forum|http://forum.texmacs.cn/>
 
-    <item><hlink|TeXmacs Builder on Windows|https://github.com/slowphil/texmacs-win-builder>
+    <item><hlink|GNU TeXmacs Gitter Chat Room|https://gitter.im/texmacs/Lobby>
 
-    <item><hlink|TeXmacs for Windows (build in MSys2/Mingw32
-    environment)|https://github.com/slowphil/mingw-w64-texmacs>
+    <item><hlink|GNU TeXmacs\<#77E5\>\<#4E4E\>\<#4E13\>\<#680F\>(Chinese)|https://zhuanlan.zhihu.com/texmacs>
 
-    <item><hlink|GNU Guile 1.8.8 for GNU TeXmacs|https://github.com/texmacs/guile>
-
-    <item><hlink|Hummus PDF Writer|https://github.com/galkahana/PDF-Writer>
-
-    <item><hlink|A Jupyter client for GNU
-    TeXmacs|https://github.com/mgubi/tm_jupyter>
-
-    <item><hlink|A Converter to Markdown|https://bitbucket.org/mdbenito/tm2md/src/master/>
+    <item><hlink|GNU TeXmacs\<#8C46\>\<#74E3\>\<#5C0F\>\<#7EC4\>(Chinese)|https://www.douban.com/group/texmacs/>
   </itemize>
 
   <section*|For Users>
-
-  <subsection*|Documents written with TeXmacs>
-
-  <\itemize>
-    <item><hlink|richi235's Bachelor Thesis on Link Aggregation
-    Tunneling|https://github.com/richi235/bachelor-thesis-link-aggregation-tunneling>
-  </itemize>
 
   <subsection*|User-contributed style files>
 
@@ -64,16 +44,34 @@
     <item><hlink|GNU TeXmacs cask for Homebrew|https://formulae.brew.sh/cask/texmacs>
   </itemize>
 
-  <section*|Blog & Forums & Chat Room>
+  <section*|Plugins>
 
   <\itemize>
-    <item><hlink|GNU TeXmacs Forum|http://forum.texmacs.cn/>
+    <item><hlink|Scala|https://github.com/texmacs/TeXmacs.scala>
 
-    <item><hlink|GNU TeXmacs Gitter Chat Room|https://gitter.im/texmacs/Lobby>
+    <item><hlink|Haskell|https://github.com/BBratschiKirloskar/TeXmacsGhci>
 
-    <item><hlink|GNU TeXmacs\<#77E5\>\<#4E4E\>\<#4E13\>\<#680F\>(Chinese)|https://zhuanlan.zhihu.com/texmacs>
+    <item><hlink|Pure|https://github.com/agraef/pure-lang/wiki/TeXmacs>
 
-    <item><hlink|GNU TeXmacs\<#8C46\>\<#74E3\>\<#5C0F\>\<#7EC4\>(Chinese)|https://www.douban.com/group/texmacs/>
+    <item><hlink|XSI/CLIPS/COOL|https://github.com/nilqed/xsiTM>
+  </itemize>
+
+  <section*|For Developers>
+
+  <\itemize>
+    <item><hlink|TeXmacs Builder on Windows|https://github.com/slowphil/texmacs-win-builder>
+
+    <item><hlink|TeXmacs for Windows (build in MSys2/Mingw32
+    environment)|https://github.com/slowphil/mingw-w64-texmacs>
+
+    <item><hlink|GNU Guile 1.8.8 for GNU TeXmacs|https://github.com/texmacs/guile>
+
+    <item><hlink|Hummus PDF Writer|https://github.com/galkahana/PDF-Writer>
+
+    <item><hlink|A Jupyter client for GNU
+    TeXmacs|https://github.com/mgubi/tm_jupyter>
+
+    <item><hlink|A Converter to Markdown|https://bitbucket.org/mdbenito/tm2md/src/master/>
   </itemize>
 </body>
 
@@ -86,6 +84,7 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|?>>
+    <associate|auto-10|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
     <associate|auto-4|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
@@ -93,6 +92,7 @@
     <associate|auto-6|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
     <associate|auto-7|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
     <associate|auto-8|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
+    <associate|auto-9|<tuple|<with|mode|<quote|math>|\<bullet\>>|?>>
   </collection>
 </references>
 

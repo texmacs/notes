@@ -12,15 +12,18 @@
 
   <hrule>
 
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Mon Apr \ 5 09:08:55
+  2021 UTC>
+
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Mon
+  Apr \ 5 09:08:55 2021 UTC>
+
   <notes-entry|example-documents.tm|A list of documents created with
   <TeXmacs>|We gather here some examples of documents created with <TeXmacs>
   to showcase the daily usage of the system. We indicate when sources are
   included since looking at examples is a great way to learn. |Mon Apr \ 5
-  08:54:53 2021 UTC>
-
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sat
-  Apr \ 3 20:18:28 2021 UTC>
+  09:08:55 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Apr \ 3 20:18:28 2021 UTC>
@@ -43,9 +46,6 @@
   case you manage to cover, even partially, one of the topic, please add a
   remark here to point to relevant material. If the topic is covered, move it
   to the \PAlready covered\Q section.|Wed Mar 17 20:57:33 2021 UTC>
-
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Mon Mar 15 14:43:45
-  2021 UTC>
 
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Sun Mar 14 21:49:27
