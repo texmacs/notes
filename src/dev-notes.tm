@@ -16,27 +16,11 @@
 
   [Last update 22.3.2021]
 
-  <section|Incremental computing>
-
-  Modifications to the documents are incremental, so one would like to take
-  this into account when recomputing both the typesetting and the rendering
-  onscreen. This problem is also relevant when syncronizing live-editing
-  document across a network connection. Some infrastructure is already
-  present in TeXmacs (details?). Here are gathered some approaches to
-  incremental computations in a general context.
+  <section|Random and unsorted resources>
 
   <\itemize>
-    <item>The paper \PPurely Functional Incremental Computing\Q
-    (<hlink|PDF|http://firsov.ee/incremental/incremental.pdf>).
-
-    <item>Talk on implementing Data-driven incremental UIs (in OCAML)
-    (<hlink|youtube|https://www.youtube.com/watch?v=R3xX37RGJKE>). And a
-    longer talk with more details (<hlink|youtube|https://www.youtube.com/watch?v=G6a5G5i4gQU>).
-
-    <item>A blog post at Jane Street (<hlink|URL|https://blog.janestreet.com/introducing-incremental/>)
-
-    <item>Adaptive computation library in JS
-    (<hlink|link|https://github.com/rkirov/adapt-comp>)
+    <item>An interesting talk about open source
+    community<nbsp>(<hlink|video|https://www.youtube.com/watch?v=o_4EX4dPppA>).
   </itemize>
 
   <section|Syntax highlighting>
@@ -153,14 +137,52 @@
   snippets in copied PDF files so that they could be reopened in TeXmacs and
   modified.
 
-  <section|Random and unsorted resources>
+  <section|Zotero integration>
+
+  <name|Zotero> is a widely used open source bibliographic management tool.
+  It would be interesting to have a good way to import bibliography items
+  from it. There are already various attemps to this:
 
   <\itemize>
-    <item>An interesting talk about open source
-    community<nbsp>(<hlink|video|https://www.youtube.com/watch?v=o_4EX4dPppA>).
+    <item><name|Zotexmacs> (<hlink|github|https://github.com/slowphil/zotexmacs>)
+    by Philippe Joyez.
+
+    <item>TeXmacs/Zotero integration (<hlink|github|https://github.com/KarlHegbloom/zotero-texmacs-integration/blob/master/progs/tm-zotero.scm>)
+    by Karl Hegbloom.
   </itemize>
 
-  \;
+  We maybe want to develop a more organic solution. Interesting links:
+
+  <\itemize>
+    <item>Zotero better BibTeX (<hlink|github|https://github.com/retorquere/zotero-better-bibtex>),
+    Zotero CLI (<hlink|github|https://github.com/jbaiter/zotero-cli>), Zotelo
+    (Zotero/Emacs integration) (<hlink|github|https://github.com/vspinu/zotelo>),
+    Web bibliographies with Zotero (<hlink|github|https://github.com/davidswelt/zot_bib_web>),
+    Zotero/LyX integration (<hlink|github|https://github.com/wshanks/lyz>).
+  </itemize>
+
+  <section|Incremental computing>
+
+  Modifications to the documents are incremental, so one would like to take
+  this into account when recomputing both the typesetting and the rendering
+  onscreen. This problem is also relevant when syncronizing live-editing
+  document across a network connection. Some infrastructure is already
+  present in TeXmacs (details?). Here are gathered some approaches to
+  incremental computations in a general context.
+
+  <\itemize>
+    <item>The paper \PPurely Functional Incremental Computing\Q
+    (<hlink|PDF|http://firsov.ee/incremental/incremental.pdf>).
+
+    <item>Talk on implementing Data-driven incremental UIs (in OCAML)
+    (<hlink|youtube|https://www.youtube.com/watch?v=R3xX37RGJKE>). And a
+    longer talk with more details (<hlink|youtube|https://www.youtube.com/watch?v=G6a5G5i4gQU>).
+
+    <item>A blog post at Jane Street (<hlink|URL|https://blog.janestreet.com/introducing-incremental/>)
+
+    <item>Adaptive computation library in JS
+    (<hlink|link|https://github.com/rkirov/adapt-comp>)
+  </itemize>
 
   \;
 </body>
@@ -182,6 +204,7 @@
     <associate|auto-6|<tuple|5|?>>
     <associate|auto-7|<tuple|6|?>>
     <associate|auto-8|<tuple|7|?>>
+    <associate|auto-9|<tuple|8|?>>
   </collection>
 </references>
 
@@ -211,9 +234,13 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-6>
 
-      6.<space|2spc>Random and unsorted resources
+      6.<space|2spc>General attachments to documents and to PDF files
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-7>
+
+      7.<space|2spc>Random and unsorted resources
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-8>
     </associate>
   </collection>
 </auxiliary>

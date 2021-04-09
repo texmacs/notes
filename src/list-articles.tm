@@ -12,18 +12,21 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Mon Apr \ 5 09:08:55
-  2021 UTC>
-
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Mon
-  Apr \ 5 09:08:55 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Thu
+  Apr \ 8 21:15:54 2021 UTC>
 
   <notes-entry|example-documents.tm|A list of documents created with
   <TeXmacs>|We gather here some examples of documents created with <TeXmacs>
   to showcase the daily usage of the system. We indicate when sources are
-  included since looking at examples is a great way to learn. |Mon Apr \ 5
-  09:08:55 2021 UTC>
+  included since looking at examples is a great way to learn. |Thu Apr \ 8
+  21:15:54 2021 UTC>
+
+  <notes-entry|awesome-texmacs.tm|Awesome GNU TeXmacs|(no abstract)|Thu Apr
+  \ 8 21:15:54 2021 UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Mon Apr \ 5 09:08:55
+  2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Apr \ 3 20:18:28 2021 UTC>
@@ -134,9 +137,6 @@
 
   <notes-entry|a-tikz-example.tm|Example of TikZ figure generation with the
   Graph plugin|(no abstract)|Tue Nov 10 16:01:20 2020 UTC>
-
-  <notes-entry|awesome-texmacs.tm|Awesome GNU TeXmacs|(no abstract)|Tue Nov
-  10 13:47:46 2020 UTC>
 
   <hrule>
 </body>
