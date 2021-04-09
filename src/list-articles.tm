@@ -13,8 +13,12 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Thu
-  Apr \ 8 21:15:54 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Fri
+  Apr \ 9 09:11:09 2021 UTC>
+
+  <notes-entry|dev-notes.tm|Development resources and ideas|This page
+  contains idea and resources pertaining to the development of TeXmacs.|Fri
+  Apr \ 9 09:11:09 2021 UTC>
 
   <notes-entry|example-documents.tm|A list of documents created with
   <TeXmacs>|We gather here some examples of documents created with <TeXmacs>
@@ -30,10 +34,6 @@
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Apr \ 3 20:18:28 2021 UTC>
-
-  <notes-entry|dev-notes.tm|Development resources and ideas|This page
-  contains idea and resources pertaining to the development of TeXmacs.|Wed
-  Mar 31 11:53:23 2021 UTC>
 
   <notes-entry|macro-editor.tm|The Macro editor and easy macro
   modification|The Macro editor is a shortcut tool for examining and

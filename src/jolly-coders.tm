@@ -46,12 +46,21 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>9.4.2021 \U We improved two standard styles for APS and AIP
+    journals based on the RevTeX LaTeX package, this allowed us to discuss
+    various issues related to writing style files and also some aspects of
+    the conversions in <LaTeX>. We talked about the tags for the front matter
+    of the papers (title, authors, etc<text-dots>), the typesetting of the
+    bibliography, some problems related to wrong interactions among styling
+    macros. The obligatory <hlink|twitter
+    post|https://twitter.com/gnu_texmacs/status/1380569437183610880>.
+
     <item>3.4.2021 \U Discussion on the behaviour of section headers within
     tables. This become an attempt to fix some suboptimal behaviour of the
     sectioning macros, and a deep dive on the algorithms <TeXmacs> uses to
     typeset lines in tables and to determine the size of horizontal cells in
     tables. A lot of macro code and some C++. <hlink|Twitter
-    post.|https://twitter.com/gnu_texmacs/status/1378382890724175872>
+    post|https://twitter.com/gnu_texmacs/status/1378382890724175872>.
 
     <item>2.4.2021 \U Joris explained the use of spreadsheets in <TeXmacs>
     and how the plugins can produce dynamic content, i.e. content in the
