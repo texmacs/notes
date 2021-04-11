@@ -46,6 +46,12 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>10.4.2021 \U Darcy showed us his work on the
+    <hlink|Octave|https://www.gnu.org/software/octave/index> plugin and we
+    worked out some issues in the plugin mechanisms: how to properly format
+    numbers coming from Octave and how to support UTF8 output. <hlink|Twitter
+    trace|https://twitter.com/gnu_texmacs/status/1380906950402138114>.
+
     <item>9.4.2021 \U We improved two standard styles for APS and AIP
     journals based on the RevTeX LaTeX package, this allowed us to discuss
     various issues related to writing style files and also some aspects of
