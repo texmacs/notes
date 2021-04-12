@@ -12,9 +12,13 @@
 
   <hrule>
 
+  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
+  the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27
+  2021 UTC>
+
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sun
-  Apr 11 16:31:22 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Mon
+  Apr 12 12:50:27 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sun Apr 11 16:31:22 2021 UTC>
@@ -49,10 +53,6 @@
   case you manage to cover, even partially, one of the topic, please add a
   remark here to point to relevant material. If the topic is covered, move it
   to the \PAlready covered\Q section.|Wed Mar 17 20:57:33 2021 UTC>
-
-  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
-  the Scheme language implementation used in <TeXmacs>.|Sun Mar 14 21:49:27
-  2021 UTC>
 
   <notes-entry|plugin-status.tm|Status of Plugins for <TeXmacs>|We review the
   current status and limitations of the various plugins on
