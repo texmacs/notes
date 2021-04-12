@@ -13,11 +13,11 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Fri
-  Apr \ 9 18:32:24 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Sun
+  Apr 11 16:31:22 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Fri Apr \ 9 18:32:24 2021 UTC>
+  the activities of the TeXmacs hacking group.|Sun Apr 11 16:31:22 2021 UTC>
 
   <notes-entry|dev-notes.tm|Development resources and ideas|This page
   contains idea and resources pertaining to the development of TeXmacs.|Fri
