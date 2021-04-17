@@ -46,6 +46,16 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>17.4.2021 \U Joris explained the organisation of the style files
+    for beamer presentations: what are the various tags, how the overlays are
+    organised, what are the possible improvements. In particular we discussed
+    about a possible template system, better UI for interacting with overlays
+    and screens, how to structure content on the slides, how the theming
+    works, the various parameters for decorations. Towards the end we touched
+    upon the theme of fonts and of their installation. A
+    <hlink|screenshot|https://twitter.com/gnu_texmacs/status/1383459597063655428>
+    from twitter.
+
     <item>10.4.2021 \U Darcy showed us his work on the
     <hlink|Octave|https://www.gnu.org/software/octave/index> plugin and we
     worked out some issues in the plugin mechanisms: how to properly format

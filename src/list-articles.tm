@@ -12,13 +12,13 @@
 
   <hrule>
 
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Mon
+  Apr 12 13:02:21 2021 UTC>
+
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27
   2021 UTC>
-
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Mon
-  Apr 12 12:50:27 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sun Apr 11 16:31:22 2021 UTC>
