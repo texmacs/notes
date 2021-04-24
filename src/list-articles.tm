@@ -14,10 +14,10 @@
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Sat
-  Apr 17 18:40:57 2021 UTC>
+  Apr 17 21:43:00 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Sat Apr 17 18:40:57 2021 UTC>
+  the activities of the TeXmacs hacking group.|Sat Apr 17 21:43:00 2021 UTC>
 
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27

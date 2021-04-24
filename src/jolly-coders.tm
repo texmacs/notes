@@ -47,6 +47,17 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>24.4.2021 \U We continued the discussion of style files and the
+    customization of styles and of tags like theorem, proposition,
+    etc<text-dots> Joris showed ways to introduce different color themes for
+    various kinds of tags in such a way that this plays well with different
+    styles (e.g. beamer, article, etc<text-dots>) We also briefly discussed
+    the possibility to improve the way users can access and customize options
+    for plugins via the application preferences systems and dialogs. Then
+    Joris gave an overview of the font selection system, and of the various
+    C++ classes involved in unicode and math font support.
+    <hlink|Tweet|https://twitter.com/gnu_texmacs/status/1385981413212753923>.\ 
+
     <item>17.4.2021 \U Joris explained the organisation of the style files
     for beamer presentations: what are the various tags, how the overlays are
     organised, what are the possible improvements. In particular we discussed
