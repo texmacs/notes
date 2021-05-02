@@ -38,15 +38,31 @@
   </with>
 
   Basile Audoly, Miguel de Benito Delgado, Álvaro Tejero Cantero,
-  Massimiliano Gubinelli, \ Joris van der Hoeven, Pierre-Henri Jondot, Marc
-  Lalaude-Labayle, Sebastian Miele, Giovanni Piredda, Joy Yang Qiping, Peter
-  Rap£an, Darcy Shen, Jeroen Wouters.
+  Massimiliano Gubinelli, Joris van der Hoeven, Pierre-Henri Jondot, Marc
+  Lalaude-Labayle, Giovanni Piredda, Joy Yang Qiping, Peter Rap£an, Darcy
+  Shen, Jeroen Wouters.
 
   \;
 
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>1.5.2021 \U Miguel showed us his many enhancements to TeXmacs which
+    still didn't make their way to the main trunk: autocompletion for
+    references, another style of comments, and the wonderful integration he
+    has set up for producing content for the Hugo static site generator,
+    including a TeXmacs<math|\<rightarrow\>>Markdown converter. We then
+    discussed about conversion in general and conservative conversion. Joris
+    showed us how the conservative conversion with LaTeX works. It is
+    described also in more detail in the paper \ \ <hlink|Conservative
+    conversion between LaTeX and TeXmacs|http://www.texmacs.org/joris/latexconv/latexconv-abs.html>
+    already mentioned in previous meetings. We discussed a possible
+    conservative conversion for Markdown. The topic will certainly pop up
+    again in future meetings. Towards the end we had a discussion on possible
+    advertisement strategies to make a wider public aware of the existence
+    and capabilities of TeXmacs. <hlink|Obligatory
+    tweet|https://twitter.com/gnu_texmacs/status/1388532464512118786>.
+
     <item>24.4.2021 \U We continued the discussion of style files and the
     customization of styles and of tags like theorem, proposition,
     etc<text-dots> Joris showed ways to introduce different color themes for
@@ -131,8 +147,6 @@
 
     <item>12.3.2021 \U The Xcode project, working on a bug related to
     exporting PDF images to the clipboard on a Mac.
-
-    <item>
   </itemize>
 
   \;

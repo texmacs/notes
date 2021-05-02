@@ -49,6 +49,9 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
+  <hlink|<TeXmacs> and the art of mathematical
+  writing|./art-of-math-writing.tm>
+
   <hlink|The Macro Editor and Easy Macro Modification|macro-editor.tm>
 
   <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>

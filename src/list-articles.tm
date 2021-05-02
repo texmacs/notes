@@ -12,16 +12,16 @@
 
   <hrule>
 
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Wed
+  Apr 28 19:44:37 2021 UTC>
+
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>
     A blog post which present the motivations behind the design of <TeXmacs>
     for a personal perspective.<next-line><with|font-shape|italic|by
     M.<nbsp>Gubinelli (<hlink|mgubi@mac.com|mailto:mgubi@mac.com>)>
-  </notes-entry|Wed Apr 28 19:13:29 2021 UTC>
-
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sat
-  Apr 24 21:00:08 2021 UTC>
+  </notes-entry|Wed Apr 28 19:44:37 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Apr 24 21:00:08 2021 UTC>
