@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-05-02T08:36:29Z</updated>
+  <updated>2021-05-02T13:06:58Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -12,13 +12,29 @@
   <icon>http://texmacs.github.io/notes/misc/blog-icon.ico</icon>
   <logo>http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png</logo>
   <entry>
+    <title><concat>Notes on <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
+    <id>texmacs.github.io/notes/main.tm:2021-05-02T08:36:57Z</id>
+    <updated>2021-05-02T08:36:57Z</updated>
+    <published>2021-05-02T08:35:00Z</published>
+  </entry>
+  <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-04-28T19:44:37Z</id>
-    <updated>2021-04-28T19:44:37Z</updated>
-    <published>2021-04-28T19:13:48Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-05-02T08:36:57Z</id>
+    <updated>2021-05-02T08:36:57Z</updated>
+    <published>2021-05-02T08:36:29Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
+  </entry>
+  <entry>
+    <title>Jolly coders</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
+    <id>texmacs.github.io/notes/jolly-coders.tm:2021-05-02T08:36:57Z</id>
+    <updated>2021-05-02T08:36:57Z</updated>
+    <published>2021-05-02T08:35:41Z</published>
+    <summary>This page gather informations on the activities of the TeXmacs
+    hacking group.</summary>
   </entry>
   <entry>
     <title><concat><TeXmacs/> and the art of mathematical
@@ -26,21 +42,11 @@
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/art-of-math-writing.html"/>
     <id>texmacs.github.io/notes/art-of-math-writing.tm:2021-04-28T19:44:37Z</id>
     <updated>2021-04-28T19:44:37Z</updated>
-    <published>2021-04-28T19:33:29Z</published>
-    <summary><document><concat>A blog post which present the motivations
-    behind the design of <TeXmacs/> for a personal
-    perspective.<next-line/><with>font-shapeitalic<concat>by
-    M.<nbsp/>Gubinelli
-    (<hlink>mgubi@mac.commailto:mgubi@mac.com</hlink>)</concat></with></concat></document></summary>
-  </entry>
-  <entry>
-    <title>Jolly coders</title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
-    <id>texmacs.github.io/notes/jolly-coders.tm:2021-04-24T21:00:08Z</id>
-    <updated>2021-04-24T21:00:08Z</updated>
-    <published>2021-05-02T08:35:41Z</published>
-    <summary>This page gather informations on the activities of the TeXmacs
-    hacking group.</summary>
+    <published>2021-05-02T13:06:30Z</published>
+    <summary><document><concat>A blog post which presents the motivations
+    behind the design of <TeXmacs/> from a personal
+    perspective.<next-line/>[by
+    <hlink>@maxgubihttps://twitter.com/maxgubi</hlink>]</concat></document></summary>
   </entry>
   <entry>
     <title>Scheming</title>
@@ -75,13 +81,6 @@
     <id>texmacs.github.io/notes/awesome-texmacs.tm:2021-04-08T21:15:54Z</id>
     <updated>2021-04-08T21:15:54Z</updated>
     <published>2021-04-08T21:12:20Z</published>
-  </entry>
-  <entry>
-    <title><concat>Notes on <TeXmacs/></concat></title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
-    <id>texmacs.github.io/notes/main.tm:2021-04-05T09:08:55Z</id>
-    <updated>2021-04-05T09:08:55Z</updated>
-    <published>2021-05-02T08:35:00Z</published>
   </entry>
   <entry>
     <title>The Macro editor and easy macro modification</title>
