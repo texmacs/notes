@@ -12,22 +12,22 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun May \ 2 08:36:57
-  2021 UTC>
-
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Sun
-  May \ 2 08:36:57 2021 UTC>
-
-  <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Sun May \ 2 08:36:57 2021 UTC>
+  May \ 2 13:07:21 2021 UTC>
 
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>
     A blog post which presents the motivations behind the design of <TeXmacs>
     from a personal perspective.<next-line>[by
     <hlink|@maxgubi|https://twitter.com/maxgubi>]
-  </notes-entry|Wed Apr 28 19:44:37 2021 UTC>
+  </notes-entry|Sun May \ 2 13:07:21 2021 UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun May \ 2 08:36:57
+  2021 UTC>
+
+  <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
+  the activities of the TeXmacs hacking group.|Sun May \ 2 08:36:57 2021 UTC>
 
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27
