@@ -13,15 +13,15 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sun
-  May \ 2 13:07:21 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Wed
+  May \ 5 10:30:07 2021 UTC>
 
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>
     A blog post which presents the motivations behind the design of <TeXmacs>
     from a personal perspective.<next-line>[by
     <hlink|@maxgubi|https://twitter.com/maxgubi>]
-  </notes-entry|Sun May \ 2 13:07:21 2021 UTC>
+  </notes-entry|Wed May \ 5 10:30:07 2021 UTC>
 
   <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun May \ 2 08:36:57
   2021 UTC>
