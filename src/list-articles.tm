@@ -1,4 +1,4 @@
-<TeXmacs|1.99.19>
+<TeXmacs|1.99.20>
 
 <style|notes>
 
@@ -13,8 +13,8 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Wed
-  May \ 5 10:30:07 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Thu
+  May \ 6 11:17:32 2021 UTC>
 
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>

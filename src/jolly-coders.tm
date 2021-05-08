@@ -1,4 +1,4 @@
-<TeXmacs|1.99.19>
+<TeXmacs|1.99.20>
 
 <style|notes>
 
@@ -47,6 +47,18 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>9.5.2021 \U Many topics today! Miguel showed up his Tufte-like
+    article style and we discussed a bit some technical challenges of figure
+    typesetting and how to make the markup dependend on whether we are on
+    odd/even pages. Max showed a bibliography style to typeset publication
+    lists to be used in CV or homepages. The we met all together on the
+    TeXmacs server to try the chat rooms and the live document features.
+    Finally Joris joined us and demonstrated a bit more the conservative
+    conversion from/to LaTeX and explained some of the implementations
+    details. This meeting was worth a couple of tweets: <hlink|a
+    first|https://twitter.com/gnu_texmacs/status/1391065772533899266> and
+    then <hlink|a second|https://twitter.com/gnu_texmacs/status/1391071054580396032>.
+
     <item>1.5.2021 \U Miguel showed us his many enhancements to TeXmacs which
     still didn't make their way to the main trunk: autocompletion for
     references, another style of comments, and the wonderful integration he
