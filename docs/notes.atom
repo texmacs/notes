@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2021-05-08T22:37:42Z</updated>
+  <updated>2021-05-29T19:43:45Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -14,11 +14,20 @@
   <entry>
     <title>List of all the articles</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
-    <id>texmacs.github.io/notes/list-articles.tm:2021-05-06T11:17:32Z</id>
-    <updated>2021-05-06T11:17:32Z</updated>
-    <published>2021-05-08T22:36:30Z</published>
+    <id>texmacs.github.io/notes/list-articles.tm:2021-05-08T22:37:56Z</id>
+    <updated>2021-05-08T22:37:56Z</updated>
+    <published>2021-05-23T07:00:41Z</published>
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
+  </entry>
+  <entry>
+    <title>Jolly coders</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
+    <id>texmacs.github.io/notes/jolly-coders.tm:2021-05-08T22:37:56Z</id>
+    <updated>2021-05-08T22:37:56Z</updated>
+    <published>2021-05-29T19:43:25Z</published>
+    <summary>This page gather informations on the activities of the TeXmacs
+    hacking group.</summary>
   </entry>
   <entry>
     <title><concat><TeXmacs/> and the art of mathematical
@@ -38,15 +47,6 @@
     <id>texmacs.github.io/notes/main.tm:2021-05-02T08:36:57Z</id>
     <updated>2021-05-02T08:36:57Z</updated>
     <published>2021-05-02T08:35:00Z</published>
-  </entry>
-  <entry>
-    <title>Jolly coders</title>
-    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
-    <id>texmacs.github.io/notes/jolly-coders.tm:2021-05-02T08:36:57Z</id>
-    <updated>2021-05-02T08:36:57Z</updated>
-    <published>2021-05-08T22:28:39Z</published>
-    <summary>This page gather informations on the activities of the TeXmacs
-    hacking group.</summary>
   </entry>
   <entry>
     <title>Scheming</title>

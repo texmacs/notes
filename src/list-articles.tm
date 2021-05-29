@@ -13,8 +13,11 @@
   <hrule>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Thu
-  May \ 6 11:17:32 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Sat
+  May \ 8 22:37:56 2021 UTC>
+
+  <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
+  the activities of the TeXmacs hacking group.|Sat May \ 8 22:37:56 2021 UTC>
 
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>
@@ -25,9 +28,6 @@
 
   <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun May \ 2 08:36:57
   2021 UTC>
-
-  <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Sun May \ 2 08:36:57 2021 UTC>
 
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27

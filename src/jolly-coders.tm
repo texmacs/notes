@@ -38,15 +38,43 @@
   </with>
 
   Basile Audoly, Miguel de Benito Delgado, Álvaro Tejero Cantero,
-  Massimiliano Gubinelli, Joris van der Hoeven, Pierre-Henri Jondot, Marc
-  Lalaude-Labayle, Giovanni Piredda, Joy Yang Qiping, Peter Rap£an, Darcy
-  Shen, Jeroen Wouters.
+  Massimiliano Gubinelli, Joris van der Hoeven, Philippe Joyez, Pierre-Henri
+  Jondot, Marc Lalaude-Labayle, Giovanni Piredda, Joy Yang Qiping, Peter
+  Rap£an, Darcy Shen, Jeroen Wouters.
 
   \;
 
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>29.5.2021 \U Darcy showed his progress with an improved Python
+    plugin supporting <code*|pyenv> to select a Python environment for the
+    session. Then Joris used as a motivation a repetitive reformatting task
+    for a long document to show us how to use scheme to perform extensive
+    changes in a document including converting certain complext markup into
+    another. The session was recorded.
+
+    <item>23.5.2021 \U Still unstructured discussions which has not been
+    recorder (sorry!). A small group today: Jeroen, Joris, Luigi and Max.
+    Topics were a bug on the activation of remote plugins which was nailed
+    down and removed, Jeroen has still to test it but seems good to go. We
+    discussed also how translations works (talk with Peter or Luigi if you
+    want to know more) and Max reported some progress in support of more
+    mathematical fonts via OpenType. We also chatted about the near future
+    and advertisement for the upcomin release.
+    <hlink|Twit|https://twitter.com/gnu_texmacs/status/1396158157991333890>.
+
+    <item>15.5.2021 \U We discussed freely about the future of TeXmacs, the
+    upcoming 2.1 release and the creation of an unstable branch where to test
+    new features, possibly managed in <name|git> instead of <name|svn>. This
+    new branch will host the integration of an alternative <name|scheme>
+    implementation and the passage to <name|qt> 5 (or 6). We also addressed
+    some of the open problems in LaTeX conversion, in particular the
+    formatting of various kind of mathematical displays with multiple lines
+    and complex horizontal alignments. Given the unstructured format this
+    sessions was not recorded. Were present \ Basile, \ Jeroen, Joris, Max
+    and Miguel.\ 
+
     <item>9.5.2021 \U Many topics today! Miguel showed up his Tufte-like
     article style and we discussed a bit some technical challenges of figure
     typesetting and how to make the markup dependend on whether we are on
