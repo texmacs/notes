@@ -1,4 +1,4 @@
-<TeXmacs|1.99.20>
+<TeXmacs|1.99.21>
 
 <style|notes>
 
@@ -47,6 +47,11 @@
   <with|font-shape|italic|Journal of past gatherings>
 
   <\itemize>
+    <item>5.6.2021 \U A small meeting with Joris, Luigi and Max. We
+    informally discussed about advertising on social media, on the Italian
+    translation and a bug in the multi-parts document. No recording has been
+    made.
+
     <item>29.5.2021 \U Darcy showed his progress with an improved Python
     plugin supporting <code*|pyenv> to select a Python environment for the
     session. Then Joris used as a motivation a repetitive reformatting task

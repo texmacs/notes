@@ -1,4 +1,4 @@
-<TeXmacs|1.99.20>
+<TeXmacs|1.99.21>
 
 <style|notes>
 
@@ -14,10 +14,10 @@
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Sat
-  May \ 8 22:37:56 2021 UTC>
+  May 29 19:44:07 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Sat May \ 8 22:37:56 2021 UTC>
+  the activities of the TeXmacs hacking group.|Sat May 29 19:44:07 2021 UTC>
 
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>
