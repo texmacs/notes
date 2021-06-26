@@ -1,4 +1,4 @@
-<TeXmacs|1.99.21>
+<TeXmacs|2.1>
 
 <style|notes>
 
@@ -12,12 +12,16 @@
 
   <hrule>
 
+  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
+  CMake and MXE on WSL for Windows |(no abstract)|Sat Jun 26 08:44:44 2021
+  UTC>
+
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
   articles in the website, ordered by the most recent modification time.|Sat
-  May 29 19:44:07 2021 UTC>
+  Jun \ 5 17:51:12 2021 UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
-  the activities of the TeXmacs hacking group.|Sat May 29 19:44:07 2021 UTC>
+  the activities of the TeXmacs hacking group.|Sat Jun \ 5 17:51:12 2021 UTC>
 
   <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
   writing>
@@ -67,10 +71,6 @@
 
   <notes-entry|customize-syntax-color.tm|Customizing the color of code
   snippets|(no abstract)|Thu Feb 18 15:29:33 2021 UTC>
-
-  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
-  CMake and MXE on WSL for Windows |(no abstract)|Thu Feb 18 15:13:01 2021
-  UTC>
 
   <notes-entry|compile-texmacs-on-raspi.tm|Compile <TeXmacs> on the Raspberry
   Pi|Unfortunately, there is no prepackaged <TeXmacs> for RaspberryPi OS,

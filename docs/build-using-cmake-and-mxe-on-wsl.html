@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.18" name="generator"></meta>
+    <meta content="TeXmacs 2.1" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -70,7 +70,7 @@ sudo apt install libc6-dev-i386-cross</pre>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-<code>make qtbase guile</code> # use -jN (-j8/-j12) to speed up</pre>
+make qtbase guile dlfcn-win32 # use -jN (-j8/-j12) to speed up</pre>
     </div>
     <h2 id="auto-7">Step 3: Build GNU TeXmacs<span style="margin-left: 1em"></span></h2>
     <div class="tmweb-code">
@@ -87,7 +87,9 @@ git checkout master
 
 # Build
 mkdir build &amp;&amp; cd build/
-i686-w64-mingw32.static-cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/win
+i686-w64-mingw32.static-cmake .. \
+  -DCMAKE_INSTALL_PREFIX=$HOME/win \
+  -DQT_CMAKE_DIR=$HOME/github/mxe/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/
 make -j8 &amp;&amp; make install -j8
 
 # Move the built result to the Documents folder
@@ -104,7 +106,7 @@ mv $HOME/win /mnt/c/Users/xxxx/Documents/texmacs_build_&lsquo;date +%Y%m%d%H&lsq
       dependencies (wget.exe/gs.exe/<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>) of a TeXmacs Windows installation
       are not automatically prepared in the <tt class="verbatim">bin/</tt> for GNU
-      TeXmacs v1.99.18.
+      TeXmacs v2.1.
     </p>
     <p>
       
