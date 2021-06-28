@@ -1,4 +1,4 @@
-<TeXmacs|1.99.18>
+<TeXmacs|2.1>
 
 <style|<tuple|generic|chinese|notes>>
 
@@ -75,7 +75,7 @@
   <\shell-code>
     export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-    <code*|make qtbase guile> # use -jN (-j8/-j12) to speed up
+    make qtbase guile dlfcn-win32 # use -jN (-j8/-j12) to speed up
   </shell-code>
 
   <section|Step 3: Build GNU <TeXmacs>>
@@ -105,7 +105,11 @@
 
     mkdir build && cd build/
 
-    i686-w64-mingw32.static-cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/win
+    i686-w64-mingw32.static-cmake .. \\
+
+    \ \ -DCMAKE_INSTALL_PREFIX=$HOME/win \\
+
+    \ \ -DQT_CMAKE_DIR=$HOME/github/mxe/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/
 
     make -j8 && make install -j8
 
@@ -128,7 +132,7 @@
   NOTICE: This is a build guide but not a package guide, the binary
   dependencies (wget.exe/gs.exe/<text-dots>) of a <TeXmacs> Windows
   installation are not automatically prepared in the <shell|bin/> for GNU
-  <TeXmacs> v1.99.18.
+  <TeXmacs> v2.1.
 
   \;
 </body>
@@ -145,11 +149,11 @@
   <\collection>
     <associate|auto-1|<tuple|?|1>>
     <associate|auto-2|<tuple|?|1>>
-    <associate|auto-3|<tuple|1|?>>
-    <associate|auto-4|<tuple|1|?>>
-    <associate|auto-5|<tuple|1|?>>
-    <associate|auto-6|<tuple|1|?>>
-    <associate|auto-7|<tuple|2|?>>
+    <associate|auto-3|<tuple|1|1>>
+    <associate|auto-4|<tuple|1|1>>
+    <associate|auto-5|<tuple|1|1>>
+    <associate|auto-6|<tuple|1|2>>
+    <associate|auto-7|<tuple|2|2>>
   </collection>
 </references>
 
@@ -162,8 +166,29 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
-      Install Ubuntu 18.04 on Windows 10 <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      Step 1. Install Ubuntu 18.04 on Windows 10
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
+
+      Step 2. Install MXE <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-3>
+
+      <with|par-left|<quote|1tab>|Download the source code of MXE to
+      <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|$HOME/github/mxe/mxe>
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-4>>
+
+      <with|par-left|<quote|1tab>|Install dependencies for MXE
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-5>>
+
+      <with|par-left|<quote|1tab>|Build qtbase and guile using MXE
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-6>>
+
+      Step 3: Build GNU T<rsub|<space|-0.4spc><move|<resize|<with|math-level|<quote|0>|E>||||0.5fn>|0fn|-0.1fn>><space|-0.4spc>X<rsub|<space|-0.4spc><move|<resize|M<space|-0.2spc>A<space|-0.4spc>CS||||0.5fn>|0fn|-0.1fn>>
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-7>
     </associate>
   </collection>
 </auxiliary>
