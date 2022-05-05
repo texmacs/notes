@@ -14,12 +14,13 @@
 
   There are three major steps to build <TeXmacs> on WSL:
 
-  <section*|Step 1. Install Ubuntu 18.04 on Windows 10>
+  <section*|Step 1. Install Ubuntu on Windows 10>
 
-  Ubuntu 18.04 is available in the Windows Store. Just click to install it.
-  For the first time, you will be prompted to provide a username and a
-  password for the installed Ubuntu 18.04 on Windows. The following steps
-  should be executed in the newly-installed Ubuntu 18.04.
+  Ubuntu is available in the Windows Store. Just click to install it. You may
+  first need to install WSL as described <hlink|here|https://docs.microsoft.com/en-us/windows/wsl/install>.
+  When running Ubuntu for the first time, you will be prompted to provide a
+  username and a password for the installed Ubuntu on Windows. The following
+  steps should be executed inside the newly-installed Ubuntu.
 
   <section|Step 2. Install MXE>
 
@@ -27,17 +28,11 @@
   <shell|$HOME/github/mxe/mxe>>
 
   <\shell-code>
-    mkdir -p $HOME/github/mxe/mxe
+    mkdir -p $HOME/github/mxe/
 
-    cd $HOME/github/mxe/mxe
+    cd $HOME/github/mxe/
 
-    git init
-
-    git remote add origin https://github.com/mxe/mxe.git
-
-    git fetch origin
-
-    git checkout master
+    git clone https://github.com/mxe/mxe.git
   </shell-code>
 
   <subsection*|Install dependencies for MXE>
@@ -47,7 +42,7 @@
 
     \;
 
-    sudo apt-get install autoconf automake autopoint bash \\
+    sudo apt install autoconf automake autopoint bash \\
 
     \ bison bzip2 flex g++ g++-multilib gettext git gperf \\
 
@@ -55,19 +50,9 @@
 
     \ libtool-bin libxml-parser-perl lzip make openssl \\
 
-    \ p7zip-full patch perl python ruby sed unzip wget xz-utils
+    \ p7zip-full patch perl python ruby sed unzip wget xz-utils \\
 
-    \;
-
-    sudo update-alternatives --install /usr/bin/python python
-    /usr/bin/python2.7 1
-
-    sudo update-alternatives --install /usr/bin/python python
-    /usr/bin/python3.6 2
-
-    \;
-
-    sudo apt install libc6-dev-i386-cross
+    \ python3-mako libc6-dev-i386-cross
   </shell-code>
 
   <subsection*|Build qtbase and guile using MXE>
@@ -75,7 +60,7 @@
   <\shell-code>
     export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-    make qtbase guile dlfcn-win32 # use -jN (-j8/-j12) to speed up
+    make qtbase qtsvg guile dlfcn-win32 # use -jN (-j8/-j12) to speed up
   </shell-code>
 
   <section|Step 3: Build GNU <TeXmacs>>
@@ -87,17 +72,11 @@
 
     # Download the source code
 
-    mkdir -p $HOME/github/texmacs/texmacs
+    mkdir -p $HOME/github/texmacs/
 
-    cd $HOME/github/texmacs/texmacs
+    cd $HOME/github/texmacs/
 
-    git init
-
-    git remote add origin https://github.com/texmacs/texmacs.git
-
-    git fetch origin
-
-    git checkout master
+    git clone https://github.com/texmacs/texmacs.git
 
     \;
 
@@ -111,7 +90,7 @@
 
     \ \ -DQT_CMAKE_DIR=$HOME/github/mxe/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/
 
-    make -j8 && make install -j8
+    make -j4 && make install -j4
 
     \;
 
@@ -174,7 +153,7 @@
       <no-break><pageref|auto-3>
 
       <with|par-left|<quote|1tab>|Download the source code of MXE to
-      <with|mode|<quote|prog>|prog-language|<quote|shell>|font-family|<quote|rm>|$HOME/github/mxe/mxe>
+      <with|mode|<quote|prog>|prog-language|<quote|shell>|<with|font|<quote|roman>|font-family|<quote|tt>|magnification|<quote|1.06>|$HOME/github/mxe/mxe>>
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>>
 
