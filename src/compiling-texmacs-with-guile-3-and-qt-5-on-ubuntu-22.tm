@@ -9,15 +9,15 @@
 
   <notes-header>
 
-  <chapter*|Compiling TeXmacs with Guile3 and Qt5 on Ubuntu 22>
+  <chapter*|Compiling TeXmacs on Ubuntu 22 with Guile3 and Qt5 >
 
   <notes-abstract|This guide describes how to compile TeXmacs on Ubuntu 22
-  with Guile 3 support and Qt 5.15.2.>
+  with Guile 3 support and Qt 5.>
 
   \;
 
-  Guile 1.8.8 is no longer supported on modern distributions. I will use
-  mgubi's Guile3 scheme fork from <hlink|here|https://github.com/mgubi/texmacs/tree/guile3>.
+  Guile 1.8.8 is no longer supported on modern distributions. Let us build
+  mgubi's Guile3 scheme TeXmacs fork.
 
   <section|Dependencies>
 
@@ -43,7 +43,7 @@
 
   Add the Qt binaries to your path. For me the installer installed the Qt
   directory in my home directory so I had to add the path
-  <verbatim|~/Qt/5.15.2/gcc_64/bin/> with the command\ 
+  <verbatim|~/Qt/5.15.2/gcc_64/bin/> with the command:
 
   <verbatim|export PATH=~/Qt/5.15.2/gcc_64/bin/:$PATH>
 
@@ -74,7 +74,9 @@
 
   <verbatim|cd src>
 
-  Run the configure command.
+  Run the configure command (the first dashes are double dashes -- it is just
+  weird HTML rendering \<less\>dash\<gtr\>\<less\>dash\<gtr\>with\<less\>dash\<gtr\>guile2
+  etc.).
 
   .<verbatim|/configure --with-guile2 --enable-guile2>
 
@@ -109,9 +111,16 @@
 <\auxiliary>
   <\collection>
     <\associate|toc>
-      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Template
-      article> <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|font-shape|<quote|small-caps>|Compiling
+      TeXmacs on Ubuntu 22 with Guile3 and Qt5 >
+      <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
+
+      1.<space|2spc>Dependencies <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-2>
+
+      2.<space|2spc>Compiling <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-3>
     </associate>
   </collection>
 </auxiliary>

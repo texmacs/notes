@@ -1,4 +1,4 @@
-<TeXmacs|1.99.19>
+<TeXmacs|2.1.1>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -96,6 +96,9 @@
   <hlink|Implementing previews for link targets|./previews.tm>
 
   <hlink|<TeXmacs> and HTML|tm-and-html.tm>
+
+  <hlink|Compiling <TeXmacs> on Ubuntu 22 with Guile 3 and Qt
+  5|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm>
 
   <section*|Contributing>
 
