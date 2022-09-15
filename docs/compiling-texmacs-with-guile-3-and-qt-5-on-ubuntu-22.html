@@ -36,51 +36,13 @@
     </p>
     <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Dependencies<span style="margin-left: 1em"></span></h2>
     <p>
-      Install Guile 3.
+      You need git to download the sources, cmake and g++ to compile them and
+      Guile 3, Qt 5 and freetype as dependencies.
     </p>
     <pre class="verbatim" xml:space="preserve">
-sudo apt install guile3 guile3-dev</pre>
-    <p>
-      Download the Qt online installer from <a href="https://www.qt.io/download-qt-installer">here</a>.
-    </p>
-    <p>
-      Make the installer executable with the command
-    </p>
-    <pre class="verbatim" xml:space="preserve">
-chmod +x &lt;path-to-installer.run&gt;</pre>
-    <p>
-      Run the installer. You will have to create a Qt account to proceed. When
-      you arrive at the components page. Select these packages:
-    </p>
-    <p>
-      <img class="image" src="compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22-1.png" width="70%"></img>
-    </p>
-    <p>
-      Agree to the license and wait for the download to finish (It was around
-      9Gb for me).
-    </p>
-    <p>
-      <img class="image" src="compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22-2.png" width="70%"></img>
-    </p>
-    <p>
-      Add the Qt binaries to your path. For me the installer installed the Qt
-      directory in my home directory so I had to add the path <tt class="verbatim">~/Qt/5.15.2/gcc_64/bin/</tt>
-      with the command:
-    </p>
-    <pre class="verbatim" xml:space="preserve">
-export PATH=~/Qt/5.15.2/gcc_64/bin/:$PATH</pre>
-    <p>
-      If you want to add the Qt binaries to your path permanently, then place
-      the command above into your <tt class="verbatim">~/.bashrc</tt> file, so that it
-      is executed each time you run the terminal.
-    </p>
-    <p>
-      Now the <tt class="verbatim">qmake</tt> command should work and output something
-      like this:
-    </p>
-    <p>
-      <img class="image" src="compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22-3.png" width="70%"></img>
-    </p>
+sudo apt install git cmake g++ guile-3.0 guile-3.0-dev libfreetype-dev 
+sudo apt install qtbase5-dev libqt5svg5-dev libfreetype-dev libsqlite-dev libjpeg-dev 
+sudo apt install libgmp-dev libltdl-dev</pre>
     <h2 id="auto-3">2.<span style="margin-left: 1em"></span>Compiling<span style="margin-left: 1em"></span></h2>
     <p>
       Navigate to the directory where you want TeXmacs' sources to be placed
@@ -123,6 +85,30 @@ make -j4</pre>
     </p>
     <p>
       The texmacs binary is placed in <tt class="verbatim">&lt;repodirectory&gt;/src/TeXmacs/bin/texmacs</tt>
+    </p>
+    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Running<span style="margin-left: 1em"></span></h2>
+    <p>
+      To run texmacs you have to setup the <tt class="verbatim">TEXMACS_PATH</tt>
+      variable. Run
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+export TEXMACS_PATH=&lt;repodirectory&gt;/src/TeXmacs</pre>
+    <p>
+      then you can run  
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+<tt class="verbatim">&lt;repodirectory&gt;/src/TeXmacs/bin/texmacs</tt></pre>
+    <p>
+      and TeXmacs should start after it compiled its modules. To make <tt
+      class="verbatim">TEXMACS_PATH</tt> setting persistent, put the command:
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+export TEXMACS_PATH=&lt;repodirectory&gt;/src/TeXmacs</pre>
+    <p>
+      into your <tt class="verbatim">~/.bashrc</tt>.
+    </p>
+    <p>
+      
     </p>
     <p>
       
