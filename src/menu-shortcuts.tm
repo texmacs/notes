@@ -51,7 +51,7 @@
 
   in <shell|my-init-texmacs.scm> I obtained a shortcut for footnotes.
 
-  <paragraph|Searching for text in TeXMacs Scheme files>
+  <paragraph|Searching for text in TeXmacs Scheme files>
 
   Forum member <hlink|@jeroen|http://forum.texmacs.cn/u/jeroen> uses
   <hlink|ack|https://beyondgrep.com/> for searching through the TeXmacs
@@ -63,7 +63,7 @@
   when at the repository one wants to search in, one is offered the option to
   search \PIn this repository\Q and clicking on the option starts the search.
   One can then filter the search results by file type, for example one can
-  choose only Scheme files).
+  choose only Scheme files.
 
   One can also limit the search to a path by means of the <shell|path:>
   option; here is how one searches for \Pfootnote\Q within the <shell|progs>
@@ -93,11 +93,11 @@
   uppercase) from the terminal when in the <shell|progs> directory of the
   TeXmacs installation and gets all the matching lines classified according
   to the file they are in. In the short tests I did, I got the impression
-  that ack can match more precisely what the user wants: I was able to match
-  <scm|(make 'footnote)> with ack but not with the GitHub search, where I got
-  results for the consecutive words <shell|make footnote> within a string as
-  well. On the other hand, with ack one does not have the immediacy of a
-  search box.
+  that ack can match more precisely what the user wants: I was able to
+  match<scm| (make 'footnote)> with ack but not with the GitHub search, where
+  I got results for the consecutive words <shell|make footnote> within a
+  string as well. On the other hand, with ack one does not have the immediacy
+  of a search box.
 
   \;
 
