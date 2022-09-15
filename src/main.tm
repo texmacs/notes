@@ -99,6 +99,9 @@
 
   <hlink|<TeXmacs> and HTML|tm-and-html.tm>
 
+  <hlink|Compiling <TeXmacs> on Ubuntu 22 with Guile 3 and Qt
+  5|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm>
+
   <section*|Contributing>
 
   <\small>
