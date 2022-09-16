@@ -32,7 +32,7 @@
     </p>
     <p>
       Guile 1.8.8 is no longer supported on modern distributions. Let us build
-      mgubi's Guile3 scheme TeXmacs fork.
+      the Guile3 scheme TeXmacs fork.
     </p>
     <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Dependencies<span style="margin-left: 1em"></span></h2>
     <p>
@@ -49,22 +49,17 @@ sudo apt install libgmp-dev libltdl-dev</pre>
       in.
     </p>
     <p>
-      Clone mgubi's repo and navigate into it.
+      Clone the TeXmacs git repository and navigate into it.
     </p>
     <pre class="verbatim" xml:space="preserve">
-git clone https://github.com/mgubi/texmacs.git texmacs-guile3  </pre>
+git clone https://github.com/texmacs/texmacs.git texmacs-guile3  </pre>
     <pre class="verbatim" xml:space="preserve">
 cd  texmacs-guile3</pre>
     <p>
       Checkout the Guile 3 branch.
     </p>
     <pre class="verbatim" xml:space="preserve">
-git checkout guile3</pre>
-    <p>
-      Go into the src directory.
-    </p>
-    <pre class="verbatim" xml:space="preserve">
-cd src</pre>
+git checkout guile3_branch_2.1</pre>
     <p>
       Run the configure command (the first dashes are double dashes &ndash; it
       is just weird HTML rendering
@@ -79,31 +74,26 @@ cd src</pre>
     <pre class="verbatim" xml:space="preserve">
 make -j4</pre>
     <p>
-      It took me around 2 minutes to compile the sources with -j12. I guess
-      the scaling is nonlinear so with -j4 it should take no more than 6
-      minutes or so (just a guess).
-    </p>
-    <p>
-      The texmacs binary is placed in <tt class="verbatim">&lt;repodirectory&gt;/src/TeXmacs/bin/texmacs</tt>
+      The TeXmacs binary is placed in <tt class="verbatim">&lt;repodirectory&gt;/TeXmacs/bin/texmacs</tt>
     </p>
     <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Running<span style="margin-left: 1em"></span></h2>
     <p>
-      To run texmacs you have to setup the <tt class="verbatim">TEXMACS_PATH</tt>
+      To run TeXmacs you have to setup the <tt class="verbatim">TEXMACS_PATH</tt>
       variable. Run
     </p>
     <pre class="verbatim" xml:space="preserve">
-export TEXMACS_PATH=&lt;repodirectory&gt;/src/TeXmacs</pre>
+export TEXMACS_PATH=&lt;repodirectory&gt;/TeXmacs</pre>
     <p>
       then you can run  
     </p>
     <pre class="verbatim" xml:space="preserve">
-<tt class="verbatim">&lt;repodirectory&gt;/src/TeXmacs/bin/texmacs</tt></pre>
+<tt class="verbatim">&lt;repodirectory&gt;/TeXmacs/bin/texmacs</tt></pre>
     <p>
       and TeXmacs should start after it compiled its modules. To make <tt
       class="verbatim">TEXMACS_PATH</tt> setting persistent, put the command:
     </p>
     <pre class="verbatim" xml:space="preserve">
-export TEXMACS_PATH=&lt;repodirectory&gt;/src/TeXmacs</pre>
+export TEXMACS_PATH=&lt;repodirectory&gt;/TeXmacs</pre>
     <p>
       into your <tt class="verbatim">~/.bashrc</tt>.
     </p>

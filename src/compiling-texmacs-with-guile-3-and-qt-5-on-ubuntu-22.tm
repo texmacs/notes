@@ -17,7 +17,7 @@
   \;
 
   Guile 1.8.8 is no longer supported on modern distributions. Let us build
-  mgubi's Guile3 scheme TeXmacs fork.
+  the Guile3 scheme TeXmacs fork.
 
   <section|Dependencies>
 
@@ -37,19 +37,16 @@
 
   Navigate to the directory where you want TeXmacs' sources to be placed in.
 
-  Clone mgubi's repo and navigate into it.
+  Clone the TeXmacs git repository and navigate into it.
 
-  <verbatim|git clone https://github.com/mgubi/texmacs.git texmacs-guile3 \ >
+  <verbatim|git clone https://github.com/texmacs/texmacs.git texmacs-guile3
+  \ >
 
   <verbatim|cd \ texmacs-guile3>
 
   Checkout the Guile 3 branch.
 
-  <verbatim|git checkout guile3>
-
-  Go into the src directory.
-
-  <verbatim|cd src>
+  <verbatim|git checkout guile3_branch_2.1>
 
   Run the configure command (the first dashes are double dashes -- it is just
   weird HTML rendering \<less\>dash\<gtr\>\<less\>dash\<gtr\>with\<less\>dash\<gtr\>guile2
@@ -61,26 +58,22 @@
 
   <verbatim|make -j4>
 
-  It took me around 2 minutes to compile the sources with -j12. I guess the
-  scaling is nonlinear so with -j4 it should take no more than 6 minutes or
-  so (just a guess).
-
-  The texmacs binary is placed in <verbatim|\<less\>repodirectory\<gtr\>/src/TeXmacs/bin/texmacs>
+  The TeXmacs binary is placed in <verbatim|\<less\>repodirectory\<gtr\>/TeXmacs/bin/texmacs>
 
   <section|Running>
 
-  To run texmacs you have to setup the <verbatim|TEXMACS_PATH> variable. Run
+  To run TeXmacs you have to setup the <verbatim|TEXMACS_PATH> variable. Run
 
-  <verbatim|export TEXMACS_PATH=\<less\>repodirectory\<gtr\>/src/TeXmacs>
+  <verbatim|export TEXMACS_PATH=\<less\>repodirectory\<gtr\>/TeXmacs>
 
   then you can run \ 
 
-  <verbatim|<verbatim|\<less\>repodirectory\<gtr\>/src/TeXmacs/bin/texmacs>>
+  <verbatim|<verbatim|\<less\>repodirectory\<gtr\>/TeXmacs/bin/texmacs>>
 
   and TeXmacs should start after it compiled its modules. To make
   <verbatim|TEXMACS_PATH> setting persistent, put the command:
 
-  <verbatim|export TEXMACS_PATH=\<less\>repodirectory\<gtr\>/src/TeXmacs>
+  <verbatim|export TEXMACS_PATH=\<less\>repodirectory\<gtr\>/TeXmacs>
 
   into your <verbatim|~/.bashrc>.
 
@@ -118,6 +111,9 @@
 
       2.<space|2spc>Compiling <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
+
+      3.<space|2spc>Running <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-4>
     </associate>
   </collection>
 </auxiliary>
