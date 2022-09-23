@@ -49,6 +49,8 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics. Roughly, most recent articles on top.>>
 
+  <hlink|Keyboard shortcuts for menu items|./menu-shortcuts.tm>
+
   <hlink|<TeXmacs> and the art of mathematical
   writing|./art-of-math-writing.tm>
 

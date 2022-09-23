@@ -1,4 +1,4 @@
-<TeXmacs|2.1>
+<TeXmacs|1.99.19>
 
 <style|notes>
 
@@ -12,13 +12,25 @@
 
   <hrule>
 
-  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
-  CMake and MXE on WSL for Windows |(no abstract)|Sat Jun 26 08:44:44 2021
-  UTC>
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Thu Sep 15 13:59:24
+  2022 UTC>
+
+  <notes-entry|menu-shortcuts.tm|Keyboard shortcuts for menu items|How to
+  write a keyboard shortcut for a menu item\Vand searching for text in
+  <TeXmacs> <scheme> files.|Thu Sep 15 13:55:11 2022 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sat
-  Jun \ 5 17:51:12 2021 UTC>
+  articles in the website, ordered by the most recent modification time.|Thu
+  Sep 15 13:55:11 2022 UTC>
+
+  <notes-entry|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm|Compiling
+  TeXmacs on Ubuntu 22 with Guile3 and Qt5 |This guide describes how to
+  compile TeXmacs on Ubuntu 22 with Guile 3 support and Qt 5.|Thu Sep 15
+  13:29:44 2022 UTC>
+
+  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
+  CMake and MXE on WSL for Windows |(no abstract)|Mon Jun 28 07:01:17 2021
+  UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Jun \ 5 17:51:12 2021 UTC>
@@ -29,9 +41,6 @@
     from a personal perspective.<next-line>[by
     <hlink|@maxgubi|https://twitter.com/maxgubi>]
   </notes-entry|Wed May \ 5 10:30:07 2021 UTC>
-
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sun May \ 2 08:36:57
-  2021 UTC>
 
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27

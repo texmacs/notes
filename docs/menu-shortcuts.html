@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta content="TeXmacs 1.99.19" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Keyboard shortcuts for menu items<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      How to write a keyboard shortcut for a menu item&mdash;and searching for
+      text in TeXmacs <class style="font-variant: small-caps">Scheme</class> files.
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-2"></a>
+      </div>
+      <h5>Strategy<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        
+      </div>
+    </p>
+    <p>
+      Following up from this <a href="http://forum.texmacs.cn/t/inserting-footnotes-via-keyboard-shortcuts/1025">forum post</a>, let us see how to write
+      a keyboard shortcut for a command available from a menu item.
+    </p>
+    <p>
+      The forum post asks how to define a keyboard shortcut for inserting a
+      footnote, which can be done through the menu item <class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Note</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Footnote</class><a
+      id="auto-3"></a>.
+    </p>
+    <p>
+      To do so, we need to find out which Scheme command is associated to the
+      menu item and then write a keyboard shortcut for that command in <tt
+      class="verbatim scheme">my-init-texmacs.scm</tt> (see Section 12.4 of the <a href="https://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.en.pdf">TeXmacs
+      manual</a> for the definition of personal keyboard shortcuts).
+    </p>
+    <p>
+      I don't think a list of commands associated to menu items exists and I
+      am not aware of an automatic way for generating it (<em>id est</em>, if
+      one wants such an automatic way, one needs to write a program that does
+      that :-)).
+    </p>
+    <p>
+      Listing these commands by hand takes time and patience and if the files
+      where the menus are defined change from release to release the list
+      becomes outdated when there are new releases.
+    </p>
+    <p>
+      Here is what I do: I do a search on the TeXmacs GitHub repository using
+      as search key the menu item name (in this case &ldquo;footnote&rdquo;),
+      in the search results I select only the Scheme files and I go through
+      them looking for the menu item.
+    </p>
+    <p>
+      For &ldquo;footnote&rdquo; I found in the file <tt class="verbatim">progs/generic/insert-menu.scm</tt>,
+      within a <tt class="verbatim scheme">menu-bind</tt> form&mdash;the menu-defining and
+      modifying form, the Scheme list <tt class="verbatim scheme">(&quot;Footnote&quot; (make
+      'footnote))</tt> and by placing
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(kbd-map (&quot;A-e f&quot; 
+(make 'footnote)))</pre>
+    </div>
+    <p>
+      in <tt class="verbatim">my-init-texmacs.scm</tt> I obtained a shortcut for
+      footnotes.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-4"></a>
+      </div>
+      <h5>Searching for text in TeXmacs Scheme files<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      Forum member <a href="http://forum.texmacs.cn/u/jeroen">@jeroen</a> uses <a href="https://beyondgrep.com/">ack</a> for searching
+      through the TeXmacs Scheme files on the local disk, perhaps you like
+      that more than the GitHub search I do. Here are the advantages and
+      disadvantages of the two search methods as I see them.
+    </p>
+    <p>
+      Searching on GitHub is intuitive; enter the search term into the search
+      box when at the repository one wants to search in, one is offered the
+      option to search &ldquo;In this repository&rdquo; and clicking on the
+      option starts the search. One can then filter the search results by file
+      type, for example one can choose only Scheme files.
+    </p>
+    <p>
+      One can also limit the search to a path by means of the <tt class="verbatim">path:</tt>
+      option; here is how one searches for &ldquo;footnote&rdquo; within the
+      <tt class="verbatim">progs</tt> directory of TeXmacs: 
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+footnote path:texmacs/progs</pre>
+    </div>
+    <p>
+      On the other search is not case sensitive and &ldquo;(a)t most, search
+      results can show two fragments from the same file, but there may be more
+      results within the file&rdquo; (from <a href="https://docs.github.com/en/search-github/searching-on-github/searching-code">GitHub code search online
+      manual</a>, and here is the <a href="https://docs.github.com/en/search-github">main page for the GitHub search</a>
+      as well); if one does not see the code lines they are looking for in the
+      search results, they have to open each file GitHub has found and repeat
+      the search in there (maybe with the browser's search facility).
+    </p>
+    <p>
+      With <tt class="verbatim">ack</tt> one types
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+ack Footnote</pre>
+    </div>
+    <p>
+      (case sensitive: it helps, because the menu item we are looking for is
+      uppercase) from the terminal when in the <tt class="verbatim">progs</tt> directory
+      of the TeXmacs installation and gets all the matching lines classified
+      according to the file they are in. In the short tests I did, I got the
+      impression that ack can match more precisely what the user wants: I was
+      able to match<tt class="verbatim scheme"> (make 'footnote)</tt> with ack but not with the
+      GitHub search, where I got results for the consecutive words <tt class="verbatim">make
+      footnote</tt> within a string as well. On the other hand, with ack one
+      does not have the immediacy of a search box.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+  </body>
+</html>
