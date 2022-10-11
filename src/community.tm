@@ -1,4 +1,4 @@
-<TeXmacs|1.99.14>
+<TeXmacs|2.1.1>
 
 <style|notes>
 
@@ -17,6 +17,14 @@
   \;
 
   <hlink|<TeXmacs> forum|http://forum.texmacs.cn>
+
+  <\itemize>
+    <item><hlink|Wiki post: Undocumented internal macros in
+    TeXmacs|http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224>
+
+    <item><hlink|Wiki post: Assorted code snippets to customize TeXmacs'
+    behaviour|http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465>
+  </itemize>
 
   <hlink|<TeXmacs> <name|Gitter> lobby|https://gitter.im/texmacs/Lobby>
 
