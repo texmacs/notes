@@ -12,16 +12,22 @@
 
   <hrule>
 
+  <notes-entry|new-lists.tm|New list types|How to define new list types in
+  <TeXmacs>.|Sun Feb \ 5 18:41:27 2023 UTC>
+
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Sun
+  Feb \ 5 18:41:27 2023 UTC>
+
+  <notes-entry|community.tm|Community links|We gather here links to websites
+  and blogs discussing <TeXmacs>.|Sat Oct 29 16:35:34 2022 UTC>
+
   <notes-entry|menu-shortcuts.tm|Keyboard shortcuts for menu items|How to
   write a keyboard shortcut for a menu item\Vand searching for text in
   <TeXmacs> <scheme> files.|Fri Sep 23 11:52:19 2022 UTC>
 
   <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Sep 23 11:52:19
   2022 UTC>
-
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Fri
-  Sep 23 11:52:19 2022 UTC>
 
   <notes-entry|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm|Compiling
   TeXmacs on Ubuntu 22 with Guile3 and Qt5 |This guide describes how to
@@ -144,9 +150,6 @@
   <notes-entry|overview.tm|An overview of <TeXmacs> from altitude|A rapid
   overview/executive summary of the <TeXmacs> system.|Thu Nov 12 17:03:27
   2020 UTC>
-
-  <notes-entry|community.tm|Community links|We gather here links to websites
-  and blogs discussing <TeXmacs>.|Thu Nov 12 17:03:27 2020 UTC>
 
   <notes-entry|tetris.tm|Tetris with <TeXmacs> tables|(no abstract)|Wed Nov
   11 19:49:14 2020 UTC>
