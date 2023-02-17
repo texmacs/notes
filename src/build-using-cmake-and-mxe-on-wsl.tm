@@ -1,6 +1,6 @@
-<TeXmacs|2.1>
+<TeXmacs|2.1.2>
 
-<style|<tuple|generic|chinese|notes>>
+<style|<tuple|generic|notes|british>>
 
 <\body>
   <\hide-preamble>
@@ -14,7 +14,7 @@
 
   There are three major steps to build <TeXmacs> on WSL:
 
-  <section*|Step 1. Install Ubuntu on Windows 10>
+  <section*|Step 1. Install Ubuntu 20.04 on Windows 10>
 
   Ubuntu is available in the Windows Store. Just click to install it. You may
   first need to install WSL as described <hlink|here|https://docs.microsoft.com/en-us/windows/wsl/install>.
@@ -34,6 +34,11 @@
 
     git clone https://github.com/mxe/mxe.git
   </shell-code>
+
+  In case of network issues with <verbatim|git clone>, one can initialize an
+  empty git repo with <verbatim|git init>, add the remote and use
+  <verbatim|git fetch>. See also <hlink|here|https://stackoverflow.com/questions/3954852/how-to-complete-a-git-clone-for-a-big-project-on-an-unstable-connection>
+  for further suggestions.
 
   <subsection*|Install dependencies for MXE>
 
@@ -60,8 +65,13 @@
   <\shell-code>
     export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-    make qtbase qtsvg guile dlfcn-win32 # use -jN (-j8/-j12) to speed up
+    make MXE_PLUGIN_DIRS=plugins/gcc8 qtbase qtsvg guile dlfcn-win32 # use
+    -jN (-j8/-j12) to speed up
   </shell-code>
+
+  Note: we make use of <verbatim|MXE_PLUGIN_DIRS=plugins/gcc8> because of
+  current build failures with <verbatim|gcc11>. This may no longer be
+  necessary in the future.
 
   <section|Step 3: Build GNU <TeXmacs>>
 
@@ -131,7 +141,7 @@
     <associate|auto-3|<tuple|1|1>>
     <associate|auto-4|<tuple|1|1>>
     <associate|auto-5|<tuple|1|1>>
-    <associate|auto-6|<tuple|1|2>>
+    <associate|auto-6|<tuple|1|1>>
     <associate|auto-7|<tuple|2|2>>
   </collection>
 </references>
@@ -145,7 +155,7 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <pageref|auto-1><vspace|0.5fn>
 
-      Step 1. Install Ubuntu 18.04 on Windows 10
+      Step 1. Install Ubuntu 20.04 on Windows 10
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-2>
 
