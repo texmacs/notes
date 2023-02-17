@@ -69,15 +69,13 @@
 
   <hlink|An overview of <TeXmacs> from altitude|overview.tm>
 
-  <hlink|Editorial guidelines|editorial-guidelines.tm>
-
-  <hlink|Contribution guide|contribution-guide.tm>
-
   <hlink|A TikZ example with the <name|Graph> plugin|./a-tikz-example.tm>\ 
 
   <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
 
   <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
+
+  <hlink|New list types|./new-lists.tm>
 
   <section*|Developers' notes>
 
@@ -116,6 +114,10 @@
     publicly visible on the website. Detailed instructions are available
     <hlink|here|./contribution-guide.tm>.
   </small>
+
+  <hlink|Editorial guidelines|editorial-guidelines.tm>
+
+  <hlink|Contribution guide|contribution-guide.tm>
 
   <hrule>
 
