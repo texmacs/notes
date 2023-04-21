@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 2.1" name="generator"></meta>
+    <meta content="TeXmacs 2.1.2" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -31,82 +31,84 @@
     <p>
       There are three major steps to build TeXmacs on WSL:
     </p>
-    <h2 id="auto-2">Step 1. Install Ubuntu 18.04 on Windows 10<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-2">Step 1. Install Ubuntu 20.04 on Windows 10<span style="margin-left: 1em"></span></h2>
     <p>
-      Ubuntu 18.04 is available in the Windows Store. Just click to install
-      it. For the first time, you will be prompted to provide a username and a
-      password for the installed Ubuntu 18.04 on Windows. The following steps
-      should be executed in the newly-installed Ubuntu 18.04.
+      Ubuntu is available in the Windows Store. Just click to install it. You
+      may first need to install WSL as described <a href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a>. When
+      running Ubuntu for the first time, you will be prompted to provide a
+      username and a password for the installed Ubuntu on Windows. The
+      following steps should be executed inside the newly-installed Ubuntu.
     </p>
     <h2 id="auto-3">Step 2. Install MXE<span style="margin-left: 1em"></span></h2>
-    <h3 id="auto-4">Download the source code of MXE to <tt class="verbatim">$HOME/github/mxe/mxe</tt><span
+    <h3 id="auto-4">Download the source code of MXE to <tt class="verbatim"><class style="font-family: Times New Roman"><tt>$HOME/github/mxe/mxe</tt></class></tt><span
     style="margin-left: 1em"></span></h3>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-mkdir -p $HOME/github/mxe/mxe
-cd $HOME/github/mxe/mxe
-git init
-git remote add origin https://github.com/mxe/mxe.git
-git fetch origin
-git checkout master</pre>
+<class style="font-family: Times New Roman"><tt>mkdir -p $HOME/github/mxe/
+cd $HOME/github/mxe/
+git clone https://github.com/mxe/mxe.git</tt></class></pre>
     </div>
+    <p>
+      In case of network issues with <tt class="verbatim">git clone</tt>, one can
+      initialize an empty git repo with <tt class="verbatim">git init</tt>, add the
+      remote and use <tt class="verbatim">git fetch</tt>. See also <a href="https://stackoverflow.com/questions/3954852/how-to-complete-a-git-clone-for-a-big-project-on-an-unstable-connection">here</a> for
+      further suggestions.
+    </p>
     <h3 id="auto-5">Install dependencies for MXE<span style="margin-left: 1em"></span></h3>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-sudo apt update
+<class style="font-family: Times New Roman"><tt>sudo apt update
 
-sudo apt-get install autoconf automake autopoint bash \
+sudo apt install autoconf automake autopoint bash \
  bison bzip2 flex g++ g++-multilib gettext git gperf \
  intltool libgdk-pixbuf2.0-dev libltdl-dev libssl-dev \
  libtool-bin libxml-parser-perl lzip make openssl \
- p7zip-full patch perl python ruby sed unzip wget xz-utils
-
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2
-
-sudo apt install libc6-dev-i386-cross</pre>
+ p7zip-full patch perl python ruby sed unzip wget xz-utils \
+ python3-mako libc6-dev-i386-cross</tt></class></pre>
     </div>
     <h3 id="auto-6">Build qtbase and guile using MXE<span style="margin-left: 1em"></span></h3>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-make qtbase guile dlfcn-win32 # use -jN (-j8/-j12) to speed up</pre>
+<class style="font-family: Times New Roman"><tt>export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+make MXE_PLUGIN_DIRS=plugins/gcc8 qtbase qtsvg guile dlfcn-win32 # use -jN (-j8/-j12) to speed up</tt></class></pre>
     </div>
+    <p>
+      Note: we make use of <tt class="verbatim">MXE_PLUGIN_DIRS=plugins/gcc8</tt>
+      because of current build failures with <tt class="verbatim">gcc11</tt>. This may
+      no longer be necessary in the future.
+    </p>
     <h2 id="auto-7">Step 3: Build GNU TeXmacs<span style="margin-left: 1em"></span></h2>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-export PATH=$PATH:$HOME/github/mxe/mxe/usr/bin
+<class style="font-family: Times New Roman"><tt>export PATH=$PATH:$HOME/github/mxe/mxe/usr/bin
 
 # Download the source code
-mkdir -p $HOME/github/texmacs/texmacs
-cd $HOME/github/texmacs/texmacs
-git init
-git remote add origin https://github.com/texmacs/texmacs.git
-git fetch origin
-git checkout master
+mkdir -p $HOME/github/texmacs/
+cd $HOME/github/texmacs/
+git clone https://github.com/texmacs/texmacs.git
 
 # Build
 mkdir build &amp;&amp; cd build/
 i686-w64-mingw32.static-cmake .. \
   -DCMAKE_INSTALL_PREFIX=$HOME/win \
   -DQT_CMAKE_DIR=$HOME/github/mxe/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/
-make -j8 &amp;&amp; make install -j8
+make -j4 &amp;&amp; make install -j4
 
 # Move the built result to the Documents folder
 cp -r $HOME/github/mxe/mxe/usr/i686-w64-mingw32.static/share/guile/1.8/ice-9/ $HOME/win/progs/
 mv $HOME/win /mnt/c/Users/xxxx/Documents/texmacs_build_&lsquo;date +%Y%m%d%H&lsquo;
 
-# please replace xxxx with your Windows user name</pre>
+# please replace xxxx with your Windows user name</tt></class></pre>
     </div>
     <p>
-      To launch the built TeXmacs, just click the <tt class="verbatim">bin/texmacs.exe</tt>.
+      To launch the built TeXmacs, just click the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>bin/texmacs.exe</tt></class></tt>.
     </p>
     <p>
       NOTICE: This is a build guide but not a package guide, the binary
       dependencies (wget.exe/gs.exe/<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>) of a TeXmacs Windows installation
-      are not automatically prepared in the <tt class="verbatim">bin/</tt> for GNU
-      TeXmacs v2.1.
+      are not automatically prepared in the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>bin/</tt></class></tt>
+      for GNU TeXmacs v2.1.
     </p>
     <p>
       
