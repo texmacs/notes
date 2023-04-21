@@ -1,4 +1,4 @@
-<TeXmacs|1.99.19>
+<TeXmacs|2.1.2>
 
 <style|notes>
 
@@ -12,12 +12,19 @@
 
   <hrule>
 
+  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
+  CMake and MXE on WSL for Windows |(no abstract)|Fri Feb 17 21:32:00 2023
+  UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Feb 17 21:31:39
+  2023 UTC>
+
   <notes-entry|new-lists.tm|New list types|How to define new list types in
-  <TeXmacs>.|Sun Feb \ 5 18:41:27 2023 UTC>
+  <TeXmacs>.|Thu Feb 16 10:39:04 2023 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Sun
-  Feb \ 5 18:41:27 2023 UTC>
+  articles in the website, ordered by the most recent modification time.|Thu
+  Feb 16 10:39:04 2023 UTC>
 
   <notes-entry|community.tm|Community links|We gather here links to websites
   and blogs discussing <TeXmacs>.|Sat Oct 29 16:35:34 2022 UTC>
@@ -26,17 +33,10 @@
   write a keyboard shortcut for a menu item\Vand searching for text in
   <TeXmacs> <scheme> files.|Fri Sep 23 11:52:19 2022 UTC>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Sep 23 11:52:19
-  2022 UTC>
-
   <notes-entry|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm|Compiling
   TeXmacs on Ubuntu 22 with Guile3 and Qt5 |This guide describes how to
   compile TeXmacs on Ubuntu 22 with Guile 3 support and Qt 5.|Fri Sep 16
   13:23:32 2022 UTC>
-
-  <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
-  CMake and MXE on WSL for Windows |(no abstract)|Mon Jun 28 07:01:17 2021
-  UTC>
 
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|Sat Jun \ 5 17:51:12 2021 UTC>

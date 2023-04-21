@@ -3,12 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.19" name="generator"></meta>
+    <meta content="TeXmacs 2.1.2" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
     <script src="../resources/notes-base.js" language="javascript" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
   </head>
   <body>
     <div class="toggle" style="display: none">
@@ -28,7 +27,7 @@
       TeXmacs.
     </div>
     <p>
-      [Last update 22.3.2021]
+      [Last update 21.4.2022]
     </p>
     <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Random and unsorted resources<span style="margin-left: 1em"></span></h2>
     <ul>
@@ -159,17 +158,112 @@
     <h2 id="auto-7">6.<span style="margin-left: 1em"></span>General attachments to documents and to PDF
     files<span style="margin-left: 1em"></span></h2>
     <p>
-      PDF gives the possibility to embed arbitrary content within the document
-      as &ldquo;Embedded file&rdquo; streams. This possibility is exploited by
+      In some circumstances it is useful to transmit both a PDF version of a
+      document and the associated TeXmacs file (eventually with all the needed
+      support files like custom styles and images). This allow usual PDF
+      viewers to open the file and at the same time allows users of TeXmacs to
+      be able to retrieve an editable version of the document for
+      modification. It is useful to augment PDF with additional information to
+      improve the user experience on a variety of platforms which do not allow
+      to access the original TeXmacs documents. The PDF format gives the
+      possibility to embed arbitrary content within the document as
+      &ldquo;Embedded file&rdquo; streams. This possibility is exploited by
       the LaTeX package <a href="https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf">attachfile</a> which allows to associate to
       typesetted parts of the document arbitrary attachments with the
-      possibility to recover it. We could introduce a similar feature in
-      TeXmacs documents, i.e. include external content in the document.
-      Another possibility is to include a TeXmacs document within a generated
-      PDF file in such a way that it is possible to open the PDF from TeXmacs
-      and edit its source. Another use could be to include TeXmacs snippets in
-      copied PDF files so that they could be reopened in TeXmacs and modified.
+      possibility to recover it. We could introduce a similar features in
+      TeXmacs. Various possible directions:
     </p>
+    <ul>
+      <li>
+        <p>
+          first include external content in a TeXmacs document, as already
+          happens with images, but in a way that each document has its own
+          filesystem which can be manipulated.
+        </p>
+      </li>
+      <li>
+        <p>
+          include a TeXmacs document within a generated PDF file in such a way
+          that it is possible to open the PDF from TeXmacs and edit its source
+        </p>
+      </li>
+      <li>
+        <p>
+          develop optional augmentation of the generated PDF by adding popups
+          for link previews, and possibly create style files for generating
+          more interactive PDF (e.g. show answers to questions, popups with
+          arbitrary information, &hellip;) See this tutorial to see how this
+          might be implemented in the PDF format (<a href="https://www.youtube.com/watch?v=UGTbcqUMJcI">youtube</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          write code which insert in the PDF interactive features like popups
+          (for preview or for additional content), better tables of content,
+          etc&hellip;
+        </p>
+      </li>
+      <li>
+        <p>
+          add some more meta informations to the PDF file, like an interface
+          (a PDF form) to record metadata explicitly and maybe a modification
+          log, some more informations about the bibliography, preview links
+          (like in the UI), and LaTeX translations of the formulas to allow
+          correct copy/paste in the PDF.
+        </p>
+      </li>
+    </ul>
+    <p>
+      Useful links
+    </p>
+    <ul>
+      <li>
+        <p>
+          MuPDF is a PDF handling C library, look e.g. at the <a href="https://github.com/ArtifexSoftware/mupdf/blob/233926048d7647c8daed493c4372656db9f9b2b5/source/pdf/pdf-link.c#L255">pdf-link.c</a>
+          file there
+        </p>
+      </li>
+      <li>
+        <p>
+          the Poppler library has two utilities which perform
+          attachment/detachement of documents, see
+        </p>
+        <ul>
+          <li>
+            <p>
+              <a href="https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfattach.cc">https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfattach.cc</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfdetach.cc">https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfdetach.cc</a>
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          some useful notes in the PDF Hummus wiki
+        </p>
+        <ul>
+          <li>
+            <p>
+              <a href="https://github.com/galkahana/PDF-Writer/wiki/PDF-Embedding">https://github.com/galkahana/PDF-Writer/wiki/PDF-Embedding</a>
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          The, already mentioned, LaTeX package <a href="https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf">attachfile</a> 
+        </p>
+      </li>
+      <li>
+        <p>
+          A discussion about this topic is taking place in the forum (<a href="http://forum.texmacs.cn/t/proposal-mechanism-to-append-documents-to-and-augment-the-generated-pdf/1386">here</a>)
+        </p>
+      </li>
+    </ul>
     <h2 id="auto-8">7.<span style="margin-left: 1em"></span>Zotero integration<span style="margin-left: 1em"></span></h2>
     <p>
       <class style="font-variant: small-caps">Zotero</class> is a widely used open source bibliographic
@@ -235,6 +329,247 @@
         </p>
       </li>
     </ul>
+    <h2 id="auto-10">9.<span style="margin-left: 1em"></span>Peer-to-peer collaboration<span style="margin-left: 1em"></span></h2>
+    <p>
+      <b>What:</b> Help improve the collaborative features of TeXmacs, in
+      particular add user cursors to the live documents and improve
+      performance or add peer-to-peer infrastructure to the live document
+      handling.
+    </p>
+    <p>
+      <b>Why:</b>  TeXmacs has already collaborative capabilities. See e.g.
+      the support in <code>$TEXMACS_PATH/progs/server</code> and
+      <code>$TEXMACS_PATH/progs/client</code>.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/d/d4d28b46031cfeafde9c7d9ee314009db58d98e3.png"><p>
+        <img class="image" src="dev-notes-1.d4d28b46031cfeafde9c7d9ee314009db58d98e3_2_690x448.png" height="448" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      We support live documents, chat rooms and shared file server. However
+      these features are still experimental and need testing, some more
+      security handling (authentication, etc&hellip;), etc&hellip; and they
+      depends on a central server (another TeXmacs instance) which should be
+      publicly visible on the Internet (i.e. have its own IP address).
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/0/05f5330887b028f8144d885451d45c560eaea143.jpeg"><p>
+        <img class="image" src="dev-notes-2.05f5330887b028f8144d885451d45c560eaea143_2_690x431.jpeg" height="431" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      <b>How:</b> Various directions are possible:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Better UI: the current UI does not give much feedback to the user,
+          especially wrt. problems in the connection to the server, successful
+          connection, liveliness of the server, etc&hellip;
+        </p>
+      </li>
+      <li>
+        <p>
+          Implement user cursors in live documents : a users should be able to
+          see where other users are actively working.
+        </p>
+      </li>
+      <li>
+        <p>
+          Investigate performance issue in the current implementation and
+          improve on them. Also investigate other possible mechanism of
+          synchronisation, e.g. the one used in <code>Typst</code> or other
+          collaborative solutions.
+        </p>
+      </li>
+      <li>
+        <p>
+          Develop some server-side architecture and relative monitoring to run
+          the Mogan server in a cloud solution like Amazon AWS or similar.
+        </p>
+      </li>
+      <li>
+        <p>
+          Alternatively (and much better than the central server solution),
+          investigate the possibility to create a peer-to-peer network using
+          modern internet technologies where clients can connect together and
+          sync their content without the presence of a centralised authority.
+        </p>
+      </li>
+    </ul>
+    <p>
+      Some references:
+    </p>
+    <ul>
+      <li>
+        <p>
+          A discussion in the forum (<a href="http://forum.texmacs.cn/t/proposal-p2p-collaborative-mogan-texmacs/1379">here</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          the <a href="https://libp2p.io/">libp2p</a> library (bloated, produces &gt;100Mb
+          executables)
+        </p>
+      </li>
+      <li>
+        <p>
+          the <a href="https://libdatachannel.org/">libdatachannel</a> C++ library. lightweight, needs a
+          signalling server to exchange connection information (which seems an
+          acceptable tradeoff) and then uses WebRTC to run a p2p channel
+        </p>
+      </li>
+      <li>
+        <p>
+          a serverless solution for signalling  <a href="https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2">https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2</a>
+        </p>
+      </li>
+      <li>
+        <p>
+          an intro to WebRTC channels and signalling: <a href="https://blog.devgenius.io/webrtc-chat-application-772539ae97b7">https://blog.devgenius.io/webrtc-chat-application-772539ae97b7</a>
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://holepunch.to/">holepunch.io</a> a complete p2p solution (but without C++
+          bindings), see <code>hyperbeam</code> for a simple tunnelling p2p
+          app.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/taylorconor/p2psc">p2psc</a> a p2p socket creation library in C++
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/AndersCan/p2p-socket">p2p-socket</a> a Node program which establish p2p
+          connection over local TCP ports
+        </p>
+      </li>
+      <li>
+        <p>
+          NAT hole punching like these require the use of an intermediate
+          server. We can run a lightweight server (e.g. coded in Javascript)
+          like here: <a href="https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2">https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2</a>
+          or use DHTs like the p2p-socket solution with uses <a href="http://holepunch.io/">holepunch.io</a>
+          to establish the connection.
+        </p>
+      </li>
+      <li>
+        <p>
+          the GNU project has its own p2p communication platform called <a
+          href="https://git.jami.net/savoirfairelinux">JAMI 1</a>. Docs are here: <a href="https://docs.jami.net/">https://docs.jami.net</a>
+          they have all the APIs and infrastructure which allow to connect two
+          clients to exchange info, we could leverage that for TeXmacs, and
+          maybe also write a TeXmacs plugin for JAMI so that one can
+          collaborate via teleconferencing and work on the same document (to
+          be seen, I've not yet looked in detail in their plugin system).
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-11">10.<span style="margin-left: 1em"></span>OpenType math font support<span style="margin-left: 1em"></span></h2>
+    <p>
+      <b>What:</b> Add support for OpenType MATH table &amp; related font
+      features (<a href="https://learn.microsoft.com/en-us/typography/opentype/spec/math">https://learn.microsoft.com/en-us/typography/opentype/spec/math
+      1</a>)
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/1/104569854713dfae99d4ab26582e54b2058dea7c.png"><p>
+        <img class="image" src="dev-notes-3.104569854713dfae99d4ab26582e54b2058dea7c_2_690x466.png" height="466" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      investigate the possibility to remove the old TeX fonts and only use
+      modern OpenType font containers (at least for the default fonts).
+    </p>
+    <p>
+      <b>Why:</b> At the moment TeXmacs is able to use only very few math
+      fonts (like Stix, TeX Gyre) and this support is hardwired in the C++
+      files and does not take into account all the informations available in
+      the font files.
+    </p>
+    <p>
+      These fonts file contain the position in the font of extensible brackets
+      or extensible glyphs like arrows, square roots, etc&hellip;, and the
+      metrics to correctly position index and subscripts.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/b/b9bd60542d93240d7095fcc19a3673c6b7b56e67.png"><p>
+        <img class="image" src="dev-notes-4.b9bd60542d93240d7095fcc19a3673c6b7b56e67_2_690x248.png" height="248" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      Some time ago mgubi started to implement some OpenType font support for
+      TeXmacs, here: <a href="https://github.com/mgubi/texmacs/tree/wip-unicode-math">https://github.com/mgubi/texmacs/tree/wip-unicode-math
+      2</a>
+    </p>
+    <p>
+      TeXmacs still depends very much on old font formats while there are now
+      available many free fonts in OpenType format which make it easier to
+      support professional math typesetting. In particular there are Latin
+      Modern fonts which can replace our old TeX fonts, and possibly improve
+      speed since there will be less font searching.
+    </p>
+    <p>
+      One side goal could be to get rid of all TeX fonts and distribute only
+      the OpenType variants. This is for example what ConTeXt does.:
+    </p>
+    <p>
+      <a href="https://wiki.contextgarden.net/ConTeXt_distribution%27s_Fonts">https://wiki.contextgarden.net/ConTeXt_distribution's_Fonts
+      1</a>
+    </p>
+    <p>
+      For a discussion see here: <a href="https://github.com/XmacsLabs/mogan/issues/523">https://github.com/XmacsLabs/mogan/issues/523
+      1</a>
+    </p>
+    <p>
+      <b>How:</b> Study and document the font selection mechanism in TeXmacs,
+      in particular how math glyphs are selected from the various fonts.
+      Possibly write some debugging tools which allow developers to check the
+      workings of which glyphs are selected, which metrics used, etc&hellip;
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/3/36ccd5a831c9d620879aca324875db9666dc75ef.jpeg"><p>
+        <img class="image" src="dev-notes-5.36ccd5a831c9d620879aca324875db9666dc75ef_2_690x431.jpeg" height="431" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <img class="image" src="dev-notes-6.0c5f5d164639fd79792ad6b1563262221c6c8c0b_2_690x498.png" height="498" width="690"></img>
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <img class="image" src="dev-notes-7.2016a827875eedd2ba0e59ff08bc91f7310ee7ad_2_690x439.png" height="439" width="690"></img>
+    </p>
+    <p>
+      Complete and debug the initial implementation of the MATH table parser
+      here: <a href="https://github.com/mgubi/texmacs/tree/wip-unicode-math">https://github.com/mgubi/texmacs/tree/wip-unicode-math
+      </a>
+    </p>
+    <p>
+      A discussion is taking place in the forum <a href="http://forum.texmacs.cn/t/proposal-opentype-math-font-support/1377/1">here</a>.
+    </p>
     <p>
       
     </p>
