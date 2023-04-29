@@ -47,7 +47,7 @@
   <section*|Miscellanea>
 
   <with|font-shape|italic|<small|Self-contained, one shot, material on
-  various topics..>>
+  various topics.>>
 
   <subsection*|Ideas>
 
@@ -87,28 +87,28 @@
 
   <hlink|Jolly coders|jolly-coders.tm>
 
+  <hlink|Scheming|scheming.tm>
+
+  <hlink|Implementing comments|comments-in-texmacs.tm>
+
+  <hlink|Implementing previews for link targets|./previews.tm>
+
+  <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
+
+  <hlink|<TeXmacs> and HTML|tm-and-html.tm>
+
+  <subsection*|Compilation>
+
   <hlink|Build <TeXmacs> using CMake and MXE on WSL for
   Windows|build-using-cmake-and-mxe-on-wsl.tm>
 
   <hlink|Build <TeXmacs> using CMake and Homebrew on
   macOS|build-using-cmake-and-homebrew-on-macos.tm>
 
-  <hlink|Scheming|scheming.tm>
-
-  <hlink|Implementing comments|comments-in-texmacs.tm>
-
-  <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
-
-  <hlink|Implementing previews for link targets|./previews.tm>
-
-  <hlink|<TeXmacs> and HTML|tm-and-html.tm>
-
   <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
 
   <hlink|Compiling <TeXmacs> on Ubuntu 22 with Guile 3 and Qt
   5|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm>
-
-  \;
 
   <section*|Contributing>
 
@@ -166,6 +166,7 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|?>>
+    <associate|auto-10|<tuple|?|?>>
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
