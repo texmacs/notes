@@ -47,39 +47,57 @@
   <section*|Miscellanea>
 
   <with|font-shape|italic|<small|Self-contained, one shot, material on
-  various topics. Roughly, most recent articles on top.>>
+  various topics.>>
 
-  <hlink|Keyboard shortcuts for menu items|./menu-shortcuts.tm>
+  <subsection*|Ideas>
 
   <hlink|<TeXmacs> and the art of mathematical
   writing|./art-of-math-writing.tm>
 
+  <hlink|An overview of <TeXmacs> from altitude|overview.tm>
+
+  <subsection*|Macros and Scheme>
+
   <hlink|The Macro Editor and Easy Macro Modification|macro-editor.tm>
 
-  <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
-
-  <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
+  <hlink|New list types|./new-lists.tm>
 
   <hlink|Customizing the color of code snippets|./customize-syntax-color.tm>
+
+  <hlink|Keyboard shortcuts for menu items|./menu-shortcuts.tm>
+
+  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
+
+  <subsection*|Plugins>
+
+  <hlink|A TikZ example with the <name|Graph> plugin|./a-tikz-example.tm>
+
+  <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
+
+  <subsection*|Graphics>
+
+  <hlink|Composing <TeXmacs> graphics with Scheme|scheme-graphics.tm>
+
+  <hlink|Modular Scheme graphics|./modular-scheme-graphics.tm>
 
   <hlink|Embedding graphics composed with Scheme into
   documents|scheme-graphics-embedding.tm>
 
-  <hlink|Composing <TeXmacs> graphics with Scheme|scheme-graphics.tm>
-
-  <hlink|An overview of <TeXmacs> from altitude|overview.tm>
-
-  <hlink|A TikZ example with the <name|Graph> plugin|./a-tikz-example.tm>\ 
-
-  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
-
-  <hlink|Embedding TikZ figures in a document|./embedding-tikz-figures-short.tm>
-
-  <hlink|New list types|./new-lists.tm>
-
   <section*|Developers' notes>
 
   <hlink|Jolly coders|jolly-coders.tm>
+
+  <hlink|Scheming|scheming.tm>
+
+  <hlink|Implementing comments|comments-in-texmacs.tm>
+
+  <hlink|Implementing previews for link targets|./previews.tm>
+
+  <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
+
+  <hlink|<TeXmacs> and HTML|tm-and-html.tm>
+
+  <subsection*|Compilation>
 
   <hlink|Build <TeXmacs> using CMake and MXE on WSL for
   Windows|build-using-cmake-and-mxe-on-wsl.tm>
@@ -87,15 +105,7 @@
   <hlink|Build <TeXmacs> using CMake and Homebrew on
   macOS|build-using-cmake-and-homebrew-on-macos.tm>
 
-  <hlink|Scheming|scheming.tm>
-
-  <hlink|Implementing comments|comments-in-texmacs.tm>
-
-  <hlink|Adding a dialog to build websites|website-builder-dialog.tm>
-
-  <hlink|Implementing previews for link targets|./previews.tm>
-
-  <hlink|<TeXmacs> and HTML|tm-and-html.tm>
+  <hlink|Compiling TeXmacs on the Raspberry Pi|./compile-texmacs-on-raspi.tm>
 
   <hlink|Compiling <TeXmacs> on Ubuntu 22 with Guile 3 and Qt
   5|compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm>
@@ -156,10 +166,15 @@
 <\references>
   <\collection>
     <associate|auto-1|<tuple|?|?>>
+    <associate|auto-10|<tuple|?|?>>
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
     <associate|auto-5|<tuple|?|?>>
+    <associate|auto-6|<tuple|?|?>>
+    <associate|auto-7|<tuple|?|?>>
+    <associate|auto-8|<tuple|?|?>>
+    <associate|auto-9|<tuple|?|?>>
   </collection>
 </references>
 
@@ -177,11 +192,14 @@
       Miscellanea <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-3>
 
+      <with|par-left|<quote|1tab>|Ideas <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
+      <no-break><pageref|auto-4>>
+
       Developers' notes <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-4>
+      <no-break><pageref|auto-5>
 
       Contributing <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-5>
+      <no-break><pageref|auto-6>
     </associate>
   </collection>
 </auxiliary>

@@ -1,4 +1,4 @@
-<TeXmacs|2.1.2>
+<TeXmacs|1.99.19>
 
 <style|notes>
 
@@ -12,19 +12,23 @@
 
   <hrule>
 
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sat Apr 29 11:49:12
+  2023 UTC>
+
+  <notes-entry|list-articles.tm|List of all the articles|A list of all the
+  articles in the website, ordered by the most recent modification time.|Fri
+  Apr 21 10:28:13 2023 UTC>
+
+  <notes-entry|dev-notes.tm|Development resources and ideas|This page
+  contains idea and resources pertaining to the development of TeXmacs.|Fri
+  Apr 21 10:28:13 2023 UTC>
+
   <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
   CMake and MXE on WSL for Windows |(no abstract)|Fri Feb 17 21:32:00 2023
   UTC>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Feb 17 21:31:39
-  2023 UTC>
-
   <notes-entry|new-lists.tm|New list types|How to define new list types in
   <TeXmacs>.|Thu Feb 16 10:39:04 2023 UTC>
-
-  <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Thu
-  Feb 16 10:39:04 2023 UTC>
 
   <notes-entry|community.tm|Community links|We gather here links to websites
   and blogs discussing <TeXmacs>.|Sat Oct 29 16:35:34 2022 UTC>
@@ -51,10 +55,6 @@
   <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
   the Scheme language implementation used in <TeXmacs>.|Mon Apr 12 12:50:27
   2021 UTC>
-
-  <notes-entry|dev-notes.tm|Development resources and ideas|This page
-  contains idea and resources pertaining to the development of TeXmacs.|Fri
-  Apr \ 9 09:11:09 2021 UTC>
 
   <notes-entry|example-documents.tm|A list of documents created with
   <TeXmacs>|We gather here some examples of documents created with <TeXmacs>
