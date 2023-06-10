@@ -1,4 +1,4 @@
-<TeXmacs|1.99.19>
+<TeXmacs|2.1.1>
 
 <style|notes>
 
@@ -12,7 +12,7 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Sat Apr 29 11:49:12
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Apr 21 10:28:13
   2023 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
