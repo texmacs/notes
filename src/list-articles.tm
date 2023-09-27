@@ -12,12 +12,16 @@
 
   <hrule>
 
-  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Apr 21 10:28:13
-  2023 UTC>
+  <notes-entry|windows-output-error.tm|Standard Output and Standard Error on
+  Microsoft Windows|We show how to see <TeXmacs>' standard output and
+  standard error on Microsoft Windows.|Tue Aug 29 11:17:14 2023 UTC>
 
   <notes-entry|list-articles.tm|List of all the articles|A list of all the
-  articles in the website, ordered by the most recent modification time.|Fri
-  Apr 21 10:28:13 2023 UTC>
+  articles in the website, ordered by the most recent modification time.|Tue
+  Aug 29 11:17:14 2023 UTC>
+
+  <notes-entry|main.tm|Notes on <TeXmacs>|(no abstract)|Fri Apr 21 10:28:13
+  2023 UTC>
 
   <notes-entry|dev-notes.tm|Development resources and ideas|This page
   contains idea and resources pertaining to the development of TeXmacs.|Fri
