@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -25,7 +28,7 @@ jobs:
       - name: Set LC_ALL to POSIX
         run: echo "export LC_ALL=POSIX" >> $GITHUB_ENV
 
-      - name: Run TeXmacs script xvfb
+      - name: Run TeXmacs script with xvfb
         run: |
           texmacs_bin=$(which texmacs)
           xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" $texmacs_bin -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
