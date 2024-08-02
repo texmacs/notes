@@ -25,6 +25,11 @@ jobs:
       - name: Set LC_ALL to POSIX
         run: echo "export LC_ALL=POSIX" >> $GITHUB_ENV
 
+      - name: Create directories for TeXmacs
+        run: |
+          mkdir -p $HOME/t/svn-src/TeXmacs/bin
+          cp /usr/bin/texmacs $HOME/t/svn-src/TeXmacs/bin/texmacs.bin
+
       - name: Convert document to html format
         run: |
           TEXMACS_PATH=$HOME/t/svn-src/TeXmacs $HOME/t/svn-src/TeXmacs/bin/texmacs.bin \
