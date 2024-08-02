@@ -21,14 +21,20 @@ jobs:
         run: |
           wget http://www.texmacs.org/Download/ftp/tmftp/Linux/Debian_12/TeXmacs-2.1.4.amd64.deb -O /tmp/texmacs.deb
           DEBIAN_FRONTEND=noninteractive apt install -y /tmp/texmacs.deb
-    
+
+      - name: Find texmacs binary
+        id: find-texmacs
+        run: |
+          texmacs_path=$(which texmacs)
+          echo "texmacs_path=$texmacs_path" >> $GITHUB_ENV
+
       - name: Set LC_ALL to POSIX
         run: echo "export LC_ALL=POSIX" >> $GITHUB_ENV
 
       - name: Create directories for TeXmacs
         run: |
           mkdir -p $HOME/t/svn-src/TeXmacs/bin
-          cp /usr/bin/texmacs $HOME/t/svn-src/TeXmacs/bin/texmacs.bin
+          cp ${{ env.texmacs_path }} $HOME/t/svn-src/TeXmacs/bin/texmacs.bin
 
       - name: Convert document to html format
         run: |
