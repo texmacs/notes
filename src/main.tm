@@ -49,6 +49,9 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics.>>
 
+  <hlink|Creating your own bibliography style for
+  <TeXmacs>|./create-bibliography-style.tm>
+
   <subsection*|Ideas>
 
   <hlink|<TeXmacs> and the art of mathematical
