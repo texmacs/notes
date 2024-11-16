@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Install dependencies
-        run: apt-get update && apt-get install -y wget git xvfb
+        run: apt-get update && apt-get install -y wget git
           
       - uses: actions/checkout@v3
         with:
@@ -25,13 +25,10 @@ jobs:
           wget http://www.texmacs.org/Download/ftp/tmftp/Linux/Debian_12/TeXmacs-2.1.4.amd64.deb -O /tmp/texmacs.deb
           DEBIAN_FRONTEND=noninteractive apt install -y /tmp/texmacs.deb
 
-      - name: Set LC_ALL to POSIX
-        run: echo "export LC_ALL=POSIX" >> $GITHUB_ENV
-
-      - name: Run TeXmacs script with xvfb
+      - name: Run TeXmacs script with headless option
         run: |
           texmacs_bin=$(which texmacs)
-          xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" $texmacs_bin -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
+          $texmacs_bin -headless -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
     
       # Deploy to local repo
       - name: Deploy
