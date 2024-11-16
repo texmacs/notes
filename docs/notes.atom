@@ -12,6 +12,14 @@
   <icon>http://texmacs.github.io/notes/misc/blog-icon.ico</icon>
   <logo>http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png</logo>
   <entry>
+    <title>Creating your own bibliography style for TeXmacs</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/create-bibliography-style.html"/>
+    <id>texmacs.github.io/notes/create-bibliography-style.tm:2024-11-16T14:00:00Z</id>
+    <updated>2024-11-16T14:00:00Z</updated>
+    <published>2024-11-16T14:01:00Z</published>
+    <summary><concat>An article about customizing <TeXmacs/> bibliography styles</concat></summary>
+  </entry>
+  <entry>
     <title>Standard Output and Standard Error on Microsoft Windows</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/windows-output-error.html"/>
     <id>texmacs.github.io/notes/windows-output-error.tm:2023-08-29T11:17:14Z</id>
