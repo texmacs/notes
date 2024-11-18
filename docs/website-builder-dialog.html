@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.15" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -37,9 +37,9 @@
       To avoid the need of exporting manually every single page to HTML, some
       support has been added to build websites in the form of Scheme
       procedures, to be found in the module <tt class="verbatim scheme">(doc tmweb)</tt> (which
-      can be found at <tt class="verbatim">TeXmacs/progs/doc/tmweb.scm</tt>). The two
-      relevant exported procedures are <tt class="verbatim scheme">tmweb-update-dir</tt> and
-      <tt class="verbatim scheme">tmweb-convert-dir</tt>. 
+      can be found at <tt class="verbatim"><class style="font-family: Times New Roman"><tt>TeXmacs/progs/doc/tmweb.scm</tt></class></tt>).
+      The two relevant exported procedures are <tt class="verbatim scheme">tmweb-update-dir</tt>
+      and <tt class="verbatim scheme">tmweb-convert-dir</tt>. 
     </p>
     <p>
       For example the user can invoke TeXmacs for the command line with
@@ -47,27 +47,28 @@
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-texmacs -x &quot;(tmweb-convert-dir \&quot;sourcedir\&quot; \&quot;target-dir\&quot;)&quot; -q</pre>
+<class style="font-family: Times New Roman"><tt>texmacs -x &quot;(tmweb-convert-dir \&quot;sourcedir\&quot; \&quot;target-dir\&quot;)&quot; -q</tt></class></pre>
     </div>
     <p>
-      which executes (option <tt class="verbatim">-x</tt>) the Scheme command 
+      which executes (option <tt class="verbatim"><class style="font-family: Times New Roman"><tt>-x</tt></class></tt>)
+      the Scheme command 
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
 (tmweb-convert-dir &quot;sourcedir&quot; &quot;target-dir&quot;)</pre>
     </div>
     <p>
-      and then exits (option <tt class="verbatim">-q</tt>). Here <var>source-dir</var>
-      and <var>target-dir</var> are two filesystem paths to the source and
-      target directories for the conversion. The procedure <tt class="verbatim scheme">tmweb-convert-dir</tt>
-      will take every <tt class="verbatim">.tm</tt> file in <var>source-dir</var>,
-      convert it to its HTML counterpart  and save it in
-      <var>target-dir</var>, all the other file types are just copied (see the
-      sources for more details). <tt class="verbatim scheme">tmweb-update-dir</tt> will convert
-      only files which are newer than their counterpart in
-      <var>target-dir</var>, if it exists. This is suitable for incremental
-      updating a website which has been already generated at least once with
-      <tt class="verbatim scheme">tmweb-convert-dir</tt>.
+      and then exits (option <tt class="verbatim"><class style="font-family: Times New Roman"><tt>-q</tt></class></tt>).
+      Here <var>source-dir</var> and <var>target-dir</var> are two filesystem
+      paths to the source and target directories for the conversion. The
+      procedure <tt class="verbatim scheme">tmweb-convert-dir</tt> will take every <tt class="verbatim"><class
+      style="font-family: Times New Roman"><tt>.tm</tt></class></tt> file in <var>source-dir</var>, convert
+      it to its HTML counterpart  and save it in <var>target-dir</var>, all
+      the other file types are just copied (see the sources for more details).
+      <tt class="verbatim scheme">tmweb-update-dir</tt> will convert only files which are newer
+      than their counterpart in <var>target-dir</var>, if it exists. This is
+      suitable for incremental updating a website which has been already
+      generated at least once with <tt class="verbatim scheme">tmweb-convert-dir</tt>.
     </p>
     <p>
       TeXmacs (here we refer to version 1.99.15 but this functionality existed

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.19" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -64,7 +64,7 @@
       them looking for the menu item.
     </p>
     <p>
-      For &ldquo;footnote&rdquo; I found in the file <tt class="verbatim">progs/generic/insert-menu.scm</tt>,
+      For &ldquo;footnote&rdquo; I found in the file <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs/generic/insert-menu.scm</tt></class></tt>,
       within a <tt class="verbatim scheme">menu-bind</tt> form&mdash;the menu-defining and
       modifying form, the Scheme list <tt class="verbatim scheme">(&quot;Footnote&quot; (make
       'footnote))</tt> and by placing
@@ -75,8 +75,8 @@
 (make 'footnote)))</pre>
     </div>
     <p>
-      in <tt class="verbatim">my-init-texmacs.scm</tt> I obtained a shortcut for
-      footnotes.
+      in <tt class="verbatim"><class style="font-family: Times New Roman"><tt>my-init-texmacs.scm</tt></class></tt> I
+      obtained a shortcut for footnotes.
     </p>
     <p>
       <div style="display: inline">
@@ -98,13 +98,14 @@
       type, for example one can choose only Scheme files.
     </p>
     <p>
-      One can also limit the search to a path by means of the <tt class="verbatim">path:</tt>
-      option; here is how one searches for &ldquo;footnote&rdquo; within the
-      <tt class="verbatim">progs</tt> directory of TeXmacs: 
+      One can also limit the search to a path by means of the <tt class="verbatim"><class
+      style="font-family: Times New Roman"><tt>path:</tt></class></tt> option; here is how one searches for
+      &ldquo;footnote&rdquo; within the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs</tt></class></tt>
+      directory of TeXmacs: 
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-footnote path:texmacs/progs</pre>
+<class style="font-family: Times New Roman"><tt>footnote path:texmacs/progs</tt></class></pre>
     </div>
     <p>
       On the other search is not case sensitive and &ldquo;(a)t most, search
@@ -116,22 +117,23 @@ footnote path:texmacs/progs</pre>
       the search in there (maybe with the browser's search facility).
     </p>
     <p>
-      With <tt class="verbatim">ack</tt> one types
+      With <tt class="verbatim"><class style="font-family: Times New Roman"><tt>ack</tt></class></tt> one types
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-ack Footnote</pre>
+<class style="font-family: Times New Roman"><tt>ack Footnote</tt></class></pre>
     </div>
     <p>
       (case sensitive: it helps, because the menu item we are looking for is
-      uppercase) from the terminal when in the <tt class="verbatim">progs</tt> directory
-      of the TeXmacs installation and gets all the matching lines classified
-      according to the file they are in. In the short tests I did, I got the
-      impression that ack can match more precisely what the user wants: I was
-      able to match<tt class="verbatim scheme"> (make 'footnote)</tt> with ack but not with the
-      GitHub search, where I got results for the consecutive words <tt class="verbatim">make
-      footnote</tt> within a string as well. On the other hand, with ack one
-      does not have the immediacy of a search box.
+      uppercase) from the terminal when in the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs</tt></class></tt>
+      directory of the TeXmacs installation and gets all the matching lines
+      classified according to the file they are in. In the short tests I did,
+      I got the impression that ack can match more precisely what the user
+      wants: I was able to match<tt class="verbatim scheme"> (make 'footnote)</tt> with ack but
+      not with the GitHub search, where I got results for the consecutive
+      words <tt class="verbatim"><class style="font-family: Times New Roman"><tt>make footnote</tt></class></tt>
+      within a string as well. On the other hand, with ack one does not have
+      the immediacy of a search box.
     </p>
     <p>
       

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.19" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -100,14 +100,15 @@
       We get a hint for the first instruction by examining the menu item
       <class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Itemize</class>&rarr;<class
       class="tmweb-menu" style="font-family: sans-serif">Default</class><a id="auto-2"></a>; a search with <a href="https://beyondgrep.com/"><class
-      style="font-variant: small-caps">ack</class></a> inside the <tt class="verbatim">progs</tt> subdirectory of
-      the TeXmacs installation directory shows that the menu item executes the
-      <class style="font-variant: small-caps">Scheme</class> command <tt class="verbatim">(make-tmlist
-      'itemize)</tt>; the file where the menu is defined is <tt class="verbatim">text/text-menu.scm</tt>.
+      style="font-variant: small-caps">ack</class></a> inside the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs</tt></class></tt>
+      subdirectory of the TeXmacs installation directory shows that the menu
+      item executes the <class style="font-variant: small-caps">Scheme</class> command <tt class="verbatim"><class
+      style="font-family: Times New Roman"><tt>(make-tmlist 'itemize)</tt></class></tt>; the file where the
+      menu is defined is <tt class="verbatim"><class style="font-family: Times New Roman"><tt>text/text-menu.scm</tt></class></tt>.
     </p>
     <p>
       We need then to add a menu entry for <font class="tmweb-markup">itemize-perso</font>
-      and we do it through the following code in <tt class="verbatim">my-init-texmacs.scm</tt>:
+      and we do it through the following code in <tt class="verbatim"><class style="font-family: Times New Roman"><tt>my-init-texmacs.scm</tt></class></tt>:
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -134,7 +135,7 @@
       </div></font>
     </div>
     <p>
-      <img src="new-lists-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: -0.0206868686868687em; margin-right: -0.0206868686868731em; margin-top: 0em; vertical-align: 0em; height: 0.707636363636364em"></img>
+      <img src="new-lists-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 0.697313131313131em"></img>
     </p>
     <p>
       If we press <font class="tmweb-key">Return</font> inside this list no new item
@@ -156,7 +157,7 @@
       (without entering into the details of the code) that <tt class="verbatim scheme">kbd-enter</tt>
       is defined inside lists (with a <tt class="verbatim scheme">(:require (list-context?
       t))</tt> declaration) as <tt class="verbatim scheme">(make-item)</tt> (see the code in
-      <tt class="verbatim">progs/text/text-edit.scm</tt>).
+      <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs/text/text-edit.scm</tt></class></tt>).
     </p>
     <p>
       In fact after calling the <tt class="verbatim scheme">define-group</tt> declaration above
@@ -168,13 +169,14 @@
       export of the list):
     </p>
     <p>
-      <img src="new-lists-2.png" style="margin-left: -0.0206868686868687em; margin-bottom: -0.0206868686868687em; margin-right: -0.0206868686868731em; margin-top: 0em; vertical-align: 0em; height: 3.02622222222222em"></img>
+      <img src="new-lists-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 3.01591919191919em"></img>
     </p>
     <p>
       As a conclusion, to define a new list one should, in addition to
       executing the <font class="tmweb-markup">new-list</font> macro, put in one's own <tt
-      class="verbatim">my-init-texmacs.scm</tt> the following code (here, again, using
-      the <font class="tmweb-markup">itemize-perso</font> example)
+      class="verbatim"><class style="font-family: Times New Roman"><tt>my-init-texmacs.scm</tt></class></tt> the
+      following code (here, again, using the <font class="tmweb-markup">itemize-perso</font>
+      example)
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">

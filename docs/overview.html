@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.15" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -227,13 +227,13 @@
       For instance, the tree
     </p>
     <center>
-      <img src="overview-1.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0413333333333332em; margin-right: -0.062060606060605em; margin-top: 0em; vertical-align: -6.91935353535354em; height: 7.60206060606061em"></img>
+      <img src="overview-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0154949494949497em; margin-right: -0.036202020202019em; margin-top: 0em; vertical-align: -6.91955555555556em; height: 7.62810101010101em"></img>
     </center>
     <p>
       typically represents the formula
     </p>
     <center>
-      <img src="overview-2.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0103030303030304em; margin-right: -0.0206868686868695em; margin-top: -0.0413737373737373em; vertical-align: -0.620525252525253em; height: 1.91341414141414em" id="tm-tree-ex"></img>
+      <img src="overview-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434348em; margin-top: -0.0155151515151517em; vertical-align: -0.620565656565657em; height: 1.88761616161616em" id="tm-tree-ex"></img>
     </center>
     <h2 id="auto-6">External representations<span style="margin-left: 1em"></span></h2>
     <p>
@@ -279,7 +279,7 @@
       Typesetting process converts TeXmacs trees into boxes:
     </p>
     <p>
-      <img src="overview-3.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0em; margin-right: -0.020686868686866em; margin-top: 0em; vertical-align: -2.39018181818182em; height: 4.78036363636364em"></img>
+      <img src="overview-3.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -2.39018181818182em; height: 4.78036363636364em"></img>
     </p>
     <p>
       The <a href="../regular/regular.en.html">typesetting primitives</a> are designed to be very fast and
@@ -359,7 +359,7 @@
       color="blue">|</font><font color="black"></font><font color="blue">&gt;</font>
     </p>
     <center>
-      <img src="overview-4.png" style="margin-left: -0.0206868686868687em; margin-bottom: -0.0206868686868687em; margin-right: -0.0206868686868695em; margin-top: -0.0206868686868688em; vertical-align: -0.258585858585859em; height: 1.07571717171717em"></img>
+      <img src="overview-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434344em; margin-right: -0.010343434343433em; margin-top: -0.0103434343434343em; vertical-align: -0.258585858585859em; height: 1.0550303030303em"></img>
     </center>
     <h2 id="auto-9"><class style="font-variant: small-caps">Guile</class> as extension language<span style="margin-left: 1em"></span></h2>
     <p>
@@ -468,7 +468,7 @@
     <h2 id="auto-12">Scheme invocation<span style="margin-left: 1em"></span></h2>
     <p>
       <class style="font-variant: small-caps">Scheme</class> commands can be invoked interactively (like
-      in <class style="font-variant: small-caps">Emacs</class>) using the <font class="tmweb-key">&#x2318;&#x2303;X</font>
+      in <class style="font-variant: small-caps">Emacs</class>) using the <font class="tmweb-key">Meta+X</font>
       shortcut. 
     </p>
     <p>
@@ -477,44 +477,52 @@
       class="tmweb-menu" style="font-family: sans-serif">Scheme</class><a id="auto-13"></a> menu item:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
-scheme] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(define (square x) (* x x))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define (square x) (* x x))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
-scheme] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(square 1111111)</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (square 1111111)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
-scheme] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(kbd-map (&quot;h i .&quot; (insert &quot;Hi there!&quot;)))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (kbd-map (&quot;h i .&quot; (insert &quot;Hi there!&quot;)))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
-scheme] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-;; try typing &lsquo;&lsquo;hi.''</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              ;; try typing &ldquo;hi.&rdquo;
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <p>
       <class style="font-variant: small-caps">Scheme</class> commands can be invoked from the command
@@ -522,7 +530,7 @@ scheme] </pre></font></td>
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-texmacs text.tm -x &quot;(print)&quot; -q</pre>
+<class style="font-family: Times New Roman"><tt>texmacs text.tm -x &quot;(print)&quot; -q</tt></class></pre>
     </div>
     <p>
       Or scheme statement executed from inside TeXmacs macros:
@@ -572,10 +580,10 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
     </div>
     <p>
       Used via e.g. <tt class="verbatim scheme">(help square)</tt>. Allows for interactive
-      input of parameters: typing <font class="tmweb-key">&#x2318;&#x2303;&#x21E7;X</font>
-      followed by <tt class="verbatim scheme">square</tt> and <font class="tmweb-key">&#x21A9;</font> and
-      you will be prompted for &ldquo;A number&rdquo; on the footer (or in a
-      dialog). Tab-completion.
+      input of parameters: typing <font class="tmweb-key">Meta+Shift+X</font> followed by
+      <tt class="verbatim scheme">square</tt> and <font class="tmweb-key">Return</font> and you will be
+      prompted for &ldquo;A number&rdquo; on the footer (or in a dialog).
+      Tab-completion.
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -611,7 +619,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
     </div>
     <div style="margin-left: 42.175176192px">
       <p>
-        <span class="no-breaks"><img src="overview-5.png" style="margin-left: -0.0206868686868687em; margin-bottom: -0.0206868686868687em; margin-right: -0.0206868686868687em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.486707070707071em"></img>This</span> is a fold/unfold
+        <span class="no-breaks"><img src="overview-5.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>This</span> is a fold/unfold
         environment
       </p>
       <p>
@@ -627,7 +635,7 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
           <b>Passive trees</b> (<tt class="verbatim">stree</tt>)
         </p>
         <center>
-          <img src="overview-6.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0103030303030304em; margin-right: -0.0206868686868689em; margin-top: -0.0413737373737373em; vertical-align: -0.620525252525253em; height: 2.08577777777778em"></img>
+          <img src="overview-6.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151515em; vertical-align: -0.620565656565657em; height: 2.06em"></img>
         </center>
         <p>
           is typically represented by
@@ -658,31 +666,41 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
           elements are other expressions of type <tt class="verbatim">content</tt>.
         </p>
         <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-          <table style="width: 100%">
-            <tbody><tr>
-              <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">scheme] </tt></font></td>
-              <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(tree-set! t '(document &quot;First line.&quot; &quot;Second line.&quot;))</pre></font></td>
-            </tr></tbody>
-          </table>
+          <p>
+            <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+              <tbody><tr>
+                <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+                <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+                  (tree-set! t '(document &quot;First line.&quot; &quot;Second
+                  line.&quot;))
+                </p></font></td>
+              </tr></tbody>
+            </table></tt></class></tt>
+          </p>
         </div>
         <div class="compact-block" style="text-indent: 0em">
-          <table style="width: 100%">
-            <tbody><tr>
-              <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">scheme] </tt></font></td>
-              <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(tree-set t 1 &quot;New second line.&quot;)</pre></font></td>
-            </tr></tbody>
-          </table>
+          <p>
+            <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+              <tbody><tr>
+                <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+                <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+                  (tree-set t 1 &quot;New second line.&quot;)
+                </p></font></td>
+              </tr></tbody>
+            </table></tt></class></tt>
+          </p>
         </div>
         <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-          <table style="width: 100%">
-            <tbody><tr>
-              <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">scheme] </tt></font></td>
-              <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(tree-set t 0 &lsquo;(strong ,(tree-ref t 0)))</pre></font></td>
-            </tr></tbody>
-          </table>
+          <p>
+            <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+              <tbody><tr>
+                <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+                <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+                  (tree-set t 0 &lsquo;(strong ,(tree-ref t 0)))
+                </p></font></td>
+              </tr></tbody>
+            </table></tt></class></tt>
+          </p>
         </div>
       </li>
     </ul>
@@ -727,20 +745,24 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       expressions of the form
     </p>
     <center>
-      <img src="overview-7.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0.0934141414141414em; margin-right: -0.0206868686868686em; margin-top: -0.010909090909091em; vertical-align: -1.10371717171717em; height: 2.10719191919192em"></img>
+      <img src="overview-7.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0673333333333335em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -1.10278787878788em; height: 2.13181818181818em"></img>
     </center>
     <p>
-      where <img src="overview-8.png" style="margin-left: -0.0206868686868687em; margin-bottom: -0.0103838383838384em; margin-right: -0.0206868686868686em; margin-top: -0.0109090909090909em; vertical-align: -0.0103030303030303em; height: 0.486707070707071em"></img> and <img src="overview-9.png" style="margin-left: -0.0206868686868687em; margin-bottom: -0.0103838383838384em; margin-right: -0.0206868686868686em; margin-top: 0em; vertical-align: -0.0103030303030303em; height: 0.744727272727273em"></img> are general
+      where <img src="overview-8.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img> and <img src="overview-9.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0206868686868686em; margin-top: 0em; vertical-align: -0.0103232323232323em; height: 0.734383838383838em"></img> are general
       expressions:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(select (buffer-tree) '(:* (:match (frac :%1 (concat &quot;1+&quot; (sqrt :%1))))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (select (buffer-tree) '(:* (:match (frac :%1 (concat
+              &quot;1+&quot; (sqrt :%1))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <h2 id="auto-19">More scheme<span style="margin-left: 1em"></span></h2>
     <p>
@@ -782,19 +804,28 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       <b>Dialogues</b>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(user-ask &quot;First number:&quot;
-  (lambda (a)
-    (user-ask &quot;Second number:&quot;
-      (lambda (b)
-        (set-message (number-&gt;string (* (string-&gt;number a)
-                                        (string-&gt;number b)))
-                     &quot;product&quot;)))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (user-ask &quot;First number:&quot;
+            </p><p>
+              (lambda (a)
+            </p><p>
+              (user-ask &quot;Second number:&quot;
+            </p><p>
+              (lambda (b)
+            </p><p>
+              (set-message (number-&gt;string (* (string-&gt;number a)
+            </p><p>
+              (string-&gt;number b)))
+            </p><p>
+              &quot;product&quot;)))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <p>
       
@@ -803,158 +834,254 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       <b>Widgets</b>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(tm-widget (example3)
-  (hlist 
-    (bold (text &quot;Hello&quot;))
-    &gt;&gt;&gt;
-    (inert (explicit-buttons (&quot;world&quot; (display &quot;!\n&quot;))))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (tm-widget (example3)
+            </p><p>
+              (hlist 
+            </p><p>
+              (bold (text &quot;Hello&quot;))
+            </p><p>
+              &gt;&gt;&gt;
+            </p><p>
+              (inert (explicit-buttons (&quot;world&quot; (display
+              &quot;!\n&quot;))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(top-window example3 &quot;Some text&quot;)</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (top-window example3 &quot;Some text&quot;)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <h2 id="auto-23"><tt class="verbatim scheme">tree-view</tt><span style="margin-left: 1em"></span></h2>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(define t
-  (stree-&gt;tree
-   '(root
-     (library &quot;Library&quot; &quot;$TEXMACS_PIXMAP_PATH/tm_german.xpm&quot; 01
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define t
+            </p><p>
+              (stree-&gt;tree
+            </p><p>
+              '(root
+            </p><p>
+              (library &quot;Library&quot;
+              &quot;$TEXMACS_PIXMAP_PATH/tm_german.xpm&quot; 01
+            </p><p>
               (collection &quot;Cool stuff&quot; 001)
+            </p><p>
               (collection &quot;Things to read&quot; 002)
+            </p><p>
               (collection &quot;Current work&quot; 003
-                          (collection &quot;Forever current&quot; 004)
-                          (collection &quot;Read me&quot; 005))))))</pre></font></td>
-        </tr></tbody>
-      </table>
+            </p><p>
+              (collection &quot;Forever
+              current&quot; 004)
+            </p><p>
+              (collection &quot;Read me&quot;
+              005))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(define dd
-  (stree-&gt;tree
-   '(list (library DisplayRole DecorationRole UserRole:1)
-          (collection DisplayRole UserRole:1))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define dd
+            </p><p>
+              (stree-&gt;tree
+            </p><p>
+              '(list (library DisplayRole DecorationRole UserRole:1)
+            </p><p>
+              (collection DisplayRole UserRole:1))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(define (action clicked cmd-role . user-roles)
-  (display* &quot;clicked= &quot; clicked &quot;, cmd-role= &quot; cmd-role
-            &quot;, user-roles= &quot; user-roles &quot;\n&quot;)))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define (action clicked cmd-role . user-roles)
+            </p><p>
+              (display* &quot;clicked= &quot; clicked &quot;, cmd-role=
+              &quot; cmd-role
+            </p><p>
+              &quot;, user-roles= &quot; user-roles
+              &quot;\n&quot;)))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(tm-widget (widget-library)
-  (resize (&quot;150px&quot; &quot;400px&quot; &quot;9000px&quot;) (&quot;300px&quot; &quot;600px&quot; &quot;9000px&quot;)
-    (vertical
-      (bold (text &quot;Testing tree-view&quot;))
-      ===
-      (tree-view action t dd))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (tm-widget (widget-library)
+            </p><p>
+              (resize (&quot;150px&quot; &quot;400px&quot;
+              &quot;9000px&quot;) (&quot;300px&quot; &quot;600px&quot;
+              &quot;9000px&quot;)
+            </p><p>
+              (vertical
+            </p><p>
+              (bold (text &quot;Testing tree-view&quot;))
+            </p><p>
+              ===
+            </p><p>
+              (tree-view action t dd))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(top-window widget-library &quot;Tree View&quot;)</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (top-window widget-library &quot;Tree View&quot;)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <h2 id="auto-24">Forms<span style="margin-left: 1em"></span></h2>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(tm-widget (form3 cmd)
-  (resize &quot;500px&quot; &quot;500px&quot;
-    (padded
-      (form &quot;Test&quot;
-        (aligned
-          (item (text &quot;Input:&quot;)
-            (form-input &quot;fieldname1&quot; &quot;string&quot; '(&quot;one&quot;) &quot;1w&quot;))
-          (item === ===)
-          (item (text &quot;Enum:&quot;)
-            (form-enum &quot;fieldname2&quot; '(&quot;one&quot; &quot;two&quot; &quot;three&quot;) &quot;two&quot; &quot;2w&quot;))
-          (item === ===)
-          (item (text &quot;Choice:&quot;)
-            (form-choice &quot;fieldname3&quot; '(&quot;one&quot; &quot;two&quot; &quot;three&quot;) &quot;one&quot;))
-          (item === ===)
-          (item (text &quot;Choices:&quot;)
-            (form-choices &quot;fieldname4&quot; 
-                          '(&quot;one&quot; &quot;two&quot; &quot;three&quot;) 
-                          '(&quot;one&quot; &quot;two&quot;))))
-        (bottom-buttons
-          (&quot;Cancel&quot; (cmd &quot;cancel&quot;)) &gt;&gt;
-          (&quot;Ok&quot;
-           (display* (form-fields) &quot; -&gt; &quot; (form-values) &quot;\n&quot;)
-           (cmd &quot;ok&quot;)))))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (tm-widget (form3 cmd)
+            </p><p>
+              (resize &quot;500px&quot; &quot;500px&quot;
+            </p><p>
+              (padded
+            </p><p>
+              (form &quot;Test&quot;
+            </p><p>
+              (aligned
+            </p><p>
+              (item (text &quot;Input:&quot;)
+            </p><p>
+              (form-input &quot;fieldname1&quot;
+              &quot;string&quot; '(&quot;one&quot;) &quot;1w&quot;))
+            </p><p>
+              (item === ===)
+            </p><p>
+              (item (text &quot;Enum:&quot;)
+            </p><p>
+              (form-enum &quot;fieldname2&quot; '(&quot;one&quot;
+              &quot;two&quot; &quot;three&quot;) &quot;two&quot;
+              &quot;2w&quot;))
+            </p><p>
+              (item === ===)
+            </p><p>
+              (item (text &quot;Choice:&quot;)
+            </p><p>
+              (form-choice &quot;fieldname3&quot;
+              '(&quot;one&quot; &quot;two&quot; &quot;three&quot;)
+              &quot;one&quot;))
+            </p><p>
+              (item === ===)
+            </p><p>
+              (item (text &quot;Choices:&quot;)
+            </p><p>
+              (form-choices &quot;fieldname4&quot; 
+            </p><p>
+              '(&quot;one&quot; &quot;two&quot;
+              &quot;three&quot;) 
+            </p><p>
+              '(&quot;one&quot; &quot;two&quot;))))
+            </p><p>
+              (bottom-buttons
+            </p><p>
+              (&quot;Cancel&quot; (cmd &quot;cancel&quot;)) &gt;&gt;
+            </p><p>
+              (&quot;Ok&quot;
+            </p><p>
+              (display* (form-fields) &quot; -&gt; &quot;
+              (form-values) &quot;\n&quot;)
+            </p><p>
+              (cmd &quot;ok&quot;)))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(dialogue-window form3 (lambda (x) (display* x &quot;\n&quot;)) &quot;Test of form3&quot;)</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (dialogue-window form3 (lambda (x) (display* x &quot;\n&quot;))
+              &quot;Test of form3&quot;)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <h2 id="auto-25">Bibliography styles<span style="margin-left: 1em"></span></h2>
     <p>
@@ -994,38 +1121,51 @@ texmacs text.tm -x &quot;(print)&quot; -q</pre>
       
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><pre class="verbatim" xml:space="preserve">
-Scheme] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-(stree-&gt;tree 
-  '(with gr-geometry (tuple &quot;geometry&quot; &quot;200px&quot; &quot;100px&quot; &quot;center&quot;) 
-         color &quot;blue&quot; 
-        (graphics (text-at &quot;TeXmacs&quot; (point &quot;-2.5&quot; &quot;-1&quot;)) 
-                  (point 0 -1) 
-                  (line (point 0 0) (point 0 1) 
-                        (point 1 1) (point 1 0) (point 0 0)))))</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (stree-&gt;tree 
+            </p><p>
+              '(with gr-geometry (tuple &quot;geometry&quot;
+              &quot;200px&quot; &quot;100px&quot; &quot;center&quot;) 
+            </p><p>
+              color &quot;blue&quot; 
+            </p><p>
+              (graphics (text-at &quot;TeXmacs&quot; (point
+              &quot;-2.5&quot; &quot;-1&quot;)) 
+            </p><p>
+              (point 0 -1) 
+            </p><p>
+              (line (point 0 0) (point 0 1) 
+            </p><p>
+              (point 1 1) (point 1 0) (point 0 0)))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
         <tt class="verbatim"><div style="margin-left: 42.175176192px">
           <div align="justify">
-            <font color="blue"><img src="overview-10.png" style="margin-left: -0.0206868686868687em; margin-bottom: 0em; margin-right: -0.020686868686866em; margin-top: 0em; vertical-align: -10.9949898989899em; height: 21.9899797979798em"></img></font>
+            <font color="blue"><img src="overview-10.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img></font>
           </div>
         </div></tt>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#008000"><tt class="verbatim">Scheme] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
     </div>
     <h2 id="auto-27">The future of TeXmacs<span style="margin-left: 1em"></span></h2>
     <p>
