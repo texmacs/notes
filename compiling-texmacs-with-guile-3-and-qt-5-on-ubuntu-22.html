@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta content="TeXmacs 2.1.1" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Compiling TeXmacs on Ubuntu 22 with Guile3 and Qt5 <span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      This guide describes how to compile TeXmacs on Ubuntu 22 with Guile 3
+      support and Qt 5.
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      Guile 1.8.8 is no longer supported on modern distributions. Let us build
+      the Guile3 scheme TeXmacs fork.
+    </p>
+    <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Dependencies<span style="margin-left: 1em"></span></h2>
+    <p>
+      You need git to download the sources, cmake and g++ to compile them and
+      Guile 3, Qt 5 and freetype as dependencies.
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+sudo apt install git cmake g++ guile-3.0 guile-3.0-dev libfreetype-dev 
+sudo apt install qtbase5-dev libqt5svg5-dev libfreetype-dev libsqlite-dev libjpeg-dev 
+sudo apt install libgmp-dev libltdl-dev</pre>
+    <h2 id="auto-3">2.<span style="margin-left: 1em"></span>Compiling<span style="margin-left: 1em"></span></h2>
+    <p>
+      Navigate to the directory where you want TeXmacs' sources to be placed
+      in.
+    </p>
+    <p>
+      Clone the TeXmacs git repository and navigate into it.
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+git clone https://github.com/texmacs/texmacs.git texmacs-guile3  </pre>
+    <pre class="verbatim" xml:space="preserve">
+cd  texmacs-guile3</pre>
+    <p>
+      Checkout the Guile 3 branch.
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+git checkout guile3_branch_2.1</pre>
+    <p>
+      Run the configure command (the first dashes are double dashes &ndash; it
+      is just weird HTML rendering
+      &lt;dash&gt;&lt;dash&gt;with&lt;dash&gt;guile2 etc.).
+    </p>
+    <p>
+      .<tt class="verbatim">/configure &ndash;with-guile2 &ndash;enable-guile2</tt>
+    </p>
+    <p>
+      Compile TeXmacs.
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+make -j4</pre>
+    <p>
+      The TeXmacs binary is placed in <tt class="verbatim">&lt;repodirectory&gt;/TeXmacs/bin/texmacs</tt>
+    </p>
+    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Running<span style="margin-left: 1em"></span></h2>
+    <p>
+      To run TeXmacs you have to setup the <tt class="verbatim">TEXMACS_PATH</tt>
+      variable. Run
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+export TEXMACS_PATH=&lt;repodirectory&gt;/TeXmacs</pre>
+    <p>
+      then you can run  
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+<tt class="verbatim">&lt;repodirectory&gt;/TeXmacs/bin/texmacs</tt></pre>
+    <p>
+      and TeXmacs should start after it compiled its modules. To make <tt
+      class="verbatim">TEXMACS_PATH</tt> setting persistent, put the command:
+    </p>
+    <pre class="verbatim" xml:space="preserve">
+export TEXMACS_PATH=&lt;repodirectory&gt;/TeXmacs</pre>
+    <p>
+      into your <tt class="verbatim">~/.bashrc</tt>.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+  </body>
+</html>
