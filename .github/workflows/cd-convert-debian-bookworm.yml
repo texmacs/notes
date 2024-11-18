@@ -1,0 +1,45 @@
+name: CD for gh-pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    container: debian:bookworm
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: write
+      pages: write 
+
+    steps:
+      - name: Install dependencies
+        run: apt-get update && apt-get install -y wget git
+          
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Download release of TeXmacs
+        run: |
+          wget http://www.texmacs.org/Download/ftp/tmftp/Linux/Debian_12/TeXmacs-2.1.4.amd64.deb -O /tmp/texmacs.deb
+          DEBIAN_FRONTEND=noninteractive apt install -y /tmp/texmacs.deb
+
+      - name: Run TeXmacs script with headless option
+        run: |
+          texmacs_bin=$(which texmacs)
+          $texmacs_bin -headless -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
+    
+      # Deploy to local repo
+      - name: Deploy
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: docs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
