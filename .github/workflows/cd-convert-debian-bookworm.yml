@@ -64,7 +64,7 @@ jobs:
           rm -rf *
           
           # copy 'docs' 
-          cp -r ../${BUILD_DIR}/* .
+          cp -r ../${BUILD_DIR}/* ./${BUILD_DIR}/.
           
           # copy 'index.html'
           cp ../${ROOT_INDEX_FILE} .
