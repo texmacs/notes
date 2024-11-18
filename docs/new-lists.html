@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">New list types<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      How to define new list types in TeXmacs.
+    </div>
+    <p>
+      The <a href="https://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.en.pdf">TeXmacs manual</a>, in Section 11.4.4, and the Jolly Writer
+      suggest that the macro <font class="tmweb-markup">new-list</font> can be used to
+      define new list types.
+    </p>
+    <p>
+      Quoting from the manual
+    </p>
+    <div style="margin-top: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+      <div style="text-indent: 0em">
+        <p>
+          The std-list d.t.d. also provides a macro <font class="tmweb-markup">new-list</font>
+          to de&#xFB01;ne new lists. Its syntax is <font color="blue">&lt;</font>new-list<font
+          color="blue">|</font><font color="black"><font color="#008000"><i></i></font><font color="brown"><i>name</i></font></font><font
+          color="blue">|</font><font color="#C68"><font color="#008000"><i></i></font><font color="brown"><i>item-render</i></font></font><font
+          color="blue">|</font><font color="#C68"><font color="#008000"><i></i></font><font color="brown"><i>item-transform</i></font></font><font
+          color="blue">&gt;</font>, where <font color="brown"><i>name</i></font><font
+          color="#008000"><i></i></font> is the name of the new list environment, <font
+          color="brown"><i>item-render</i></font> an (inline) macro for rendering the
+          item and <font color="brown"><i>item-transform</i></font> an additional
+          transformation which is applied on the item text. For instance, the
+          <font class="tmweb-markup">enumerate-roman</font> environment is de&#xFB01;ned by
+        </p>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+      <div class="tmweb-code" style="text-indent: 0em">
+        <p>
+          <font color="blue">&lt;</font>new-list<font color="blue">|</font><font color="black">enumerate-roman</font><font
+          color="blue">|</font><font color="#C68"><font color="#008000"><i>aligned-dot-item</i></font></font><font
+          color="blue">|</font><font color="#C68"><font color="blue">&lt;</font>macro<font
+          color="blue">|</font><font color="brown"><i>x</i></font><font color="blue">|</font><font
+          color="black"><font color="blue">&lt;</font>number<font color="blue">|</font><font
+          color="black"><font color="brown"><i>x</i></font></font><font color="blue">|</font><font
+          color="black">roman</font><font color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      As user <font color="#707070">bpascal40</font> observed <a href="http://forum.texmacs.cn/t/creating-a-new-list-does-not-seem-to-work/1259">in the
+      forum</a>, this is not enough for obtaining a new list type that works
+      like the default <font class="tmweb-markup">itemize</font> environment. If one has
+      defined a list type by, <em>exempli gratia</em>,
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>new-list<font color="blue">|</font><font color="black">itemize-perso</font><font
+        color="blue">|</font><font color="#C68"><font color="#008000"><i>aligned-dot-item</i></font></font><font
+        color="blue">|</font><font color="#C68"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>x</i></font><font color="blue">|</font><font color="black">&#x229B;</font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      then generating a list in the hybrid mode as  will generate the <font
+      class="tmweb-markup">itemize-perso</font> environment but won't add the first item to
+      it; moreover pressing <font class="tmweb-key">Return</font> while in the list
+      environment won't add an item to the list.
+    </p>
+    <p>
+      In order to get an <font class="tmweb-markup">itemize-perso</font> list to behave like
+      a default <font class="tmweb-markup">itemize</font> list we need two more instructions
+      for TeXmacs.
+    </p>
+    <p>
+      We get a hint for the first instruction by examining the menu item
+      <class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Itemize</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Default</class><a id="auto-2"></a>; a search with <a href="https://beyondgrep.com/"><class
+      style="font-variant: small-caps">ack</class></a> inside the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs</tt></class></tt>
+      subdirectory of the TeXmacs installation directory shows that the menu
+      item executes the <class style="font-variant: small-caps">Scheme</class> command <tt class="verbatim"><class
+      style="font-family: Times New Roman"><tt>(make-tmlist 'itemize)</tt></class></tt>; the file where the
+      menu is defined is <tt class="verbatim"><class style="font-family: Times New Roman"><tt>text/text-menu.scm</tt></class></tt>.
+    </p>
+    <p>
+      We need then to add a menu entry for <font class="tmweb-markup">itemize-perso</font>
+      and we do it through the following code in <tt class="verbatim"><class style="font-family: Times New Roman"><tt>my-init-texmacs.scm</tt></class></tt>:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(menu-bind itemize-menu
+  (former)
+  ---
+  (&quot;Perso&quot; (make-tmlist 'itemize-perso)))</pre>
+    </div>
+    <p>
+      Executing the new menu entry that appears (<class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Itemize</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Perso</class><a
+      id="auto-3"></a>) generates a new list with a first item, like the following:
+    </p>
+    <div style="margin-top: 0.5em; margin-bottom: 0.5em">
+      <font color="black"><div class="ornament" style="background-color:#ffdfbf;display:block;">
+        <p style="margin-top: 1em; margin-bottom: 1em">
+          <strong>Note. </strong>The current <class style="font-variant: small-caps">HTML</class> export
+          filter can only export faithfully <font class="tmweb-markup">itemize</font>
+          environments, so we are substituting images for our custom
+          itemization lists; a <class style="font-variant: small-caps">PDF</class> export is faithful.
+          We plan to write another post on <class style="font-variant: small-caps">HTML</class> export
+          of custom lists.
+        </p>
+      </div></font>
+    </div>
+    <p>
+      <img src="new-lists-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 0.697313131313131em"></img>
+    </p>
+    <p>
+      If we press <font class="tmweb-key">Return</font> inside this list no new item
+      appears. We need one more piece of code, the declaration
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(define-group itemize-tag
+  itemize itemize-minus itemize-dot itemize-arrow itemize-perso)</pre>
+    </div>
+    <p>
+      The writer of this blog post does not understand how the declaration
+      works, only the following that was explained by user <font color="#707070">mgubi</font>
+      in the <a href="http://forum.texmacs.cn/t/creating-a-new-list-does-not-seem-to-work/1259/13">forum</a>: the declaration instructs TeXmacs to treat
+      the group of tags in the same way.
+    </p>
+    <p>
+      Following this hint and looking inside the TeXmacs code one notices
+      (without entering into the details of the code) that <tt class="verbatim scheme">kbd-enter</tt>
+      is defined inside lists (with a <tt class="verbatim scheme">(:require (list-context?
+      t))</tt> declaration) as <tt class="verbatim scheme">(make-item)</tt> (see the code in
+      <tt class="verbatim"><class style="font-family: Times New Roman"><tt>progs/text/text-edit.scm</tt></class></tt>).
+    </p>
+    <p>
+      In fact after calling the <tt class="verbatim scheme">define-group</tt> declaration above
+      the <font class="tmweb-markup">itemize-perso</font> list works nicely; after executing
+      the menu entry <class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class class="tmweb-menu"
+      style="font-family: sans-serif">Itemize</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Perso</class><a id="auto-4"></a>
+      and pressing <font class="tmweb-key">Return</font> we get the following list with
+      two items (again substituting an image for the <class style="font-variant: small-caps">HTML</class>
+      export of the list):
+    </p>
+    <p>
+      <img src="new-lists-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 3.01591919191919em"></img>
+    </p>
+    <p>
+      As a conclusion, to define a new list one should, in addition to
+      executing the <font class="tmweb-markup">new-list</font> macro, put in one's own <tt
+      class="verbatim"><class style="font-family: Times New Roman"><tt>my-init-texmacs.scm</tt></class></tt> the
+      following code (here, again, using the <font class="tmweb-markup">itemize-perso</font>
+      example)
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(menu-bind itemize-menu
+  (former)
+  ---
+  (&quot;Perso&quot; (make-tmlist 'itemize-perso)))
+
+(define-group itemize-tag
+  itemize itemize-minus itemize-dot itemize-arrow itemize-perso)</pre>
+    </div>
+    <ul>
+      <p>
+        
+      </p>
+    </ul>
+  </body>
+</html>

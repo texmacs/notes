@@ -1,0 +1,1314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">An overview of TeXmacs from altitude<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      A rapid overview/executive summary of the TeXmacs system.
+    </div>
+    <h2 id="auto-2">Main features<span style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          Visual <b>structured</b> editor: WYSWYG <b>&amp;</b> WYSWYM
+        </p>
+      </li>
+      <li>
+        <p>
+          Inspired by TeX and <class style="font-variant: small-caps">Emacs</class>
+        </p>
+      </li>
+      <li>
+        <p>
+          High-quality typesetting algorithms (including microtypography)
+        </p>
+      </li>
+      <li>
+        <p>
+          Special features for mathematical typesetting and input
+        </p>
+      </li>
+      <li>
+        <p>
+          Support for interactive sessions: Scheme, Python, R, Octave, Maxima,
+          Axiom, Mathemagix (and other CAS).
+        </p>
+      </li>
+      <li>
+        <p>
+          Multi-platform: Unix, MacOS, Windows (via <class style="font-variant: small-caps">Qt</class>)
+        </p>
+      </li>
+      <li>
+        <p>
+          Own format (<class style="font-variant: small-caps">XML</class> like). Native output to <class
+          style="font-variant: small-caps">PDF</class> and <class style="font-variant: small-caps">PS</class>. Export to LaTeX,
+          <class style="font-variant: small-caps">HTML</class>
+        </p>
+      </li>
+      <li>
+        <p>
+          Internal image editor, interfaces to <class style="font-variant: small-caps">Svn</class> and
+          <class style="font-variant: small-caps">Git</class>, versioning tool, database tool,
+          encryption of documents.
+        </p>
+      </li>
+      <li>
+        <p>
+          Website and documentation written in TeXmacs
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-3">Gallery<span style="margin-left: 1em"></span></h2>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/texmacs-1.png" width="500"></img>
+      </p>
+      <p>
+        The legacy X11 backend
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/texmacs-ffnlogn.png" width="600"></img>
+      </p>
+      <p>
+        The <class style="font-variant: small-caps">Qt</class> backend, high quality typesetting
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/Screenshot 2019-05-11 at 13.15.10.png" width="600"></img>
+      </p>
+      <p>
+        Structured editing, high quality math typesetting
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/texmacs-beamer.png" width="600"></img>
+      </p>
+      <p>
+        Presentation mode
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/Screenshot 2019-05-11 at 12.48.10.png" width="500"></img>
+      </p>
+      <p>
+        Graphics editor
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/Screenshot 2019-05-11 at 13.08.48.png" width="650"></img>
+      </p>
+      <p>
+        Microtypography, synthetic math fonts
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/Screenshot 2019-05-11 at 13.16.53.png" width="600"></img>
+      </p>
+      <p>
+        Interfaces to external packages (here DraTeX)
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/texmacs-cas.png" width="600"></img>
+      </p>
+      <p>
+        Interfaces to external packages (here <class style="font-variant: small-caps">Mathemagix</class>
+        and <class style="font-variant: small-caps">Maxima</class>)
+      </p>
+    </center>
+    <center>
+      <p>
+        <img class="image" src="../resources/overview/texmacs-chinese.png" width="600"></img>
+      </p>
+      <p>
+        Support for oriental scripts
+      </p>
+    </center>
+    <p>
+      
+    </p>
+    <h2 id="auto-4">Development<span style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          Started in 1998 by <class style="font-variant: small-caps">Joris Van Der Hoeven</class>
+        </p>
+        <font style="font-size: 90.0%"><ul>
+          <li>
+            <p>
+              v0.2.3&beta; released 26 Oct 1999
+            </p>
+          </li>
+          <li>
+            <p>
+              v1.0 (2002)
+            </p>
+          </li>
+          <li>
+            <p>
+              <class style="font-variant: small-caps">Qt</class> backend in v1.0.7 (2008)
+            </p>
+          </li>
+          <li>
+            <p>
+              native <class style="font-variant: small-caps">Pdf</class> support in v1.99.1 (2013)
+            </p>
+          </li>
+          <li>
+            <p>
+              currently version 1.99.9 (soon 2.1)
+            </p>
+          </li>
+        </ul></font>
+      </li>
+      <li>
+        <p>
+          Written in <class style="font-variant: small-caps">C++</class> (~300.000 loc) and <class
+          style="font-variant: small-caps">Scheme</class> (~150.000 loc) (from <a href="https://www.openhub.net/p/texmacs/analyses/latest/languages_summary">[openhub]</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          Fully modular, external dependencies (mostly) isolated via tight
+          interfaces.
+        </p>
+      </li>
+      <li>
+        <p>
+          Two UI backends: legacy <class style="font-variant: small-caps">X11</class> with custom widget
+          library, modern <class style="font-variant: small-caps">Qt</class> backend (cross-platform
+          support).
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>GNU Guile as extension language</b>. C++ export basic
+          manipulation routines and few internal datatypes.
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-5">TeXmacs' content model<span style="margin-left: 1em"></span></h2>
+    <p>
+      All TeXmacs documents or document fragments can be thought of as
+      <em>trees</em>. 
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      For instance, the tree
+    </p>
+    <center>
+      <img src="overview-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0154949494949497em; margin-right: -0.036202020202019em; margin-top: 0em; vertical-align: -6.91955555555556em; height: 7.62810101010101em"></img>
+    </center>
+    <p>
+      typically represents the formula
+    </p>
+    <center>
+      <img src="overview-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434348em; margin-top: -0.0155151515151517em; vertical-align: -0.620565656565657em; height: 1.88761616161616em" id="tm-tree-ex"></img>
+    </center>
+    <h2 id="auto-6">External representations<span style="margin-left: 1em"></span></h2>
+    <p>
+      Serialization of TeXmacs documents without loss of informations
+    </p>
+    <p>
+      
+    </p>
+    <ul>
+      <li>
+        <p>
+          TeXmacs format
+        </p>
+        <div style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+          <div class="tmweb-code" style="text-indent: 0em">
+            <tt class="verbatim">&lt;with|mode|math|x+y+&lt;frac|1|2&gt;+&lt;sqrt|y+z&gt;&gt;</tt>
+          </div>
+        </div>
+      </li>
+      <li>
+        <p>
+          <class style="font-variant: small-caps">XML</class> format
+        </p>
+        <div style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+          <div class="tmweb-code" style="text-indent: 0em">
+            <pre class="verbatim" xml:space="preserve">
+&lt;frac&gt;&lt;tm-arg&gt;1&lt;/tm-arg&gt;&lt;tm-arg&gt;2&lt;/tm-arg&gt;&lt;/frac&gt;+&lt;sqrt&gt;y+z&lt;/sqrt&gt;</pre>
+          </div>
+        </div>
+      </li>
+      <li>
+        <p>
+          <class style="font-variant: small-caps">Scheme</class> format
+        </p>
+        <div class="tmweb-code">
+          <pre class="verbatim" xml:space="preserve">
+(with &quot;mode&quot; &quot;math&quot; (concat &quot;x+y+&quot; (frac &quot;1&quot; &quot;2&quot;) &quot;+&quot; (sqrt &quot;y+z&quot;)))</pre>
+        </div>
+      </li>
+    </ul>
+    <h2 id="auto-7">Typesetting<span style="margin-left: 1em"></span></h2>
+    <p>
+      Typesetting process converts TeXmacs trees into boxes:
+    </p>
+    <p>
+      <img src="overview-3.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -2.39018181818182em; height: 4.78036363636364em"></img>
+    </p>
+    <p>
+      The <a href="../regular/regular.en.html">typesetting primitives</a> are designed to be very fast and
+      they are built-in into the editor:
+    </p>
+    <div style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+      <div style="text-indent: 0em">
+        <p>
+          <font style="font-size: 90.0%">e.g. typesetting primitives for horizontal
+          concatenations (<font class="tmweb-markup">concat</font>), page breaks (<font
+          class="tmweb-markup">page-break</font>), mathematical fractions (<font class="tmweb-markup">frac</font>),
+          hyperlinks (<font class="tmweb-markup">hlink</font>), and so on.</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      The rendering of many of the primitives may be customized through the <a
+      href="../environment/environment.en.html">built-in environment variables</a>.
+    </p>
+    <div style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+      <div style="text-indent: 0em">
+        <p>
+          <font style="font-size: 90.0%">e.g. the environment variable <font color="#008000"><i>color</i></font>
+          specifies the current color of objects, <font color="#008000"><i>par-left</i></font>
+          the current left margin of paragraphs, <abbr>etc.</abbr></font>
+        </p>
+      </div>
+    </div>
+    <p>
+      The <a href="../stylesheet/stylesheet.en.html">stylesheet language</a> allows the user to write new
+      primitives (macros) on top of the built-in primitives. 
+    </p>
+    <div style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 84.350352384px; margin-right: 84.350352384px">
+      <div style="text-indent: 0em">
+        <p>
+          <font style="font-size: 90.0%">Contains primitives for defining macros, conditional
+          statements, computations, delayed execution, <abbr>etc.</abbr> and a
+          special <font class="tmweb-markup">extern</font> tag to inject <class style="font-variant: small-caps">Scheme</class>
+          expressions in order to write macros.</font>
+        </p>
+      </div>
+    </div>
+    <h2 id="auto-8">Macros<span style="margin-left: 1em"></span></h2>
+    <p>
+      Evaluation of TeXmacs trees proceeds by reduction of the primitives,
+      essentialy by evaluation of macro applications.
+    </p>
+    <p>
+      
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>hello</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>name</i></font><font color="blue">|</font><font color="black"><font
+        color="black">Hello </font><font color="black"><font color="brown"><i>name</i></font></font><font
+        color="black">, how are you today?</font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      Macros have editable input fields. Examples here below (activate the
+      macros):
+    </p>
+    <p>
+      <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>hello</i></font><font
+      color="blue">|</font><font color="black"></font><font color="blue">&gt;</font>
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>seq</i></font><font
+      color="blue">|</font><font color="black"></font><font color="blue">&gt;</font>
+    </p>
+    <center>
+      <img src="overview-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434344em; margin-right: -0.010343434343433em; margin-top: -0.0103434343434343em; vertical-align: -0.258585858585859em; height: 1.0550303030303em"></img>
+    </center>
+    <h2 id="auto-9"><class style="font-variant: small-caps">Guile</class> as extension language<span style="margin-left: 1em"></span></h2>
+    <p>
+      TeXmacs is extendable and customizable in various ways:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <class style="font-variant: small-caps"><b>Guile</b></class> embedded as extension and
+          scripting language
+        </p>
+      </li>
+      <li>
+        <p>
+          A plugin system allows asyncronous communication with external
+          programs 
+        </p>
+      </li>
+      <li>
+        <p>
+          Mechanism to dynamically load external code (via C interface)
+        </p>
+      </li>
+    </ul>
+    <p>
+      
+    </p>
+    <p>
+      <class style="font-variant: small-caps">Guile</class> is easy to embed and provides a reasonably
+      fast implementation of <class style="font-variant: small-caps">Scheme</class>.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      Why <class style="font-variant: small-caps">Scheme</class>?
+    </p>
+    <ol>
+      <li>
+        <p>
+          Allows to mix programs and data in a common framework.
+        </p>
+      </li>
+      <li>
+        <p>
+          Allows to customize the language itself, by adding new programming
+          constructs.
+        </p>
+      </li>
+      <li>
+        <p>
+          Allows to write programs on a very abstract level.
+        </p>
+      </li>
+    </ol>
+    <h2 id="auto-10"> Menus<span style="margin-left: 1em"></span></h2>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(menu-bind file-menu
+  (&quot;New&quot; (new-buffer))
+  (&quot;Load&quot; (choose-file load-buffer &quot;Load file&quot; &quot;&quot;))
+  (&quot;Save&quot; (save-buffer))
+  &hellip;)</pre>
+    </div>
+    <p>
+      can be easily extended from user code:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(menu-bind insert-menu
+  (former)
+  &ndash;&ndash;&ndash;
+  (-&gt; &quot;Opening&quot;
+      (&quot;Dear Sir&quot; (insert &quot;Dear Sir,&quot;))
+      (&quot;Dear Madam&quot; (insert &quot;Dear Madam,&quot;)))
+  (-&gt; &quot;Closing&quot;
+      (&quot;Yours sincerely&quot; (insert &quot;Yours sincerely,&quot;))
+      (&quot;Greetings&quot; (insert &quot;Greetings,&quot;))))</pre>
+    </div>
+    <h2 id="auto-11">Some more GUI<span style="margin-left: 1em"></span></h2>
+    <p>
+      Keybindings
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(kbd-map
+  (&quot;D e f .&quot; (make 'definition))
+  (&quot;L e m .&quot; (make 'lemma))
+  (&quot;P r o p .&quot; (make 'proposition))
+  (&quot;T h .&quot; (make 'theorem)))</pre>
+    </div>
+    <p>
+      The file <tt class="verbatim">my-init-buffer.scm</tt> is executed every time a
+      buffer is loaded, it allows some specific customizations. For example:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(if (not (buffer-has-name? (current-buffer)))
+    (begin
+      (init-style &quot;article&quot;)
+      (buffer-pretend-saved (current-buffer))))
+
+(if (not (buffer-has-name? (current-buffer)))
+    (make-session &quot;maxima&quot; (url-&gt;string (current-buffer))))</pre>
+    </div>
+    <h2 id="auto-12">Scheme invocation<span style="margin-left: 1em"></span></h2>
+    <p>
+      <class style="font-variant: small-caps">Scheme</class> commands can be invoked interactively (like
+      in <class style="font-variant: small-caps">Emacs</class>) using the <font class="tmweb-key">Meta+X</font>
+      shortcut. 
+    </p>
+    <p>
+      A <class style="font-variant: small-caps">Scheme</class> session is started using the <class
+      class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Session</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Scheme</class><a id="auto-13"></a> menu item:
+    </p>
+    <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define (square x) (* x x))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (square 1111111)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (kbd-map (&quot;h i .&quot; (insert &quot;Hi there!&quot;)))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              ;; try typing &ldquo;hi.&rdquo;
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <p>
+      <class style="font-variant: small-caps">Scheme</class> commands can be invoked from the command
+      line:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+<class style="font-family: Times New Roman"><tt>texmacs text.tm -x &quot;(print)&quot; -q</tt></class></pre>
+    </div>
+    <p>
+      Or scheme statement executed from inside TeXmacs macros:
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>extern<font color="blue">|</font><font color="#228"><tt>(lambda
+        (x) &lsquo;(concat &quot;Hallo &quot; ,x))</tt></font><font color="blue">|</font><font
+        color="black">Piet</font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <h2 id="auto-14">The <tt class="verbatim scheme">tm-define</tt> macro<span style="margin-left: 1em"></span></h2>
+    <p>
+      <i>Contextual overloading</i> 
+    </p>
+    <p>
+      Function definition can depend on several run-time conditions (e.g.
+      editor mode). This allows to develop modular user interfaces.
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (hello) (insert &quot;Hello&quot;))
+(tm-define (hello) (:require (in-math?)) (insert-go-to &quot;hello()&quot; '(6)))</pre>
+    </div>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (hello)
+  (if (in-math?) (insert-go-to &quot;hello()&quot; '(6)) (former)))</pre>
+    </div>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (my-replace what by)
+  default-implementation)
+
+(tm-define (my-replace what by)
+  (:require (== what by))
+  (noop))</pre>
+    </div>
+    <h2 id="auto-15">Meta informations<span style="margin-left: 1em"></span></h2>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (square x)
+  (:synopsis &quot;Compute the square of @x&quot;)
+  (:argument x &quot;A number&quot;)
+  (:returns &quot;The square of @x&quot;)
+  (* x x))</pre>
+    </div>
+    <p>
+      Used via e.g. <tt class="verbatim scheme">(help square)</tt>. Allows for interactive
+      input of parameters: typing <font class="tmweb-key">Meta+Shift+X</font> followed by
+      <tt class="verbatim scheme">square</tt> and <font class="tmweb-key">Return</font> and you will be
+      prompted for &ldquo;A number&rdquo; on the footer (or in a dialog).
+      Tab-completion.
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-property (choose-file fun text type)
+  (:interactive #t))</pre>
+    </div>
+    <p>
+      to indicate interactive commands in menu items like:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(&quot;Load&quot; (choose-file load-buffer &quot;Load file&quot; &quot;&quot;))</pre>
+    </div>
+    <p>
+      Check-marks for menu items:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (toggle-session-math-input)
+  (:check-mark &quot;v&quot; session-math-input?)
+  (session-use-math-input (not (session-math-input?))))</pre>
+    </div>
+    <p>
+      
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define mouse-unfold
+  (:secure #t)
+  (with-action t
+    (tree-go-to t :start)
+    (fold)))</pre>
+    </div>
+    <div style="margin-left: 42.175176192px">
+      <p>
+        <span class="no-breaks"><img src="overview-5.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>This</span> is a fold/unfold
+        environment
+      </p>
+      <p>
+        It allows to toggle the display of its content by switching the tag
+        from <font class="tmweb-markup">fold</font> to <font class="tmweb-markup">unfold</font> and back.
+      </p>
+    </div>
+    <h2 id="auto-16"><class style="font-variant: small-caps">Scheme</class> representation TeXmacs content<span
+    style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          <b>Passive trees</b> (<tt class="verbatim">stree</tt>)
+        </p>
+        <center>
+          <img src="overview-6.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151515em; vertical-align: -0.620565656565657em; height: 2.06em"></img>
+        </center>
+        <p>
+          is typically represented by
+        </p>
+        <div class="tmweb-code">
+          <pre class="verbatim scheme" xml:space="preserve">
+(frac (concat &quot;a&quot; (rsup &quot;2&quot;)) &quot;b+c&quot;)</pre>
+        </div>
+        <p>
+          convenient to manipulate content directly using standard <class
+          style="font-variant: small-caps">Scheme</class> routines on lists.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Active trees</b> (<tt class="verbatim">tree</tt>). TeXmacs internal C++
+          type <tt class="verbatim">tree</tt> which is exported to <class style="font-variant: small-caps">Scheme</class>
+          via the glue. Keeps track of the <i>position</i> of the tree inside
+          the global document tree and can be used to programmatically modify
+          documents.
+        </p>
+      </li>
+      <li>
+        <p>
+          <b>Hybrid representation</b> (<tt class="verbatim">content</tt>). an
+          expression of the type <tt class="verbatim">content</tt> is either a string, a
+          tree or a list whose first element is a symbol and whose remaining
+          elements are other expressions of type <tt class="verbatim">content</tt>.
+        </p>
+        <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+          <p>
+            <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+              <tbody><tr>
+                <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+                <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+                  (tree-set! t '(document &quot;First line.&quot; &quot;Second
+                  line.&quot;))
+                </p></font></td>
+              </tr></tbody>
+            </table></tt></class></tt>
+          </p>
+        </div>
+        <div class="compact-block" style="text-indent: 0em">
+          <p>
+            <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+              <tbody><tr>
+                <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+                <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+                  (tree-set t 1 &quot;New second line.&quot;)
+                </p></font></td>
+              </tr></tbody>
+            </table></tt></class></tt>
+          </p>
+        </div>
+        <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+          <p>
+            <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+              <tbody><tr>
+                <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">scheme] </font></td>
+                <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+                  (tree-set t 0 &lsquo;(strong ,(tree-ref t 0)))
+                </p></font></td>
+              </tr></tbody>
+            </table></tt></class></tt>
+          </p>
+        </div>
+      </li>
+    </ul>
+    <h2 id="auto-17">A full example<span style="margin-left: 1em"></span></h2>
+    <p>
+      
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (swap-numerator-denominator t)
+  (:require (tree-is? t 'frac))
+  (with p (tree-cursor-path t)
+    (tree-set! t &lsquo;(frac ,(tree-ref t 1) ,(tree-ref t 0)))
+    (tree-go-to t (cons (- 1 (car p)) (cdr p)))
+    (tree-focus t)))</pre>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      To be called as <tt class="verbatim scheme">(swap-numerator-denominator
+      (focus-tree))</tt>, or just add it as a structured variant to <font
+      class="tmweb-markup">frac</font>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (variant-circulate t forward?)
+  (:require (tree-is? t 'frac))
+  (swap-numerator-denominator t))</pre>
+    </div>
+    <h2 id="auto-18">Regular expressions<span style="margin-left: 1em"></span></h2>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      TeXmacs implements the routines <tt class="verbatim scheme">match?</tt> and <tt class="verbatim scheme">select</tt>
+      for matching regular expressions and selecting subexpressions along a
+      &ldquo;path&rdquo;. For instance:  in the current buffer search all
+      expressions of the form
+    </p>
+    <center>
+      <img src="overview-7.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0673333333333335em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -1.10278787878788em; height: 2.13181818181818em"></img>
+    </center>
+    <p>
+      where <img src="overview-8.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img> and <img src="overview-9.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0206868686868686em; margin-top: 0em; vertical-align: -0.0103232323232323em; height: 0.734383838383838em"></img> are general
+      expressions:
+    </p>
+    <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (select (buffer-tree) '(:* (:match (frac :%1 (concat
+              &quot;1+&quot; (sqrt :%1))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <h2 id="auto-19">More scheme<span style="margin-left: 1em"></span></h2>
+    <p>
+      <b>User preferences</b>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(define-preferences
+  (&quot;Gnu's hair color&quot; &quot;brown&quot; notify-gnu-hair-change)
+  (&quot;Snail's cruising speed&quot; &quot;1mm/sec&quot; notify-Achilles))</pre>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      <b>New data formats and converters</b>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(define-format blablah
+  (:name &quot;Blablah&quot;)
+  (:suffix &quot;bla&quot;))
+
+(converter blablah-file latex-file
+  (:require (url-exists-in-path? &quot;bla2tex&quot;))
+  (:shell &quot;bla2tex&quot; from &quot;&gt;&quot; to))</pre>
+    </div>
+    <p>
+      When a format can be converted from or into TeXmacs, then it will
+      automatically appear into the <class class="tmweb-menu" style="font-family: sans-serif">File</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Export</class><a id="auto-20"></a> and <class class="tmweb-menu" style="font-family: sans-serif">File</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Import</class><a id="auto-21"></a> menus. Similarly, when a format
+      can be converted to <class style="font-variant: small-caps">Postscript</class>, then it also
+      becomes a valid format for images. TeXmacs also attempts to combine
+      explicitly declared converters into new ones.
+    </p>
+    <h2 id="auto-22">Dialogues &amp; Widgets<span style="margin-left: 1em"></span></h2>
+    <p>
+      <b>Dialogues</b>
+    </p>
+    <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (user-ask &quot;First number:&quot;
+            </p><p>
+              (lambda (a)
+            </p><p>
+              (user-ask &quot;Second number:&quot;
+            </p><p>
+              (lambda (b)
+            </p><p>
+              (set-message (number-&gt;string (* (string-&gt;number a)
+            </p><p>
+              (string-&gt;number b)))
+            </p><p>
+              &quot;product&quot;)))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      <b>Widgets</b>
+    </p>
+    <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (tm-widget (example3)
+            </p><p>
+              (hlist 
+            </p><p>
+              (bold (text &quot;Hello&quot;))
+            </p><p>
+              &gt;&gt;&gt;
+            </p><p>
+              (inert (explicit-buttons (&quot;world&quot; (display
+              &quot;!\n&quot;))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (top-window example3 &quot;Some text&quot;)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <h2 id="auto-23"><tt class="verbatim scheme">tree-view</tt><span style="margin-left: 1em"></span></h2>
+    <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define t
+            </p><p>
+              (stree-&gt;tree
+            </p><p>
+              '(root
+            </p><p>
+              (library &quot;Library&quot;
+              &quot;$TEXMACS_PIXMAP_PATH/tm_german.xpm&quot; 01
+            </p><p>
+              (collection &quot;Cool stuff&quot; 001)
+            </p><p>
+              (collection &quot;Things to read&quot; 002)
+            </p><p>
+              (collection &quot;Current work&quot; 003
+            </p><p>
+              (collection &quot;Forever
+              current&quot; 004)
+            </p><p>
+              (collection &quot;Read me&quot;
+              005))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define dd
+            </p><p>
+              (stree-&gt;tree
+            </p><p>
+              '(list (library DisplayRole DecorationRole UserRole:1)
+            </p><p>
+              (collection DisplayRole UserRole:1))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (define (action clicked cmd-role . user-roles)
+            </p><p>
+              (display* &quot;clicked= &quot; clicked &quot;, cmd-role=
+              &quot; cmd-role
+            </p><p>
+              &quot;, user-roles= &quot; user-roles
+              &quot;\n&quot;)))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (tm-widget (widget-library)
+            </p><p>
+              (resize (&quot;150px&quot; &quot;400px&quot;
+              &quot;9000px&quot;) (&quot;300px&quot; &quot;600px&quot;
+              &quot;9000px&quot;)
+            </p><p>
+              (vertical
+            </p><p>
+              (bold (text &quot;Testing tree-view&quot;))
+            </p><p>
+              ===
+            </p><p>
+              (tree-view action t dd))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (top-window widget-library &quot;Tree View&quot;)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <h2 id="auto-24">Forms<span style="margin-left: 1em"></span></h2>
+    <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (tm-widget (form3 cmd)
+            </p><p>
+              (resize &quot;500px&quot; &quot;500px&quot;
+            </p><p>
+              (padded
+            </p><p>
+              (form &quot;Test&quot;
+            </p><p>
+              (aligned
+            </p><p>
+              (item (text &quot;Input:&quot;)
+            </p><p>
+              (form-input &quot;fieldname1&quot;
+              &quot;string&quot; '(&quot;one&quot;) &quot;1w&quot;))
+            </p><p>
+              (item === ===)
+            </p><p>
+              (item (text &quot;Enum:&quot;)
+            </p><p>
+              (form-enum &quot;fieldname2&quot; '(&quot;one&quot;
+              &quot;two&quot; &quot;three&quot;) &quot;two&quot;
+              &quot;2w&quot;))
+            </p><p>
+              (item === ===)
+            </p><p>
+              (item (text &quot;Choice:&quot;)
+            </p><p>
+              (form-choice &quot;fieldname3&quot;
+              '(&quot;one&quot; &quot;two&quot; &quot;three&quot;)
+              &quot;one&quot;))
+            </p><p>
+              (item === ===)
+            </p><p>
+              (item (text &quot;Choices:&quot;)
+            </p><p>
+              (form-choices &quot;fieldname4&quot; 
+            </p><p>
+              '(&quot;one&quot; &quot;two&quot;
+              &quot;three&quot;) 
+            </p><p>
+              '(&quot;one&quot; &quot;two&quot;))))
+            </p><p>
+              (bottom-buttons
+            </p><p>
+              (&quot;Cancel&quot; (cmd &quot;cancel&quot;)) &gt;&gt;
+            </p><p>
+              (&quot;Ok&quot;
+            </p><p>
+              (display* (form-fields) &quot; -&gt; &quot;
+              (form-values) &quot;\n&quot;)
+            </p><p>
+              (cmd &quot;ok&quot;)))))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (dialogue-window form3 (lambda (x) (display* x &quot;\n&quot;))
+              &quot;Test of form3&quot;)
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <h2 id="auto-25">Bibliography styles<span style="margin-left: 1em"></span></h2>
+    <p>
+      New styles can be defined via <class style="font-variant: small-caps">Scheme</class> modules like
+      <tt class="verbatim">example.scm</tt> defined as follows:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(texmacs-module (bibtex example)
+  (:use (bibtex bib-utils)))
+
+(bib-define-style &quot;example&quot; &quot;plain&quot;)
+
+(tm-define (bib-format-date e)
+  (:mode bib-example?)
+  (bib-format-field e &quot;year&quot;))</pre>
+    </div>
+    <p>
+      This example style behaves in a similar way as the <tt class="verbatim">plain</tt>
+      style, except that all dates are formatted according to our custom
+      routine. Styles are stored in <tt class="verbatim">$TEXMACS_PATH/progs/bibtex</tt>
+      and referred to as e.g. <tt class="verbatim">tm-example</tt> (for  when used in a
+      TeXmacs document.
+    </p>
+    <p>
+      
+    </p>
+    <h2 id="auto-26">Graphics<span style="margin-left: 1em"></span></h2>
+    <p>
+      Graphics objects are also part of the TeXmacs format and can be
+      manipulated programmatically from Scheme.
+    </p>
+    <p>
+      Actually, part of the graphics editor is written in Scheme.
+    </p>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              (stree-&gt;tree 
+            </p><p>
+              '(with gr-geometry (tuple &quot;geometry&quot;
+              &quot;200px&quot; &quot;100px&quot; &quot;center&quot;) 
+            </p><p>
+              color &quot;blue&quot; 
+            </p><p>
+              (graphics (text-at &quot;TeXmacs&quot; (point
+              &quot;-2.5&quot; &quot;-1&quot;)) 
+            </p><p>
+              (point 0 -1) 
+            </p><p>
+              (line (point 0 0) (point 0 1) 
+            </p><p>
+              (point 1 1) (point 1 0) (point 0 0)))))
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
+      <p style="margin-top: 0.5em; margin-bottom: 0.5em">
+        <tt class="verbatim"><div style="margin-left: 42.175176192px">
+          <div align="justify">
+            <font color="blue"><img src="overview-10.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img></font>
+          </div>
+        </div></tt>
+      </p>
+    </div>
+    <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
+      <p>
+        <tt class="verbatim"><class style="font-family: Times New Roman"><tt><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#008000">Scheme] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="black"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt></class></tt>
+      </p>
+    </div>
+    <h2 id="auto-27">The future of TeXmacs<span style="margin-left: 1em"></span></h2>
+    <p>
+      Many improvements ahead
+    </p>
+    <p>
+      
+    </p>
+    <ul>
+      <li>
+        <p>
+          Version 2.1 to be released soon
+        </p>
+      </li>
+      <li>
+        <p>
+          Update the backend to <class style="font-variant: small-caps">Qt</class> 5 (currently <class
+          style="font-variant: small-caps">Qt</class> 4.8) [almost there]
+        </p>
+      </li>
+      <li>
+        <p>
+          Adapt the scheme code to run on <class style="font-variant: small-caps">Guile 3</class>.
+          (currently <class style="font-variant: small-caps">Guile</class> 1.8) [WIP]
+        </p>
+      </li>
+      <li>
+        <p>
+          New website, documentations, videos [WIP]
+        </p>
+      </li>
+      <li>
+        <p>
+          <class style="font-variant: small-caps">Jupyter</class> plugins (protocol to interface to many
+          computational kernels, e.g. <class style="font-variant: small-caps">Python</class>, <class
+          style="font-variant: small-caps">Julia</class>, <class style="font-variant: small-caps">R</class>, <class style="font-variant: small-caps">Haskell</class>,
+          <class style="font-variant: small-caps">Guile</class>, <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>)
+        </p>
+      </li>
+      <li>
+        <p>
+          Improvements to the styling of presentations and posters [WIP]
+        </p>
+      </li>
+      <li>
+        <p>
+          More documentation, more tutorial, grow community [Stackexchange
+          proposal]
+        </p>
+      </li>
+      <li>
+        <p>
+          Collaboration tools
+        </p>
+      </li>
+      <li>
+        <p>
+          Bibliography management with <class style="font-variant: small-caps">Zotero</class>
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-28">Hacking TeXmacs<span style="margin-left: 1em"></span></h2>
+    <p>
+      <i>Many opportunities for contributions</i> for all tastes
+    </p>
+    <ul>
+      <li>
+        <p>
+          From the outside
+        </p>
+        <font style="font-size: 90.0%"><ul>
+          <li>
+            <p>
+              Write and review documentations, tutorials, videos, improve
+              community, advertise
+            </p>
+          </li>
+          <li>
+            <p>
+              Develop plugins to your preferred system or to add your
+              preferred feature, e.g.: literate programming tools with
+              beautyful output
+            </p>
+          </li>
+          <li>
+            <p>
+              Write new document styles, templates, presentation styles,
+              poster styles
+            </p>
+          </li>
+          <li>
+            <p>
+              Font tuning
+            </p>
+          </li>
+        </ul></font>
+      </li>
+      <li>
+        <p>
+          Hack the <class style="font-variant: small-caps">C++</class> code
+        </p>
+        <font style="font-size: 90.0%"><ul>
+          <li>
+            <p>
+              Understand the code and write developer documentation
+            </p>
+          </li>
+          <li>
+            <p>
+              Improve the <class style="font-variant: small-caps">Qt</class> backend, fix bugs, add
+              features, improve stability, better image handling and PDF
+              export of TeXmacs features
+            </p>
+          </li>
+          <li>
+            <p>
+              Write new backends (<class style="font-variant: small-caps">Cocoa</class>), port to
+              tablets or to the browser
+            </p>
+          </li>
+        </ul></font>
+      </li>
+      <li>
+        <p>
+          Hack <class style="font-variant: small-caps">Scheme</class>
+        </p>
+        <font style="font-size: 90.0%"><ul>
+          <li>
+            <p>
+              Help porting to <class style="font-variant: small-caps">Guile 3</class>, improve speed
+            </p>
+          </li>
+          <li>
+            <p>
+              fix bugs, review code, add new cool features
+            </p>
+          </li>
+        </ul></font>
+      </li>
+    </ul>
+    <p>
+      
+    </p>
+  </body>
+</html>

@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Development resources and ideas<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      This page contains idea and resources pertaining to the development of
+      TeXmacs.
+    </div>
+    <p>
+      [Last update 21.4.2022]
+    </p>
+    <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Random and unsorted resources<span style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          An interesting talk about open source community (<a href="https://www.youtube.com/watch?v=o_4EX4dPppA">video</a>).
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-3">2.<span style="margin-left: 1em"></span>Syntax highlighting<span style="margin-left: 1em"></span></h2>
+    <p>
+      We need syntax highlighting computations when rendering verbatim code
+      snippets and also when exporting to HTML, for example. Currently there
+      is some parsing library written in C++ inside TeXmacs (see the
+      <tt>src/System/Language</tt> directory), but this does not cover HTML
+      output and it is quite rudimentary. In this blog for example we achieve
+      syntax-highlighting for HTML via an external JavaScript library. It
+      would be useful just to output the appropriate elaborated text (together
+      with a plain-text version for copy/paste). In general it could be maybe
+      interesting to evaluate the use of external libraries for syntax
+      analysis of programming languages. 
+    </p>
+    <ul>
+      <li>
+        <p>
+          Tree-sitter is a recent interesting library for computing
+          incrementally an AST for a piece of text, including error recovery.
+          It is written in C/C++ with no external dependencies (as it is
+          claimed) which make relatively easy an inclusion in TeXmacs. The
+          github <a href="https://tree-sitter.github.io/tree-sitter/">link</a>, and a presentation <a href="https://www.youtube.com/watch?v=Jes3bD6P0To">talk</a> on
+          youtube.
+        </p>
+      </li>
+      <li>
+        <p>
+          The KDE project has a syntax-highlighting engine <a href="https://invent.kde.org/frameworks/syntax-highlighting/">here</a>
+          where languages descriptions comes in external XML files.  
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-4">3.<span style="margin-left: 1em"></span>Parsing Markdown and other languages<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      It could be useful for us to be able to parse the <a href="https://www.markdownguide.org">Markdown</a>
+      format. There are various available parsers which could be integrated as
+      plugins in the codebase, for example <a href="https://github.com/jgm/peg-markdown">PEG-markdown</a>, <a href="https://github.com/vmg/sundown">sundown</a>,
+      <a href="https://fossil.instinctive.eu/libsoldout/index">libsoldout</a>, <a href="https://github.com/mity/md4c">md4c</a> and also some native scheme
+      implementations like <a href="https://bitbucket.org/DerGuteMoritz/lowdown/src/master/">lowdown</a> for Chicken Scheme. Currently
+      in TeXmacs we do not have a generic way to parse external languages: for
+      example internally the parsing of HTML or TeX is done via C++ code
+      without any common parsing substrate (as far as I can see). There is
+      some support for packrat parsing but it is used only in the semantic
+      checking of math formulas and it seems that the packrat parser is not
+      capable of semantic actions, i.e. can only report if a string (or tree?)
+      belongs to some language or not. Tree-sitter could also be an option as
+      generic parsing mechanism. It could be useful to think how to factor and
+      restructure the parsing mechanisms in TeXmacs to avoid duplicating
+      code/efforts/know-how.
+    </p>
+    <h2 id="auto-5">4.<span style="margin-left: 1em"></span>Spellchecking and grammar-checking<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      This could be an area where we can improve substantially over
+      LaTeX-based workflows, probably. We need to check what is done in other
+      text-processing software. Some interesting resources
+    </p>
+    <ul>
+      <li>
+        <p>
+          <a href="https://github.com/languagetool-org/languagetool">Languagetool</a> is a (big) open source Java system for
+          grammar correction in various languages. Maybe it is conceivable to
+          offer the possibility to use it as an external service (on the web
+          or locally).
+        </p>
+      </li>
+      <li>
+        <p>
+          A list of grammar-checking resources in github: <a href="https://github.com/topics/grammar-checker">URL</a>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Programs that link to Languagetools for LaTeX documents: <a href="https://github.com/sylvainhalle/textidote">texidote</a>,
+          <a href="https://github.com/valentjn/vscode-ltex">vscode-ltex</a>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Spellchecking alternatives: <a href="https://nuspell.github.io">nuspell</a>, <a href="http://hunspell.github.io">hunspell</a>,
+          <a href="https://github.com/wolfgarbe/SymSpell">symspell</a> <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> which to pick, if any? We would
+          need to survey tradeoffs and opportunities.
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-6">5.<span style="margin-left: 1em"></span>General plugin mechanisms<span style="margin-left: 1em"></span></h2>
+    <p>
+      A strategical goal would be to improve support for general mechanisms to
+      talk to external programs:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <a href="https://jupyter.org">Jupyter</a> is a protocol to interface clients to
+          computational kernels (Python, Julia, Haskell,<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>). We
+          already have a very primitive plugin here <a href="https://github.com/mgubi/tm_jupyter">tm_jupyter</a>
+          (written in Python). It could potentially replace many of our
+          various plugins and allow easier maintenance. Moreover it could
+          allow TeXmacs to be an alternative to Jupyter notebooks or <a href="https://github.com/mgubi/tm_jupyter">
+          Jupyter Qt Console</a>. One can look to these projects to understand
+          which features have to be supported. Jeroen has improved the
+          tm_jupyter plugin <a href="https://github.com/woutersj/tm_jupyter/commits/master">here</a>.  
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> allows to connect to various
+          programming language servers to obtain semantic informations, code
+          completions, etc<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+          style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> For example it could be useful
+          to provide an interface to theorem provers like <a href="https://leanprover.github.io">Lean</a> or
+          <a href="https://isabelle.in.tum.de">Isabelle/HOL</a>. In general this could be related to
+          literate programming capabilities/projects.
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-7">6.<span style="margin-left: 1em"></span>General attachments to documents and to PDF
+    files<span style="margin-left: 1em"></span></h2>
+    <p>
+      In some circumstances it is useful to transmit both a PDF version of a
+      document and the associated TeXmacs file (eventually with all the needed
+      support files like custom styles and images). This allow usual PDF
+      viewers to open the file and at the same time allows users of TeXmacs to
+      be able to retrieve an editable version of the document for
+      modification. It is useful to augment PDF with additional information to
+      improve the user experience on a variety of platforms which do not allow
+      to access the original TeXmacs documents. The PDF format gives the
+      possibility to embed arbitrary content within the document as
+      &ldquo;Embedded file&rdquo; streams. This possibility is exploited by
+      the LaTeX package <a href="https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf">attachfile</a> which allows to associate to
+      typesetted parts of the document arbitrary attachments with the
+      possibility to recover it. We could introduce a similar features in
+      TeXmacs. Various possible directions:
+    </p>
+    <ul>
+      <li>
+        <p>
+          first include external content in a TeXmacs document, as already
+          happens with images, but in a way that each document has its own
+          filesystem which can be manipulated.
+        </p>
+      </li>
+      <li>
+        <p>
+          include a TeXmacs document within a generated PDF file in such a way
+          that it is possible to open the PDF from TeXmacs and edit its source
+        </p>
+      </li>
+      <li>
+        <p>
+          develop optional augmentation of the generated PDF by adding popups
+          for link previews, and possibly create style files for generating
+          more interactive PDF (e.g. show answers to questions, popups with
+          arbitrary information, &hellip;) See this tutorial to see how this
+          might be implemented in the PDF format (<a href="https://www.youtube.com/watch?v=UGTbcqUMJcI">youtube</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          write code which insert in the PDF interactive features like popups
+          (for preview or for additional content), better tables of content,
+          etc&hellip;
+        </p>
+      </li>
+      <li>
+        <p>
+          add some more meta informations to the PDF file, like an interface
+          (a PDF form) to record metadata explicitly and maybe a modification
+          log, some more informations about the bibliography, preview links
+          (like in the UI), and LaTeX translations of the formulas to allow
+          correct copy/paste in the PDF.
+        </p>
+      </li>
+    </ul>
+    <p>
+      Useful links
+    </p>
+    <ul>
+      <li>
+        <p>
+          MuPDF is a PDF handling C library, look e.g. at the <a href="https://github.com/ArtifexSoftware/mupdf/blob/233926048d7647c8daed493c4372656db9f9b2b5/source/pdf/pdf-link.c#L255">pdf-link.c</a>
+          file there
+        </p>
+      </li>
+      <li>
+        <p>
+          the Poppler library has two utilities which perform
+          attachment/detachement of documents, see
+        </p>
+        <ul>
+          <li>
+            <p>
+              <a href="https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfattach.cc">https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfattach.cc</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfdetach.cc">https://cgit.freedesktop.org/poppler/poppler/tree/utils/pdfdetach.cc</a>
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          some useful notes in the PDF Hummus wiki
+        </p>
+        <ul>
+          <li>
+            <p>
+              <a href="https://github.com/galkahana/PDF-Writer/wiki/PDF-Embedding">https://github.com/galkahana/PDF-Writer/wiki/PDF-Embedding</a>
+            </p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          The, already mentioned, LaTeX package <a href="https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf">attachfile</a> 
+        </p>
+      </li>
+      <li>
+        <p>
+          A discussion about this topic is taking place in the forum (<a href="http://forum.texmacs.cn/t/proposal-mechanism-to-append-documents-to-and-augment-the-generated-pdf/1386">here</a>)
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-8">7.<span style="margin-left: 1em"></span>Zotero integration<span style="margin-left: 1em"></span></h2>
+    <p>
+      <class style="font-variant: small-caps">Zotero</class> is a widely used open source bibliographic
+      management tool. It would be interesting to have a good way to import
+      bibliography items from it. There are already various attemps to this:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <class style="font-variant: small-caps">Zotexmacs</class> (<a href="https://github.com/slowphil/zotexmacs">github</a>) by Philippe
+          Joyez.
+        </p>
+      </li>
+      <li>
+        <p>
+          TeXmacs/Zotero integration (<a href="https://github.com/KarlHegbloom/zotero-texmacs-integration/blob/master/progs/tm-zotero.scm">github</a>) by Karl Hegbloom.
+        </p>
+      </li>
+    </ul>
+    <p>
+      We maybe want to develop a more organic solution. Interesting links:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Zotero better BibTeX (<a href="https://github.com/retorquere/zotero-better-bibtex">github</a>), Zotero CLI (<a href="https://github.com/jbaiter/zotero-cli">github</a>),
+          Zotelo (Zotero/Emacs integration) (<a href="https://github.com/vspinu/zotelo">github</a>), Web
+          bibliographies with Zotero (<a href="https://github.com/davidswelt/zot_bib_web">github</a>), Zotero/LyX
+          integration (<a href="https://github.com/wshanks/lyz">github</a>).
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-9">8.<span style="margin-left: 1em"></span>Incremental computing<span style="margin-left: 1em"></span></h2>
+    <p>
+      Modifications to the documents are incremental, so one would like to
+      take this into account when recomputing both the typesetting and the
+      rendering onscreen. This problem is also relevant when syncronizing
+      live-editing document across a network connection. Some infrastructure
+      is already present in TeXmacs (details?). Here are gathered some
+      approaches to incremental computations in a general context.
+    </p>
+    <ul>
+      <li>
+        <p>
+          The paper &ldquo;Purely Functional Incremental Computing&rdquo; (<a
+          href="http://firsov.ee/incremental/incremental.pdf">PDF</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          Talk on implementing Data-driven incremental UIs (in OCAML) (<a
+          href="https://www.youtube.com/watch?v=R3xX37RGJKE">youtube</a>). And a longer talk with more details (<a href="https://www.youtube.com/watch?v=G6a5G5i4gQU">youtube</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          A blog post at Jane Street (<a href="https://blog.janestreet.com/introducing-incremental/">URL</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          Adaptive computation library in JS (<a href="https://github.com/rkirov/adapt-comp">link</a>)
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-10">9.<span style="margin-left: 1em"></span>Peer-to-peer collaboration<span style="margin-left: 1em"></span></h2>
+    <p>
+      <b>What:</b> Help improve the collaborative features of TeXmacs, in
+      particular add user cursors to the live documents and improve
+      performance or add peer-to-peer infrastructure to the live document
+      handling.
+    </p>
+    <p>
+      <b>Why:</b>  TeXmacs has already collaborative capabilities. See e.g.
+      the support in <code>$TEXMACS_PATH/progs/server</code> and
+      <code>$TEXMACS_PATH/progs/client</code>.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/d/d4d28b46031cfeafde9c7d9ee314009db58d98e3.png"><p>
+        <img class="image" src="dev-notes-1.png" height="448" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      We support live documents, chat rooms and shared file server. However
+      these features are still experimental and need testing, some more
+      security handling (authentication, etc&hellip;), etc&hellip; and they
+      depends on a central server (another TeXmacs instance) which should be
+      publicly visible on the Internet (i.e. have its own IP address).
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/0/05f5330887b028f8144d885451d45c560eaea143.jpeg"><p>
+        <img class="image" src="dev-notes-2.jpeg" height="431" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      <b>How:</b> Various directions are possible:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Better UI: the current UI does not give much feedback to the user,
+          especially wrt. problems in the connection to the server, successful
+          connection, liveliness of the server, etc&hellip;
+        </p>
+      </li>
+      <li>
+        <p>
+          Implement user cursors in live documents : a users should be able to
+          see where other users are actively working.
+        </p>
+      </li>
+      <li>
+        <p>
+          Investigate performance issue in the current implementation and
+          improve on them. Also investigate other possible mechanism of
+          synchronisation, e.g. the one used in <code>Typst</code> or other
+          collaborative solutions.
+        </p>
+      </li>
+      <li>
+        <p>
+          Develop some server-side architecture and relative monitoring to run
+          the Mogan server in a cloud solution like Amazon AWS or similar.
+        </p>
+      </li>
+      <li>
+        <p>
+          Alternatively (and much better than the central server solution),
+          investigate the possibility to create a peer-to-peer network using
+          modern internet technologies where clients can connect together and
+          sync their content without the presence of a centralised authority.
+        </p>
+      </li>
+    </ul>
+    <p>
+      Some references:
+    </p>
+    <ul>
+      <li>
+        <p>
+          A discussion in the forum (<a href="http://forum.texmacs.cn/t/proposal-p2p-collaborative-mogan-texmacs/1379">here</a>)
+        </p>
+      </li>
+      <li>
+        <p>
+          the <a href="https://libp2p.io/">libp2p</a> library (bloated, produces &gt;100Mb
+          executables)
+        </p>
+      </li>
+      <li>
+        <p>
+          the <a href="https://libdatachannel.org/">libdatachannel</a> C++ library. lightweight, needs a
+          signalling server to exchange connection information (which seems an
+          acceptable tradeoff) and then uses WebRTC to run a p2p channel
+        </p>
+      </li>
+      <li>
+        <p>
+          a serverless solution for signalling  <a href="https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2">https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2</a>
+        </p>
+      </li>
+      <li>
+        <p>
+          an intro to WebRTC channels and signalling: <a href="https://blog.devgenius.io/webrtc-chat-application-772539ae97b7">https://blog.devgenius.io/webrtc-chat-application-772539ae97b7</a>
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://holepunch.to/">holepunch.io</a> a complete p2p solution (but without C++
+          bindings), see <code>hyperbeam</code> for a simple tunnelling p2p
+          app.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/taylorconor/p2psc">p2psc</a> a p2p socket creation library in C++
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/AndersCan/p2p-socket">p2p-socket</a> a Node program which establish p2p
+          connection over local TCP ports
+        </p>
+      </li>
+      <li>
+        <p>
+          NAT hole punching like these require the use of an intermediate
+          server. We can run a lightweight server (e.g. coded in Javascript)
+          like here: <a href="https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2">https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2</a>
+          or use DHTs like the p2p-socket solution with uses <a href="http://holepunch.io/">holepunch.io</a>
+          to establish the connection.
+        </p>
+      </li>
+      <li>
+        <p>
+          the GNU project has its own p2p communication platform called <a
+          href="https://git.jami.net/savoirfairelinux">JAMI 1</a>. Docs are here: <a href="https://docs.jami.net/">https://docs.jami.net</a>
+          they have all the APIs and infrastructure which allow to connect two
+          clients to exchange info, we could leverage that for TeXmacs, and
+          maybe also write a TeXmacs plugin for JAMI so that one can
+          collaborate via teleconferencing and work on the same document (to
+          be seen, I've not yet looked in detail in their plugin system).
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-11">10.<span style="margin-left: 1em"></span>OpenType math font support<span style="margin-left: 1em"></span></h2>
+    <p>
+      <b>What:</b> Add support for OpenType MATH table &amp; related font
+      features (<a href="https://learn.microsoft.com/en-us/typography/opentype/spec/math">https://learn.microsoft.com/en-us/typography/opentype/spec/math
+      1</a>)
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/1/104569854713dfae99d4ab26582e54b2058dea7c.png"><p>
+        <img class="image" src="dev-notes-3.png" height="466" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      investigate the possibility to remove the old TeX fonts and only use
+      modern OpenType font containers (at least for the default fonts).
+    </p>
+    <p>
+      <b>Why:</b> At the moment TeXmacs is able to use only very few math
+      fonts (like Stix, TeX Gyre) and this support is hardwired in the C++
+      files and does not take into account all the informations available in
+      the font files.
+    </p>
+    <p>
+      These fonts file contain the position in the font of extensible brackets
+      or extensible glyphs like arrows, square roots, etc&hellip;, and the
+      metrics to correctly position index and subscripts.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/b/b9bd60542d93240d7095fcc19a3673c6b7b56e67.png"><p>
+        <img class="image" src="dev-notes-4.png" height="248" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      Some time ago mgubi started to implement some OpenType font support for
+      TeXmacs, here: <a href="https://github.com/mgubi/texmacs/tree/wip-unicode-math">https://github.com/mgubi/texmacs/tree/wip-unicode-math
+      2</a>
+    </p>
+    <p>
+      TeXmacs still depends very much on old font formats while there are now
+      available many free fonts in OpenType format which make it easier to
+      support professional math typesetting. In particular there are Latin
+      Modern fonts which can replace our old TeX fonts, and possibly improve
+      speed since there will be less font searching.
+    </p>
+    <p>
+      One side goal could be to get rid of all TeX fonts and distribute only
+      the OpenType variants. This is for example what ConTeXt does.:
+    </p>
+    <p>
+      <a href="https://wiki.contextgarden.net/ConTeXt_distribution%27s_Fonts">https://wiki.contextgarden.net/ConTeXt_distribution's_Fonts
+      1</a>
+    </p>
+    <p>
+      For a discussion see here: <a href="https://github.com/XmacsLabs/mogan/issues/523">https://github.com/XmacsLabs/mogan/issues/523
+      1</a>
+    </p>
+    <p>
+      <b>How:</b> Study and document the font selection mechanism in TeXmacs,
+      in particular how math glyphs are selected from the various fonts.
+      Possibly write some debugging tools which allow developers to check the
+      workings of which glyphs are selected, which metrics used, etc&hellip;
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <a href="http://forum.texmacs.cn/uploads/default/original/2X/3/36ccd5a831c9d620879aca324875db9666dc75ef.jpeg"><p>
+        <img class="image" src="dev-notes-5.jpeg" height="431" width="690"></img>
+      </p></a>
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <img class="image" src="dev-notes-6.png" height="498" width="690"></img>
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <img class="image" src="dev-notes-7.png" height="439" width="690"></img>
+    </p>
+    <p>
+      Complete and debug the initial implementation of the MATH table parser
+      here: <a href="https://github.com/mgubi/texmacs/tree/wip-unicode-math">https://github.com/mgubi/texmacs/tree/wip-unicode-math
+      </a>
+    </p>
+    <p>
+      A discussion is taking place in the forum <a href="http://forum.texmacs.cn/t/proposal-opentype-math-font-support/1377/1">here</a>.
+    </p>
+    <p>
+      
+    </p>
+  </body>
+</html>

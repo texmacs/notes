@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Standard Output and Standard Error on Microsoft Windows<span
+    style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      We show how to see TeXmacs' standard output and standard error on
+      Microsoft Windows.
+    </div>
+    <p>
+      [6.1.2021]
+    </p>
+    <p>
+      On Windows, TeXmacs does not show standard output and standard error:
+      neither when it is run from the Command shell nor from the Powershell.
+    </p>
+    <p>
+      It is still possible to see standard output and standard error if one
+      redirects them to a file. Here is the command that does it for the
+      Powershell
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim" xml:space="preserve">
+Start-Process -FilePath &quot;C:\Program Files (x86)\TeXmacs\bin\texmacs.exe&quot; -RedirectStandardOutput stdout.txt -RedirectStandardError stderr.txt</pre>
+    </div>
+    <p>
+      to be given in a single Powershell line.
+    </p>
+    <p>
+      In this command, one has to substitute for <tt class="verbatim"><class style="font-family: Times New Roman"><tt>&quot;C:\Program
+      Files (x86)\TeXmacs\bin\texmacs.exe&quot;</tt></class></tt> the location
+      of the TeXmacs executable in their system; <tt class="verbatim"><class style="font-family: Times New Roman"><tt>stdout.txt</tt></class></tt>
+      and <tt class="verbatim"><class style="font-family: Times New Roman"><tt>stderr.txt</tt></class></tt> will be
+      created in the current working directory of the Powershell session.
+    </p>
+  </body>
+</html>
