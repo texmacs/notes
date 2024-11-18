@@ -38,6 +38,10 @@ jobs:
 
       - name: Run TeXmacs script with headless option
         run: |
+          # add safe directory (texmacs script uses git to obtain metadata)
+          git config --global --add safe.directory $PWD
+
+          # run texmacs scripts
           texmacs_bin=$(which texmacs)
           $texmacs_bin -headless -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
 
@@ -48,6 +52,7 @@ jobs:
           # set variable
           TARGET_BRANCH="gh-pages"
           BUILD_DIR="docs"
+          RESOURCES_DIR="resources"
           ROOT_INDEX_FILE="index.html"
           REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           
@@ -74,6 +79,9 @@ jobs:
           # copy 'docs' 
           cp -r ../${BUILD_DIR} .
           
+          # copy 'resources' 
+          cp -r ../${RESOURCES_DIR} .
+
           # copy 'index.html'
           cp ../${ROOT_INDEX_FILE} .
           
