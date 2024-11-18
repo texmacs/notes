@@ -9,9 +9,9 @@ on:
       - main
 
 jobs:
-  permissions:
-    contents: write
   build:
+    permissions:
+      contents: write
     container: debian:bookworm
     runs-on: ubuntu-22.04
     steps:
