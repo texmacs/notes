@@ -41,7 +41,7 @@ jobs:
           texmacs_bin=$(which texmacs)
           $texmacs_bin -headless -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
 
-      - name: Deploy to gh-pages
+      - name: Commit changes to main and deploy to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -54,7 +54,12 @@ jobs:
           # set Git config
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          
+
+          # commit & push to main
+          git add --all
+          git commit -m "CD build"
+          git push
+
           # init gh-pages branch
           git clone --branch ${TARGET_BRANCH} --depth 1 ${REPO_URL} gh-pages || \
           (git init gh-pages && cd gh-pages && git checkout --orphan ${TARGET_BRANCH})
@@ -64,7 +69,7 @@ jobs:
           rm -rf *
           
           # copy 'docs' 
-          cp -r ../${BUILD_DIR}/* ./${BUILD_DIR}/.
+          cp -r ../${BUILD_DIR} .
           
           # copy 'index.html'
           cp ../${ROOT_INDEX_FILE} .
