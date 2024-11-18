@@ -51,6 +51,9 @@ jobs:
           ROOT_INDEX_FILE="index.html"
           REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           
+          # add safe directory
+          git config --global --add safe.directory $PWD
+
           # set Git config
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
