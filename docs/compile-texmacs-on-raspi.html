@@ -3,12 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.16" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
     <script src="../resources/notes-base.js" language="javascript" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
   </head>
   <body>
     <div class="notes-header">
@@ -38,8 +37,8 @@
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-sudo apt install build-essential libfreetype-dev libltdl-dev \
-     libgmp-dev qt4-default qt4-config</pre>
+<class style="font-family: Times New Roman"><tt>sudo apt install build-essential libfreetype-dev libltdl-dev \
+     libgmp-dev qt4-default qt4-config</tt></class></pre>
     </div>
     <p>
       Now, that everything is ready to download and build we start by making a
@@ -47,14 +46,14 @@ sudo apt install build-essential libfreetype-dev libltdl-dev \
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-mkdir texmacs-builddir</pre>
+<class style="font-family: Times New Roman"><tt>mkdir texmacs-builddir</tt></class></pre>
     </div>
     <p>
       Change the working directory to it:
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-cd texmacs-builddir</pre>
+<class style="font-family: Times New Roman"><tt>cd texmacs-builddir</tt></class></pre>
     </div>
     <p>
       TeXmacs depends on a Guile, so we need to build guile first. For this
@@ -63,12 +62,12 @@ cd texmacs-builddir</pre>
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<font color="blue"><code></code></font>wget https://ftp.gnu.org/gnu/guile/guile-1.8.8.tar.gz
+<class style="font-family: Times New Roman"><tt><font color="blue"><code></code></font>wget https://ftp.gnu.org/gnu/guile/guile-1.8.8.tar.gz
 <code>tar xzf guile-1.8.8.tar.gz</code>
 cd guile-1.8.8
 ./configure --disable-error-on-warning
 make -j 4
-sudo make install</pre>
+sudo make install</tt></class></pre>
     </div>
     <p>
       The last step will ask for your password to install guile to your
@@ -79,13 +78,13 @@ sudo make install</pre>
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-<font color="blue"><code></code></font>cd ..
+<class style="font-family: Times New Roman"><tt><font color="blue"><code></code></font>cd ..
 wget www.texmacs.org/Download/ftp/tmftp/source/TeXmacs-1.99.16-src.tar.gz
 tar xzf TeXmacs-1.99.16-src.tar.gz
 cd TeXmacs-1.99.16-src/
 ./configure --enable-qtpipes
 make -j 4
-sudo make install</pre>
+sudo make install</tt></class></pre>
     </div>
     <p>
       Again the last step will ask for your password. 
@@ -96,7 +95,7 @@ sudo make install</pre>
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
-texmacs</pre>
+<class style="font-family: Times New Roman"><tt>texmacs</tt></class></pre>
     </div>
     <p>
       or from the normal menu.

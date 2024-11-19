@@ -3,12 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.16" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
     <script src="../resources/notes-base.js" language="javascript" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
   </head>
   <body>
     <div class="toggle" style="display: none">
@@ -41,7 +40,7 @@
       Here's an example of a document with two comments:
     </p>
     <p>
-      <img class="image" src="comments-in-texmacs-1.png" width="100%"></img>
+      <img src="comments-in-texmacs-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 31.0346666666667em"></img>
     </p>
     <p>
       and here the same document with both comments hidden, showing the
@@ -49,18 +48,19 @@
       (indicated by a flag, here shown in the &ldquo;detailed&rdquo; mode).
     </p>
     <p>
-      <img class="image" src="comments-in-texmacs-2.png" width="100%"></img>
+      <img src="comments-in-texmacs-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 29.9865050505051em"></img>
     </p>
     <h2 id="auto-3">The implementation<span style="margin-left: 1em"></span></h2>
     <p>
       We discuss the implementation of the basic functionality: comment tags
       and commands to operate on them. The first thing is to create a new
       package which the user has to include in the document in order to
-      activate this feature. The package can be found in <tt class="verbatim">TeXmacs/packages/utilities/comment.ts</tt>.
+      activate this feature. The package can be found in <tt class="verbatim"><class
+      style="font-family: Times New Roman"><tt>TeXmacs/packages/utilities/comment.ts</tt></class></tt>.
       First we make sure that the appropriate menu is loaded as soon as the
       package become active. Menus are created and managed via Scheme code, so
       we load the scheme module <tt class="verbatim scheme">(various comment-menu)</tt> which
-      is found in the file <tt class="verbatim">TeXmacs/progs/various/comment-menu.scm</tt>:
+      is found in the file <tt class="verbatim"><class style="font-family: Times New Roman"><tt>TeXmacs/progs/various/comment-menu.scm</tt></class></tt>:
     </p>
     <div class="tmweb-code">
       <p>
@@ -283,8 +283,8 @@
       Note the <tt class="verbatim scheme">insert-go-to</tt> procedure, which insert a given
       markup and also move the cursor at the position <tt class="verbatim scheme">(5 0)</tt>,
       meaning the 6th child of the inserted subtree, i.e. the body of the
-      comment (which is an empty string), and there in position \(0\), ready
-      for the user to fill in the comment.
+      comment (which is an empty string), and there in position <span class="no-breaks"><img
+      src="comments-in-texmacs-3.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434344em; margin-top: -0.0155151515151516em; vertical-align: -0.0103232323232323em; height: 0.656808080808081em"></img>,</span> ready for the user to fill in the comment.
     </p>
     <p>
       Basic operations on all the comments in a given document are provided by
@@ -426,7 +426,7 @@
       style="font-family: sans-serif">Edit comments</class><a id="auto-5"></a> command is inkoved:
     </p>
     <p>
-      <img class="image" src="comments-in-texmacs-3.png" width="100%"></img>
+      <img src="comments-in-texmacs-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 21.1672121212121em"></img>
     </p>
     <p>
       The rendering of the <font class="tmweb-markup">mirror-comment</font> markup is
@@ -485,7 +485,7 @@
     </p>
     <p>
       The most basic change is to describe the behaviour of the markup with
-      respect to multi-paragraph material. In <tt class="verbatim">src/Kernel/Types/tree.cpp</tt>
+      respect to multi-paragraph material. In <tt class="verbatim"><class style="font-family: Times New Roman"><tt>src/Kernel/Types/tree.cpp</tt></class></tt>
       we have to modify the <tt class="verbatim cpp">is_multi_paragraph</tt> function as
       follows:
     </p>
@@ -557,7 +557,7 @@ inline_set-&gt;insert (make_tree_label (&quot;hide-comment&quot;));</pre>
       <font color="#800000">[Explain consequences of this predicate]</font>   
     </p>
     <p>
-      We have also to modify <tt class="verbatim">src/Edit/Replace/edit_select.cpp</tt>:
+      We have also to modify <tt class="verbatim"><class style="font-family: Times New Roman"><tt>src/Edit/Replace/edit_select.cpp</tt></class></tt>:
     </p>
     <font style="font-size: 90.0%"><div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -586,7 +586,7 @@ edit_select_rep::focus_get (bool skip_flag) {
 }</pre>
     </div></font>
     <p>
-      and <tt class="verbatim">src/Edit/Modify/edit_dynamic.cpp</tt>:
+      and <tt class="verbatim"><class style="font-family: Times New Roman"><tt>src/Edit/Modify/edit_dynamic.cpp</tt></class></tt>:
     </p>
     <font style="font-size: 90.0%"><div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -692,7 +692,7 @@ edit_dynamic_rep::make_compound (tree_label l, int n= -1) {
 }</pre>
     </div></font>
     <p>
-      And finally <tt class="verbatim">src/Edit/Modify/edit_delete.cpp</tt>
+      And finally <tt class="verbatim"><class style="font-family: Times New Roman"><tt>src/Edit/Modify/edit_delete.cpp</tt></class></tt>
     </p>
     <font style="font-size: 90.0%"><div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
