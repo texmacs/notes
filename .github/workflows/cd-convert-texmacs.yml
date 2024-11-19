@@ -1,0 +1,70 @@
+name: continuous deployment for gh-pages
+
+#on:
+#  push:
+#    branches:
+#      - main
+
+# Use an on demand workflow trigger.  
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container:
+	    image: ghcr.io/texmacs/texmacs-2.1.4-cd:main.20241119.224746.672z
+
+    steps:
+      - name: Run TeXmacs script with headless option
+        run: |
+          # add safe directory (texmacs script uses git to obtain metadata)
+          git config --global --add safe.directory $PWD
+
+          # run texmacs scripts
+          texmacs_bin=$(which texmacs)
+          $texmacs_bin -headless -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
+
+      - name: Commit changes to main and deploy to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # set variable
+          TARGET_BRANCH="gh-pages"
+          BUILD_DIR="docs"
+          RESOURCES_DIR="resources"
+          ROOT_INDEX_FILE="index.html"
+          REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          
+          # add safe directory
+          git config --global --add safe.directory $PWD
+
+          # set Git config
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+          # commit & push to main
+          git add --all
+          git commit -m "CD build"
+          git push
+
+          # init gh-pages branch
+          git clone --branch ${TARGET_BRANCH} --depth 1 ${REPO_URL} gh-pages || \
+          (git init gh-pages && cd gh-pages && git checkout --orphan ${TARGET_BRANCH})
+          cd gh-pages
+          
+          # remove old file
+          rm -rf *
+          
+          # copy 'docs' 
+          cp -r ../${BUILD_DIR} .
+          
+          # copy 'resources' 
+          cp -r ../${RESOURCES_DIR} .
+
+          # copy 'index.html'
+          cp ../${ROOT_INDEX_FILE} .
+          
+          # commit & push
+          git add --all
+          git commit -m "Deploy to ${TARGET_BRANCH} branch"
+          git push --force ${REPO_URL} ${TARGET_BRANCH}
