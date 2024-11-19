@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/texmacs/texmacs-2.1.4-cd:main.20241119.224746.672z
+      image: ghcr.io/texmacs/texmacs-2.1.4-cd:main.20241119.234058.192z
       credentials:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
