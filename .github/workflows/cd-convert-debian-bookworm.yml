@@ -1,10 +1,7 @@
-name: CD for gh-pages
+name: continuous deployment for gh-pages
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -12,10 +9,6 @@ jobs:
   build:
     container: debian:bookworm
     runs-on: ubuntu-22.04
-
-    permissions:
-      contents: write
-      pages: write 
 
     steps:
       - name: Install dependencies
