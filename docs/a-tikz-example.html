@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.15" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -35,8 +35,8 @@
       You may insert a <class style="font-variant: small-caps">Graph</class> session using <class class="tmweb-menu"
       style="font-family: sans-serif">Insert</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Session</class>&rarr;<class
       class="tmweb-menu" style="font-family: sans-serif">Graph</class><a id="auto-2"></a>. When you finished typing your
-      input, press  <font class="tmweb-key">&#x21A9;</font> in order to compute the
-      output. Multiline input is entered using <font class="tmweb-key">&#x21E7;&#x21A9;</font>.
+      input, press  <font class="tmweb-key">Return</font> in order to compute the output.
+      Multiline input is entered using <font class="tmweb-key">Shift+Return</font>.
     </p>
     <p>
       Type <tt class="verbatim">help</tt>, you will get all the available graph
@@ -74,14 +74,18 @@
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-asy] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-pdflatex</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><p>
+              asy] 
+            </p></font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              pdflatex
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
@@ -93,62 +97,102 @@ pdflatex</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-pdflatex] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-\documentclass[tikz]{standalone}
-\usepackage{tikz-3dplot}
-
-\begin{document}
-\tdplotsetmaincoords{60}{120}
-
-\begin{tikzpicture}[scale=3,tdplot_main_coords,axis/.style={-&gt;,blue,thick},
-vector/.style={-stealth,red,very thick},vector guide/.style={dashed,red,thick}]
-
-%standard tikz coordinate definition using x, y, z coords
-\coordinate (O) at (0,0,0);
-
-%tikz-3dplot coordinate definition using r, theta, phi coords
-\tdplotsetcoord{P}{.8}{55}{60}
-
-%draw axes
-\draw[axis] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
-\draw[axis] (0,0,0) -- (0,1,0) node[anchor=north west]{$y$};
-\draw[axis] (0,0,0) -- (0,0,1) node[anchor=south]{$z$};
-
-%draw a vector from O to P
-\draw[vector] (O) -- (P);
-
-%draw guide lines to components
-\draw[vector guide] (O) -- (Pxy);
-\draw[vector guide] (Pxy) -- (P);
-
-\end{tikzpicture}
-
-\end{document}</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><p>
+              pdflatex] 
+            </p></font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              \documentclass[tikz]{standalone}
+            </p><p>
+              \usepackage{tikz-3dplot}
+            </p><p>
+              
+            </p><p>
+              \begin{document}
+            </p><p>
+              \tdplotsetmaincoords{60}{120}
+            </p><p>
+              
+            </p><p>
+              \begin{tikzpicture}[scale=3,tdplot_main_coords,axis/.style={-&gt;,blue,thick},
+            </p><p>
+              vector/.style={-stealth,red,very thick},vector
+              guide/.style={dashed,red,thick}]
+            </p><p>
+              
+            </p><p>
+              %standard tikz coordinate definition using x, y, z coords
+            </p><p>
+              \coordinate (O) at (0,0,0);
+            </p><p>
+              
+            </p><p>
+              %tikz-3dplot coordinate definition using r, theta, phi coords
+            </p><p>
+              \tdplotsetcoord{P}{.8}{55}{60}
+            </p><p>
+              
+            </p><p>
+              %draw axes
+            </p><p>
+              \draw[axis] (0,0,0) &ndash; (1,0,0) node[anchor=north
+              east]{$x$};
+            </p><p>
+              \draw[axis] (0,0,0) &ndash; (0,1,0) node[anchor=north
+              west]{$y$};
+            </p><p>
+              \draw[axis] (0,0,0) &ndash; (0,0,1) node[anchor=south]{$z$};
+            </p><p>
+              
+            </p><p>
+              %draw a vector from O to P
+            </p><p>
+              \draw[vector] (O) &ndash; (P);
+            </p><p>
+              
+            </p><p>
+              %draw guide lines to components
+            </p><p>
+              \draw[vector guide] (O) &ndash; (Pxy);
+            </p><p>
+              \draw[vector guide] (Pxy) &ndash; (P);
+            </p><p>
+              
+            </p><p>
+              \end{tikzpicture}
+            </p><p>
+              
+            </p><p>
+              \end{document}
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
         <tt class="verbatim"><div style="margin-left: 42.175176192px">
           <div align="justify">
-            <img src="a-tikz-example-2.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: 0em; height: 21.3645656565657em"></img>
+            <img src="a-tikz-example-1.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: 0em; height: 21.3646060606061em"></img>
           </div>
         </div></tt>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-pdflatex] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><p>
+              pdflatex] 
+            </p></font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       
