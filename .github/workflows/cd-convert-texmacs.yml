@@ -1,4 +1,4 @@
-name: continuous deployment for gh-pages
+name: continuous deployment for gh-pages (with texmacs-cd image)
 
 #on:
 #  push:
