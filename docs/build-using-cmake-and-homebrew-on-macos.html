@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
   <head>
     <title>TeXmacs notes</title>
-    <meta content="TeXmacs 1.99.16" name="generator"></meta>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
     <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
@@ -29,8 +29,8 @@
     <h3 id="auto-3">Install Homebrew and build essentials<span style="margin-left: 1em"></span></h3>
     <p>
       Homebrew is a package manger for macOS. Typically, we install Homebrew
-      first, and then use the <tt class="verbatim">brew</tt> command line to install
-      build tools and dependencies to build TeXmacs.
+      first, and then use the <tt class="verbatim"><class style="font-family: Times New Roman"><tt>brew</tt></class></tt>
+      command line to install build tools and dependencies to build TeXmacs.
     </p>
     <p>
       Xcode Command Line Tools provide the C/C++ compiler. It is required.
@@ -53,40 +53,52 @@
       <h5>Global Variables<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-GROUP_DIR=$HOME/texmacs</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              GROUP_DIR=$HOME/texmacs
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-T_HOMEBREW_DIR=$GROUP_DIR/homebrew</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              T_HOMEBREW_DIR=$GROUP_DIR/homebrew
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-T_TEXMACS_DIR=$GROUP_DIR/texmacs</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              T_TEXMACS_DIR=$GROUP_DIR/texmacs
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       These global variables should be executed manually every time you use
@@ -99,14 +111,16 @@ T_TEXMACS_DIR=$GROUP_DIR/texmacs</pre></font></td>
       <h5>Check Homebrew installation<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -138,13 +152,16 @@ brew --version</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
@@ -153,14 +170,16 @@ brew --version</pre></font></td>
       <h5>Check Xcode Command Line Tools installation<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-$(xcode-select --print-path)/usr/bin/cc --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              $(xcode-select &ndash;print-path)/usr/bin/cc &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -199,13 +218,16 @@ $(xcode-select --print-path)/usr/bin/cc --version</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
@@ -214,14 +236,16 @@ $(xcode-select --print-path)/usr/bin/cc --version</pre></font></td>
       <h5>Install CMake and check<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cmake --version || brew install cmake</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cmake &ndash;version || brew install cmake
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -252,30 +276,38 @@ cmake --version || brew install cmake</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <h3 id="auto-10">Install GNU Guile 1.8<span style="margin-left: 1em"></span></h3>
     <p>
       <div style="display: inline">
         <a id="auto-11"></a>
       </div>
-      <h5>Clone <tt class="verbatim">texmacs/homebrew</tt><span style="margin-left: 1em"></span></h5>
+      <h5>Clone <tt class="verbatim"><class style="font-family: Times New Roman"><tt>texmacs/homebrew</tt></class></tt><span
+      style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-[[ -d &quot;$T_HOMEBREW_DIR&quot; ]] &amp;&amp; echo &quot;texmacs/homebrew is cloned&quot; || echo &quot;Please clone texmacs/homebrew first&quot;</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              [[ -d &quot;$T_HOMEBREW_DIR&quot; ]] &amp;&amp; echo
+              &quot;texmacs/homebrew is cloned&quot; || echo &quot;Please
+              clone texmacs/homebrew first&quot;
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
@@ -287,32 +319,43 @@ Shell] </pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-[[ ! -d $T_HOMEBREW_DIR ]] &amp;&amp; git clone <tt class="verbatim"><code>git@github.com:texmacs/homebrew.git</code></tt> $T_HOMEBREW_DIR</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              [[ ! -d $T_HOMEBREW_DIR ]] &amp;&amp; git clone <tt class="verbatim"><code>git@github.com:texmacs/homebrew.git</code></tt>
+              $T_HOMEBREW_DIR
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-[[ ! -d $T_HOMEBREW_DIR ]] &amp;&amp; git clone https://github.com/texmacs/guile.git $T_HOMEBREW_DIR</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              [[ ! -d $T_HOMEBREW_DIR ]] &amp;&amp; git clone
+              https://github.com/texmacs/guile.git $T_HOMEBREW_DIR
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-[[ -d $T_HOMEBREW_DIR ]] &amp;&amp; echo &quot;texmacs/homebrew is cloned&quot;</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              [[ -d $T_HOMEBREW_DIR ]] &amp;&amp; echo &quot;texmacs/homebrew
+              is cloned&quot;
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
@@ -324,28 +367,35 @@ Shell] </pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
         <a id="auto-12"></a>
       </div>
-      <h5>Install guile 1.8 using <tt class="verbatim">brew</tt><span style="margin-left: 1em"></span></h5>
+      <h5>Install guile 1.8 using <tt class="verbatim"><class style="font-family: Times New Roman"><tt>brew</tt></class></tt><span
+      style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cd $T_HOMEBREW_DIR &amp;&amp; brew install guile@1.8.rb</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cd $T_HOMEBREW_DIR &amp;&amp; brew install guile@1.8.rb
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <h3 id="auto-13">Install Qt<span style="margin-left: 1em"></span></h3>
     <p>
@@ -357,36 +407,46 @@ cd $T_HOMEBREW_DIR &amp;&amp; brew install guile@1.8.rb</pre></font></td>
     <p>
       For GNU TeXmacs 1.99.15, please use Qt 4 if you want to build and
       package TeXmacs by yourself. Qt 4 has been removed in the official
-      homebrew repo. We need extra steps to install Qt 4 via <tt class="verbatim">brew</tt>:
+      homebrew repo. We need extra steps to install Qt 4 via <tt class="verbatim"><class
+      style="font-family: Times New Roman"><tt>brew</tt></class></tt>:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew tap cartr/qt4</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><p>
+              Shell] 
+            </p></font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew tap cartr/qt4
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew tap-pin <tt class="verbatim">cartr/qt4</tt></pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew tap-pin <tt class="verbatim">cartr/qt4</tt>
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew install qt@4  # will link qt</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew install qt@4  # will link qt
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -426,14 +486,17 @@ brew install qt@4  # will link qt</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-<code>/usr/local/Cellar/qt@4/4.8.7_6/bin/qmake</code> --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              <code>/usr/local/Cellar/qt@4/4.8.7_6/bin/qmake</code>
+              &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -463,13 +526,16 @@ Shell] </pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
@@ -482,14 +548,16 @@ Shell] </pre></font></td>
       switch between Qt 4 and Qt 5:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-qmake --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              qmake &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -519,14 +587,16 @@ qmake --version</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew unlink qt@4 &amp;&amp; brew link qt --force</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew unlink qt@4 &amp;&amp; brew link qt &ndash;force
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -586,14 +656,16 @@ brew unlink qt@4 &amp;&amp; brew link qt --force</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-qmake --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              qmake &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -643,14 +715,16 @@ qmake --version</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew unlink qt &amp;&amp; brew link qt@4</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew unlink qt &amp;&amp; brew link qt@4
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -681,14 +755,16 @@ brew unlink qt &amp;&amp; brew link qt@4</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-qmake --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              qmake &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -709,39 +785,49 @@ qmake --version</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
-      If you have trouble on <tt class="verbatim">brew link qt &ndash;force</tt> and <tt
-      class="verbatim">brew unlink qt</tt>. Make sure that you have installed Qt before
+      If you have trouble on <tt class="verbatim"><class style="font-family: Times New Roman"><tt>brew link qt
+      &ndash;force</tt></class></tt> and <tt class="verbatim"><class style="font-family: Times New Roman"><tt>brew
+      unlink qt</tt></class></tt>. Make sure that you have installed Qt before
       using homebrew:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-brew install qt</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><p>
+              Shell] 
+            </p></font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              brew install qt
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <h3 id="auto-16">Install Ghostscript<span style="margin-left: 1em"></span></h3>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-gs --version || brew install ghostscript</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              gs &ndash;version || brew install ghostscript
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -762,13 +848,16 @@ gs --version || brew install ghostscript</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <h3 id="auto-17">Missing dependencies<span style="margin-left: 1em"></span></h3>
     <p>
@@ -779,44 +868,59 @@ gs --version || brew install ghostscript</pre></font></td>
       <div style="display: inline">
         <a id="auto-19"></a>
       </div>
-      <h5>Clone <tt class="verbatim">texmacs/texmacs</tt> and build it<span style="margin-left: 1em"></span></h5>
+      <h5>Clone <tt class="verbatim"><class style="font-family: Times New Roman"><tt>texmacs/texmacs</tt></class></tt>
+      and build it<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-[[ ! -d $T_TEXMACS_DIR ]] &amp;&amp; git clone git@github.com:texmacs/texmacs.git $T_TEXMACS_DIR</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              [[ ! -d $T_TEXMACS_DIR ]] &amp;&amp; git clone
+              git@github.com:texmacs/texmacs.git $T_TEXMACS_DIR
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-mkdir -p $T_TEXMACS_DIR/build</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              mkdir -p $T_TEXMACS_DIR/build
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cd $T_TEXMACS_DIR/build &amp;&amp; cmake -DQT_QMAKE_EXECUTABLE=/usr/local/Cellar/qt@4/4.8.7_6/bin/qmake -DCMAKE_INSTALL_PREFIX=./TeXmacs.app/Contents/Resources ..</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cd $T_TEXMACS_DIR/build &amp;&amp; cmake
+              -DQT_QMAKE_EXECUTABLE=/usr/local/Cellar/qt@4/4.8.7_6/bin/qmake
+              -DCMAKE_INSTALL_PREFIX=./TeXmacs.app/Contents/Resources ..
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cd $T_TEXMACS_DIR/build &amp;&amp; make -j8 install</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cd $T_TEXMACS_DIR/build &amp;&amp; make -j8 install
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
@@ -830,14 +934,16 @@ cd $T_TEXMACS_DIR/build &amp;&amp; make -j8 install</pre></font></td>
       timings</class><a id="auto-21"></a> as checked.
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-sleep 2</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              sleep 2
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; margin-bottom: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
@@ -851,13 +957,16 @@ sleep 2</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       Execute the sleep command, and you will find the timings are listed on
@@ -868,23 +977,28 @@ sleep 2</pre></font></td>
       reduced with ccache.
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cd $T_TEXMACS_DIR/build &amp;&amp; make -j8</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cd $T_TEXMACS_DIR/build &amp;&amp; make -j8
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-ccache --version || brew install ccache</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              ccache &ndash;version || brew install ccache
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -982,13 +1096,16 @@ ccache --version || brew install ccache</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cd $T_TEXMACS_DIR/build &amp;&amp; make -j8</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cd $T_TEXMACS_DIR/build &amp;&amp; make -j8
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       As long as ccache is available, CMake will use it to boost the
@@ -1002,22 +1119,28 @@ cd $T_TEXMACS_DIR/build &amp;&amp; make -j8</pre></font></td>
       <h5>Running the C++ Unit Tests<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-cd $T_TEXMACS_DIR/build &amp;&amp; ctest</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              cd $T_TEXMACS_DIR/build &amp;&amp; ctest
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
@@ -1026,14 +1149,17 @@ cd $T_TEXMACS_DIR/build &amp;&amp; ctest</pre></font></td>
       <h5>Testing the binary<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-$T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs --version</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              $T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs
+              &ndash;version
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -1081,14 +1207,17 @@ $T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs --version</pre></font></
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><pre class="verbatim" xml:space="preserve">
-Shell] </pre></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-$T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs --help</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              $T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs
+              &ndash;help
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <p style="margin-top: 0.5em">
@@ -1298,13 +1427,16 @@ $T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs --help</pre></font></td>
       </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       <div style="display: inline">
@@ -1313,22 +1445,28 @@ $T_TEXMACS_DIR/build/TeXmacs.app/Contents/MacOS/TeXmacs --help</pre></font></td>
       <h5>Testing the App<span style="margin-left: 1em"></span></h5>
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-open $T_TEXMACS_DIR/build # click the app to test it as a user</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              open $T_TEXMACS_DIR/build # click the app to test it as a user
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="padding-left: 0em; padding-right: 0em"><font color="#401000"><tt class="verbatim">Shell] </tt></font></td>
-          <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><pre class="verbatim" xml:space="preserve">
-</pre></font></td>
-        </tr></tbody>
-      </table>
+      <p>
+        <tt class="verbatim"><table style="width: 100%">
+          <tbody><tr>
+            <td style="padding-left: 0em; padding-right: 0em"><font color="#401000">Shell] </font></td>
+            <td style="width: 100%; padding-left: 0em; padding-right: 0em"><font color="#000080"><p>
+              
+            </p></font></td>
+          </tr></tbody>
+        </table></tt>
+      </p>
     </div>
     <p>
       
