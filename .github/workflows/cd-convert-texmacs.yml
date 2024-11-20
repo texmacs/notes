@@ -1,12 +1,12 @@
 name: continuous deployment for gh-pages (with texmacs-cd image)
 
-#on:
-#  push:
-#    branches:
-#      - main
+on:
+  push:
+    branches:
+      - main
 
 # Use an on demand workflow trigger.  
-on: workflow_dispatch
+#on: workflow_dispatch
 
 jobs:
   build:
