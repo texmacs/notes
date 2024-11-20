@@ -1,9 +1,10 @@
-name: continuous deployment for gh-pages
+name: (DISABLED) continuous deployment for gh-pages
 
-on:
-  push:
-    branches:
-      - main
+# this workflow is disabled use the cd-convert-texmacs.yaml workflow
+#on:
+#  push:
+#    branches:
+#      - main
 
 jobs:
   build:
