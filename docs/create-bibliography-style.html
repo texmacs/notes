@@ -26,7 +26,7 @@
     </p>
     <p>
       It is a good idea to first choose a style that is close to what you have
-      in mind, and make a derivative of that one. In my case, `tm-elsart-num`
+      in mind, and make a derivative of that one. In my case, <tt class="verbatim">tm-elsart-num</tt>
       was a good starting point, since it orders the sources in the order that
       they appear in the text and cites numerically.
     </p>
@@ -94,8 +94,8 @@
     (if (bib-null? u) &quot;&quot; `(concat &quot;url: &quot; ,u))))</pre>
     </div>
     <p>
-      Then add the url field to the article entry definition just below: So
-      look for this part in the file&hellip; &darr;
+      Then add the url field to the article entry definition just below: look
+      for this part in the file&hellip; &darr;
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -115,7 +115,9 @@
                 ,(bib-format-note x))))))</pre>
     </div>
     <p>
-      &hellip; and add the last line below &darr;
+      &hellip; and add the last line below <tt class="verbatim">,(bib-format-url x)</tt>
+      in the last line as in the code below; the comma preceding the open
+      parenthesis in <tt class="verbatim">,(bib-format-url x)</tt> is important! &darr;
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -136,21 +138,23 @@
         ,(bib-format-url x))))))</pre>
     </div>
     <p>
-      Do this for the other entry types on which you want the urls to show up
+      Do this for the other entry types for which you want the urls to show up
       on.
     </p>
     <p>
       
     </p>
     <p>
-      If you have TeXmacs opened, then restart it now so that it can reload
-      the bibliographies.
+      If you have TeXmacs opened on your computer, then restart it now so that
+      it can reload the bibliographies.
     </p>
     <p>
-      Then open the document and head down to the bibliography.
+      Open a document with a bibliography in it and head down to the
+      bibliography section.
     </p>
     <p>
-      Click on the bibliography, click on the current `style`:
+      Click on the bibliography. In the Toolbar there should be an entry for
+      <tt class="verbatim">style</tt>:
     </p>
     <center>
       <p style="margin-top: 0.5em; margin-bottom: 0.5em">
@@ -158,12 +162,14 @@
       </p>
     </center>
     <p>
-      And click on `Other &hellip;`. It will show a Pop-Up, where you can
-      enter the name of your style, prefixed with &quot;tm-&quot;. For
-      example,  `tm-julius-link-elsart-num`. Then click on &quot;ok&quot;. Now
-      rebuild the current buffer (either click on the button <span class="no-breaks"><img
-      class="image" src="create-bibliography-style-2.png" width="22.4"></img>or</span> do `crtl`+`shift`+`R`). The sources
-      should now show up.
+      Click the current style (<tt class="verbatim">tm-plain</tt> in the above image)
+      And click on <tt class="verbatim">Other &hellip;</tt>. It will show a Pop-Up,
+      where you can enter the name of your style, prefixed with
+      &quot;tm-&quot;. For example,  <tt class="verbatim">tm-julius-link-elsart-num</tt>.
+      Then click on &quot;ok&quot;. Now rebuild the current buffer (either
+      click on the button <span class="no-breaks"><img class="image" src="create-bibliography-style-2.png" width="22.4"></img>or</span>
+      do <tt class="verbatim">crtl</tt>+<tt class="verbatim">shift</tt>+<tt class="verbatim">R</tt>). The
+      url should now show up in the sources.
     </p>
     <p>
       <img class="image" src="create-bibliography-style-3.png" width="100%"></img>
