@@ -1,4 +1,4 @@
-<TeXmacs|2.1.1>
+<TeXmacs|2.1.4>
 
 <style|<tuple|notes|html-font-size>>
 
@@ -49,9 +49,6 @@
   <with|font-shape|italic|<small|Self-contained, one shot, material on
   various topics.>>
 
-  <hlink|Creating your own bibliography style for
-  <TeXmacs>|./create-bibliography-style.tm>
-
   <subsection*|Ideas>
 
   <hlink|<TeXmacs> and the art of mathematical
@@ -69,7 +66,12 @@
 
   <hlink|Keyboard shortcuts for menu items|./menu-shortcuts.tm>
 
-  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>\ 
+  <hlink|Tetris with <TeXmacs> tables|./tetris.tm>
+
+  <subsection*|Bibliographies>
+
+  <hlink|Creating your own bibliography style for
+  <TeXmacs>|./create-bibliography-style.tm>
 
   <subsection*|Plugins>
 
@@ -173,6 +175,7 @@
   <\collection>
     <associate|auto-1|<tuple|?|?>>
     <associate|auto-10|<tuple|?|?>>
+    <associate|auto-11|<tuple|?|?>>
     <associate|auto-2|<tuple|?|?>>
     <associate|auto-3|<tuple|?|?>>
     <associate|auto-4|<tuple|?|?>>
