@@ -19,7 +19,7 @@
   have all the necessary glyphs, especially for the typesetting of technical
   documents.>
 
-  \;
+  [Version 1.0 of 3.1.2025. By <hlink|@mgubi|https://github.com/mgubi>]
 
   This document aims to describe the way <TeXmacs> deals with fonts. We
   describe the state of affairs as per <verbatim|svn> revision <tt|r14561>
