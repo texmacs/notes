@@ -8,7 +8,6 @@
     <link href="../resources/blog-icon.png" rel="icon"></link>
     <script src="../resources/highlight.pack.js" language="javascript" defer></script>
     <script src="../resources/notes-base.js" language="javascript" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" language="javascript"></script>
   </head>
   <body>
     <div class="toggle" style="display: none">
@@ -24,20 +23,20 @@
     </div>
     <h1 id="auto-1">Font mechanics<span style="margin-left: 1em"></span></h1>
     <div class="notes-abstract">
-      This file provides a template for typical notes/articles. You can use
-      the tag <font class="tmweb-markup">notes-abstract</font> to provide a small summary of
-      the content, as exemplified by this very text.
+      We describe the various mechanisms and features of TeXmacs font
+      handling, from the user interface at the level of documents to the inner
+      workings of the various fonts types at the level of the <tt class="verbatim">C++</tt>
+      source code. TeXmacs implements sophisticate algorithms to allow to use
+      a wide variety of fonts despite of the facts that they do to have all
+      the necessary glyphs, especially for the typesetting of technical
+      documents.
     </div>
     <p>
       
     </p>
     <p>
-      The present document aims to describe the way TeXmacs deals with fonts.
-      It has the purpose to be personal note and a description to interested
-      developers.
-    </p>
-    <p>
-      We describe the state of facts as per <tt class="verbatim">svn</tt> revision
+      This document aims to describe the way TeXmacs deals with fonts. We
+      describe the state of affairs as per <tt class="verbatim">svn</tt> revision
       <tt>r14561</tt> (December 2024, <tt>TeXmacs 2.14+</tt>). Parts of the
       general overview of fonts in TeXmacs are extracted, for reference, from
       the official documentation and from the paper &ldquo;Mathematical font
@@ -104,7 +103,8 @@
     </p>
     <p>
       Fonts are usually made up from glyphs like &ldquo;x&rdquo;,
-      &ldquo;ffi&rdquo;, &ldquo;\(\alpha\)&rdquo;, &ldquo;\(\sum\)&rdquo;,
+      &ldquo;ffi&rdquo;, &ldquo;<span class="no-breaks"><img src="font-mechanics-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0827474747474747em; margin-top: -0.0103434343434343em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img>&rdquo;,</span>
+      &ldquo;<span class="no-breaks"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img>&rdquo;,</span>
       <abbr>etc.</abbr> When rendering a string, the string is decomposed into
       glyphs so as to take into account ligatures (like fi, fl, ff, ffi, ffl).
       Next, the individual glyphs are positioned while taking into account
@@ -115,7 +115,7 @@
       brackets in
     </p>
     <center>
-      \(\displaystyle \left( (()^{^{}})^{^{^{}}} \right) .\)
+      <img src="font-mechanics-3.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0284646464646465em; margin-right: -0.0103434343434343em; margin-top: 0em; vertical-align: -0.310848484848485em; height: 1.33739393939394em"></img>
     </center>
     <h2 id="auto-3">2.<span style="margin-left: 1em"></span>String encodings<span style="margin-left: 1em"></span></h2>
     <p>
@@ -169,7 +169,8 @@
     </p>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>font</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span style="margin-left: 0.25em"></span><tt>roman</tt>
+        <font color="#008000"><i>font</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span
+        style="margin-left: 0.25em"></span><tt>roman</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font name)</font>
@@ -195,16 +196,16 @@
     </div>
     <div class="tmweb-code" style="margin-left: 42.175176192px">
       <p>
-        Roman: \(a^2 + b^2 = c^2\)
+        Roman: <img src="font-mechanics-5.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
       </p>
       <p>
-        Adobe: \(a^2 + b^2 = c^2\)
+        Adobe: <img src="font-mechanics-6.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
       </p>
       <p>
-        New roman: \(a^2 + b^2 = c^2\)
+        New roman: <img src="font-mechanics-7.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
       </p>
       <p>
-        Concrete: \(a^2 + b^2 = c^2\)
+        Concrete: <img src="font-mechanics-8.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
       </p>
     </div>
     <div style="margin-bottom: 0.5em; margin-left: 42.175176192px">
@@ -223,8 +224,8 @@
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>font-family</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span
-        style="margin-left: 0.25em"></span><tt>rm</tt>
+        <font color="#008000"><i>font-family</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png"
+        style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>rm</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font variant)</font>
@@ -251,14 +252,13 @@
         roman, <tt>typewriter</tt> and <class style="font-family: sans-serif">sans serif</class>
       </p>
       <p>
-        Sans serif formula: <class style="font-family: sans-serif">\(\sin (x + y) = \sin x \cos y +
-        \cos x \sin y\)</class>
+        Sans serif formula: <class style="font-family: sans-serif"><img src="font-mechanics-9.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0154949494949495em; margin-right: -0.0517171717171721em; margin-top: -0.00711111111111107em; vertical-align: -0.248222222222222em; height: 0.956767676767677em"></img></class>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>font-series</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span
-        style="margin-left: 0.25em"></span><tt>medium</tt>
+        <font color="#008000"><i>font-series</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png"
+        style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>medium</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font weight)</font>
@@ -278,8 +278,8 @@
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>font-shape</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span
-        style="margin-left: 0.25em"></span><tt>right</tt>
+        <font color="#008000"><i>font-shape</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png"
+        style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>right</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font shape)</font>
@@ -302,8 +302,8 @@
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <a id="font-base-size"></a><font color="#008000"><i>font-base-size</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span
-        style="margin-left: 0.25em"></span><tt>10</tt>
+        <a id="font-base-size"></a><font color="#008000"><i>font-base-size</i></font><span style="margin-left: 0.25em"></span><img
+        src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>10</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font base size)</font>
@@ -326,8 +326,8 @@
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <a id="font-size"></a><font color="#008000"><i>font-size</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span
-        style="margin-left: 0.25em"></span><tt>1</tt>
+        <a id="font-size"></a><font color="#008000"><i>font-size</i></font><span style="margin-left: 0.25em"></span><img
+        src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>1</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font size)</font>
@@ -386,13 +386,15 @@
     <div style="margin-bottom: 0.5em; margin-left: 42.175176192px">
       <p>
         From a mathematical point of view, the multipliers are in a geometric
-        progression with factor \(\sqrt[4]{2}\). Notice that the font size is
-        also affected by the <a href="env-math.en.html#math-level">index level</a>.
+        progression with factor <span class="no-breaks"><img src="font-mechanics-10.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0673333333333333em; margin-right: -0.0103434343434343em; margin-top: 0.0373333333333333em; vertical-align: -0.365212121212121em; height: 1.11191919191919em"></img>.</span>
+        Notice that the font size is also affected by the <a href="env-math.en.html#math-level">index
+        level</a>.
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>dpi</i></font><span style="margin-left: 0.25em"></span>\(:=\)<span style="margin-left: 0.25em"></span><tt>600</tt>
+        <font color="#008000"><i>dpi</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span
+        style="margin-left: 0.25em"></span><tt>600</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(fonts rendering quality)</font>
@@ -440,8 +442,9 @@
       <li>
         <p>
           Inconsistencies: sloppy design of some glyphs that are important for
-          mathematics (such as \(-\), \(<\), <abbr>etc.</abbr>), leading to
-          inconsistencies.
+          mathematics (such as <span class="no-breaks"><img src="font-mechanics-11.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>,</span>
+          <span class="no-breaks"><img src="font-mechanics-12.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>,</span> <abbr>etc.</abbr>),
+          leading to inconsistencies.
         </p>
       </li>
     </ul>
@@ -450,20 +453,22 @@
       emulation</em>. The first technique consists of borrowing missing glyphs
       from other fonts. This can either be done on the level of an entire font
       (<abbr>e.g.</abbr> for obtaining bold or italic declinations) or for
-      individual characters (<abbr>e.g.</abbr> a missing \(\propto\) symbol,
-      or lacking Greek characters). Font emulation consists of combining and
-      altering the glyphs of symbols in a font in order to generate new ones.
-      This can again be done for entire fonts or individual glyphs.
+      individual characters (<abbr>e.g.</abbr> a missing <img src="font-mechanics-13.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.47579797979798em"></img>
+      symbol, or lacking Greek characters). Font emulation consists of
+      combining and altering the glyphs of symbols in a font in order to
+      generate new ones. This can again be done for entire fonts or individual
+      glyphs.
     </p>
     <p>
       A prerequisite for automatic font substitutions is a detailed analysis
       of the main characteristics of all supported fonts. The results of this
       analysis are stored in a database. Using this database, we may then
-      compute the distance between two fonts. In the case when a symbol
-      \(\sigma\) is missing in a font \(F_1\), it then suffices to find the
-      closest font \(F_2\) that supports this symbol \(\sigma\). Notice that
-      the best substitution font may depend on the fonts which are installed
-      on your system.
+      compute the distance between two fonts. In the case when a symbol <img
+      src="font-mechanics-14.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0827474747474747em; margin-top: -0.0201212121212121em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img> is missing in a font <span class="no-breaks"><img src="font-mechanics-15.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.15169696969697em; height: 0.849878787878788em"></img>,</span>
+      it then suffices to find the closest font <img src="font-mechanics-16.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.162020202020202em; height: 0.849878787878788em"></img> that
+      supports this symbol <span class="no-breaks"><img src="font-mechanics-14.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0827474747474747em; margin-top: -0.0201212121212121em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img>.</span> Notice
+      that the best substitution font may depend on the fonts which are
+      installed on your system.
     </p>
     <p>
       In our database we both use discrete font characteristics
@@ -478,8 +483,9 @@
     <p>
       One of the most important font characteristics is the height of the
       &ldquo;x&rdquo; symbol (with respect to the design size). When the font
-      \(F_1\) borrows a symbol from the font \(F_2\) we first scale it by the
-      quotient of these x-heights inside \(F_1\) and \(F_2\).
+      <img src="font-mechanics-15.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.15169696969697em; height: 0.849878787878788em"></img> borrows a symbol from the font <img src="font-mechanics-16.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.162020202020202em; height: 0.849878787878788em"></img>
+      we first scale it by the quotient of these x-heights inside <img src="font-mechanics-15.png"
+      style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.15169696969697em; height: 0.849878787878788em"></img> and <span class="no-breaks"><img src="font-mechanics-16.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.162020202020202em; height: 0.849878787878788em"></img>.</span>
     </p>
     <p>
       Other common font characteristics are also taken into account into our
@@ -497,99 +503,6 @@
       Capitals</class> and &ldquo;blackboard bold&rdquo; variations of a given
       font.
     </p>
-    <div style="margin-top: 1em; margin-bottom: 1em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><table style="display: inline-table; vertical-align: middle">
-            <tbody><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-top: 0px solid; border-bottom: 1px solid; border-top: 0px solid">Regular</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; border-top: 0px solid; border-bottom: 1px solid">Bold</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 1px solid">Italic</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 1px solid">Small Caps</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 1px solid">Blackboard Bold</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 1px solid; border-right: 0px solid">Mathematics</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-top: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid; border-left: 0px solid; border-right: 1px solid">Optima</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; border-top: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid; border-left: 1px solid"><strong>Bold</strong><sup>*</sup></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid"><em>Italic</em></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-top: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 0px solid; border-right: 1px solid; border-left: 0px solid">Cochin</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 0px solid; border-left: 1px solid"><strong>Bold</strong><sup><class style="font-family: Times New Roman">*</class></sup></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 0px solid"><em>Italic</em><sup><class style="font-family: Times New Roman">*</class></sup></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 0px solid"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-top: 0px solid; border-bottom: 0px solid; border-right: 0px solid">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Chartrand</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid"><strong>Bold</strong></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em"><em>Italic</em></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Essays1743</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid"><strong>Bold</strong><sup>*</sup></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><em>Italic</em><sup>*</sup></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(\mathbb{C}\),<span style="margin-left: -0.2em"></span>
-              \(\mathbb{N}\),<span style="margin-left: -0.2em"></span> \(\mathbb{Q}\),<span style="margin-left: -0.2em"></span>
-              \(\mathbb{R}\),<span style="margin-left: -0.2em"></span>
-              \(\mathbb{Z}\)<sup>*</sup></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Meyne Textur</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid"><strong>Bold</strong></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><em>Italic</em></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Chalkduster</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid"><strong>Bold</strong></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><em>Italic</em></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Comic Sans</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid"><strong>Bold</strong></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><em>Italic</em></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-bottom: 0px solid">Papyrus</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid"><strong>Bold</strong></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><em>Italic</em></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em"><class style="font-variant: small-caps">Small Caps</class></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(\mathbb{C}\), \(\mathbb{N}\), \(\mathbb{Q}\),
-              \(\mathbb{R}\), \(\mathbb{Z}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em">\(x^2 + f \left( x, \frac{a}{b + c} \right)\)</td>
-            </tr></tbody>
-          </table></td>
-        </tr><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
-        </tr><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em; padding-left: 1.5em; padding-right: 1.5em"><div class="caption">
-            <font style="font-size: 90.0%"><p>
-              <b>Figure 1. </b><a id="auto-10"></a>Emulation of bold, italic, small
-              capitals and blackboard bold.
-            </p><p>
-              * These declinations are already supported by the original font.
-            </p></font>
-          </div></td>
-        </tr></tbody>
-      </table>
-    </div>
     <p>
       Missing glyphs can be generated automatically from existing ones using a
       combination of the following main techniques, listed by increasing
@@ -598,30 +511,31 @@
     <ul>
       <li>
         <p>
-          Superposition of several glyphs: \(+\) and \(-\) can be combined
-          into \(\pm\), and \(\ll\) be obtained by juxtaposing two \(<\)
-          symbols.
+          Superposition of several glyphs: <img src="font-mechanics-17.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151515em; vertical-align: 0em; height: 0.501656565656566em"></img> and <img
+          src="font-mechanics-11.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> can be combined into <span class="no-breaks"><img src="font-mechanics-18.png"
+          style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: 0em; vertical-align: 0em; height: 0.579232323232323em"></img>,</span> and <img src="font-mechanics-19.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> be obtained by
+          juxtaposing two <img src="font-mechanics-12.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> symbols.
         </p>
       </li>
       <li>
         <p>
-          Clipping rectangular areas: cutting \(\mapsto\) and
-          \(\twoheadrightarrow\) in their midsts and combining them yields
-          \(\nonconverted{twoheadmapsto}\).
+          Clipping rectangular areas: cutting <img src="font-mechanics-20.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434345em; margin-top: 0em; vertical-align: 0em; height: 0.47579797979798em"></img> and <img
+          src="font-mechanics-21.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.506828282828283em"></img> in their midsts and combining them yields <span
+          class="no-breaks"><img src="font-mechanics-22.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.506828282828283em"></img>.</span>
         </p>
       </li>
       <li>
         <p>
           Linear transformations: combining a crushed O and an I, we may
-          produce the Greek capital &lt;Phi*&gt;. Turning around
-          \(\rightarrow\), we obtain \(\uparrow\).
+          produce the Greek capital &lt;Phi*&gt;. Turning around <span class="no-breaks"><img
+          src="font-mechanics-23.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434345em; margin-top: 0em; vertical-align: 0em; height: 0.47579797979798em"></img>,</span> we obtain <span class="no-breaks"><img src="font-mechanics-24.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00515151515151516em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -0.237878787878788em; height: 1.06020202020202em"></img>.</span>
         </p>
       </li>
       <li>
         <p>
           Simple graphical constructs such as circles and lines. This can for
-          instance be used for producing the missing half circle of
-          \(\subset\).
+          instance be used for producing the missing half circle of <span
+          class="no-breaks"><img src="font-mechanics-25.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>.</span>
         </p>
       </li>
       <li>
@@ -629,10 +543,11 @@
           Special <em>ad hoc</em> transformations that directly operate on the
           pixels of a glyph (or on their outlines if possible). For instance,
           we designed a special &ldquo;curlyfication&rdquo; method that turns
-          \(<\) into \(\nonconverted{prec*}\) and <font style="font-size: 120.0%">\(<\)</font>
-          into <font style="font-size: 120.0%">\(\nonconverted{prec*}\)</font>. Similarly, we
-          implemented a &ldquo;flood fill&rdquo; algorithm for transforming
-          \(\vartriangleleft\) into \(\blacktriangleleft\).
+          <img src="font-mechanics-12.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> into <img src="font-mechanics-26.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> and <font
+          style="font-size: 120.0%"><img src="font-mechanics-27.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img></font> into <font style="font-size: 120.0%"><img src="font-mechanics-28.png"
+          style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img></font>. Similarly, we implemented a &ldquo;flood
+          fill&rdquo; algorithm for transforming <img src="font-mechanics-29.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> into
+          <span class="no-breaks"><img src="font-mechanics-30.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>.</span>
         </p>
       </li>
       <li>
@@ -643,285 +558,15 @@
         </p>
       </li>
     </ul>
-    <div style="margin-top: 1em; margin-bottom: 1em">
-      <table style="width: 100%">
-        <tbody><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><table style="display: inline-table; vertical-align: middle">
-            <tbody><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-top: 0px solid; border-bottom: 1px solid; border-top: 0px solid"></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Gamma;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Delta;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Theta;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Lambda;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Xi;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Pi;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Sigma;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Upsilon;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Phi;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Psi;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">&Omega;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\)\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 1px solid">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Optima</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 1px solid; border-bottom: 0px solid">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-right: 1px solid; border-left: 0px solid">Cochin</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; border-top: 0px solid; border-bottom: 0px solid">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Didot</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Cuprum</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Essays1743</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid"><font style="font-size: 90.0%">Am. Typewr.</font></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Chalkboard</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid">Chalkduster</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; border-bottom: 0px solid">Papyrus</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\({\asymp\!\!\!\!\!\!-}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr><tr>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 0px solid; border-right: 1px solid; padding-bottom: 0.25em; padding-top: 0.25em; border-bottom: 0px solid; border-left: 0px solid; border-right: 1px solid">Paper Cuts</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; border-left: 1px solid; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Gamma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Delta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Theta*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Lambda*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Xi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Pi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Sigma*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Upsilon*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Phi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Psi*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">&lt;Omega*&gt;</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\mp\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(:=\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\approxeq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em"></td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nVdash\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\rightarrow\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\leftrightharpoons\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\lneq\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{varsqsubsetneq}\)</td>
-              <td style="padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em; padding-bottom: 0.25em; padding-top: 0.25em; text-align: center; padding-left: 0.25em; padding-right: 0.25em">\(\nonconverted{blacktrianglerighteqslant}\)</td>
-            </tr></tbody>
-          </table></td>
-        </tr><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
-        </tr><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em; padding-left: 1.5em; padding-right: 1.5em"><div class="caption">
-            <font style="font-size: 90.0%"><p>
-              <b>Figure 2. </b><a id="auto-11"></a>Emulation of various mathematical
-              symbols in various fonts.
-            </p></font>
-          </div></td>
-        </tr></tbody>
-      </table>
-    </div>
     <p>
       One specific problem with mathematical fonts is the need for rubber
       characters. There are essentially four types of them: big operators
-      (\(\sum\), \(\prod\), \(\bigotimes\)), large delimiters \(((()))\) \(\{
-      \{ \{ \} \} \}\), wide accents (\(\widehat{},
-      \widehat{\hspace{1.1em}}\), \(\widehat{\hspace{1.8em}}\)), and long
-      arrows (\(\xrightarrow{\hspace{2.7em}}\),
-      \(\overset{\hspace{2.8em}}{\leftrightharpoons}\)).
+      (<span class="no-breaks"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-31.png"
+      style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-32.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0222424242424242em; margin-right: -0.0103434343434345em; margin-top: -0.0109292929292929em; vertical-align: -0.202181818181818em; height: 0.879191919191919em"></img>),</span>
+      large delimiters <img src="font-mechanics-33.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0284646464646465em; margin-right: -0.0103434343434343em; margin-top: -0.0143838383838384em; vertical-align: -0.332848484848485em; height: 1.13777777777778em"></img> <span class="no-breaks"><img src="font-mechanics-34.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00260606060606061em; margin-right: -0.0103434343434343em; margin-top: -0.00470707070707077em; vertical-align: -0.33769696969697em; height: 1.16363636363636em"></img>,</span>
+      wide accents (<span class="no-breaks"><img src="font-mechanics-35.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0413535353535354em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -0.144787878787879em; height: 0.817131313131313em"></img>,</span> <span class="no-breaks"><img
+      src="font-mechanics-36.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0258585858585859em; vertical-align: 0em; height: 0.698161616161616em"></img>),</span> and long arrows (<span class="no-breaks"><img src="font-mechanics-37.png"
+      style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: 0.31030303030303em; vertical-align: 0em; height: 0.78949494949495em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-38.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: 0.31030303030303em; vertical-align: 0em; height: 0.954989898989899em"></img>).</span>
     </p>
     <p>
       We produce these rubber characters using essentially the same techniques
@@ -934,93 +579,43 @@
         <tbody><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em"><p>
             <div style="display: inline">
-              \(\begin{array}{ccc}
-  \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons20}
-  &
-              \nonconverted{rubbermapsto20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons20}
-  &
-              \nonconverted{rubbermapsto20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons*20}
-  &
-              \nonconverted{rubbermapsto*20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons20}
-  &
-              \nonconverted{rubbermapsto20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons20}
-  &
-              \nonconverted{rubbermapsto20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons*20}
-  &
-              \nonconverted{rubbermapsto*20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons*20}
-  &
-              \nonconverted{rubbermapsto*20}\\
- 
-              \nonconverted{rubberLeftarrow20} &
-              \nonconverted{rubberleftrightharpoons20}
-  &
-              \nonconverted{rubbermapsto20}
-\end{array}\)<span style="margin-left: 2em"></span>
+              <img src="font-mechanics-39.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.429212121212121em; margin-right: -0.010343434343433em; margin-top: 0.1809898989899em; vertical-align: -4.57157575757576em; height: 9.01909090909091em"></img><span style="margin-left: 2em"></span>
             </div>
             <table style="display: inline-table; vertical-align: middle">
               <tbody><tr>
-                <td style="text-align: center">\(\sum\)</td>
-                <td style="text-align: center; text-align: right">\(\displaystyle \sum\)</td>
-                <td style="text-align: center">\(\displaystyle \prod\)</td>
-                <td style="text-align: center">\(\prod\)</td>
+                <td style="text-align: center"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img></td>
+                <td style="text-align: center; text-align: right"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.025010101010101em; margin-right: -0.0103434343434345em; margin-top: -0.00816161616161615em; vertical-align: -0.463535353535354em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0153333333333333em; margin-right: -0.0103434343434343em; margin-top: -0.0178383838383838em; vertical-align: -0.453858585858586em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img></td>
               </tr><tr>
-                <td style="text-align: center">\(\sum\)</td>
-                <td style="text-align: center; text-align: right">\(\displaystyle \sum\)</td>
-                <td style="text-align: center">\(\displaystyle \prod\)</td>
-                <td style="text-align: center">\(\prod\)</td>
+                <td style="text-align: center"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img></td>
+                <td style="text-align: center; text-align: right"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.025010101010101em; margin-right: -0.0103434343434345em; margin-top: -0.00816161616161615em; vertical-align: -0.463535353535354em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0153333333333333em; margin-right: -0.0103434343434343em; margin-top: -0.0178383838383838em; vertical-align: -0.453858585858586em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img></td>
               </tr><tr>
-                <td style="text-align: center">\(\sum\)</td>
-                <td style="text-align: center; text-align: right">\(\displaystyle \sum\)</td>
-                <td style="text-align: center">\(\displaystyle \prod\)</td>
-                <td style="text-align: center">\(\prod\)</td>
+                <td style="text-align: center"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img></td>
+                <td style="text-align: center; text-align: right"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.025010101010101em; margin-right: -0.0103434343434345em; margin-top: -0.00816161616161615em; vertical-align: -0.463535353535354em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0153333333333333em; margin-right: -0.0103434343434343em; margin-top: -0.0178383838383838em; vertical-align: -0.453858585858586em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img></td>
               </tr><tr>
-                <td style="text-align: center">\(\sum\)</td>
-                <td style="text-align: center; text-align: right">\(\displaystyle \sum\)</td>
-                <td style="text-align: center">\(\displaystyle \prod\)</td>
-                <td style="text-align: center">\(\prod\)</td>
+                <td style="text-align: center"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img></td>
+                <td style="text-align: center; text-align: right"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.025010101010101em; margin-right: -0.0103434343434345em; margin-top: -0.00816161616161615em; vertical-align: -0.463535353535354em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0153333333333333em; margin-right: -0.0103434343434343em; margin-top: -0.0178383838383838em; vertical-align: -0.453858585858586em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img></td>
               </tr><tr>
-                <td style="text-align: center">\(\sum\)</td>
-                <td style="text-align: center; text-align: right">\(\displaystyle \sum\)</td>
-                <td style="text-align: center">\(\displaystyle \prod\)</td>
-                <td style="text-align: center">\(\prod\)</td>
+                <td style="text-align: center"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img></td>
+                <td style="text-align: center; text-align: right"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.025010101010101em; margin-right: -0.0103434343434345em; margin-top: -0.00816161616161615em; vertical-align: -0.463535353535354em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0153333333333333em; margin-right: -0.0103434343434343em; margin-top: -0.0178383838383838em; vertical-align: -0.453858585858586em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img></td>
               </tr><tr>
-                <td style="text-align: center">\(\sum\)</td>
-                <td style="text-align: center; text-align: right">\(\displaystyle \sum\)</td>
-                <td style="text-align: center">\(\displaystyle \prod\)</td>
-                <td style="text-align: center">\(\prod\)</td>
+                <td style="text-align: center"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img></td>
+                <td style="text-align: center; text-align: right"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.025010101010101em; margin-right: -0.0103434343434345em; margin-top: -0.00816161616161615em; vertical-align: -0.463535353535354em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0153333333333333em; margin-right: -0.0103434343434343em; margin-top: -0.0178383838383838em; vertical-align: -0.453858585858586em; height: 1.39636363636364em"></img></td>
+                <td style="text-align: center"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img></td>
               </tr></tbody>
             </table>
             <div style="display: inline">
-              <span style="margin-left: 1em"></span>\(\left\lfloor \begin{array}{cc}
-  (((())))
-              & \{ \{ \{ \{\} \} \} \}\\
-  (((()))) & \{ \{ \{ \{\} \} \}
-              \}\\
-  (((()))) & \{ \{ \{ \{\} \} \} \}\\
-  (((()))) & \{ \{ \{
-              \{ \} \} \} \}\\
-  (((()))) & \{ \{ \{ \{\} \} \} \}
-\end{array}
-              \right\rceil\)
+              <span style="margin-left: 1em"></span><img src="font-mechanics-42.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.00870707070707066em; margin-right: -0.0103434343434348em; margin-top: -0.00870707070707066em; vertical-align: -4.42715151515152em; height: 9.48052525252525em"></img>
             </div>
           </p><p>
             
@@ -1030,14 +625,14 @@
         </tr><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em; padding-left: 1.5em; padding-right: 1.5em"><div class="caption">
             <font style="font-size: 90.0%"><p>
-              <b>Figure 3. </b><a id="auto-12"></a>Assorted rubber symbols from various
+              <b>Figure 1. </b><a id="auto-10"></a>Assorted rubber symbols from various
               fonts.
             </p></font>
           </div></td>
         </tr></tbody>
       </table>
     </div>
-    <h2 id="auto-13">5.<span style="margin-left: 1em"></span>The abstract font class<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-11">5.<span style="margin-left: 1em"></span>The abstract font class<span style="margin-left: 1em"></span></h2>
     <p>
       The main abstract <tt class="verbatim">font</tt> class is defined in <tt class="verbatim">font.hpp</tt>:
       
@@ -1060,7 +655,7 @@ struct font_rep: rep&lt;font&gt; {<br />  display  dis;              // underlyi
       other virtual routines are used for determining additional properties of
       typeset strings.
     </p>
-    <h2 id="auto-14">6.<span style="margin-left: 1em"></span>Font selection<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-12">6.<span style="margin-left: 1em"></span>Font selection<span style="margin-left: 1em"></span></h2>
     <p>
       Font selection is initiated in <tt class="verbatim cpp">edit_env_rep::update_font</tt>
       where the variables controlling the current font, family, series, shape,
@@ -1148,7 +743,7 @@ smart_font (string family, string variant, string series, string shape,
       in favour of the main font variables, but we make local adjustement to
       carry over corretly the variant and shape selection.
     </p>
-    <h2 id="auto-15">7.<span style="margin-left: 1em"></span>Smart fonts<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-13">7.<span style="margin-left: 1em"></span>Smart fonts<span style="margin-left: 1em"></span></h2>
     <p>
       A smart font collects and coordinate various physical fonts in order to
       represent the full spectrum of TeXmacs basic entities (TeXmacs universal
@@ -1353,7 +948,7 @@ converter conv= load_converter (&quot;UTF-8&quot;, &quot;Cork&quot;);</pre>
       encoded in Scheme expressions in various files in <tt class="verbatim">$TEXMACS_PATH/langs/encoding</tt>.
       
     </p>
-    <h3 id="auto-16">7.1.<span style="margin-left: 1em"></span>Entity resolution<span style="margin-left: 1em"></span></h3>
+    <h3 id="auto-14">7.1.<span style="margin-left: 1em"></span>Entity resolution<span style="margin-left: 1em"></span></h3>
     <p>
       We go back now to entity resolution in <tt class="verbatim cpp">smart_font</tt>. The
       next step is how <tt class="verbatim cpp">resolve</tt> works. The function is
@@ -1798,8 +1393,8 @@ smart_font_rep::initialize_font (int nr) {
     <p>
       
     </p>
-    <h2 id="auto-17"><a id="sec:other"></a>8.<span style="margin-left: 1em"></span>Other fonts<span style="margin-left: 1em"></span></h2>
-    <h3 id="auto-18"><a id="sec:rubber"></a>8.1.<span style="margin-left: 1em"></span>Rubber fonts<span style="margin-left: 1em"></span></h3>
+    <h2 id="auto-15"><a id="sec:other"></a>8.<span style="margin-left: 1em"></span>Other fonts<span style="margin-left: 1em"></span></h2>
+    <h3 id="auto-16"><a id="sec:rubber"></a>8.1.<span style="margin-left: 1em"></span>Rubber fonts<span style="margin-left: 1em"></span></h3>
     <p>
       Rubber fonts take care of large variants of delimiters like brackets and
       square roots, described by entities like <tt class="verbatim">&lt;large-lceil-X&gt;</tt>
@@ -1915,11 +1510,12 @@ supports_big_operators (string res_name) {
     <p>
       It indicates whether the font is capable of rendering bigger version of
       standard operators like sums, products, direct sums, etc<span style="margin-left: 0.16665em"></span>.<span
-      style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> (\(\sum\),
-      \(\prod\), &oplus;, <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
-      style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>). Essentially only math fonts are
-      capable of that and in the current version of TeXmacs only the math
-      features for TeX Gyre fonts are implemented.
+      style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> (<span class="no-breaks"><img
+      src="font-mechanics-43.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-44.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img>,</span>
+      &oplus;, <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+      style="margin-left: 0.16665em"></span>). Essentially only math fonts are capable of that and in
+      the current version of TeXmacs only the math features for TeX Gyre fonts
+      are implemented.
     </p>
     <p>
       The field <tt class="verbatim cpp">larger</tt> is an array of <tt class="verbatim cpp">2*MAGNIFIED_NUMBER+5</tt>
@@ -2156,7 +1752,7 @@ poor_rubber_font_rep::get_font (int nr) {
         </p>
       </li>
     </ul>
-    <h3 id="auto-19"><a id="sec:unicode-font"></a>8.2.<span style="margin-left: 1em"></span>Unicode fonts<span style="margin-left: 1em"></span></h3>
+    <h3 id="auto-17"><a id="sec:unicode-font"></a>8.2.<span style="margin-left: 1em"></span>Unicode fonts<span style="margin-left: 1em"></span></h3>
     <p>
       Unicode fontsare capable of indexing unicode glyphs in physical fonts
       (i.e. modern TrueType, or OpenType font files which can handle the whole
@@ -2625,7 +2221,7 @@ unicode_font_rep::draw_fixed (renderer ren, string s, SI x, SI y, bool ligf) {
   }
 }</pre>
     </div>
-    <h3 id="auto-20"><a id="sec:rubber-unicode"></a>8.3.<span style="margin-left: 1em"></span>Rubber Unicode fonts<span
+    <h3 id="auto-18"><a id="sec:rubber-unicode"></a>8.3.<span style="margin-left: 1em"></span>Rubber Unicode fonts<span
     style="margin-left: 1em"></span></h3>
     <p>
       Rubber Unicode fonts are implemented similarly to rubber fonts. They
@@ -2808,7 +2404,7 @@ rubber_assemble_font_rep::search_font (string s, string&amp; r) {
   return 0;
 }</pre>
     </div>
-    <h3 id="auto-21"><a id="sec:virtual-font"></a>8.4.<span style="margin-left: 1em"></span>Virtual fonts<span style="margin-left: 1em"></span></h3>
+    <h3 id="auto-19"><a id="sec:virtual-font"></a>8.4.<span style="margin-left: 1em"></span>Virtual fonts<span style="margin-left: 1em"></span></h3>
     <p>
       Virtual fonts provide a mechanism to extend the set of available glyphs
       by synthetizing new glyphs from operations on those of a base font. The
@@ -3020,7 +2616,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
 (italic $p1 $p2 $p3)</pre>
     <pre class="verbatim" xml:space="preserve">
 (circle $r $w)</pre>
-    <h3 id="auto-22">8.5.<span style="margin-left: 1em"></span>TeX fonts<span style="margin-left: 1em"></span></h3>
+    <h3 id="auto-20">8.5.<span style="margin-left: 1em"></span>TeX fonts<span style="margin-left: 1em"></span></h3>
     <p>
       TeX fonts are physical fonts are handled via specific mechanisms which
       decoded the TeX font files and metrrics to produce metric informations
@@ -3032,14 +2628,14 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
       etc<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>
     </p>
-    <h3 id="auto-23">8.6.<span style="margin-left: 1em"></span>Compound fonts for mathematics<span style="margin-left: 1em"></span></h3>
+    <h3 id="auto-21">8.6.<span style="margin-left: 1em"></span>Compound fonts for mathematics<span style="margin-left: 1em"></span></h3>
     <p>
       The <tt class="verbatim cpp">math_font</tt> class represent a compound font which can
       render all the usual entities for mathematical document preparation. It
       is modelled around TeX math fonts to map several physical fonts to cover
       all math alphabets. 
     </p>
-    <h2 id="auto-24">9.<span style="margin-left: 1em"></span>From logical to physical font<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-22">9.<span style="margin-left: 1em"></span>From logical to physical font<span style="margin-left: 1em"></span></h2>
     <p>
       As we already discusses, TeXmacs implements a font substitution
       mechanism that tries to find a physical font which better fits a given
