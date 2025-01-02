@@ -90,6 +90,8 @@
 
   <section*|Developers' notes>
 
+  <hlink|Font mechanics|font-mechanics.tm>
+
   <hlink|Jolly coders|jolly-coders.tm>
 
   <hlink|Scheming|scheming.tm>

@@ -3,7 +3,11 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="http://texmacs.github.io/notes"/>
   <link rel="self" type="application/atom+xml" href="http://texmacs.github.io/notes/docs/notes.atom"/>
+<<<<<<< Updated upstream
   <updated>2024-12-30T00:35:58Z</updated>
+=======
+  <updated>2025-01-02T23:37:55Z</updated>
+>>>>>>> Stashed changes
   <author>
     <name>The TeXmacs organisation</name>
     <uri>http://www.texmacs.org</uri>
@@ -12,6 +16,7 @@
   <icon>http://texmacs.github.io/notes/misc/blog-icon.ico</icon>
   <logo>http://texmacs.github.io/notes/misc/texmacs-blog-transparent.png</logo>
   <entry>
+<<<<<<< Updated upstream
     <title>Wishlist</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/wishlist.html"/>
     <id>texmacs.github.io/notes/wishlist.tm:2024-12-30T00:35:13Z</id>
@@ -66,12 +71,20 @@
     <id>texmacs.github.io/notes/template.tm:2024-12-30T00:35:13Z</id>
     <updated>2024-12-30T00:35:13Z</updated>
     <published>2024-12-30T00:35:54Z</published>
+=======
+    <title>Font mechanics</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/font-mechanics.html"/>
+    <id>texmacs.github.io/notes/font-mechanics.tm:2025-01-02T23:30:02Z</id>
+    <updated>2025-01-02T23:30:02Z</updated>
+    <published>2025-01-02T23:30:02Z</published>
+>>>>>>> Stashed changes
     <summary><concat>This file provides a template for typical notes/articles.
     You can use the tag <markup>notes-abstract</markup> to provide a small
     summary of the content, as exemplified by this very
     text.</concat></summary>
   </entry>
   <entry>
+<<<<<<< Updated upstream
     <title>Scheming</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheming.html"/>
     <id>texmacs.github.io/notes/scheming.tm:2024-12-30T00:35:13Z</id>
@@ -168,10 +181,18 @@
     <id>texmacs.github.io/notes/list-articles.tm:2024-12-30T00:35:13Z</id>
     <updated>2024-12-30T00:35:13Z</updated>
     <published>2024-12-30T00:35:54Z</published>
+=======
+    <title>List of all the articles</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/list-articles.html"/>
+    <id>texmacs.github.io/notes/list-articles.tm:2024-12-08T00:33:14Z</id>
+    <updated>2024-12-08T00:33:14Z</updated>
+    <published>2024-12-29T09:55:50Z</published>
+>>>>>>> Stashed changes
     <summary>A list of all the articles in the website, ordered by the most
     recent modification time.</summary>
   </entry>
   <entry>
+<<<<<<< Updated upstream
     <title>Jolly coders</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
     <id>texmacs.github.io/notes/jolly-coders.tm:2024-12-30T00:35:13Z</id>
@@ -273,10 +294,44 @@
     documents. This is a new feature introduced by Joris in <tt>r13254</tt>
     with some additions in subsequent revisions, the current description is
     based on revision <tt>r13256</tt>.</concat></summary>
+=======
+    <title>Creating a Bibliography Style for TeXmacs</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/create-bibliography-style.html"/>
+    <id>texmacs.github.io/notes/create-bibliography-style.tm:2024-12-08T00:31:42Z</id>
+    <updated>2024-12-08T00:31:42Z</updated>
+    <published>2024-12-29T09:55:50Z</published>
+    <summary xml:space="preserve">This tutorial covers customizing one of the premade TeXmacs bibliography styles to use for your project. </summary>
+  </entry>
+  <entry>
+    <title><concat>Notes on <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/main.html"/>
+    <id>texmacs.github.io/notes/main.tm:2024-11-15T23:34:14Z</id>
+    <updated>2024-11-15T23:34:14Z</updated>
+    <published>2025-01-02T23:34:57Z</published>
+  </entry>
+  <entry>
+    <title>Standard Output and Standard Error on Microsoft Windows</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/windows-output-error.html"/>
+    <id>texmacs.github.io/notes/windows-output-error.tm:2023-09-27T21:38:25Z</id>
+    <updated>2023-09-27T21:38:25Z</updated>
+    <published>2024-11-19T22:56:48Z</published>
+    <summary><concat>We show how to see <TeXmacs/>' standard output and
+    standard error on Microsoft Windows.</concat></summary>
+  </entry>
+  <entry>
+    <title>Development resources and ideas</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/dev-notes.html"/>
+    <id>texmacs.github.io/notes/dev-notes.tm:2023-04-21T10:28:13Z</id>
+    <updated>2023-04-21T10:28:13Z</updated>
+    <published>2024-11-19T22:56:48Z</published>
+    <summary>This page contains idea and resources pertaining to the
+    development of TeXmacs.</summary>
+>>>>>>> Stashed changes
   </entry>
   <entry>
     <title><concat xml:space="preserve">Build <TeXmacs/> using CMake and MXE on WSL for Windows </concat></title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/build-using-cmake-and-mxe-on-wsl.html"/>
+<<<<<<< Updated upstream
     <id>texmacs.github.io/notes/build-using-cmake-and-mxe-on-wsl.tm:2024-12-30T00:35:13Z</id>
     <updated>2024-12-30T00:35:13Z</updated>
     <published>2024-12-30T00:35:54Z</published>
@@ -290,20 +345,123 @@
     <summary><concat>This article serves as a guide for <TeXmacs/>
     contributors and developers on macOS. We talk about how to build and test
     GNU <TeXmacs/> on macOS using CMake and Homebrew.</concat></summary>
+=======
+    <id>texmacs.github.io/notes/build-using-cmake-and-mxe-on-wsl.tm:2023-02-17T21:32:00Z</id>
+    <updated>2023-02-17T21:32:00Z</updated>
+    <published>2024-11-19T22:56:48Z</published>
+  </entry>
+  <entry>
+    <title>New list types</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/new-lists.html"/>
+    <id>texmacs.github.io/notes/new-lists.tm:2023-02-16T10:39:04Z</id>
+    <updated>2023-02-16T10:39:04Z</updated>
+    <published>2024-11-19T22:56:48Z</published>
+    <summary><concat>How to define new list types in
+    <TeXmacs/>.</concat></summary>
+  </entry>
+  <entry>
+    <title>Community links</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/community.html"/>
+    <id>texmacs.github.io/notes/community.tm:2022-10-29T16:35:34Z</id>
+    <updated>2022-10-29T16:35:34Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>We gather here links to websites and blogs discussing
+    <TeXmacs/>.</concat></summary>
+  </entry>
+  <entry>
+    <title>Keyboard shortcuts for menu items</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/menu-shortcuts.html"/>
+    <id>texmacs.github.io/notes/menu-shortcuts.tm:2022-09-23T11:52:19Z</id>
+    <updated>2022-09-23T11:52:19Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>How to write a keyboard shortcut for a menu itemand
+    searching for text in <TeXmacs/> <scheme/> files.</concat></summary>
+  </entry>
+  <entry>
+    <title xml:space="preserve">Compiling TeXmacs on Ubuntu 22 with Guile3 and Qt5 </title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.html"/>
+    <id>texmacs.github.io/notes/compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.tm:2022-09-16T13:23:32Z</id>
+    <updated>2022-09-16T13:23:32Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary>This guide describes how to compile TeXmacs on Ubuntu 22 with
+    Guile 3 support and Qt 5.</summary>
+  </entry>
+  <entry>
+    <title>Jolly coders</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/jolly-coders.html"/>
+    <id>texmacs.github.io/notes/jolly-coders.tm:2021-06-05T17:51:12Z</id>
+    <updated>2021-06-05T17:51:12Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary>This page gather informations on the activities of the TeXmacs
+    hacking group.</summary>
+  </entry>
+  <entry>
+    <title><concat><TeXmacs/> and the art of mathematical
+    writing</concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/art-of-math-writing.html"/>
+    <id>texmacs.github.io/notes/art-of-math-writing.tm:2021-05-05T10:30:07Z</id>
+    <updated>2021-05-05T10:30:07Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><document><concat>A blog post which presents the motivations
+    behind the design of <TeXmacs/> from a personal
+    perspective.<next-line/>[by
+    <hlink>@maxgubihttps://twitter.com/maxgubi</hlink>]</concat></document></summary>
+  </entry>
+  <entry>
+    <title>Scheming</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheming.html"/>
+    <id>texmacs.github.io/notes/scheming.tm:2021-04-12T12:50:27Z</id>
+    <updated>2021-04-12T12:50:27Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>We discuss some aspects of the choice of the Scheme
+    language implementation used in <TeXmacs/>.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>A list of documents created with
+    <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/example-documents.html"/>
+    <id>texmacs.github.io/notes/example-documents.tm:2021-04-08T21:15:54Z</id>
+    <updated>2021-04-08T21:15:54Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat xml:space="preserve">We gather here some examples of documents created with <TeXmacs/> to showcase the daily usage of the system. We indicate when sources are included since looking at examples is a great way to learn. </concat></summary>
+>>>>>>> Stashed changes
   </entry>
   <entry>
     <title>Awesome GNU TeXmacs</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/awesome-texmacs.html"/>
+<<<<<<< Updated upstream
     <id>texmacs.github.io/notes/awesome-texmacs.tm:2024-12-30T00:35:13Z</id>
     <updated>2024-12-30T00:35:13Z</updated>
     <published>2024-12-30T00:35:54Z</published>
+=======
+    <id>texmacs.github.io/notes/awesome-texmacs.tm:2021-04-08T21:15:54Z</id>
+    <updated>2021-04-08T21:15:54Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>The Macro editor and easy macro modification</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/macro-editor.html"/>
+    <id>texmacs.github.io/notes/macro-editor.tm:2021-03-17T20:57:33Z</id>
+    <updated>2021-03-17T20:57:33Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary>The Macro editor is a shortcut tool for examining and modifying
+    macro definitions; it can be used as well to write a new macro starting
+    from an existing macro. We look at its use with the help of two
+    examples.</summary>
+>>>>>>> Stashed changes
   </entry>
   <entry>
     <title><concat>A wishlist for <TeXmacs/> articles</concat></title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/articles-wishes.html"/>
+<<<<<<< Updated upstream
     <id>texmacs.github.io/notes/articles-wishes.tm:2024-12-30T00:35:13Z</id>
     <updated>2024-12-30T00:35:13Z</updated>
     <published>2024-12-30T00:35:54Z</published>
+=======
+    <id>texmacs.github.io/notes/articles-wishes.tm:2021-03-17T20:57:33Z</id>
+    <updated>2021-03-17T20:57:33Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+>>>>>>> Stashed changes
     <summary><concat>It would be useful to have some short articles or
     tutorials covering the topics listed here below. This article collects
     them in the hope that someone will contribute them to the blog. They can
@@ -314,6 +472,7 @@
     section.</concat></summary>
   </entry>
   <entry>
+<<<<<<< Updated upstream
     <title><concat><TeXmacs/> and the art of mathematical
     writing</concat></title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/art-of-math-writing.html"/>
@@ -324,12 +483,175 @@
     behind the design of <TeXmacs/> from a personal
     perspective.<next-line/>[by
     <hlink>@maxgubihttps://twitter.com/maxgubi</hlink>]</concat></document></summary>
+=======
+    <title><concat>Status of Plugins for <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/plugin-status.html"/>
+    <id>texmacs.github.io/notes/plugin-status.tm:2021-02-18T15:29:33Z</id>
+    <updated>2021-02-18T15:29:33Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary>We review the current status and limitations of the various
+    plugins on Windows/Mac/Linux.</summary>
+  </entry>
+  <entry>
+    <title>Customizing the color of code snippets</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/customize-syntax-color.html"/>
+    <id>texmacs.github.io/notes/customize-syntax-color.tm:2021-02-18T15:29:33Z</id>
+    <updated>2021-02-18T15:29:33Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title><concat>Compile <TeXmacs/> on the Raspberry Pi</concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/compile-texmacs-on-raspi.html"/>
+    <id>texmacs.github.io/notes/compile-texmacs-on-raspi.tm:2020-12-07T07:17:01Z</id>
+    <updated>2020-12-07T07:17:01Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>Unfortunately, there is no prepackaged <TeXmacs/> for
+    RaspberryPi OS, because of its ARM chipset. Likewise there are no
+    precompiled binaries, but it is not hard to built it
+    yourself.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>Implementing comments in <TeXmacs/></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/comments-in-texmacs.html"/>
+    <id>texmacs.github.io/notes/comments-in-texmacs.tm:2020-12-05T15:09:47Z</id>
+    <updated>2020-12-05T15:09:47Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>We discuss the implementation of comments in <TeXmacs/>
+    documents. This is a new feature introduced by Joris in <tt>r13254</tt>
+    with some additions in subsequent revisions, the current description is
+    based on revision <tt>r13256</tt>.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>Modular graphics with <name>Scheme</name></concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/modular-scheme-graphics.html"/>
+    <id>texmacs.github.io/notes/modular-scheme-graphics.tm:2020-11-25T23:42:07Z</id>
+    <updated>2020-11-25T23:42:07Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>Editorial scope and author guidelines</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/editorial-guidelines.html"/>
+    <id>texmacs.github.io/notes/editorial-guidelines.tm:2020-11-25T23:08:42Z</id>
+    <updated>2020-11-25T23:08:42Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title><concat xml:space="preserve">Build <TeXmacs/> using CMake and Homebrew </concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/build-using-cmake-and-homebrew-on-macos.html"/>
+    <id>texmacs.github.io/notes/build-using-cmake-and-homebrew-on-macos.tm:2020-11-20T20:36:27Z</id>
+    <updated>2020-11-20T20:36:27Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>This article serves as a guide for <TeXmacs/>
+    contributors and developers on macOS. We talk about how to build and test
+    GNU <TeXmacs/> on macOS using CMake and Homebrew.</concat></summary>
+  </entry>
+  <entry>
+    <title>Composing TeXmacs graphics with Scheme</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheme-graphics.html"/>
+    <id>texmacs.github.io/notes/scheme-graphics.tm:2020-11-16T13:28:34Z</id>
+    <updated>2020-11-16T13:28:34Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>Embedding graphics composed with Scheme into documents</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/scheme-graphics-embedding.html"/>
+    <id>texmacs.github.io/notes/scheme-graphics-embedding.tm:2020-11-16T13:28:34Z</id>
+    <updated>2020-11-16T13:28:34Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>Wishlist</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/wishlist.html"/>
+    <id>texmacs.github.io/notes/wishlist.tm:2020-11-15T21:17:44Z</id>
+    <updated>2020-11-15T21:17:44Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary>This wishlist collects suggestions for improvements and nice
+    ideas for addition to TeXmacs. These should be of limited scope and
+    somewhat reasonable technical difficulty. It is mostly meant for
+    developers or technically savyy users to collect good ideas. It should be
+    clear that the functionality is not already provided in some form. This
+    wishlist must not be used for very broad and vague requests (e.g. ``make
+    the program more versatile and powerful").</summary>
+  </entry>
+  <entry>
+    <title>Adding a dialog to build websites</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/website-builder-dialog.html"/>
+    <id>texmacs.github.io/notes/website-builder-dialog.tm:2020-11-15T17:36:40Z</id>
+    <updated>2020-11-15T17:36:40Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>In this article we document the construction of a user
+    interface to the website building facilities of
+    <TeXmacs/>.</concat></summary>
+  </entry>
+  <entry>
+    <title>Implementing previews for link targets</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/previews.html"/>
+    <id>texmacs.github.io/notes/previews.tm:2020-11-13T23:58:44Z</id>
+    <updated>2020-11-13T23:58:44Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>Example of TikZ figure embedding within a document</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/embedding-tikz-figures-short.html"/>
+    <id>texmacs.github.io/notes/embedding-tikz-figures-short.tm:2020-11-13T12:26:43Z</id>
+    <updated>2020-11-13T12:26:43Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>Contribution guide</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/contribution-guide.html"/>
+    <id>texmacs.github.io/notes/contribution-guide.tm:2020-11-12T18:54:10Z</id>
+    <updated>2020-11-12T18:54:10Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+  </entry>
+  <entry>
+    <title>TeXmacs and HTML</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/tm-and-html.html"/>
+    <id>texmacs.github.io/notes/tm-and-html.tm:2020-11-12T17:03:27Z</id>
+    <updated>2020-11-12T17:03:27Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>In this article we discuss question related to conversion
+    from/to <name>HTML</name>.</concat></summary>
+  </entry>
+  <entry>
+    <title>Template article</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/template.html"/>
+    <id>texmacs.github.io/notes/template.tm:2020-11-12T17:03:27Z</id>
+    <updated>2020-11-12T17:03:27Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>This file provides a template for typical notes/articles.
+    You can use the tag <markup>notes-abstract</markup> to provide a small
+    summary of the content, as exemplified by this very
+    text.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>An overview of <TeXmacs/> from altitude</concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/overview.html"/>
+    <id>texmacs.github.io/notes/overview.tm:2020-11-12T17:03:27Z</id>
+    <updated>2020-11-12T17:03:27Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+    <summary><concat>A rapid overview/executive summary of the <TeXmacs/>
+    system.</concat></summary>
+  </entry>
+  <entry>
+    <title><concat>Tetris with <TeXmacs/> tables</concat></title>
+    <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/tetris.html"/>
+    <id>texmacs.github.io/notes/tetris.tm:2020-11-11T19:49:14Z</id>
+    <updated>2020-11-11T19:49:14Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+>>>>>>> Stashed changes
   </entry>
   <entry>
     <title>Example of TikZ figure generation with the Graph plugin</title>
     <link rel="alternate" type="text/html" hreflang="en" href="http://texmacs.github.io/notes/docs/a-tikz-example.html"/>
+<<<<<<< Updated upstream
     <id>texmacs.github.io/notes/a-tikz-example.tm:2024-12-30T00:35:13Z</id>
     <updated>2024-12-30T00:35:13Z</updated>
     <published>2024-12-30T00:35:54Z</published>
+=======
+    <id>texmacs.github.io/notes/a-tikz-example.tm:2020-11-10T16:01:20Z</id>
+    <updated>2020-11-10T16:01:20Z</updated>
+    <published>2023-01-02T20:08:55Z</published>
+>>>>>>> Stashed changes
   </entry>
 </feed>
