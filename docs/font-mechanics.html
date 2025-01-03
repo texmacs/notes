@@ -191,7 +191,7 @@
     <div style="margin-left: 42.175176192px">
       <p>
         Similarly, TeXmacs supports various mathematical fonts: <font color="#800000">[Does
-        not render correclty]</font>
+        not render correctly]</font>
       </p>
     </div>
     <div class="tmweb-code" style="margin-left: 42.175176192px">
@@ -412,7 +412,7 @@
         is usually set once and for all for the whole document.
       </p>
     </div>
-    <h2 id="auto-9">4.<span style="margin-left: 1em"></span>Font substition and emulation<span style="margin-left: 1em"></span></h2>
+    <h2 id="auto-9">4.<span style="margin-left: 1em"></span>Font substitution and emulation<span style="margin-left: 1em"></span></h2>
     <p>
       For more details see the paper, J. van der Hoeven,  &ldquo;Mathematical
       font art&rdquo; available at <a href="https://www.texmacs.org/joris/fontart/fontart-abs.html"><tt>https://www.texmacs.org/joris/fontart/fontart-abs.html</tt></a>.
@@ -571,7 +571,7 @@
       <li>
         <p>
           Emulation of uppercase Greek letters is obtained by gluing together
-          pieces of certain glyphs to produce others. Lowecase Greek letters
+          pieces of certain glyphs to produce others. Lowercase Greek letters
           are not amenable to this approach.
         </p>
       </li>
@@ -791,12 +791,12 @@ smart_font (string family, string variant, string series, string shape,
     <p>
       as we see, in the new font mechanism (selected via the <tt class="verbatim cpp">new_fonts</tt>
       global boolean), we ignore the mode-dependent font selection variables,
-      in favour of the main font variables, but we make local adjustement to
-      carry over corretly the variant and shape selection.
+      in favour of the main font variables, but we make local adjustment to
+      carry over correctly the variant and shape selection.
     </p>
     <h2 id="auto-15">7.<span style="margin-left: 1em"></span>Smart fonts<span style="margin-left: 1em"></span></h2>
     <p>
-      A smart font collects and coordinate various physical fonts in order to
+      A smart font collects and coordinates various physical fonts in order to
       represent the full spectrum of TeXmacs basic entities (TeXmacs universal
       encoding) and handles also various customizations and effects. The
       structure has various fields:
@@ -962,7 +962,7 @@ rewrite_math (string s) {
     <p>
       Let's make a brief digression on how this is implemented before
       continuing. <tt class="verbatim cpp">utf8_to_cork</tt> is implemented in <tt class="verbatim">converter.cpp</tt>
-      and uses a <tt class="verbatim cpp">converter</tt> object instatiated via 
+      and uses a <tt class="verbatim cpp">converter</tt> object instantiated via 
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -1108,10 +1108,10 @@ int smart_font_rep::resolve (string c)</pre>
 int smart_font_rep::resolve (string c, string fam, int attempt)</pre>
     </div>
     <p>
-      here the <tt class="verbatim cpp">attempt</tt> variable indicate the number of attemps
-      we already perfomed. This function implements the semantics of the font
-      sequence string, allowing to choose different fonts for subranges of
-      glyphs, or variants (like bold, italic, etc&hellip;). 
+      here the <tt class="verbatim cpp">attempt</tt> variable indicate the number of
+      attempts we already performed. This function implements the semantics of
+      the font sequence string, allowing to choose different fonts for
+      subranges of glyphs, or variants (like bold, italic, etc&hellip;). 
     </p>
     <p>
       For selectors <tt class="verbatim cpp">fam</tt> of the form <tt class="verbatim cpp">&quot;selector
@@ -1139,7 +1139,7 @@ int smart_font_rep::resolve (string c, string fam, int attempt)</pre>
       </li>
       <li>
         <p>
-          a mathematical alphabeth range, i.e. one of <tt class="verbatim">bold-math</tt>,
+          a mathematical alphabet range, i.e. one of <tt class="verbatim">bold-math</tt>,
           <tt class="verbatim">italic-math</tt>, <tt class="verbatim">bold-italic-math</tt>, <tt
           class="verbatim">cal</tt>, <tt class="verbatim">bold-cal</tt>, <tt class="verbatim">frak</tt>, <tt
           class="verbatim">bold-frak</tt>, <tt class="verbatim">bbb</tt>, <tt class="verbatim">ss</tt>, <tt
@@ -1222,7 +1222,7 @@ is_rubber (string c) {
 }</pre>
     </div>
     <p>
-      Note that some rubber entities can be matched in the earlier attemps,
+      Note that some rubber entities can be matched in the earlier attempts,
       e.g. by <tt class="verbatim">mathlarge</tt>, <tt class="verbatim">mathbigops</tt> or <tt
       class="verbatim">mathrubber</tt> selectors, and supported by a physical font, e.g.
       by an <tt class="verbatim">unicode_font</tt>s below in Section <a href="#sec:unicode-font">8.2</a>.
@@ -1252,11 +1252,11 @@ is_rubber (string c) {
 (&quot;&lt;large-rfloor-0&gt;&quot;    &quot;#230B&quot;)</pre>
     </div>
     <p>
-      For the other sizes we need larger or strecthed variants of those
+      For the other sizes we need larger or stretched variants of those
       glyphs. This is the job of the rubber fonts, therefore for rubber
       entities which arrive at this point we try to instantiate a substitute
       in the <tt class="verbatim cpp">&quot;rubber&quot;</tt> subfont which tries to render
-      the glyph via the best method, and ultimately synthetize it via some
+      the glyph via the best method, and ultimately synthetizes it via some
       virtual font, see Section <a href="#sec:rubber">8.1</a>.
     </p>
     <p>
@@ -1264,10 +1264,9 @@ is_rubber (string c) {
       scanning again all the selectors with an higher <tt class="verbatim cpp">attempt</tt>
       number. At this point, since <tt class="verbatim cpp">attempt&gt;1</tt> the resolution
       however proceed differently. If the entity belongs to some mathematical
-      alphabeth as detected via <tt class="verbatim cpp">substitute_math_letter</tt>, then
-      we stop further attempts and we dispatch the glyph to one of the
-      subfonts for variants of alphabetical glyphs associated with one of the
-      keys: 
+      alphabet as detected via <tt class="verbatim cpp">substitute_math_letter</tt>, then we
+      stop further attempts and we dispatch the glyph to one of the subfonts
+      for variants of alphabetical glyphs associated with one of the keys: 
     </p>
     <p>
       <tt class="verbatim cpp">&quot;bold-math&quot;</tt>, <tt class="verbatim cpp">&quot;italic-math&quot;</tt>,
@@ -1321,8 +1320,8 @@ get_unicode_range (int code) {
 tree key= tuple (fam, augmented_variant, series, rshape, as_string (attempt-1));</pre>
     </div>
     <p>
-      After a number of attemps determined by <tt class="verbatim cpp">FONT_ATTEMPTS</tt> we
-      give up. At this point we try <i>virtual fonts</i> via <tt class="verbatim cpp">find_in_virtual</tt>
+      After a number of attempts determined by <tt class="verbatim cpp">FONT_ATTEMPTS</tt>
+      we give up. At this point we try <i>virtual fonts</i> via <tt class="verbatim cpp">find_in_virtual</tt>
       and if successful instantiate the virtual font with key <tt class="verbatim cpp">&quot;virtual&quot;</tt>.
     </p>
     <p>
@@ -1332,7 +1331,7 @@ tree key= tuple (fam, augmented_variant, series, rshape, as_string (attempt-1));
       the resolution mechanics. 
     </p>
     <p>
-      The semanthics of the subfont keys is determined at the moment we
+      The semantics of the subfont keys is determined at the moment we
       instantiated the subfonts in <tt class="verbatim cpp">initialize_font</tt>, as
       follows. The <tt class="verbatim cpp">fn_spec[nr]</tt> field of <tt class="verbatim cpp">smart_map</tt>
       is a tree which specify the kind of font
@@ -1490,7 +1489,7 @@ make_rubber_font (font fn) {
       handling of the selector (as we have seen in <tt class="verbatim cpp">smart_font_rep::resolve</tt>).
       In case the base font is an unicode font, the global bool flag <tt
       class="verbatim cpp">has_poor_rubber</tt> (which by default is <tt class="verbatim cpp">true</tt>)
-      controls whether we try to synthetize rubber or we use the font's
+      controls whether we try to synthesize rubber or we use the font's
       provided one. If everything else is not appropriate we return the base
       font. 
     </p>
@@ -1517,7 +1516,7 @@ struct poor_rubber_font_rep: font_rep {
     </div>
     <p>
       It relies on magnified versions of the fonts stored in the <tt class="verbatim cpp">larger</tt>
-      field and on virtual fonts to synthetise even larger versions of some of
+      field and on virtual fonts to synthesize even larger versions of some of
       the glyphs via the <tt class="verbatim cpp">&quot;emu-large&quot;</tt> virtual font
       (see Section <a href="#sec:virtual-font">8.4</a>). 
     </p>
@@ -1684,7 +1683,7 @@ poor_rubber_font_rep::search_font (string s, string&amp; r) {
 }</pre>
     </div>
     <p>
-      The coding of this function is relatively straighfoward.
+      The coding of this function is relatively straightforward.
     </p>
     <p>
       For entities of the form <tt class="verbatim">&lt;big-XXXX-N&gt;</tt> with <tt
@@ -1799,13 +1798,13 @@ poor_rubber_font_rep::get_font (int nr) {
       <li>
         <p>
           and finally <tt class="verbatim cpp">2*MAGNIFIED_NUMBER + 4</tt> to the <tt class="verbatim cpp">rubber_unicode_font</tt>
-          based on the same font as this rubbert font.
+          based on the same font as this rubber font.
         </p>
       </li>
     </ul>
     <h3 id="auto-19"><a id="sec:unicode-font"></a>8.2.<span style="margin-left: 1em"></span>Unicode fonts<span style="margin-left: 1em"></span></h3>
     <p>
-      Unicode fontsare capable of indexing unicode glyphs in physical fonts
+      Unicode fonts are capable of indexing unicode glyphs in physical fonts
       (i.e. modern TrueType, or OpenType font files which can handle the whole
       unicode space without special encodings) 
     </p>
@@ -1832,7 +1831,7 @@ struct unicode_font_rep: font_rep {
     </div>
     <p>
       The constructors set the <tt class="verbatim cpp">font_rep::type</tt> field to <tt
-      class="verbatim cpp">FONT_TYPE_UNICODE</tt>, load the metric and glyph informatations
+      class="verbatim cpp">FONT_TYPE_UNICODE</tt>, load the metric and glyph informations
       from the font file which is (ultimately) retrieved via the function
     </p>
     <div class="tmweb-code">
@@ -1953,7 +1952,7 @@ tt_face load_tt_face (string name);</pre>
     tex_gyre_operators ();</pre>
     </div>
     <p>
-      and finally initialize microtypographic adjustements (in <tt class="verbatim cpp">lsub_correct</tt>,
+      and finally initialize micro-typographic adjustments (in <tt class="verbatim cpp">lsub_correct</tt>,
       <tt class="verbatim cpp">lsup_correct</tt>, <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> fields of <tt class="verbatim cpp">font_rep</tt>)
       which are hard-coded in TeXmacs for some of the &ldquo;curated&rdquo;
@@ -1992,7 +1991,7 @@ tt_face load_tt_face (string name);</pre>
       find entities (for mathematical typography) which are not mapped in the
       standardized unicode points but in the private areas and in a
       font-dependent manner. It might be interesting to see how it is coded to
-      haev an idea of the range of glyphs involved in the re-mapping:
+      have an idea of the range of glyphs involved in the re-mapping:
     </p>
     <table style="width: 100%">
       <tbody><tr>
@@ -2376,7 +2375,7 @@ rubber_unicode_font_rep::get_font (int nr) {
       and are given by progressively zoomed versions of the base font plus an
       additional <tt class="verbatim cpp">rubber_assemble_font</tt> used to create synthetic
       rubber from pieces of the base Unicode font. Its implementation is
-      relatively straighforward: for the first few sizes it uses magnified
+      relatively straightforward: for the first few sizes it uses magnified
       variants of the base font:
     </p>
     <div class="tmweb-code">
@@ -2458,7 +2457,7 @@ rubber_assemble_font_rep::search_font (string s, string&amp; r) {
     <h3 id="auto-21"><a id="sec:virtual-font"></a>8.4.<span style="margin-left: 1em"></span>Virtual fonts<span style="margin-left: 1em"></span></h3>
     <p>
       Virtual fonts provide a mechanism to extend the set of available glyphs
-      by synthetizing new glyphs from operations on those of a base font. The
+      by synthesizing new glyphs from operations on those of a base font. The
       programs which describe the sequence of (parametrized) operations to
       perform are formulated in a domain-specific language of s-expressions. 
     </p>
@@ -2581,8 +2580,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
     </p>
     <p>
       <tt class="verbatim">(glue $glyph1 $glyph2)</tt>, <tt class="verbatim">(glue* $glyph1
-      $glyph2)</tt> glue virtual glyphs horizontally with different
-      alignements
+      $glyph2)</tt> glue virtual glyphs horizontally with different alignments
     </p>
     <p>
       <tt class="verbatim">(glue-above $glyph1 $glyph2 $dy)</tt>, <tt class="verbatim">(glue-below
@@ -2670,12 +2668,12 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
     <h3 id="auto-22">8.5.<span style="margin-left: 1em"></span>TeX fonts<span style="margin-left: 1em"></span></h3>
     <p>
       TeX fonts are physical fonts are handled via specific mechanisms which
-      decoded the TeX font files and metrrics to produce metric informations
+      decoded the TeX font files and metrics to produce metric informations
       for the typesetter and bitmaps for the renderer. They work similarly to
       Unicode fonts, but the specifics of the encoding of the various TeXmacs
       entities is complex due to the limitations in the design of the font
       files and a logical font must be reconstructed gluing together several
-      physical fonts and taking care of rubber, mathematical alphabeths,
+      physical fonts and taking care of rubber, mathematical alphabets,
       etc<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>
     </p>
@@ -2683,7 +2681,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
     <p>
       The <tt class="verbatim cpp">math_font</tt> class represent a compound font which can
       render all the usual entities for mathematical document preparation. It
-      is modelled around TeX math fonts to map several physical fonts to cover
+      is modeled around TeX math fonts to map several physical fonts to cover
       all math alphabets. 
     </p>
     <h2 id="auto-24">9.<span style="margin-left: 1em"></span>From logical to physical font<span style="margin-left: 1em"></span></h2>
@@ -2691,7 +2689,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
       As we already discusses, TeXmacs implements a font substitution
       mechanism that tries to find a physical font which better fits a given
       series of characteristics. This is used to find replacements for missing
-      features (like a bold alphabeth, or upright Greek letters, etc<span
+      features (like a bold alphabet, or upright Greek letters, etc<span
       style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>)
       or glyph sets (e.g. Greek, Cyrillic, asian fonts, mathematical letters,
       mathematical symbols)
@@ -2707,7 +2705,7 @@ font closest_font (string family, string variant, string series, string shape,
     <p>
       which returns a physical font which fits certain characteristics (i.e.
       family, variant, series, shape). The <tt class="verbatim cpp">attempt</tt> variable is
-      used to iterate amont the possibile return values according to the order
+      used to iterate among the possible return values according to the order
       given by a distance function defined among all fonts. The function <tt
       class="verbatim cpp">closest_font</tt> calls <tt class="verbatim cpp">find_closest</tt> to do
       caching and the actual search of a physical font with suitable
@@ -2770,7 +2768,7 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
       available fonts with similar characteristics (as specified by <tt class="verbatim cpp">logical_font</tt>
       and after performing some substitutions via <tt class="verbatim cpp">apply_substitutions</tt>).
       If the selected font does not posses features (outline, bold, smallcaps,
-      italic) of the required font, we synthetize them via &ldquo;poor&rdquo;
+      italic) of the required font, we synthesize them via &ldquo;poor&rdquo;
       replacements. 
     </p>
     <p>
