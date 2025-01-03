@@ -21,13 +21,12 @@
 
   [Version 1.0 of 3.1.2025. By <hlink|@mgubi|https://github.com/mgubi>]
 
-  This document aims to describe the way <TeXmacs> deals with fonts. We
-  describe the state of affairs as per <verbatim|svn> revision <tt|r14561>
-  (December 2024, TeXmacs <tt|2.14+>). Parts of the general overview of fonts
-  in TeXmacs are extracted, for reference, from the official documentation
-  and from the paper<hlink| \PMathematical font
-  art\Q|https://www.texmacs.org/joris/fontart/fontart-abs.html> by Joris van
-  der Hoeven.
+  This document describes <TeXmacs> fonts handling. We describe the state of
+  affairs as per <verbatim|svn> revision <tt|r14561> (December 2024, TeXmacs
+  <tt|2.14+>). Parts of the general overview of fonts in TeXmacs are
+  extracted, for reference, from the official documentation and from the
+  paper<hlink| \PMathematical font art\Q|https://www.texmacs.org/joris/fontart/fontart-abs.html>
+  by Joris van der Hoeven.
 
   <section|Fonts in TeXmacs>
 
