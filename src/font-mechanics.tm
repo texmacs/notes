@@ -19,9 +19,9 @@
   font handling, from the user interface at the level of documents to the
   inner workings of the various fonts types at the level of the
   <verbatim|C++> source code. TeXmacs implements sophisticate algorithms to
-  allow to use a wide variety of fonts despite of the facts that they do to
-  have all the necessary glyphs, especially for the typesetting of technical
-  documents.>
+  allow the use a wide variety of fonts despite of the facts that they do not
+  have all the necessary glyphs, especially those needed in the typesetting
+  of technical documents.>
 
   [Version 1.0 of 3.1.2025. By <hlink|@mgubi|https://github.com/mgubi>]
 
