@@ -333,6 +333,35 @@
   <strong|Bold>, <em|Italic> and <name|Small Capitals> and \Pblackboard
   bold\Q variations of a given font.
 
+  <\big-figure|<tabular|<tformat|<cwith|9|9|1|-1|font|Papyrus>|<cwith|8|8|1|-1|font|Comic
+  MS>|<cwith|1|-1|1|-1|cell-bsep|0.5spc>|<cwith|1|-1|1|-1|cell-tsep|0.5spc>|<cwith|2|2|1|-1|font|Cochin>|<cwith|1|1|1|-1|cell-tborder|0ln>|<cwith|1|1|1|-1|cell-bborder|1ln>|<cwith|2|2|1|-1|cell-tborder|1ln>|<cwith|1|1|6|6|cell-rborder|0ln>|<cwith|1|1|1|1|cell-tborder|0ln>|<cwith|9|9|1|1|cell-bborder|0ln>|<cwith|1|-1|1|1|cell-lborder|0ln>|<cwith|1|-1|1|1|cell-rborder|1ln>|<cwith|1|-1|2|2|cell-lborder|1ln>|<cwith|7|7|1|-1|font|Chalkduster>|<cwith|7|7|1|-1|font-base-size|8>|<cwith|5|5|1|-1|font|Essays1743>|<cwith|6|6|1|-1|font|Meyne
+  Textur>|<cwith|4|4|1|6|cell-bsep|0.5spc>|<cwith|4|4|1|6|cell-tsep|0.5spc>|<cwith|4|4|1|1|cell-lborder|0ln>|<cwith|4|4|1|1|cell-rborder|1ln>|<cwith|4|4|2|2|cell-lborder|1ln>|<cwith|4|4|1|6|font|Chartrand>|<cwith|3|3|1|6|cell-bsep|0.5spc>|<cwith|3|3|1|6|cell-tsep|0.5spc>|<cwith|3|3|1|6|font|Cochin>|<cwith|3|3|1|1|cell-rborder|1ln>|<cwith|3|3|2|2|cell-lborder|1ln>|<cwith|2|2|1|6|cell-bsep|0.5spc>|<cwith|2|2|1|6|cell-tsep|0.5spc>|<cwith|2|2|1|1|cell-lborder|0ln>|<cwith|2|2|1|1|cell-rborder|1ln>|<cwith|2|2|2|2|cell-lborder|1ln>|<cwith|2|2|1|6|font|Optima>|<cwith|3|3|1|-1|cell-tborder|0ln>|<cwith|2|2|1|-1|cell-bborder|0ln>|<cwith|3|3|1|-1|cell-bborder|0ln>|<cwith|3|3|1|1|cell-lborder|0ln>|<cwith|3|3|6|6|cell-rborder|0ln>|<table|<row|<cell|Regular>|<cell|Bold>|<cell|Italic>|<cell|Small
+  Caps>|<cell|Blackboard Bold>|<cell|Mathematics>>|<row|<cell|Optima>|<cell|<strong|Bold><rsup|*>>|<cell|<em|Italic>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Cochin>|<cell|<strong|Bold><rsup|<with|font|roman|*>>>|<cell|<em|Italic><rsup|<with|font|roman|*>>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Chartrand>|<cell|<strong|Bold>>|<cell|<em|Italic>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Essays1743>|<cell|<strong|Bold><rsup|*>>|<cell|<em|Italic><rsup|*>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>,<space|-0.4spc>
+  <math|\<bbb-N\>>,<space|-0.4spc> <math|\<bbb-Q\>>,<space|-0.4spc>
+  <math|\<bbb-R\>>,<space|-0.4spc> <math|\<bbb-Z\>><rsup|*>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Meyne
+  Textur>|<cell|<strong|Bold>>|<cell|<em|Italic>>|<cell|<with|font-shape|small-caps|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Chalkduster>|<cell|<strong|Bold>>|<cell|<em|Italic>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Comic
+  Sans>|<cell|<strong|Bold>>|<cell|<em|Italic>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>|<row|<cell|Papyrus>|<cell|<strong|Bold>>|<cell|<em|Italic>>|<cell|<name|Small
+  Caps>>|<cell|<math|\<bbb-C\>>, <math|\<bbb-N\>>, <math|\<bbb-Q\>>,
+  <math|\<bbb-R\>>, <math|\<bbb-Z\>>>|<cell|<math|x<rsup|2>+f<around*|(|x,<frac|a|b+c>|)>>>>>>>>
+    Emulation of bold, italic, small capitals and blackboard bold.
+
+    <no-indent>* These declinations are already supported by the original
+    font.
+  </big-figure>
+
   Missing glyphs can be generated automatically from existing ones using a
   combination of the following main techniques, listed by increasing
   complexity:
@@ -367,6 +396,14 @@
     pieces of certain glyphs to produce others. Lowecase Greek letters are
     not amenable to this approach.
   </itemize>
+
+  <\big-figure|<tabular|<tformat|<cwith|10|10|1|-1|font|Papyrus>|<cwith|1|-1|1|-1|cell-bsep|0.5spc>|<cwith|1|-1|1|-1|cell-tsep|0.5spc>|<cwith|1|1|1|-1|cell-tborder|0ln>|<cwith|1|1|1|-1|cell-bborder|1ln>|<cwith|2|2|1|-1|cell-tborder|1ln>|<cwith|1|1|1|1|cell-tborder|0ln>|<cwith|10|10|1|1|cell-bborder|0ln>|<cwith|1|-1|1|1|cell-lborder|0ln>|<cwith|1|-1|1|1|cell-rborder|1ln>|<cwith|1|-1|2|2|cell-lborder|1ln>|<cwith|9|9|1|-1|font|Chalkduster>|<cwith|6|6|1|-1|font|Essays1743>|<cwith|4|4|1|12|cell-bsep|0.5spc>|<cwith|4|4|1|12|cell-tsep|0.5spc>|<cwith|4|4|1|1|cell-lborder|0ln>|<cwith|4|4|1|1|cell-rborder|1ln>|<cwith|3|3|1|12|cell-bsep|0.5spc>|<cwith|3|3|1|12|cell-tsep|0.5spc>|<cwith|3|3|1|1|cell-rborder|1ln>|<cwith|2|2|1|12|cell-bsep|0.5spc>|<cwith|2|2|1|12|cell-tsep|0.5spc>|<cwith|2|2|1|1|cell-lborder|0ln>|<cwith|2|2|1|1|cell-rborder|1ln>|<cwith|3|3|1|-1|cell-tborder|0ln>|<cwith|2|2|1|-1|cell-bborder|0ln>|<cwith|3|3|1|-1|cell-bborder|0ln>|<cwith|3|3|1|1|cell-lborder|0ln>|<cwith|7|7|2|12|cell-bsep|0.5spc>|<cwith|7|7|2|12|cell-tsep|0.5spc>|<cwith|7|7|2|2|cell-lborder|1ln>|<cwith|7|7|2|12|cell-bsep|0.5spc>|<cwith|7|7|2|12|cell-tsep|0.5spc>|<cwith|7|7|1|-1|font|American
+  Typewriter>|<cwith|9|9|1|-1|font-base-size|9>|<cwith|1|-1|2|-1|cell-halign|c>|<cwith|8|8|1|20|cell-bsep|0.5spc>|<cwith|8|8|1|20|cell-tsep|0.5spc>|<cwith|8|8|1|1|cell-lborder|0ln>|<cwith|8|8|1|1|cell-rborder|1ln>|<cwith|8|8|2|2|cell-lborder|1ln>|<cwith|8|8|2|20|cell-halign|c>|<cwith|1|-1|2|-1|cell-lsep|0.5spc>|<cwith|1|-1|2|-1|cell-rsep|0.5spc>|<cwith|3|3|1|-1|font|Cochin>|<cwith|2|2|1|-1|font|Optima>|<cwith|8|8|1|-1|font|Chalkboard>|<cwith|4|4|1|-1|font|Didot>|<cwith|5|5|1|22|cell-bsep|0.5spc>|<cwith|5|5|1|22|cell-tsep|0.5spc>|<cwith|5|5|1|1|cell-lborder|0ln>|<cwith|5|5|1|1|cell-rborder|1ln>|<cwith|5|5|2|2|cell-lborder|1ln>|<cwith|5|5|1|12|cell-bsep|0.5spc>|<cwith|5|5|1|12|cell-tsep|0.5spc>|<cwith|5|5|1|1|cell-lborder|0ln>|<cwith|5|5|1|1|cell-rborder|1ln>|<cwith|5|5|2|22|cell-halign|c>|<cwith|5|5|2|22|cell-lsep|0.5spc>|<cwith|5|5|2|22|cell-rsep|0.5spc>|<cwith|5|5|1|-1|font|Cuprum>|<cwith|11|11|1|22|cell-bsep|0.5spc>|<cwith|11|11|1|22|cell-tsep|0.5spc>|<cwith|11|11|1|1|cell-bborder|0ln>|<cwith|11|11|1|1|cell-lborder|0ln>|<cwith|11|11|1|1|cell-rborder|1ln>|<cwith|11|11|2|2|cell-lborder|1ln>|<cwith|11|11|2|22|cell-halign|c>|<cwith|11|11|2|22|cell-lsep|0.5spc>|<cwith|11|11|2|22|cell-rsep|0.5spc>|<cwith|11|11|1|-1|font|Paper
+  Cuts 2>|<table|<row|<cell|>|<cell|\<Gamma\>>|<cell|\<Delta\>>|<cell|\<Theta\>>|<cell|\<Lambda\>>|<cell|\<Xi\>>|<cell|\<Pi\>>|<cell|\<Sigma\>>|<cell|\<Upsilon\>>|<cell|\<Phi\>>|<cell|\<Psi\>>|<cell|\<Omega\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|><math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Optima>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Cochin>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Didot>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Cuprum>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Essays1743>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|<small|Am.
+  Typewr.>>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Chalkboard>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Chalkduster>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Papyrus>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|<math|\<asympasymp\>>>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>|<row|<cell|Paper
+  Cuts>|<cell|\<Gamma*\>>|<cell|\<Delta*\>>|<cell|\<Theta*\>>|<cell|\<Lambda*\>>|<cell|\<Xi*\>>|<cell|\<Pi*\>>|<cell|\<Sigma*\>>|<cell|\<Upsilon*\>>|<cell|\<Phi*\>>|<cell|\<Psi*\>>|<cell|\<Omega*\>>|<cell|<math|\<mp\>>>|<cell|<math|\<assign\>>>|<cell|<math|\<approxeq\>>>|<cell|>|<cell|<math|\<nVdash\>>>|<cell|<math|\<rightarrow\>>>|<cell|<math|\<leftrightharpoons\>>>|<cell|<math|\<lneq\>>>|<cell|<math|\<varsqsubsetneq\>>>|<cell|<math|\<blacktrianglerighteqslant\>>>>>>>>
+    Emulation of various mathematical symbols in various fonts.
+  </big-figure>
 
   One specific problem with mathematical fonts is the need for rubber
   characters. There are essentially four types of them: big operators
@@ -3775,21 +3812,21 @@
   <\collection>
     <associate|auto-1|<tuple|?|3>>
     <associate|auto-10|<tuple|1|10>>
-    <associate|auto-11|<tuple|5|11>>
-    <associate|auto-12|<tuple|6|11>>
-    <associate|auto-13|<tuple|7|11>>
-    <associate|auto-14|<tuple|7.1|13>>
-    <associate|auto-15|<tuple|8|15>>
-    <associate|auto-16|<tuple|8.1|19>>
-    <associate|auto-17|<tuple|8.2|26>>
-    <associate|auto-18|<tuple|8.3|26>>
-    <associate|auto-19|<tuple|8.4|32>>
+    <associate|auto-11|<tuple|2|11>>
+    <associate|auto-12|<tuple|3|11>>
+    <associate|auto-13|<tuple|5|11>>
+    <associate|auto-14|<tuple|6|13>>
+    <associate|auto-15|<tuple|7|15>>
+    <associate|auto-16|<tuple|7.1|19>>
+    <associate|auto-17|<tuple|8|26>>
+    <associate|auto-18|<tuple|8.1|26>>
+    <associate|auto-19|<tuple|8.2|32>>
     <associate|auto-2|<tuple|1|5>>
-    <associate|auto-20|<tuple|8.5|40>>
-    <associate|auto-21|<tuple|8.6|44>>
-    <associate|auto-22|<tuple|9|48>>
-    <associate|auto-23|<tuple|9|48>>
-    <associate|auto-24|<tuple|9|48>>
+    <associate|auto-20|<tuple|8.3|40>>
+    <associate|auto-21|<tuple|8.4|44>>
+    <associate|auto-22|<tuple|8.5|48>>
+    <associate|auto-23|<tuple|8.6|?>>
+    <associate|auto-24|<tuple|9|?>>
     <associate|auto-3|<tuple|2|6>>
     <associate|auto-4|<tuple|3|6>>
     <associate|auto-5|<tuple|3|6>>
@@ -3810,19 +3847,8 @@
 <\auxiliary>
   <\collection>
     <\associate|figure>
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
-        Emulation of bold, italic, small capitals and blackboard bold.
-
-        <no-indent>* These declinations are already supported by the original
-        font.
-      </surround>|<pageref|auto-10>>
-
-      <tuple|normal|<\surround|<hidden-binding|<tuple>|2>|>
-        Emulation of various mathematical symbols in various fonts.
-      </surround>|<pageref|auto-11>>
-
-      <tuple|normal|<surround|<hidden-binding|<tuple>|3>||Assorted rubber
-      symbols from various fonts.>|<pageref|auto-12>>
+      <tuple|normal|<surround|<hidden-binding|<tuple>|1>||Assorted rubber
+      symbols from various fonts.>|<pageref|auto-10>>
     </associate>
     <\associate|idx>
       <tuple|<tuple|<with|font-family|<quote|ss>|Document>|<with|font-family|<quote|ss>|Font>>|<pageref|auto-5>>
@@ -3856,48 +3882,48 @@
 
       5.<space|2spc>The abstract font class
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-13>
+      <no-break><pageref|auto-11>
 
       6.<space|2spc>Font selection <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-14>
+      <no-break><pageref|auto-12>
 
       7.<space|2spc>Smart fonts <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-15>
+      <no-break><pageref|auto-13>
 
       <with|par-left|<quote|1tab>|7.1.<space|2spc>Entity resolution
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-16>>
+      <no-break><pageref|auto-14>>
 
       8.<space|2spc>Other fonts <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-17>
+      <no-break><pageref|auto-15>
 
       <with|par-left|<quote|1tab>|8.1.<space|2spc>Rubber fonts
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-18>>
+      <no-break><pageref|auto-16>>
 
       <with|par-left|<quote|1tab>|8.2.<space|2spc>Unicode fonts
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-19>>
+      <no-break><pageref|auto-17>>
 
       <with|par-left|<quote|1tab>|8.3.<space|2spc>Rubber Unicode fonts
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-20>>
+      <no-break><pageref|auto-18>>
 
       <with|par-left|<quote|1tab>|8.4.<space|2spc>Virtual fonts
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-21>>
+      <no-break><pageref|auto-19>>
 
       <with|par-left|<quote|1tab>|8.5.<space|2spc>TeX fonts
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-22>>
+      <no-break><pageref|auto-20>>
 
       <with|par-left|<quote|1tab>|8.6.<space|2spc>Compound fonts for
       mathematics <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-23>>
+      <no-break><pageref|auto-21>>
 
       9.<space|2spc>From logical to physical font
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
-      <no-break><pageref|auto-24>
+      <no-break><pageref|auto-22>
     </associate>
   </collection>
 </auxiliary>
