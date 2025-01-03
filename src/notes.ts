@@ -1,4 +1,4 @@
-<TeXmacs|1.99.16>
+<TeXmacs|2.1.4>
 
 <style|source>
 
@@ -28,9 +28,7 @@
     </src-comment>
   </active*>
 
-  <assign|full-screen-mode|false>
-
-  <assign|font-base-size|12>
+  <assign|font-base-size|11>
 
   <assign|page-medium|papyrus>
 
@@ -109,6 +107,24 @@
   <assign|tmhtml-notes-entry-date|<macro|date|<html-class|tmweb-entry-date|<arg|date>>>>
 
   <assign|tmhtml-notes-entry-abstract|<macro|abs|<compound|html-div-class|tmweb-entry-abstract|<arg|abs>>>>
+
+  \;
+
+  <assign|pseudo-code|<\macro|body>
+    <\very-small>
+      <\surround||<no-indent*>>
+        <\framed-quoted>
+          <\with|par-first|0fn|par-par-sep|0fn|item-hsep|<macro|1.5fn>>
+            <\framed-code>
+              <arg|body>
+            </framed-code>
+          </with>
+        </framed-quoted>
+      </surround>
+    </very-small>
+  </macro>>
+
+  \;
 
   <\active*>
     <\src-comment>

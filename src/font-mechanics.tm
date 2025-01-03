@@ -1,10 +1,14 @@
 <TeXmacs|2.1.4>
 
-<style|<tuple|notes|doc>>
+<style|notes>
 
 <\body>
   <\hide-preamble>
-    \;
+    <assign|cpp-code|<\macro|body>
+      <\pseudo-code>
+        <cpp|<arg|body>>
+      </pseudo-code>
+    </macro>>
   </hide-preamble>
 
   <notes-header>
@@ -403,7 +407,7 @@
 
   <section|The abstract font class>
 
-  The main abstract <verbatim|font> class is defined in <verbatim|font.hpp>:\ 
+  The main abstract <verbatim|font> class is defined in <verbatim|font.hpp>:
 
   <\cpp-code>
     struct font_rep: rep\<less\>font\<gtr\> {
@@ -3869,37 +3873,37 @@
 
 <\references>
   <\collection>
-    <associate|auto-1|<tuple|?|3>>
-    <associate|auto-10|<tuple|1|10>>
-    <associate|auto-11|<tuple|2|11>>
-    <associate|auto-12|<tuple|3|11>>
-    <associate|auto-13|<tuple|5|11>>
-    <associate|auto-14|<tuple|6|13>>
-    <associate|auto-15|<tuple|7|15>>
-    <associate|auto-16|<tuple|7.1|19>>
-    <associate|auto-17|<tuple|8|26>>
-    <associate|auto-18|<tuple|8.1|26>>
-    <associate|auto-19|<tuple|8.2|32>>
-    <associate|auto-2|<tuple|1|5>>
-    <associate|auto-20|<tuple|8.3|40>>
-    <associate|auto-21|<tuple|8.4|44>>
-    <associate|auto-22|<tuple|8.5|48>>
+    <associate|auto-1|<tuple|?|?>>
+    <associate|auto-10|<tuple|1|?>>
+    <associate|auto-11|<tuple|2|?>>
+    <associate|auto-12|<tuple|3|?>>
+    <associate|auto-13|<tuple|5|?>>
+    <associate|auto-14|<tuple|6|?>>
+    <associate|auto-15|<tuple|7|?>>
+    <associate|auto-16|<tuple|7.1|?>>
+    <associate|auto-17|<tuple|8|?>>
+    <associate|auto-18|<tuple|8.1|?>>
+    <associate|auto-19|<tuple|8.2|?>>
+    <associate|auto-2|<tuple|1|?>>
+    <associate|auto-20|<tuple|8.3|?>>
+    <associate|auto-21|<tuple|8.4|?>>
+    <associate|auto-22|<tuple|8.5|?>>
     <associate|auto-23|<tuple|8.6|?>>
     <associate|auto-24|<tuple|9|?>>
-    <associate|auto-3|<tuple|2|6>>
-    <associate|auto-4|<tuple|3|6>>
-    <associate|auto-5|<tuple|3|6>>
-    <associate|auto-6|<tuple|3|6>>
-    <associate|auto-7|<tuple|1|8>>
-    <associate|auto-8|<tuple|1|8>>
-    <associate|auto-9|<tuple|4|9>>
-    <associate|font-base-size|<tuple|1|8>>
-    <associate|font-size|<tuple|1|8>>
-    <associate|sec:other|<tuple|8|26>>
-    <associate|sec:rubber|<tuple|8.1|26>>
-    <associate|sec:rubber-unicode|<tuple|8.3|40>>
-    <associate|sec:unicode-font|<tuple|8.2|32>>
-    <associate|sec:virtual-font|<tuple|8.4|44>>
+    <associate|auto-3|<tuple|2|?>>
+    <associate|auto-4|<tuple|3|?>>
+    <associate|auto-5|<tuple|3|?>>
+    <associate|auto-6|<tuple|3|?>>
+    <associate|auto-7|<tuple|1|?>>
+    <associate|auto-8|<tuple|1|?>>
+    <associate|auto-9|<tuple|4|?>>
+    <associate|font-base-size|<tuple|1|?>>
+    <associate|font-size|<tuple|1|?>>
+    <associate|sec:other|<tuple|8|?>>
+    <associate|sec:rubber|<tuple|8.1|?>>
+    <associate|sec:rubber-unicode|<tuple|8.3|?>>
+    <associate|sec:unicode-font|<tuple|8.2|?>>
+    <associate|sec:virtual-font|<tuple|8.4|?>>
   </collection>
 </references>
 
@@ -3946,7 +3950,7 @@
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-4>
 
-      4.<space|2spc>Font substition and emulation
+      4.<space|2spc>Font substitution and emulation
       <datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.2fn>.<space|0.2fn>>>>>|<htab|5mm>>
       <no-break><pageref|auto-9>
 
