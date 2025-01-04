@@ -16,17 +16,16 @@
   <chapter*|Font mechanics>
 
   <notes-abstract|We describe the various mechanisms and features of TeXmacs
-  font handling, from the user interface at the level of documents to the
+  font handling, from the user interface at the level of the document to the
   inner workings of the various fonts types at the level of the
-  <verbatim|C++> source code. TeXmacs implements sophisticate algorithms to
-  allow the use a wide variety of fonts despite of the facts that they do not
-  have all the necessary glyphs, especially those needed in the typesetting
-  of technical documents.>
+  <verbatim|C++> source code. To support the use of a wide variety of fonts
+  in the typesetting of technical documents, TeXmacs implements sophisticate
+  algorithms to synthetize or replace the missing glyphs.>
 
   [Version 1.0 of 3.1.2025. By <hlink|@mgubi|https://github.com/mgubi>]
 
-  This document describes <TeXmacs> fonts handling. We describe the state of
-  affairs as per <verbatim|svn> revision <tt|r14561> (December 2024, TeXmacs
+  This document describes the state of affairs of <TeXmacs> fonts handling as
+  per <verbatim|svn> revision <tt|r14561> (December 2024, TeXmacs
   <tt|2.14+>). Parts of the general overview of fonts in TeXmacs are
   extracted, for reference, from the official documentation and from the
   paper<hlink| \PMathematical font art\Q|https://www.texmacs.org/joris/fontart/fontart-abs.html>
