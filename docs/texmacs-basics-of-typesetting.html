@@ -1,0 +1,2642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">From trees to boxes<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      <p>
+        This document describes TeXmacs typesetter. We describe the state of
+        facts as per <tt class="verbatim">svn</tt> revision <tt>r14561</tt> (December
+        2024, <tt>TeXmacs 2.14+</tt>). Excerpts from the official
+        documentation are included for completeness.
+      </p>
+      <p>
+        
+      </p>
+    </div>
+    <font color="#800000"><table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 100%; padding-left: 0em; padding-right: 0em; background-color: #ff000020; border-top: 0px solid; border-bottom: 0px solid; border-left: 5px solid; border-right: 0px solid; padding-left: 1em; padding-right: 1em; padding-bottom: 0.5em; padding-top: 0.5em"><p>
+          Still WIP.
+        </p><ul>
+          <li>
+            <p>
+              Revise the overview;
+            </p>
+          </li>
+          <li>
+            <p>
+              Complete analysis of the bridge, and go to the concater, the
+              stacker, etc<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+              style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> and basic boxes mechanisms;
+            </p>
+          </li>
+          <li>
+            <p>
+              Review evaluation of trees? 
+            </p>
+          </li>
+        </ul></td>
+      </tr></tbody>
+    </table></font>
+    <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Overview<span style="margin-left: 1em"></span></h2>
+    <h3 id="auto-3"><a id="sec-tm-tree"></a>1.1.<span style="margin-left: 1em"></span>TeXmacs trees<span style="margin-left: 1em"></span></h3>
+    <p>
+      All TeXmacs documents or document fragments can be thought of as
+      <em>trees</em>. For instance, the tree
+    </p>
+    <center>
+      <img src="texmacs-basics-of-typesetting-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823695em; vertical-align: -6.73613223140496em; height: 7.42446280991736em"></img>
+    </center>
+    <p>
+      typically represents the formula
+    </p>
+    <table width="100%">
+      <tr>
+        <td width="100%" align="center"><img src="texmacs-basics-of-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -0.599889807162534em; height: 1.91627548209366em" id="tm-tree-ex"></img></td>
+        <td align="right">(1)</td>
+      </tr>
+    </table>
+    <p>
+      <div style="display: inline">
+        <a id="auto-4"></a>
+      </div>
+      <h5>Internal nodes of TeXmacs trees<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      Each of the internal nodes of a TeXmacs tree is a string symbol and each
+      of the leafs is an ordinary string. A string symbol is different from a
+      usual string only from the efficiency point of view: TeXmacs represents
+      each symbol by a unique number, so that it is extremely fast to test
+      weather two symbols are equal.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-5"></a>
+      </div>
+      <h5>Leafs of TeXmacs trees<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      Currently, all strings are represented using the <em>universal TeXmacs
+      encoding</em>. This encoding coincides with the Cork font encoding for
+      all characters except &ldquo;<tt class="verbatim">&lt;</tt>&rdquo; and &ldquo;<tt
+      class="verbatim">&gt;</tt>&rdquo;. Character sequences starting with &ldquo;<tt
+      class="verbatim">&lt;</tt>&rdquo; and ending with &ldquo;<tt class="verbatim">&gt;</tt>&rdquo;
+      are interpreted as special extension characters. For example, <tt class="verbatim">&lt;alpha&gt;</tt>
+      stands for the letter <span class="no-breaks"><img src="texmacs-basics-of-typesetting-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0225454545454545em; height: 0.490842975206612em"></img>.</span> The
+      semantics of characters in the universal TeXmacs encoding does not
+      depend on the context (currently, cyrillic characters are an exception,
+      but this should change soon). In other words, the universal TeXmacs
+      encoding may be seen as an analogue of Unicode. In the future, we might
+      actually switch to Unicode.
+    </p>
+    <p>
+      The string leafs either contain ordinary text or special data. TeXmacs
+      supports the following atomic data types:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          Boolean numbers
+        </dt>
+        <dd>
+          <p>
+            Either <tt class="verbatim">true</tt> or <tt class="verbatim">false</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Integers
+        </dt>
+        <dd>
+          <p>
+            Sequences of digits which may be preceded by a minus sign.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Floating point numbers
+        </dt>
+        <dd>
+          <p>
+            Specified using the usual scientific notation.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Lengths
+        </dt>
+        <dd>
+          <p>
+            Floating point numbers followed by a <a href="lengths.en.html">length unit</a>,
+            like <tt class="verbatim">29.7cm</tt> or <tt class="verbatim">2fn</tt>.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <h3 id="auto-6"><a id="sec-tm-docs"></a>1.2.<span style="margin-left: 1em"></span>TeXmacs documents<span style="margin-left: 1em"></span></h3>
+    <p>
+      Whereas TeXmacs document fragments can be general TeXmacs trees, TeXmacs
+      documents are trees of a special form which we will describe now. The
+      root of a TeXmacs document is necessarily a <font class="tmweb-markup">document</font>
+      tag. The children of this tag are necessarily of one of the following
+      forms:
+    </p>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">TeXmacs</class></font><a
+        id="auto-7"></a><font color="blue">|</font><font color="brown"><i>version</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(TeXmacs version)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        This mandatory tag specifies the version of TeXmacs which was used to
+        save the document.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">project</class></font><a
+        id="auto-8"></a><font color="blue">|</font><font color="brown"><i>ref</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(part of a project)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        An optional project to which the document belongs.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">style</class></font><a
+        id="auto-9"></a><font color="blue">|</font><font color="brown"><i>version</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">style</class></font><a
+        id="auto-10"></a><font color="blue">|</font><font color="brown"><i><class style="font-style: normal"><font
+        color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tuple</class></font><a
+        id="auto-11"></a><font color="blue">|</font><font color="brown"><i>style</i></font><font
+        color="blue">|</font><font color="brown"><i>pack-1</i></font><font color="blue">|</font><font
+        color="brown"><i><img src="texmacs-basics-of-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font color="blue">|</font><font
+        color="brown"><i>pack-n</i></font><font color="blue">&gt;</font></class></i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(style and packages)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        An optional style and additional packages for the document.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">body</class></font><a
+        id="auto-12"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(body of the document)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        This mandatory tag specifies the body of your document.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <a id="initial-env"></a><font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">initial</class></font><a
+        id="auto-13"></a><font color="blue">|</font><font color="brown"><i>table</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(initial environment)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        Optional specification of the initial environment for the document,
+        with information about the page size, margins, <abbr>etc.</abbr>. The
+        <font color="brown"><i>table</i></font> is of the form <font color="blue">&lt;</font><font
+        color="blue"><class style="font-family: sans-serif">collection</class></font><a id="auto-14"></a><font color="blue">|</font><font
+        color="brown"><i>binding-1</i></font><font color="blue">|</font><font color="brown"><i><img
+        src="texmacs-basics-of-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font color="blue">|</font><font color="brown"><i>binding-n</i></font><font
+        color="blue">&gt;</font>. Each <font color="brown"><i>binding-i</i></font> is of
+        the form <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">associate</class></font><a
+        id="auto-15"></a><font color="blue">|</font><font color="brown"><i>var-i</i></font><font
+        color="blue">|</font><font color="brown"><i>val-i</i></font><font color="blue">&gt;</font>
+        and associates the initial value <font color="brown"><i>val-i</i></font> to
+        the environment variable <font color="brown"><i>var-i</i></font>. The initial
+        values of environment variables which do not occur in the table are
+        determined by the style file and packages.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">references</class></font><a
+        id="auto-16"></a><font color="blue">|</font><font color="brown"><i>table</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(references)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        An optional list of all valid references to labels in the document.
+        Even though this information can be automatically recovered by the
+        typesetter, this recovery requires several passes. In order to make
+        the behaviour of the editor more natural when loading files,
+        references are therefore stored along with the document.
+      </p>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        The <font color="brown"><i>table</i></font> is of a similar form as above. In
+        this case a tuple is associated to each label. This tuple is either of
+        the form <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tuple</class></font><a
+        id="auto-17"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>page-nr</i></font><font color="blue">&gt;</font>
+        or <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tuple</class></font><a
+        id="auto-18"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>page-nr</i></font><font color="blue">|</font><font
+        color="brown"><i>file</i></font><font color="blue">&gt;</font>. The <font color="brown"><i>content</i></font>
+        corresponds to the displayed text when referring to the label, <font
+        color="brown"><i>page-nr</i></font> to the corresponding page number, and the
+        optional <font color="brown"><i>file</i></font> to the file where the label
+        was defined (this is only used when the file is part of a project).
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">auxiliary</class></font><a
+        id="auto-19"></a><font color="blue">|</font><font color="brown"><i>table</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(auxiliary data attached to the file)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        This optional tag specifies all auxiliary data attached to the
+        document. Usually, such auxiliary data can be recomputed automatically
+        from the document, but such recomputations may be expensive and even
+        require tools which are not necessarily installed on your system. The
+        <font color="brown"><i>table</i></font>, which is specified in a similar way
+        as above, associates auxiliary content to a key. Standard keys include
+        <tt class="verbatim">bib</tt>, <tt class="verbatim">toc</tt>, <tt class="verbatim">idx</tt>, <tt
+        class="verbatim">gly</tt>, <abbr>etc.</abbr>
+      </p>
+    </div>
+    <p style="margin-top: 1em">
+      <strong>Example <class style="font-style: normal">1</class>. </strong>An article with the
+      simple text &ldquo;hello world!&rdquo; is represented as
+    </p>
+    <p style="margin-bottom: 1em">
+      <center>
+        <img src="texmacs-basics-of-typesetting-5.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889805em; margin-right: -0.0112837465564724em; margin-top: -0.00564187327823695em; vertical-align: -6.53302479338843em; height: 7.22699724517906em"></img>
+      </center>
+    </p>
+    <h3 id="auto-20"><a id="sec-tm-tm"></a>1.3.<span style="margin-left: 1em"></span>Default serialization<span
+    style="margin-left: 1em"></span></h3>
+    <p>
+      Documents are generally written to disk using the standard TeXmacs
+      syntax (which corresponds to the <tt class="verbatim">.tm</tt> and <tt class="verbatim">.ts</tt>
+      file extensions). This syntax is designed to be unobtrusive and easy to
+      read, so the content of a document can be easily understood from a plain
+      text editor. For instance, the formula (<a href="#tm-tree-ex">1</a>) is represented
+      by
+    </p>
+    <div style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 77.321376014376px; margin-right: 77.321376014376px">
+      <div class="tmweb-code" style="text-indent: 0em">
+        <tt class="verbatim">&lt;with|mode|math|x+y+&lt;frac|1|2&gt;+&lt;sqrt|y+z&gt;&gt;</tt>
+      </div>
+    </div>
+    <p>
+      On the other hand, TeXmacs syntax makes style files difficult to read
+      and is not designed to be hand-edited: whitespace has complex semantics
+      and some internal structures are not obviously presented. Do not edit
+      documents (and especially style files) in the TeXmacs syntax unless you
+      know what you are doing.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-21"></a>
+      </div>
+      <h5>Main serialization principle<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      The TeXmacs format uses the special characters <tt class="verbatim">&lt;</tt>, <tt
+      class="verbatim">|</tt>, <tt class="verbatim">&gt;</tt>, <tt class="verbatim">\</tt> and <tt class="verbatim">/</tt>
+      in order to serialize trees. By default, a tree like
+    </p>
+    <table width="100%">
+      <tr>
+        <td width="100%" align="center"><img src="texmacs-basics-of-typesetting-6.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.011261707988981em; margin-right: -0.0112837465564737em; margin-top: -0.0225674931129476em; vertical-align: -2.33562534435262em; height: 3.05780716253444em" id="gen-tree-tm"></img></td>
+        <td align="right">(2)</td>
+      </tr>
+    </table>
+    <p>
+      is serialized as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+&lt;f|x<sub>1</sub>|&hellip;|x<sub>n</sub>&gt;</pre>
+      </div>
+    </div>
+    <p>
+      If one of the arguments <img src="texmacs-basics-of-typesetting-7.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em"></img> is a multi-paragraph
+      tree (which means in this context that it contains a <font class="tmweb-markup">document</font>
+      tag or a <font class="tmweb-markup">collection</font> tag), then an alternative long
+      form is used for the serialization. If <tt class="verbatim">f</tt> takes only
+      multi-paragraph arguments, then the tree would be serialized as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+&lt;\f&gt;
+  x<sub>1</sub>
+&lt;|f&gt;
+  &hellip;
+&lt;|f&gt;
+  x<sub>n</sub>
+&lt;/f&gt;</pre>
+      </div>
+    </div>
+    <p>
+      In general, arguments which are not multi-paragraph are serialized using
+      the short form. For instance, if <tt class="verbatim">n=5</tt> and <tt class="verbatim">x<sub>3</sub></tt>
+      and <tt class="verbatim">x<sub>5</sub></tt> are multi-paragraph, but not <tt
+      class="verbatim">x<sub>1</sub>,</tt> <tt class="verbatim">x<sub>2</sub></tt> and <tt class="verbatim">x<sub>4</sub></tt>,
+      then (<a href="#gen-tree-tm">2</a>) is serialized as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+&lt;\f|x<sub>1</sub>|x<sub>2</sub>&gt;
+  x<sub>3</sub>
+&lt;|f|x<sub>4</sub>&gt;
+  x<sub>5</sub>
+&lt;/f&gt;</pre>
+      </div>
+    </div>
+    <p>
+      The escape sequences <tt class="verbatim">\&lt;less\&gt;</tt>, <tt class="verbatim">\|</tt>,
+      <tt class="verbatim">\&lt;gtr\&gt;</tt> and <tt class="verbatim">\\</tt> may be used to
+      represent the characters <tt class="verbatim">&lt;</tt>, <tt class="verbatim">|</tt>, <tt
+      class="verbatim">&gt;</tt> and <tt class="verbatim">\</tt>. For instance, <img src="texmacs-basics-of-typesetting-8.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em"></img>
+      is serialized as <tt class="verbatim">\&lt;alpha\&gt;+\&lt;beta\&gt;</tt>.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-22"></a>
+      </div>
+      <h5>Formatting and whitespace<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      The <font class="tmweb-markup">document</font> and <font class="tmweb-markup">concat</font>
+      primitives are serialized in a special way. The <font class="tmweb-markup">concat</font>
+      primitive is serialized as usual concatenation. For instance, the text
+      &ldquo;an <em>important</em> note&rdquo; is serialized as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+an &lt;em|important&gt; note</pre>
+      </div>
+    </div>
+    <p>
+      The <font class="tmweb-markup">document</font> tag is serialized by separating
+      successive paragraphs by double newline characters. For instance, the
+      quotation
+    </p>
+    <div style="margin-top: 0.5em; margin-left: 77.321376014376px; margin-right: 77.321376014376px">
+      <div style="text-indent: 0em">
+        <p>
+          Ik ben de blauwbilgorgel.
+        </p>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 77.321376014376px; margin-right: 77.321376014376px">
+      <div style="text-indent: 0em">
+        <p>
+          Als ik niet wok of worgel,
+        </p>
+      </div>
+    </div>
+    <p>
+      is serialized as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+&lt;\quote-env&gt;
+  Ik ben de blauwbilgorgel.
+
+  Als ik niet wok of worgel,
+&lt;/quote-env&gt;</pre>
+      </div>
+    </div>
+    <p>
+      Notice that whitespace at the beginning and end of paragraphs is
+      ignored. Inside paragraphs, any amount of whitespace is considered as a
+      single space. Similarly, more than two newline characters are equivalent
+      to two newline characters. For instance, the quotation might have been
+      stored on disk as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+&lt;\quote-env&gt;
+  Ik ben de           blauwbilgorgel.
+
+
+  Als ik niet wok of          worgel,
+&lt;/quote-env&gt;</pre>
+      </div>
+    </div>
+    <p>
+      The space character may be explicitly represented through the escape
+      sequence &ldquo;<tt class="verbatim">\ </tt>&rdquo;. Empty paragraphs are
+      represented using the escape sequence &ldquo;<tt class="verbatim">\;</tt>&rdquo;.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-23"></a>
+      </div>
+      <h5>Raw data<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      The <font class="tmweb-markup">raw-data</font> primitive is used inside TeXmacs for
+      the representation of binary data, like image files included into the
+      document. Such binary data is serialized as
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+&lt;#<em>binary-data</em>&gt;</pre>
+      </div>
+    </div>
+    <p>
+      where the <tt class="verbatim"><em>binary-data</em></tt> is a string of
+      hexadecimal numbers which represents a string of bytes.
+    </p>
+    <h3 id="auto-24"><a id="sec-typesetting"></a>1.4.<span style="margin-left: 1em"></span>The typesetting process<span
+    style="margin-left: 1em"></span></h3>
+    <p>
+      In order to understand the TeXmacs document format well, it is useful to
+      have a basic understanding about how documents are typeset by the
+      editor. The typesetter mainly rewrites logical TeXmacs trees into
+      physical <em>boxes</em>, which can be displayed on the screen or on
+      paper (notice that boxes actually contain more information than is
+      necessary for their rendering, such as information about how to position
+      the cursor inside the box or how to make selections).
+    </p>
+    <p>
+      The global typesetting process can be subdivided into two major parts
+      (which are currently done at the same stage, but this may change in the
+      future): evaluation of the TeXmacs tree using the stylesheet language,
+      and the actual typesetting.
+    </p>
+    <p>
+      The typesetting primitives are designed to be very fast and they are
+      built-in into the editor. For instance, one has typesetting primitives
+      for horizontal concatenations (<font class="tmweb-markup">concat</font>), page breaks
+      (<font class="tmweb-markup">page-break</font>), mathematical fractions (<font class="tmweb-markup">frac</font>),
+      hyperlinks (<font class="tmweb-markup">hlink</font>), and so on. The precise rendering
+      of many of the typesetting primitives may be customized through the
+      built-in environment variables. For instance, the environment variable
+      <font color="#008000"><i>color</i></font> specifies the current color of objects,
+      <font color="#008000"><i>par-left</i></font> the current left margin of
+      paragraphs, <abbr>etc.</abbr>
+    </p>
+    <p>
+      The stylesheet language allows the user to write new primitives (macros)
+      on top of the built-in primitives. It contains primitives for defining
+      macros, conditional statements, computations, delayed execution,
+      <abbr>etc.</abbr> The stylesheet language also provides a special <font
+      class="tmweb-markup">extern</font> tag which offers you the full power of the <class
+      style="font-variant: small-caps">Scheme</class> extension language in order to write macros.
+    </p>
+    <p>
+      It should be noticed that user-defined macros have two aspects. On the
+      one hand they usually perform simple rewritings. For instance, the macro
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <p>
+          <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>seq</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font
+          color="blue">|</font><font color="brown"><i>var</i></font><font color="blue">|</font><font
+          color="brown"><i>from</i></font><font color="blue">|</font><font color="brown"><i>to</i></font><font
+          color="blue">|</font><font color="black"><img src="texmacs-basics-of-typesetting-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      is a shortcut in order to produce sequences like <span class="no-breaks"><img src="texmacs-basics-of-typesetting-10.png"
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em"></img>.</span> When macros perform simple rewritings like in this
+      example, the children <font color="brown"><i>var</i></font>, <font color="brown"><i>from</i></font>
+      and <font color="brown"><i>to</i></font> of the <font class="tmweb-markup">seq</font> tag
+      remain <em>accessible</em> from within the editor. In other words, you
+      can position the cursor inside them and modify them. User defined macros
+      also have a synthetic or computational aspect. For instance, the dots of
+      a <font class="tmweb-markup">seq</font> tag as above cannot be edited by the user.
+      Similarly, the macro
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <p>
+          <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>square</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font
+          color="blue">|</font><font color="brown"><i>x</i></font><font color="blue">|</font><font
+          color="black"><font color="blue">&lt;</font>times<font color="blue">|</font><font
+          color="#848"><font color="brown"><i>x</i></font></font><font color="blue">|</font><font
+          color="#848"><font color="brown"><i>x</i></font></font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      serves an exclusively computational purpose. As a general rule,
+      synthetic macros are sometimes easier to write, but the more
+      accessibility is preserved, the more natural it becomes for the user to
+      edit the markup.
+    </p>
+    <p>
+      It should be noticed that TeXmacs also produces some auxiliary data as a
+      byproduct of the typesetting product. For instance, the correct values
+      of references and page numbers, as well as tables of contents, indexes,
+      <abbr>etc.</abbr> are determined during the typesetting stage and
+      memorized at a special place. Even though auxiliary data may be
+      determined automatically from the document, it may be expensive to do so
+      (one typically has to retypeset the document). When the auxiliary data
+      are computed by an external plug-in, then it may even be impossible to
+      perform the recomputations on certain systems. For these reasons,
+      auxiliary data are carefully memorized and stored on disk when you save
+      your work.
+    </p>
+    <h3 id="auto-25"><a id="sec-tm-drd"></a>1.5.<span style="margin-left: 1em"></span>Data relation descriptions<span
+    style="margin-left: 1em"></span></h3>
+    <p>
+      <div style="display: inline">
+        <a id="auto-26"></a>
+      </div>
+      <h5>The rationale behind <abbr>D.R.D.</abbr>s<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      One major advantage of TeXmacs is that the editor uses general trees as
+      its data format. Like for XML, this choice has the advantages of being
+      simple to understand and making documents easy to manipulate by generic
+      tools. However, when using the editor for a particular purpose, the data
+      format usually needs to be restricted to a subset of the set of all
+      possible trees.
+    </p>
+    <p>
+      In XML, one uses Data Type Definitions (<abbr>D.T.D.</abbr>s) in order
+      to formally specify a subset of the generic XML format. Such a
+      <abbr>D.T.D.</abbr> specifies when a given document is valid for a
+      particular purpose. For instance, one has <abbr>D.T.D.</abbr>s for
+      documents on the web (<class style="font-variant: small-caps">XHTML</class>), for mathematics
+      (<class style="font-variant: small-caps">MathML</class>), for two-dimensional graphics (<class
+      style="font-variant: small-caps">SVG</class>) and so on. Moreover, up to a certain extent, XML
+      provides mechanisms for combining such <abbr>D.T.D.</abbr>s. Finally, a
+      precise description of a <abbr>D.T.D.</abbr> usually also provides some
+      kind of reference manual for documents of a certain type.
+    </p>
+    <p>
+      In TeXmacs, we have started to go one step further than
+      <abbr>D.T.D.</abbr>s: besides being able to decide whether a given
+      document is valid or not, it is also very useful to formally describe
+      certain properties of the document. For instance, in an interactive
+      editor, the numerator of a fraction may typically be edited by the user
+      (we say that it is <em>accessible</em>), whereas the URL of a hyperlink
+      is only editable on request. Similarly, certain primitives like <font
+      class="tmweb-markup">itemize</font> correspond to block content, whereas other
+      primitives like <font class="tmweb-markup">sqrt</font> correspond to inline content.
+      Finally, certain groups of primitives, like <font class="tmweb-markup">chapter</font>,
+      <font class="tmweb-markup">section</font>, <font class="tmweb-markup">subsection</font>,
+      <abbr>etc.</abbr> behave similarly under certain operations, like
+      conversions.
+    </p>
+    <p>
+      A Data Relation Description (<abbr>D.R.D.</abbr>) consists of a Data
+      Type Definition, together with additional logical properties of tags or
+      document fragments. These logical properties are stated using so called
+      <em>Horn clauses</em>, which are also used in logical programming
+      languages such as Prolog. Contrary to logical programming languages, it
+      should nevertheless be relatively straightforward to determine the
+      properties of tags or document fragments, so that certain database
+      techniques can be used for efficient implementations. At the moment, we
+      only started to implement this technology (and we are still using lots
+      of C++ hacks instead of what has been said above), so a more complete
+      formal description of <abbr>D.R.D.</abbr>s will only be given at a later
+      stage.
+    </p>
+    <p>
+      One major advantage of the use of <abbr>D.R.D.</abbr>s is that it is not
+      necessary to establish rigid hierarchies of object classes like in
+      object oriented programming. This is particularly useful in our context,
+      since properties like accessibility, inline-ness, <abbr>etc.</abbr> are
+      quite independent one from another. In fact, where <abbr>D.T.D.</abbr>s
+      may be good enough for the description of passive documents, more
+      fine-grained properties are often useful when manipulating documents in
+      a more interactive way.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-27"></a>
+      </div>
+      <h5>Current <abbr>D.R.D.</abbr> properties and applications<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      Currently, the <abbr>D.R.D.</abbr> of a document contains the following
+      information:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The possible arities of a tag.
+        </p>
+      </li>
+      <li>
+        <p>
+          The accessibility of a tag and its children.
+        </p>
+      </li>
+    </ul>
+    <p>
+      In the near future, the following properties will be added:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Inline-ness of a tag and its children.
+        </p>
+      </li>
+      <li>
+        <p>
+          Tabular-ness of a tag and its children.
+        </p>
+      </li>
+      <li>
+        <p>
+          Purpose of a tag and its children.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The above information is used (among others) for the following
+      applications:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Natural default behaviour when creating/deleting tags or children
+          (automatic insertion of missing arguments and removal of tags with
+          too little children).
+        </p>
+      </li>
+      <li>
+        <p>
+          Only traverse accessible nodes during searches, spell-checking,
+          <abbr>etc.</abbr>
+        </p>
+      </li>
+      <li>
+        <p>
+          Automatic insertion of <font class="tmweb-markup">document</font> or <font class="tmweb-markup">table</font>
+          tags when creating block or tabular environments.
+        </p>
+      </li>
+      <li>
+        <p>
+          Syntactic highlighting in source mode as a function of the purpose
+          of tags and arguments.
+        </p>
+      </li>
+    </ul>
+    <p>
+      <div style="display: inline">
+        <a id="auto-28"></a>
+      </div>
+      <h5>Determination of the <abbr>D.R.D.</abbr> of a document<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      TeXmacs associate a unique <abbr>D.R.D.</abbr> to each document. This
+      <abbr>D.R.D.</abbr> is determined in two stages. First of all, TeXmacs
+      tries to heuristically determine <abbr>D.R.D.</abbr> properties of
+      user-defined tags, or tags which are defined in style files. For
+      instance, when the user defines a tag like
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <p>
+          <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>hi</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font
+          color="blue">|</font><font color="brown"><i>name</i></font><font color="blue">|</font><font
+          color="black"><font color="black">Hello </font><font color="black"><font color="brown"><i>name</i></font></font><font
+          color="black">!</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      TeXmacs automatically notices that <font class="tmweb-markup">hi</font> is a macro
+      with one element, so it considers <img src="texmacs-basics-of-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img> to be the only
+      possible arity of the <font class="tmweb-markup">hi</font> tag. Notice that the
+      heuristic determination of the <abbr>D.R.D.</abbr> is done
+      interactively: when defining a macro inside your document, its
+      properties will automatically be put into the <abbr>D.R.D.</abbr>
+      (assuming that you give TeXmacs a small amount of free time of the order
+      of a second; this minor delay is used to avoid compromising the
+      reactivity of the editor).
+    </p>
+    <p>
+      Sometimes the heuristically defined properties are inadequate. For this
+      case, TeXmacs provides the <font class="tmweb-markup">drd-props</font> tag in order to
+      manually override the default properties.
+    </p>
+    <h3 id="auto-29"><a id="sec-lengths"></a>1.6.<span style="margin-left: 1em"></span>TeXmacs lengths<span style="margin-left: 1em"></span></h3>
+    <p>
+      A simple TeXmacs length is a number followed by a length unit, like <tt
+      class="verbatim">1cm</tt> or <tt class="verbatim">1.5mm</tt>. TeXmacs supports three main
+      types of units:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          Absolute units
+        </dt>
+        <dd>
+          <p>
+            The length of an absolute unit like <tt class="verbatim">cm</tt> or <tt
+            class="verbatim">pt</tt> on print is fixed.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Context dependent units
+        </dt>
+        <dd>
+          <p>
+            Context-dependent length units depend on the current font or other
+            environment variables. For instance, <tt class="verbatim">1ex</tt>
+            corresponds to the height of the &ldquo;x&rdquo; character in the
+            current font and <tt class="verbatim">1par</tt> correspond to the current
+            paragraph width.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          User defined units
+        </dt>
+        <dd>
+          <p>
+            Any nullary macro, whose name contains only lower case roman
+            letters followed by <tt class="verbatim">-length</tt>, and which returns a
+            length, can be used as a unit itself. For instance, the following
+            macro defines the <tt class="verbatim">dm</tt> length:
+          </p>
+          <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+            <div class="tmweb-code">
+              <p>
+                <font color="blue">&lt;</font>assign<font color="blue">|</font><font
+                color="#008000"><i>dm-length</i></font><font color="blue">|</font><font
+                color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+                color="black">10cm</font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+              </p>
+            </div>
+          </div>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      Furthermore, length units can be <em>stretchable</em>. A stretchable
+      length is represented by a triple of rigid lengths: a minimal length, a
+      default length and a maximal length. When justifying lines or pages,
+      stretchable lengths are automatically sized so as to produce nicely
+      looking layout.
+    </p>
+    <p>
+      In the case of page breaking, the <font color="#008000"><i>page-flexibility</i></font>
+      environment provides additional control over the stretchability of white
+      space. When setting the <font color="#008000"><i>page-flexibility</i></font> to
+      <span class="no-breaks"><img src="texmacs-basics-of-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img>,</span> stretchable spaces behave
+      as usual. When setting the <font color="#008000"><i>page-flexibility</i></font>
+      to <span class="no-breaks"><img src="texmacs-basics-of-typesetting-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.0112617079889807em; height: 0.716517906336088em"></img>,</span> stretchable spaces
+      become rigid. For other values, the behaviour is linear.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-30"></a>
+      </div>
+      <h5>Absolute length units<span style="margin-left: 1em"></span></h5>
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <code>cm</code>
+        </dt>
+        <dd>
+          <p>
+            One centimeter.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>mm</code>
+        </dt>
+        <dd>
+          <p>
+            One millimeter.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>in</code>
+        </dt>
+        <dd>
+          <p>
+            One inch.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>pt</code>
+        </dt>
+        <dd>
+          <p>
+            The standard typographic point corresponds to <img src="texmacs-basics-of-typesetting-13.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em"></img>
+            of an inch.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">bp</tt>
+        </dt>
+        <dd>
+          <p>
+            A big point corresponds to <img src="texmacs-basics-of-typesetting-14.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em"></img> of an inch.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">dd</tt>
+        </dt>
+        <dd>
+          <p>
+            The Did&ocirc;t point equals 1/72 of a French inch,
+            <abbr>i.e.</abbr> <tt class="verbatim">0.376mm</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">pc</tt>
+        </dt>
+        <dd>
+          <p>
+            One &ldquo;pica&rdquo; equals 12 points.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">cc</tt>
+        </dt>
+        <dd>
+          <p>
+            One &ldquo;cicero&rdquo; equals 12 Did&ocirc;t points.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      <div style="display: inline">
+        <a id="auto-31"></a>
+      </div>
+      <h5>Rigid font-dependent length units<span style="margin-left: 1em"></span></h5>
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <tt class="verbatim">fs</tt>
+        </dt>
+        <dd>
+          <p>
+            The font size. When using a <tt class="verbatim">12pt</tt> font, <tt class="verbatim">1fs</tt>
+            corresponds to <tt class="verbatim">12pt</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">fbs</tt>
+        </dt>
+        <dd>
+          <p>
+            The base font size. Typically, when selecting <tt class="verbatim">10</tt>
+            as the font size for your document and when typing large text, the
+            base font size is <tt class="verbatim">10pt</tt> and the font size <tt
+            class="verbatim">12pt</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>ln</code>
+        </dt>
+        <dd>
+          <p>
+            The width of a nicely looking fraction bar for the current font.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>sep</code>
+        </dt>
+        <dd>
+          <p>
+            A typical separation between text and graphics for the current
+            font, so as to keep the text readable. For instance, the numerator
+            in a fraction is shifted up by <tt class="verbatim">1sep</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">yfrac</tt>
+        </dt>
+        <dd>
+          <p>
+            The height of the fraction bar for the current font (approximately
+            <tt class="verbatim">0.5ex</tt>).
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">ex</tt>
+        </dt>
+        <dd>
+          <p>
+            The height of the &ldquo;x&rdquo; character in the current font.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">emunit</tt>
+        </dt>
+        <dd>
+          <p>
+            The width of the &ldquo;M&rdquo; character in the current font.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      <div style="display: inline">
+        <a id="auto-32"></a>
+      </div>
+      <h5>Stretchable font-dependent length units<span style="margin-left: 1em"></span></h5>
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <code>fn</code>
+        </dt>
+        <dd>
+          <p>
+            This is a stretchable variant of <tt class="verbatim">1quad</tt>. The
+            default length of <tt class="verbatim">1fn</tt> is <tt class="verbatim">1quad</tt>.
+            When stretched, <tt class="verbatim">1fn</tt> may be reduced to <tt class="verbatim">0.5fn</tt>
+            and extended to <tt class="verbatim">1.5fn</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">fns</tt>
+        </dt>
+        <dd>
+          <p>
+            This length defaults to zero, but it may be stretched up till <tt
+            class="verbatim">1fn</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">bls</tt>
+        </dt>
+        <dd>
+          <p>
+            The &ldquo;base line skip&rdquo; is the sum of <tt class="verbatim">1quad</tt>
+            and <font color="#008000"><i>par-sep</i></font>. It corresponds to the
+            distance between successive lines of normal text.
+          </p>
+          <p>
+            Typically, the baselines of successive lines are separated by a
+            distance of <tt class="verbatim">1fn</tt> (in TeXmacs and LaTeX a slightly
+            larger space is used though so as to allow for subscripts and
+            superscripts and avoid a too densely looking text. When stretched,
+            <tt class="verbatim">1fn</tt> may be reduced to <tt class="verbatim">0.5fn</tt> and
+            extended to <tt class="verbatim">1.5fn</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>spc</code>
+        </dt>
+        <dd>
+          <p>
+            The (stretchable) width of space character in the current font.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">xspc</tt>
+        </dt>
+        <dd>
+          <p>
+            The additional (stretchable) width of a space character after a
+            period.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      <div style="display: inline">
+        <a id="auto-33"></a>
+      </div>
+      <h5>Box lengths<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        <a id="box-lengths"></a>
+      </div>
+    </p>
+    <p>
+      Box length units can only be used within some special markup elements,
+      such as <font class="tmweb-markup">move</font>, <font class="tmweb-markup">shift</font>, <font
+      class="tmweb-markup">resize</font>, <font class="tmweb-markup">clipped</font> and <font class="tmweb-markup">image</font>.
+      The principal body of this content (<abbr>e.g.</abbr> the content being
+      &ldquo;moved&rdquo; in the case of <font class="tmweb-markup">move</font>) is typeset
+      as a box. The following lengths units then correspond to the size and
+      the extents of the box.
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <code>w</code>
+        </dt>
+        <dd>
+          <p>
+            The width of the box.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">h</tt>
+        </dt>
+        <dd>
+          <p>
+            The height of the box.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>l</code>
+        </dt>
+        <dd>
+          <p>
+            The logical left <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-coordinate</span>
+            of the box.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>r</code>
+        </dt>
+        <dd>
+          <p>
+            The logical right <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-coordinate</span>
+            of the box.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>b</code>
+        </dt>
+        <dd>
+          <p>
+            The logical bottom <span class="no-breaks"><img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img>-coordinate</span>
+            of the box.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>t</code>
+        </dt>
+        <dd>
+          <p>
+            The logical top <span class="no-breaks"><img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img>-coordinate</span>
+            of the box.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      For instance, the code
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <p>
+          <font color="blue">&lt;</font>move<font color="blue">|</font><font color="black">Hello
+          there</font><font color="blue">|</font><font color="#288"></font><font color="blue">|</font><font
+          color="#288"><font color="blue">&lt;</font>plus<font color="blue">|</font><font color="#848">-0.5b</font><font
+          color="blue">|</font><font color="#848">-0.5t</font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      can be used to center Hello there at the base-line.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-34"></a>
+      </div>
+      <h5>Other length units<span style="margin-left: 1em"></span></h5>
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <code>par</code>
+        </dt>
+        <dd>
+          <p>
+            The width of the paragraph. That is the length the text can span.
+            It is affected by paper size, margins, number of columns, column
+            separation, cell width (if in a table), <abbr>etc.</abbr>
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">pag</tt>
+        </dt>
+        <dd>
+          <p>
+            The height of the main text in a page. In a similar way as <tt
+            class="verbatim">par</tt>, this length unit is affected by page size,
+            margins, <abbr>etc.</abbr>
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>px</code>
+        </dt>
+        <dd>
+          <p>
+            One screen pixel, the meaning of this unit is affected by the
+            shrinking factor.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <code>tmpt</code>
+        </dt>
+        <dd>
+          <p>
+            The smallest length unit for internal length calculations by
+            TeXmacs. <tt class="verbatim">1px</tt> divided by the shrinking factor
+            corresponds to <tt class="verbatim">256tmpt</tt>.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      <div style="display: inline">
+        <a id="auto-35"></a>
+      </div>
+      <h5>Different ways to specify lengths<span style="margin-left: 1em"></span></h5>
+    </p>
+    <p>
+      There are three types of lengths in TeXmacs:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          Simple lengths
+        </dt>
+        <dd>
+          <p>
+            A string consisting of a number followed by a length unit.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Abstract lengths
+        </dt>
+        <dd>
+          <p>
+            An abstract length is a macro which evaluates to a length. Such
+            lengths have the advantage that they may depend on the context.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Normalized lengths
+        </dt>
+        <dd>
+          <p>
+            All lengths are ultimately converted into a normalized length,
+            which is a tag of the form <font color="blue">&lt;</font><font color="blue"><class
+            style="font-family: sans-serif">tmlen</class></font><a id="auto-36"></a><font color="blue">|</font><font
+            color="brown"><i>l</i></font><font color="blue">&gt;</font> (for rigid lengths)
+            or <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tmlen</class></font><a
+            id="auto-37"></a><font color="blue">|</font><font color="brown"><i>min</i></font><font
+            color="blue">|</font><font color="brown"><i>def</i></font><font color="blue">|</font><font
+            color="brown"><i>max</i></font><font color="blue">&gt;</font> (for stretchable
+            lengths). The user may also use this tag in order to specify
+            stretchable lengths. For instance, <font color="blue">&lt;</font>tmlen<font
+            color="blue">|</font><font color="#288"><font color="blue">&lt;</font>minus<font
+            color="blue">|</font><font color="#848">1quad</font><font color="blue">|</font><font
+            color="#848">1pt</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+            color="#288">1quad</font><font color="blue">|</font><font color="#288">1.5quad</font><font
+            color="blue">&gt;</font> evaluates to a length which is <tt class="verbatim">1quad</tt>
+            by default, at least <tt class="verbatim">1quad-1pt</tt> and at most <tt
+            class="verbatim">1.5quad</tt>.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <h3 id="auto-38">1.7.<span style="margin-left: 1em"></span>Intern representation of texts<span style="margin-left: 1em"></span></h3>
+    <p>
+      TeXmacs represents all texts by trees (for a fixed text, the
+      corresponding tree is called the <em>edit tree</em>). The nodes of such
+      a tree are labeled by standard <em>operators</em> which are listed in
+      <tt class="verbatim">Basic/Data/tree.hpp</tt> and <tt class="verbatim">Basic/Data/tree.cpp</tt>.
+      The labels of the leaves of the tree are strings, which are either
+      invisible (such as lengths or macro definitions), or visible (the real
+      text).
+    </p>
+    <p>
+      The meaning of the text and the way it is typeset essentially depend on
+      the current environment. The environment mainly consists of a relative
+      hash table of type <tt class="verbatim">rel_hashmap&lt;string,tree&gt;</tt>, i.e.
+      a mapping from the environment variables to their tree values. The
+      current language and the current font are examples of system environment
+      variables; new variables can be defined by the user.
+    </p>
+    <h3 id="auto-39">1.8.<span style="margin-left: 1em"></span>Text<span style="margin-left: 1em"></span></h3>
+    <p>
+      All text strings in TeXmacs consist of sequences of either specific or
+      universal symbols. A specific symbol is a character, different from <tt
+      class="verbatim">'\0'</tt>, <tt class="verbatim">'&lt;'</tt> and <tt class="verbatim">'&gt;'</tt>. Its
+      meaning may depend on the particular font which is being used. A
+      universal symbol is a string starting with <tt class="verbatim">'&lt;'</tt>,
+      followed by an arbitrary sequence of characters different from <tt
+      class="verbatim">'\0'</tt>, <tt class="verbatim">'&lt;'</tt> and <tt class="verbatim">'&gt;'</tt>, and
+      ending with <tt class="verbatim">'&gt;'</tt>. The meaning of universal characters
+      does not depend on the particular font which is used, but different
+      fonts may render them in a different way.
+    </p>
+    <h3 id="auto-40">1.9.<span style="margin-left: 1em"></span>The language<span style="margin-left: 1em"></span></h3>
+    <p>
+      The language of the text is capable performing a further semantic
+      analysis of a text phrase. At least, it is capable of splitting a phrase
+      up into <em>words</em> (which are smaller phrases) and inform the
+      typesetter about the desired spaces between words and hyphenation
+      information. In the future, additional semantics may be added into
+      languages. For instance, spell checkers might be implemented for natural
+      languages and parsers for mathematical formulas or programming
+      languages.
+    </p>
+    <h2 id="auto-41">2.<span style="margin-left: 1em"></span>Boxes<span style="margin-left: 1em"></span></h2>
+    <p>
+      The TeXmacs typesetter essentially translates a document represented by
+      a tree into a graphical box, which can either be displayed on a graphics
+      device (e.g. the screen or a PDF file). Contrary to a system like LaTeX,
+      the graphical box actually contains much more information than is
+      necessary for a graphical rendering. Roughly speaking, this information
+      can be subdivided into the following categories:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Logical and physical bounding boxes.
+        </p>
+      </li>
+      <li>
+        <p>
+          A method for graphical rendering.
+        </p>
+      </li>
+      <li>
+        <p>
+          Miscellaneous typesetting information.
+        </p>
+      </li>
+      <li>
+        <p>
+          Keeping track of the source subtree which led to the box.
+        </p>
+      </li>
+      <li>
+        <p>
+          Computing the positions of cursors and selections.
+        </p>
+      </li>
+      <li>
+        <p>
+          Event handlers for dynamic content.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The logical bounding box is used by the typesetter to position the box
+      with respect to other boxes. A certain amount of other information, such
+      as the slant of the box, is also stored for the typesetter. The physical
+      bounding box encloses the graphical representation of the box. This
+      knowledge is needed when partially redrawing a box in an efficient way.
+    </p>
+    <p>
+      In order to position the cursor or when making a selection, it is
+      necessary to have a correspondence between logical positions in the
+      source tree and physical positions in the typeset boxes. More precisely,
+      boxes and their subboxes are logically organized as a tree. Boxes
+      provide routines to translate between paths in the box tree and the
+      source tree and to find the path which is associated to a graphical
+      point.
+    </p>
+    <p>
+      Notice also that, besides a horizontal and vertical position, the
+      physical cursor also contains an infinitesimal horizontal position.
+      Roughly speaking, this infinitesimal coordinate is used to give certain
+      boxes (such as color changes) an extra infinitesimal width.
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      The abstract <tt class="verbatim cpp">box_rep</tt> class is defined in <tt class="verbatim">src/Typeset/boxes.hpp</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+class box_rep: public abstract_struct {
+private:
+  SI x0, y0;    // offset w.r.t. parent box
+
+public:
+  SI x1, y1;    // under left corner (logical)
+  SI x2, y2;    // upper right corner (logical)
+  SI x3, y3;    // under left corner (ink)
+  SI x4, y4;    // upper right corner (ink)
+
+  path ip;      // corresponding inverse path in source tree
+  
+  // [methods not shown]
+}</pre>
+      </div>
+    </div>
+    <p>
+      Coordinates are expressed in the standard internal graphic unit <tt
+      class="verbatim cpp">SI</tt> which is essentially a fixed float with <tt class="verbatim cpp">PIXEL</tt>
+      being the unit size and set to <tt class="verbatim cpp">256</tt> (in <tt class="verbatim">src/Graphics/rendered.hpp</tt>).
+      Cartesian coordinates are relative to a standard frame oriented as in
+      elementary geometry, i.e. the x-axis from left to right and the y-axis
+      from bottom to top. 
+    </p>
+    <center>
+      <img src="texmacs-basics-of-typesetting-17.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: -6.6636694214876em; height: 13.3273388429752em"></img>
+    </center>
+    <p>
+      The field <tt class="verbatim cpp">ip</tt> represents an <i>inverse path</i> needed to
+      relate the box to the piece of document from which it originates.
+    </p>
+    <h3 id="auto-42">2.1.<span style="margin-left: 1em"></span>The correspondence between a box and its
+    source<span style="margin-left: 1em"></span></h3>
+    <p>
+      In order to implement the correspondence between paths in the source
+      tree and the box tree, one has to face several simultaneous
+      difficulties:
+    </p>
+    <ol>
+      <li>
+        <p>
+          Due to line breaking, footnotes and macro expansions, the
+          correspondence may be non straightforward.
+        </p>
+      </li>
+      <li>
+        <p>
+          The correspondence has to be reasonably time and space efficient.
+        </p>
+      </li>
+      <li>
+        <p>
+          Some boxes, such header and footers, or certain results of macro
+          expansions, may not be &ldquo;accessible&rdquo;. Although one should
+          be able to find a reasonable cursor position when clicking on them,
+          the contents of this box can not be edited directly.
+        </p>
+      </li>
+      <li>
+        <p>
+          The correspondence has to be reasonably complete (see the next
+          section).
+        </p>
+      </li>
+    </ol>
+    <p>
+      The first difficulty forces us to store a path in the source tree along
+      with any box (in the <tt class="verbatim cpp">box_rep::ip</tt> field). In order to
+      save storage, this path is stored in a reversed manner, so that common
+      heads can be shared. This common head sharing is also necessary to
+      quickly change the source locations when modifying the source tree, for
+      instance by inserting a new paragraph.
+    </p>
+    <p>
+      In order to cope with the third difficulty, the inverse path may start
+      with a negative number, which indicates that the box can not directly be
+      edited (we also say that the box is a <i>decoration</i>). From <tt
+      class="verbatim">src/Typeset/boxes.hpp</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+#define DECORATION        (-1)
+#define DECORATION_LEFT    (-2)
+#define DECORATION_MIDDLE  (-3)
+#define DECORATION_RIGHT   (-4)
+#define DETACHED          (-5)</pre>
+      </div>
+    </div>
+    <p>
+      In this case, the tail of the inverse path corresponds to a location in
+      the source tree, where the cursor should be positioned when clicking on
+      the box. The negative number influences the way in which this is done.
+    </p>
+    <h3 id="auto-43">2.2.<span style="margin-left: 1em"></span>The three kinds of paths<span style="margin-left: 1em"></span></h3>
+    <p>
+      More precisely, we have to deal with three kinds of paths:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          Tree paths
+        </dt>
+        <dd>
+          <p>
+            These paths correspond to paths in the source tree. Actually, the
+            path minus its last item points to a subtree of the source tree.
+            The last item gives a position in this subtree: if the subtree is
+            a leaf, i.e. a string, it is a position in this string. Otherwise
+            a zero indicates a position before the subtree and a one a
+            position after the subtree.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Inverse paths
+        </dt>
+        <dd>
+          <p>
+            These are just reverted tree paths (with shared tails), with an
+            optional negative head. A negative head indicates that the tree
+            path is not accessible, i.e. the corresponding subtree does not
+            correspond to editable content. If the negative value is <span
+            class="no-breaks"><img src="texmacs-basics-of-typesetting-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img>,</span> <img src="texmacs-basics-of-typesetting-19.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.0112617079889807em; height: 0.716517906336088em"></img> or
+            <span class="no-breaks"><img src="texmacs-basics-of-typesetting-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img>,</span> then a zero or one
+            has to be put behind the tree path, depending on the value and the
+            cursor position.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Box paths
+        </dt>
+        <dd>
+          <p>
+            These paths correspond to logical paths in the box tree. Again,
+            the path minus its last item points to a subbox of the main box,
+            and the last item gives a position in this subtree: if the subbox
+            corresponds to a text box it is a position in this text. Otherwise
+            a zero indicates a position before the subbox and a one a position
+            after it. In the case of side boxes, a two and a three may also
+            indicate the position after the left script <abbr>resp.</abbr>
+            before the right script.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      In order to implement the conversion between the three kinds of paths,
+      every box comes with a reference inverse path <tt class="verbatim">ip</tt> in the
+      source tree. Composite boxes also come with a left and a right inverse
+      path <tt class="verbatim">lip</tt> <abbr>resp.</abbr> <tt class="verbatim">rip</tt>, which
+      correspond to the left-most and right-most accessible paths in its
+      subboxes (if there are such subboxes).
+    </p>
+    <p>
+      The routine:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+    virtual path box_rep::find_tree_path (path bp);</pre>
+      </div>
+    </div>
+    <p>
+      transforms a box path into a tree path. This routine (which only uses
+      <tt class="verbatim">ip</tt>) is fast and has a linear time complexity as a
+      function of the lengths of the paths. 
+    </p>
+    <p>
+      The routine: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+    virtual path box_rep::find_box_path (path p);</pre>
+      </div>
+    </div>
+    <p>
+      does the inverse conversion. Unfortunately, in the worst case, it may be
+      necessary to search for the matching tree path in all subboxes.
+      Nevertheless, in the best case, a dichotomic algorithm (which uses <tt
+      class="verbatim">lip</tt> and <tt class="verbatim">rip</tt>), finds the right branch how to
+      descend in a logarithmic time. This algorithm also has a quadratic time
+      complexity as a function of the lengths of the paths, because we
+      frequently need to revert paths.
+    </p>
+    <h3 id="auto-44">2.3.<span style="margin-left: 1em"></span>The cursor and selections<span style="margin-left: 1em"></span></h3>
+    <p>
+      In order to fulfill the requirement of being a &ldquo;structured
+      editor&rdquo;, TeXmacs needs to provide a (reasonably) complete
+      correspondence between logical tree paths and physical cursor positions.
+      This yields an additional difficulty in the case of &ldquo;environment
+      changes&rdquo;, such as a change in font or color. Indeed, when you are
+      on the border of such a change, it is not clear <i>a priori</i> which
+      environment you are in.
+    </p>
+    <p>
+      In TeXmacs, the cursor position therefore contains an <img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>
+      and a <img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img> coordinate, as well as an additional
+      infinitesimal <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-coordinate,</span>
+      called <span class="no-breaks"><img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img>.</span> A change in
+      environment is then represented by a box with an infinitesimal width.
+      Although the <span class="no-breaks"><img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img>-position</span> of the
+      cursor is always zero when you select using the mouse, it may be non
+      zero when moving around using the cursor keys. The linear time routine:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+    virtual path box_rep::find_box_path (SI x, SI y, SI delta);</pre>
+      </div>
+    </div>
+    <p>
+      as a function of the length of the path searches the box path which
+      corresponds to a cursor position. Inversely, the routine: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+    virtual cursor box_rep::find_cursor (box bp);</pre>
+      </div>
+    </div>
+    <p>
+      yields a graphical representation for the cursor at a certain box path.
+      The cursor is given by its <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>,</span>
+      <img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img> and <img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img> coordinates and a
+      line segment relative to this origin, given by its extremities <img src="texmacs-basics-of-typesetting-22.png"
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.902699724517906em"></img> and <span class="no-breaks"><img src="texmacs-basics-of-typesetting-23.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.902699724517906em"></img>.</span> From <tt
+      class="verbatim">src/Typeset/boxes.hpp</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+struct cursor_rep: concrete_struct {
+  SI ox, oy;    // main cursor position
+  SI delta;     // infinitesimal shift to the right
+  SI y1;        // under base line
+  SI y2;        // upper base line
+  double slope; // slope of cursor
+  bool valid;   // the cursor is valid
+};</pre>
+      </div>
+    </div>
+    <p>
+      The default implementation of the <tt class="verbatim cpp">find_cursor</tt> method is:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+cursor
+box_rep::find_cursor (path bp) {
+  bool flag= bp == path (0);
+  double slope= flag? left_slope (): right_slope ();
+  cursor cu (flag? x1: x2, 0);
+  cu-&gt;y1= y1; cu-&gt;y2= y2;
+  cu-&gt;slope= slope;
+  return cu;
+}</pre>
+      </div>
+    </div>
+    <p>
+      In a similar way, the routine: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+    virtual selection box_rep::find_selection (box lbp, box rbp);</pre>
+      </div>
+    </div>
+    <p>
+      computes the selection between two given box paths. This selection
+      comprises two delimiting tree paths and a graphical representation in
+      the form of a list of rectangles.
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+struct selection_rep: concrete_struct {
+  rectangles rs;
+  path start;
+  path end;
+  bool valid;
+};</pre>
+      </div>
+    </div>
+    <p>
+      The default implementation of <tt class="verbatim cpp">find_selection</tt> reads:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+selection
+box_rep::find_selection (path lbp, path rbp) {
+  if (lbp == rbp)
+    return selection (rectangles (),
+                      find_tree_path (lbp), find_tree_path (rbp));
+  else
+    return selection (rectangle (x1, y1, x2, y2),
+                      find_tree_path (path (0)), find_tree_path (path (1)));
+}</pre>
+      </div>
+    </div>
+    <h2 id="auto-45">3.<span style="margin-left: 1em"></span>The low levels<span style="margin-left: 1em"></span></h2>
+    <p>
+      A typical stack trace with a breakpoint in the low-level typesetting
+      routines (in this case <tt class="verbatim cpp">sqrt_box</tt>) looks like:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim" xml:space="preserve">
+#0 0x000000010317b254 in sqrt_box(list&lt;int&gt;, box, box, box, font, pencil) 
+#1 0x0000000103270ee4 in concater_rep::typeset_sqrt(tree, list&lt;int&gt;) 
+#2 0x00000001032a73b4 in concater_rep::typeset(tree, list&lt;int&gt;) 
+#3 0x00000001032a9330 in typeset_concat(edit_env, tree, list&lt;int&gt;) 
+#4 0x000000010337c5c4 in typeset_concat_or_table(edit_env, tree, list&lt;int&gt;) 
+#5 0x000000010337d6ec in typeset_stack(edit_env, tree, list&lt;int&gt;, array&lt;line_item&gt;, array&lt;line_item&gt;, stack_border&amp;) 
+#6 0x0000000103215ac4 in typesetter_rep::insert_paragraph(tree, list&lt;int&gt;) 
+#7 0x00000001031ccd78 in bridge_rep::my_typeset(int) 
+#8 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#9 0x00000001031e9f98 in bridge_document_rep::my_typeset(int) 
+#10 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#11 0x00000001031d317c in bridge_argument_rep::my_typeset(int) 
+#12 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#13 0x0000000103212430 in bridge_surround_rep::my_typeset(int) 
+#14 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#15 0x00000001031e9f98 in bridge_document_rep::my_typeset(int) 
+#16 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#17 0x0000000103214cf8 in bridge_with_rep::my_typeset(int) 
+#18 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#19 0x00000001031e2298 in bridge_compound_rep::my_typeset(int) 
+#20 0x00000001031cd6d4 in bridge_rep::typeset(int) 
+#21 0x00000001031e9f98 in bridge_document_rep::my_typeset(int) 
+#22 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#23 0x0000000103217e80 in typesetter_rep::typeset() 
+#24 0x0000000103218370 in typesetter_rep::typeset(int&amp;, int&amp;, int&amp;, int&amp;) 
+#25 0x000000010321a9e8 in typeset(typesetter_rep*, int&amp;, int&amp;, int&amp;, int&amp;) 
+#26 0x0000000102db9954 in edit_typeset_rep::typeset_sub(int&amp;, int&amp;, int&amp;, int&amp;) 
+#27 0x0000000102db9df8 in edit_typeset_rep::typeset(int&amp;, int&amp;, int&amp;, int&amp;) 
+#28 0x0000000102df6694 in edit_interface_rep::apply_changes() 
+#29 0x000000010311c1e0 in tm_server_rep::interpose_handler() 
+#30 0x0000000103023540 in qt_gui_rep::update() </pre>
+      </div>
+    </div>
+    <p>
+      This gives a good idea how we go from the main entry points relative to
+      the <tt class="verbatim cpp">typesetter</tt> class, to the low lever routines which
+      produce the actual boxes. In the intermediate steps of the computation
+      an important role is played by the <tt class="verbatim cpp">bridge</tt> object.
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+class typesetter_rep {
+public:
+  edit_env&amp;    env;
+  bridge       br;
+  rectangles   change_log;
+  array&lt;brush&gt; old_bgs;
+
+  array&lt;page_item&gt; l;      // current lines
+  stack_border     sb;     // border properties
+  array&lt;line_item&gt; a;      // left surroundings
+  array&lt;line_item&gt; b;      // right surroundings
+
+  SI x1, y1, x2, y2;
+  hashmap&lt;string,tree&gt; old_patch;
+  bool paper;
+
+public:
+  typesetter_rep (edit_env&amp; env, tree et, path ip);
+
+  void insert_stack     (array&lt;page_item&gt; l, stack_border sb);
+  void insert_parunit   (tree t, path ip);
+  void insert_paragraph (tree t, path ip);
+  void insert_surround  (array&lt;line_item&gt; a, array&lt;line_item&gt; b);
+  void insert_marker    (tree st, path ip);
+
+  void local_start   (array&lt;page_item&gt;&amp; l, stack_border&amp; sb);
+  void local_end     (array&lt;page_item&gt;&amp; l, stack_border&amp; sb);
+
+  void determine_page_references (box b);
+  box  typeset ();
+  box  typeset (SI&amp; x1, SI&amp; y1, SI&amp; x2, SI&amp; y2);
+};</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      In the normal operation of the GUI the typesetting starts at <tt class="verbatim cpp">typesetter_rep::typeset(int&amp;,
+      int&amp;, int&amp;, int&amp;)</tt>: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+typesetter_rep::typeset (SI&amp; x1b, SI&amp; y1b, SI&amp; x2b, SI&amp; y2b) {
+  x1= x1b; y1= y1b; x2=x2b; y2= y2b;
+  box b= typeset ();
+  // cout &lt;&lt; &quot;-------------------------------------------------------------\n&quot;;
+  b-&gt;position_at (0, 0, change_log);
+  change_log= requires_update (change_log);
+  rectangle r (0, 0, 0, 0);
+  if (!is_nil (change_log)) r= least_upper_bound (change_log);
+  array&lt;brush&gt; new_bgs;
+  array&lt;rectangle&gt; rs;
+  b-&gt;collect_page_colors (new_bgs, rs);
+  for (int i=0; i&lt;min(N(old_bgs), N(new_bgs)); i++)
+    if (new_bgs[i] != old_bgs[i])
+      r= least_upper_bound (r, rs[i]);
+  old_bgs= new_bgs;
+  x1b= r-&gt;x1; y1b= r-&gt;y1; x2b= r-&gt;x2; y2b= r-&gt;y2;
+  change_log= rectangles ();
+  return b;
+}</pre>
+      </div>
+    </div>
+    <p>
+      which does some administrative work setting the view boundaries
+      requested by the editor and, when the typesetting is done, performing
+      some accesory computations to determine the new changed region due to
+      changes in the background color of the pages and propagating it up via
+      the reference arguments. The production of the boxes is the job of <tt
+      class="verbatim cpp">typesetter_rep::typeset()</tt>: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+typesetter_rep::typeset () {
+  old_patch= hashmap&lt;string,tree&gt; (UNINIT);
+  l        = array&lt;page_item&gt; ();
+  sb       = stack_border ();
+  a        = array&lt;line_item&gt; ();
+  b        = array&lt;line_item&gt; ();
+  paper    = (env-&gt;get_string (PAGE_MEDIUM) == &quot;paper&quot;);
+
+  // Test whether we are doing a complete typesetting
+  env-&gt;complete= br-&gt;my_typeset_will_be_complete ();
+  tree st= br-&gt;st;
+  int i= 0, n= N(st);
+  if (is_compound (st[0], &quot;show-preamble&quot;)) { i++; env-&gt;complete= false; }
+  if (is_compound (st[0], &quot;hide-preamble&quot;)) i++;
+  for (; i&lt;n &amp;&amp; env-&gt;complete; i++) {
+    if (is_compound (st[i], &quot;hide-part&quot;)) env-&gt;complete= false;
+    if (!is_compound (st[i], &quot;show-part&quot;)) break;
+  }
+
+  // Typeset
+  if (env-&gt;complete) {
+    env-&gt;local_aux= hashmap&lt;string,tree&gt; (UNINIT);
+    env-&gt;missing  = hashmap&lt;string,tree&gt; (UNINIT);
+    env-&gt;redefined= array&lt;tree&gt; ();
+    env-&gt;touched  = hashmap&lt;string,bool&gt; (false);
+  }
+  br-&gt;typeset (PROCESSED+ WANTED_PARAGRAPH);
+  pager ppp= tm_new&lt;pager_rep&gt; (br-&gt;ip, env, l);
+  box rb= ppp-&gt;make_pages ();
+  if (env-&gt;complete &amp;&amp; paper) determine_page_references (rb);
+  tm_delete (ppp);
+  // env-&gt;complete= false;  // moved to edit_typeset_rep::typeset
+  return rb;
+}</pre>
+      </div>
+    </div>
+    <p>
+      Here we setup the typesetting environment and then ask the bridge <tt
+      class="verbatim cpp">br</tt> to start processing the document. The boxes so obtained
+      require still to be laid out as a sequence of pages via a <tt class="verbatim cpp">pager</tt>
+      which will be illustrated later on.
+    </p>
+    <h3 id="auto-46">3.1.<span style="margin-left: 1em"></span>The bridge<span style="margin-left: 1em"></span></h3>
+    <p>
+      The bridge structure is receptive to changes  in the document (via the
+      observer pattern) and perform the necessary preparations for the
+      typesetting and the typesetting itself of the subtree which it manages: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+class bridge_rep: public abstract_struct {
+public:
+  typesetter           ttt;      // the underlying typesetter
+  edit_env&amp;            env;      // the environment
+  tree                 st;       // the present subtree
+  path                 ip;       // source location of the paragraph
+  int                  status;   // status among above values
+  hashmap&lt;string,tree&gt; changes;  // changes in the environment
+
+  array&lt;page_item&gt;     l;        // the typesetted lines of st
+  stack_border         sb;       // border properties of l
+  link_repository      link_env; // loci and links declared inside bridge
+
+public:
+  bridge_rep (typesetter ttt, tree st, path ip);
+  inline virtual ~bridge_rep () {}
+
+  virtual void notify_assign (path p, tree u) = 0;
+  virtual void notify_insert (path p, tree u);
+  virtual void notify_remove (path p, int nr);
+  virtual void notify_split  (path p);
+  virtual void notify_join   (path p);
+  virtual bool notify_macro  (int type, string var, int l, path p, tree u) = 0;
+  virtual void notify_change () = 0;
+
+  virtual void my_clean_links ();
+  virtual void my_exec_until (path p);
+  virtual bool my_typeset_will_be_complete ();
+  virtual void my_typeset (int desired_status);
+  virtual void exec_until (path p, bool skip_flag= false);
+  void typeset (int desired_status);
+};</pre>
+      </div>
+    </div>
+    <p>
+      It is recursively created by parsing the document tree via <tt class="verbatim cpp">make_bridge</tt>
+      :
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+bridge
+make_bridge (typesetter ttt, tree st, path ip) {
+  // cout &lt;&lt; &quot;Make bridge &quot; &lt;&lt; st &lt;&lt; &quot;, &quot; &lt;&lt; ip &lt;&lt; LF;
+  // cout &lt;&lt; &quot;Preamble mode= &quot; &lt;&lt; ttt-&gt;env-&gt;preamble &lt;&lt; LF;
+  if (ttt-&gt;env-&gt;preamble)
+    return make_inactive_bridge (ttt, st, ip);
+  switch (L(st)) {
+  case ERROR:
+    return bridge_auto (ttt, st, ip, error_m, true);
+  case DOCUMENT:
+    return bridge_document (ttt, st, ip);
+  case SURROUND:
+    return bridge_surround (ttt, st, ip);
+  case HIDDEN:
+    return bridge_hidden (ttt, st, ip);
+  case DATOMS:
+    return bridge_formatting (ttt, st, ip, ATOM_DECORATIONS);
+  case DLINES:
+    return bridge_formatting (ttt, st, ip, LINE_DECORATIONS);
+  case DPAGES:
+    return bridge_formatting (ttt, st, ip, PAGE_DECORATIONS);
+  case TFORMAT:
+    return bridge_formatting (ttt, st, ip, CELL_FORMAT);
+  case WITH:
+    return bridge_with (ttt, st, ip);
+  case COMPOUND:
+    return bridge_compound (ttt, st, ip);
+  case ARG:
+    return bridge_argument (ttt, st, ip);
+  case MAP_ARGS:
+    // FIXME: we might want to merge bridge_rewrite and bridge_eval
+    // 'map_args' should really be implemented using bridge_rewrite,
+    // but bridge_eval leads to better locality of updates for 'screens'
+    return bridge_eval (ttt, st, ip);
+  case MARK:
+  case VAR_MARK:
+    return bridge_mark (ttt, st, ip);
+  case EXPAND_AS:
+    return bridge_expand_as (ttt, st, ip);
+  case EVAL:
+  case QUASI:
+    return bridge_eval (ttt, st, ip);
+  case EXTERN:
+  case VAR_INCLUDE:
+  case WITH_PACKAGE:
+    return bridge_rewrite (ttt, st, ip);
+  case INCLUDE:
+    return bridge_compound (ttt, st, ip);
+  case STYLE_ONLY:
+  case VAR_STYLE_ONLY:
+  case ACTIVE:
+  case VAR_ACTIVE:
+    return bridge_compound (ttt, st, ip);
+  case INACTIVE:
+    return bridge_auto (ttt, st, ip, inactive_m, true);
+  case VAR_INACTIVE:
+    return bridge_auto (ttt, st, ip, var_inactive_m, true);
+  case REWRITE_INACTIVE:
+    return bridge_rewrite (ttt, st, ip);
+  case LOCUS:
+    return bridge_locus (ttt, st, ip);
+  case HLINK:
+  case ACTION:
+    return bridge_compound (ttt, st, ip);
+  case ANIM_STATIC:
+  case ANIM_DYNAMIC:
+    return bridge_eval (ttt, st, ip);
+  case CANVAS:
+    return bridge_canvas (ttt, st, ip);
+  case ORNAMENT:
+    return bridge_ornament (ttt, st, ip);
+  case ART_BOX:
+    return bridge_art_box (ttt, st, ip);
+  default:
+    if (L(st) &lt; START_EXTENSIONS) return bridge_default (ttt, st, ip);
+    else return bridge_compound (ttt, st, ip);
+  }
+}</pre>
+      </div>
+    </div>
+    <p>
+      Default typesetting of the bridge is
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_rep::my_typeset (int desired_status) {
+  if ((desired_status &amp; WANTED_MASK) == WANTED_PARAGRAPH)
+    ttt-&gt;insert_paragraph (st, ip);
+  if ((desired_status &amp; WANTED_MASK) == WANTED_PARUNIT)
+    ttt-&gt;insert_parunit (st, ip);
+}</pre>
+      </div>
+    </div>
+    <p>
+      In the current implementation the result of the alternatives here
+      produce the same effect, i.e.: the tree is typesetted in paragraph mode
+      via <tt class="verbatim cpp">typeset_stack</tt>
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+array&lt;page_item&gt;
+typeset_stack (edit_env env, tree t, path ip,
+               array&lt;line_item&gt; a, array&lt;line_item&gt; b, stack_border&amp; sb)
+{
+  // cout &lt;&lt; &quot;Typeset stack &quot; &lt;&lt; t &lt;&lt; &quot;\n&quot;;
+  lazy_paragraph par (env, ip);
+  par-&gt;a= a;
+  par-&gt;a &lt;&lt; typeset_concat_or_table (env, t, ip);
+  par-&gt;a &lt;&lt; b;
+  par-&gt;format_paragraph ();
+  sb= par-&gt;sss-&gt;sb;
+  return par-&gt;sss-&gt;l;
+}</pre>
+      </div>
+    </div>
+    <p>
+      and the generated <tt class="verbatim cpp">page_item</tt>s are appended to the <tt
+      class="verbatim cpp">typesetter_rep::l</tt> field. Note that the <tt class="verbatim cpp">a</tt> and
+      <tt class="verbatim cpp">b</tt> arguments are taken, in this case from the
+      typesetter's, <tt class="verbatim cpp">a</tt> and <tt class="verbatim cpp">b</tt> fields.
+    </p>
+    <p>
+      Let's see how a more specific bridge works. Consider for example <tt
+      class="verbatim cpp">bridge_document_rep</tt>. Its initialization goes as follows:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+bridge_document_rep::bridge_document_rep (typesetter ttt, tree st, path ip):
+  bridge_rep (ttt, st, ip)
+{
+  initialize ();
+}
+
+void
+bridge_document_rep::initialize () {
+  int i, n= N(st);
+  brs= array&lt;bridge&gt; (n);
+  for (i=0; i&lt;n; i++)
+    brs[i]= make_bridge (ttt, st[i], descend (ip, i));
+  initialize_acc ();
+}</pre>
+      </div>
+    </div>
+    <p>
+      Indeed, recursively it creates bridges for its children. Typesetting, on
+      the other hand, is also left to the sub-bridges, but around this, the
+      document bridge takes cares of managing the semantics of typesetter's
+      <tt class="verbatim cpp">a</tt> and <tt class="verbatim cpp">b</tt> fields appropriately:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_document_rep::my_typeset (int desired_status) {
+  //cout &lt;&lt; INDENT;
+  if (is_nil (acc)) {
+    int i, n= N(st);
+    array&lt;line_item&gt; a= ttt-&gt;a;
+    array&lt;line_item&gt; b= ttt-&gt;b;
+    for (i=0; i&lt;n; i++) {
+      //cout &lt;&lt; &quot;Typesetting &quot; &lt;&lt; st[i] &lt;&lt; LF;
+      int wanted= (i==n-1? desired_status &amp; WANTED_MASK: WANTED_PARAGRAPH);
+      ttt-&gt;a= (i==0  ? a: array&lt;line_item&gt; ());
+      ttt-&gt;b= (i==n-1? b: array&lt;line_item&gt; ());
+      brs[i]-&gt;typeset (PROCESSED+ wanted);
+    }
+  }
+  else acc-&gt;my_typeset (desired_status);
+  //cout &lt;&lt; UNINDENT;
+}</pre>
+      </div>
+    </div>
+    <p>
+      The typesetter's <tt class="verbatim cpp">a</tt> and <tt class="verbatim cpp">b</tt> fields are
+      populated by the <font class="tmweb-markup">surround</font> primitive, typesetted by
+      the corresponding bridge:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_surround_rep::my_typeset (int desired_status) {
+  if (corrupted || (N(ttt-&gt;old_patch) != 0)) {
+    hashmap&lt;string,tree&gt; prev_back (UNINIT);
+    env-&gt;local_start (prev_back);
+    /*
+    cout &lt;&lt; st[0] &lt;&lt; &quot;\n&quot;;
+    cout &lt;&lt; st[1] &lt;&lt; &quot;\n&quot;;
+    cout &lt;&lt; &quot;-------------------------------------------------------------\n&quot;;
+    */
+    a= typeset_concat (env, st[0], descend (ip, 0));
+    b= typeset_concat (env, st[1], descend (ip, 1));
+    env-&gt;local_update (ttt-&gt;old_patch, changes_before);
+    env-&gt;local_end (prev_back);
+    corrupted= false;
+  }
+  else env-&gt;monitored_patch_env (changes_before);
+
+  ttt-&gt;insert_marker (st, ip);
+  ttt-&gt;insert_surround (a, b);
+  body-&gt;typeset (desired_status);
+}</pre>
+      </div>
+    </div>
+    <p>
+      <tt class="verbatim cpp">insert_surround</tt> takes care of adding the surround
+      material to the current typesetter status in the correct order:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+typesetter_rep::insert_surround  (array&lt;line_item&gt; a2, array&lt;line_item&gt; b2) {
+  a &lt;&lt; a2;
+  array&lt;line_item&gt; temp_b= b;
+  b= copy (b2);
+  b &lt;&lt; temp_b;
+}</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <font color="#800000"><table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 100%; padding-left: 0em; padding-right: 0em; background-color: #ff000020; border-top: 0px solid; border-bottom: 0px solid; border-left: 5px solid; border-right: 0px solid; padding-left: 1em; padding-right: 1em; padding-bottom: 0.5em; padding-top: 0.5em"><p>
+          To investigate further: as far as I can see the <tt class="verbatim cpp">a,b</tt>
+          fields are resetted only in <tt class="verbatim cpp">typesetter_rep::typeset</tt>
+          and only &ldquo;augmented&rdquo; after that, which would seem to
+          lead to a multiple typesetting of those elements.
+        </p></td>
+      </tr></tbody>
+    </table></font>
+    <p>
+      
+    </p>
+    <p>
+      Going back to the bridge typesetting mechanisms, here's <tt class="verbatim cpp">bridge_eval_rep::my_typeset</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_eval_rep::my_typeset (int desired_status) {
+  if (is_func (st, EVAL, 1))
+    initialize (env-&gt;exec (st[0]));
+  else if (is_func (st, QUASI, 1))
+    initialize (env-&gt;exec (tree (QUASIQUOTE, st[0])));
+  else if (is_func (st, ANIM_STATIC) || is_func (st, ANIM_DYNAMIC))
+    initialize (env-&gt;exec (st));
+  else if (is_func (st, MAP_ARGS))
+    initialize (env-&gt;rewrite (st));
+  else initialize (tree (ERROR, &quot;bad eval bridge&quot;));
+  ttt-&gt;insert_marker (st, ip);
+  body-&gt;typeset (desired_status);
+}</pre>
+      </div>
+    </div>
+    <p>
+      that execute various subtrees in the current environment and then
+      re-create an appropriate bridge for them via <tt class="verbatim cpp">initialize</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_eval_rep::initialize (tree body_t) {
+  if (is_nil (body)) body= make_bridge (ttt, attach_right (body_t, ip));
+  else replace_bridge (body, path (), bt, attach_right (body_t, ip));
+  bt= copy (body_t);
+}</pre>
+      </div>
+    </div>
+    <p>
+      Indeed the eval bridge does not initialize its subtree in the
+      constructor. Execution of trees will be discussed elsewhere.
+    </p>
+    <p>
+      Another interesting bridge is <tt class="verbatim cpp">bridge_formatting_rep</tt>,
+      that typesets as:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_formatting_rep::my_typeset (int desired_status) {
+  tree new_format= env-&gt;read (v) * st (0, last);
+  tree old_format= env-&gt;local_begin (v, new_format);
+  if (v != CELL_FORMAT) ttt-&gt;insert_marker (st, ip);
+  if (is_func (st, DATOMS)) {
+    array&lt;line_item&gt; a, b;
+    box ab= empty_box (decorate (ip), 0, 0, 0, env-&gt;fn-&gt;yx);
+    box bb= empty_box (decorate (ip), 0, 0, 0, env-&gt;fn-&gt;yx);
+    a &lt;&lt; line_item (CONTROL_ITEM, OP_SKIP, ab, HYPH_INVALID, st (0, N(st)-1));
+    b &lt;&lt; line_item (CONTROL_ITEM, OP_SKIP, bb, HYPH_INVALID, tree (L(st)));
+    if (v != CELL_FORMAT) ttt-&gt;insert_marker (st, ip);
+    ttt-&gt;insert_surround (a, b);
+  }
+  body-&gt;typeset (desired_status);
+  env-&gt;local_end (v, old_format);
+}</pre>
+      </div>
+    </div>
+    <p>
+      It locally modifies the environment (e.g. <tt class="verbatim cpp">&quot;atoms-decorations&quot;</tt>
+      for the <font class="tmweb-markup">datoms</font> primitive).
+    </p>
+    <font color="#800000"><table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 100%; padding-left: 0em; padding-right: 0em; background-color: #ff000020; border-top: 0px solid; border-bottom: 0px solid; border-left: 5px solid; border-right: 0px solid; padding-left: 1em; padding-right: 1em; padding-bottom: 0.5em; padding-top: 0.5em"><p>
+          I still need to understand what is the purpose of <tt class="verbatim cpp">CONTROL_ITEM</tt>s.
+        </p></td>
+      </tr></tbody>
+    </table></font>
+    <p>
+      
+    </p>
+    <p>
+      The auto bridge implements another part of interesting functionality,
+      the rendering of (inactivated) markup. The <tt class="verbatim cpp">bridge_auto_rep</tt>
+      it is created by <tt class="verbatim cpp">make_bridge</tt> in the following cases:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+  case ERROR:
+    return bridge_auto (ttt, st, ip, error_m, true);
+  case INACTIVE:
+    return bridge_auto (ttt, st, ip, inactive_m, true);
+  case VAR_INACTIVE:
+    return bridge_auto (ttt, st, ip, var_inactive_m, true);</pre>
+      </div>
+    </div>
+    <p>
+      and my <tt class="verbatim cpp">make_inactive_bridge</tt> (used to typeset the
+      preamble):
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+bridge
+make_inactive_bridge (typesetter ttt, tree st, path ip) {
+  if (is_document (st))
+    return bridge_document (ttt, st, ip);
+  else return bridge_auto (ttt, st, ip, inactive_auto, false);
+}</pre>
+      </div>
+    </div>
+    <p>
+      and it requires a TeXmacs macro in creation, in the cases above they
+      are:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+static tree inactive_auto
+  (MACRO, &quot;x&quot;, tree (REWRITE_INACTIVE, tree (ARG, &quot;x&quot;), &quot;recurse*&quot;));
+static tree error_m
+  (MACRO, &quot;x&quot;, tree (REWRITE_INACTIVE, tree (ARG, &quot;x&quot;, &quot;0&quot;), &quot;error*&quot;));
+static tree inactive_m
+  (MACRO, &quot;x&quot;, tree (REWRITE_INACTIVE, tree (ARG, &quot;x&quot;, &quot;0&quot;), &quot;once*&quot;));
+static tree var_inactive_m
+  (MACRO, &quot;x&quot;, tree (REWRITE_INACTIVE, tree (ARG, &quot;x&quot;, &quot;0&quot;), &quot;recurse*&quot;));</pre>
+      </div>
+    </div>
+    <p>
+      and an auto bridge typesets as follows:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_auto_rep::my_typeset (int desired_status) {
+  env-&gt;macro_arg= list&lt;hashmap&lt;string,tree&gt; &gt; (
+    hashmap&lt;string,tree&gt; (UNINIT), env-&gt;macro_arg);
+  env-&gt;macro_src= list&lt;hashmap&lt;string,path&gt; &gt; (
+    hashmap&lt;string,path&gt; (path (DECORATION)), env-&gt;macro_src);
+  string var= f[0]-&gt;label;
+  env-&gt;macro_arg-&gt;item (var)= st;
+  env-&gt;macro_src-&gt;item (var)= ip;
+  tree oldv= env-&gt;read (PREAMBLE);
+  env-&gt;write_update (PREAMBLE, &quot;false&quot;);
+  initialize ();
+  if (border) ttt-&gt;insert_marker (st, ip);
+  body-&gt;typeset (desired_status);
+  env-&gt;write_update (PREAMBLE, oldv);
+  env-&gt;macro_arg= env-&gt;macro_arg-&gt;next;
+  env-&gt;macro_src= env-&gt;macro_src-&gt;next;
+}</pre>
+      </div>
+    </div>
+    <p>
+      and finally (via the macros) create an inner rewrite bridge:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+  case REWRITE_INACTIVE:
+    return bridge_rewrite (ttt, st, ip);</pre>
+      </div>
+    </div>
+    <p>
+      which typesets as follows:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+bridge_rewrite_rep::my_typeset (int desired_status) {
+  initialize (env-&gt;rewrite (st));
+  ttt-&gt;insert_marker (st, ip);
+  if (is_func (st, VAR_INCLUDE)) {
+    url save_name= env-&gt;cur_file_name;
+    url file_name= url_unix (env-&gt;exec_string (st[0]));
+    env-&gt;cur_file_name= relative (env-&gt;base_file_name, file_name);
+    env-&gt;secure= is_secure (env-&gt;cur_file_name);
+    body-&gt;typeset (desired_status);
+    env-&gt;cur_file_name= save_name;
+    env-&gt;secure= is_secure (env-&gt;cur_file_name);
+  }
+  else body-&gt;typeset (desired_status);
+}</pre>
+      </div>
+    </div>
+    <p>
+      by calling 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+tree edit_env_rep::rewrite (tree t);</pre>
+      </div>
+    </div>
+    <p>
+      which on its turns calls  
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+tree edit_env_rep::rewrite_inactive (tree t, tree var);</pre>
+      </div>
+    </div>
+    <p>
+      to rewrite the tree so to typeset it in an inactive way.
+    </p>
+    <font color="#800000"><table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 100%; padding-left: 0em; padding-right: 0em; background-color: #ff000020; border-top: 0px solid; border-bottom: 0px solid; border-left: 5px solid; border-right: 0px solid; padding-left: 1em; padding-right: 1em; padding-bottom: 0.5em; padding-top: 0.5em"><p>
+          Why this level of indirection, from auto bridge to rewrite bridge?
+        </p></td>
+      </tr></tbody>
+    </table></font>
+    <h3 id="auto-47">3.2.<span style="margin-left: 1em"></span>The concater<span style="margin-left: 1em"></span></h3>
+    <font color="#800000"><table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 100%; padding-left: 0em; padding-right: 0em; background-color: #ff000020; border-top: 0px solid; border-bottom: 0px solid; border-left: 5px solid; border-right: 0px solid; padding-left: 1em; padding-right: 1em; padding-bottom: 0.5em; padding-top: 0.5em"><p>
+          TODO
+        </p></td>
+      </tr></tbody>
+    </table></font>
+    <p>
+      At the lower level the horizontal concatenation of boxes is implemented
+      via the <tt class="verbatim cpp">concater</tt> object. From <tt class="verbatim">src/Typeset/Concat/concater.cpp</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+array&lt;line_item&gt;
+typeset_concat (edit_env env, tree t, path ip) {
+  concater ccc= tm_new&lt;concater_rep&gt; (env);
+  ccc-&gt;typeset (t, ip);
+  ccc-&gt;finish ();
+  array&lt;line_item&gt; a= ccc-&gt;a;
+  tm_delete (ccc);
+  return a;
+}</pre>
+      </div>
+    </div>
+    <p>
+      Its main output is an array of <tt class="verbatim cpp">line_item</tt> structs. From
+      <tt class="verbatim">src/Typeset/Format/line_item.hpp</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+class line_item_rep: public concrete_struct {
+public:
+  int        type;      // type of the line item
+  int        op_type;   // operator type for mathematical symbols
+  box        b;         // the box
+  space      spc;       // separation space
+  int        penalty;   // penalty for a linebreak after this line_item
+  bool       limits;    // line items has limits
+  language   lan;       // language for hyphenating strings
+  tree       t;         // for control items
+
+  line_item_rep (int type, int ot_type, box b, int penalty);
+  line_item_rep (int type, int ot_type, box b, int penalty, language lan);
+  line_item_rep (int type, int ot_type, box b, int penalty, tree t);
+  ~line_item_rep ();
+};</pre>
+      </div>
+    </div>
+    <p>
+      the possible types of line items are
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+#define OBSOLETE_ITEM          0
+#define STD_ITEM               1
+#define MARKER_ITEM            2
+#define STRING_ITEM            3
+#define LEFT_BRACKET_ITEM      4
+#define MIDDLE_BRACKET_ITEM    5
+#define RIGHT_BRACKET_ITEM     6
+#define CONTROL_ITEM           7
+#define FLOAT_ITEM             8
+#define NOTE_LINE_ITEM         9
+#define NOTE_PAGE_ITEM        10
+
+#define LSUB_ITEM             11
+#define LSUP_ITEM             12
+#define RSUB_ITEM             13
+#define RSUP_ITEM             14
+#define GLUE_LSUBS_ITEM       15
+#define GLUE_RSUBS_ITEM       16
+#define GLUE_LEFT_ITEM        17
+#define GLUE_RIGHT_ITEM       18
+#define GLUE_BOTH_ITEM        19</pre>
+      </div>
+    </div>
+    <h3 id="auto-48">3.3.<span style="margin-left: 1em"></span>The stacker<span style="margin-left: 1em"></span></h3>
+    <font color="#800000"><table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 100%; padding-left: 0em; padding-right: 0em; background-color: #ff000020; border-top: 0px solid; border-bottom: 0px solid; border-left: 5px solid; border-right: 0px solid; padding-left: 1em; padding-right: 1em; padding-bottom: 0.5em; padding-top: 0.5em"><p>
+          TODO
+        </p></td>
+      </tr></tbody>
+    </table></font>
+    <p>
+      From <tt class="verbatim">src/Typeset/Format/page_item.hpp</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+class page_item_rep: public concrete_struct {
+public:
+  int          type;    // type of the page item
+
+  box          b;       // the box
+  space        spc;     // separation space
+  int          penalty; // penalty for a linebreak after this page_item
+
+  array&lt;lazy&gt;  fl;      // floating objects attached to this item
+  int          nr_cols; // number of columns
+  tree         t;       // for page control items
+
+  page_item_rep (box b, array&lt;lazy&gt; fl, int nr_cols);
+  page_item_rep (tree t, int nr_cols);
+  page_item_rep (int type, box b, space spc, int pen,
+                 array&lt;lazy&gt; fl, int nr_cols, tree t);
+};</pre>
+      </div>
+    </div>
+    <p>
+      the possible types of line items are
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+#define PAGE_LINE_ITEM      0
+#define PAGE_HIDDEN_ITEM    1
+#define PAGE_CONTROL_ITEM   2
+#define PAGE_NOTE_ITEM      3</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+class stack_border_rep: public concrete_struct {
+public:
+  SI    height;  // default distance between successive base lines
+  SI    sep;     // (~~PAR_SEP) sep-ver_sep is maximal amount of shoving
+  SI    hor_sep; // min. hor. ink sep. when lines are shoved into each other
+  SI    ver_sep; // minimal separation of ink
+  SI    bot;     // logical bottom of lines
+  SI    top;     // logical top of lines
+
+  SI    height_before;
+  SI    sep_before;
+  SI    hor_sep_before;
+  SI    ver_sep_before;
+
+  space vspc_before, vspc_after;
+  bool  nobr_before, nobr_after;
+
+  inline stack_border_rep ():
+    height (0), sep (0), hor_sep (0), ver_sep (0), bot (0), top (0),
+    height_before (0), sep_before (0), hor_sep_before (0), ver_sep_before (0),
+    vspc_before (0), vspc_after (0),
+    nobr_before (false), nobr_after (false) {}
+};</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+typeset_as_stack (edit_env env, tree t, path ip) {
+  // cout &lt;&lt; &quot;Typeset as stack &quot; &lt;&lt; t &lt;&lt; &quot;\n&quot;;
+  int i, n= N(t);
+  stacker sss= tm_new&lt;stacker_rep&gt; ();
+  SI sep       = env-&gt;get_length (PAR_SEP);
+  SI hor_sep   = env-&gt;get_length (PAR_HOR_SEP);
+  SI ver_sep   = env-&gt;get_length (PAR_VER_SEP);
+  SI height    = env-&gt;as_length (string (&quot;1fn&quot;))+ sep;
+  SI bot       = 0;
+  SI top       = env-&gt;fn-&gt;yx;
+  array&lt;SI&gt; swell;
+  sss-&gt;set_env_vars (height, sep, hor_sep, ver_sep, bot, top, swell);
+  for (i=0; i&lt;n; i++)
+    sss-&gt;print (typeset_as_concat (env, t[i], descend (ip, i)));
+
+  n= N(sss-&gt;l);
+  array&lt;box&gt; lines_bx (n);
+  array&lt;SI&gt;  lines_ht (n);
+  for (i=0; i&lt;n; i++) {
+    page_item item= copy (sss-&gt;l[i]);
+    lines_bx[i]= item-&gt;b;
+    lines_ht[i]= item-&gt;spc-&gt;def;
+  }
+
+  tm_delete (sss);
+  box b= stack_box (ip, lines_bx, lines_ht);
+  SI dy= n==0? 0: b[0]-&gt;y2;
+  return move_box (ip, stack_box (ip, lines_bx, lines_ht), 0, dy);
+}</pre>
+      </div>
+    </div>
+  </body>
+</html>

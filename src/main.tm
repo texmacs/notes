@@ -90,6 +90,10 @@
 
   <section*|Developers' notes>
 
+  <hlink|Mathematical typesetting in <TeXmacs>|texmacs-math-typesetting.tm>
+
+  <hlink|From trees to boxes|texmacs-basics-of-typesetting.tm>
+
   <hlink|Font mechanics|font-mechanics.tm>
 
   <hlink|Jolly coders|jolly-coders.tm>
