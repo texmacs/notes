@@ -1,0 +1,3330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <head>
+    <title>TeXmacs notes</title>
+    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
+    <link href="../resources/blog-icon.png" rel="icon"></link>
+    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
+    <script src="../resources/notes-base.js" language="javascript" defer></script>
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Mathematical typesetting in TeXmacs<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      <p>
+        This document describes how TeXmacs deals with the typesetting of
+        mathematics, and in particular with the low level implementation of
+        the typesetting primitives relative to mathematical documents. It
+        should be useful if you are interested in understanding the <tt class="verbatim">C++</tt>
+        sources. We describe the state of facts as per <tt class="verbatim">svn</tt>
+        revision <tt>r14561</tt> (December 2024, <tt>TeXmacs 2.14+</tt>).
+        Excerpts from the official documentation are included in this document
+        for completeness.
+      </p>
+      <p>
+        
+      </p>
+    </div>
+    <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Overview<span style="margin-left: 1em"></span></h2>
+    <p>
+      In this chapter we describe the algorithms used by TeXmacs in order to
+      typeset mathematical formulas. This is a difficult subject, because
+      esthetics and effectiveness do not always go hand in hand. Until now,
+      TeX is widely accepted for having achieved an optimal compromise in this
+      respect. Nevertheless, we thought that several improvements could still
+      be made, which have now been implemented in TeXmacs. We will shortly
+      describe the motivations behind them.
+    </p>
+    <p>
+      In order to obtain esthetic formulas, what criteria should we use? It is
+      often stressed that good typesetting allows the reader to concentrate on
+      what he reads, without being distracted by ugly typesetting details.
+      Such distracting details arise when distinct, though similar parts of
+      text are typeset in a non uniform way:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          Different base lines
+        </dt>
+        <dd>
+          <p>
+            The eye expects text of a similar nature to be typeset with
+            respect to a same base line. For instance, in <span class="no-breaks"><img
+            src="texmacs-math-typesetting-1.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.733443526170799em"></img>,</span> the bottoms of the <img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>
+            and <img src="texmacs-math-typesetting-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: 0em; vertical-align: -0.0789641873278237em; height: 0.519052341597796em"></img> should be at the same height as the
+            bottom of the <span class="no-breaks"><img src="texmacs-math-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-part</span> in
+            the <span class="no-breaks"><img src="texmacs-math-typesetting-5.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img>.</span> This should again
+            be the case in <span class="no-breaks"><img src="texmacs-math-typesetting-6.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: 0em; height: 0.739063360881543em"></img>.</span>
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          Unequal spacing
+        </dt>
+        <dd>
+          <p>
+            Different components of text with approximately the same function
+            should be separated by equal amounts of space. For instance, in
+            <span class="no-breaks"><img src="texmacs-math-typesetting-7.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 1.09075482093664em"></img>,</span> the typesetter should
+            notice the hangover of the <span class="no-breaks"><img src="texmacs-math-typesetting-8.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.169256198347107em; margin-top: -0.0225674931129476em; vertical-align: -0.21436914600551em; height: 0.930909090909091em"></img>.</span>
+            This should again be the case in <span class="no-breaks"><img src="texmacs-math-typesetting-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.90831955922865em"></img>.</span>
+            Similarly, the distance between the baselines of the <img src="texmacs-math-typesetting-10.png"
+            style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img> and the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img> in <img src="texmacs-math-typesetting-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em"></img>
+            should not be disproportionally large with respect to the height
+            of an <span class="no-breaks"><img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>.</span>
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      Additional difficulties may arise when considering automatically
+      generated formulas, in which case line breaking has to be dealt with in
+      a satisfactory way.
+    </p>
+    <p>
+      Unfortunately, the different esthetic criteria may enter into conflict
+      with each other. For instance, consider the formula <span class="no-breaks"><img
+      src="texmacs-math-typesetting-13.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.324451790633609em; height: 1.2131349862259em"></img>.</span> On the one hand, the baselines of the scripts
+      should be the same, but the other hand, the first subscript should not
+      be &ldquo;disproportionally low&rdquo; with respect to the <span class="no-breaks"><img
+      src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>.</span> Unfortunately, this dilemma can not been
+      solved in a completely satisfactory way without the help of a human for
+      the simple reason that the computer has no way to know whether the <img
+      src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img> and <img src="texmacs-math-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em"></img> are
+      &ldquo;related&rdquo;. Indeed, if the <img src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img> and <img
+      src="texmacs-math-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em"></img> are close (like in <span class="no-breaks"><img src="texmacs-math-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em"></img>),</span>
+      then it is natural to opt for a common base line. However, if they are
+      further away from each other (like in <span class="no-breaks"><img src="texmacs-math-typesetting-17.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.23087603305785em"></img>),</span>
+      then we might want to opt for different base lines and locally optimize
+      the rendering of the first <span class="no-breaks"><img src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img>.</span>
+    </p>
+    <p>
+      Consequently, TeXmacs should offer a reasonable compromise for the most
+      frequent cases, while offering methods for the user to make finer
+      adjustments in the remaining ones. We provide the constructs <class
+      class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Adjust</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Move</class><a id="auto-3"></a> and <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Adjust</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Resize</class><a
+      id="auto-4"></a> to move and resize boxes in order to perform such adjustments.
+      For instance, if the brackets around the two sums
+    </p>
+    <center>
+      <img src="texmacs-math-typesetting-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.122247933884298em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -1.1644958677686em; height: 2.68923415977961em"></img>
+    </center>
+    <p>
+      have different sizes, then one may resize the bottom of the subscript
+      <img src="texmacs-math-typesetting-19.png" style="margin-left: -0.112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0282093663911845em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em"></img> of the second sum to <tt class="verbatim">0fn</tt>.
+      Alternatively, one may resize the bottoms of both the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img>
+      and <img src="texmacs-math-typesetting-19.png" style="margin-left: -0.112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0282093663911845em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em"></img> subscripts to (say) <tt class="verbatim">-0.3fn</tt>.
+      For easier adjustments you may use <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Adjust</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Smash</class><a
+      id="auto-5"></a> and <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class class="tmweb-menu"
+      style="font-family: sans-serif">Adjust</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Inflate</class><a id="auto-6"></a>
+      to automatically adjust the size of the contents to the height of the
+      character &ldquo;x&rdquo; and the largest one in the font respectively.
+    </p>
+    <p>
+      Notice that one should adjust by preference in a structural and not
+      visual way. For instance, one should prefer <tt class="verbatim">-0.3fn</tt> to
+      <tt class="verbatim">-2mm</tt> in the above example, because the second option
+      disallows you to switch to another font size for your document.
+      Similarly, you should try not change the semantics of the formula. For
+      instance, in the above example, you might have added a &ldquo;dummy
+      subscript&rdquo; to the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img> subscript of the sum.
+      However, this would alter the meaning of the formula (whence make it non
+      suitable as input to a computer algebra system) In the future, we plan
+      to provide additional constructs in order to facilitate structural
+      adjusting. For instance, in the case of a formula like
+    </p>
+    <center>
+      <img src="texmacs-math-typesetting-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: -0.189928374655647em; height: 1.11894214876033em"></img>
+    </center>
+    <p>
+      one might think of a construct to enclose the entire formula into an
+      area, where all scripts are forced to be double (using dummy
+      superscripts wherever necessary).
+    </p>
+    <h2 id="auto-7">2.<span style="margin-left: 1em"></span>Mathematical primitives<span style="margin-left: 1em"></span></h2>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">left</class></font><a
+        id="auto-8"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">left</class></font><a
+        id="auto-9"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
+        color="blue">|</font><font color="brown"><i>size</i></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">left</class></font><a
+        id="auto-10"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
+        color="blue">|</font><font color="brown"><i>bottom</i></font><font color="blue">|</font><font
+        color="brown"><i>top</i></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">mid</class></font><a
+        id="auto-11"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
+        color="blue">|</font><font color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">right</class></font><a
+        id="auto-12"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
+        color="blue">|</font><font color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(large delimiters)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        These primitives are used for producing large delimiters, like in the
+        formula
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-22.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0394710743801653em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823684em; vertical-align: -0.970380165289256em; height: 2.42600550964187em"></img>
+      </center>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        Matching left and right delimiters are automatically sized so as
+        contain the enclosed expression. Between matching left and right
+        delimiters, the formula may contain an arbitrary number of middle
+        delimiters, which are sized in a similar way. Contrary to TeX, the
+        depth of a large delimiter is not necessarily equal to its height, so
+        as to correctly render formulas like
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-23.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0479338842975205em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -2.02615977961432em; height: 3.75334435261708em"></img>
+      </center>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        The user may override the automatically determined size by specifying
+        additional length parameters <font color="brown"><i>size</i></font> or <font
+        color="brown"><i>bottom</i></font> and <font color="brown"><i>top</i></font>. For
+        instance,
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="black">f</font><font color="black"><font color="blue">&lt;</font>left<font
+            color="blue">|</font><font color="black">(</font><font color="blue">|</font><font
+            color="black">-8mm</font><font color="blue">|</font><font color="black">4mm</font><font
+            color="blue">&gt;</font></font><font color="black">x</font><font color="black"><font
+            color="blue">&lt;</font>mid<font color="blue">|</font><font color="black">|</font><font
+            color="blue">|</font><font color="black">8mm</font><font color="blue">&gt;</font></font><font
+            color="black">y</font><font color="black"><font color="blue">&lt;</font>right<font
+            color="blue">|</font><font color="black">)</font><font color="blue">|</font><font
+            color="black">-4mm</font><font color="blue">|</font><font color="black">8mm</font><font
+            color="blue">&gt;</font></font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        is rendered as
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-24.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0607823691460054em; margin-right: -0.0112837465564737em; margin-top: -0.0197245179063361em; vertical-align: -2.21721212121212em; height: 4.39336639118457em"></img>
+      </center>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        The <font color="brown"><i>size</i></font> may also be a number <span class="no-breaks"><img
+        src="texmacs-math-typesetting-25.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>,</span> in which case the <span class="no-breaks"><img src="texmacs-math-typesetting-25.png"
+        style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-th</span> available size for the delimiter is taken. For
+        instance,
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="black">g</font><font color="black"><font color="blue">&lt;</font>left<font
+            color="blue">|</font><font color="black">(</font><font color="blue">|</font><font
+            color="black">0</font><font color="blue">&gt;</font></font><font color="black"><font
+            color="blue">&lt;</font>left<font color="blue">|</font><font color="black">(</font><font
+            color="blue">|</font><font color="black">1</font><font color="blue">&gt;</font></font><font
+            color="black"><font color="blue">&lt;</font>left<font color="blue">|</font><font
+            color="black">(</font><font color="blue">|</font><font color="black">2</font><font
+            color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>left<font
+            color="blue">|</font><font color="black">(</font><font color="blue">|</font><font
+            color="black">3</font><font color="blue">&gt;</font></font><font color="black">z</font><font
+            color="black"><font color="blue">&lt;</font>right<font color="blue">|</font><font
+            color="black">)</font><font color="blue">|</font><font color="black">3</font><font
+            color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>right<font
+            color="blue">|</font><font color="black">)</font><font color="blue">|</font><font
+            color="black">2</font><font color="blue">&gt;</font></font><font color="black"><font
+            color="blue">&lt;</font>right<font color="blue">|</font><font color="black">)</font><font
+            color="blue">|</font><font color="black">1</font><font color="blue">&gt;</font></font><font
+            color="black"><font color="blue">&lt;</font>right<font color="blue">|</font><font
+            color="black">)</font><font color="blue">|</font><font color="black">0</font><font
+            color="blue">&gt;</font></font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        is rendered as
+      </p>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-26.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564732em; margin-top: -0.00564187327823695em; vertical-align: -0.473895316804408em; height: 1.43867768595041em"></img>
+      </center>
+    </div>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">big</class></font><a
+        id="auto-13"></a><font color="blue">|</font><font color="brown"><i>big-symbol</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(big symbols)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        This primitive is used in order to produce big operators as in
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <table width="100%">
+        <tr>
+          <td width="100%" align="center"><img src="texmacs-math-typesetting-27.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.15695867768595em; height: 2.7462479338843em" id="big-example"></img></td>
+          <td align="right">(1)</td>
+        </tr>
+      </table>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        The size of the operator depends on whether the formula is rendered in
+        &ldquo;display style&rdquo; or not. Formulas in separate equations,
+        like (<a href="#big-example">1</a>), are said to be rendered in display style,
+        contrary to formulas which occur in the main text, like <span class="no-breaks"><img
+        src="texmacs-math-typesetting-28.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.21295867768595em"></img>.</span> The user may use <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class
+        class="tmweb-menu" style="font-family: sans-serif">Display style</class><a id="auto-14"></a> to override the current
+        settings.
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        Notice that the formula (<a href="#big-example">1</a>) is internally represented as
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="black"><font color="blue">&lt;</font>big<font color="blue">|</font><font
+            color="black">sum</font><font color="blue">&gt;</font></font><font color="black"><font
+            color="blue">&lt;</font>rsub<font color="blue">|</font><font color="black">i=0</font><font
+            color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>rsup<font
+            color="blue">|</font><font color="black">&infin;</font><font color="blue">&gt;</font></font><font
+            color="black">a</font><font color="black"><font color="blue">&lt;</font>rsub<font
+            color="blue">|</font><font color="black">i</font><font color="blue">&gt;</font></font><font
+            color="black">*z</font><font color="black"><font color="blue">&lt;</font>rsup<font
+            color="blue">|</font><font color="black">i</font><font color="blue">&gt;</font></font><font
+            color="black"><font color="blue">&lt;</font>big<font color="blue">|</font><font
+            color="black">.</font><font color="blue">&gt;</font></font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        The invisible big operator <font color="blue">&lt;</font>big<font color="blue">|</font><font
+        color="black">.</font><font color="blue">&gt;</font> is used to indicate the end of
+        the scope of <font color="blue">&lt;</font>big<font color="blue">|</font><font
+        color="black">sum</font><font color="blue">&gt;</font>.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">frac</class></font><a
+        id="auto-15"></a><font color="blue">|</font><font color="brown"><i>num</i></font><font
+        color="blue">|</font><font color="brown"><i>den</i></font><font color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(fractions)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        The <font class="tmweb-markup">frac</font> primitive is used in order to render
+        fractions like <span class="no-breaks"><img src="texmacs-math-typesetting-29.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672177em; margin-right: -0.0112837465564739em; margin-top: 0em; vertical-align: -0.577300275482094em; height: 1.45364187327824em"></img>.</span> In display
+        style, the numerator <font color="brown"><i>num</i></font> and denominator
+        <font color="brown"><i>den</i></font> are rendered in the normal size, but
+        display style is turned of when typesetting <font color="brown"><i>num</i></font>
+        and <font color="brown"><i>den</i></font>. When the display style is turned
+        of, then the arguments are rendered in script size. For instance, the
+        content
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="blue">&lt;</font>frac<font color="blue">|</font><font color="black">1</font><font
+            color="blue">|</font><font color="black"><font color="black">a</font><font color="black"><font
+            color="blue">&lt;</font>rsub<font color="blue">|</font><font color="black">0</font><font
+            color="blue">&gt;</font></font><font color="black">+</font><font color="black"><font
+            color="blue">&lt;</font>frac<font color="blue">|</font><font color="black">1</font><font
+            color="blue">|</font><font color="black"><font color="black">a</font><font color="black"><font
+            color="blue">&lt;</font>rsub<font color="blue">|</font><font color="black">1</font><font
+            color="blue">&gt;</font></font><font color="black">+</font><font color="black"><font
+            color="blue">&lt;</font>frac<font color="blue">|</font><font color="black">1</font><font
+            color="blue">|</font><font color="black"><font color="black">a</font><font color="black"><font
+            color="blue">&lt;</font>rsub<font color="blue">|</font><font color="black">2</font><font
+            color="blue">&gt;</font></font><font color="black">+&#x22F1;</font></font><font
+            color="blue">&gt;</font></font></font><font color="blue">&gt;</font></font></font><font
+            color="blue">&gt;</font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        is rendered in display style as
+      </p>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-30.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -2.11739944903581em; height: 3.43378512396694em"></img>
+      </center>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">sqrt</class></font><a
+        id="auto-16"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">sqrt</class></font><a
+        id="auto-17"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>n</i></font><font color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(roots)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        The <font class="tmweb-markup">sqrt</font> primitive is used in order to render
+        square roots like <img src="texmacs-math-typesetting-31.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0676804407713499em; margin-right: -0.0112837465564739em; margin-top: 0.0639338842975207em; vertical-align: -0.342258953168044em; height: 1.06067217630854em"></img> or <font color="brown"><i>n</i></font>-th
+        roots like <span class="no-breaks"><img src="texmacs-math-typesetting-32.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0676804407713499em; margin-right: -0.0112837465564739em; margin-top: 0.0789862258953169em; vertical-align: -0.342258953168044em; height: 1.15089807162534em"></img>.</span> The root
+        symbol is automatically sized so as to encapsulate the <font color="brown"><i>content</i></font>:
+      </p>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-33.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0658292011019284em; margin-right: -0.0112837465564741em; margin-top: 0.0582920110192839em; vertical-align: -1.06631404958678em; height: 2.51627548209366em"></img>
+      </center>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">lsub</class></font><a
+        id="auto-18"></a><font color="blue">|</font><font color="brown"><i>script</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">lsup</class></font><a
+        id="auto-19"></a><font color="blue">|</font><font color="brown"><i>script</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">rsub</class></font><a
+        id="auto-20"></a><font color="blue">|</font><font color="brown"><i>script</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">rsup</class></font><a
+        id="auto-21"></a><font color="blue">|</font><font color="brown"><i>script</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(scripts)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        These primitives are used in order to attach a <font color="brown"><i>script</i></font>
+        to the preceding box in a horizontal concatenation (in the case of
+        right scripts) or the next one (in the case of left scripts). When
+        there is no such box, then the script is attached to an empty box.
+        Moreover, when both a subscript and a superscript are specified on the
+        same side, then they are merged together. For instance, the expression
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="black"><font color="blue">&lt;</font>rsub<font color="blue">|</font><font
+            color="black">a</font><font color="blue">&gt;</font></font><font color="black"><font
+            color="blue">&lt;</font>rsup<font color="blue">|</font><font color="black">b</font><font
+            color="blue">&gt;</font></font><font color="black">+</font><font color="black"><font
+            color="blue">&lt;</font>lsub<font color="blue">|</font><font color="black">1</font><font
+            color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>lsup<font
+            color="blue">|</font><font color="black">2</font><font color="blue">&gt;</font></font><font
+            color="black">x</font><font color="black"><font color="blue">&lt;</font>rsub<font
+            color="blue">|</font><font color="black">3</font><font color="blue">&gt;</font></font><font
+            color="black"><font color="blue">&lt;</font>rsup<font color="blue">|</font><font
+            color="black">4</font><font color="blue">&gt;</font></font><font color="black">=y</font><font
+            color="black"><font color="blue">&lt;</font>rsub<font color="blue">|</font><font
+            color="black">1</font><font color="blue">&gt;</font></font><font color="black">+</font><font
+            color="black"><font color="blue">&lt;</font>lsub<font color="blue">|</font><font
+            color="black">c</font><font color="blue">&gt;</font></font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        is rendered as
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-34.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.367625344352617em; height: 1.28537741046832em"></img>
+      </center>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        When a right script is attached to an operator (or symbol) which
+        accepts limits, then it is rendered below or above instead of beside
+        the operator:
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-35.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0225674931129476em; vertical-align: -0.708738292011019em; height: 1.43092011019284em"></img>
+      </center>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        Scripts are rendered in a smaller font in non-display style.
+        Nevertheless, in order to keep formulas readable, the size is not
+        reduced below script-script-size.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">lprime</class></font><a
+        id="auto-22"></a><font color="blue">|</font><font color="brown"><i>prime-symbols</i></font><font
+        color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">rprime</class></font><a
+        id="auto-23"></a><font color="blue">|</font><font color="brown"><i>prime-symbols</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(primes)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        Left and right primes are similar to left and right superscripts,
+        except that they behave in a different way when being edited. For
+        instance, when your cursor is behind the prime symbol in <img src="texmacs-math-typesetting-36.png"
+        style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.00564187327823695em; vertical-align: -0.21436914600551em; height: 1.0540826446281em"></img> and you press backspace, then the prime is removed. If
+        you are behind <img src="texmacs-math-typesetting-37.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.00941046831955916em; vertical-align: -0.21436914600551em; height: 0.930909090909091em"></img> and you press backspace several
+        times, then you first enter the superscript, next remove <img src="texmacs-math-typesetting-25.png"
+        style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img> and finally remove the superscript. Notice also that
+        <font color="brown"><i>prime-symbols</i></font> is necessarily a string of
+        concatenated prime symbols. For instance, <img src="texmacs-math-typesetting-38.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823684em; vertical-align: -0.21436914600551em; height: 1.17538292011019em"></img> is
+        represented by <font color="black">f</font><font color="black"><font color="blue">&lt;</font>rprime<font
+        color="blue">|</font><font color="black">'&dagger;</font><font color="blue">&gt;</font></font>.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">below</class></font><a
+        id="auto-24"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>script</i></font><font color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">above</class></font><a
+        id="auto-25"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>script</i></font><font color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(scripts above and below)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        The <font class="tmweb-markup">below</font> and <font class="tmweb-markup">above</font> tags are
+        used to explicitly attach a <font color="brown"><i>script</i></font> below or
+        above a given <font color="brown"><i>content</i></font>. Both can be mixed in
+        order to produce content with both a script below and above:
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-39.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889806em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.72em; height: 1.81901928374656em"></img>
+      </center>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        can be produced using
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="black"><font color="blue">&lt;</font>above<font color="blue">|</font><font
+            color="black"><font color="blue">&lt;</font>below<font color="blue">|</font><font
+            color="black">xor</font><font color="blue">|</font><font color="black">i=1</font><font
+            color="blue">&gt;</font></font><font color="blue">|</font><font color="black">&infin;</font><font
+            color="blue">&gt;</font></font><font color="black"> x</font><font color="black"><font
+            color="blue">&lt;</font>rsub<font color="blue">|</font><font color="black">i</font><font
+            color="blue">&gt;</font></font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <p style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">wide</class></font><a
+        id="auto-26"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>wide-symbol</i></font><font color="blue">&gt;</font>
+      </p>
+      <div class="left-tab">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">wide*</class></font><a
+        id="auto-27"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">|</font><font color="brown"><i>wide-symbol</i></font><font color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(wide symbols)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        These primitives can be used in order to produce wide accents above or
+        below some mathematical <font color="brown"><i>content</i></font>. For
+        instance <img src="texmacs-math-typesetting-40.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0394931129476584em; vertical-align: -0.21436914600551em; height: 0.911118457300276em"></img> corresponds to the markup <font
+        color="blue">&lt;</font>wide<font color="blue">|</font><font color="black">x+y</font><font
+        color="blue">|</font><font color="black">&macr;</font><font color="blue">&gt;</font>.
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">neg</class></font><a
+        id="auto-28"></a><font color="blue">|</font><font color="brown"><i>content</i></font><font
+        color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(negations)</font>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        This primitive is mainly used for producing negated symbols or
+        expressions, such as <img src="texmacs-math-typesetting-41.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476584em; vertical-align: -0.104661157024793em; height: 0.8073608815427em"></img> or <span class="no-breaks"><img src="texmacs-math-typesetting-42.png"
+        style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476584em; vertical-align: -0.183625344352617em; height: 0.897586776859504em"></img>.</span>
+      </p>
+    </div>
+    <div class="compact-block" style="text-indent: 0em">
+      <div class="left-tab" style="margin-top: 0.5em">
+        <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tree</class></font><a
+        id="auto-29"></a><font color="blue">|</font><font color="brown"><i>root</i></font><font
+        color="blue">|</font><font color="brown"><i>child-1</i></font><font color="blue">|</font><font
+        color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font color="blue">|</font><font
+        color="brown"><i>child-n</i></font><font color="blue">&gt;</font>
+      </div>
+      <div class="right-tab" style="margin-bottom: 0.25em">
+        <font color="#707070">(trees)</font>
+      </div>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        This primitive is used to produce a tree with a given <font color="brown"><i>root</i></font>
+        and children <font color="brown"><i>child-1</i></font> until <font color="brown"><i>child-n</i></font>.
+        The primitive should be used recursively in order to produce trees.
+        For instance,
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <center>
+        <img src="texmacs-math-typesetting-43.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -4.55468870523416em; height: 5.07376308539945em"></img>
+      </center>
+    </div>
+    <div style="margin-left: 38.660688007188px">
+      <p>
+        corresponds to the markup
+      </p>
+    </div>
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
+      <div class="compact-block" style="text-indent: 0em">
+        <div class="tmweb-code">
+          <p>
+            <font color="blue">&lt;</font>tree<font color="blue">|</font><font color="black">+</font><font
+            color="blue">|</font><font color="black">x</font><font color="blue">|</font><font
+            color="black">y</font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>tree<font
+            color="blue">|</font><font color="black">&times;</font><font color="blue">|</font><font
+            color="black">2</font><font color="blue">|</font><font color="black">y</font><font
+            color="blue">|</font><font color="black">z</font><font color="blue">&gt;</font></font><font
+            color="blue">&gt;</font>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
+      <p>
+        In the future, we plan to provide further style parameters in order to
+        control the rendering.
+      </p>
+    </div>
+    <h2 id="auto-30">3.<span style="margin-left: 1em"></span>The font parameters<span style="margin-left: 1em"></span></h2>
+    <p>
+      Several font parameters are crucial for the correct positioning of the
+      different components. The following are often needed:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <tt class="verbatim">quad</tt>
+        </dt>
+        <dd>
+          <p>
+            The main font reference space <tt class="verbatim">1fn</tt>, which can be
+            taken as the distance between successive lines of text.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">y1</tt> and <tt class="verbatim">y2</tt>
+        </dt>
+        <dd>
+          <p>
+            The bottom and top level for the font (we have <tt class="verbatim">y2-y1=quad</tt>).
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">sep</tt>
+        </dt>
+        <dd>
+          <p>
+            The reference minimal space between distinct components, like the
+            minimal distance between a subscript and a superscript. In fact,
+            <tt class="verbatim">sep=quad/10</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">wline</tt>
+        </dt>
+        <dd>
+          <p>
+            The width of several types of lines, like the fraction and square
+            root bars, wide accents, etc.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">yfrac</tt>
+        </dt>
+        <dd>
+          <p>
+            The height of the fraction bar, which is needed for the
+            positioning of fractions and big delimiters. Usually, <tt class="verbatim">yfrac</tt>
+            is almost equal to <tt class="verbatim">yx/2</tt> below.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      The following parameters are mainly needed in order to deal with
+      scripts:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <tt class="verbatim">yx</tt>
+        </dt>
+        <dd>
+          <p>
+            The height of the <img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img> character, which is
+            needed for the positioning of scripts. All the remaining
+            parameters are actually computed as a function of <tt class="verbatim">yx</tt>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">ysub lo base</tt>
+        </dt>
+        <dd>
+          <p>
+            Logical base line for subscripts.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">ysub hi lim</tt>
+        </dt>
+        <dd>
+          <p>
+            Subscripts may never physically exceed this top height.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">ysup lo base</tt>
+        </dt>
+        <dd>
+          <p>
+            Logical base line for superscripts.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">ysup lo lim</tt>
+        </dt>
+        <dd>
+          <p>
+            Superscripts may never physically exceed this bottom height.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">ysup hi lim</tt>
+        </dt>
+        <dd>
+          <p>
+            Suggestion for a physical top line for superscripts.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">yshift</tt>
+        </dt>
+        <dd>
+          <p>
+            Possible shift of the base lines when we are inside fractions or
+            scripts.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      The individual strings in a font also have several important positioning
+      properties. First of all, they always admit left and right slopes.
+      Furthermore, they admit left and right italic corrections, which are
+      needed for the positioning of scripts or when passing from text in
+      upright to text in italics (or vice versa).
+    </p>
+    <h2 id="auto-31">4.<span style="margin-left: 1em"></span>Implementation of the mathematical
+    primitives<span style="margin-left: 1em"></span></h2>
+    <p>
+      The typesetting semantics of TeXmacs documents is implemented by
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void concater_rep::typeset (tree t, path ip);</pre>
+      </div>
+    </div>
+    <p>
+      in <tt class="verbatim">src/Typeset/Concat/concat_math.cpp</tt> which dispatch
+      according to the current tree label to more specialized routines, which
+      we will describe below.
+    </p>
+    <p>
+      Tree labels for mathematical typesettings are (in <tt class="verbatim">scr/Kernel/Types/tree_label.hpp</tt>)
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+enum tree_label {
+  // [&hellip; other labels &hellip;]
+  
+  // mathematics
+  AROUND, VAR_AROUND, BIG_AROUND,
+  LEFT, MID, RIGHT, BIG, LONG_ARROW,
+  LPRIME, RPRIME, BELOW, ABOVE,
+  LSUB, LSUP, RSUB, RSUP,
+  FRAC, SQRT, WIDE, VAR_WIDE, NEG, TREE,
+  SYNTAX,
+
+  // [&hellip; other labels &hellip;]
+};</pre>
+      </div>
+    </div>
+    <p>
+      They provide labels for the primitives to typeset brackets (<font class="tmweb-markup">around</font>,
+      <font class="tmweb-markup">var_around</font>, <font class="tmweb-markup">big_around</font>, <tt
+      class="verbatim">left</tt>, <tt class="verbatim">mid</tt>, <tt class="verbatim">right</tt>),
+      sub/super-scripts (<tt class="verbatim">lsup</tt>, <tt class="verbatim">lsub</tt>, <tt
+      class="verbatim">rsup</tt>, <tt class="verbatim">rsub</tt>), accents (<tt class="verbatim">lprime</tt>,
+      <tt class="verbatim">rprime</tt>), above and below formulas (<tt class="verbatim">below</tt>,
+      <tt class="verbatim">above</tt>) fractions (<tt class="verbatim">frac</tt>), roots (<tt
+      class="verbatim">sqrt</tt>), wide under and over braces (<tt class="verbatim">wide</tt>, <tt
+      class="verbatim">var_wide</tt>), negations (<tt class="verbatim">neg</tt>), and trees (<tt
+      class="verbatim">tree</tt>) or syntax (<tt class="verbatim">syntax</tt>) constructions.
+    </p>
+    <h3 id="auto-32">4.1.<span style="margin-left: 1em"></span>Primed expressions<span style="margin-left: 1em"></span></h3>
+    <p>
+      Primed expressions are encoded in TeXmacs as
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-44.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.15795041322314em; height: 1.03433608815427em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              <font color="blue">&lt;</font>math<font color="blue">|</font><font color="#C68"><font
+              color="black">a</font><font color="black"><font color="blue">&lt;</font>rprime<font
+              color="blue">|</font><font color="black">'</font><font color="blue">&gt;</font></font><font
+              color="black">,a</font><font color="black"><font color="blue">&lt;</font>rprime<font
+              color="blue">|</font><font color="black">&Dagger;</font><font color="blue">&gt;</font></font><font
+              color="black">,</font><font color="black"><font color="blue">&lt;</font>lprime<font
+              color="blue">|</font><font color="black">&Dagger;</font><font color="blue">&gt;</font></font><font
+              color="black">s</font></font><font color="blue">&gt;</font>
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      and are typeset via the following code (the code for <tt class="verbatim">rprime</tt>
+      is analogous and is not shown):
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_lprime (tree t, path ip) {
+  if ((N(t) == 1) &amp;&amp; is_atomic (t[0])) {
+    string s= t[0]-&gt;label;
+    bool flag= (env-&gt;fn-&gt;type == FONT_TYPE_UNICODE);
+    if (flag)
+      for (int i=0; i&lt;N(s); i++)
+        flag= flag &amp;&amp; (s[i] == '\'' || s[i] == '&lsquo;');
+    if (env-&gt;fn-&gt;type == FONT_TYPE_TEX ||
+        env-&gt;fn-&gt;math_type != MATH_TYPE_NORMAL)
+      s= replace_primes (s);
+    tree old_il;
+    if (!flag) old_il= env-&gt;local_begin_script ();
+    path sip= descend (ip, 0);
+    box b1, b2;
+    b2= typeset_as_concat (env, s /*t[0]*/, sip);
+    b2= symbol_box (sip, b2, N(t[0]-&gt;label));
+    if (flag || env-&gt;fn-&gt;math_type != MATH_TYPE_TEX_GYRE)
+      b2= move_box (sip, b2,
+                    flag? 0: env-&gt;as_length (string (&quot;-0.05fn&quot;)),
+                    flag? env-&gt;as_length (&quot;-0.75ex&quot;): 0,
+                    false, true);
+    if (!flag) env-&gt;local_end_script (old_il);
+    print (LSUP_ITEM, OP_SKIP, script_box (ip, b1, b2, env-&gt;fn));
+    penalty_max (HYPH_INVALID);
+  }
+  else typeset_error (t, ip);
+}</pre>
+      </div>
+    </div>
+    <p>
+      Note that we output an <tt class="verbatim">LSUP_ITEM</tt>, since later on, in a
+      second pass, we need to reposition these boxes as we will do for  sub,
+      superscripts.
+    </p>
+    <p>
+      The <tt class="verbatim cpp">replace_primes</tt> function: 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+string
+replace_primes (string s) {
+  string r;
+  int i, n= N(s);
+  for (i=0; i&lt;n; i++)
+    if (s[i] == '\'') r &lt;&lt; &quot;&lt;prime&gt;&quot;;
+    else if (s[i] == '&lsquo;') r &lt;&lt; &quot;&lt;backprime&gt;&quot;;
+    else r &lt;&lt; s[i];
+  return r;
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-33">4.2.<span style="margin-left: 1em"></span>Fractions<span style="margin-left: 1em"></span></h3>
+    <p>
+      Fractions can be inline <img src="texmacs-math-typesetting-45.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672177em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.577300275482094em; height: 1.65110743801653em"></img> or in display style and
+      have different variants (standard <tt class="verbatim">frac</tt>, display <tt
+      class="verbatim">dfrac</tt>, small inline <tt class="verbatim">tfrac</tt>, continued <tt
+      class="verbatim">cfrac</tt> and slashed <tt class="verbatim">frac*</tt>). For example 
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-46.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -0.814258953168044em; height: 2.11374104683196em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;dfrac|\&lt;mathd\&gt;x|\&lt;mathd\&gt;y&gt;,&lt;space|2em&gt;
+            </p>
+            <p>
+              &lt;frac*|\&lt;mathd\&gt;x|\&lt;mathd\&gt;y&gt;,
+            </p>
+            <p>
+              <font color="blue">&lt;</font>math<font color="blue">|</font><font color="#C68"><font
+              color="black"><font color="blue">&lt;</font>dfrac<font color="blue">|</font><font
+              color="black">dx</font><font color="blue">|</font><font color="black">dy</font><font
+              color="blue">&gt;</font></font><font color="black">,</font><font color="black"><font
+              color="blue">&lt;</font>space<font color="blue">|</font><font color="#288">2em</font><font
+              color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>frac*<font
+              color="blue">|</font><font color="black">dx</font><font color="blue">|</font><font
+              color="black">dy</font><font color="blue">&gt;</font></font><font color="black">,</font><font
+              color="black"><font color="blue">&lt;</font>space<font color="blue">|</font><font
+              color="#288">2em</font><font color="blue">&gt;</font></font><font color="black"><font
+              color="blue">&lt;</font>tfrac<font color="blue">|</font><font color="black">dx</font><font
+              color="blue">|</font><font color="black">dy</font><font color="blue">&gt;</font></font><font
+              color="black">,</font></font><font color="blue">&gt;</font>
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; vertical-align: middle; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-47.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -3.01066666666667em; height: 4.32707438016529em"></img>
+        </center></td>
+        <td style="width: 50%; vertical-align: middle; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;cfrac|1|1+&lt;cfrac|1|1+&lt;cfrac|1|1+x&gt;&gt;&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      
+    </p>
+    <p>
+      Apart from <tt class="verbatim">frac</tt>, the others tags are implemented in <tt
+      class="verbatim">std-maths.ts</tt> as:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <p>
+          <font color="blue">&lt;</font>document<font color="blue">|</font><font color="black"><font
+          color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>tfrac</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font
+          color="blue">|</font><font color="brown"><i>x</i></font><font color="blue">|</font><font
+          color="brown"><i>y</i></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font
+          color="blue">|</font><font color="#008000"><i>mode</i></font><font color="blue">|</font><font
+          color="black">math</font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font
+          color="blue">|</font><font color="#008000"><i>math-display</i></font><font color="blue">|</font><font
+          color="black">false</font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>frac<font
+          color="blue">|</font><font color="black"><font color="brown"><i>x</i></font></font><font
+          color="blue">|</font><font color="black"><font color="brown"><i>y</i></font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+          color="black"></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>assign<font
+          color="blue">|</font><font color="#008000"><i>dfrac</i></font><font color="blue">|</font><font
+          color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+          color="brown"><i>x</i></font><font color="blue">|</font><font color="brown"><i>y</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font color="blue">|</font><font
+          color="#008000"><i>mode</i></font><font color="blue">|</font><font color="black">math</font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font color="blue">|</font><font
+          color="#008000"><i>math-display</i></font><font color="blue">|</font><font color="black">true</font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>frac<font color="blue">|</font><font
+          color="black"><font color="brown"><i>x</i></font></font><font color="blue">|</font><font
+          color="black"><font color="brown"><i>y</i></font></font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font></font><font color="blue">|</font><font color="black"></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>assign<font
+          color="blue">|</font><font color="#008000"><i>cfrac</i></font><font color="blue">|</font><font
+          color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+          color="brown"><i>x</i></font><font color="blue">|</font><font color="brown"><i>y</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font color="blue">|</font><font
+          color="#008000"><i>mode</i></font><font color="blue">|</font><font color="black">math</font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>dfrac<font
+          color="blue">|</font><font color="black"><font color="brown"><i>x</i></font></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>resize<font
+          color="blue">|</font><font color="black"><font color="brown"><i>y</i></font></font><font
+          color="blue">|</font><font color="#288"></font><font color="blue">|</font><font color="#288"></font><font
+          color="blue">|</font><font color="#288"><font color="blue">&lt;</font>plus<font color="blue">|</font><font
+          color="#848">1r</font><font color="blue">|</font><font color="#848">-1sep</font><font
+          color="blue">&gt;</font></font><font color="blue">|</font><font color="#288"></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+          color="black"></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>assign<font
+          color="blue">|</font><font color="#008000"><i>frac*</i></font><font color="blue">|</font><font
+          color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+          color="brown"><i>x</i></font><font color="blue">|</font><font color="brown"><i>y</i></font><font
+          color="blue">|</font><font color="black"><font color="blue">&lt;</font>move<font color="blue">|</font><font
+          color="black"><font color="black"><font color="blue">&lt;</font>lsup<font color="blue">|</font><font
+          color="black"><font color="brown"><i>x</i></font></font><font color="blue">&gt;</font></font><font
+          color="black"><font color="blue">&lt;</font>resize<font color="blue">|</font><font
+          color="black">/</font><font color="blue">|</font><font color="#288"><font color="blue">&lt;</font>plus<font
+          color="blue">|</font><font color="#848">1l</font><font color="blue">|</font><font
+          color="#848">0.15em</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+          color="#288"><font color="blue">&lt;</font>plus<font color="blue">|</font><font color="#848">1b</font><font
+          color="blue">|</font><font color="#848">0.5em</font><font color="blue">&gt;</font></font><font
+          color="blue">|</font><font color="#288"><font color="blue">&lt;</font>minus<font
+          color="blue">|</font><font color="#848">1r</font><font color="blue">|</font><font
+          color="#848">0.15em</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+          color="#288"><font color="blue">&lt;</font>minus<font color="blue">|</font><font
+          color="#848">1t</font><font color="blue">|</font><font color="#848">0.5em</font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="black"><font
+          color="blue">&lt;</font>rsub<font color="blue">|</font><font color="black"><font color="brown"><i>y</i></font></font><font
+          color="blue">&gt;</font></font></font><font color="blue">|</font><font color="#288"></font><font
+          color="blue">|</font><font color="#288">0.05em</font><font color="blue">&gt;</font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+          color="black"></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>drd-props<font
+          color="blue">|</font><font color="black">frac*</font><font color="blue">|</font><font
+          color="black">arity</font><font color="blue">|</font><font color="black">2</font><font
+          color="blue">|</font><font color="black">syntax</font><font color="blue">|</font><font
+          color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+          color="brown"><i>x</i></font><font color="blue">|</font><font color="brown"><i>y</i></font><font
+          color="blue">|</font><font color="black"><font color="black"><font color="brown"><i>x</i></font></font><font
+          color="black">/</font><font color="black"><font color="brown"><i>y</i></font></font></font><font
+          color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+        </p>
+      </div>
+    </div>
+    <p>
+      The <tt class="verbatim">frac</tt> tag is primitive and typesetted by <tt class="verbatim">concater_rep::typeset_frac</tt>
+      :
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_frac (tree t, path ip) {
+  if (N(t) != 2) { typeset_error (t, ip); return; }
+  bool disp= env-&gt;display_style;
+  tree old;
+  if (disp) old= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+  else old= env-&gt;local_begin_script ();
+  tree old_vp= env-&gt;local_begin (MATH_VPOS, &quot;1&quot;);
+  box num= typeset_as_concat (env, t[0], descend (ip, 0));
+  env-&gt;local_end (MATH_VPOS, &quot;-1&quot;);
+  box den= typeset_as_concat (env, t[1], descend (ip, 1));
+  env-&gt;local_end (MATH_VPOS, old_vp);
+  font sfn= env-&gt;fn;
+  if (disp) env-&gt;local_end (MATH_DISPLAY, old);
+  else env-&gt;local_end_script (old);
+  if (num-&gt;w() &lt;= env-&gt;frac_max &amp;&amp; den-&gt;w () &lt;= env-&gt;frac_max)
+    print (frac_box (ip, num, den, env-&gt;fn, sfn, env-&gt;pen));
+  else typeset_wide_frac (t, ip);
+}</pre>
+      </div>
+    </div>
+    <p>
+      The <tt class="verbatim cpp">&quot;math-vpos&quot;</tt> environment variable is set to
+      <img src="texmacs-math-typesetting-48.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em"></img> depending on where we are in the typesetting of
+      fractions. This is used in the finalization routines. <font color="#800000">[Add
+      more?]</font>
+    </p>
+    <p>
+      The function <tt class="verbatim cpp">frac_box</tt> inserts an instance of <tt class="verbatim cpp">frac_box_rep</tt>
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+frac_box_rep::frac_box_rep (
+  path ip, box b1, box b2, font fn2, font sfn2, pencil pen2):
+    composite_box_rep (ip), fn (fn2), sfn (sfn2), pen (pen2)
+{
+  // Italic correction does not lead to nicer results,
+  // because right correction is not equilibrated w.r.t. left correction
+
+  SI bar_y = fn-&gt;yfrac;
+  SI bar_w = fn-&gt;wline;
+  SI sep   = fn-&gt;sep;
+  SI b1_y  = min (b1-&gt;y1, sfn-&gt;y1);
+  SI b2_y  = max (b2-&gt;y2, sfn-&gt;y2);
+  SI w     = max (b1-&gt;w (), b2-&gt;w()) + 2*sep;
+  SI d     = sep &gt;&gt; 1;
+
+  pencil bar_pen= pen-&gt;set_width (bar_w);
+  insert (b1, (w&gt;&gt;1) - (b1-&gt;x2&gt;&gt;1), bar_y+ sep+ (bar_w&gt;&gt;1)- b1_y);
+  insert (b2, (w&gt;&gt;1) - (b2-&gt;x2&gt;&gt;1), bar_y- sep- (bar_w&gt;&gt;1)- b2_y);
+  insert (line_box (decorate_middle (ip), d, 0, w-d, 0, bar_pen), 0, bar_y);
+
+  italic_correct (b1);
+  italic_correct (b2);
+  position ();
+  italic_restore (b1);
+  italic_restore (b2);
+  x1= min (0, x1);
+  x2= max (w, x2);
+  left_justify ();
+  finalize ();
+}</pre>
+      </div>
+    </div>
+    <p>
+      The following heuristics are used:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The horizontal middles of the numerator and the denominator are
+          taken to be the same.
+        </p>
+      </li>
+      <li>
+        <p>
+          The vertical spaces between the numerator <abbr>resp.</abbr>
+          denominator and the fraction bar is at least <tt class="verbatim">sep</tt>.
+        </p>
+      </li>
+      <li>
+        <p>
+          The depth (<abbr>resp.</abbr> height) of the numerator
+          (<abbr>resp.</abbr> denominator) is descended (<abbr>resp.</abbr>
+          increased) to <tt class="verbatim">y1</tt> (<abbr>resp.</abbr> <tt class="verbatim">y2</tt>)
+          if necessary. This forces the base lines of not too large numerators
+          <abbr>resp.</abbr> denominators to be the same in presence of
+          multiple fractions.
+        </p>
+      </li>
+      <li>
+        <p>
+          The fraction bar has a overhang of <tt class="verbatim">sep/2</tt> to both
+          sides and the logical limits of the fraction are another <tt class="verbatim">sep/2</tt>
+          further. The logical left limit is zero.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The italic corrections are not taken into account during the positioning
+      algorithms, because this may create the impression that the numerator
+      and denominator are not correctly centered with respect to each other.
+      Nevertheless, the italic corrections are taken into account in order to
+      compute the logical bounding box of the fraction (whose has italic
+      slopes vanish at both sides).
+    </p>
+    <p>
+      In the case the fraction's numerator or denominator are very wide a
+      fallback typesetting strategy is used, according to:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_wide_frac (tree t, path ip) {
+  bool numb= needs_brackets (t[0], &quot;Product&quot;);
+  bool denb= needs_brackets (t[1], &quot;Power&quot;);
+  pencil old_pen= env-&gt;pen;
+  marker (descend (ip, 0));
+  typeset_large (tree (LEFT, &quot;.&quot;), decorate_left (descend (ip, 0)),
+                 LEFT_BRACKET_ITEM, OP_OPENING_BRACKET, &quot;&lt;left-&quot;);
+  env-&gt;pen= env-&gt;flatten_pen;
+  if (numb)
+    typeset_large (tree (LEFT, &quot;(&quot;), decorate_left (descend (ip, 0)),
+                   LEFT_BRACKET_ITEM, OP_OPENING_BRACKET, &quot;&lt;left-&quot;);
+  env-&gt;pen= old_pen;
+  typeset (t[0], descend (ip, 0));
+  env-&gt;pen= env-&gt;flatten_pen;
+  if (numb)
+    typeset_large (tree (RIGHT, &quot;)&quot;), decorate_right (descend (ip, 0)),
+                   RIGHT_BRACKET_ITEM, OP_CLOSING_BRACKET, &quot;&lt;right-&quot;);
+  typeset_large (tree (MID, &quot;/&quot;), decorate_middle (ip),
+                 MIDDLE_BRACKET_ITEM, OP_MIDDLE_BRACKET, &quot;&lt;mid-&quot;);
+  if (denb)
+    typeset_large (tree (LEFT, &quot;(&quot;), decorate_left (descend (ip, 1)),
+                   LEFT_BRACKET_ITEM, OP_OPENING_BRACKET, &quot;&lt;left-&quot;);
+  env-&gt;pen= old_pen;
+  typeset (t[1], descend (ip, 1));
+  env-&gt;pen= env-&gt;flatten_pen;
+  if (denb)
+    typeset_large (tree (RIGHT, &quot;)&quot;), decorate_right (descend (ip, 1)),
+                   RIGHT_BRACKET_ITEM, OP_CLOSING_BRACKET, &quot;&lt;right-&quot;);
+  env-&gt;pen= old_pen;
+  typeset_large (tree (RIGHT, &quot;.&quot;), decorate_right (descend (ip, 1)),
+                 RIGHT_BRACKET_ITEM, OP_CLOSING_BRACKET, &quot;&lt;right-&quot;);
+  marker (descend (ip, 1));
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-34">4.3.<span style="margin-left: 1em"></span>Roots<span style="margin-left: 1em"></span></h3>
+    <p>
+      The following heuristics are used:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The vertical space between the main argument and the upper bar is at
+          least <tt class="verbatim">sep</tt>.
+        </p>
+      </li>
+      <li>
+        <p>
+          The root itself is typeset like a large delimiter. The positioning
+          of a potential script is very dependent on the usage of TeX fonts.
+          <font color="#800000">[make precise]</font>
+        </p>
+      </li>
+      <li>
+        <p>
+          The upper bar has a overhang of <tt class="verbatim">sep/2</tt> at the right
+          and the logical right limit of the root is situated another <tt
+          class="verbatim">sep/2</tt> further to the right.
+        </p>
+      </li>
+    </ul>
+    <p>
+      We take the logical right border plus the italic correction of the main
+      argument in order to determine the right hand limit of the upper bar.
+      The left italic correction is not needed.
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-49.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0658292011019284em; margin-right: -0.0112837465564741em; margin-top: 0.0582920110192839em; vertical-align: -1.06631404958678em; height: 2.51627548209366em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;sqrt|1+&lt;frac|3|4&gt;+\&lt;cdots\&gt;+d&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      Typesetting goes as follows:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_sqrt (tree t, path ip) {
+  if (N(t) != 1 &amp;&amp; N(t) != 2) { typeset_error (t, ip); return; }
+  box b= typeset_as_concat (env, t[0], descend (ip, 0));
+  if (b-&gt;w () &gt; env-&gt;frac_max) { typeset_wide_sqrt (t, ip); return; }
+  box ind;
+  if (N(t)==2) {
+    bool disp= env-&gt;display_style;
+    tree old;
+    if (disp) old= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+    tree old_il= env-&gt;local_begin_script ();
+    ind= typeset_as_concat (env, t[1], descend (ip, 1));
+    env-&gt;local_end_script (old_il);
+    if (disp) env-&gt;local_end (MATH_DISPLAY, old);
+  }
+  SI sep= env-&gt;fn-&gt;sep;
+  font lfn= env-&gt;fn;
+  bool stix= starts (lfn-&gt;res_name, &quot;stix-&quot;);
+  if (stix) lfn= rubber_font (lfn);
+  box sqrtb= delimiter_box (decorate_left (ip), &quot;&lt;large-sqrt&gt;&quot;,
+                            lfn, env-&gt;pen, b-&gt;y1, b-&gt;y2 + (3*sep &gt;&gt; 1));
+  if (stix) sqrtb= shift_box (decorate_left (ip), sqrtb,
+                              -env-&gt;fn-&gt;wline/2, -env-&gt;fn-&gt;wline/3,
+                              false, true);
+  print (sqrt_box (ip, b, ind, sqrtb, env-&gt;fn, env-&gt;pen));
+}</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+sqrt_box_rep::sqrt_box_rep (
+  path ip, box b1, box b2, box sqrtb, font fn2, pencil pen2):
+    composite_box_rep (ip), fn (fn2), pen (pen2)
+{
+  right_italic_correct (b1);
+
+  SI sep  = fn-&gt;sep;
+  SI wline= fn-&gt;wline;
+  SI dx   = -fn-&gt;wfn/36, dy= -fn-&gt;wfn/36; // correction
+  SI by   = sqrtb-&gt;y2+ dy;
+  if (sqrtb-&gt;x2 - sqrtb-&gt;x4 &gt; wline) dx -= (sqrtb-&gt;x2 - sqrtb-&gt;x4);
+  
+  pencil rpen= pen-&gt;set_width (wline);
+  insert (b1, 0, 0);
+  if (!is_nil (b2)) {
+    SI X = - sqrtb-&gt;w();
+    SI M = X / 3;
+    SI Y = sqrtb-&gt;y1;
+    SI bw= sqrtb-&gt;w();
+    SI bh= sqrtb-&gt;h();
+    if (fn-&gt;math_type == MATH_TYPE_TEX_GYRE) {
+      if (2*bh &lt; 9*bw) Y += bh &gt;&gt; 1;
+      else if (occurs (&quot;ermes&quot;, fn-&gt;res_name)) Y += (19*bw) &gt;&gt; 3;
+      else if (occurs (&quot;agella&quot;, fn-&gt;res_name)) Y += (16*bw) &gt;&gt; 3;
+      else Y += (15*bw) &gt;&gt; 3;
+    }
+    else {
+      if (bh &lt; 3*bw) Y += bh &gt;&gt; 1;
+      else Y += (bw*3) &gt;&gt; 1;
+    }
+    insert (b2, min (X, M- b2-&gt;x2), Y- b2-&gt;y1+ sep);
+  }
+  insert (sqrtb, -sqrtb-&gt;x2, 0);
+  insert (line_box (decorate_middle (ip), dx, by, b1-&gt;x2, by, rpen), 0, 0);
+  
+  position ();
+  left_justify ();
+  y1 -= wline;
+  y2 += wline;
+  x2 += sep &gt;&gt; 1;
+
+  right_italic_restore (b1);
+  finalize ();
+}</pre>
+      </div>
+    </div>
+    <p>
+      Wide versions of the square root goes as follows:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_wide_sqrt (tree t, path ip) {
+  bool br= needs_brackets (t[0], &quot;Postfixed&quot;);
+  pencil old_pen= env-&gt;pen;
+  marker (descend (ip, 0));
+  typeset_large (tree (LEFT, &quot;.&quot;), decorate_left (descend (ip, 0)),
+                 LEFT_BRACKET_ITEM, OP_OPENING_BRACKET, &quot;&lt;left-&quot;);
+  env-&gt;pen= env-&gt;flatten_pen;
+  if (br)
+    typeset_large (tree (LEFT, &quot;(&quot;), decorate_left (descend (ip, 0)),
+                   LEFT_BRACKET_ITEM, OP_OPENING_BRACKET, &quot;&lt;left-&quot;);
+  env-&gt;pen= old_pen;
+  typeset (t[0], descend (ip, 0));
+  env-&gt;pen= env-&gt;flatten_pen;
+  if (br)
+    typeset_large (tree (RIGHT, &quot;)&quot;), decorate_right (descend (ip, 0)),
+                   RIGHT_BRACKET_ITEM, OP_CLOSING_BRACKET, &quot;&lt;right-&quot;);
+  env-&gt;pen= old_pen;
+
+  bool disp= env-&gt;display_style;
+  tree old;
+  if (disp) old= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+  tree old_il= env-&gt;local_begin_script ();
+  env-&gt;pen= env-&gt;flatten_pen;
+  box num= typeset_as_concat (env, &quot;1&quot;, decorate_middle (ip));
+  box den;
+  if (N(t) &gt;= 2) {
+    env-&gt;pen= old_pen;
+    den= typeset_as_concat (env, t[1], descend (ip, 1));
+    env-&gt;pen= env-&gt;flatten_pen;
+  }
+  else den= typeset_as_concat (env, &quot;2&quot;, decorate_middle (ip));
+  box fr= frac_box (decorate_middle (ip), num, den, env-&gt;fn, env-&gt;fn, env-&gt;pen);
+  env-&gt;pen= old_pen;
+  env-&gt;local_end_script (old_il);
+  if (disp) env-&gt;local_end (MATH_DISPLAY, old);
+  penalty_max (HYPH_INVALID);
+  a &lt;&lt; line_item (RSUP_ITEM, OP_SKIP,
+                  script_box (ip, box (), fr, env-&gt;fn), HYPH_INVALID);
+
+  typeset_large (tree (RIGHT, &quot;.&quot;), decorate_right (descend (ip, 1)),
+                 RIGHT_BRACKET_ITEM, OP_CLOSING_BRACKET, &quot;&lt;right-&quot;);
+  marker (descend (ip, 1));
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-35">4.4.<span style="margin-left: 1em"></span>Negations<span style="margin-left: 1em"></span></h3>
+    <p>
+      Negations are barred expressions:
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-50.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476583em; vertical-align: -0.183625344352617em; height: 1.13454545454545em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;neg|abc&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      
+    </p>
+    <p>
+      The following heuristics are used:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The negation bar passes through the logical center of the argument.
+        </p>
+      </li>
+      <li>
+        <p>
+          The italic corrections of the argument are only taken into account
+          during the computation of the logical limits of the negation box
+          (which has zero left and right slopes).
+        </p>
+      </li>
+    </ul>
+    <p>
+      Typesetting of negation tags is very elementary
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_neg (tree t, path ip) {
+  if (N(t) != 1) { typeset_error (t, ip); return; }
+  box b= typeset_as_concat (env, t[0], descend (ip, 0));
+  print_semantic (neg_box (ip, b, env-&gt;fn, env-&gt;pen), t[0]);
+}</pre>
+      </div>
+    </div>
+    <p>
+      and give rise to negation boxes:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+neg_box_rep::neg_box_rep (path ip, box b, font fn2, pencil pen2):
+  composite_box_rep (ip), fn (fn2), pen (pen2)
+{
+  SI wline= fn-&gt;wline;
+  SI delta= fn-&gt;wfn/6;
+  SI X    = (b-&gt;x1 + b-&gt;x2) &gt;&gt; 1;
+  SI Y    = (b-&gt;y1 + b-&gt;y2) &gt;&gt; 1;
+  SI DX, DY;
+
+  pencil npen= pen-&gt;set_width (wline);
+  insert (b, 0, 0);
+  if ((3*(b-&gt;x2-b-&gt;x1)) &gt; (2*(b-&gt;y2-b-&gt;y1))) {
+    DY= delta + ((b-&gt;y2 - b-&gt;y1)&gt;&gt;1);
+    DX= DY&gt;&gt;1;
+  }
+  else {
+    DX= delta + ((b-&gt;x2 - b-&gt;x1)&gt;&gt;1);
+    DY= DX;
+  }
+  insert (line_box (decorate_middle (ip), X+DX, Y+DY, X-DX, Y-DY, npen), 0, 0);
+  
+  italic_correct (b);
+  position ();
+  italic_restore (b);
+  finalize ();
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-36">4.5.<span style="margin-left: 1em"></span>Wide boxes<span style="margin-left: 1em"></span></h3>
+    <p>
+      Wide boxes are used for under and over-braces and wide accents:
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-51.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889805em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.37815977961433em; height: 2.94329476584022em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;wide*|x+y|\&lt;wide-underbrace\&gt;&gt;&lt;rsub|s&gt;
+            </p>
+            <p>
+              &lt;wide|x+\&lt;cdots\&gt;+y|\&lt;wide-overbrace\&gt;&gt;&lt;rsup|s&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      
+    </p>
+    <p>
+      The following heuristics are used:
+    </p>
+    <ul>
+      <li>
+        <p>
+          We use TeX fonts for small accents and an <i>ad hoc</i> algorithm
+          for the wider ones.
+        </p>
+      </li>
+      <li>
+        <p>
+          The distance between the main argument and the accent is at least
+          <tt class="verbatim">sep</tt> (or a distance which depends on the TeX font for
+          small accents).
+        </p>
+      </li>
+      <li>
+        <p>
+          The accent is positioned horizontally according to the right slope
+          of the main argument.
+        </p>
+      </li>
+      <li>
+        <p>
+          The slopes for the accented box are inherited from those of the main
+          argument and the italic corrections are adjusted accordingly.
+        </p>
+      </li>
+      <li>
+        <p>
+          All script height parameters of the accented box are inherited from
+          the main argument. The only exception is <tt class="verbatim">ysup_hi_lim</tt>,
+          which may be increased by the height of the accent, or determined in
+          the generic way, whichever leads to the least value. It is indeed
+          better to keep superscripts positioned reasonably low, whenever
+          possible.
+        </p>
+      </li>
+    </ul>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_wide (tree t, path ip, bool above) {
+  if (N(t) != 2) { typeset_error (t, ip); return; }
+  box b= typeset_as_concat (env, t[0], descend (ip, 0));
+  string s= env-&gt;exec_string (t[1]);
+  if (s == &quot;^&quot;) s= &quot;&lt;hat&gt;&quot;;
+  if (s == &quot;~&quot;) s= &quot;&lt;tilde&gt;&quot;;
+  bool request_wide= false;
+  if (starts (s, &quot;&lt;wide-&quot;)) {
+    s= &quot;&lt;&quot; * s (6, N(s));
+    request_wide= true;
+  }
+  if (ends (s, &quot;brace&gt;&quot;) || ends (s, &quot;brace*&gt;&quot;))
+    b= move_box (decorate_middle (descend (ip, 0)), b, 0, 0, true);
+  box wb= wide_box (ip, b, s, env-&gt;fn, env-&gt;pen, request_wide, above);
+  print_semantic (wb, t[0]);
+  if (ends (s, &quot;brace&gt;&quot;)) with_limits (LIMITS_ALWAYS);
+}</pre>
+      </div>
+    </div>
+    <p>
+      <tt class="verbatim cpp">wide_box</tt> produces a <tt class="verbatim cpp">wide_box_rep</tt> whose
+      constructor perform further computations and handling of special cases:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+wide_box_rep::wide_box_rep (
+  path ip, box ref2, string s2, font fn2, pencil pen2,
+  bool request_wide2, bool above2):
+    composite_box_rep (ip), ref (ref2), s (s2), fn (fn2), pen (pen2),
+    request_wide (request_wide2), above (above2)
+{
+  box hi;
+  wide= compute_wide_accent (ip, ref, s, fn, pen, request_wide, above, hi, sep);
+  SI X, Y, dx;
+  SI hw= max (ref-&gt;w(), hi-&gt;w()) &gt;&gt; 1;
+  SI m = (ref-&gt;x1 + ref-&gt;x2) &gt;&gt; 1;
+  insert (ref, 0, 0);
+  if (above) {
+    Y= ref-&gt;y2;
+    X= m;
+    if (ref-&gt;right_slope () != 0)
+      X += ref-&gt;rsup_correction() + ((SI) (ref-&gt;right_slope() * fn-&gt;yx * 0.5));
+    X += ref-&gt;wide_correction (1);
+    //X= ((SI) (ref-&gt;right_slope () * (Y - fn-&gt;yx))) + m;
+    insert (hi, X- ((hi-&gt;x1 + hi-&gt;x2)&gt;&gt;1), Y+ sep);
+  }
+  else {
+    Y= ref-&gt;y1 - hi-&gt;y2;
+    X= m - ((SI) (ref-&gt;right_slope () * sep));
+    X += ref-&gt;wide_correction (-1);
+    //X= ((SI) (ref-&gt;right_slope () * (Y - sep))) + m;
+    insert (hi, X- ((hi-&gt;x1 + hi-&gt;x2)&gt;&gt;1), Y- sep);
+  }
+  position ();
+  dx= x1;
+  left_justify ();
+
+  dh= hi-&gt;y2+ sep;
+  dw= (SI) (dh * ref-&gt;right_slope ());
+  dd= fn-&gt;sep;
+  x1= m- hw- dx;
+  x2= m+ hw- dx;
+  x1= min (x1, ref-&gt;x1);
+  x2= max (x2, ref-&gt;x2);
+  if (!above) y1 += fn-&gt;sep - sep;
+  finalize ();
+}</pre>
+      </div>
+    </div>
+    <p>
+      The computation of the wide accent is more involved and divided in
+      several cases.
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+bool
+compute_wide_accent (path ip, box b, string s,
+                     font fn, pencil pen, bool request_wide, bool above,
+                     box&amp; wideb, SI&amp; sep) {
+  bool unicode= (fn-&gt;type == FONT_TYPE_UNICODE);
+  bool stix= (fn-&gt;math_type == MATH_TYPE_STIX);
+  bool tex_gyre= (fn-&gt;math_type == MATH_TYPE_TEX_GYRE);
+  bool wide= (b-&gt;w() &gt; (fn-&gt;wquad)) || request_wide;
+  if (ends (s, &quot;dot&gt;&quot;) || (s == &quot;&lt;acute&gt;&quot;) ||
+      (s == &quot;&lt;grave&gt;&quot;) || (s == &quot;&lt;abovering&gt;&quot;)) wide= false;
+  if (wide &amp;&amp; !request_wide &amp;&amp; b-&gt;wide_correction (0) != 0) wide= false;
+  bool very_wide= false;
+  SI   accw= fn-&gt;wfn;
+  if (wide) {
+    if (tex_gyre) {
+      if (s == &quot;^&quot; || s == &quot;&lt;hat&gt;&quot; ||
+          s == &quot;~&quot; || s == &quot;&lt;tilde&gt;&quot; ||
+          s == &quot;&lt;check&gt;&quot;)
+        very_wide= (b-&gt;w() &gt;= ((8*fn-&gt;wfn) &gt;&gt; 2));
+      else if (ends (s, &quot;brace&gt;&quot;) || ends (s, &quot;brace*&gt;&quot;)) {
+        if (starts (s, &quot;&lt;sq&quot;))
+          very_wide= (b-&gt;w() &gt;= ((11*fn-&gt;wfn) &gt;&gt; 2));
+        else very_wide= (b-&gt;w() &gt;= ((15*fn-&gt;wfn) &gt;&gt; 2));
+      }
+      else very_wide= true;
+    }
+    else if (!unicode) {
+      if (s == &quot;^&quot; || s == &quot;&lt;hat&gt;&quot; || s == &quot;~&quot; || s == &quot;&lt;tilde&gt;&quot;)
+        very_wide= (b-&gt;w() &gt;= ((9*fn-&gt;wfn) &gt;&gt; 2));
+      else very_wide= true;
+    }
+    else if (stix) very_wide= true;
+    /*
+    else if (s == &quot;^&quot; || s == &quot;&lt;hat&gt;&quot; || s == &quot;~&quot; || s == &quot;&lt;tilde&gt;&quot; ||
+             s == &quot;&lt;bar&gt;&quot; || s == &quot;&lt;vect&gt;&quot; || s == &quot;&lt;check&gt;&quot; ||
+             s == &quot;&lt;breve&gt;&quot; || s == &quot;&lt;invbreve&gt;&quot;) {
+      box wb= text_box (decorate_middle (ip), 0, s, fn, pen);
+      accw= wb-&gt;x4 - wb-&gt;x3;
+      if (b-&gt;w() &gt;= 16*accw) very_wide= true;
+    }
+    */
+    else very_wide= true;
+  }
+  if (wide &amp;&amp; stix) {
+    if (s == &quot;^&quot;) s= &quot;&lt;hat&gt;&quot;;
+    if (s == &quot;~&quot;) s= &quot;&lt;tilde&gt;&quot;;
+    if (s == &quot;&lt;hat&gt;&quot; || s == &quot;&lt;tilde&gt;&quot; || s == &quot;&lt;check&gt;&quot; ||
+        ends (s, &quot;brace&gt;&quot;) || ends (s, &quot;brace*&gt;&quot;)) {
+      font rfn= rubber_font (fn);
+      SI width= b-&gt;x2- b-&gt;x1 - fn-&gt;wfn/4;
+      wideb= wide_stix_box (decorate_middle (ip),
+                            &quot;&lt;rubber-&quot; * s (1, N(s)-1) * &quot;&gt;&quot;,
+                            rfn, pen, width);
+      if (wideb-&gt;w() &gt;= width) {
+        if (b-&gt;right_slope () != 0)
+          wideb= shift_box (decorate_middle (ip), wideb,
+                            (SI) (-0.5 * b-&gt;right_slope () * fn-&gt;yx), 0);
+        sep= above? -fn-&gt;yx: fn-&gt;sep;
+        if (above) {
+          if (s == &quot;&lt;overbrace&gt;&quot; || s == &quot;&lt;squnderbrace*&gt;&quot;) sep= 2 * fn-&gt;sep;
+          if (s == &quot;&lt;poverbrace&gt;&quot;) sep= 3 * fn-&gt;sep;
+        }
+        return wide;
+      }
+    }
+  }
+  if (very_wide) {
+    SI w= fn-&gt;wline;
+    if (stix) w= (SI) (1.189 * w);
+    pencil wpen= pen-&gt;set_width (w);
+    if ((s == &quot;^&quot;) || (s == &quot;&lt;hat&gt;&quot;))
+      wideb= wide_hat_box   (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if ((s == &quot;~&quot;) || (s == &quot;&lt;tilde&gt;&quot;))
+      wideb= wide_tilda_box (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;bar&gt;&quot;)
+      wideb= wide_bar_box   (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;vect&gt;&quot;)
+      wideb= wide_vect_box  (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;check&gt;&quot;)
+      wideb= wide_check_box (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;breve&gt;&quot; || s == &quot;&lt;punderbrace&gt;&quot; || s == &quot;&lt;punderbrace*&gt;&quot;)
+      wideb= wide_breve_box (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;invbreve&gt;&quot; || s == &quot;&lt;poverbrace&gt;&quot; || s == &quot;&lt;poverbrace*&gt;&quot;)
+      wideb= wide_invbreve_box(decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;squnderbrace&gt;&quot; || s == &quot;&lt;squnderbrace*&gt;&quot;)
+      wideb= wide_squbr_box (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else if (s == &quot;&lt;sqoverbrace&gt;&quot; || s == &quot;&lt;sqoverbrace*&gt;&quot;)
+      wideb= wide_sqobr_box (decorate_middle (ip), b-&gt;x1, b-&gt;x2, wpen);
+    else wideb= wide_box (decorate_middle (ip),
+                          &quot;&lt;rubber-&quot; * s (1, N(s)-1) * &quot;&gt;&quot;,
+                          fn, pen, b-&gt;x2- b-&gt;x1);
+    sep= fn-&gt;sep;
+    if (stix || !unicode) sep= (SI) (1.5 * sep);
+  }
+  else if (wide &amp;&amp; tex_gyre) {
+    string ws= &quot;&lt;wide-&quot; * s (1, N(s)-1) * &quot;&gt;&quot;;
+    SI width= b-&gt;x2- b-&gt;x1 - fn-&gt;wfn/4;
+    wideb= wide_box (decorate_middle (ip), ws, fn, pen, width);
+    if (b-&gt;right_slope () != 0) {
+      bool times= stix || (tex_gyre &amp;&amp; occurs (&quot;ermes&quot;, fn-&gt;res_name));
+      double factor= ((times || !above)? 0.2: 0.5);
+      wideb= shift_box (decorate_middle (ip), wideb,
+                        (SI) (-factor * b-&gt;right_slope () * fn-&gt;yx), 0);
+    }
+    sep= above? -fn-&gt;yx: fn-&gt;sep;
+  }
+  else if (wide &amp;&amp; !unicode) {
+    string ss= s (1, N(s)-1);
+    if (ss == &quot;^&quot;) ss= &quot;hat&quot;;
+    if (ss == &quot;~&quot;) ss= &quot;tilde&quot;;
+    string ws= &quot;&lt;wide-&quot; * ss * &quot;&gt;&quot;;
+    SI width= b-&gt;x2- b-&gt;x1 - fn-&gt;wfn/4;
+    wideb= wide_box (decorate_middle (ip), ws, fn, pen, width);
+    if (b-&gt;right_slope () != 0) {
+      double factor= (above? 0.5: 0.2);
+      wideb= shift_box (decorate_middle (ip), wideb,
+                        (SI) (-factor * b-&gt;right_slope () * fn-&gt;yx), 0);
+    }
+    sep= above? -fn-&gt;yx: fn-&gt;sep;
+  }
+  else if (wide) {
+    SI pad= fn-&gt;wfn - accw;
+    pad= (SI) ((0.75 * accw * pad) / (b-&gt;w() - pad));
+    double sx= ((double) (b-&gt;w() - pad)) / ((double) accw);
+    sx= floor (4.0*sx) / 4.0;
+    double sy= sqrt (sqrt (sx));
+    font sfn= fn-&gt;magnify (sx, sy);
+    wideb= text_box (decorate_middle (ip), 0, s, sfn, pen);
+    wideb= resize_box (decorate_middle (ip), wideb,
+                       max (wideb-&gt;x1, wideb-&gt;x3), wideb-&gt;y1,
+                       min (wideb-&gt;x2, wideb-&gt;x4), wideb-&gt;y2);
+    if (unicode &amp;&amp; b-&gt;right_slope () != 0)
+      wideb= shift_box (decorate_middle (ip), wideb,
+                        (SI) (-0.5 * b-&gt;right_slope () * fn-&gt;yx), 0);
+    sep= above? -fn-&gt;yx: fn-&gt;sep;
+    if (above) sep -= 3 * (sy - 1.0) * fn-&gt;sep;
+  }
+  else {
+    wideb= text_box (decorate_middle (ip), 0, s, fn, pen);
+    if (unicode &amp;&amp; b-&gt;right_slope () != 0) {
+      bool times= stix || (tex_gyre &amp;&amp; occurs (&quot;ermes&quot;, fn-&gt;res_name));
+      double factor= ((times || !above)? 0.2: 0.5);
+      wideb= shift_box (decorate_middle (ip), wideb,
+                        (SI) (-factor * b-&gt;right_slope () * fn-&gt;yx), 0);
+    }
+    sep= above? -fn-&gt;yx: fn-&gt;sep;
+  }
+  if (above &amp;&amp; unicode) {
+    SI min_d= fn-&gt;yx / 8;
+    SI max_d= fn-&gt;yx / 3;
+    if (wideb-&gt;y1 + sep &lt;  min_d) sep= min_d - wideb-&gt;y1;
+    if (wideb-&gt;y1 + sep &gt;= max_d) sep= max_d - wideb-&gt;y1;
+  }
+  if (!unicode &amp;&amp; !wide &amp;&amp; !above)
+    wideb= vresize_box (wideb-&gt;ip, wideb, wideb-&gt;y1 + fn-&gt;yx, wideb-&gt;y2);
+  else if (unicode &amp;&amp; s == &quot;&lt;vect&gt;&quot;) {
+    if (wide);
+    else if (above) sep -= fn-&gt;yx + (fn-&gt;sep &gt;&gt; 1);
+    else wideb= vresize_box (wideb-&gt;ip, wideb, wideb-&gt;y1 + fn-&gt;yx, wideb-&gt;y2);
+  }
+  else if (stix || tex_gyre) sep += fn-&gt;sep &gt;&gt; 1;
+  return wide;
+}</pre>
+      </div>
+    </div>
+    <p>
+      To complete the description we discuss <tt class="verbatim cpp">wide_box</tt> and <tt
+      class="verbatim cpp">wide_stix_box</tt> which are variants of the same logic:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+wide_box (path ip, string s, font fn, pencil pen, SI width) {
+  string r= get_wide (s, fn, width);
+  metric ex;
+  fn-&gt;get_extents (r, ex);
+  box b= text_box (ip, 0, r, fn, pen);
+  return macro_box (ip, b, fn);
+}
+
+box
+wide_stix_box (path ip, string s, font fn, pencil pen, SI width) {
+  string r= get_wide_stix (s, fn, width);
+  metric ex;
+  fn-&gt;get_extents (r, ex);
+  box b= text_box (ip, 0, r, fn, pen);
+  return macro_box (ip, b, fn);
+}</pre>
+      </div>
+    </div>
+    <p>
+      the concrete selection of the appropriate glyph which fits the
+      horizontal size of wide construction is performed by <tt class="verbatim cpp">get_wide</tt>
+      (or <tt class="verbatim cpp">get_stix_wide</tt>):
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+static string
+get_wide (string s, font fn, SI width) {
+  ASSERT (N(s) &gt;= 2 &amp;&amp; s[0] == '&lt;' &amp;&amp; s[N(s)-1] == '&gt;',
+          &quot;invalid rubber character&quot;);
+  string radical= s (0, N(s)-1) * &quot;-&quot;;
+  string first  = radical * &quot;0&gt;&quot;;
+  metric ex;
+  fn-&gt;get_extents (first, ex);
+  if ((ex-&gt;x2- ex-&gt;x1) &gt;= width) return first;
+
+  string second = radical * &quot;1&gt;&quot;;
+  metric ey;
+  fn-&gt;get_extents (second, ey);
+  SI w1= ex-&gt;x2- ex-&gt;x1;
+  SI w2= ey-&gt;x2- ey-&gt;x1;
+  if ((w2 &lt;= w1) || (w2 &gt; width)) return first;
+  SI  d= w2- w1;
+  int n= (width-w1) / (d+1);
+
+  int credit= 20;
+  while (true) {
+    string test= radical * as_string (n+1) * &quot;&gt;&quot;;
+    fn-&gt;get_extents (test, ey);
+    if (ey-&gt;x2- ey-&gt;x1 &gt; width || credit &lt;= 0)
+      return radical * as_string (n) * &quot;&gt;&quot;;
+    n++;
+    credit--;
+  }
+}
+
+static string
+get_wide_stix (string s, font fn, SI width) {
+  ASSERT (N(s) &gt;= 2 &amp;&amp; s[0] == '&lt;' &amp;&amp; s[N(s)-1] == '&gt;',
+          &quot;invalid rubber character&quot;);
+  string radical= s (0, N(s)-1) * &quot;-&quot;;
+  metric ex;
+  int n= 0;
+  while (true) {
+    string test= radical * as_string (n) * &quot;&gt;&quot;;
+    fn-&gt;get_extents (test, ex);
+    if (ex-&gt;x2- ex-&gt;x1 &gt; width || n &gt;= 6)
+      return radical * as_string (n) * &quot;&gt;&quot;;
+    n++;
+  }
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-37">4.6.<span style="margin-left: 1em"></span>Subscripts and superscripts<span style="margin-left: 1em"></span></h3>
+    <p>
+      The positioning of subscripts and superscripts is a complicated affair,
+      due to the conflict between locally and globally optimal esthetics
+      mentioned above. The base line for a subscript is determined as follows:
+    </p>
+    <ol>
+      <li>
+        <p>
+          Always pretend that the subscript has height at least <tt class="verbatim">y2-yshift</tt>
+          in the script font (actually we should use the height of an <img
+          src="texmacs-math-typesetting-52.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0451349862258953em; margin-top: 0em; vertical-align: 0em; height: 0.688308539944904em"></img> instead).
+        </p>
+      </li>
+      <li>
+        <p>
+          Try to position the script at the base line given by the main
+          argument.
+        </p>
+      </li>
+      <li>
+        <p>
+          If the top limit (given by the main argument) is physically exceeded
+          by the subscript, then the base line is moved further down
+          accordingly.
+        </p>
+      </li>
+    </ol>
+    <p>
+      The base line for a superscript is determined as follows:
+    </p>
+    <ol>
+      <li>
+        <p>
+          Try to physically position the superscript beneath the suggested top
+          line. Usually, this will place the superscript to far down.
+        </p>
+      </li>
+      <li>
+        <p>
+          Move the superscript up to the logical base line if necessary. This
+          will usually occur: most of the time, the logical base line is the
+          just the height of an <span class="no-breaks"><img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-script</span>
+          below the suggested top line.
+        </p>
+      </li>
+      <li>
+        <p>
+          If the superscript physically descends below the physical under
+          limit given by the main box, then we move the superscript further
+          upwards.
+        </p>
+      </li>
+    </ol>
+    <p>
+      If both a subscript and a superscript were present, then we still have
+      to adjust the base lines: if the top of the subscript and the bottom of
+      the superscript are not physically separated by <tt class="verbatim">sep</tt>,
+      then we both move the subscript and the superscript by the same amount
+      away from each other. Because of step 1 in the positioning of the
+      subscript, the base lines of double scripts will usually be the same in
+      formulas with several of them.
+    </p>
+    <p>
+      The right slope and italic correction of a script box may be non
+      trivial. In order to compute them, we first determine the script (or
+      main argument), whose right limit (taking into account its italic
+      correction) is furthest to the right (this may be the main box, in the
+      case of a big integral with a tiny subscript). Then the right slope of
+      the main box is inherited by the right slope of this script (or main
+      argument). As to the italic correction, it is precisely the difference
+      between the right offset of the script plus its italic correction minus
+      the logical right coordinate of the entire box. The italic correction
+      should be at least zero though. The left slope and italic correction are
+      computed in a similar way.
+    </p>
+    <p>
+      <font color="#800000">[Explain the code below]</font>
+    </p>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_script (tree t, path ip, bool right) {
+  if (N(t) != 1) { typeset_error (t, ip); return; }
+  int type= RSUP_ITEM;
+  box b1, b2;
+  tree old_ds= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+  tree old_mc= env-&gt;local_begin (MATH_CONDENSED, &quot;true&quot;);
+  tree old_il= env-&gt;local_begin_script ();
+  if (is_func (t, SUB (right))) {
+    tree old_vp= env-&gt;local_begin (MATH_VPOS, &quot;-1&quot;);
+    b1= typeset_as_concat (env, t[0], descend (ip, 0));
+    type= right? RSUB_ITEM: LSUB_ITEM;
+    env-&gt;local_end (MATH_VPOS, old_vp);
+  }
+  if (is_func (t, SUP (right))) {
+    tree old_vp= env-&gt;local_begin (MATH_VPOS, &quot;1&quot;);
+    b2= typeset_as_concat (env, t[0], descend (ip, 0));
+    type= right? RSUP_ITEM: LSUP_ITEM;
+    env-&gt;local_end (MATH_VPOS, old_vp);
+  }
+  env-&gt;local_end_script (old_il);
+  env-&gt;local_end (MATH_CONDENSED, old_mc);
+  env-&gt;local_end (MATH_DISPLAY, old_ds);
+  if (right) penalty_max (HYPH_INVALID);
+  a &lt;&lt; line_item (type, OP_SKIP,
+                  script_box (ip, b1, b2, env-&gt;fn), HYPH_INVALID);
+  // do not use print, because of italic space
+  if (!right) penalty_max (HYPH_INVALID);
+}</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+dummy_script_box_rep::dummy_script_box_rep (path ip, box b1, box b2, font fn2):
+  composite_box_rep (ip), fn (fn2)
+{
+  SI sep  = fn-&gt;sep;
+  SI lo_y = fn-&gt;ysub_lo_base;
+  SI hi_y = fn-&gt;ysup_lo_base;
+  SI miny2= (fn-&gt;y2 - fn-&gt;yshift) * script (fn-&gt;size, 1) / fn-&gt;size;
+
+  type= 0;
+  if (!is_nil (b1)) type += 1;
+  if (!is_nil (b2)) type += 2;
+
+  if ((!is_nil (b1)) &amp;&amp; (!is_nil (b2))) {
+    SI y= max (b1-&gt;y2, miny2);
+    SI d= lo_y + y + sep - hi_y - b2-&gt;y1;
+    if (d &gt; 0) {
+      lo_y -= (d&gt;&gt;1);
+      hi_y += (d&gt;&gt;1);
+    }
+  }
+  if (!is_nil (b1)) {
+    insert (b1, 0, lo_y);
+    italic_correct (b1);
+  }
+  if (!is_nil (b2)) {
+    insert (b2, 0, hi_y);
+    italic_correct (b2);
+  }
+  position ();
+  if (!is_nil (b1)) italic_restore (b1);
+  if (!is_nil (b2)) italic_restore (b2);
+  left_justify ();
+  y1= min (y1, fn-&gt;ysub_lo_base);
+  y2= max (y2, fn-&gt;ysup_lo_base + fn-&gt;yx);
+  finalize ();
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-38">4.7.<span style="margin-left: 1em"></span>Big operators<span style="margin-left: 1em"></span></h3>
+    <p>
+      Big operators, like the big sum, products or integrals
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-53.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0112837465564739em; vertical-align: -1.15695867768595em; height: 2.9155041322314em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;big|sum&gt;&lt;rsub|n=1&gt;&lt;rsup|N&gt;a&lt;rsub|n&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-54.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.15695867768595em; height: 2.7462479338843em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;big|prod&gt;&lt;rsub|n=1&gt;&lt;rsup|\&lt;infty\&gt;&gt;
+            </p>
+            <p>
+              &lt;around*|(|1-&lt;frac|1|n&gt;|)&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-55.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.563195592286501em; height: 1.78296418732782em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;big|int&gt;x&lt;rsup|2&gt;\&lt;mathd\&gt;x
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <center>
+      
+    </center>
+    <p>
+      It has two basic shapes, either in display style as above or inline as
+      <span class="no-breaks"><img src="texmacs-math-typesetting-57.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.31845730027548em"></img>,</span> <span class="no-breaks"><img src="texmacs-math-typesetting-58.png"
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.468275482093664em; height: 1.50823140495868em"></img>,</span> <span class="no-breaks"><img src="texmacs-math-typesetting-59.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.404275482093664em; height: 1.46514600550964em"></img>.</span>
+    </p>
+    <p>
+      They are typeset by:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_bigop (tree t, path ip) {
+  if ((N(t) == 1) &amp;&amp; is_atomic (t[0])) {
+    space spc= env-&gt;fn-&gt;spc;
+    string l= t[0]-&gt;label;
+    string s= &quot;&lt;big-&quot; * l * &quot;&gt;&quot;;
+    bool flag= (!env-&gt;math_condensed) &amp;&amp; (l != &quot;.&quot;);
+    box b;
+    if (env-&gt;fn-&gt;type == FONT_TYPE_UNICODE) {
+      font mfn= rubber_font (env-&gt;fn);
+      b= big_operator_box (ip, s, mfn, env-&gt;pen,
+                           env-&gt;display_style? 2: 1);
+    }
+    else b= big_operator_box (ip, s, env-&gt;fn, env-&gt;pen,
+                              env-&gt;display_style? 2: 1);
+    print (STD_ITEM, OP_BIG, b);
+    penalty_min (HYPH_PANIC);
+    bool int_flag= false, it_flag= false, lim_flag= true;
+    get_big_flags (l, int_flag, it_flag, lim_flag);
+    if (lim_flag) with_limits (LIMITS_DISPLAY);
+    if (flag) {
+      if (int_flag) {
+        if (env-&gt;fn-&gt;math_type == MATH_TYPE_STIX)
+          print (env-&gt;display_style? (spc / 2): (spc / 4));
+        else if (env-&gt;fn-&gt;math_type == MATH_TYPE_TEX_GYRE)
+          print (env-&gt;display_style? (spc / 2): (spc / 4));
+        else if (it_flag)
+          print (env-&gt;display_style? 0: (spc / 4));
+        else print (spc / 4);
+      }
+      else print (env-&gt;display_style? spc: (spc / 2));
+    }
+    // FIXME: we should use parameters from operator-big class in std-math.syx
+    // FIXME: in concat_post, we add some more space behind big operators
+    //        with scripts; this should be understood better and formalized
+  }
+  else typeset_error (t, ip);
+}</pre>
+      </div>
+    </div>
+    <p>
+      where we note the handling of limits and of the correct spacing after
+      the symbol. The relevant glyph for <tt class="verbatim">&lt;big|sum&gt;</tt> is
+      <tt class="verbatim">&lt;big-sum-N&gt;</tt> where <tt class="verbatim">N=1,2</tt> according
+      to the appropriate size. Note that for Unicode fonts (<tt class="verbatim cpp">type ==
+      FONT_TYPE_UNICODE</tt>) we dispatch the selection of the glyph to a
+      rubber obtained via <tt class="verbatim cpp">rubber_font</tt>.
+    </p>
+    <p>
+      The function <tt class="verbatim cpp">big_operator_box</tt> takes care of the proper
+      vertical placement of the glyph:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+big_operator_box (path ip, string s, font fn, pencil pen, int n) {
+  ASSERT (N(s) &gt;= 2 &amp;&amp; s[0] == '&lt;' &amp;&amp; s[N(s)-1] == '&gt;',
+          &quot;invalid rubber character&quot;);
+  string r= s (0, N(s)-1) * &quot;-&quot; * as_string (n) * &quot;&gt;&quot;;
+  metric ex;
+  fn-&gt;get_extents (r, ex);
+  SI y= fn-&gt;yfrac - ((ex-&gt;y1 + ex-&gt;y2) &gt;&gt; 1);
+  box mvb= move_box (ip, text_box (ip, 0, r, fn, pen), 0, y, false, true);
+  return macro_box (ip, mvb, fn, BIG_OP_BOX);
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-39">4.8.<span style="margin-left: 1em"></span>Big delimiters<span style="margin-left: 1em"></span></h3>
+    <p>
+      The automatic positioning and computation of sizes of big delimiters is
+      again complicated because of potential conflicts between locally and
+      globally optimal esthetics.
+    </p>
+    <p>
+      First of all, TeX fonts come only with a discrete set of possible sizes
+      for large delimiters. This is an advantage from the point of view that
+      it favorites delimiters around slightly different expressions to have
+      the same baselines. However, it has the disadvantage that delimiters are
+      easily made &ldquo;one size to large&rdquo;. For this reason, we
+      actually diminish the height and the depth of the delimited expression
+      by the small amount <tt class="verbatim">sep</tt>, before computing the sizes of
+      the delimiters.
+    </p>
+    <p>
+      Secondly, it is best when the vertical middles of big delimiters occur
+      at the height of fraction bars. However, in a formula like
+    </p>
+    <center>
+      <img src="texmacs-math-typesetting-60.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0363636363636362em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -2.65205509641873em; height: 4.38485950413223em"></img>
+    </center>
+    <p>
+      it may be worth it to descend the delimiters a bit. On the other hand,
+      slight vertical shifts in the middles of the delimiters potentially have
+      a bad effect on base lines, like in
+    </p>
+    <center>
+      <img src="texmacs-math-typesetting-61.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0345344352617079em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063359em; vertical-align: -1.3212782369146em; height: 3.14677685950413em"></img>
+    </center>
+    <p>
+      In TeXmacs, we use the following compromise: we start with the middle of
+      the delimited expression as a first approximation to the middle of the
+      delimiters. The real middle is obtained by shifting this middle towards
+      the height of fraction bars by an amount which cannot exceed <tt class="verbatim">sep</tt>.
+    </p>
+    <p>
+      From a horizontal point of view, we finally have to notice that we
+      adapted the metrics of the big delimiters in a way that potential
+      scripts are positioned in a better way. For instance, according to the
+      TeX <tt class="verbatim">tfm</tt> file, in a formula like
+    </p>
+    <center>
+      <img src="texmacs-math-typesetting-62.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0623911845730027em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -1.21796143250689em; height: 2.93769696969697em"></img>
+    </center>
+    <p>
+      the square rather seems to be a left superscript of the second closing
+      bracket than a right superscript of the first one. This is particularly
+      annoying in the case of automatically generated formulas, where this
+      situation occurs quite often.
+    </p>
+    <p>
+      Markup looks like
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-63.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0094545454545456em; vertical-align: -0.795482093663912em; height: 2.11570247933884em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;around*|[|
+            </p>
+            <p>
+              <span style="margin-left: 1em"></span>&lt;around*|{|
+            </p>
+            <p>
+              <span style="margin-left: 3em"></span>&lt;frac|1|2&gt;+\&lt;cdots\&gt;+&lt;frac|3|4&gt;
+            </p>
+            <p>
+              <span style="margin-left: 1em"></span>|}&gt;+\&lt;alpha\&gt;
+            </p>
+            <p>
+              |]&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      
+    </p>
+    <p>
+      for automatic sizing of the brackets and like
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-64.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.795482093663912em; height: 2.11570247933884em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              &lt;around*|&lt;left|[|5&gt;|
+            </p>
+            <p>
+              <span style="margin-left: 1em"></span>&lt;around*|&lt;left|{|2&gt;|
+            </p>
+            <p>
+              <span style="margin-left: 3em"></span>1+\&lt;cdots\&gt;+3
+            </p>
+            <p>
+              <span style="margin-left: 1em"></span>|&lt;right|}|2&gt;&gt;+\&lt;alpha\&gt;
+            </p>
+            <p>
+              |&lt;right|]|5&gt;&gt;
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      for manual sizing. The typesetting of big delimiters proceeds in various
+      phases. A first phase fixes the basic structure and horizontal
+      positioning of the three arguments of the <tt class="verbatim">around</tt> tag. If
+      requested via an appropriate environment variable, we use different
+      colors to emphasize the matching brackets.
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_around (tree t, path ip, bool colored) {
+  tree old_nl=
+    env-&gt;local_begin (MATH_NESTING_LEVEL, as_string (env-&gt;nesting_level + 1));
+  if (colored) {
+    tree old_col= env-&gt;local_begin (COLOR, bracket_color (env-&gt;nesting_level));
+    typeset_around (t, ip, false);
+    env-&gt;local_end (COLOR, old_col);
+  }
+  else {
+    marker (descend (ip, 0));
+    switch (L(t)) {
+    case AROUND:
+      if (N(t) == 3) {
+        box br1= typeset_as_concat (env, t[0], descend (ip, 0));
+        print (STD_ITEM, OP_OPENING_BRACKET, br1);
+        typeset (t[1], descend (ip, 1));
+        box br2= typeset_as_concat (env, t[2], descend (ip, 2));
+        print (STD_ITEM, OP_CLOSING_BRACKET, br2);
+      }
+      else typeset_error (t, ip);
+      break;
+    case VAR_AROUND:
+      if (N(t) == 3) {
+        font old_fn= env-&gt;fn;
+        font new_fn= env-&gt;fn;
+        if (starts (new_fn-&gt;res_name, &quot;stix-&quot;))
+          //if (new_fn-&gt;type == FONT_TYPE_UNICODE)
+          new_fn= rubber_font (new_fn);
+        env-&gt;fn= new_fn;
+        typeset (make_large (LEFT, t[0]),
+                 decorate_middle (descend (ip, 0)));
+        env-&gt;fn= old_fn;
+        typeset (t[1], descend (ip, 1));
+        env-&gt;fn= new_fn;
+        typeset (make_large (RIGHT, t[2]),
+                 decorate_middle (descend (ip, 2)));
+        env-&gt;fn= old_fn;
+      }
+      else typeset_error (t, ip);
+      break;
+    case BIG_AROUND:
+      if (N(t) == 2) {
+        typeset (make_large (BIG, t[0]),
+                 decorate_middle (descend (ip, 0)));
+        typeset (t[1], descend (ip, 1));
+      }
+      else typeset_error (t, ip);
+      break;
+    default:
+      break;
+    }
+    marker (descend (ip, 1));
+  }
+  env-&gt;local_end (MATH_NESTING_LEVEL, old_nl);
+}</pre>
+      </div>
+    </div>
+    <p>
+      The expression <tt class="verbatim cpp">make_large (LEFT, t[0])</tt> ensures that the
+      first and third subtrees have a specific structure, of the form <tt
+      class="verbatim">&lt;left|[|5&gt;</tt> for a fixed size or <tt class="verbatim">&lt;left|[&gt;</tt>
+      if there is automatic sizing.
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+static tree
+make_large (tree_label l, tree t) {
+  if (!is_atomic (t)) {
+    if (is_func (t, l)) {
+      if (N(t) == 2 &amp;&amp; is_atomic (t[0]) &amp;&amp; is_int (t[1])) {
+        string s= t[0]-&gt;label;
+        if (N(s) &gt;= 3 &amp;&amp; s[0] == '&lt;' &amp;&amp; s[N(s)-1] == '&gt;') s= s (1, N(s)-1);
+        return tree (l, s * &quot;-&quot; * t[1]-&gt;label);
+      }
+      else return t;
+    }
+    else return tree (l, &quot;.&quot;);
+  }
+  string s= t-&gt;label;
+  if (N(s) &lt;= 1) return tree (l, s);
+  if (s[0] != '&lt;' || s[N(s)-1] != '&gt;' || s == &quot;&lt;nobracket&gt;&quot;)
+    return tree (l, &quot;.&quot;);
+  return tree (l, s (1, N(s)-1));
+}</pre>
+      </div>
+    </div>
+    <p>
+      The typesetting of <tt class="verbatim">LEFT</tt>, <tt class="verbatim">RIGHT</tt> and <tt
+      class="verbatim">MID</tt> markup is dispatched as follows in <tt class="verbatim cpp">concater_rep::typeset</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+  case LEFT:
+    typeset_large (t, ip, LEFT_BRACKET_ITEM, OP_OPENING_BRACKET, &quot;&lt;left-&quot;);
+    break;
+  case MID:
+    typeset_wide_middle (t, ip);
+    break;
+  case RIGHT:
+    typeset_large (t, ip, RIGHT_BRACKET_ITEM, OP_CLOSING_BRACKET, &quot;&lt;right-&quot;);
+    break;</pre>
+      </div>
+    </div>
+    <p>
+      and realised as follows:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_large (tree t, path ip, int tp, int otp, string prefix) {
+  font old_fn= env-&gt;fn;
+  if (starts (old_fn-&gt;res_name, &quot;stix-&quot;))
+    //if (old_fn-&gt;type == FONT_TYPE_UNICODE)
+    env-&gt;fn= rubber_font (old_fn);
+  
+  if (N(t) &lt; 1 || !is_atomic (t[0]))
+    typeset_error (t, ip);
+  else {
+    string br= t[0]-&gt;label;
+    if (N(br) &gt; 2 &amp;&amp; br[0] == '&lt;' &amp;&amp; br[N(br)-1] == '&gt;')
+      br= br (1, N(br) - 1);
+    if (N(t) == 1) {
+      string s= prefix * br * &quot;&gt;&quot;;
+      box b= text_box (ip, 0, s, env-&gt;fn, env-&gt;pen);
+      print (tp, otp, b);
+      // temporarary: use parameters from group-open class in std-math.syx
+      // bug: allow hyphenation after ) and before *
+    }
+    else if (N(t) == 2 &amp;&amp; is_int (t[1])) {
+      int nr= max (as_int (t[1]-&gt;label), 0);
+      string s= prefix * br * &quot;-&quot; * as_string (nr) * &quot;&gt;&quot;;
+      box b= text_box (ip, 0, s, env-&gt;fn, env-&gt;pen);
+      SI dy= env-&gt;fn-&gt;yfrac - ((b-&gt;y1 + b-&gt;y2) &gt;&gt; 1);
+      box mvb= move_box (ip, b, 0, dy, false, true);
+      print (STD_ITEM, otp, macro_box (ip, mvb, env-&gt;fn));
+    }
+    else {
+      SI y1, y2;
+      if (N(t) == 2) {
+        SI l= env-&gt;as_length (t[1]) &gt;&gt; 1;
+        y1= env-&gt;fn-&gt;yfrac - l;
+        y2= env-&gt;fn-&gt;yfrac + l;
+      }
+      else {
+        y1= env-&gt;as_length (t[1]);
+        y2= env-&gt;as_length (t[2]);
+      }
+      string s= prefix * br * &quot;&gt;&quot;;
+      box b= delimiter_box (ip, s, env-&gt;fn, env-&gt;pen, y1, y2);
+      print (STD_ITEM, otp, b);
+    }
+  }
+
+  env-&gt;fn= old_fn;
+}</pre>
+      </div>
+    </div>
+    <p>
+      Note that the main branch for markup like <tt class="verbatim">&lt;left|[&gt;</tt>
+      produces only a text box with an appropriate glyph. The vertical size of
+      the glyph is still not correct at this point. Since it depends on the
+      globality of the current expression and not known when typesetting the
+      left bracket. It will be determined later on. See Section <a href="#sec:finalization">4.11</a>.
+    </p>
+    <h3 id="auto-40">4.9.<span style="margin-left: 1em"></span>Long arrows<span style="margin-left: 1em"></span></h3>
+    <p>
+      Long arrows refers to the following markup:
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-65.png" style="margin-left: -0.0564187327823691em; margin-bottom: -2.20385674930546e-5em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.801079889807163em; height: 1.88881542699725em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              <font color="black">A</font><font color="black"><font color="blue">&lt;</font>long-arrow<font
+              color="blue">|</font><font color="black">&lt;rubber-rightarrow&gt;</font><font
+              color="blue">|</font><font color="black"></font><font color="blue">|</font><font
+              color="black"><font color="blue">&lt;</font>text<font color="blue">|</font><font
+              color="#C68">a long arrow</font><font color="blue">&gt;</font></font><font
+              color="blue">&gt;</font></font><font color="black">B</font>
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      allowing for material above and below. The typesetting of long arrows do
+      not require further mechanisms to those already put in place for wide
+      boxes:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_long_arrow (tree t, path ip) {
+  if (N(t) != 2 &amp;&amp; N(t) != 3) { typeset_error (t, ip); return; }
+  tree old_ds= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+  tree old_mc= env-&gt;local_begin (MATH_CONDENSED, &quot;true&quot;);
+  tree old_il= env-&gt;local_begin_script ();
+  box sup_b, sub_b;
+  if (N(t) &gt;= 2) {
+    tree old_vp= env-&gt;local_begin (MATH_VPOS, &quot;-1&quot;);
+    sup_b= typeset_as_concat (env, t[1], descend (ip, 1));
+    env-&gt;local_end (MATH_VPOS, old_vp);
+  }
+  if (N(t) &gt;= 3) {
+    tree old_vp= env-&gt;local_begin (MATH_VPOS, &quot;1&quot;);
+    sub_b= typeset_as_concat (env, t[2], descend (ip, 2));
+    env-&gt;local_end (MATH_VPOS, old_vp);
+  }
+  env-&gt;local_end_script (old_il);
+  env-&gt;local_end (MATH_CONDENSED, old_mc);
+  env-&gt;local_end (MATH_DISPLAY, old_ds);
+
+  string s= env-&gt;exec_string (t[0]);
+  SI w= sup_b-&gt;w();
+  if (N(t) == 3) w= max (w, sub_b-&gt;w());
+  w += env-&gt;fn-&gt;wquad;
+  box arrow= wide_box (decorate (descend (ip, 0)), s, env-&gt;fn, env-&gt;pen, w);
+
+  space spc= env-&gt;fn-&gt;spc;
+  if (env-&gt;math_condensed) spc= space (spc-&gt;min&gt;&gt;3, spc-&gt;def&gt;&gt;3, spc-&gt;max&gt;&gt;2);
+  else spc= space (spc-&gt;min&gt;&gt;1, spc-&gt;def&gt;&gt;1, spc-&gt;max);
+  print (spc);
+  print (limit_box (ip, arrow, sub_b, sup_b, env-&gt;fn, false));
+  print (spc);
+}</pre>
+      </div>
+    </div>
+    <p>
+      It introduces <tt class="verbatim cpp">lim_box_rep</tt> which takes care of the
+      relative positioning of the various subboxes (<tt class="verbatim cpp">limit_box</tt>
+      returns a <tt class="verbatim cpp">lim_box_rep</tt>):
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+lim_box_rep::lim_box_rep (path ip, box r2, box lo, box hi, font fn2, bool gl):
+  composite_box_rep (ip), ref (r2), fn (fn2), glued (gl)
+{
+  SI sep_lo= fn-&gt;sep + fn-&gt;yshift;
+  SI sep_hi= fn-&gt;sep + (fn-&gt;yshift &gt;&gt; 1);
+  SI X, Y;
+  insert (ref, 0, 0);
+  type= 0;
+  if (!is_nil (lo)) type += 1;
+  if (!is_nil (hi)) type += 2;
+  if (!is_nil (lo)) {
+    SI top= max (lo-&gt;y2, fn-&gt;y2 * script (fn-&gt;size, 1) / fn-&gt;size) + sep_lo;
+    Y= ref-&gt;y1;
+    X= ((SI) (ref-&gt;right_slope ()* (Y+top-lo-&gt;y1))) + ((ref-&gt;x1+ref-&gt;x2)&gt;&gt;1);
+    insert (lo, X- (lo-&gt;x2 &gt;&gt; 1), Y-top);
+    italic_correct (lo);
+  }
+  if (!is_nil (hi)) {
+    SI bot= min (hi-&gt;y1, fn-&gt;y1 * script (fn-&gt;size, 1) / fn-&gt;size) - sep_hi;
+    Y= ref-&gt;y2;
+    X= ((SI) (ref-&gt;right_slope ()*(Y+hi-&gt;y2-bot))) + ((ref-&gt;x1+ref-&gt;x2)&gt;&gt;1);
+    insert (hi, X- (hi-&gt;x2 &gt;&gt; 1), Y-bot);
+    italic_correct (hi);
+  }
+  italic_correct (ref);
+  position ();
+  italic_restore (ref);
+  if (!is_nil (lo)) italic_restore (lo);
+  if (!is_nil (hi)) italic_restore (hi);
+  left_justify ();
+  finalize ();
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-41">4.10.<span style="margin-left: 1em"></span>Above and below boxes<span style="margin-left: 1em"></span></h3>
+    <p>
+      The <font class="tmweb-markup">below</font> and <font class="tmweb-markup">above</font> tags are
+      used to explicitly attach a <font color="brown"><i>script</i></font> below or
+      above a given <font color="brown"><i>content</i></font>. Both can be mixed in
+      order to produce content with both a script below and above:
+    </p>
+    <table style="width: 100%">
+      <tbody><tr>
+        <td style="width: 50%; padding-left: 0em"><center>
+          <img src="texmacs-math-typesetting-66.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889806em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.72em; height: 1.81901928374656em"></img>
+        </center></td>
+        <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+          <div class="tmweb-code">
+            <p>
+              <font color="blue">&lt;</font>math<font color="blue">|</font><font color="#C68"><font
+              color="black"> </font><font color="black"><font color="blue">&lt;</font>above<font
+              color="blue">|</font><font color="black"><font color="blue">&lt;</font>below<font
+              color="blue">|</font><font color="black">xor</font><font color="blue">|</font><font
+              color="black">i=1</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+              color="black">&infin;</font><font color="blue">&gt;</font></font><font color="black">
+              x</font><font color="black"><font color="blue">&lt;</font>rsub<font color="blue">|</font><font
+              color="black">i</font><font color="blue">&gt;</font></font></font><font
+              color="blue">&gt;</font>
+            </p>
+          </div>
+        </div></td>
+      </tr></tbody>
+    </table>
+    <p>
+      Like long arrows, above and below tags also rely on <tt class="verbatim cpp">lim_box_rep</tt>
+      for their graphical rendering:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_below (tree t, path ip) {
+  if (N(t) != 2) { typeset_error (t, ip); return; }
+  box b1= typeset_as_concat (env, t[0], descend (ip, 0));
+  tree old_ds= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+  tree old_mc= env-&gt;local_begin (MATH_CONDENSED, &quot;true&quot;);
+  tree old_il= env-&gt;local_begin_script ();
+  box b2= typeset_as_concat (env, t[1], descend (ip, 1));
+  env-&gt;local_end_script (old_il);
+  env-&gt;local_end (MATH_CONDENSED, old_mc);
+  env-&gt;local_end (MATH_DISPLAY, old_ds);
+  print (limit_box (ip, b1, b2, box (), env-&gt;fn, false));
+}</pre>
+      </div>
+    </div>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::typeset_above (tree t, path ip) {
+  if (N(t) != 2) { typeset_error (t, ip); return; }
+  box b1= typeset_as_concat (env, t[0], descend (ip, 0));
+  tree old_ds= env-&gt;local_begin (MATH_DISPLAY, &quot;false&quot;);
+  tree old_mc= env-&gt;local_begin (MATH_CONDENSED, &quot;true&quot;);
+  tree old_il= env-&gt;local_begin_script ();
+  box b2= typeset_as_concat (env, t[1], descend (ip, 1));
+  env-&gt;local_end_script (old_il);
+  env-&gt;local_end (MATH_CONDENSED, old_mc);
+  env-&gt;local_end (MATH_DISPLAY, old_ds);
+  // NOTE: start dirty hack to get scripts above &hellip; right
+  if ((t[0] == &quot;&lt;ldots&gt;&quot; &amp;&amp; env-&gt;read (&quot;low-dots&quot;) != UNINIT) ||
+      (t[0] == &quot;&lt;cdots&gt;&quot; &amp;&amp; env-&gt;read (&quot;center-dots&quot;) != UNINIT)) {
+    string s= (t[0] == &quot;&lt;ldots&gt;&quot;? &quot;,&quot;: &quot;&lt;cdot&gt;&quot;);
+    box tb= typeset_as_concat (env, s, decorate_middle (descend (ip, 0)));
+    b1= resize_box (descend (ip, 0), b1, b1-&gt;x1, b1-&gt;y1, b1-&gt;x2, tb-&gt;y2);
+  }
+  // NOTE: end dirty hack to get scripts above &hellip; right
+  print (limit_box (ip, b1, box (), b2, env-&gt;fn, false));
+}</pre>
+      </div>
+    </div>
+    <h3 id="auto-42"><a id="sec:finalization"></a>4.11.<span style="margin-left: 1em"></span>Finalization<span style="margin-left: 1em"></span></h3>
+    <p>
+      The computation of the correct size of extensible brackets and the
+      proper placement of super/sub-scripts require a second pass through the
+      <tt class="verbatim cpp">line_item</tt> array that <tt class="verbatim cpp">concater</tt> is
+      currently typesetting. This triggered by <tt class="verbatim cpp">concater_rep::finish
+      ()</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::finish () {
+  kill_spaces ();
+  pre_glue ();
+  handle_brackets ();
+  clean_and_correct ();
+}</pre>
+      </div>
+    </div>
+    <p>
+      <tt class="verbatim">kill_spaces</tt> and <tt class="verbatim">pre_glue</tt> simplify the
+      <tt class="verbatim">line_items</tt> array:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+/******************************************************************************
+* Kill invalid spaces
+******************************************************************************/
+
+void
+concater_rep::kill_spaces () {
+  int i;
+  for (i=N(a)-1; (i&gt;0) &amp;&amp; (a[i]-&gt;type == CONTROL_ITEM); i--)
+    a[i-1]-&gt;spc= space (0);
+  for (i=0; (i&lt;N(a)) &amp;&amp; (a[i]-&gt;type == CONTROL_ITEM); i++)
+    a[i]-&gt;spc= space (0);
+
+  for (i=0; i&lt;N(a); i++)
+    if (a[i]-&gt;type==CONTROL_ITEM) {
+      if (is_formatting (a[i]-&gt;t)) {
+        tree_label lab= L(a[i]-&gt;t);
+        if ((lab==NEXT_LINE) || (lab==LINE_BREAK) || (lab==NEW_LINE))
+          {
+            if (i&gt;0) a[i-1]-&gt;spc= space (0);
+            a[i]-&gt;spc= space (0);
+          }
+      }
+
+      if (is_tuple (a[i]-&gt;t, &quot;env_par&quot;) ||
+          is_tuple (a[i]-&gt;t, &quot;env_page&quot;))
+        a[i]-&gt;spc= space (0);
+    }
+}</pre>
+      </div>
+    </div>
+    <p>
+      while <tt class="verbatim cpp">pre_glue</tt> put together neightbor sub and super
+      scripts on the same side labelling them with the line items type <tt
+      class="verbatim cpp">GLUE_LSUBS_ITEM</tt> or <tt class="verbatim cpp">GLUE_RSUBS_ITEM</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+
+void
+concater_rep::pre_glue () {
+  int i=0;
+  while (true) {
+    int j= succ(i);
+    if (j &gt;= N(a)) break;
+    line_item item1= a[i];
+    line_item item2= a[j];
+    int t1= item1-&gt;type;
+    int t2= item2-&gt;type;
+    if (((t1 == RSUB_ITEM) &amp;&amp; (t2 == RSUP_ITEM)) ||
+        ((t1 == RSUP_ITEM) &amp;&amp; (t2 == RSUB_ITEM)) ||
+        ((t1 == LSUB_ITEM) &amp;&amp; (t2 == LSUP_ITEM)) ||
+        ((t1 == LSUP_ITEM) &amp;&amp; (t2 == LSUB_ITEM)))
+      {
+        bool  flag1 = (t1 == LSUB_ITEM) || (t1 == RSUB_ITEM);
+        bool  flag2 = (t1 == LSUB_ITEM) || (t1 == LSUP_ITEM);
+        int   type  = flag2? GLUE_LSUBS_ITEM: GLUE_RSUBS_ITEM;
+        box   b1    = flag1? item1-&gt;b[0]: item2-&gt;b[0];
+        box   b2    = flag1? item2-&gt;b[0]: item1-&gt;b[0];
+        box   b     = script_box (b1-&gt;ip, b1, b2, env-&gt;fn);
+        int   pen   = item2-&gt;penalty;
+        space spc   = max (item1-&gt;spc, item2-&gt;spc);
+
+        a[i]= line_item (type, OP_SKIP, b, pen);
+        a[i]-&gt;spc = spc;
+        for (int k=i+1; k&lt;j; k++)
+          if (a[k]-&gt;type == MARKER_ITEM)
+            a[k]= line_item (OBSOLETE_ITEM, OP_SKIP, a[k]-&gt;b, a[k]-&gt;penalty);
+        a[j]= line_item (OBSOLETE_ITEM, OP_SKIP, item2-&gt;b, pen);
+      }
+    i++;
+  }
+}</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      The function <tt class="verbatim cpp">handle_brackets</tt> fixes the size of the
+      extensible brackets and middle marks and also the global placement of
+      scripts :
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::handle_brackets () {
+  int first=-1, start=0, i=0;
+  while (i&lt;N(a)) {
+    if (a[i]-&gt;type==LEFT_BRACKET_ITEM) {
+      if (first==-1) first= i;
+      start= i;
+    }
+    if (a[i]-&gt;type==RIGHT_BRACKET_ITEM) {
+      handle_scripts  (succ (start), prec (i));
+      handle_matching (start, i);
+      if (first!=-1) i=first-1;
+      start= 0;
+      first= -1;
+    }
+    i++;
+  }
+  if (N(a)&gt;0) {
+    handle_scripts  (0, N(a)-1);
+    handle_matching (0, N(a)-1);
+  }
+}</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      The placement of scripts is the job of <tt class="verbatim cpp">handle_scripts</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::handle_scripts (int start, int end) {
+  int i;
+  for (i=start; i&lt;=end; ) {
+    if ((a[i]-&gt;type == OBSOLETE_ITEM) ||
+        (a[i]-&gt;type == LSUB_ITEM) ||
+        (a[i]-&gt;type == LSUP_ITEM) ||
+        (a[i]-&gt;type == GLUE_LSUBS_ITEM) ||
+        (a[i]-&gt;type == RSUB_ITEM) ||
+        (a[i]-&gt;type == RSUP_ITEM) ||
+        (a[i]-&gt;type == GLUE_RSUBS_ITEM) ||
+        (a[i]-&gt;type == CONTROL_ITEM &amp;&amp; L(a[i]-&gt;t) == DATOMS)) {
+      i++; continue; }
+
+    path sip;
+    int l= prec (i);
+    box lb1, lb2;
+    if (l &lt; start) l= -1;
+    else switch (a[l]-&gt;type) {
+    case LSUB_ITEM:
+      lb1= a[l]-&gt;b[0]; sip= lb1-&gt;ip;
+      break;
+    case LSUP_ITEM:
+      lb2= a[l]-&gt;b[0]; sip= lb2-&gt;ip;
+      break;
+    case GLUE_LSUBS_ITEM:
+      lb1= a[l]-&gt;b[0]; lb2= a[l]-&gt;b[1];
+      sip= lb2-&gt;ip;
+      break;
+    default:
+      l = -1;
+    }
+
+    int r= succ (i);
+    box rb1, rb2;
+    if (r &gt; end) r= N(a);
+    else switch (a[r]-&gt;type) {
+    case RSUB_ITEM:
+      rb1= a[r]-&gt;b[0]; sip= rb1-&gt;ip;
+      break;
+    case RSUP_ITEM:
+      rb2= a[r]-&gt;b[0]; sip= rb2-&gt;ip;
+      break;
+    case GLUE_RSUBS_ITEM:
+      rb1= a[r]-&gt;b[0]; rb2= a[r]-&gt;b[1];
+      sip= rb2-&gt;ip;
+      break;
+    default:
+      r = N(a);
+    }
+
+    box b;
+    if (l==-1) {
+      if (r==N(a)) { i++; continue; }
+      else {
+        font ref_fn= get_reference_font (a[i]-&gt;b, env-&gt;fn);
+        box mb= glue_right_markers (a[i]-&gt;b, i, r, false);
+        if (a[i]-&gt;limits)
+          b= limit_box (sip, mb, rb1, rb2, ref_fn, true);
+        else
+          b= right_script_box (sip, mb, rb1, rb2, ref_fn, env-&gt;vert_pos);
+        glue (b, i, r);
+      }
+    }
+    else {
+      font ref_fn= get_reference_font (a[i]-&gt;b, env-&gt;fn);
+      box mb= glue_left_markers (a[i]-&gt;b, i, l);
+      if (r==N(a)) {
+        b= left_script_box (sip, mb, lb1, lb2, ref_fn, env-&gt;vert_pos);
+        glue (b, i, l);
+      }
+      else {
+        mb= glue_right_markers (mb, i, r, true);
+        b = side_box (sip, mb, lb1, lb2, rb1, rb2, ref_fn, env-&gt;vert_pos);
+        glue (b, i, l, r);
+      }
+    }
+  }
+}</pre>
+      </div>
+    </div>
+    <p>
+      with the help of the following subsidiary routines: <font color="#800000">[explain
+      more]</font>
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+concater_rep::glue_left_markers (box b, int ref, int arg) {
+  int i= arg+1;
+  while (i &lt; ref &amp;&amp; a[i]-&gt;type == OBSOLETE_ITEM) i++;
+  if (i &gt;= ref) return b;
+  array&lt;box&gt; bs;
+  array&lt;SI&gt;  spc;
+  while (i &lt; ref) {
+    if (a[i]-&gt;type == MARKER_ITEM) {
+      bs  &lt;&lt; a[i]-&gt;b;
+      spc &lt;&lt; 0;
+      a[i]-&gt;type= OBSOLETE_ITEM;
+    }
+    i++;
+  }
+  bs  &lt;&lt; b;
+  spc &lt;&lt; 0;
+  return concat_box (b-&gt;ip, bs, spc);
+}
+
+box
+concater_rep::glue_right_markers (box b, int ref, int arg, bool flag) {
+  int i= ref+1;
+  while (i &lt; arg &amp;&amp; a[i]-&gt;type == OBSOLETE_ITEM) i++;
+  if (i &gt;= arg) return b;
+  array&lt;box&gt; bs;
+  array&lt;SI&gt;  spc;
+  if (flag) {
+    for (int j=0; j&lt;N(b); j++) {
+      bs  &lt;&lt; b[j];
+      spc &lt;&lt; 0;
+    }
+  }
+  else {
+    bs  &lt;&lt; b;
+    spc &lt;&lt; 0;
+  }
+  while (i &lt; arg) {
+    if (a[i]-&gt;type == MARKER_ITEM) {
+      bs  &lt;&lt; a[i]-&gt;b;
+      spc &lt;&lt; 0;
+      a[i]-&gt;type= OBSOLETE_ITEM;
+    }
+    i++;
+  }
+  return concat_box (b-&gt;ip, bs, spc);
+}
+
+void
+concater_rep::glue (box b, int ref, int arg) {
+  if (a[ref]-&gt;op_type == OP_BIG &amp;&amp; arg &gt;= ref &amp;&amp; !a[ref]-&gt;limits) {
+    font ref_fn= get_reference_font (a[ref]-&gt;b, env-&gt;fn);
+    if (ref_fn-&gt;math_type != MATH_TYPE_NORMAL)
+      if (a[ref]-&gt;spc-&gt;def &gt; 0) {
+        space spc= ref_fn-&gt;spc;
+        a[ref]-&gt;spc += space (spc-&gt;min/3, spc-&gt;def/3, spc-&gt;def/3);
+      }
+  }
+  
+  space spc = max (a[ref]-&gt;spc, a[arg]-&gt;spc);
+
+  a[arg]  = line_item (OBSOLETE_ITEM, OP_SKIP, a[arg]-&gt;b, a[arg]-&gt;penalty);
+  a[ref]  = line_item (arg&lt;ref? GLUE_LEFT_ITEM: GLUE_RIGHT_ITEM,
+                       a[ref]-&gt;op_type, b,
+                       min (a[ref]-&gt;penalty, a[arg]-&gt;penalty));
+  a[ref]-&gt;spc = spc;
+}
+
+void
+concater_rep::glue (box b, int ref, int arg1, int arg2) {
+  if (a[ref]-&gt;op_type == OP_BIG &amp;&amp; !a[ref]-&gt;limits) {
+    font ref_fn= get_reference_font (a[ref]-&gt;b, env-&gt;fn);
+    if (ref_fn-&gt;math_type != MATH_TYPE_NORMAL)
+      if (a[ref]-&gt;spc-&gt;def &gt; 0) {
+        space spc= ref_fn-&gt;spc;
+        a[ref]-&gt;spc += space (spc-&gt;min/3, spc-&gt;def/3, spc-&gt;def/3);
+      }
+  }
+
+  space spc = max (a[ref]-&gt;spc, max (a[arg1]-&gt;spc, a[arg2]-&gt;spc));
+  int   pen = min (a[ref]-&gt;penalty, min (a[arg1]-&gt;penalty, a[arg2]-&gt;penalty));
+
+  space ref_spc= a[ref]-&gt;spc;
+  a[arg1]= line_item (OBSOLETE_ITEM, OP_SKIP, a[arg1]-&gt;b, a[arg1]-&gt;penalty);
+  a[arg2]= line_item (OBSOLETE_ITEM, OP_SKIP, a[arg2]-&gt;b, a[arg2]-&gt;penalty);
+  a[ref]= line_item (GLUE_BOTH_ITEM, a[ref]-&gt;op_type, b, pen);
+  a[ref]-&gt;spc = spc;
+}</pre>
+      </div>
+    </div>
+    <p>
+      
+    </p>
+    <p>
+      Finally, the sizing of the brackets is the job of <tt class="verbatim cpp">handle_matching</tt>:
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+void
+concater_rep::handle_matching (int start, int end) {
+  //cout &lt;&lt; &quot;matching &quot; &lt;&lt; start &lt;&lt; &quot; -- &quot; &lt;&lt; end &lt;&lt; &quot;\n&quot;;
+  //cout &lt;&lt; a &lt;&lt; &quot;\n\n&quot;;
+  int i;
+  SI y1=  MAX_SI;
+  SI y2= -MAX_SI;
+  bool uninit= true;
+  a[start]-&gt;penalty++;
+  a[end]-&gt;penalty++;
+  for (i=start+1; i&lt;end; i++) {
+    if (a[i]-&gt;type == OBSOLETE_ITEM) continue;
+    // cout &lt;&lt; &quot;  &quot; &lt;&lt; a[i] &lt;&lt; &quot;: &quot; &lt;&lt; (a[i]-&gt;b-&gt;y2- a[i]-&gt;b-&gt;y1) &lt;&lt; &quot;\n&quot;;
+    // y1= min (y1, a[i]-&gt;b-&gt;sub_base());
+    // y2= max (y2, a[i]-&gt;b-&gt;sup_base());
+    SI lo, hi;
+    a[i]-&gt;b-&gt;get_bracket_extents (lo, hi);
+    y1= min (y1, lo);
+    y2= max (y2, hi);
+    a[i]-&gt;penalty++;
+    uninit= false;
+  }
+  if (uninit) {
+    y1= min (a[start]-&gt;b-&gt;y1, a[end]-&gt;b-&gt;y2);
+    y2= max (a[start]-&gt;b-&gt;y1, a[end]-&gt;b-&gt;y2);
+  }
+
+  for (i=start; i&lt;=end; i++) {
+    int tp= a[i]-&gt;type;
+    if (tp == LEFT_BRACKET_ITEM ||
+        tp == MIDDLE_BRACKET_ITEM ||
+        tp == RIGHT_BRACKET_ITEM)
+      {
+        string ls= a[i]-&gt;b-&gt;get_leaf_string ();
+        pencil lp= a[i]-&gt;b-&gt;get_leaf_pencil ();
+        font   fn= a[i]-&gt;b-&gt;get_leaf_font ();
+
+        // find the middle of the bracket, around where to center
+        SI mid= (a[i]-&gt;b-&gt;y1 + a[i]-&gt;b-&gt;y2) &gt;&gt; 1;
+        bool custom=
+          N(ls) &gt; 2 &amp;&amp; is_digit (ls[N(ls)-2]) &amp;&amp; !ends (ls, &quot;-0&gt;&quot;);
+        if (custom) {
+          int pos= N(ls)-1;
+          while (pos &gt; 0 &amp;&amp; ls[pos] != '-') pos--;
+          if (pos &gt; 0 &amp;&amp; ls[pos-1] == '-') pos--;
+          string ss= ls (0, pos) * &quot;&gt;&quot;;
+          box auxb= text_box (a[i]-&gt;b-&gt;ip, 0, ss, fn, lp);
+          mid= (auxb-&gt;y1 + auxb-&gt;y2) &gt;&gt; 1;
+        }
+
+        // make symmetric and prevent from too large delimiters if possible
+        SI Y1   = y1 + (fn-&gt;sep &gt;&gt; 1);
+        SI Y2   = y2 - (fn-&gt;sep &gt;&gt; 1);
+        SI tol  = fn-&gt;sep &lt;&lt; 1;
+        SI drift= ((Y1 + Y2) &gt;&gt; 1) - mid; // fn-&gt;yfrac;
+        if (drift &lt; 0) Y2 += min (-drift, tol) &lt;&lt; 1;
+        else Y1 -= min (drift, tol) &lt;&lt; 1;
+
+        // further adjustments when the enclosed expression is not very high
+        // and for empty brackets
+        SI h= y2 - y1 - fn-&gt;sep;
+        SI d= 5 * fn-&gt;yx - h;
+        if (d &gt; 0) { Y1 += d/12; Y2 -= d/12; }
+        if (N(ls) &gt;= 8 &amp;&amp; (ls[6] == '.' || ls[7] == '.'))
+          if (starts (ls, &quot;&lt;left-.&quot;) || starts (ls, &quot;&lt;right-.&quot;)) {
+            Y1 += d/6; Y2 -= d/12; }
+
+        // replace item by large or small delimiter
+        if (Y1 &lt; fn-&gt;y1 || Y2 &gt; fn-&gt;y2 || custom || use_poor_rubber (fn))
+          a[i]-&gt;b= delimiter_box (a[i]-&gt;b-&gt;ip, ls, fn, lp, Y1, Y2, mid, y1, y2);
+        else {
+          string s= &quot;&lt;nobracket&gt;&quot;;
+          int j;
+          for (j=0; j&lt;N(ls); j++)
+            if (ls[j] == '-') break;
+          if (j&lt;N(ls) &amp;&amp; ls[N(ls)-1] == '&gt;') s= ls (j+1, N(ls)-1);
+          if (N(s) &gt; 1 &amp;&amp; s[0] != '&lt;') s= &quot;&lt;&quot; * s * &quot;&gt;&quot;;
+          else if (N(s) == 0 || s == &quot;.&quot;) s= &quot;&lt;nobracket&gt;&quot;;
+          a[i]-&gt;b= text_box (a[i]-&gt;b-&gt;ip, 0, s, fn, lp);
+          tp= STD_ITEM;
+        }
+        a[i]-&gt;type= STD_ITEM;
+      }
+    if (tp == LEFT_BRACKET_ITEM)
+      for (int j= i-1; j&gt;=0; j--) {
+        if (a[j]-&gt;type == MARKER_ITEM) {
+          SI Y1= a[i]-&gt;b-&gt;y1;
+          SI Y2= a[i]-&gt;b-&gt;y2;
+          //a[j]-&gt;b = marker_box (a[j]-&gt;b-&gt;find_lip (), 0, Y1, 0, Y2, a[j]-&gt;b);
+          a[j]-&gt;b   = marker_box (a[j]-&gt;b-&gt;find_lip (), 0, Y1, 0, Y2, a[i]-&gt;b);
+          a[j]-&gt;type= STD_ITEM;
+        }
+        else if (a[j]-&gt;type != CONTROL_ITEM) break;
+      }
+    if (tp == RIGHT_BRACKET_ITEM)
+      for (int j= i+1; j&lt;N(a); j++) {
+        if (a[j]-&gt;type == MARKER_ITEM) {
+          SI Y1= a[i]-&gt;b-&gt;y1;
+          SI Y2= a[i]-&gt;b-&gt;y2;
+          //a[j]-&gt;b = marker_box (a[j]-&gt;b-&gt;find_lip (), 0, Y1, 0, Y2, a[j]-&gt;b);
+          a[j]-&gt;b   = marker_box (a[j]-&gt;b-&gt;find_lip (), 0, Y1, 0, Y2, a[i]-&gt;b);
+          a[j]-&gt;type= STD_ITEM;
+        }
+        else if (a[j]-&gt;type != CONTROL_ITEM) break;
+      }
+  }
+}</pre>
+      </div>
+    </div>
+    <p>
+      Again, a key point of this procedure is the call to <tt class="verbatim cpp">delimiter_box</tt>
+      (in <tt class="verbatim">src/Typeset/Boxes/Basic/text_boxes.cpp</tt>) in order to
+      replace the &ldquo;temporary&rdquo; vertical delimiter, with a correctly
+      sized one (be it a left, right or middle delimiter). 
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+box
+delimiter_box (path ip, string s, font fn, pencil pen,
+               SI bot, SI top, SI mid, SI real_bot, SI real_top)
+{
+  SI h= top - bot;
+  string r= get_delimiter (s, fn, h);
+  box b= text_box (ip, 0, r, fn, pen);
+  SI x= -b-&gt;x1;
+  SI y= (top + bot - b-&gt;y1 - b-&gt;y2) &gt;&gt; 1;
+  if (b-&gt;y2 - b-&gt;y1 &lt; h) {
+    y= (mid - b-&gt;y1 - b-&gt;y2) &gt;&gt; 1;
+    y= min (top - b-&gt;y2, y);
+    y= max (bot - b-&gt;y1, y);
+  }
+  //cout &lt;&lt; s &lt;&lt; &quot;, &quot; &lt;&lt; bot/PIXEL &lt;&lt; &quot; -- &quot; &lt;&lt; top/PIXEL
+  //     &lt;&lt; &quot; -&gt; &quot; &lt;&lt; r &lt;&lt; &quot;; &quot; &lt;&lt; x/PIXEL &lt;&lt; &quot;, &quot; &lt;&lt; y/PIXEL &lt;&lt; &quot;\n&quot;;
+  //cout &lt;&lt; &quot;  extents: &quot; &lt;&lt; b-&gt;x1/PIXEL &lt;&lt; &quot;, &quot; &lt;&lt; b-&gt;y1/PIXEL
+  //     &lt;&lt; &quot;; &quot; &lt;&lt; b-&gt;x2/PIXEL &lt;&lt; &quot;, &quot; &lt;&lt; b-&gt;y2/PIXEL &lt;&lt; &quot;\n&quot;;
+  box mvb= move_delimiter_box (ip, b, x, y, real_bot, real_top);
+  if (ends (r, &quot;-0&gt;&quot;)) return mvb;
+  SI dy= ((mvb-&gt;y1 + mvb-&gt;y2)&gt;&gt;1) - fn-&gt;yfrac;
+  return macro_delimiter_box (ip, mvb, fn, dy);
+}</pre>
+      </div>
+    </div>
+    <p>
+      The function <tt class="verbatim cpp">get_delimiter</tt> queries the font for a
+      sequence of glyphs in the form <tt class="verbatim">&lt;left-[-N&gt;</tt> (for
+      example) with <tt class="verbatim">N=0,1,2,3,4,<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
+      style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span></tt> until we obtain the required
+      height.
+    </p>
+    <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
+      <div class="tmweb-code">
+        <pre class="verbatim cpp" xml:space="preserve">
+/******************************************************************************
+* Computing right size for rubber characters
+******************************************************************************/
+
+static int
+get_number (string s, int&amp; pos) {
+  int n= N(s);
+  pos= n-1;
+  while (pos &gt; 0 &amp;&amp; s[pos] != '-') pos--;
+  if (pos &gt; 0 &amp;&amp; s[pos-1] == '-') pos--;
+  return as_int (s (pos+1, n-1));
+}
+
+static string
+get_delimiter (string s, font fn, SI height) {
+  int ns= N(s);
+  ASSERT (ns &gt;= 2 &amp;&amp; s[0] == '&lt;' &amp;&amp; s[ns-1] == '&gt;',
+          &quot;invalid rubber character&quot;);
+  if (is_digit (s[ns-2])) {
+    int pos;
+    int plus= get_number (s, pos);
+    if (pos &gt; 0) {
+      string s2= s (0, pos) * &quot;&gt;&quot;;
+      string r2= get_delimiter (s2, fn, height);
+      int pos2;
+      int nr2= get_number (r2, pos2);
+      if (pos2 &gt; 0) {
+        int nr= max (nr2 + plus, 0);
+        return r2 (0, pos2) * &quot;-&quot; * as_string (nr) * &quot;&gt;&quot;;
+      }
+    }
+  }
+  height -= PIXEL;
+  string radical= s (0, N(s)-1) * &quot;-&quot;;
+  string best= radical * &quot;0&gt;&quot;;
+  SI best_h= 0;
+  int n= 0;
+  SI last= 0;
+  int credit= 20;
+  while (credit &gt; 0) {
+    metric ex;
+    string test= radical * as_string (n) * &quot;&gt;&quot;;
+    fn-&gt;get_extents (test, ex);
+    SI h= ex-&gt;y2 - ex-&gt;y1;
+    if (h &gt;= (height - (n==1? PIXEL: 0))) return test;
+    if (h &gt; best_h) { best_h= h; best= test; }
+    int d= h - last;
+    if (last &gt; 0 &amp;&amp; d &gt; 0) {
+      int plus= (height - h - 1) / d;
+      if (plus &lt;= 1 || n &lt;= 4) { n++; last= h; }
+      else {
+        int n2= n + plus;
+        metric ex2;
+        string test2= radical * as_string (n2) * &quot;&gt;&quot;;
+        fn-&gt;get_extents (test2, ex2);
+        SI h2= ex2-&gt;y2 - ex2-&gt;y1;
+        if (h2 &gt;= height || h2 &lt; h) { n++; last= h; }
+        else { n= n2; last= 0; }
+      }
+    }
+    else if (last &lt;= 0 || n &lt; 10) { n++; last= h; }
+    else return best;
+    credit--;
+  }
+  return best;
+}</pre>
+      </div>
+    </div>
+    <h2 id="auto-43">5.<span style="margin-left: 1em"></span>Final remarks<span style="margin-left: 1em"></span></h2>
+    <p>
+      A list of possible improvements to the code reviewed in this document:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The mechanism to select appropriate glyphs do not depend on specific
+          details of the typesetting process apart from the required size, so
+          maybe can be moved into the font (and possibly allow for
+          simplification in this generic part)
+        </p>
+      </li>
+      <li>
+        <p>
+          Ideally we want to try to remove dependence on specific fonts in
+          this part of code, all the required measurements should be available
+          in a generic way from the current font without further tweaking (or
+          less of it).
+        </p>
+      </li>
+      <li>
+        <p>
+          Allow for OpenType <tt class="verbatim">MATH</tt> table information (if
+          available) to be used, e.g. in the placement of various math
+          constructions.
+        </p>
+      </li>
+    </ul>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+  </body>
+</html>
