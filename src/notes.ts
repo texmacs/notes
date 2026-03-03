@@ -20,7 +20,7 @@
     </src-title>
   </active*>
 
-  <use-package|tmmanual|html-font-size|libertine-font>
+  <use-package|tmmanual|html-font-size>
 
   <\active*>
     <\src-comment>
