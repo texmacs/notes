@@ -26,7 +26,7 @@
     behaviour|http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465>
   </itemize>
 
-  <hlink|<TeXmacs> <name|Gitter> lobby|https://gitter.im/texmacs/Lobby>
+  <hlink|<TeXmacs> <name|Gitter> lobby|https://app.gitter.im/#/room/#texmacs_Lobby:gitter.im>
 
   <hlink|Bertrand Bratschi's blog|https://yuktibhasa.wordpress.com>
 

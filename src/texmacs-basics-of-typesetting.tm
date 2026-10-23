@@ -154,7 +154,7 @@
     notation.
 
     <item*|Lengths>Floating point numbers followed by a <hlink|length
-    unit|lengths.en.tm>, like <verbatim|29.7cm> or <verbatim|2fn>.
+    unit|https://www.texmacs.org/tmweb/manual/webman-format.en.html#sec-lengths>, like <verbatim|29.7cm> or <verbatim|2fn>.
   </description>
 
   <subsection|<TeXmacs> documents><label|sec-tm-docs>

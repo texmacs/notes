@@ -1,23 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Scheming — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="We discuss some aspects of the choice of the Scheme language implementation used in TeXmacs.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/scheming.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -106,7 +110,7 @@
           sources of Guile 1.8 (which is not more maintained) in TeXmacs. This
           would not require changes to our scheme code. However the packaging
           problems remains, moreover there are large portions of the library
-          we do not use. 
+          we do not use.
         </p>
       </li>
       <li>
@@ -158,7 +162,14 @@
     <ul>
       <li>
         <p>
-          <a href="https://github.com/mgubi/texmacs/tree/s7/src"><tt>https://github.com/mgubi/texmacs/tree/s7/src</tt></a>
+          <a href="https://github.com/mgubi/texmacs/tree/upsilon_texmacs">upsilon_texmacs</a>: as of October 2026, S7 is the default
+          interpreter of <a href="https://mgubi.github.io/texmacs/">TeXmacs Upsilon</a>, which offers <a href="https://mgubi.github.io/texmacs/#downloads">experimental
+          builds</a>
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/mgubi/texmacs/tree/wip_other_schemes">wip_other_schemes</a>: other Scheme implementations
         </p>
       </li>
       <li>
@@ -218,7 +229,7 @@
             24.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid"><p>
             0.84
@@ -262,7 +273,7 @@
             2.21
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             7.14
@@ -370,13 +381,13 @@
             20.97
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.71
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.46
@@ -395,7 +406,7 @@
             3.65
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.52
@@ -427,16 +438,16 @@
             44.14
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.96
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -465,16 +476,16 @@
             25.80
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.71
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -509,7 +520,7 @@
             3.59
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             6.87
@@ -547,7 +558,7 @@
             3.32
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             7.69
@@ -566,7 +577,7 @@
             5.39
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             50.09
@@ -579,13 +590,13 @@
             18.56
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.26
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             67.01
@@ -617,13 +628,13 @@
             &ndash;
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.60
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.56
@@ -642,7 +653,7 @@
             4.73
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             24.89
@@ -661,7 +672,7 @@
             2.83
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             18.51
@@ -680,7 +691,7 @@
             2.34
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             13.90
@@ -699,7 +710,7 @@
             3.12
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             8.41
@@ -775,7 +786,7 @@
             2.69
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             28.40
@@ -794,7 +805,7 @@
             3.57
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.82
@@ -807,7 +818,7 @@
             8.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             1.76
@@ -851,7 +862,7 @@
             2.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             5.15
@@ -870,7 +881,7 @@
             2.10
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             10.51
@@ -899,16 +910,16 @@
             earley
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             5.03
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.49
@@ -921,13 +932,13 @@
             127.61
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             2.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             23.03
@@ -940,13 +951,13 @@
             139.28
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.91
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             15.94
@@ -965,7 +976,7 @@
             1.63
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             9.88
@@ -984,7 +995,7 @@
             1.66
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             4.70
@@ -1022,7 +1033,7 @@
             4.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             19.37
@@ -1035,13 +1046,13 @@
             31.42
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             5.97
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             4.25
@@ -1054,13 +1065,13 @@
             39.44
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.35
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             10.69
@@ -1111,13 +1122,13 @@
             94.00
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.90
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             13.25
@@ -1136,7 +1147,7 @@
             2.55
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             15.14
@@ -1168,13 +1179,13 @@
             &ndash;
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.32
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             0.31
@@ -1225,13 +1236,13 @@
             20.54
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             1.87
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             3.51
@@ -1250,7 +1261,7 @@
             13.33
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             10.65
@@ -1269,10 +1280,10 @@
             0.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -1288,7 +1299,7 @@
             2.47
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
             4.49
@@ -1297,23 +1308,23 @@
       </table></font>
     </center>
     <p>
-      
+
     </p>
     <p>
-      <hr></hr>
+      <hr>
     </p>
     <p>
       [8.1.2021]
     </p>
     <p>
       Some more benchmarks. Populating the autocompletion tree (i.e. pressing
-      <font class="tmweb-key">Tab</font> in a Scheme session within TeXmacs)
+      <font class="tmweb-key" style="font-size: 70.0%">&#x21E5;</font> in a Scheme session within TeXmacs)
     </p>
     <center>
       <font style="font-size: 90.0%"><table style="width: 100%">
         <tbody><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0px solid; border-bottom: 0.5px solid; padding-bottom: 0.3em; padding-top: 0.3em; border-left: 0px solid"><p>
-            
+
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0px solid; border-bottom: 0.5px solid"><p>
             <b>symbols</b>
@@ -1355,10 +1366,10 @@
       </table></font>
     </center>
     <p>
-      
+
     </p>
     <p>
-      <hr></hr>
+      <hr>
     </p>
     <p>
       [12.4.2021]
@@ -1371,7 +1382,7 @@
       still faster on average.
     </p>
     <p>
-      
+
     </p>
     <center>
       <font style="font-size: 90.0%"><table style="width: 100%">
@@ -1402,13 +1413,13 @@
             browse:2000
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; text-align: center; border-top: 0.5px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; text-align: center"><p>
             24.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; text-align: center"><p>
             0.84
@@ -1458,7 +1469,7 @@
             2.21
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             7.14
@@ -1584,13 +1595,13 @@
             20.97
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             3.71
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             9.46
@@ -1612,7 +1623,7 @@
             3.65
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             9.52
@@ -1650,16 +1661,16 @@
             44.14
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             0.96
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -1694,16 +1705,16 @@
             25.80
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             0.71
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -1744,7 +1755,7 @@
             3.59
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             6.87
@@ -1788,7 +1799,7 @@
             3.32
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             7.69
@@ -1798,7 +1809,7 @@
             mbrot:75:1000
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             24.40
@@ -1810,7 +1821,7 @@
             5.39
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             50.09
@@ -1820,19 +1831,19 @@
             mbrotZ:75:1000
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             18.56
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             9.26
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             67.01
@@ -1864,19 +1875,19 @@
             pi
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             &ndash;
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             0.60
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             0.56
@@ -1898,7 +1909,7 @@
             4.73
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             24.89
@@ -1920,7 +1931,7 @@
             2.83
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             18.51
@@ -1942,7 +1953,7 @@
             2.34
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             13.90
@@ -1964,7 +1975,7 @@
             3.12
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             8.41
@@ -2052,7 +2063,7 @@
             2.69
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             28.40
@@ -2074,7 +2085,7 @@
             3.57
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             9.82
@@ -2090,7 +2101,7 @@
             8.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             1.76
@@ -2128,7 +2139,7 @@
             compiler:2000
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             41.16
@@ -2140,7 +2151,7 @@
             2.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             5.15
@@ -2162,7 +2173,7 @@
             2.10
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             10.51
@@ -2172,7 +2183,7 @@
             dynamic:500
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             22.74
@@ -2197,16 +2208,16 @@
             35.82
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             5.03
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             9.49
@@ -2222,13 +2233,13 @@
             127.61
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             2.27
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             23.03
@@ -2244,13 +2255,13 @@
             139.28
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             3.91
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             15.94
@@ -2272,7 +2283,7 @@
             1.63
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             9.88
@@ -2282,7 +2293,7 @@
             maze:20:7:10000
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; text-align: center"><p>
-            <img src="scheming-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>
+            <img src="scheming-2.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             23.26
@@ -2294,7 +2305,7 @@
             1.66
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             4.70
@@ -2338,7 +2349,7 @@
             4.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             19.37
@@ -2354,13 +2365,13 @@
             31.42
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             5.97
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             4.25
@@ -2370,19 +2381,19 @@
             parsing:2500
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             39.44
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             3.35
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             10.69
@@ -2442,13 +2453,13 @@
             94.00
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             3.90
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             13.25
@@ -2458,7 +2469,7 @@
             scheme:100000
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             71.46
@@ -2470,7 +2481,7 @@
             2.55
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             15.14
@@ -2480,7 +2491,7 @@
             slatex:500
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             32.07
@@ -2502,19 +2513,19 @@
             chudnovsky
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             &ndash;
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             0.32
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             0.31
@@ -2568,19 +2579,19 @@
             gcbench:20:1
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             20.54
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             1.87
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             3.51
@@ -2590,7 +2601,7 @@
             mperm:20:10:2:1
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center; border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             173.33
@@ -2602,7 +2613,7 @@
             13.33
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             10.65
@@ -2624,10 +2635,10 @@
             0.99
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
         </tr><tr>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid"><p>
@@ -2646,7 +2657,7 @@
             2.47
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
-            <img src="scheming-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0206666666666667em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.0723838383838384em; height: 0.698181818181818em"></img>
+            <img src="scheming-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347106em; vertical-align: -0.0789641873278237em; height: 0.705234159779614em" alt="Figure from “Scheming”" decoding="async" loading="lazy">
           </p></td>
           <td style="border-top: 0.5px solid; border-bottom: 0.5px solid; border-left: 0px solid; border-right: 0px solid; text-align: center"><p>
             4.49
@@ -2655,10 +2666,10 @@
       </table></font>
     </center>
     <p>
-      
+
     </p>
     <p>
-      
+
     </p>
   </body>
 </html>

@@ -38,6 +38,13 @@ jobs:
           texmacs_bin=$(which texmacs)
           $texmacs_bin -headless -x '(begin (load "notes-tools.scm") (notes-update) (quit))'
 
+      - name: Post-process and check the generated HTML
+        run: |
+          command -v python3 || (apt-get update && apt-get install -y python3)
+          python3 tools/postprocess_site.py
+          python3 -m unittest discover -s tools -p 'test_*.py'
+          find tools -name __pycache__ -exec rm -rf {} +
+
       - name: Commit changes to main and deploy to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -83,8 +90,8 @@ jobs:
           # copy 'misc' (icons referenced by older feed copies)
           cp -r ../${MISC_DIR} .
 
-          # copy 'index.html'
-          cp ../${ROOT_INDEX_FILE} .
+          # copy 'index.html', '404.html' and 'sitemap.xml'
+          cp ../${ROOT_INDEX_FILE} ../404.html ../sitemap.xml .
 
           # commit & push, only if the site changed
           git add --all

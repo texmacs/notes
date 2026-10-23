@@ -188,7 +188,7 @@
   To summarize: for twenty years <TeXmacs> has been a resource available to
   professional mathematicians and a wider audience, including university
   students and high school teachers and students. More information can be
-  found on the program's website <slink|www.texmacs.org>, including
+  found on the program's website <hlink|www.texmacs.org|https://www.texmacs.org>, including
   documentation and some introductory videos. Various tutorials and
   demonstrations are also hosted on YouTube. <TeXmacs> is also a community
   project that gathers mathematicians (and non-mathematicians) who are

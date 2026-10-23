@@ -112,7 +112,9 @@
   The development branches of <TeXmacs> for Guile 3 and S7 can be found here:
 
   <\itemize-dot>
-    <item><slink|https://github.com/mgubi/texmacs/tree/s7/src>
+    <item><hlink|upsilon_texmacs|https://github.com/mgubi/texmacs/tree/upsilon_texmacs>: as of October 2026, S7 is the default interpreter of <hlink|TeXmacs Upsilon|https://mgubi.github.io/texmacs/>, which offers <hlink|experimental builds|https://mgubi.github.io/texmacs/#downloads>
+
+    <item><hlink|wip_other_schemes|https://github.com/mgubi/texmacs/tree/wip_other_schemes>: other Scheme implementations
 
     <item><slink|https://github.com/mgubi/texmacs/tree/guile3/src>
   </itemize-dot>

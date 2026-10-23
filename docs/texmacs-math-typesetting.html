@@ -1,41 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Mathematical typesetting in TeXmacs — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This document describes how TeXmacs deals with the typesetting of mathematics, and in particular with the low level implementation of the typesetting primitives relative to mathematical documents. It should be useful if you are interested in understanding the C++ sources. We describe the state...">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/texmacs-math-typesetting.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -52,7 +56,7 @@
         for completeness.
       </p>
       <p>
-        
+
       </p>
     </div>
     <h2 id="auto-2">1.<span style="margin-left: 1em"></span>Overview<span style="margin-left: 1em"></span></h2>
@@ -81,11 +85,11 @@
           <p>
             The eye expects text of a similar nature to be typeset with
             respect to a same base line. For instance, in <span class="no-breaks"><img
-            src="texmacs-math-typesetting-1.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.733443526170799em"></img>,</span> the bottoms of the <img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>
-            and <img src="texmacs-math-typesetting-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: 0em; vertical-align: -0.0789641873278237em; height: 0.519052341597796em"></img> should be at the same height as the
-            bottom of the <span class="no-breaks"><img src="texmacs-math-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-part</span> in
-            the <span class="no-breaks"><img src="texmacs-math-typesetting-5.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img>.</span> This should again
-            be the case in <span class="no-breaks"><img src="texmacs-math-typesetting-6.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: 0em; height: 0.739063360881543em"></img>.</span>
+            src="texmacs-math-typesetting-1.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.733443526170799em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">,</span> the bottoms of the <img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
+            and <img src="texmacs-math-typesetting-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564739em; margin-top: 0em; vertical-align: -0.0789641873278237em; height: 0.519052341597796em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> should be at the same height as the
+            bottom of the <span class="no-breaks"><img src="texmacs-math-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">-part</span> in
+            the <span class="no-breaks"><img src="texmacs-math-typesetting-5.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span> This should again
+            be the case in <span class="no-breaks"><img src="texmacs-math-typesetting-6.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: 0em; height: 0.739063360881543em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
           </p>
         </dd>
       </p>
@@ -97,13 +101,13 @@
           <p>
             Different components of text with approximately the same function
             should be separated by equal amounts of space. For instance, in
-            <span class="no-breaks"><img src="texmacs-math-typesetting-7.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 1.09075482093664em"></img>,</span> the typesetter should
-            notice the hangover of the <span class="no-breaks"><img src="texmacs-math-typesetting-8.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.169256198347107em; margin-top: -0.0225674931129476em; vertical-align: -0.21436914600551em; height: 0.930909090909091em"></img>.</span>
-            This should again be the case in <span class="no-breaks"><img src="texmacs-math-typesetting-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.90831955922865em"></img>.</span>
+            <span class="no-breaks"><img src="texmacs-math-typesetting-7.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 1.09075482093664em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">,</span> the typesetter should
+            notice the hangover of the <span class="no-breaks"><img src="texmacs-math-typesetting-8.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.169256198347107em; margin-top: -0.0225674931129476em; vertical-align: -0.21436914600551em; height: 0.930909090909091em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
+            This should again be the case in <span class="no-breaks"><img src="texmacs-math-typesetting-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.90831955922865em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
             Similarly, the distance between the baselines of the <img src="texmacs-math-typesetting-10.png"
-            style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img> and the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img> in <img src="texmacs-math-typesetting-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em"></img>
+            style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> and the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> in <img src="texmacs-math-typesetting-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
             should not be disproportionally large with respect to the height
-            of an <span class="no-breaks"><img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>.</span>
+            of an <span class="no-breaks"><img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
           </p>
         </dd>
       </p>
@@ -116,19 +120,19 @@
     <p>
       Unfortunately, the different esthetic criteria may enter into conflict
       with each other. For instance, consider the formula <span class="no-breaks"><img
-      src="texmacs-math-typesetting-13.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.324451790633609em; height: 1.2131349862259em"></img>.</span> On the one hand, the baselines of the scripts
+      src="texmacs-math-typesetting-13.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.324451790633609em; height: 1.2131349862259em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span> On the one hand, the baselines of the scripts
       should be the same, but the other hand, the first subscript should not
       be &ldquo;disproportionally low&rdquo; with respect to the <span class="no-breaks"><img
-      src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>.</span> Unfortunately, this dilemma can not been
+      src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span> Unfortunately, this dilemma can not been
       solved in a completely satisfactory way without the help of a human for
       the simple reason that the computer has no way to know whether the <img
-      src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img> and <img src="texmacs-math-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em"></img> are
-      &ldquo;related&rdquo;. Indeed, if the <img src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img> and <img
-      src="texmacs-math-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em"></img> are close (like in <span class="no-breaks"><img src="texmacs-math-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em"></img>),</span>
+      src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> and <img src="texmacs-math-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> are
+      &ldquo;related&rdquo;. Indeed, if the <img src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> and <img
+      src="texmacs-math-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> are close (like in <span class="no-breaks"><img src="texmacs-math-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330071625344353em; height: 1.22437465564738em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">),</span>
       then it is natural to opt for a common base line. However, if they are
-      further away from each other (like in <span class="no-breaks"><img src="texmacs-math-typesetting-17.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.23087603305785em"></img>),</span>
+      further away from each other (like in <span class="no-breaks"><img src="texmacs-math-typesetting-17.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.23087603305785em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">),</span>
       then we might want to opt for different base lines and locally optimize
-      the rendering of the first <span class="no-breaks"><img src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img>.</span>
+      the rendering of the first <span class="no-breaks"><img src="texmacs-math-typesetting-14.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
     </p>
     <p>
       Consequently, TeXmacs should offer a reasonable compromise for the most
@@ -141,13 +145,13 @@
       For instance, if the brackets around the two sums
     </p>
     <center>
-      <img src="texmacs-math-typesetting-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.122247933884298em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -1.1644958677686em; height: 2.68923415977961em"></img>
+      <img src="texmacs-math-typesetting-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.122247933884298em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -1.1644958677686em; height: 2.68923415977961em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
     </center>
     <p>
       have different sizes, then one may resize the bottom of the subscript
-      <img src="texmacs-math-typesetting-19.png" style="margin-left: -0.112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0282093663911845em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em"></img> of the second sum to <tt class="verbatim">0fn</tt>.
-      Alternatively, one may resize the bottoms of both the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img>
-      and <img src="texmacs-math-typesetting-19.png" style="margin-left: -0.112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0282093663911845em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em"></img> subscripts to (say) <tt class="verbatim">-0.3fn</tt>.
+      <img src="texmacs-math-typesetting-19.png" style="margin-left: -0.112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0282093663911845em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> of the second sum to <tt class="verbatim">0fn</tt>.
+      Alternatively, one may resize the bottoms of both the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
+      and <img src="texmacs-math-typesetting-19.png" style="margin-left: -0.112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0282093663911845em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> subscripts to (say) <tt class="verbatim">-0.3fn</tt>.
       For easier adjustments you may use <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class
       class="tmweb-menu" style="font-family: sans-serif">Adjust</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Smash</class><a
       id="auto-5"></a> and <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class class="tmweb-menu"
@@ -162,14 +166,14 @@
       disallows you to switch to another font size for your document.
       Similarly, you should try not change the semantics of the formula. For
       instance, in the above example, you might have added a &ldquo;dummy
-      subscript&rdquo; to the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img> subscript of the sum.
+      subscript&rdquo; to the <img src="texmacs-math-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> subscript of the sum.
       However, this would alter the meaning of the formula (whence make it non
       suitable as input to a computer algebra system) In the future, we plan
       to provide additional constructs in order to facilitate structural
       adjusting. For instance, in the case of a formula like
     </p>
     <center>
-      <img src="texmacs-math-typesetting-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: -0.189928374655647em; height: 1.11894214876033em"></img>
+      <img src="texmacs-math-typesetting-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: -0.189928374655647em; height: 1.11894214876033em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
     </center>
     <p>
       one might think of a construct to enclose the entire formula into an
@@ -197,13 +201,13 @@
       <p>
         <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">mid</class></font><a
         id="auto-11"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
-        color="blue">|</font><font color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font
+        color="blue">|</font><font color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"></i></font><font
         color="blue">&gt;</font>
       </p>
       <div class="left-tab">
         <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">right</class></font><a
         id="auto-12"></a><font color="blue">|</font><font color="brown"><i>large-delimiter</i></font><font
-        color="blue">|</font><font color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font
+        color="blue">|</font><font color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"></i></font><font
         color="blue">&gt;</font>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
@@ -218,7 +222,7 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-22.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0394710743801653em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823684em; vertical-align: -0.970380165289256em; height: 2.42600550964187em"></img>
+        <img src="texmacs-math-typesetting-22.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0394710743801653em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823684em; vertical-align: -0.970380165289256em; height: 2.42600550964187em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-left: 38.660688007188px">
@@ -233,7 +237,7 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-23.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0479338842975205em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -2.02615977961432em; height: 3.75334435261708em"></img>
+        <img src="texmacs-math-typesetting-23.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0479338842975205em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -2.02615977961432em; height: 3.75334435261708em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-left: 38.660688007188px">
@@ -269,14 +273,14 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-24.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0607823691460054em; margin-right: -0.0112837465564737em; margin-top: -0.0197245179063361em; vertical-align: -2.21721212121212em; height: 4.39336639118457em"></img>
+        <img src="texmacs-math-typesetting-24.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0607823691460054em; margin-right: -0.0112837465564737em; margin-top: -0.0197245179063361em; vertical-align: -2.21721212121212em; height: 4.39336639118457em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-left: 38.660688007188px">
       <p>
         The <font color="brown"><i>size</i></font> may also be a number <span class="no-breaks"><img
-        src="texmacs-math-typesetting-25.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>,</span> in which case the <span class="no-breaks"><img src="texmacs-math-typesetting-25.png"
-        style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-th</span> available size for the delimiter is taken. For
+        src="texmacs-math-typesetting-25.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">,</span> in which case the <span class="no-breaks"><img src="texmacs-math-typesetting-25.png"
+        style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">-th</span> available size for the delimiter is taken. For
         instance,
       </p>
     </div>
@@ -315,11 +319,11 @@
     </div>
     <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-26.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564732em; margin-top: -0.00564187327823695em; vertical-align: -0.473895316804408em; height: 1.43867768595041em"></img>
+        <img src="texmacs-math-typesetting-26.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564732em; margin-top: -0.00564187327823695em; vertical-align: -0.473895316804408em; height: 1.43867768595041em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <p>
-      
+
     </p>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
@@ -339,7 +343,7 @@
     <div style="margin-left: 38.660688007188px">
       <table width="100%">
         <tr>
-          <td width="100%" align="center"><img src="texmacs-math-typesetting-27.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.15695867768595em; height: 2.7462479338843em" id="big-example"></img></td>
+          <td width="100%" align="center"><img src="texmacs-math-typesetting-27.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.15695867768595em; height: 2.7462479338843em" id="big-example" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"></td>
           <td align="right">(1)</td>
         </tr>
       </table>
@@ -350,7 +354,7 @@
         &ldquo;display style&rdquo; or not. Formulas in separate equations,
         like (<a href="#big-example">1</a>), are said to be rendered in display style,
         contrary to formulas which occur in the main text, like <span class="no-breaks"><img
-        src="texmacs-math-typesetting-28.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.21295867768595em"></img>.</span> The user may use <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class
+        src="texmacs-math-typesetting-28.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.21295867768595em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span> The user may use <class class="tmweb-menu" style="font-family: sans-serif">Format</class>&rarr;<class
         class="tmweb-menu" style="font-family: sans-serif">Display style</class><a id="auto-14"></a> to override the current
         settings.
       </p>
@@ -400,7 +404,7 @@
     <div style="margin-left: 38.660688007188px">
       <p>
         The <font class="tmweb-markup">frac</font> primitive is used in order to render
-        fractions like <span class="no-breaks"><img src="texmacs-math-typesetting-29.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672177em; margin-right: -0.0112837465564739em; margin-top: 0em; vertical-align: -0.577300275482094em; height: 1.45364187327824em"></img>.</span> In display
+        fractions like <span class="no-breaks"><img src="texmacs-math-typesetting-29.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672177em; margin-right: -0.0112837465564739em; margin-top: 0em; vertical-align: -0.577300275482094em; height: 1.45364187327824em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span> In display
         style, the numerator <font color="brown"><i>num</i></font> and denominator
         <font color="brown"><i>den</i></font> are rendered in the normal size, but
         display style is turned of when typesetting <font color="brown"><i>num</i></font>
@@ -438,7 +442,7 @@
     </div>
     <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-30.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -2.11739944903581em; height: 3.43378512396694em"></img>
+        <img src="texmacs-math-typesetting-30.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -2.11739944903581em; height: 3.43378512396694em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div class="compact-block" style="text-indent: 0em">
@@ -459,14 +463,14 @@
     <div style="margin-left: 38.660688007188px">
       <p>
         The <font class="tmweb-markup">sqrt</font> primitive is used in order to render
-        square roots like <img src="texmacs-math-typesetting-31.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0676804407713499em; margin-right: -0.0112837465564739em; margin-top: 0.0639338842975207em; vertical-align: -0.342258953168044em; height: 1.06067217630854em"></img> or <font color="brown"><i>n</i></font>-th
-        roots like <span class="no-breaks"><img src="texmacs-math-typesetting-32.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0676804407713499em; margin-right: -0.0112837465564739em; margin-top: 0.0789862258953169em; vertical-align: -0.342258953168044em; height: 1.15089807162534em"></img>.</span> The root
+        square roots like <img src="texmacs-math-typesetting-31.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0676804407713499em; margin-right: -0.0112837465564739em; margin-top: 0.0639338842975207em; vertical-align: -0.342258953168044em; height: 1.06067217630854em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> or <font color="brown"><i>n</i></font>-th
+        roots like <span class="no-breaks"><img src="texmacs-math-typesetting-32.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0676804407713499em; margin-right: -0.0112837465564739em; margin-top: 0.0789862258953169em; vertical-align: -0.342258953168044em; height: 1.15089807162534em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span> The root
         symbol is automatically sized so as to encapsulate the <font color="brown"><i>content</i></font>:
       </p>
     </div>
     <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-33.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0658292011019284em; margin-right: -0.0112837465564741em; margin-top: 0.0582920110192839em; vertical-align: -1.06631404958678em; height: 2.51627548209366em"></img>
+        <img src="texmacs-math-typesetting-33.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0658292011019284em; margin-right: -0.0112837465564741em; margin-top: 0.0582920110192839em; vertical-align: -1.06631404958678em; height: 2.51627548209366em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div class="compact-block" style="text-indent: 0em">
@@ -534,7 +538,7 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-34.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.367625344352617em; height: 1.28537741046832em"></img>
+        <img src="texmacs-math-typesetting-34.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.367625344352617em; height: 1.28537741046832em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-left: 38.660688007188px">
@@ -546,7 +550,7 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-35.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0225674931129476em; vertical-align: -0.708738292011019em; height: 1.43092011019284em"></img>
+        <img src="texmacs-math-typesetting-35.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0225674931129476em; vertical-align: -0.708738292011019em; height: 1.43092011019284em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
@@ -576,12 +580,12 @@
         Left and right primes are similar to left and right superscripts,
         except that they behave in a different way when being edited. For
         instance, when your cursor is behind the prime symbol in <img src="texmacs-math-typesetting-36.png"
-        style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.00564187327823695em; vertical-align: -0.21436914600551em; height: 1.0540826446281em"></img> and you press backspace, then the prime is removed. If
-        you are behind <img src="texmacs-math-typesetting-37.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.00941046831955916em; vertical-align: -0.21436914600551em; height: 0.930909090909091em"></img> and you press backspace several
+        style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.00564187327823695em; vertical-align: -0.21436914600551em; height: 1.0540826446281em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> and you press backspace, then the prime is removed. If
+        you are behind <img src="texmacs-math-typesetting-37.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.00941046831955916em; vertical-align: -0.21436914600551em; height: 0.930909090909091em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> and you press backspace several
         times, then you first enter the superscript, next remove <img src="texmacs-math-typesetting-25.png"
-        style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img> and finally remove the superscript. Notice also that
+        style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> and finally remove the superscript. Notice also that
         <font color="brown"><i>prime-symbols</i></font> is necessarily a string of
-        concatenated prime symbols. For instance, <img src="texmacs-math-typesetting-38.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823684em; vertical-align: -0.21436914600551em; height: 1.17538292011019em"></img> is
+        concatenated prime symbols. For instance, <img src="texmacs-math-typesetting-38.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823684em; vertical-align: -0.21436914600551em; height: 1.17538292011019em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> is
         represented by <font color="black">f</font><font color="black"><font color="blue">&lt;</font>rprime<font
         color="blue">|</font><font color="black">'&dagger;</font><font color="blue">&gt;</font></font>.
       </p>
@@ -611,7 +615,7 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-39.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889806em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.72em; height: 1.81901928374656em"></img>
+        <img src="texmacs-math-typesetting-39.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889806em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.72em; height: 1.81901928374656em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-left: 38.660688007188px">
@@ -653,7 +657,7 @@
       <p>
         These primitives can be used in order to produce wide accents above or
         below some mathematical <font color="brown"><i>content</i></font>. For
-        instance <img src="texmacs-math-typesetting-40.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0394931129476584em; vertical-align: -0.21436914600551em; height: 0.911118457300276em"></img> corresponds to the markup <font
+        instance <img src="texmacs-math-typesetting-40.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0394931129476584em; vertical-align: -0.21436914600551em; height: 0.911118457300276em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> corresponds to the markup <font
         color="blue">&lt;</font>wide<font color="blue">|</font><font color="black">x+y</font><font
         color="blue">|</font><font color="black">&macr;</font><font color="blue">&gt;</font>.
       </p>
@@ -671,8 +675,8 @@
     <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         This primitive is mainly used for producing negated symbols or
-        expressions, such as <img src="texmacs-math-typesetting-41.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476584em; vertical-align: -0.104661157024793em; height: 0.8073608815427em"></img> or <span class="no-breaks"><img src="texmacs-math-typesetting-42.png"
-        style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476584em; vertical-align: -0.183625344352617em; height: 0.897586776859504em"></img>.</span>
+        expressions, such as <img src="texmacs-math-typesetting-41.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476584em; vertical-align: -0.104661157024793em; height: 0.8073608815427em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> or <span class="no-breaks"><img src="texmacs-math-typesetting-42.png"
+        style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476584em; vertical-align: -0.183625344352617em; height: 0.897586776859504em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
@@ -680,7 +684,7 @@
         <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tree</class></font><a
         id="auto-29"></a><font color="blue">|</font><font color="brown"><i>root</i></font><font
         color="blue">|</font><font color="brown"><i>child-1</i></font><font color="blue">|</font><font
-        color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font color="blue">|</font><font
+        color="brown"><i><img src="texmacs-math-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"></i></font><font color="blue">|</font><font
         color="brown"><i>child-n</i></font><font color="blue">&gt;</font>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
@@ -697,7 +701,7 @@
     </div>
     <div style="margin-left: 38.660688007188px">
       <center>
-        <img src="texmacs-math-typesetting-43.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -4.55468870523416em; height: 5.07376308539945em"></img>
+        <img src="texmacs-math-typesetting-43.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -4.55468870523416em; height: 5.07376308539945em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
       </center>
     </div>
     <div style="margin-left: 38.660688007188px">
@@ -800,7 +804,7 @@
         </dt>
         <dd>
           <p>
-            The height of the <img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img> character, which is
+            The height of the <img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> character, which is
             needed for the positioning of scripts. All the remaining
             parameters are actually computed as a function of <tt class="verbatim">yx</tt>.
           </p>
@@ -899,7 +903,7 @@ void concater_rep::typeset (tree t, path ip);</pre>
         <pre class="verbatim cpp" xml:space="preserve">
 enum tree_label {
   // [&hellip; other labels &hellip;]
-  
+
   // mathematics
   AROUND, VAR_AROUND, BIG_AROUND,
   LEFT, MID, RIGHT, BIG, LONG_ARROW,
@@ -931,7 +935,7 @@ enum tree_label {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-44.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.15795041322314em; height: 1.03433608815427em"></img>
+          <img src="texmacs-math-typesetting-44.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.15795041322314em; height: 1.03433608815427em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -992,7 +996,7 @@ concater_rep::typeset_lprime (tree t, path ip) {
       superscripts.
     </p>
     <p>
-      The <tt class="verbatim cpp">replace_primes</tt> function: 
+      The <tt class="verbatim cpp">replace_primes</tt> function:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1011,15 +1015,15 @@ replace_primes (string s) {
     </div>
     <h3 id="auto-33">4.2.<span style="margin-left: 1em"></span>Fractions<span style="margin-left: 1em"></span></h3>
     <p>
-      Fractions can be inline <img src="texmacs-math-typesetting-45.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672177em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.577300275482094em; height: 1.65110743801653em"></img> or in display style and
+      Fractions can be inline <img src="texmacs-math-typesetting-45.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672177em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.577300275482094em; height: 1.65110743801653em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> or in display style and
       have different variants (standard <tt class="verbatim">frac</tt>, display <tt
       class="verbatim">dfrac</tt>, small inline <tt class="verbatim">tfrac</tt>, continued <tt
-      class="verbatim">cfrac</tt> and slashed <tt class="verbatim">frac*</tt>). For example 
+      class="verbatim">cfrac</tt> and slashed <tt class="verbatim">frac*</tt>). For example
     </p>
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-46.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -0.814258953168044em; height: 2.11374104683196em"></img>
+          <img src="texmacs-math-typesetting-46.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -0.814258953168044em; height: 2.11374104683196em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -1051,7 +1055,7 @@ replace_primes (string s) {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; vertical-align: middle; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-47.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -3.01066666666667em; height: 4.32707438016529em"></img>
+          <img src="texmacs-math-typesetting-47.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -3.01066666666667em; height: 4.32707438016529em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; vertical-align: middle; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -1063,7 +1067,7 @@ replace_primes (string s) {
       </tr></tbody>
     </table>
     <p>
-      
+
     </p>
     <p>
       Apart from <tt class="verbatim">frac</tt>, the others tags are implemented in <tt
@@ -1179,7 +1183,7 @@ concater_rep::typeset_frac (tree t, path ip) {
     </div>
     <p>
       The <tt class="verbatim cpp">&quot;math-vpos&quot;</tt> environment variable is set to
-      <img src="texmacs-math-typesetting-48.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em"></img> depending on where we are in the typesetting of
+      <img src="texmacs-math-typesetting-48.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> depending on where we are in the typesetting of
       fractions. This is used in the finalization routines. <font color="#800000">[Add
       more?]</font>
     </p>
@@ -1340,7 +1344,7 @@ concater_rep::typeset_wide_frac (tree t, path ip) {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-49.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0658292011019284em; margin-right: -0.0112837465564741em; margin-top: 0.0582920110192839em; vertical-align: -1.06631404958678em; height: 2.51627548209366em"></img>
+          <img src="texmacs-math-typesetting-49.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0658292011019284em; margin-right: -0.0112837465564741em; margin-top: 0.0582920110192839em; vertical-align: -1.06631404958678em; height: 2.51627548209366em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -1386,7 +1390,7 @@ concater_rep::typeset_sqrt (tree t, path ip) {
       </div>
     </div>
     <p>
-      
+
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1402,7 +1406,7 @@ sqrt_box_rep::sqrt_box_rep (
   SI dx   = -fn-&gt;wfn/36, dy= -fn-&gt;wfn/36; // correction
   SI by   = sqrtb-&gt;y2+ dy;
   if (sqrtb-&gt;x2 - sqrtb-&gt;x4 &gt; wline) dx -= (sqrtb-&gt;x2 - sqrtb-&gt;x4);
-  
+
   pencil rpen= pen-&gt;set_width (wline);
   insert (b1, 0, 0);
   if (!is_nil (b2)) {
@@ -1425,7 +1429,7 @@ sqrt_box_rep::sqrt_box_rep (
   }
   insert (sqrtb, -sqrtb-&gt;x2, 0);
   insert (line_box (decorate_middle (ip), dx, by, b1-&gt;x2, by, rpen), 0, 0);
-  
+
   position ();
   left_justify ();
   y1 -= wline;
@@ -1496,7 +1500,7 @@ concater_rep::typeset_wide_sqrt (tree t, path ip) {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-50.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476583em; vertical-align: -0.183625344352617em; height: 1.13454545454545em"></img>
+          <img src="texmacs-math-typesetting-50.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0394931129476584em; margin-right: -0.0112837465564739em; margin-top: -0.0394931129476583em; vertical-align: -0.183625344352617em; height: 1.13454545454545em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -1508,7 +1512,7 @@ concater_rep::typeset_wide_sqrt (tree t, path ip) {
       </tr></tbody>
     </table>
     <p>
-      
+
     </p>
     <p>
       The following heuristics are used:
@@ -1567,7 +1571,7 @@ neg_box_rep::neg_box_rep (path ip, box b, font fn2, pencil pen2):
     DY= DX;
   }
   insert (line_box (decorate_middle (ip), X+DX, Y+DY, X-DX, Y-DY, npen), 0, 0);
-  
+
   italic_correct (b);
   position ();
   italic_restore (b);
@@ -1582,7 +1586,7 @@ neg_box_rep::neg_box_rep (path ip, box b, font fn2, pencil pen2):
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-51.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889805em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.37815977961433em; height: 2.94329476584022em"></img>
+          <img src="texmacs-math-typesetting-51.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889805em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.37815977961433em; height: 2.94329476584022em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -1597,7 +1601,7 @@ neg_box_rep::neg_box_rep (path ip, box b, font fn2, pencil pen2):
       </tr></tbody>
     </table>
     <p>
-      
+
     </p>
     <p>
       The following heuristics are used:
@@ -1977,7 +1981,7 @@ get_wide_stix (string s, font fn, SI width) {
         <p>
           Always pretend that the subscript has height at least <tt class="verbatim">y2-yshift</tt>
           in the script font (actually we should use the height of an <img
-          src="texmacs-math-typesetting-52.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0451349862258953em; margin-top: 0em; vertical-align: 0em; height: 0.688308539944904em"></img> instead).
+          src="texmacs-math-typesetting-52.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0451349862258953em; margin-top: 0em; vertical-align: 0em; height: 0.688308539944904em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy"> instead).
         </p>
       </li>
       <li>
@@ -2008,7 +2012,7 @@ get_wide_stix (string s, font fn, SI width) {
         <p>
           Move the superscript up to the logical base line if necessary. This
           will usually occur: most of the time, the logical base line is the
-          just the height of an <span class="no-breaks"><img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-script</span>
+          just the height of an <span class="no-breaks"><img src="texmacs-math-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">-script</span>
           below the suggested top line.
         </p>
       </li>
@@ -2046,7 +2050,7 @@ get_wide_stix (string s, font fn, SI width) {
       <font color="#800000">[Explain the code below]</font>
     </p>
     <p>
-      
+
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -2083,7 +2087,7 @@ concater_rep::typeset_script (tree t, path ip, bool right) {
       </div>
     </div>
     <p>
-      
+
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -2133,7 +2137,7 @@ dummy_script_box_rep::dummy_script_box_rep (path ip, box b1, box b2, font fn2):
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-53.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0112837465564739em; vertical-align: -1.15695867768595em; height: 2.9155041322314em"></img>
+          <img src="texmacs-math-typesetting-53.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0112837465564739em; vertical-align: -1.15695867768595em; height: 2.9155041322314em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2147,7 +2151,7 @@ dummy_script_box_rep::dummy_script_box_rep (path ip, box b1, box b2, font fn2):
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-54.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.15695867768595em; height: 2.7462479338843em"></img>
+          <img src="texmacs-math-typesetting-54.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -1.15695867768595em; height: 2.7462479338843em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2162,12 +2166,12 @@ dummy_script_box_rep::dummy_script_box_rep (path ip, box b1, box b2, font fn2):
       </tr></tbody>
     </table>
     <p>
-      
+
     </p>
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-55.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.563195592286501em; height: 1.78296418732782em"></img>
+          <img src="texmacs-math-typesetting-55.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.563195592286501em; height: 1.78296418732782em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2179,12 +2183,12 @@ dummy_script_box_rep::dummy_script_box_rep (path ip, box b1, box b2, font fn2):
       </tr></tbody>
     </table>
     <center>
-      
+
     </center>
     <p>
       It has two basic shapes, either in display style as above or inline as
-      <span class="no-breaks"><img src="texmacs-math-typesetting-57.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.31845730027548em"></img>,</span> <span class="no-breaks"><img src="texmacs-math-typesetting-58.png"
-      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.468275482093664em; height: 1.50823140495868em"></img>,</span> <span class="no-breaks"><img src="texmacs-math-typesetting-59.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.404275482093664em; height: 1.46514600550964em"></img>.</span>
+      <span class="no-breaks"><img src="texmacs-math-typesetting-57.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0112837465564738em; vertical-align: -0.330931129476584em; height: 1.31845730027548em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img src="texmacs-math-typesetting-58.png"
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.468275482093664em; height: 1.50823140495868em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img src="texmacs-math-typesetting-59.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.404275482093664em; height: 1.46514600550964em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">.</span>
     </p>
     <p>
       They are typeset by:
@@ -2281,7 +2285,7 @@ big_operator_box (path ip, string s, font fn, pencil pen, int n) {
       at the height of fraction bars. However, in a formula like
     </p>
     <center>
-      <img src="texmacs-math-typesetting-60.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0363636363636362em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -2.65205509641873em; height: 4.38485950413223em"></img>
+      <img src="texmacs-math-typesetting-60.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0363636363636362em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063361em; vertical-align: -2.65205509641873em; height: 4.38485950413223em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
     </center>
     <p>
       it may be worth it to descend the delimiters a bit. On the other hand,
@@ -2289,7 +2293,7 @@ big_operator_box (path ip, string s, font fn, pencil pen, int n) {
       a bad effect on base lines, like in
     </p>
     <center>
-      <img src="texmacs-math-typesetting-61.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0345344352617079em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063359em; vertical-align: -1.3212782369146em; height: 3.14677685950413em"></img>
+      <img src="texmacs-math-typesetting-61.png" style="margin-left: -0.141046831955923em; margin-bottom: 0.0345344352617079em; margin-right: -0.0112837465564741em; margin-top: -0.0197245179063359em; vertical-align: -1.3212782369146em; height: 3.14677685950413em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
     </center>
     <p>
       In TeXmacs, we use the following compromise: we start with the middle of
@@ -2304,7 +2308,7 @@ big_operator_box (path ip, string s, font fn, pencil pen, int n) {
       TeX <tt class="verbatim">tfm</tt> file, in a formula like
     </p>
     <center>
-      <img src="texmacs-math-typesetting-62.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0623911845730027em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -1.21796143250689em; height: 2.93769696969697em"></img>
+      <img src="texmacs-math-typesetting-62.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0623911845730027em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -1.21796143250689em; height: 2.93769696969697em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
     </center>
     <p>
       the square rather seems to be a left superscript of the second closing
@@ -2318,7 +2322,7 @@ big_operator_box (path ip, string s, font fn, pencil pen, int n) {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-63.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0094545454545456em; vertical-align: -0.795482093663912em; height: 2.11570247933884em"></img>
+          <img src="texmacs-math-typesetting-63.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0094545454545456em; vertical-align: -0.795482093663912em; height: 2.11570247933884em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2342,7 +2346,7 @@ big_operator_box (path ip, string s, font fn, pencil pen, int n) {
       </tr></tbody>
     </table>
     <p>
-      
+
     </p>
     <p>
       for automatic sizing of the brackets and like
@@ -2350,7 +2354,7 @@ big_operator_box (path ip, string s, font fn, pencil pen, int n) {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-64.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.795482093663912em; height: 2.11570247933884em"></img>
+          <img src="texmacs-math-typesetting-64.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931656e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.795482093663912em; height: 2.11570247933884em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2501,7 +2505,7 @@ concater_rep::typeset_large (tree t, path ip, int tp, int otp, string prefix) {
   if (starts (old_fn-&gt;res_name, &quot;stix-&quot;))
     //if (old_fn-&gt;type == FONT_TYPE_UNICODE)
     env-&gt;fn= rubber_font (old_fn);
-  
+
   if (N(t) &lt; 1 || !is_atomic (t[0]))
     typeset_error (t, ip);
   else {
@@ -2558,7 +2562,7 @@ concater_rep::typeset_large (tree t, path ip, int tp, int otp, string prefix) {
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-65.png" style="margin-left: -0.0564187327823691em; margin-bottom: -2.20385674930546e-5em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.801079889807163em; height: 1.88881542699725em"></img>
+          <img src="texmacs-math-typesetting-65.png" style="margin-left: -0.0564187327823691em; margin-bottom: -2.20385674930546e-5em; margin-right: -0.0112837465564732em; margin-top: 0em; vertical-align: -0.801079889807163em; height: 1.88881542699725em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2670,7 +2674,7 @@ lim_box_rep::lim_box_rep (path ip, box r2, box lo, box hi, font fn2, bool gl):
     <table style="width: 100%">
       <tbody><tr>
         <td style="width: 50%; padding-left: 0em"><center>
-          <img src="texmacs-math-typesetting-66.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889806em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.72em; height: 1.81901928374656em"></img>
+          <img src="texmacs-math-typesetting-66.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889806em; margin-right: -0.0112837465564741em; margin-top: 0em; vertical-align: -0.72em; height: 1.81901928374656em" alt="Figure from “Mathematical typesetting in TeXmacs”" decoding="async" loading="lazy">
         </center></td>
         <td style="width: 50%; padding-right: 0em"><div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
           <div class="tmweb-code">
@@ -2840,7 +2844,7 @@ concater_rep::pre_glue () {
       </div>
     </div>
     <p>
-      
+
     </p>
     <p>
       The function <tt class="verbatim cpp">handle_brackets</tt> fixes the size of the
@@ -2875,7 +2879,7 @@ concater_rep::handle_brackets () {
       </div>
     </div>
     <p>
-      
+
     </p>
     <p>
       The placement of scripts is the job of <tt class="verbatim cpp">handle_scripts</tt>:
@@ -3029,7 +3033,7 @@ concater_rep::glue (box b, int ref, int arg) {
         a[ref]-&gt;spc += space (spc-&gt;min/3, spc-&gt;def/3, spc-&gt;def/3);
       }
   }
-  
+
   space spc = max (a[ref]-&gt;spc, a[arg]-&gt;spc);
 
   a[arg]  = line_item (OBSOLETE_ITEM, OP_SKIP, a[arg]-&gt;b, a[arg]-&gt;penalty);
@@ -3062,7 +3066,7 @@ concater_rep::glue (box b, int ref, int arg1, int arg2) {
       </div>
     </div>
     <p>
-      
+
     </p>
     <p>
       Finally, the sizing of the brackets is the job of <tt class="verbatim cpp">handle_matching</tt>:
@@ -3183,7 +3187,7 @@ concater_rep::handle_matching (int start, int end) {
       Again, a key point of this procedure is the call to <tt class="verbatim cpp">delimiter_box</tt>
       (in <tt class="verbatim">src/Typeset/Boxes/Basic/text_boxes.cpp</tt>) in order to
       replace the &ldquo;temporary&rdquo; vertical delimiter, with a correctly
-      sized one (be it a left, right or middle delimiter). 
+      sized one (be it a left, right or middle delimiter).
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -3321,10 +3325,10 @@ get_delimiter (string s, font fn, SI height) {
       </li>
     </ul>
     <p>
-      
+
     </p>
     <p>
-      
+
     </p>
   </body>
 </html>

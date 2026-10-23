@@ -18,7 +18,7 @@
 
   <TeXmacs> can be used to build websites, in fact
   <hlink|this|https://texmacs.github.io/notes> blog, the main
-  <hlink|<TeXmacs> website|www.texmacs.org> and a couple of other websites
+  <hlink|<TeXmacs> website|https://www.texmacs.org> and a couple of other websites
   (e.g. one <hlink|here|https://www.texmacs.org/joris/main/joris.html> and
   another one <hlink|here|http://www.mathemagix.org/www/mmdoc/doc/html/main/index.en.html>)
   are currently written and maintained exclusively within <TeXmacs>.\ 

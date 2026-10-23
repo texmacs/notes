@@ -1,18 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Embedding graphics composed with Scheme into documents — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Embedding graphics composed with Scheme into documents, an article on Notes on TeXmacs.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/scheme-graphics-embedding.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -117,8 +121,8 @@
   ;; a closed polyline for the triangle
   (with &quot;color&quot; &quot;red&quot;   (cline ,pA ,pB ,pC))
   ;; add letters using text-at
-  (with &quot;color&quot; &quot;black&quot; (text-at &quot;A&quot; ,tA))  
-  (with &quot;color&quot; &quot;black&quot; (text-at &quot;B&quot; ,tB))  
+  (with &quot;color&quot; &quot;black&quot; (text-at &quot;A&quot; ,tA))
+  (with &quot;color&quot; &quot;black&quot; (text-at &quot;B&quot; ,tB))
   (with &quot;color&quot; &quot;black&quot; (text-at &quot;C&quot; ,tC))
   ;; finally decorate with the TeXmacs symbol
   ;; and close all of the parentheses!!!
@@ -138,9 +142,9 @@
       <table style="width: 100%">
         <tbody><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em"><p>
-            <img src="scheme-graphics-embedding-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -3.87878787878788em; height: 7.75757575757576em"></img>
+            <img src="scheme-graphics-embedding-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -3.87878787878788em; height: 7.75757575757576em" alt="Figure from “Embedding graphics composed with Scheme into documents”" decoding="async" loading="lazy">
           </p><p>
-            
+
           </p></td>
         </tr><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
@@ -199,8 +203,8 @@
   ;; a closed polyline for the triangle
   (with &quot;color&quot; &quot;red&quot;   (cline ,pA ,pB ,pC))
   ;; add letters using text-at
-  (with &quot;color&quot; &quot;black&quot; (text-at &quot;A&quot; ,tA))  
-  (with &quot;color&quot; &quot;black&quot; (text-at &quot;B&quot; ,tB))  
+  (with &quot;color&quot; &quot;black&quot; (text-at &quot;A&quot; ,tA))
+  (with &quot;color&quot; &quot;black&quot; (text-at &quot;B&quot; ,tB))
   (with &quot;color&quot; &quot;black&quot; (text-at &quot;C&quot; ,tC))
   ;; finally decorate with the TeXmacs symbol
   ;; and close all of the parentheses!!!
@@ -210,7 +214,7 @@
       </table></font>
     </p>
     <p>
-      
+
     </p>
     <p>
       It is also possible to edit the drawing with the interactive (point and
