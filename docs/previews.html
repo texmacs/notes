@@ -1,23 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Implementing previews for link targets — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Implementing previews for link targets, an article on Notes on TeXmacs.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/previews.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -39,11 +43,11 @@
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
 tree ln3 (LINK, &quot;hyperlink&quot;, copy (ref_id), copy (dest_ref));
-env (&quot;reference&quot;) = tree (MACRO, &quot;Id&quot;, 
-                                 tree (LOCUS, copy (ref_id), 
+env (&quot;reference&quot;) = tree (MACRO, &quot;Id&quot;,
+                                 tree (LOCUS, copy (ref_id),
                                               ln3, reftxt));
-env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;, 
-                               tree (LOCUS, copy (ref_id), 
+env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
+                               tree (LOCUS, copy (ref_id),
                                             copy (ln3), preftxt));</pre>
     </div>
     <p>
@@ -151,7 +155,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     (with (x1 y1 x2 y2) (tree-bounding-rectangle ref)
       (and-let* ((packs (get-style-list))
                  (pre (document-get-preamble (buffer-tree)))
-                 (id (and (tree-atomic? body*) 
+                 (id (and (tree-atomic? body*)
                           (tree-&gt;string body*)))
                  (balloon (ref-preview id))
                  (zf (get-window-zoom-factor))
@@ -235,7 +239,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
     </div>
     <p>
       This markup provides a custom style  and background color for the
-      preview area, including a minimum width. 
+      preview area, including a minimum width.
     </p>
     <p>
       The <font color="brown"><i>body</i></font> argument is feed with a meaningful
@@ -280,7 +284,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
         ((tm-in? t (section-tag-list))
          (with l (symbol-append (tm-label t) '*)
            &lsquo;(,l ,@(tm-children t))))
-        ((tm-in? t '(label item item* 
+        ((tm-in? t '(label item item*
                            bibitem bibitem* eq-number)) &quot;&quot;)
         ((or (tm-func? t 'equation 1) (tm-func? t 'equation* 1))
          &lsquo;(equation* ,(clean-preview (tm-ref t 0))))
@@ -289,7 +293,7 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
         (else t)))</pre>
     </div>
     <p>
-      
+
     </p>
   </body>
 </html>

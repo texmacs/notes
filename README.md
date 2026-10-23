@@ -20,6 +20,10 @@ Structure of the repository:
 
 To automatically regenerate all the web pages  use `Tools->Web->Create/Update web site` within TeXmacs and choose `src/` as source and `docs/` as destination directories. 
 
+After exporting, run `python3 tools/postprocess_site.py`: it adds page titles, descriptions and other HTML metadata, and regenerates `index.html`, `404.html` and `sitemap.xml`. Check the result with `python3 -m unittest discover -s tools -p 'test_*.py'`, which also verifies that all local links and anchors resolve. The continuous deployment runs both steps.
+
+The `.tm` sources use TeXmacs' own 8-bit encoding, not UTF-8. To edit them outside TeXmacs without corrupting accented characters, use `python3 tools/patch_texmacs.py FILE --replace OLD NEW --dry-run` (then without `--dry-run`).
+
 Once the repository is pushed on github it becomes visible. 
 
 **To contribute:**

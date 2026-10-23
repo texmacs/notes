@@ -225,10 +225,10 @@
     base size>
   <|explain>
     The base font size is specified in <hlink|<verbatim|pt>
-    units|../basics/lengths.en.tm> and is usually invariant throughout the
+    units|https://www.texmacs.org/tmweb/manual/webman-format.en.html#sec-lengths> and is usually invariant throughout the
     document. Usually, the base font size is <verbatim|9pt>, <verbatim|10pt>,
     <verbatim|11pt> or <verbatim|12pt>. Other font sizes are usually obtained
-    by changing the <hlink|<src-var|magnification>|env-general.en.tm#magnification>
+    by changing the <hlink|<src-var|magnification>|https://www.texmacs.org/tmweb/manual/webman-env.en.html#magnification>
     or the relative <hlink|font-size|#font-size>.
 
     <\tm-fragment>
@@ -252,7 +252,7 @@
     From a mathematical point of view, the multipliers are in a geometric
     progression with factor <no-break><math|<sqrt|2|4>>. Notice that the font
     size is also affected by the <hlink|index
-    level|env-math.en.tm#math-level>.
+    level|https://www.texmacs.org/tmweb/manual/webman-env.en.html#math-level>.
   </explain>
 
   <\explain>
