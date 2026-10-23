@@ -8,6 +8,11 @@ on:
 # Use an on demand workflow trigger.  
 #on: workflow_dispatch
 
+# Builds push to main and gh-pages: never run two at once.
+concurrency:
+  group: cd-gh-pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -19,10 +24,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 1
-      
+          # full history: notes-tools.scm dates each article from git log
+          fetch-depth: 0
+
       - name: Run TeXmacs script with headless option
         run: |
           # add safe directory (texmacs script uses git to obtain metadata)
@@ -40,6 +46,7 @@ jobs:
           TARGET_BRANCH="gh-pages"
           BUILD_DIR="docs"
           RESOURCES_DIR="resources"
+          MISC_DIR="misc"
           ROOT_INDEX_FILE="index.html"
           REPO_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           
@@ -50,10 +57,14 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
-          # commit & push to main
+          # commit & push to main, only if the build changed something
           git add --all
-          git commit -m "CD build"
-          git push
+          if git diff --cached --quiet; then
+            echo "Build output already up to date on main."
+          else
+            git commit -m "CD build"
+            git push
+          fi
 
           # init gh-pages branch
           git clone --branch ${TARGET_BRANCH} --depth 1 ${REPO_URL} gh-pages || \
@@ -69,10 +80,17 @@ jobs:
           # copy 'resources' 
           cp -r ../${RESOURCES_DIR} .
 
+          # copy 'misc' (icons referenced by older feed copies)
+          cp -r ../${MISC_DIR} .
+
           # copy 'index.html'
           cp ../${ROOT_INDEX_FILE} .
-          
-          # commit & push
+
+          # commit & push, only if the site changed
           git add --all
-          git commit -m "Deploy to ${TARGET_BRANCH} branch"
-          git push --force ${REPO_URL} ${TARGET_BRANCH}
+          if git diff --cached --quiet; then
+            echo "${TARGET_BRANCH} already up to date."
+          else
+            git commit -m "Deploy to ${TARGET_BRANCH} branch"
+            git push --force ${REPO_URL} ${TARGET_BRANCH}
+          fi
