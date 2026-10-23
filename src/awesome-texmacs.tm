@@ -19,7 +19,7 @@
   <\itemize>
     <item><hlink|GNU TeXmacs Forum|http://forum.texmacs.cn/>
 
-    <item><hlink|GNU TeXmacs Gitter Chat Room|https://gitter.im/texmacs/Lobby>
+    <item><hlink|GNU TeXmacs Gitter Chat Room|https://app.gitter.im/#/room/#texmacs_Lobby:gitter.im>
 
     <item><hlink|GNU TeXmacs\<#77E5\>\<#4E4E\>\<#4E13\>\<#680F\>(Chinese)|https://zhuanlan.zhihu.com/texmacs>
 
@@ -39,7 +39,7 @@
   <\itemize>
     <item><hlink|GNU TeXmacs package for Chocolatey|https://chocolatey.org/packages/texmacs>
 
-    <item><hlink|GNU TeXmacs package for Archlinux|https://www.archlinux.org/packages/extra/x86_64/texmacs/>
+    <item><hlink|GNU TeXmacs package for Archlinux|https://aur.archlinux.org/packages/texmacs>
 
     <item><hlink|GNU TeXmacs cask for Homebrew|https://formulae.brew.sh/cask/texmacs>
   </itemize>
@@ -71,7 +71,7 @@
     <item><hlink|A Jupyter client for GNU
     TeXmacs|https://github.com/mgubi/tm_jupyter>
 
-    <item><hlink|A Converter to Markdown|https://bitbucket.org/mdbenito/tm2md/src/master/>
+    <item><hlink|A Converter to Markdown|https://github.com/da-liii/tm2md>
   </itemize>
 </body>
 

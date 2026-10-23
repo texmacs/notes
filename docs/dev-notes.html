@@ -1,23 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Development resources and ideas — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This page contains idea and resources pertaining to the development of TeXmacs.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/dev-notes.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -48,7 +52,7 @@
       would be useful just to output the appropriate elaborated text (together
       with a plain-text version for copy/paste). In general it could be maybe
       interesting to evaluate the use of external libraries for syntax
-      analysis of programming languages. 
+      analysis of programming languages.
     </p>
     <ul>
       <li>
@@ -64,7 +68,7 @@
       <li>
         <p>
           The KDE project has a syntax-highlighting engine <a href="https://invent.kde.org/frameworks/syntax-highlighting/">here</a>
-          where languages descriptions comes in external XML files.  
+          where languages descriptions comes in external XML files.
         </p>
       </li>
     </ul>
@@ -140,7 +144,7 @@
           allow TeXmacs to be an alternative to Jupyter notebooks or <a href="https://github.com/mgubi/tm_jupyter">
           Jupyter Qt Console</a>. One can look to these projects to understand
           which features have to be supported. Jeroen has improved the
-          tm_jupyter plugin <a href="https://github.com/woutersj/tm_jupyter/commits/master">here</a>.  
+          tm_jupyter plugin <a href="https://github.com/woutersj/tm_jupyter/commits/master">here</a>.
         </p>
       </li>
       <li>
@@ -255,7 +259,7 @@
       </li>
       <li>
         <p>
-          The, already mentioned, LaTeX package <a href="https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf">attachfile</a> 
+          The, already mentioned, LaTeX package <a href="https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/attachfile/attachfile.pdf">attachfile</a>
         </p>
       </li>
       <li>
@@ -342,11 +346,11 @@
       <code>$TEXMACS_PATH/progs/client</code>.
     </p>
     <p>
-      
+
     </p>
     <p>
       <a href="http://forum.texmacs.cn/uploads/default/original/2X/d/d4d28b46031cfeafde9c7d9ee314009db58d98e3.png"><p>
-        <img class="image" src="dev-notes-1.png" height="448" width="690"></img>
+        <img class="image" src="dev-notes-1.png" height="448" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
       </p></a>
     </p>
     <p>
@@ -357,11 +361,11 @@
       publicly visible on the Internet (i.e. have its own IP address).
     </p>
     <p>
-      
+
     </p>
     <p>
       <a href="http://forum.texmacs.cn/uploads/default/original/2X/0/05f5330887b028f8144d885451d45c560eaea143.jpeg"><p>
-        <img class="image" src="dev-notes-2.jpeg" height="431" width="690"></img>
+        <img class="image" src="dev-notes-2.jpeg" height="431" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
       </p></a>
     </p>
     <p>
@@ -459,7 +463,7 @@
           NAT hole punching like these require the use of an intermediate
           server. We can run a lightweight server (e.g. coded in Javascript)
           like here: <a href="https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2">https://medium.com/collaborne-engineering/serverless-yjs-72d0a84326a2</a>
-          or use DHTs like the p2p-socket solution with uses <a href="http://holepunch.io/">holepunch.io</a>
+          or use DHTs like the p2p-socket solution with uses <a href="https://holepunch.to/">holepunch.io</a>
           to establish the connection.
         </p>
       </li>
@@ -482,11 +486,11 @@
       1</a>)
     </p>
     <p>
-      
+
     </p>
     <p>
       <a href="http://forum.texmacs.cn/uploads/default/original/2X/1/104569854713dfae99d4ab26582e54b2058dea7c.png"><p>
-        <img class="image" src="dev-notes-3.png" height="466" width="690"></img>
+        <img class="image" src="dev-notes-3.png" height="466" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
       </p></a>
     </p>
     <p>
@@ -505,17 +509,22 @@
       metrics to correctly position index and subscripts.
     </p>
     <p>
-      
+
     </p>
     <p>
       <a href="http://forum.texmacs.cn/uploads/default/original/2X/b/b9bd60542d93240d7095fcc19a3673c6b7b56e67.png"><p>
-        <img class="image" src="dev-notes-4.png" height="248" width="690"></img>
+        <img class="image" src="dev-notes-4.png" height="248" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
       </p></a>
     </p>
     <p>
       Some time ago mgubi started to implement some OpenType font support for
-      TeXmacs, here: <a href="https://github.com/mgubi/texmacs/tree/wip-unicode-math">https://github.com/mgubi/texmacs/tree/wip-unicode-math
-      2</a>
+      TeXmacs. As of October 2026, this work continues in the <a href="https://github.com/mgubi/texmacs/tree/wip_opentype">wip_opentype</a>
+      branch. It is integrated, together with alternative Scheme runtimes (<a
+      href="https://github.com/mgubi/texmacs/tree/wip_other_schemes">wip_other_schemes</a>) and fixes, performance work and tests (<a
+      href="https://github.com/mgubi/texmacs/tree/wip_fixes">wip_fixes</a>), in <a href="https://mgubi.github.io/texmacs/">TeXmacs Upsilon</a>, an experimental
+      version of TeXmacs developed in the <a href="https://github.com/mgubi/texmacs/tree/upsilon_texmacs">upsilon_texmacs</a> branch.
+      <a href="https://mgubi.github.io/texmacs/#downloads">Experimental builds</a> of Upsilon are available for macOS,
+      Linux and Windows.
     </p>
     <p>
       TeXmacs still depends very much on old font formats while there are now
@@ -543,35 +552,34 @@
       workings of which glyphs are selected, which metrics used, etc&hellip;
     </p>
     <p>
-      
+
     </p>
     <p>
       <a href="http://forum.texmacs.cn/uploads/default/original/2X/3/36ccd5a831c9d620879aca324875db9666dc75ef.jpeg"><p>
-        <img class="image" src="dev-notes-5.jpeg" height="431" width="690"></img>
+        <img class="image" src="dev-notes-5.jpeg" height="431" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
       </p></a>
     </p>
     <p>
-      
+
     </p>
     <p>
-      <img class="image" src="dev-notes-6.png" height="498" width="690"></img>
+      <img class="image" src="dev-notes-6.png" height="498" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
     </p>
     <p>
-      
+
     </p>
     <p>
-      <img class="image" src="dev-notes-7.png" height="439" width="690"></img>
+      <img class="image" src="dev-notes-7.png" height="439" width="690" alt="Figure from “Development resources and ideas”" decoding="async" loading="lazy">
     </p>
     <p>
       Complete and debug the initial implementation of the MATH table parser
-      here: <a href="https://github.com/mgubi/texmacs/tree/wip-unicode-math">https://github.com/mgubi/texmacs/tree/wip-unicode-math
-      </a>
+      here: <a href="https://github.com/mgubi/texmacs/tree/wip_opentype">https://github.com/mgubi/texmacs/tree/wip_opentype</a>
     </p>
     <p>
       A discussion is taking place in the forum <a href="http://forum.texmacs.cn/t/proposal-opentype-math-font-support/1377/1">here</a>.
     </p>
     <p>
-      
+
     </p>
   </body>
 </html>

@@ -1,43 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Font mechanics — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="We describe the various mechanisms and features of TeXmacs font handling, from the user interface at the level of the document to the inner workings of the various fonts types at the level of the C++ source code. To support the use of a wide variety of fonts in the typesetting of technical...">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/font-mechanics.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
     <h1 id="auto-1">Font mechanics<span style="margin-left: 1em"></span></h1>
     <div class="notes-abstract">
       We describe the various mechanisms and features of TeXmacs font
-      handling, from the user interface at the level of documents to the inner
-      workings of the various fonts types at the level of the <tt class="verbatim">C++</tt>
-      source code. TeXmacs implements sophisticate algorithms to allow to use
-      a wide variety of fonts despite of the facts that they do to have all
-      the necessary glyphs, especially for the typesetting of technical
-      documents.
+      handling, from the user interface at the level of the document to the
+      inner workings of the various fonts types at the level of the <tt class="verbatim">C++</tt>
+      source code. To support the use of a wide variety of fonts in the
+      typesetting of technical documents, TeXmacs implements sophisticate
+      algorithms to synthetize or replace the missing glyphs.
     </div>
     <p>
       [Version 1.0 of 3.1.2025. By <a href="https://github.com/mgubi">@mgubi</a>]
     </p>
     <p>
-      This document describes TeXmacs fonts handling. We describe the state of
-      affairs as per <tt class="verbatim">svn</tt> revision <tt>r14561</tt> (December
-      2024, TeXmacs <tt>2.14+</tt>). Parts of the general overview of fonts in
+      This document describes the state of affairs of TeXmacs fonts handling
+      as per <tt class="verbatim">svn</tt> revision <tt>r14561</tt> (December 2024,
+      TeXmacs <tt>2.14+</tt>). Parts of the general overview of fonts in
       TeXmacs are extracted, for reference, from the official documentation
       and from the paper<a href="https://www.texmacs.org/joris/fontart/fontart-abs.html"> &ldquo;Mathematical font art&rdquo;</a> by
       Joris van der Hoeven.
@@ -103,8 +106,8 @@
     </p>
     <p>
       Fonts are usually made up from glyphs like &ldquo;x&rdquo;,
-      &ldquo;ffi&rdquo;, &ldquo;<span class="no-breaks"><img src="font-mechanics-1.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0827474747474747em; margin-top: -0.0103434343434343em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img>&rdquo;,</span>
-      &ldquo;<span class="no-breaks"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img>&rdquo;,</span>
+      &ldquo;ffi&rdquo;, &ldquo;<span class="no-breaks"><img src="font-mechanics-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0789862258953168em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">&rdquo;,</span>
+      &ldquo;<span class="no-breaks"><img src="font-mechanics-2.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.017168044077135em; margin-right: -0.0112837465564738em; margin-top: -0.00482644628099171em; vertical-align: -0.243129476584022em; height: 0.959118457300275em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">&rdquo;,</span>
       <abbr>etc.</abbr> When rendering a string, the string is decomposed into
       glyphs so as to take into account ligatures (like fi, fl, ff, ffi, ffl).
       Next, the individual glyphs are positioned while taking into account
@@ -115,7 +118,7 @@
       brackets in
     </p>
     <center>
-      <img src="font-mechanics-3.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0284646464646465em; margin-right: -0.0103434343434343em; margin-top: 0em; vertical-align: -0.310848484848485em; height: 1.33739393939394em"></img>
+      <img src="font-mechanics-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0275922865013775em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.282071625344353em; height: 1.36777961432507em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
     </center>
     <h2 id="auto-3">2.<span style="margin-left: 1em"></span>String encodings<span style="margin-left: 1em"></span></h2>
     <p>
@@ -169,46 +172,46 @@
     </p>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>font</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span
+        <font color="#008000"><i>font</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span
         style="margin-left: 0.25em"></span><tt>roman</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font name)</font>
       </div>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         These variables control the main name of the font, also called the
         <em>font family</em>. For instance:
       </p>
     </div>
-    <div class="tmweb-code" style="margin-left: 42.175176192px">
+    <div class="tmweb-code" style="margin-left: 38.660688007188px">
       <p>
         <class style="font-family: Times New Roman">Computer modern roman</class>, Linux Libertine,
         Chancery, Palatino
       </p>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         Similarly, TeXmacs supports various mathematical fonts: <font color="#800000">[Does
         not render correctly]</font>
       </p>
     </div>
-    <div class="tmweb-code" style="margin-left: 42.175176192px">
+    <div class="tmweb-code" style="margin-left: 38.660688007188px">
       <p>
-        Roman: <img src="font-mechanics-5.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
+        Roman: <img src="font-mechanics-5.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.866953168044077em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
       </p>
       <p>
-        Adobe: <img src="font-mechanics-6.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
+        Adobe: <img src="font-mechanics-6.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.866953168044077em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
       </p>
       <p>
-        New roman: <img src="font-mechanics-7.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
+        New roman: <img src="font-mechanics-7.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.866953168044077em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
       </p>
       <p>
-        Concrete: <img src="font-mechanics-8.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0103434343434339em; margin-top: -0.0155151515151515em; vertical-align: -0.0103232323232323em; height: 0.829191919191919em"></img>
+        Concrete: <img src="font-mechanics-8.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.866953168044077em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
       </p>
     </div>
-    <div style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         Most fonts only implement a subset of all Unicode glyphs. Sometimes,
         the user might wish to combine several fonts to cover a larger subset.
@@ -225,13 +228,13 @@
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
         <font color="#008000"><i>font-family</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png"
-        style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>rm</tt>
+        style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span style="margin-left: 0.25em"></span><tt>rm</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font variant)</font>
       </div>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         This variable selects a variant of the major font, like a sans serif
         font, a typewriter font, and so on. As explained above, variants of a
@@ -241,37 +244,37 @@
         back on a suitable alternative font.
       </p>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         Typical variants for text fonts are <tt class="verbatim">rm</tt> (roman), <tt
         class="verbatim">tt</tt> (typewriter) and <tt class="verbatim">ss</tt> (sans serif):
       </p>
     </div>
-    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         roman, <tt>typewriter</tt> and <class style="font-family: sans-serif">sans serif</class>
       </p>
       <p>
-        Sans serif formula: <class style="font-family: sans-serif"><img src="font-mechanics-9.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0154949494949495em; margin-right: -0.0517171717171721em; margin-top: -0.00711111111111107em; vertical-align: -0.248222222222222em; height: 0.956767676767677em"></img></class>
+        Sans serif formula: <class style="font-family: sans-serif"><img src="font-mechanics-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0225454545454545em; margin-right: -0.0451349862258947em; margin-top: -0.0139063360881543em; vertical-align: -0.248220385674931em; height: 0.959118457300275em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"></class>
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
         <font color="#008000"><i>font-series</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png"
-        style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>medium</tt>
+        style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span style="margin-left: 0.25em"></span><tt>medium</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font weight)</font>
       </div>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         The font series determines the weight of the font. Most fonts only
         provide <tt class="verbatim">regular</tt> and <tt class="verbatim">bold</tt> font weights.
         Some fonts also provide <tt class="verbatim">light</tt> as a possible value.
       </p>
     </div>
-    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         light, medium, <b>bold</b>
       </p>
@@ -279,20 +282,20 @@
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
         <font color="#008000"><i>font-shape</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png"
-        style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>right</tt>
+        style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span style="margin-left: 0.25em"></span><tt>right</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font shape)</font>
       </div>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         The font shape determines other characters of a font, like its slant,
         whether we use small capitals, whether it is condensed, and so on. For
         instance,
       </p>
     </div>
-    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         <class style="font-style: normal">upright</class>, slanted, <i>italic</i>, left slanted,
         <class style="font-variant: small-caps">Small Capitals</class>, <tt>proportional
@@ -303,23 +306,23 @@
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
         <a id="font-base-size"></a><font color="#008000"><i>font-base-size</i></font><span style="margin-left: 0.25em"></span><img
-        src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>10</tt>
+        src="font-mechanics-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span style="margin-left: 0.25em"></span><tt>10</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font base size)</font>
       </div>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
-        The base font size is specified in <a href="../basics/lengths.en.html"><tt class="verbatim">pt</tt>
+        The base font size is specified in <a href="https://www.texmacs.org/tmweb/manual/webman-format.en.html#sec-lengths"><tt class="verbatim">pt</tt>
         units</a> and is usually invariant throughout the document. Usually,
         the base font size is <tt class="verbatim">9pt</tt>, <tt class="verbatim">10pt</tt>, <tt
         class="verbatim">11pt</tt> or <tt class="verbatim">12pt</tt>. Other font sizes are usually
-        obtained by changing the <a href="env-general.en.html#magnification"><font color="#008000"><i>magnification</i></font></a>
+        obtained by changing the <a href="https://www.texmacs.org/tmweb/manual/webman-env.en.html#magnification"><font color="#008000"><i>magnification</i></font></a>
         or the relative <a href="#font-size">font-size</a>.
       </p>
     </div>
-    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div class="tmweb-code" style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         9pt, 10pt, 11pt, 12pt
       </p>
@@ -327,13 +330,13 @@
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
         <a id="font-size"></a><font color="#008000"><i>font-size</i></font><span style="margin-left: 0.25em"></span><img
-        src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span style="margin-left: 0.25em"></span><tt>1</tt>
+        src="font-mechanics-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span style="margin-left: 0.25em"></span><tt>1</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(font size)</font>
       </div>
     </div>
-    <div style="margin-left: 42.175176192px">
+    <div style="margin-left: 38.660688007188px">
       <p>
         The real font size is obtained by multiplying the <font color="#008000"><i>font-base-size</i></font>
         by the <font color="#008000"><i>font-size</i></font> multiplier. The following
@@ -341,7 +344,7 @@
         class="tmweb-menu" style="font-family: sans-serif">Size</class><a id="auto-7"></a>:
       </p>
     </div>
-    <div style="margin-left: 42.175176192px; margin-top: 1em; margin-bottom: 1em">
+    <div style="margin-left: 38.660688007188px; margin-top: 1em; margin-bottom: 1em">
       <table style="width: 100%">
         <tbody><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em"><table style="display: inline-table; vertical-align: middle">
@@ -383,24 +386,24 @@
         </tr></tbody>
       </table>
     </div>
-    <div style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         From a mathematical point of view, the multipliers are in a geometric
-        progression with factor <span class="no-breaks"><img src="font-mechanics-10.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0673333333333333em; margin-right: -0.0103434343434343em; margin-top: 0.0373333333333333em; vertical-align: -0.365212121212121em; height: 1.11191919191919em"></img>.</span>
-        Notice that the font size is also affected by the <a href="env-math.en.html#math-level">index
+        progression with factor <span class="no-breaks"><img src="font-mechanics-10.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0805289256198347em; margin-right: -0.0112837465564737em; margin-top: 0.0394931129476584em; vertical-align: -0.373465564738292em; height: 1.11850137741047em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span>
+        Notice that the font size is also affected by the <a href="https://www.texmacs.org/tmweb/manual/webman-env.en.html#math-level">index
         level</a>.
       </p>
     </div>
     <div class="compact-block" style="text-indent: 0em">
       <div class="left-tab" style="margin-top: 0.5em">
-        <font color="#008000"><i>dpi</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434344em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.491313131313131em"></img><span
+        <font color="#008000"><i>dpi</i></font><span style="margin-left: 0.25em"></span><img src="font-mechanics-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.502126721763085em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"><span
         style="margin-left: 0.25em"></span><tt>600</tt>
       </div>
       <div class="right-tab" style="margin-bottom: 0.25em">
         <font color="#707070">(fonts rendering quality)</font>
       </div>
     </div>
-    <div style="margin-bottom: 0.5em; margin-left: 42.175176192px">
+    <div style="margin-bottom: 0.5em; margin-left: 38.660688007188px">
       <p>
         The rendering quality of raster fonts (also called Type 3 fonts), such
         as the fonts generated by the <class style="font-variant: small-caps">Metafont</class> program
@@ -442,8 +445,8 @@
       <li>
         <p>
           Inconsistencies: sloppy design of some glyphs that are important for
-          mathematics (such as <span class="no-breaks"><img src="font-mechanics-11.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>,</span>
-          <span class="no-breaks"><img src="font-mechanics-12.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>,</span> <abbr>etc.</abbr>),
+          mathematics (such as <span class="no-breaks"><img src="font-mechanics-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span>
+          <span class="no-breaks"><img src="font-mechanics-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> <abbr>etc.</abbr>),
           leading to inconsistencies.
         </p>
       </li>
@@ -453,7 +456,7 @@
       emulation</em>. The first technique consists of borrowing missing glyphs
       from other fonts. This can either be done on the level of an entire font
       (<abbr>e.g.</abbr> for obtaining bold or italic declinations) or for
-      individual characters (<abbr>e.g.</abbr> a missing <img src="font-mechanics-13.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.47579797979798em"></img>
+      individual characters (<abbr>e.g.</abbr> a missing <img src="font-mechanics-13.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
       symbol, or lacking Greek characters). Font emulation consists of
       combining and altering the glyphs of symbols in a font in order to
       generate new ones. This can again be done for entire fonts or individual
@@ -464,9 +467,9 @@
       of the main characteristics of all supported fonts. The results of this
       analysis are stored in a database. Using this database, we may then
       compute the distance between two fonts. In the case when a symbol <img
-      src="font-mechanics-14.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0827474747474747em; margin-top: -0.0201212121212121em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img> is missing in a font <span class="no-breaks"><img src="font-mechanics-15.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.15169696969697em; height: 0.849878787878788em"></img>,</span>
-      it then suffices to find the closest font <img src="font-mechanics-16.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.162020202020202em; height: 0.849878787878788em"></img> that
-      supports this symbol <span class="no-breaks"><img src="font-mechanics-14.png" style="margin-left: -0.0103434343434343em; margin-bottom: -2.0202020202021e-5em; margin-right: -0.0827474747474747em; margin-top: -0.0201212121212121em; vertical-align: -0.0103232323232323em; height: 0.47579797979798em"></img>.</span> Notice
+      src="font-mechanics-14.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0789862258953168em; margin-top: -0.00526721763085397em; vertical-align: -0.0112617079889807em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> is missing in a font <span class="no-breaks"><img src="font-mechanics-15.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.150435261707989em; height: 0.827460055096419em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span>
+      it then suffices to find the closest font <img src="font-mechanics-16.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.16169696969697em; height: 0.827460055096419em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> that
+      supports this symbol <span class="no-breaks"><img src="font-mechanics-14.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0789862258953168em; margin-top: -0.00526721763085397em; vertical-align: -0.0112617079889807em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span> Notice
       that the best substitution font may depend on the fonts which are
       installed on your system.
     </p>
@@ -483,9 +486,9 @@
     <p>
       One of the most important font characteristics is the height of the
       &ldquo;x&rdquo; symbol (with respect to the design size). When the font
-      <img src="font-mechanics-15.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.15169696969697em; height: 0.849878787878788em"></img> borrows a symbol from the font <img src="font-mechanics-16.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.162020202020202em; height: 0.849878787878788em"></img>
+      <img src="font-mechanics-15.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.150435261707989em; height: 0.827460055096419em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> borrows a symbol from the font <img src="font-mechanics-16.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.16169696969697em; height: 0.827460055096419em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
       we first scale it by the quotient of these x-heights inside <img src="font-mechanics-15.png"
-      style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.15169696969697em; height: 0.849878787878788em"></img> and <span class="no-breaks"><img src="font-mechanics-16.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0103232323232323em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151516em; vertical-align: -0.162020202020202em; height: 0.849878787878788em"></img>.</span>
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.150435261707989em; height: 0.827460055096419em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> and <span class="no-breaks"><img src="font-mechanics-16.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.16169696969697em; height: 0.827460055096419em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span>
     </p>
     <p>
       Other common font characteristics are also taken into account into our
@@ -506,7 +509,7 @@
     <div style="margin-top: 1em; margin-bottom: 1em">
       <table style="width: 100%">
         <tbody><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><img src="font-mechanics-17.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 15.247898989899em"></img></td>
+          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><img src="font-mechanics-17.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: 0em; height: 16.6340716253444em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"></td>
         </tr><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
         </tr><tr>
@@ -529,31 +532,31 @@
     <ul>
       <li>
         <p>
-          Superposition of several glyphs: <img src="font-mechanics-18.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0155151515151515em; vertical-align: 0em; height: 0.501656565656566em"></img> and <img
-          src="font-mechanics-11.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> can be combined into <span class="no-breaks"><img src="font-mechanics-19.png"
-          style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: 0em; vertical-align: 0em; height: 0.579232323232323em"></img>,</span> and <img src="font-mechanics-20.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> be obtained by
-          juxtaposing two <img src="font-mechanics-12.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> symbols.
+          Superposition of several glyphs: <img src="font-mechanics-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.490842975206612em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> and <img
+          src="font-mechanics-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> can be combined into <span class="no-breaks"><img src="font-mechanics-19.png"
+          style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: 0em; height: 0.60368044077135em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> and <img src="font-mechanics-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> be obtained by
+          juxtaposing two <img src="font-mechanics-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> symbols.
         </p>
       </li>
       <li>
         <p>
-          Clipping rectangular areas: cutting <img src="font-mechanics-21.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434345em; margin-top: 0em; vertical-align: 0em; height: 0.47579797979798em"></img> and <img
-          src="font-mechanics-22.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.506828282828283em"></img> in their midsts and combining them yields <span
-          class="no-breaks"><img src="font-mechanics-23.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0206868686868687em; vertical-align: 0em; height: 0.506828282828283em"></img>.</span>
+          Clipping rectangular areas: cutting <img src="font-mechanics-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.490842975206612em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> and <img
+          src="font-mechanics-22.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564737em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.519052341597796em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> in their midsts and combining them yields <span
+          class="no-breaks"><img src="font-mechanics-23.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564737em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.519052341597796em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span>
         </p>
       </li>
       <li>
         <p>
           Linear transformations: combining a crushed O and an I, we may
           produce the Greek capital &lt;Phi*&gt;. Turning around <span class="no-breaks"><img
-          src="font-mechanics-24.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434345em; margin-top: 0em; vertical-align: 0em; height: 0.47579797979798em"></img>,</span> we obtain <span class="no-breaks"><img src="font-mechanics-25.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00515151515151516em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -0.237878787878788em; height: 1.06020202020202em"></img>.</span>
+          src="font-mechanics-24.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.490842975206612em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> we obtain <span class="no-breaks"><img src="font-mechanics-25.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.236936639118457em; height: 1.04374655647383em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span>
         </p>
       </li>
       <li>
         <p>
           Simple graphical constructs such as circles and lines. This can for
           instance be used for producing the missing half circle of <span
-          class="no-breaks"><img src="font-mechanics-26.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>.</span>
+          class="no-breaks"><img src="font-mechanics-26.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span>
         </p>
       </li>
       <li>
@@ -561,11 +564,11 @@
           Special <em>ad hoc</em> transformations that directly operate on the
           pixels of a glyph (or on their outlines if possible). For instance,
           we designed a special &ldquo;curlyfication&rdquo; method that turns
-          <img src="font-mechanics-12.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> into <img src="font-mechanics-27.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> and <font
-          style="font-size: 120.0%"><img src="font-mechanics-28.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img></font> into <font style="font-size: 120.0%"><img src="font-mechanics-29.png"
-          style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img></font>. Similarly, we implemented a &ldquo;flood
-          fill&rdquo; algorithm for transforming <img src="font-mechanics-30.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img> into
-          <span class="no-breaks"><img src="font-mechanics-31.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: 0em; height: 0.466020202020202em"></img>.</span>
+          <img src="font-mechanics-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> into <img src="font-mechanics-27.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> and <font
+          style="font-size: 120.0%"><img src="font-mechanics-28.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.0225674931129477em; vertical-align: 0em; height: 0.575471074380165em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"></font> into <font style="font-size: 120.0%"><img src="font-mechanics-29.png"
+          style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.0225674931129477em; vertical-align: 0em; height: 0.575471074380165em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"></font>. Similarly, we implemented a &ldquo;flood
+          fill&rdquo; algorithm for transforming <img src="font-mechanics-30.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> into
+          <span class="no-breaks"><img src="font-mechanics-31.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: -0.00526721763085397em; vertical-align: 0em; height: 0.467900826446281em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">.</span>
         </p>
       </li>
       <li>
@@ -579,7 +582,7 @@
     <div style="margin-top: 1em; margin-bottom: 1em">
       <table style="width: 100%">
         <tbody><tr>
-          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><img src="font-mechanics-32.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: 0em; height: 15.2045252525253em"></img></td>
+          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><img src="font-mechanics-32.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: 0em; height: 16.5867548209366em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"></td>
         </tr><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
         </tr><tr>
@@ -595,12 +598,12 @@
     <p>
       One specific problem with mathematical fonts is the need for rubber
       characters. There are essentially four types of them: big operators
-      (<span class="no-breaks"><img src="font-mechanics-2.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-33.png"
-      style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-34.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0222424242424242em; margin-right: -0.0103434343434345em; margin-top: -0.0109292929292929em; vertical-align: -0.202181818181818em; height: 0.879191919191919em"></img>),</span>
-      large delimiters <img src="font-mechanics-35.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0284646464646465em; margin-right: -0.0103434343434343em; margin-top: -0.0143838383838384em; vertical-align: -0.332848484848485em; height: 1.13777777777778em"></img> <span class="no-breaks"><img src="font-mechanics-36.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00260606060606061em; margin-right: -0.0103434343434343em; margin-top: -0.00470707070707077em; vertical-align: -0.33769696969697em; height: 1.16363636363636em"></img>,</span>
-      wide accents (<span class="no-breaks"><img src="font-mechanics-37.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0413535353535354em; margin-right: -0.0103434343434343em; margin-top: -0.0103434343434343em; vertical-align: -0.144787878787879em; height: 0.817131313131313em"></img>,</span> <span class="no-breaks"><img
-      src="font-mechanics-38.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: -0.0258585858585859em; vertical-align: 0em; height: 0.698161616161616em"></img>),</span> and long arrows (<span class="no-breaks"><img src="font-mechanics-39.png"
-      style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: 0.31030303030303em; vertical-align: 0em; height: 0.78949494949495em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-40.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434343em; margin-top: 0.31030303030303em; vertical-align: 0em; height: 0.954989898989899em"></img>).</span>
+      (<span class="no-breaks"><img src="font-mechanics-2.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.017168044077135em; margin-right: -0.0112837465564738em; margin-top: -0.00482644628099171em; vertical-align: -0.243129476584022em; height: 0.959118457300275em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img src="font-mechanics-33.png"
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.017168044077135em; margin-right: -0.0112837465564739em; margin-top: -0.00482644628099171em; vertical-align: -0.243129476584022em; height: 0.959118457300275em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img src="font-mechanics-34.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0137079889807163em; margin-right: -0.0112837465564737em; margin-top: -0.0188429752066115em; vertical-align: -0.206170798898072em; height: 0.902699724517906em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">),</span>
+      large delimiters <img src="font-mechanics-35.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0275922865013774em; margin-right: -0.0112837465564737em; margin-top: -0.00498071625344354em; vertical-align: -0.332892561983471em; height: 1.12837465564738em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy"> <span class="no-breaks"><img src="font-mechanics-36.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0275922865013774em; margin-right: -0.0112837465564741em; margin-top: -0.022633608815427em; vertical-align: -0.338159779614325em; height: 1.15658402203857em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span>
+      wide accents (<span class="no-breaks"><img src="font-mechanics-37.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0338292011019284em; margin-right: -0.0112837465564739em; margin-top: -0.0225674931129476em; vertical-align: -0.146666666666667em; height: 0.846280991735537em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img
+      src="font-mechanics-38.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.0282093663911845em; vertical-align: 0em; height: 0.707085399449036em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">),</span> and long arrows (<span class="no-breaks"><img src="font-mechanics-39.png"
+      style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564737em; margin-top: 0.338512396694215em; vertical-align: 0em; height: 0.814920110192837em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img src="font-mechanics-40.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564741em; margin-top: 0.338512396694215em; vertical-align: 0em; height: 0.972892561983471em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">).</span>
     </p>
     <p>
       We produce these rubber characters using essentially the same techniques
@@ -612,9 +615,9 @@
       <table style="width: 100%">
         <tbody><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em"><p>
-            <img src="font-mechanics-41.png" style="margin-left: -0.0103434343434343em; margin-bottom: -0.0103434343434343em; margin-right: -0.0103434343434365em; margin-top: 0em; vertical-align: 0em; height: 9.33171717171717em"></img>
+            <img src="font-mechanics-41.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: 0em; height: 10.1800550964187em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">
           </p><p>
-            
+
           </p></td>
         </tr><tr>
           <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
@@ -631,7 +634,6 @@
     <h2 id="auto-13">5.<span style="margin-left: 1em"></span>The abstract font class<span style="margin-left: 1em"></span></h2>
     <p>
       The main abstract <tt class="verbatim">font</tt> class is defined in <tt class="verbatim">font.hpp</tt>:
-      
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -711,7 +713,7 @@ struct font_rep: rep&lt;font&gt; {
       Font selection is initiated in <tt class="verbatim cpp">edit_env_rep::update_font</tt>
       where the variables controlling the current font, family, series, shape,
       size and magnification are extracted from the current environment via
-      calls to <tt class="verbatim cpp">edit_env_rep::get_string</tt>. 
+      calls to <tt class="verbatim cpp">edit_env_rep::get_string</tt>.
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -764,8 +766,8 @@ font smart_font (string family, string variant, string series, string shape,
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
-font smart_font (string family, string variant, string series, string shape, 
-                 string tfam, string tvar, string tser, string tsh, 
+font smart_font (string family, string variant, string series, string shape,
+                 string tfam, string tvar, string tser, string tsh,
                  int sz, int dpi);            </pre>
     </div>
     <p>
@@ -818,7 +820,7 @@ struct smart_font_rep: font_rep {
 
   array&lt;font&gt; fn;
   smart_map   sm;
-  
+
   smart_font_rep (string name, font base_fn, font err_fn,
                 string family, string variant,
                 string series, string shape, int sz, int hdpi, int vdpi);
@@ -957,12 +959,12 @@ rewrite_math (string s) {
     <p>
       Each entity is transformed back and forth from Cork to UTF8, which has
       as effect to transform some entities in unicode points which are
-      represented in TeXmacs' encoding as <tt class="verbatim">&lt;#xxxx&gt;</tt>. 
+      represented in TeXmacs' encoding as <tt class="verbatim">&lt;#xxxx&gt;</tt>.
     </p>
     <p>
       Let's make a brief digression on how this is implemented before
       continuing. <tt class="verbatim cpp">utf8_to_cork</tt> is implemented in <tt class="verbatim">converter.cpp</tt>
-      and uses a <tt class="verbatim cpp">converter</tt> object instantiated via 
+      and uses a <tt class="verbatim cpp">converter</tt> object instantiated via
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -997,7 +999,7 @@ converter conv= load_converter (&quot;UTF-8&quot;, &quot;Cork&quot;);</pre>
       the boolean value determine if we construct the direct (<tt class="verbatim cpp">false</tt>)
       or inverse (<tt class="verbatim cpp">true</tt>) mapping. The various tables are
       encoded in Scheme expressions in various files in <tt class="verbatim">$TEXMACS_PATH/langs/encoding</tt>.
-      
+
     </p>
     <h3 id="auto-16">7.1.<span style="margin-left: 1em"></span>Entity resolution<span style="margin-left: 1em"></span></h3>
     <p>
@@ -1055,7 +1057,7 @@ int smart_font_rep::resolve (string c)</pre>
       <li>
         <p>
           Other entities are associated to the <tt class="verbatim cpp">&quot;emu-bracket&quot;</tt>
-          subfont, if appropriate. See <tt class="verbatim cpp">find_in_emu_bracket</tt>. 
+          subfont, if appropriate. See <tt class="verbatim cpp">find_in_emu_bracket</tt>.
         </p>
       </li>
     </ul>
@@ -1097,7 +1099,7 @@ int smart_font_rep::resolve (string c)</pre>
       <i>main selector</i>. The other selectors are assumed to be pairs of the
       form <tt class="verbatim cpp">&quot;XXX=YYY&quot;</tt>, where the l.h.s. determines a
       particular subrange of entities and the r.h.s. the font to be used for
-      their rendering.   
+      their rendering.
     </p>
     <p>
       For each selector in the <tt class="verbatim cpp">a</tt> array, we perform a
@@ -1111,7 +1113,7 @@ int smart_font_rep::resolve (string c, string fam, int attempt)</pre>
       here the <tt class="verbatim cpp">attempt</tt> variable indicate the number of
       attempts we already performed. This function implements the semantics of
       the font sequence string, allowing to choose different fonts for
-      subranges of glyphs, or variants (like bold, italic, etc&hellip;). 
+      subranges of glyphs, or variants (like bold, italic, etc&hellip;).
     </p>
     <p>
       For selectors <tt class="verbatim cpp">fam</tt> of the form <tt class="verbatim cpp">&quot;selector
@@ -1266,7 +1268,7 @@ is_rubber (string c) {
       however proceed differently. If the entity belongs to some mathematical
       alphabet as detected via <tt class="verbatim cpp">substitute_math_letter</tt>, then we
       stop further attempts and we dispatch the glyph to one of the subfonts
-      for variants of alphabetical glyphs associated with one of the keys: 
+      for variants of alphabetical glyphs associated with one of the keys:
     </p>
     <p>
       <tt class="verbatim cpp">&quot;bold-math&quot;</tt>, <tt class="verbatim cpp">&quot;italic-math&quot;</tt>,
@@ -1328,7 +1330,7 @@ tree key= tuple (fam, augmented_variant, series, rshape, as_string (attempt-1));
       Other special cases are dispatched to the  <tt class="verbatim cpp">&quot;other&quot;</tt>
       subfont. Finally we assign the glyph to the  <tt class="verbatim cpp">&quot;error&quot;</tt>
       subfont and show it as a red string. This concludes the description of
-      the resolution mechanics. 
+      the resolution mechanics.
     </p>
     <p>
       The semantics of the subfont keys is determined at the moment we
@@ -1441,7 +1443,7 @@ smart_font_rep::initialize_font (int nr) {
 }</pre>
     </div>
     <p>
-      
+
     </p>
     <h2 id="auto-17"><a id="sec:other"></a>8.<span style="margin-left: 1em"></span>Other fonts<span style="margin-left: 1em"></span></h2>
     <h3 id="auto-18"><a id="sec:rubber"></a>8.1.<span style="margin-left: 1em"></span>Rubber fonts<span style="margin-left: 1em"></span></h3>
@@ -1457,7 +1459,7 @@ font rubber_font (font base);</pre>
     </div>
     <p>
       which returns a font appropriate to render the rubber for a base font
-      <tt class="verbatim">base</tt>. It caches the result of a call to 
+      <tt class="verbatim">base</tt>. It caches the result of a call to
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -1491,12 +1493,12 @@ make_rubber_font (font fn) {
       class="verbatim cpp">has_poor_rubber</tt> (which by default is <tt class="verbatim cpp">true</tt>)
       controls whether we try to synthesize rubber or we use the font's
       provided one. If everything else is not appropriate we return the base
-      font. 
+      font.
     </p>
     <p>
       A <tt class="verbatim">poor_rubber</tt> font has the duty of rendering TeXmacs
       entities which come in various sizes according to some hard-coded
-      heuristics. 
+      heuristics.
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -1518,7 +1520,7 @@ struct poor_rubber_font_rep: font_rep {
       It relies on magnified versions of the fonts stored in the <tt class="verbatim cpp">larger</tt>
       field and on virtual fonts to synthesize even larger versions of some of
       the glyphs via the <tt class="verbatim cpp">&quot;emu-large&quot;</tt> virtual font
-      (see Section <a href="#sec:virtual-font">8.4</a>). 
+      (see Section <a href="#sec:virtual-font">8.4</a>).
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -1561,7 +1563,7 @@ supports_big_operators (string res_name) {
       It indicates whether the font is capable of rendering bigger version of
       standard operators like sums, products, direct sums, etc<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span> (<span class="no-breaks"><img
-      src="font-mechanics-42.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.0351111111111111em; margin-right: -0.0103434343434343em; margin-top: -0.0142424242424243em; vertical-align: -0.245737373737374em; height: 0.956767676767677em"></img>,</span> <span class="no-breaks"><img src="font-mechanics-43.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0.00925252525252523em; margin-right: -0.0103434343434343em; margin-top: -0.0239191919191919em; vertical-align: -0.240909090909091em; height: 0.982626262626263em"></img>,</span>
+      src="font-mechanics-42.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.017168044077135em; margin-right: -0.0112837465564739em; margin-top: -0.00482644628099171em; vertical-align: -0.243129476584022em; height: 0.959118457300275em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span> <span class="no-breaks"><img src="font-mechanics-43.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.017168044077135em; margin-right: -0.0112837465564737em; margin-top: -0.00482644628099171em; vertical-align: -0.243129476584022em; height: 0.959118457300275em" alt="Figure from “Font mechanics”" decoding="async" loading="lazy">,</span>
       &oplus;, <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
       style="margin-left: 0.16665em"></span>). Essentially only math fonts are capable of that and in
       the current version of TeXmacs only the math features for TeX Gyre fonts
@@ -1674,7 +1676,7 @@ poor_rubber_font_rep::search_font (string s, string&amp; r) {
     }
     else
       code= virt-&gt;dict [&quot;&lt;rubber-lparenthesis-#&gt;&quot;];
-    
+
     r= string ((char) code) * as_string (nr + HUGE_ADJUST) * &quot;&gt;&quot;;
     return 2*MAGNIFIED_NUMBER + 2 + thin;
   }
@@ -1692,7 +1694,7 @@ poor_rubber_font_rep::search_font (string s, string&amp; r) {
       in case <tt class="verbatim cpp">big_flag</tt> is <tt class="verbatim cpp">true</tt>, for the big
       variants with <tt class="verbatim">N=2</tt> while for those at <tt class="verbatim">N=1</tt>
       the base font is used. The subfont at index <tt class="verbatim cpp">2*MAGNIFIED_NUMBER
-      + 4</tt> is used in this case for the <tt class="verbatim">N=2</tt> sized glyphs. 
+      + 4</tt> is used in this case for the <tt class="verbatim">N=2</tt> sized glyphs.
     </p>
     <p>
       Otherwise we normalize all entities of the form  <tt class="verbatim">&lt;left-XXXX-N&gt;</tt>,
@@ -1730,7 +1732,7 @@ is_thin (string s) {
     </p>
     <p>
       The physical font associated to each subfont index is determined by the
-      <tt class="verbatim cpp">get_font</tt> method:  
+      <tt class="verbatim cpp">get_font</tt> method:
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -1806,7 +1808,7 @@ poor_rubber_font_rep::get_font (int nr) {
     <p>
       Unicode fonts are capable of indexing unicode glyphs in physical fonts
       (i.e. modern TrueType, or OpenType font files which can handle the whole
-      unicode space without special encodings) 
+      unicode space without special encodings)
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -1819,13 +1821,13 @@ struct unicode_font_rep: font_rep {
   int         ligs;
 
   hashmap&lt;string,int&gt; native; // additional native (non unicode) characters
-  
+
   unicode_font_rep (string name, string family, int size, int hdpi, int vdpi);
   void tex_gyre_operators ();
 
   unsigned int read_unicode_char (string s, int&amp; i);
   unsigned int ligature_replace (unsigned int c, string s, int&amp; i);
-  
+
   // + virtual functions from the base class
 };</pre>
     </div>
@@ -1844,7 +1846,7 @@ tt_face load_tt_face (string name);</pre>
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
-  // in unicode_font_rep::unicode_font_rep (&hellip;) 
+  // in unicode_font_rep::unicode_font_rep (&hellip;)
 
   // get main font parameters
   metric ex;
@@ -1984,7 +1986,7 @@ tt_face load_tt_face (string name);</pre>
 }</pre>
     </div>
     <p>
-      
+
     </p>
     <p>
       The <tt class="verbatim cpp">tex_gyre_native</tt> function initialize lookup table to
@@ -2042,8 +2044,8 @@ tex_gyre_native () {
   native (&quot;&lt;big-upointlim-2&gt;&quot;)= 4153;
   native (&quot;&lt;big-upoiintlim-2&gt;&quot;)= 4154;
   native (&quot;&lt;big-upoiiintlim-2&gt;&quot;)= 4155;
-  
-  
+
+
   native (&quot;&lt;large-sqrt-1&gt;&quot;)= 4136;
   native (&quot;&lt;large-sqrt-2&gt;&quot;)= 4148;
   native (&quot;&lt;large-sqrt-3&gt;&quot;)= 4160;
@@ -2113,10 +2115,10 @@ tex_gyre_native () {
       </tr></tbody>
     </table>
     <p>
-      
+
     </p>
     <p>
-      The dispatching function is 
+      The dispatching function is
     </p>
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
@@ -2202,7 +2204,7 @@ bool tt_font_metric_rep::exists (int i);</pre>
 inline FT_UInt
 decode_index (FT_Face face, int i) {
   if (i &lt; 0xc000000) return ft_get_char_index (face, i);
-  return i - 0xc000000;  
+  return i - 0xc000000;
 }</pre>
     </div>
     <p>
@@ -2381,7 +2383,7 @@ rubber_unicode_font_rep::get_font (int nr) {
     <div class="tmweb-code">
       <pre class="verbatim cpp" xml:space="preserve">
 #define MAGNIFIED_NUMBER 4
-        
+
 font
 rubber_assemble_font_rep::get_font (int nr) {
   ASSERT (nr &lt; N(larger), &quot;wrong font number&quot;);
@@ -2459,7 +2461,7 @@ rubber_assemble_font_rep::search_font (string s, string&amp; r) {
       Virtual fonts provide a mechanism to extend the set of available glyphs
       by synthesizing new glyphs from operations on those of a base font. The
       programs which describe the sequence of (parametrized) operations to
-      perform are formulated in a domain-specific language of s-expressions. 
+      perform are formulated in a domain-specific language of s-expressions.
     </p>
     <p>
       The main entry point is the function
@@ -2547,7 +2549,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
     </p>
     <p>
       An atomic value (not a list) refers to a glyph in the base font or to
-      another virtual glyph. 
+      another virtual glyph.
     </p>
     <p>
       A list of the form <tt class="verbatim">($x $y $s)</tt> where <tt class="verbatim">$x</tt>,
@@ -2558,7 +2560,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
     <p>
       <tt class="verbatim">(with $var $val $body)</tt> evaluates <tt class="verbatim">$body</tt>
       with the symbol <tt class="verbatim">$var</tt> replaced by the value of the
-      expression <tt class="verbatim">$val</tt>. 
+      expression <tt class="verbatim">$val</tt>.
     </p>
     <p>
       <tt class="verbatim">(or $el1 $el2 <span style="margin-left: 0.16665em"></span>.<span style="margin-left: 0.16665em"></span>.<span
@@ -2682,7 +2684,7 @@ void virtual_font_rep::draw_tree (renderer ren, scheme_tree t, SI x, SI y);</pre
       The <tt class="verbatim cpp">math_font</tt> class represent a compound font which can
       render all the usual entities for mathematical document preparation. It
       is modeled around TeX math fonts to map several physical fonts to cover
-      all math alphabets. 
+      all math alphabets.
     </p>
     <h2 id="auto-24">9.<span style="margin-left: 1em"></span>From logical to physical font<span style="margin-left: 1em"></span></h2>
     <p>
@@ -2769,7 +2771,7 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
       and after performing some substitutions via <tt class="verbatim cpp">apply_substitutions</tt>).
       If the selected font does not posses features (outline, bold, smallcaps,
       italic) of the required font, we synthesize them via &ldquo;poor&rdquo;
-      replacements. 
+      replacements.
     </p>
     <p>
       Font substitutions are collected in the file <tt class="verbatim">$TEXMACS_PATH/fonts/font-substitutions.scm</tt>
@@ -2805,7 +2807,7 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
       <tt class="verbatim">$TEXMACS_PATH/fonts</tt>. These are computer generated and
       cache several important informations obtained by analyzing the available
       font files, those local to the specific installation of TeXmacs are kept
-      in <tt class="verbatim">$TEXMACS_HOME_PATH/fonts</tt>. 
+      in <tt class="verbatim">$TEXMACS_HOME_PATH/fonts</tt>.
     </p>
     <p>
       The file <tt class="verbatim">font-database.scm</tt> associate to each font
@@ -2829,7 +2831,7 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
     </div>
     <p>
       The file <tt class="verbatim"><tt class="verbatim">font-features.scm</tt></tt> records the
-      available features for each font identifier, for example: 
+      available features for each font identifier, for example:
     </p>
     <div class="tmweb-code">
       <pre class="verbatim" xml:space="preserve">
@@ -2861,7 +2863,7 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
 ((TeX\ Gyre\ Bonum Bold) (Ascii Latin Greek mono=no sans=no slant=0 italic=no case=mixed regular=yes ex=84 em=186 lvw=35 lhw=19 uvw=38 uhw=20 fillp=55 vcnt=60 lasprat=115 pasprat=110 loasc=152 lodes=148 dides=102))</pre>
     </div>
     <p>
-      
+
     </p>
     <p>
       An alternative font selection mechanism, active in particular when <tt
@@ -2870,7 +2872,7 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
       which allows the user to decide which parameters should be considered
       meaningful. At the lowest level, TeXmacs provides a fixed number of
       macros which directly correspond to the above types of concrete fonts.
-      For instance, the macro 
+      For instance, the macro
     </p>
     <pre class="verbatim scheme" xml:space="preserve">
     (tex $name $size $dpi)</pre>
@@ -2882,11 +2884,11 @@ find_closest (string&amp; family, string&amp; variant, string&amp; series, strin
 font tex_font (display dis, string fam, int size, int dpi, int dsize=10);</pre>
     </div>
     <p>
-      of a TeX text font. 
+      of a TeX text font.
     </p>
     <p>
       At the middle level, it is possible to specify some rewriting rules like
-      
+
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -2901,7 +2903,7 @@ font tex_font (display dis, string fam, int size, int dpi, int dsize=10);</pre>
     </p>
     <p>
       At the top level, TeXmacs calls (via the <tt class="verbatim cpp">find_font</tt>
-      function) a macro of the form 
+      function) a macro of the form
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -2911,10 +2913,10 @@ font tex_font (display dis, string fam, int size, int dpi, int dsize=10);</pre>
       as a function of the current environment in the text.
     </p>
     <p>
-      
+
     </p>
     <p>
-      
+
     </p>
   </body>
 </html>

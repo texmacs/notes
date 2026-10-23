@@ -191,7 +191,7 @@
   border point|control point|grid point|grid curve point|curve-grid
   intersection|curve point|curve-curve intersection>|gr-arrow-end|\<gtr\>|gr-line-width|2ln|<graphics||<text-at|<with|ornament-vpadding|.5em|ornament-hpadding|.5em|<decorated|<verbatim|tree>>>|<point|-6.05515610530493|-0.144066675486175>>|<text-at|<with|ornament-vpadding|.5em|ornament-hpadding|.5em|<decorated|<verbatim|tree>>>|<point|-0.74740375711073|-0.17892578383384>>|<text-at|<with|ornament-vpadding|.5em|ornament-hpadding|.5em|<decorated|<verbatim|boxes>>>|<point|4.6472218547427|-0.153684349781717>>|<with|color|#aaf|arrow-end|\<gtr\>|line-width|2ln|<line|<point|-4.22002|0.0257971>|<point|-0.898548088371478|-0.00906204524407991>>>|<with|color|#aaf|arrow-end|\<gtr\>|line-width|2ln|<line|<point|1.08773|-0.00906205>|<point|4.49608083079772|0.0334534991400979>>>|<text-at|evaluation|<point|-4.0|-0.7>>|<text-at|typesetting|<point|1.5|-0.7>>>>
 
-  The <hlink|typesetting primitives|../regular/regular.en.tm> are designed to
+  The <hlink|typesetting primitives|https://www.texmacs.org/tmweb/manual/webman-primitives.en.html> are designed to
   be very fast and they are built-in into the editor:
 
   <\quote-env>
@@ -201,7 +201,7 @@
   </quote-env>
 
   The rendering of many of the primitives may be customized through the
-  <hlink|built-in environment variables|../environment/environment.en.tm>.
+  <hlink|built-in environment variables|https://www.texmacs.org/tmweb/manual/webman-env.en.html>.
 
   <\quote-env>
     <small|e.g. the environment variable <src-var|color> specifies the
@@ -209,7 +209,7 @@
     paragraphs, <abbr|etc.>>
   </quote-env>
 
-  The <hlink|stylesheet language|../stylesheet/stylesheet.en.tm> allows the
+  The <hlink|stylesheet language|https://www.texmacs.org/tmweb/manual/webman-styling.en.html> allows the
   user to write new primitives (macros) on top of the built-in primitives.\ 
 
   <\quote-env>
