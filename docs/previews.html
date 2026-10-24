@@ -161,10 +161,10 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
                  (zf (get-window-zoom-factor))
                  (sf (/ 4.0 zf))
                  (mag (number-&gt;string (/ zf 1.5)))
-                 (balloon* &lsquo;(with &quot;magnification&quot; ,mag ,balloon))
+                 (balloon* `(with &quot;magnification&quot; ,mag ,balloon))
                  (w (widget-texmacs-output
-                     &lsquo;(surround (hide-preamble ,pre) &quot;&quot; ,balloon*)
-                     &lsquo;(style (tuple ,@packs)))))
+                     `(surround (hide-preamble ,pre) &quot;&quot; ,balloon*)
+                     `(style (tuple ,@packs)))))
         (show-balloon w x1 (- y1 1280))))))</pre>
     </div>
     <p>
@@ -197,8 +197,8 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
         (set! doc (apply tmconcat (map uncell (tm-children doc)))))
       (set! doc (clean-preview doc))
       (when math?
-        (set! doc &lsquo;(with &lsquo;&lsquo;math-display'' &lsquo;&lsquo;true'' (math ,doc))))
-      &lsquo;(preview-balloon ,doc))))</pre>
+        (set! doc `(with ``math-display'' ``true'' (math ,doc))))
+      `(preview-balloon ,doc))))</pre>
     </div>
     <p>
       The construction of the preview content is performed by the snippet <tt
@@ -278,18 +278,18 @@ env (&quot;pageref&quot;) = tree (MACRO, &quot;Id&quot;,
       <pre class="verbatim scheme" xml:space="preserve">
 (define (clean-preview t)
   (cond ((tm-is? t 'document)
-         &lsquo;(document ,@(map clean-preview (tm-children t))))
+         `(document ,@(map clean-preview (tm-children t))))
         ((tm-is? t 'concat)
          (apply tmconcat (map clean-preview (tm-children t))))
         ((tm-in? t (section-tag-list))
          (with l (symbol-append (tm-label t) '*)
-           &lsquo;(,l ,@(tm-children t))))
+           `(,l ,@(tm-children t))))
         ((tm-in? t '(label item item*
                            bibitem bibitem* eq-number)) &quot;&quot;)
         ((or (tm-func? t 'equation 1) (tm-func? t 'equation* 1))
-         &lsquo;(equation* ,(clean-preview (tm-ref t 0))))
+         `(equation* ,(clean-preview (tm-ref t 0))))
         ((tm-in? t '(eqnarray eqnarray* tformat table row cell))
-         &lsquo;(,(tm-label t) ,@(map clean-preview (tm-children t))))
+         `(,(tm-label t) ,@(map clean-preview (tm-children t))))
         (else t)))</pre>
     </div>
     <p>

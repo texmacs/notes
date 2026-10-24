@@ -12,6 +12,21 @@
 
   <hrule>
 
+  <notes-entry|scheme-snippets.tm|Customizing <TeXmacs> with Scheme: a
+  commented collection of snippets|Many aspects of the behaviour of <TeXmacs>
+  can be changed with a few lines of Scheme in your personal initialization
+  files. We explain where such code goes, how <TeXmacs> loads its own Scheme
+  code and why this matters for your customizations, and then present a
+  collection of tested snippets for keyboard shortcuts, menus, export,
+  sessions and new documents.|24 Oct 2026>
+
+  <notes-entry|internal-macros.tm|Behind the markup: internal macros of
+  <TeXmacs>|A guided tour of the internal macros and primitives that
+  <TeXmacs> uses behind the scenes: the <markup|render-*> hooks of the
+  standard styles, footnotes, labels and the binding mechanism, loci and
+  links, and the processing of title data. Each topic starts from how
+  <TeXmacs> works and ends with examples you can try.|24 Oct 2026>
+
   <notes-entry|website-builder-dialog.tm|Adding a dialog to build websites|In
   this article we document the construction of a user interface to the
   website building facilities of <TeXmacs>.|23 Oct 2026>

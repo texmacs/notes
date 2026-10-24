@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import subprocess
 import sys
 import unittest
@@ -130,6 +131,12 @@ class SiteQualityTests(unittest.TestCase):
                     if target_parser is None or fragment not in target_parser.anchors:
                         problems.append(f"{path.relative_to(ROOT)} -> {attrs['href']}")
         self.assertFalse(problems, "\n" + "\n".join(problems))
+
+    def test_code_blocks_keep_literal_quotes(self) -> None:
+        for path in self.pages:
+            text = path.read_text(encoding="utf-8")
+            for block in re.findall(r"<pre\b.*?</pre>", text, re.S):
+                self.assertNotIn("&lsquo;", block, path.relative_to(ROOT).as_posix())
 
     def test_site_infrastructure(self) -> None:
         for relative in ("index.html", "404.html", "sitemap.xml"):

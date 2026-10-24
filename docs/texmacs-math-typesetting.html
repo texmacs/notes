@@ -967,7 +967,7 @@ concater_rep::typeset_lprime (tree t, path ip) {
     bool flag= (env-&gt;fn-&gt;type == FONT_TYPE_UNICODE);
     if (flag)
       for (int i=0; i&lt;N(s); i++)
-        flag= flag &amp;&amp; (s[i] == '\'' || s[i] == '&lsquo;');
+        flag= flag &amp;&amp; (s[i] == '\'' || s[i] == '`');
     if (env-&gt;fn-&gt;type == FONT_TYPE_TEX ||
         env-&gt;fn-&gt;math_type != MATH_TYPE_NORMAL)
       s= replace_primes (s);
@@ -1007,7 +1007,7 @@ replace_primes (string s) {
   int i, n= N(s);
   for (i=0; i&lt;n; i++)
     if (s[i] == '\'') r &lt;&lt; &quot;&lt;prime&gt;&quot;;
-    else if (s[i] == '&lsquo;') r &lt;&lt; &quot;&lt;backprime&gt;&quot;;
+    else if (s[i] == '`') r &lt;&lt; &quot;&lt;backprime&gt;&quot;;
     else r &lt;&lt; s[i];
   return r;
 }</pre>
