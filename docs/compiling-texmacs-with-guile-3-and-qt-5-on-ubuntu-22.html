@@ -1,23 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Compiling TeXmacs on Ubuntu 22 with Guile3 and Qt5 — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This guide describes how to compile TeXmacs on Ubuntu 22 with Guile 3 support and Qt 5.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/compiling-texmacs-with-guile-3-and-qt-5-on-ubuntu-22.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -27,7 +31,7 @@
       support and Qt 5.
     </div>
     <p>
-      
+
     </p>
     <p>
       Guile 1.8.8 is no longer supported on modern distributions. Let us build
@@ -39,8 +43,8 @@
       Guile 3, Qt 5 and freetype as dependencies.
     </p>
     <pre class="verbatim" xml:space="preserve">
-sudo apt install git cmake g++ guile-3.0 guile-3.0-dev libfreetype-dev 
-sudo apt install qtbase5-dev libqt5svg5-dev libfreetype-dev libsqlite-dev libjpeg-dev 
+sudo apt install git cmake g++ guile-3.0 guile-3.0-dev libfreetype-dev
+sudo apt install qtbase5-dev libqt5svg5-dev libfreetype-dev libsqlite-dev libjpeg-dev
 sudo apt install libgmp-dev libltdl-dev</pre>
     <h2 id="auto-3">2.<span style="margin-left: 1em"></span>Compiling<span style="margin-left: 1em"></span></h2>
     <p>
@@ -83,7 +87,7 @@ make -j4</pre>
     <pre class="verbatim" xml:space="preserve">
 export TEXMACS_PATH=&lt;repodirectory&gt;/TeXmacs</pre>
     <p>
-      then you can run  
+      then you can run
     </p>
     <pre class="verbatim" xml:space="preserve">
 <tt class="verbatim">&lt;repodirectory&gt;/TeXmacs/bin/texmacs</tt></pre>
@@ -97,10 +101,10 @@ export TEXMACS_PATH=&lt;repodirectory&gt;/TeXmacs</pre>
       into your <tt class="verbatim">~/.bashrc</tt>.
     </p>
     <p>
-      
+
     </p>
     <p>
-      
+
     </p>
   </body>
 </html>

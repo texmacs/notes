@@ -1,44 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>From trees to boxes — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This document describes TeXmacs typesetter. We describe the state of facts as per svn revision r14561 (December 2024, TeXmacs 2.14+). Excerpts from the official documentation are included for completeness.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/texmacs-basics-of-typesetting.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="toggle" style="display: none">
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
       <p>
-        
+
       </p>
     </div>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -51,7 +55,7 @@
         documentation are included for completeness.
       </p>
       <p>
-        
+
       </p>
     </div>
     <font color="#800000"><table style="width: 100%">
@@ -73,7 +77,7 @@
           </li>
           <li>
             <p>
-              Review evaluation of trees? 
+              Review evaluation of trees?
             </p>
           </li>
         </ul></td>
@@ -86,14 +90,14 @@
       <em>trees</em>. For instance, the tree
     </p>
     <center>
-      <img src="texmacs-basics-of-typesetting-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823695em; vertical-align: -6.73613223140496em; height: 7.42446280991736em"></img>
+      <img src="texmacs-basics-of-typesetting-1.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823695em; vertical-align: -6.73613223140496em; height: 7.42446280991736em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">
     </center>
     <p>
       typically represents the formula
     </p>
     <table width="100%">
       <tr>
-        <td width="100%" align="center"><img src="texmacs-basics-of-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -0.599889807162534em; height: 1.91627548209366em" id="tm-tree-ex"></img></td>
+        <td width="100%" align="center"><img src="texmacs-basics-of-typesetting-2.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823706em; vertical-align: -0.599889807162534em; height: 1.91627548209366em" id="tm-tree-ex" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"></td>
         <td align="right">(1)</td>
       </tr>
     </table>
@@ -123,7 +127,7 @@
       class="verbatim">&gt;</tt>&rdquo;. Character sequences starting with &ldquo;<tt
       class="verbatim">&lt;</tt>&rdquo; and ending with &ldquo;<tt class="verbatim">&gt;</tt>&rdquo;
       are interpreted as special extension characters. For example, <tt class="verbatim">&lt;alpha&gt;</tt>
-      stands for the letter <span class="no-breaks"><img src="texmacs-basics-of-typesetting-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0225454545454545em; height: 0.490842975206612em"></img>.</span> The
+      stands for the letter <span class="no-breaks"><img src="texmacs-basics-of-typesetting-3.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564739em; margin-top: -0.0169256198347107em; vertical-align: -0.0225454545454545em; height: 0.490842975206612em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">.</span> The
       semantics of characters in the universal TeXmacs encoding does not
       depend on the context (currently, cyrillic characters are an exception,
       but this should change soon). In other words, the universal TeXmacs
@@ -171,7 +175,7 @@
         </dt>
         <dd>
           <p>
-            Floating point numbers followed by a <a href="lengths.en.html">length unit</a>,
+            Floating point numbers followed by a <a href="https://www.texmacs.org/tmweb/manual/webman-format.en.html#sec-lengths">length unit</a>,
             like <tt class="verbatim">29.7cm</tt> or <tt class="verbatim">2fn</tt>.
           </p>
         </dd>
@@ -228,7 +232,7 @@
         color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">tuple</class></font><a
         id="auto-11"></a><font color="blue">|</font><font color="brown"><i>style</i></font><font
         color="blue">|</font><font color="brown"><i>pack-1</i></font><font color="blue">|</font><font
-        color="brown"><i><img src="texmacs-basics-of-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font color="blue">|</font><font
+        color="brown"><i><img src="texmacs-basics-of-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"></i></font><font color="blue">|</font><font
         color="brown"><i>pack-n</i></font><font color="blue">&gt;</font></class></i></font><font
         color="blue">&gt;</font>
       </div>
@@ -273,7 +277,7 @@
         <font color="brown"><i>table</i></font> is of the form <font color="blue">&lt;</font><font
         color="blue"><class style="font-family: sans-serif">collection</class></font><a id="auto-14"></a><font color="blue">|</font><font
         color="brown"><i>binding-1</i></font><font color="blue">|</font><font color="brown"><i><img
-        src="texmacs-basics-of-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em"></img></i></font><font color="blue">|</font><font color="brown"><i>binding-n</i></font><font
+        src="texmacs-basics-of-typesetting-4.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: 0em; height: 0.473917355371901em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"></i></font><font color="blue">|</font><font color="brown"><i>binding-n</i></font><font
         color="blue">&gt;</font>. Each <font color="brown"><i>binding-i</i></font> is of
         the form <font color="blue">&lt;</font><font color="blue"><class style="font-family: sans-serif">associate</class></font><a
         id="auto-15"></a><font color="blue">|</font><font color="brown"><i>var-i</i></font><font
@@ -348,7 +352,7 @@
     </p>
     <p style="margin-bottom: 1em">
       <center>
-        <img src="texmacs-basics-of-typesetting-5.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889805em; margin-right: -0.0112837465564724em; margin-top: -0.00564187327823695em; vertical-align: -6.53302479338843em; height: 7.22699724517906em"></img>
+        <img src="texmacs-basics-of-typesetting-5.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889805em; margin-right: -0.0112837465564724em; margin-top: -0.00564187327823695em; vertical-align: -6.53302479338843em; height: 7.22699724517906em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">
       </center>
     </p>
     <h3 id="auto-20"><a id="sec-tm-tm"></a>1.3.<span style="margin-left: 1em"></span>Default serialization<span
@@ -386,7 +390,7 @@
     </p>
     <table width="100%">
       <tr>
-        <td width="100%" align="center"><img src="texmacs-basics-of-typesetting-6.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.011261707988981em; margin-right: -0.0112837465564737em; margin-top: -0.0225674931129476em; vertical-align: -2.33562534435262em; height: 3.05780716253444em" id="gen-tree-tm"></img></td>
+        <td width="100%" align="center"><img src="texmacs-basics-of-typesetting-6.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.011261707988981em; margin-right: -0.0112837465564737em; margin-top: -0.0225674931129476em; vertical-align: -2.33562534435262em; height: 3.05780716253444em" id="gen-tree-tm" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"></td>
         <td align="right">(2)</td>
       </tr>
     </table>
@@ -400,7 +404,7 @@
       </div>
     </div>
     <p>
-      If one of the arguments <img src="texmacs-basics-of-typesetting-7.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em"></img> is a multi-paragraph
+      If one of the arguments <img src="texmacs-basics-of-typesetting-7.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> is a multi-paragraph
       tree (which means in this context that it contains a <font class="tmweb-markup">document</font>
       tag or a <font class="tmweb-markup">collection</font> tag), then an alternative long
       form is used for the serialization. If <tt class="verbatim">f</tt> takes only
@@ -439,7 +443,7 @@
       The escape sequences <tt class="verbatim">\&lt;less\&gt;</tt>, <tt class="verbatim">\|</tt>,
       <tt class="verbatim">\&lt;gtr\&gt;</tt> and <tt class="verbatim">\\</tt> may be used to
       represent the characters <tt class="verbatim">&lt;</tt>, <tt class="verbatim">|</tt>, <tt
-      class="verbatim">&gt;</tt> and <tt class="verbatim">\</tt>. For instance, <img src="texmacs-basics-of-typesetting-8.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em"></img>
+      class="verbatim">&gt;</tt> and <tt class="verbatim">\</tt>. For instance, <img src="texmacs-basics-of-typesetting-8.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: 0em; vertical-align: -0.21436914600551em; height: 0.874490358126722em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">
       is serialized as <tt class="verbatim">\&lt;alpha\&gt;+\&lt;beta\&gt;</tt>.
     </p>
     <p>
@@ -584,14 +588,14 @@ an &lt;em|important&gt; note</pre>
           color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font
           color="blue">|</font><font color="brown"><i>var</i></font><font color="blue">|</font><font
           color="brown"><i>from</i></font><font color="blue">|</font><font color="brown"><i>to</i></font><font
-          color="blue">|</font><font color="black"><img src="texmacs-basics-of-typesetting-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em"></img></font><font
+          color="blue">|</font><font color="black"><img src="texmacs-basics-of-typesetting-9.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.312154269972452em; height: 0.774809917355372em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"></font><font
           color="blue">&gt;</font></font><font color="blue">&gt;</font>
         </p>
       </div>
     </div>
     <p>
       is a shortcut in order to produce sequences like <span class="no-breaks"><img src="texmacs-basics-of-typesetting-10.png"
-      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em"></img>.</span> When macros perform simple rewritings like in this
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0112617079889807em; margin-right: -0.0112837465564741em; margin-top: -0.0169256198347107em; vertical-align: -0.165465564738292em; height: 0.633763085399449em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">.</span> When macros perform simple rewritings like in this
       example, the children <font color="brown"><i>var</i></font>, <font color="brown"><i>from</i></font>
       and <font color="brown"><i>to</i></font> of the <font class="tmweb-markup">seq</font> tag
       remain <em>accessible</em> from within the editor. In other words, you
@@ -798,7 +802,7 @@ an &lt;em|important&gt; note</pre>
     </div>
     <p>
       TeXmacs automatically notices that <font class="tmweb-markup">hi</font> is a macro
-      with one element, so it considers <img src="texmacs-basics-of-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img> to be the only
+      with one element, so it considers <img src="texmacs-basics-of-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> to be the only
       possible arity of the <font class="tmweb-markup">hi</font> tag. Notice that the
       heuristic determination of the <abbr>D.R.D.</abbr> is done
       interactively: when defining a macro inside your document, its
@@ -879,9 +883,9 @@ an &lt;em|important&gt; note</pre>
       In the case of page breaking, the <font color="#008000"><i>page-flexibility</i></font>
       environment provides additional control over the stretchability of white
       space. When setting the <font color="#008000"><i>page-flexibility</i></font> to
-      <span class="no-breaks"><img src="texmacs-basics-of-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img>,</span> stretchable spaces behave
+      <span class="no-breaks"><img src="texmacs-basics-of-typesetting-11.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">,</span> stretchable spaces behave
       as usual. When setting the <font color="#008000"><i>page-flexibility</i></font>
-      to <span class="no-breaks"><img src="texmacs-basics-of-typesetting-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.0112617079889807em; height: 0.716517906336088em"></img>,</span> stretchable spaces
+      to <span class="no-breaks"><img src="texmacs-basics-of-typesetting-12.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.0112617079889807em; height: 0.716517906336088em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">,</span> stretchable spaces
       become rigid. For other values, the behaviour is linear.
     </p>
     <p>
@@ -927,7 +931,7 @@ an &lt;em|important&gt; note</pre>
         </dt>
         <dd>
           <p>
-            The standard typographic point corresponds to <img src="texmacs-basics-of-typesetting-13.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em"></img>
+            The standard typographic point corresponds to <img src="texmacs-basics-of-typesetting-13.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564741em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">
             of an inch.
           </p>
         </dd>
@@ -938,7 +942,7 @@ an &lt;em|important&gt; note</pre>
         </dt>
         <dd>
           <p>
-            A big point corresponds to <img src="texmacs-basics-of-typesetting-14.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em"></img> of an inch.
+            A big point corresponds to <img src="texmacs-basics-of-typesetting-14.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.00564187327823695em; vertical-align: -0.15795041322314em; height: 0.846280991735537em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> of an inch.
           </p>
         </dd>
       </p>
@@ -1177,7 +1181,7 @@ an &lt;em|important&gt; note</pre>
         </dt>
         <dd>
           <p>
-            The logical left <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-coordinate</span>
+            The logical left <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">-coordinate</span>
             of the box.
           </p>
         </dd>
@@ -1188,7 +1192,7 @@ an &lt;em|important&gt; note</pre>
         </dt>
         <dd>
           <p>
-            The logical right <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-coordinate</span>
+            The logical right <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">-coordinate</span>
             of the box.
           </p>
         </dd>
@@ -1199,7 +1203,7 @@ an &lt;em|important&gt; note</pre>
         </dt>
         <dd>
           <p>
-            The logical bottom <span class="no-breaks"><img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img>-coordinate</span>
+            The logical bottom <span class="no-breaks"><img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">-coordinate</span>
             of the box.
           </p>
         </dd>
@@ -1210,7 +1214,7 @@ an &lt;em|important&gt; note</pre>
         </dt>
         <dd>
           <p>
-            The logical top <span class="no-breaks"><img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img>-coordinate</span>
+            The logical top <span class="no-breaks"><img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">-coordinate</span>
             of the box.
           </p>
         </dd>
@@ -1452,7 +1456,7 @@ an &lt;em|important&gt; note</pre>
       boxes (such as color changes) an extra infinitesimal width.
     </p>
     <p>
-      
+
     </p>
     <p>
       The abstract <tt class="verbatim cpp">box_rep</tt> class is defined in <tt class="verbatim">src/Typeset/boxes.hpp</tt>:
@@ -1471,7 +1475,7 @@ public:
   SI x4, y4;    // upper right corner (ink)
 
   path ip;      // corresponding inverse path in source tree
-  
+
   // [methods not shown]
 }</pre>
       </div>
@@ -1482,10 +1486,10 @@ public:
       being the unit size and set to <tt class="verbatim cpp">256</tt> (in <tt class="verbatim">src/Graphics/rendered.hpp</tt>).
       Cartesian coordinates are relative to a standard frame oriented as in
       elementary geometry, i.e. the x-axis from left to right and the y-axis
-      from bottom to top. 
+      from bottom to top.
     </p>
     <center>
-      <img src="texmacs-basics-of-typesetting-17.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: -6.6636694214876em; height: 13.3273388429752em"></img>
+      <img src="texmacs-basics-of-typesetting-17.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0em; margin-right: -0.0112837465564724em; margin-top: 0em; vertical-align: -6.6636694214876em; height: 13.3273388429752em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">
     </center>
     <p>
       The field <tt class="verbatim cpp">ip</tt> represents an <i>inverse path</i> needed to
@@ -1584,8 +1588,8 @@ public:
             optional negative head. A negative head indicates that the tree
             path is not accessible, i.e. the corresponding subtree does not
             correspond to editable content. If the negative value is <span
-            class="no-breaks"><img src="texmacs-basics-of-typesetting-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img>,</span> <img src="texmacs-basics-of-typesetting-19.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.0112617079889807em; height: 0.716517906336088em"></img> or
-            <span class="no-breaks"><img src="texmacs-basics-of-typesetting-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em"></img>,</span> then a zero or one
+            class="no-breaks"><img src="texmacs-basics-of-typesetting-18.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">,</span> <img src="texmacs-basics-of-typesetting-19.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: -0.0112617079889807em; height: 0.716517906336088em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> or
+            <span class="no-breaks"><img src="texmacs-basics-of-typesetting-20.png" style="margin-left: -0.0112837465564738em; margin-bottom: -0.0112837465564738em; margin-right: -0.0112837465564739em; margin-top: -0.00564187327823695em; vertical-align: 0em; height: 0.716517906336088em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">,</span> then a zero or one
             has to be put behind the tree path, depending on the value and the
             cursor position.
           </p>
@@ -1629,10 +1633,10 @@ public:
     <p>
       transforms a box path into a tree path. This routine (which only uses
       <tt class="verbatim">ip</tt>) is fast and has a linear time complexity as a
-      function of the lengths of the paths. 
+      function of the lengths of the paths.
     </p>
     <p>
-      The routine: 
+      The routine:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1660,12 +1664,12 @@ public:
       environment you are in.
     </p>
     <p>
-      In TeXmacs, the cursor position therefore contains an <img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>
-      and a <img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img> coordinate, as well as an additional
-      infinitesimal <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>-coordinate,</span>
-      called <span class="no-breaks"><img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img>.</span> A change in
+      In TeXmacs, the cursor position therefore contains an <img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">
+      and a <img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> coordinate, as well as an additional
+      infinitesimal <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">-coordinate,</span>
+      called <span class="no-breaks"><img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">.</span> A change in
       environment is then represented by a box with an infinitesimal width.
-      Although the <span class="no-breaks"><img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img>-position</span> of the
+      Although the <span class="no-breaks"><img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">-position</span> of the
       cursor is always zero when you select using the mouse, it may be non
       zero when moving around using the cursor keys. The linear time routine:
     </p>
@@ -1677,7 +1681,7 @@ public:
     </div>
     <p>
       as a function of the length of the path searches the box path which
-      corresponds to a cursor position. Inversely, the routine: 
+      corresponds to a cursor position. Inversely, the routine:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1687,10 +1691,10 @@ public:
     </div>
     <p>
       yields a graphical representation for the cursor at a certain box path.
-      The cursor is given by its <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em"></img>,</span>
-      <img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em"></img> and <img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em"></img> coordinates and a
+      The cursor is given by its <span class="no-breaks"><img src="texmacs-basics-of-typesetting-15.png" style="margin-left: -0.0282093663911846em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.0112617079889807em; height: 0.490842975206612em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">,</span>
+      <img src="texmacs-basics-of-typesetting-16.png" style="margin-left: -0.0282093663911846em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564738em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.67702479338843em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> and <img src="texmacs-basics-of-typesetting-21.png" style="margin-left: -0.0112837465564738em; margin-bottom: -2.20385674931135e-5em; margin-right: -0.0112837465564738em; margin-top: 0em; vertical-align: -0.0112617079889807em; height: 0.688308539944904em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> coordinates and a
       line segment relative to this origin, given by its extremities <img src="texmacs-basics-of-typesetting-22.png"
-      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.902699724517906em"></img> and <span class="no-breaks"><img src="texmacs-basics-of-typesetting-23.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.902699724517906em"></img>.</span> From <tt
+      style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.902699724517906em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy"> and <span class="no-breaks"><img src="texmacs-basics-of-typesetting-23.png" style="margin-left: -0.0112837465564738em; margin-bottom: 0.0169035812672176em; margin-right: -0.0112837465564737em; margin-top: -0.0169256198347107em; vertical-align: -0.21436914600551em; height: 0.902699724517906em" alt="Figure from “From trees to boxes”" decoding="async" loading="lazy">.</span> From <tt
       class="verbatim">src/Typeset/boxes.hpp</tt>:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
@@ -1724,7 +1728,7 @@ box_rep::find_cursor (path bp) {
       </div>
     </div>
     <p>
-      In a similar way, the routine: 
+      In a similar way, the routine:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1773,36 +1777,36 @@ box_rep::find_selection (path lbp, path rbp) {
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
         <pre class="verbatim" xml:space="preserve">
-#0 0x000000010317b254 in sqrt_box(list&lt;int&gt;, box, box, box, font, pencil) 
-#1 0x0000000103270ee4 in concater_rep::typeset_sqrt(tree, list&lt;int&gt;) 
-#2 0x00000001032a73b4 in concater_rep::typeset(tree, list&lt;int&gt;) 
-#3 0x00000001032a9330 in typeset_concat(edit_env, tree, list&lt;int&gt;) 
-#4 0x000000010337c5c4 in typeset_concat_or_table(edit_env, tree, list&lt;int&gt;) 
-#5 0x000000010337d6ec in typeset_stack(edit_env, tree, list&lt;int&gt;, array&lt;line_item&gt;, array&lt;line_item&gt;, stack_border&amp;) 
-#6 0x0000000103215ac4 in typesetter_rep::insert_paragraph(tree, list&lt;int&gt;) 
-#7 0x00000001031ccd78 in bridge_rep::my_typeset(int) 
-#8 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#9 0x00000001031e9f98 in bridge_document_rep::my_typeset(int) 
-#10 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#11 0x00000001031d317c in bridge_argument_rep::my_typeset(int) 
-#12 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#13 0x0000000103212430 in bridge_surround_rep::my_typeset(int) 
-#14 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#15 0x00000001031e9f98 in bridge_document_rep::my_typeset(int) 
-#16 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#17 0x0000000103214cf8 in bridge_with_rep::my_typeset(int) 
-#18 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#19 0x00000001031e2298 in bridge_compound_rep::my_typeset(int) 
-#20 0x00000001031cd6d4 in bridge_rep::typeset(int) 
-#21 0x00000001031e9f98 in bridge_document_rep::my_typeset(int) 
+#0 0x000000010317b254 in sqrt_box(list&lt;int&gt;, box, box, box, font, pencil)
+#1 0x0000000103270ee4 in concater_rep::typeset_sqrt(tree, list&lt;int&gt;)
+#2 0x00000001032a73b4 in concater_rep::typeset(tree, list&lt;int&gt;)
+#3 0x00000001032a9330 in typeset_concat(edit_env, tree, list&lt;int&gt;)
+#4 0x000000010337c5c4 in typeset_concat_or_table(edit_env, tree, list&lt;int&gt;)
+#5 0x000000010337d6ec in typeset_stack(edit_env, tree, list&lt;int&gt;, array&lt;line_item&gt;, array&lt;line_item&gt;, stack_border&amp;)
+#6 0x0000000103215ac4 in typesetter_rep::insert_paragraph(tree, list&lt;int&gt;)
+#7 0x00000001031ccd78 in bridge_rep::my_typeset(int)
+#8 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#9 0x00000001031e9f98 in bridge_document_rep::my_typeset(int)
+#10 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#11 0x00000001031d317c in bridge_argument_rep::my_typeset(int)
+#12 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#13 0x0000000103212430 in bridge_surround_rep::my_typeset(int)
+#14 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#15 0x00000001031e9f98 in bridge_document_rep::my_typeset(int)
+#16 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#17 0x0000000103214cf8 in bridge_with_rep::my_typeset(int)
+#18 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#19 0x00000001031e2298 in bridge_compound_rep::my_typeset(int)
+#20 0x00000001031cd6d4 in bridge_rep::typeset(int)
+#21 0x00000001031e9f98 in bridge_document_rep::my_typeset(int)
 #22 0x00000001031cd6d4 in bridge_rep::typeset(int)
-#23 0x0000000103217e80 in typesetter_rep::typeset() 
-#24 0x0000000103218370 in typesetter_rep::typeset(int&amp;, int&amp;, int&amp;, int&amp;) 
-#25 0x000000010321a9e8 in typeset(typesetter_rep*, int&amp;, int&amp;, int&amp;, int&amp;) 
-#26 0x0000000102db9954 in edit_typeset_rep::typeset_sub(int&amp;, int&amp;, int&amp;, int&amp;) 
-#27 0x0000000102db9df8 in edit_typeset_rep::typeset(int&amp;, int&amp;, int&amp;, int&amp;) 
-#28 0x0000000102df6694 in edit_interface_rep::apply_changes() 
-#29 0x000000010311c1e0 in tm_server_rep::interpose_handler() 
+#23 0x0000000103217e80 in typesetter_rep::typeset()
+#24 0x0000000103218370 in typesetter_rep::typeset(int&amp;, int&amp;, int&amp;, int&amp;)
+#25 0x000000010321a9e8 in typeset(typesetter_rep*, int&amp;, int&amp;, int&amp;, int&amp;)
+#26 0x0000000102db9954 in edit_typeset_rep::typeset_sub(int&amp;, int&amp;, int&amp;, int&amp;)
+#27 0x0000000102db9df8 in edit_typeset_rep::typeset(int&amp;, int&amp;, int&amp;, int&amp;)
+#28 0x0000000102df6694 in edit_interface_rep::apply_changes()
+#29 0x000000010311c1e0 in tm_server_rep::interpose_handler()
 #30 0x0000000103023540 in qt_gui_rep::update() </pre>
       </div>
     </div>
@@ -1850,11 +1854,11 @@ public:
       </div>
     </div>
     <p>
-      
+
     </p>
     <p>
       In the normal operation of the GUI the typesetting starts at <tt class="verbatim cpp">typesetter_rep::typeset(int&amp;,
-      int&amp;, int&amp;, int&amp;)</tt>: 
+      int&amp;, int&amp;, int&amp;)</tt>:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1887,7 +1891,7 @@ typesetter_rep::typeset (SI&amp; x1b, SI&amp; y1b, SI&amp; x2b, SI&amp; y2b) {
       some accesory computations to determine the new changed region due to
       changes in the background color of the pages and propagating it up via
       the reference arguments. The production of the boxes is the job of <tt
-      class="verbatim cpp">typesetter_rep::typeset()</tt>: 
+      class="verbatim cpp">typesetter_rep::typeset()</tt>:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -1939,7 +1943,7 @@ typesetter_rep::typeset () {
     <p>
       The bridge structure is receptive to changes  in the document (via the
       observer pattern) and perform the necessary preparations for the
-      typesetting and the typesetting itself of the subtree which it manages: 
+      typesetting and the typesetting itself of the subtree which it manages:
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -2210,7 +2214,7 @@ typesetter_rep::insert_surround  (array&lt;line_item&gt; a2, array&lt;line_item&
       </div>
     </div>
     <p>
-      
+
     </p>
     <font color="#800000"><table style="width: 100%">
       <tbody><tr>
@@ -2223,7 +2227,7 @@ typesetter_rep::insert_surround  (array&lt;line_item&gt; a2, array&lt;line_item&
       </tr></tbody>
     </table></font>
     <p>
-      
+
     </p>
     <p>
       Going back to the bridge typesetting mechanisms, here's <tt class="verbatim cpp">bridge_eval_rep::my_typeset</tt>:
@@ -2304,7 +2308,7 @@ bridge_formatting_rep::my_typeset (int desired_status) {
       </tr></tbody>
     </table></font>
     <p>
-      
+
     </p>
     <p>
       The auto bridge implements another part of interesting functionality,
@@ -2414,7 +2418,7 @@ bridge_rewrite_rep::my_typeset (int desired_status) {
       </div>
     </div>
     <p>
-      by calling 
+      by calling
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -2423,7 +2427,7 @@ tree edit_env_rep::rewrite (tree t);</pre>
       </div>
     </div>
     <p>
-      which on its turns calls  
+      which on its turns calls
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -2567,7 +2571,7 @@ public:
       </div>
     </div>
     <p>
-      
+
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">
@@ -2598,10 +2602,10 @@ public:
       </div>
     </div>
     <p>
-      
+
     </p>
     <p>
-      
+
     </p>
     <div class="compact-block" style="margin-top: 1em; margin-bottom: 1em; text-indent: 0em">
       <div class="tmweb-code">

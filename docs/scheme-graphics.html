@@ -1,18 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:x="https://www.texmacs.org/2002/extensions" xmlns:m="http://www.w3.org/1998/Math/MathML">
+<!doctype html>
+<html lang="en">
   <head>
-    <title>TeXmacs notes</title>
-    <meta charset="utf-8" content="TeXmacs 2.1.4" name="generator"></meta>
-    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet"></link>
-    <link href="../resources/blog-icon.png" rel="icon"></link>
-    <script src="../resources/highlight.pack.js" language="javascript" defer></script>
-    <script src="../resources/notes-base.js" language="javascript" defer></script>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Composing TeXmacs graphics with Scheme — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Composing TeXmacs graphics with Scheme, an article on Notes on TeXmacs.">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/scheme-graphics.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
   </head>
   <body>
     <div class="notes-header">
       <p>
-        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784"></img><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
         class="notes-header-name">Notes on TeXmacs</em>
       </p>
     </div>
@@ -105,7 +109,7 @@
     </div>
     <div class="compact-block" style="margin-bottom: 0.5em; text-indent: 0em">
       <p>
-        
+
       </p>
     </div>
     <p>
@@ -284,7 +288,7 @@
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (stree-&gt;tree
-&lsquo;(with &quot;gr-geometry&quot; 
+&lsquo;(with &quot;gr-geometry&quot;
      (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
      (graphics ,pA ,pB ,pC)))</pre></td>
           </tr></tbody>
@@ -296,7 +300,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <img src="scheme-graphics-1.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img>
+              <img src="scheme-graphics-1.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em" alt="Figure from “Composing TeXmacs graphics with Scheme”" decoding="async" loading="lazy">
             </p>
           </div>
         </div></tt>
@@ -319,9 +323,9 @@ Scheme] </pre></font></td>
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (stree-&gt;tree
- &lsquo;(with &quot;gr-geometry&quot; 
+ &lsquo;(with &quot;gr-geometry&quot;
       (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
-   (graphics 
+   (graphics
       (with &quot;color&quot; &quot;blue&quot; ,pA)
       (with &quot;color&quot; &quot;red&quot; ,pB)
       (with &quot;color&quot; &quot;green&quot; ,pC))))</pre></td>
@@ -334,7 +338,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <img src="scheme-graphics-2.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img>
+              <img src="scheme-graphics-2.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em" alt="Figure from “Composing TeXmacs graphics with Scheme”" decoding="async" loading="lazy">
             </p>
           </div>
         </div></tt>
@@ -411,7 +415,7 @@ Scheme] </pre></font></td>
       we wrap the <tt class="verbatim scheme">with</tt> up in the <tt class="verbatim scheme">graphics</tt>
       primitive, which is in turn enclosed in its own <tt class="verbatim scheme">with</tt>
       which sets the <tt class="verbatim scheme">&quot;gr-geometry&quot;</tt> property of the
-      graphics object: 
+      graphics object:
     </p>
     <div class="compact-block" style="margin-top: 0.5em; text-indent: 0em">
       <div class="ornament" style="background-color:#ffffdf;border-width:1px;padding-left:0.5em;padding-right:0.5em;border-left-color:#dfdfdf;border-top-color:grey;border-radius:0px;;display:block;">
@@ -421,7 +425,7 @@ Scheme] </pre></font></td>
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (stree-&gt;tree
- &lsquo;(with &quot;gr-geometry&quot; 
+ &lsquo;(with &quot;gr-geometry&quot;
      (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
      (graphics
         (with &quot;color&quot; &quot;red&quot;   (cline ,pA ,pB ,pC)))))</pre></td>
@@ -434,7 +438,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <img src="scheme-graphics-3.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img>
+              <img src="scheme-graphics-3.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em" alt="Figure from “Composing TeXmacs graphics with Scheme”" decoding="async" loading="lazy">
             </p>
           </div>
         </div></tt>
@@ -452,7 +456,7 @@ Scheme] </pre></font></td>
       </div>
     </div>
     <p>
-      We are ready to compose our drawing; as usual the syntax is 
+      We are ready to compose our drawing; as usual the syntax is
     </p>
     <div class="tmweb-code">
       <pre class="verbatim scheme" xml:space="preserve">
@@ -471,7 +475,7 @@ Scheme] </pre></font></td>
 Scheme] </pre></font></td>
             <td style="width: 100%; text-align: left; padding-left: 0em; padding-right: 0em; padding-bottom: 0em; padding-top: 0em"><pre class="verbatim" xml:space="preserve">
 (stree-&gt;tree
- &lsquo;(with &quot;gr-geometry&quot; 
+ &lsquo;(with &quot;gr-geometry&quot;
     (tuple &quot;geometry&quot; &quot;400px&quot; &quot;300px&quot; &quot;center&quot;)
     &quot;font-shape&quot; &quot;italic&quot;
     (graphics
@@ -481,12 +485,12 @@ Scheme] </pre></font></td>
       ;; a closed polyline for the triangle
       (with &quot;color&quot; &quot;red&quot; &quot;line-width&quot; &quot;1pt&quot; (cline ,pA ,pB ,pC))
       ;; add letters using text-at
-      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))  
-      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))  
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;A&quot; ,tA))
+      (with &quot;color&quot; &quot;black&quot;  (text-at &quot;B&quot; ,tB))
       (with &quot;color&quot; &quot;black&quot;  (text-at &quot;C&quot; ,tC))
       ;; finally decorate with the TeXmacs symbol
-      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot; 
-        (text-at (TeXmacs) ,(pt -0.55 -0.75)))))) 
+      (with &quot;color&quot; &quot;blue&quot;  &quot;font-shape&quot; &quot;upright&quot;
+        (text-at (TeXmacs) ,(pt -0.55 -0.75))))))
 ;; and close all of the parentheses!!!</pre></td>
           </tr></tbody>
         </table>
@@ -497,7 +501,7 @@ Scheme] </pre></font></td>
         <tt class="verbatim"><div align="justify">
           <div class="ornament" style="background-color:#fff0;border-width:0px;padding-left:0.5em;padding-right:0.5em;border-radius:0px;padding-top:0.5em;padding-bottom:0.5em;display:block;">
             <p>
-              <i><img src="scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img></i>
+              <i><img src="scheme-graphics-4.png" style="margin-left: 0em; margin-bottom: 0em; margin-right: 0em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em" alt="Figure from “Composing TeXmacs graphics with Scheme”" decoding="async" loading="lazy"></i>
             </p>
           </div>
         </div></tt>
@@ -525,7 +529,7 @@ Scheme] </pre></font></td>
       objects, illustrating a few possibilities:
     </p>
     <p>
-      <img src="scheme-graphics-5.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em"></img>
+      <img src="scheme-graphics-5.png" style="margin-left: -0.0103434343434343em; margin-bottom: 0em; margin-right: -0.010343434343433em; margin-top: 0em; vertical-align: -10.9949494949495em; height: 21.989898989899em" alt="Figure from “Composing TeXmacs graphics with Scheme”" decoding="async" loading="lazy">
     </p>
   </body>
 </html>
