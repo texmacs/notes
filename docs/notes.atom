@@ -3,7 +3,7 @@
   <title>Notes on TeXmacs</title>
   <link rel="alternate" type="text/html" href="https://texmacs.github.io/notes/"/>
   <link rel="self" type="application/atom+xml" href="https://texmacs.github.io/notes/docs/notes.atom"/>
-  <updated>2026-10-23T23:10:11Z</updated>
+  <updated>2026-10-24T09:02:20Z</updated>
   <author>
     <name>The TeXmacs organisation</name>
     <uri>https://www.texmacs.org</uri>
@@ -11,6 +11,28 @@
   <id>tag:texmacs.github.io,2020:notes</id>
   <icon>https://texmacs.github.io/notes/resources/blog-icon.png</icon>
   <logo>https://texmacs.github.io/notes/resources/texmacs-blog-transparent.png</logo>
+  <entry>
+    <title>Customizing TeXmacs with Scheme: a commented collection of
+    snippets</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="https://texmacs.github.io/notes/docs/scheme-snippets.html"/>
+    <id>tag:texmacs.github.io,2020:notes/scheme-snippets.tm</id>
+    <updated>2026-10-24T09:02:20Z</updated>
+    <published>2026-10-24T09:02:20Z</published>
+    <summary>Many aspects of the behaviour of TeXmacs can be changed with a
+    few lines of Scheme in your personal initialization files. We explain
+    where such code goes, how TeXmacs loads its own Scheme code and why this
+    matters for your customizations, and then present a collection of tested
+    snippets for keyboard shortcuts, menus, export, sessions and new
+    documents.</summary>
+  </entry>
+  <entry>
+    <title>Behind the markup: internal macros of TeXmacs</title>
+    <link rel="alternate" type="text/html" hreflang="en" href="https://texmacs.github.io/notes/docs/internal-macros.html"/>
+    <id>tag:texmacs.github.io,2020:notes/internal-macros.tm</id>
+    <updated>2026-10-24T09:02:20Z</updated>
+    <published>2026-10-24T09:02:20Z</published>
+    <summary xml:space="preserve">A guided tour of the internal macros and primitives that TeXmacs uses behind the scenes: the  hooks of the standard styles, footnotes, labels and the binding mechanism, loci and links, and the processing of title data. Each topic starts from how TeXmacs works and ends with examples you can try.</summary>
+  </entry>
   <entry>
     <title>Adding a dialog to build websites</title>
     <link rel="alternate" type="text/html" hreflang="en" href="https://texmacs.github.io/notes/docs/website-builder-dialog.html"/>

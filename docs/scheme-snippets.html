@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Customizing TeXmacs with Scheme: a commented collection of snippets — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Many aspects of the behaviour of TeXmacs can be changed with a few lines of Scheme in your personal initialization files. We explain where such code goes, how TeXmacs loads its own Scheme code and why this matters for your customizations, and then present a collection of tested snippets for...">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/scheme-snippets.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Customizing TeXmacs with Scheme: a commented collection of
+    snippets<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      Many aspects of the behaviour of TeXmacs can be changed with a few lines
+      of Scheme in your personal initialization files. We explain where such
+      code goes, how TeXmacs loads its own Scheme code and why this matters
+      for your customizations, and then present a collection of tested
+      snippets for keyboard shortcuts, menus, export, sessions and new
+      documents.
+    </div>
+    <p>
+      [Version 1.0 of 24.10.2026. Based on the forum wiki thread <a href="http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465">Assorted
+      code snippets to customize TeXmacs' behaviour</a> and its contributors.]
+    </p>
+    <p>
+      The forum wiki thread on which this article is based was started in 2021
+      by <a href="http://forum.texmacs.cn/u/jeroen">jeroen</a> to collect small pieces of Scheme code that users
+      put in their initialization files, and it was extended and debugged by
+      <a href="http://forum.texmacs.cn/u/pireddag">pireddag</a>, <a href="http://forum.texmacs.cn/u/mgubi">mgubi</a> and others. Here we take its
+      content one step further: we explain the mechanisms that the snippets
+      rely on, we check every snippet against the source code, we fix those
+      that do not work (or work only by luck), and we add a few more.
+    </p>
+    <p>
+      Everything was tested with TeXmacs 2.1.4, using a fresh user
+      configuration, and checked against the development version (SVN trunk,
+      revision 15370, October 2026), whose Scheme code is essentially
+      identical. Links to the sources point to the <a href="https://github.com/texmacs/texmacs">GitHub mirror</a>
+      of the official repository.
+    </p>
+    <h2 id="auto-2"><a id="sec-where"></a>1.<span style="margin-left: 1em"></span>Where your code goes<span style="margin-left: 1em"></span></h2>
+    <p>
+      TeXmacs reads two personal Scheme files, both in the <tt class="verbatim">progs</tt>
+      subdirectory of your TeXmacs home directory (<tt class="verbatim">~/.TeXmacs</tt>
+      on Linux and macOS, <tt class="verbatim">%APPDATA%\TeXmacs</tt> on Windows):
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <tt class="verbatim">my-init-texmacs.scm</tt>
+        </dt>
+        <dd>
+          <p>
+            is executed once, when TeXmacs starts, right after the system file
+            <tt class="verbatim">init-texmacs.scm</tt>. This is the place for keyboard
+            shortcuts, menus and new commands. Changes take effect after a
+            restart.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <tt class="verbatim">my-init-buffer.scm</tt>
+        </dt>
+        <dd>
+          <p>
+            is executed each time a document is opened in a new view, both for
+            new and for existing documents, after the system file <tt class="verbatim">init-buffer.scm</tt>.
+            This is the place for settings of new documents. Changes take
+            effect for the next document you open, without a restart.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      The easiest way to edit them is from TeXmacs itself: enable <class
+      class="tmweb-menu" style="font-family: sans-serif">Tools</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Developer
+      tool</class><a id="auto-3"></a>; a <class class="tmweb-menu" style="font-family: sans-serif">Developer</class><a id="auto-4"></a>
+      menu appears, with the entries <class class="tmweb-menu" style="font-family: sans-serif">Open
+      my-init-texmacs.scm</class><a id="auto-5"></a> and <class class="tmweb-menu" style="font-family: sans-serif">Open
+      my-init-buffer.scm</class><a id="auto-6"></a> (which create the files if they do
+      not exist yet). When you paste code from a web page, <class class="tmweb-menu"
+      style="font-family: sans-serif">Edit</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Paste
+      from</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Verbatim</class><a id="auto-7"></a>
+      avoids surprises with formatting.
+    </p>
+    <p>
+      One important fact: <em>an error in <tt class="verbatim">my-init-texmacs.scm</tt>
+      stops the execution of the rest of the file</em>. The error message is
+      printed on the terminal (if you started TeXmacs from one), together with
+      the line of the offending expression. If a customization seems to have
+      no effect, check that nothing before it fails. Section <a href="#sec-debug">9</a>
+      explains how to investigate.
+    </p>
+    <h2 id="auto-8"><a id="sec-lazy"></a>2.<span style="margin-left: 1em"></span>How TeXmacs loads its Scheme
+    code<span style="margin-left: 1em"></span></h2>
+    <p>
+      Most surprises with personal customizations come from one design
+      decision: to start quickly, TeXmacs loads most of its Scheme modules
+      <em>lazily</em>. At startup, <tt class="verbatim">init-texmacs.scm</tt> (in <a
+      href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/init-texmacs.scm"><tt class="verbatim">TeXmacs/progs/init-texmacs.scm</tt></a>) loads a few
+      essential modules, such as the main menus, and otherwise mostly declares
+      where things are defined:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <tt class="verbatim">lazy-define</tt> declares functions; the module which
+          defines them is loaded the first time one of them is called.
+        </p>
+      </li>
+      <li>
+        <p>
+          <tt class="verbatim">lazy-keyboard</tt> declares keymaps; they are loaded when
+          TeXmacs is idle for a moment, or when the corresponding mode becomes
+          active.
+        </p>
+      </li>
+      <li>
+        <p>
+          <tt class="verbatim">lazy-menu</tt>, <tt class="verbatim">lazy-format</tt> and <tt
+          class="verbatim">lazy-initialize</tt> do the same for menus, file formats and
+          other initializations, all of them loaded after a short idle time.
+        </p>
+      </li>
+    </ul>
+    <p>
+      Your <tt class="verbatim">my-init-texmacs.scm</tt> runs <em>before</em> these
+      idle-time loads. This has three consequences, which we observed in our
+      tests:
+    </p>
+    <ol>
+      <li>
+        <p>
+          A keyboard shortcut defined at the top level of your file can be
+          <em>overridden</em> by a standard keymap loaded later. For instance,
+          a binding for <tt class="verbatim">C-s</tt> is replaced by the standard
+          binding which makes text strong (on macOS, in text mode) or saves
+          the document (on Linux and Windows, in all modes).
+        </p>
+      </li>
+      <li>
+        <p>
+          A menu which you extend at the top level of your file may not be
+          defined yet when your file runs, and its module may be loaded later.
+          Whether your additions survive then depends on details of the
+          loading order, so it is better not to rely on it.
+        </p>
+      </li>
+      <li>
+        <p>
+          A function of a module which has not been loaded, and which is not
+          declared with <tt class="verbatim">lazy-define</tt>, is not defined at all,
+          and calling it is an error, which also aborts the rest of your file.
+        </p>
+      </li>
+    </ol>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+;; Does NOT work as intended in my-init-texmacs.scm:
+(kbd-map (&quot;C-s&quot; (kbd-up)))        ; later overridden by a standard keymap
+(output-set-line-length 1000000)  ; error: unbound variable</pre>
+    </div>
+    <p>
+      There are two remedies, both used throughout the snippets below:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <tt class="verbatim scheme">(delayed &hellip;)</tt> runs its body later, from the
+          event loop. Combined with <tt class="verbatim scheme">(lazy-keyboard-force #t)</tt>,
+          which loads all the pending keymaps immediately, it makes sure that
+          your bindings are installed <em>after</em> the standard ones
+          (keymaps of plugins loaded even later could still override them).
+          (<tt class="verbatim scheme">delayed</tt> accepts options such as <tt class="verbatim scheme">(:idle
+          1000)</tt> to wait until the user is idle for a second, or <tt
+          class="verbatim scheme">(:pause 100)</tt>.)
+        </p>
+      </li>
+      <li>
+        <p>
+          <tt class="verbatim scheme">(import-from (module name))</tt> loads a given module
+          immediately, so that its functions and menus are defined before you
+          use or extend them. The name of the module is the path of its file
+          under <tt class="verbatim">progs</tt>: <tt class="verbatim">(convert tools output)</tt>
+          is the file <tt class="verbatim">progs/convert/tools/output.scm</tt>.
+        </p>
+      </li>
+    </ul>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+;; Run after the standard keymaps have been loaded:
+(delayed
+  (lazy-keyboard-force #t)
+  (kbd-map (&quot;C-s&quot; (kbd-up))))
+
+;; Load the module which defines a function before using it:
+(import-from (convert tools output))
+(output-set-line-length 1000000)</pre>
+    </div>
+    <p>
+      The <tt class="verbatim scheme">delayed</tt> variant was used in the original forum
+      snippets, and is the right choice for keyboard shortcuts; <tt class="verbatim scheme">import-from</tt>
+      is more predictable for functions and menus.
+    </p>
+    <h2 id="auto-9"><a id="sec-vocabulary"></a>3.<span style="margin-left: 1em"></span>The customization vocabulary<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      A handful of Scheme forms cover almost all customizations.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-10"></a>
+      </div>
+      <h5>Keyboard shortcuts.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        <tt class="verbatim scheme">(kbd-map (key action) &hellip;)</tt> binds key sequences to
+        actions. A key sequence is a string of keys separated by spaces, like
+        <tt class="verbatim">&quot;M-e p&quot;</tt> (first <tt class="verbatim">M-e</tt>, then <tt
+        class="verbatim">p</tt>). The modifiers are written <tt class="verbatim">S-</tt> (Shift),
+        <tt class="verbatim">C-</tt> (Control), <tt class="verbatim">A-</tt> (Alt, or Option on a
+        Mac) and <tt class="verbatim">M-</tt> (Meta: the Windows or Super key, or
+        Command on a Mac). If your system intercepts a combination, the <tt
+        class="verbatim">Escape</tt> key can be used as a modifier: on Linux and Windows
+        it stands for <tt class="verbatim">M-</tt>, and pressed twice for <tt class="verbatim">A-</tt>;
+        on macOS it stands for <tt class="verbatim">A-</tt> (Option), twice for <tt
+        class="verbatim">C-</tt>, three times for <tt class="verbatim">M-</tt> (Command). Since
+        the conventional modifier for commands differs between systems,
+        TeXmacs also offers portable prefixes: <tt class="verbatim">std</tt> is <tt
+        class="verbatim">C-</tt> on Linux and Windows and <tt class="verbatim">M-</tt> (Command)
+        on a Mac, so that <tt class="verbatim">&quot;std s&quot;</tt> is the usual
+        &ldquo;save&rdquo; shortcut everywhere; <tt class="verbatim">cmd</tt>, <tt
+        class="verbatim">altcmd</tt> and <tt class="verbatim">extra</tt> are further portable
+        combinations. These prefixes are defined by a lazily loaded keymap, so
+        they only work once that keymap is loaded, that is after <tt class="verbatim scheme">(lazy-keyboard-force
+        #t)</tt>; we always do this inside <tt class="verbatim scheme">delayed</tt>, which is
+        the safest choice.
+      </div>
+    </p>
+    <p>
+      A <tt class="verbatim scheme">kbd-map</tt> may start with <tt class="verbatim scheme">(:mode
+      in-math?)</tt> (or <tt class="verbatim scheme">in-text?</tt>, <tt class="verbatim scheme">in-session?</tt>,
+      <tt class="verbatim scheme">in-prog?</tt>, &hellip;) to restrict the bindings to a mode.
+      When several bindings apply, the one defined last wins, which is again
+      why the order of loading matters.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-11"></a>
+      </div>
+      <h5>Editor commands.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        <tt class="verbatim scheme">(kbd-commands (name help action) &hellip;)</tt> defines
+        commands that you type as <tt class="verbatim">\name</tt> followed by <tt class="verbatim">Return</tt>,
+        like the built-in <tt class="verbatim">\red</tt> which inserts red text.
+      </div>
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-12"></a>
+      </div>
+      <h5>Menus.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        <tt class="verbatim scheme">(menu-bind name entries &hellip;)</tt> redefines a menu.
+        The special entry <tt class="verbatim scheme">(former)</tt> stands for the previous
+        content of the menu, so that you can add entries instead of replacing
+        everything. In menus, <tt class="verbatim">---</tt> is a separator, <tt class="verbatim scheme">(&quot;label&quot;
+        action)</tt> an entry, <tt class="verbatim scheme">(-&gt; &quot;label&quot;
+        &hellip;)</tt> a submenu, <tt class="verbatim scheme">(=&gt; &quot;label&quot;
+        &hellip;)</tt> a pull-down menu (as in the menu bar) and <tt class="verbatim scheme">(group
+        &quot;text&quot;)</tt> a heading.
+      </div>
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-13"></a>
+      </div>
+      <h5>Functions and contextual overloading.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        <tt class="verbatim scheme">tm-define</tt> defines a function, like <tt class="verbatim scheme">define</tt>,
+        but it can be redefined in specific contexts. With <tt class="verbatim scheme">(:require
+        condition)</tt>, the new definition is used only when the condition
+        holds; otherwise the previous definition is called. This example from
+        the TeXmacs developer documentation defines a command which behaves
+        differently in math mode (to try it, bind <tt class="verbatim scheme">(hello)</tt> to a
+        key of your choice with <tt class="verbatim scheme">kbd-map</tt>, and press it in text
+        and in math mode):
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (hello) (insert &quot;Hello&quot;))
+
+(tm-define (hello)
+  (:require (in-math?))
+  (insert-go-to &quot;hello()&quot; '(6)))</pre>
+    </div>
+    <p>
+      In the body of a redefinition, <tt class="verbatim scheme">former</tt> refers to the
+      previous definition, so that you can extend a function instead of
+      replacing it:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (save-buffer . args)
+  (apply former args)
+  (set-message &quot;Saved!&quot; &quot;my-init-texmacs.scm&quot;))</pre>
+    </div>
+    <p>
+      Much of TeXmacs is organized this way. For instance, the <tt class="verbatim">Return</tt>
+      key calls <tt class="verbatim scheme">(kbd-enter t shift?)</tt>, where <tt class="verbatim scheme">t</tt>
+      is the innermost structure around the cursor, and each kind of structure
+      (sessions, tables, lists&hellip;) overloads <tt class="verbatim scheme">kbd-enter</tt>
+      with a <tt class="verbatim scheme">:require</tt> clause. Your own definitions can join
+      in.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-14"></a>
+      </div>
+      <h5>Preferences.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        <tt class="verbatim scheme">(get-preference &quot;name&quot;)</tt> and <tt class="verbatim scheme">(set-preference
+        &quot;name&quot; &quot;value&quot;)</tt> read and write the
+        preferences stored in <tt class="verbatim">system/preferences.scm</tt> in your
+        TeXmacs home directory. Values are strings, and <tt class="verbatim scheme">set-preference</tt>
+        saves the preferences file when a value changes; for settings that
+        should simply persist, it is more natural to call it once, in a Scheme
+        session, than at every start. You can invent your own preference
+        names, as we do below.
+      </div>
+    </p>
+    <h2 id="auto-15"><a id="sec-keyboard"></a>4.<span style="margin-left: 1em"></span>Keyboard snippets<span style="margin-left: 1em"></span></h2>
+    <p>
+      <div style="display: inline">
+        <a id="auto-16"></a>
+      </div>
+      <h5>Emacs-like cursor movements.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Use <tt class="verbatim">C-a</tt>, <tt class="verbatim">C-f</tt>, <tt class="verbatim">C-s</tt> and
+        <tt class="verbatim">C-d</tt> as arrow keys (from the forum thread). Without <tt
+        class="verbatim scheme">delayed</tt>, most of the four bindings are overridden by the
+        standard ones. Note that this replaces standard shortcuts: on Linux
+        and Windows <tt class="verbatim">C-a</tt>, <tt class="verbatim">C-f</tt> and <tt class="verbatim">C-s</tt>
+        are &ldquo;select all&rdquo;, &ldquo;find&rdquo; and
+        &ldquo;save&rdquo;, and on Linux <tt class="verbatim">C-d</tt> deletes the next
+        character; on macOS <tt class="verbatim">C-a</tt>, <tt class="verbatim">C-s</tt> and <tt
+        class="verbatim">C-d</tt> insert an abbreviation, strong text and a description
+        list.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(delayed
+  (lazy-keyboard-force #t)
+  (kbd-map
+    (&quot;C-a&quot; (kbd-left))
+    (&quot;C-f&quot; (kbd-right))
+    (&quot;C-s&quot; (kbd-up))
+    (&quot;C-d&quot; (kbd-down))))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-17"></a>
+      </div>
+      <h5>Subscripts and superscripts in sessions.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Type <tt class="verbatim">\ _</tt> or <tt class="verbatim">\ ^</tt> followed by <tt class="verbatim">Tab</tt>
+        (Jupyter style) to insert a subscript or a superscript, only inside
+        sessions. The key name <tt class="verbatim">var</tt> stands for <tt class="verbatim">Tab</tt>.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(delayed
+  (lazy-keyboard-force #t)
+  (kbd-map
+    (:mode in-session?)
+    (&quot;\\ _ var&quot; (make-script #f #t))
+    (&quot;\\ ^ var&quot; (make-script #t #t))))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-18"></a>
+      </div>
+      <h5>A shortcut for a color.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        With this definition, typing <tt class="verbatim">\darkgreen</tt> and <tt class="verbatim">Return</tt>
+        starts dark green text, just like the built-in <tt class="verbatim">\red</tt>.
+        Command names cannot contain spaces.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(kbd-commands
+  (&quot;darkgreen&quot; &quot;&quot; (make-with &quot;color&quot; &quot;dark green&quot;)))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-19"></a>
+      </div>
+      <h5>Insert today's date.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Typing <tt class="verbatim">\today</tt> and <tt class="verbatim">Return</tt> inserts the
+        current date as text (unlike the <font class="tmweb-markup">date</font> tag, it does
+        not change later).
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(kbd-commands
+  (&quot;today&quot; &quot;insert today's date&quot;
+   (insert (strftime &quot;%Y-%m-%d&quot; (localtime (current-time))))))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-20"></a>
+      </div>
+      <h5>Alternative shortcuts for the source mode.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Some window managers (the forum mentions Sway) do not pass the default
+        shortcut for <class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class class="tmweb-menu"
+        style="font-family: sans-serif">Source</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Edit source
+        tree</class><a id="auto-21"></a> (<tt class="verbatim">M-A-s</tt>, that is
+        Command+Option+S on a Mac and Super+Alt+S elsewhere) to TeXmacs. Keep
+        only the line you want. Note that with the developer tool enabled, <tt
+        class="verbatim">A-F1</tt> normally shows the documentation of the Scheme symbol
+        at the cursor. The <tt class="verbatim scheme">delayed</tt> makes sure that your choice
+        wins over standard bindings: on macOS <tt class="verbatim">A-space</tt> enlarges
+        the selection, and on Linux and Windows <tt class="verbatim">A-s</tt> makes text
+        strong (or inserts a square root in math mode), which these bindings
+        replace.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(delayed
+  (lazy-keyboard-force #t)
+  (kbd-map
+    (&quot;A-space&quot; (toggle-source-mode))
+    (&quot;A-F1&quot; (toggle-source-mode))
+    (&quot;A-s&quot; (toggle-source-mode))))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-22"></a>
+      </div>
+      <h5>Shortcuts that insert structures.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Bind a key to the insertion of a theorem in text mode (with the
+        portable <tt class="verbatim">std</tt> prefix), and <tt class="verbatim">; ;</tt> to a
+        fraction in math mode. Any tag can be inserted with <tt class="verbatim scheme">(make
+        'tag-name)</tt>. The second binding replaces the standard meaning of
+        <tt class="verbatim">; ;</tt> in math mode.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(delayed
+  (lazy-keyboard-force #t)
+  (kbd-map (:mode in-text?)
+    (&quot;std T&quot; (make 'theorem)))     ; Ctrl+Shift+T, or Cmd+Shift+T on a Mac
+  (kbd-map (:mode in-math?)
+    (&quot;; ;&quot; (make-fraction))))</pre>
+    </div>
+    <h2 id="auto-23"><a id="sec-menus"></a>5.<span style="margin-left: 1em"></span>Menus and toolbars<span style="margin-left: 1em"></span></h2>
+    <p>
+      <div style="display: inline">
+        <a id="auto-24"></a>
+      </div>
+      <h5>More fonts in the font menu of the toolbar.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The forum snippet used <tt class="verbatim scheme">delayed</tt>; loading the module
+        that defines the menu is more robust. The fonts must be installed on
+        your system.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(import-from (generic document-menu))
+
+(menu-bind document-short-font-menu
+  (former)
+  ---
+  (group &quot;My fonts&quot;)
+  (&quot;Cantarell&quot; (init-font &quot;Cantarell&quot;))
+  (&quot;Garamond&quot; (init-font &quot;Garamond Libre&quot;))
+  (&quot;Montserrat&quot; (init-font &quot;Montserrat&quot;)))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-25"></a>
+      </div>
+      <h5>A menu of your own.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The empty menu <tt class="verbatim">texmacs-extra-menu</tt> is a hook, provided
+        by TeXmacs for additions to the menu bar. Here we use it for a <class
+        class="tmweb-menu" style="font-family: sans-serif">My tools</class><a id="auto-26"></a> menu (the first entry is
+        defined in Section <a href="#sec-export">6</a>):
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(menu-bind texmacs-extra-menu
+  (former)
+  (=&gt; &quot;My tools&quot;
+      (&quot;Export PDF next to document&quot; (export-to-same-name-pdf))
+      (&quot;Toggle source mode&quot; (toggle-source-mode))
+      ---
+      (&quot;Edit my-init-texmacs.scm&quot;
+       (load-document &quot;$TEXMACS_HOME_PATH/progs/my-init-texmacs.scm&quot;))))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-27"></a>
+      </div>
+      <h5>A toolbar button.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The main toolbar is the menu <tt class="verbatim">texmacs-main-icons</tt>; <tt
+        class="verbatim">/</tt> is a separator between icons. The command is again the
+        one of Section <a href="#sec-export">6</a> (the order of the definitions in the
+        file does not matter, since the action only runs when the button is
+        clicked):
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(menu-bind texmacs-main-icons
+  (former)
+  /
+  ((balloon (icon &quot;tm_print.xpm&quot;) &quot;Export PDF next to document&quot;)
+   (export-to-same-name-pdf)))</pre>
+    </div>
+    <p>
+      An entry in the context menu (the menu that appears with a right click)
+      is added in the same way, through <tt class="verbatim">texmacs-popup-menu</tt>;
+      see the sessions snippet in Section <a href="#sec-sessions">7</a>.
+    </p>
+    <h2 id="auto-28"><a id="sec-export"></a>6.<span style="margin-left: 1em"></span>Export<span style="margin-left: 1em"></span></h2>
+    <p>
+      <div style="display: inline">
+        <a id="auto-29"></a>
+      </div>
+      <h5>Export to a PDF file next to the document.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The first snippet of the forum thread binds <tt class="verbatim">M-e p</tt> to
+        an export of the current document to a PDF file with the same name.
+        The snippet in the thread builds the name of the PDF file from the
+        name of the document:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(define (propose-pdf-name)
+  (with name (propose-name-buffer)
+    (if (string-ends? name &quot;.tm&quot;)
+        (string-append (string-drop-right name 3) &quot;.pdf&quot;))))</pre>
+    </div>
+    <p>
+      This works on Linux and macOS but fails on Windows with a &ldquo;Could
+      not concretize tuple&rdquo; error, as found by <a href="http://forum.texmacs.cn/u/pireddag">pireddag</a> (<a
+      href="http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465/6">post 6</a> to <a href="http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465/14">post 14</a>). The reason is instructive.
+      Inside TeXmacs, file names are not strings but <em>urls</em>, structured
+      values which know about the conventions of the operating system. <tt
+      class="verbatim scheme">propose-name-buffer</tt> converts the url of the document into a
+      Unix-style string, so that on Windows <tt class="verbatim">C:\Users\me\x.tm</tt>
+      becomes <tt class="verbatim">/C/Users/me/x.tm</tt>, without the colon after the
+      drive letter. When the modified string is later converted back into a
+      url, it is read with the Windows conventions, and without the colon it
+      is no longer recognized as an absolute path. The lesson is general:
+      <em>do not build file names by string manipulation; keep them as urls
+      and use the url functions</em> (<tt class="verbatim scheme">url-relative</tt>, <tt class="verbatim scheme">url-basename</tt>,
+      <tt class="verbatim scheme">url-glue</tt>, <tt class="verbatim scheme">url-exists?</tt>, &hellip;).
+    </p>
+    <p>
+      Here is a version which follows this advice, also checks that the
+      document has been saved (and is a <tt class="verbatim">.tm</tt> file), and uses
+      the same function as <class class="tmweb-menu" style="font-family: sans-serif">File</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Export</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Pdf</class><a id="auto-30"></a>:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (same-name-pdf-url)
+  (with u (current-buffer)
+        (and (not (url-scratch? u))
+         (== (url-suffix u) &quot;tm&quot;)
+         (url-relative u (string-append (url-basename u) &quot;.pdf&quot;)))))
+
+(tm-define (export-to-same-name-pdf)
+  (with pdf (same-name-pdf-url)
+    (cond ((not pdf)
+           (set-message &quot;Save the document first&quot; &quot;Export to PDF&quot;))
+          ((url-exists? pdf)
+           (user-confirm &quot;File already exists. Really overwrite?&quot; #f
+             (lambda (answ) (when answ (wrapped-print-to-file pdf)))))
+          (else (wrapped-print-to-file pdf)))))
+
+(kbd-map (&quot;M-e p&quot; (export-to-same-name-pdf)))</pre>
+    </div>
+    <p>
+      On Windows, <tt class="verbatim">M-e</tt> is <tt class="verbatim">Win+E</tt>, which the
+      system uses to open the file explorer; choose another key there, or
+      press <tt class="verbatim">Escape</tt> <tt class="verbatim">e p</tt>.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-31"></a>
+      </div>
+      <h5>Update the PDF at every save.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Building on the previous snippet (it uses <tt class="verbatim scheme">same-name-pdf-url</tt>,
+        so keep both), we can extend <tt class="verbatim scheme">save-buffer</tt> with <tt
+        class="verbatim scheme">former</tt> so that the PDF is updated whenever the document is
+        saved, if a preference of our own is set. It calls <tt class="verbatim scheme">wrapped-print-to-file</tt>
+        directly, so that saving does not ask every time whether to overwrite
+        the PDF:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (save-buffer . args)
+  (apply former args)
+  (when (== (get-preference &quot;my:pdf on save&quot;) &quot;on&quot;)
+    (with pdf (same-name-pdf-url)
+      (when pdf (wrapped-print-to-file pdf)))))</pre>
+    </div>
+    <p>
+      Turn it on and off from a Scheme session (<class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Session</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Scheme</class><a
+      id="auto-32"></a>):
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(set-preference &quot;my:pdf on save&quot; &quot;on&quot;)    ; turn it on
+(set-preference &quot;my:pdf on save&quot; &quot;off&quot;)   ; turn it off</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-33"></a>
+      </div>
+      <h5>Long lines in LaTeX export.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        By default the LaTeX exporter breaks lines after 79 characters, which
+        can be annoying when the LaTeX file is later edited or put under
+        version control. This sets the line length to a huge value:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(import-from (convert tools output))
+(output-set-line-length 1000000000)</pre>
+    </div>
+    <p>
+      The forum version, <tt class="verbatim scheme">(delayed (:idle 1000)
+      (output-set-line-length 1000000000))</tt>, usually works too, but only
+      if the module has been loaded within one second; the explicit <tt class="verbatim scheme">import-from</tt>
+      removes the guesswork.
+    </p>
+    <h2 id="auto-34"><a id="sec-sessions"></a>7.<span style="margin-left: 1em"></span>Sessions<span style="margin-left: 1em"></span></h2>
+    <p>
+      <div style="display: inline">
+        <a id="auto-35"></a>
+      </div>
+      <h5>Multiline input by default.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        In a multiline session, <tt class="verbatim">Return</tt> inserts a new line and
+        <tt class="verbatim">S-return</tt> evaluates. The arguments are the plugin and
+        the session name, as in <class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class
+        class="tmweb-menu" style="font-family: sans-serif">Session</class><a id="auto-36"></a>:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(import-from (dynamic session-edit))
+(set-session-multiline-input &quot;python&quot; &quot;default&quot; #t)
+(set-session-multiline-input &quot;julia&quot; &quot;default&quot; #t)</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-37"></a>
+      </div>
+      <h5>Evaluate all the sessions of a document.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The command below, bound to <tt class="verbatim">A-e</tt> and added to the
+        context menu inside sessions, evaluates every session of the document
+        in turn. (On Linux and Windows, <tt class="verbatim">A-e</tt> normally inserts
+        an enumeration in text mode; pick another key if you use that.)
+        Compared with the forum version, it searches for <tt class="verbatim scheme">session-document-context?</tt>
+        instead of <tt class="verbatim scheme">subsession-document-context?</tt>, so that
+        unfolded subsessions are not evaluated twice, and it drops an import
+        of <tt class="verbatim scheme">tree-search</tt> from the module <tt class="verbatim">(link
+        link-extract)</tt>: <tt class="verbatim scheme">tree-search</tt> is now a standard
+        function, and the old import raises an error in current versions.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (evaluate-all-sessions)
+  (for-each (lambda (doc)
+              (tree-go-to doc :last 1 :end)
+              (session-evaluate-all))
+            (tree-search (buffer-tree) session-document-context?)))
+
+(delayed
+  (lazy-keyboard-force #t)
+  (kbd-map (&quot;A-e&quot; (evaluate-all-sessions))))
+
+(tm-menu (texmacs-popup-menu)
+  (:require (inside? 'session))
+  (former)
+  ---
+  (&quot;Evaluate all sessions in document&quot; (evaluate-all-sessions)))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-38"></a>
+      </div>
+      <h5>Evaluate without creating a new input field.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        At the end of the thread, <a href="http://forum.texmacs.cn/u/hamorabi">hamorabi</a> asked how to avoid the
+        empty input field that appears after each evaluation (<a href="http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465/24">post
+        24</a> and <a href="http://forum.texmacs.cn/t/wiki-assorted-code-snippets-to-customize-texmacs-behaviour/465/26">post 26</a>). There is no option for this: the new
+        field is part of the protocol with the plugin, which writes its next
+        prompt into it (see <tt class="verbatim">field-process-input</tt> in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/dynamic/session-edit.scm"><tt
+        class="verbatim">TeXmacs/progs/dynamic/session-edit.scm</tt></a>). We can,
+        however, remove it once the evaluation is finished. The following
+        redefines <tt class="verbatim">C-return</tt> inside session inputs (using
+        contextual overloading of <tt class="verbatim scheme">kbd-control-enter</tt>) to
+        evaluate the current field, keep the cursor in it, and remove the
+        empty field that was appended, if any. Plain <tt class="verbatim">Return</tt>
+        keeps the usual behaviour; to add a new field when you need one, use
+        <class class="tmweb-menu" style="font-family: sans-serif">Insert field below</class><a id="auto-39"></a> in the
+        <class class="tmweb-menu" style="font-family: sans-serif">Focus</class><a id="auto-40"></a> menu or on the focus
+        toolbar.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(import-from (dynamic session-edit))
+
+(define (my-field-busy? t)
+  (with out (and (tree? t) (&gt; (tree-arity t) 2) (tree-ref t 2))
+    (and out (tree-is? out 'document) (&gt; (tree-arity out) 0)
+         (tree-is? (tree-ref out :last) 'script-busy))))
+
+(define (my-empty-input? u)
+  (and (tree? u) (tree-&gt;path u)
+       (tree-in? u '(input input-math input-text))
+       (tree-empty? (tree-ref u 1))))
+
+(tm-define (session-evaluate-in-place)
+  (with-innermost t field-input-context?
+    (with last? (not (tree-ref t :next))
+      (session-evaluate)                  ; may append a new field u
+      (with u (and last? (tree-ref t :next))
+        (tree-go-to t 1 :end)             ; stay in the evaluated field
+        (when u
+          (delayed
+            (:pause 100)
+            (:require (not (my-field-busy? t)))  ; wait for the output
+            (when (my-empty-input? u)
+              (tree-remove (tree-ref u :up) (tree-index u) 1))))))))
+
+(tm-define (kbd-control-enter t shift?)
+  (:require (field-input-context? t))
+  (session-evaluate-in-place))</pre>
+    </div>
+    <p>
+      We tested it with the Scheme plugin; other plugins use the same
+      mechanism, but check it with yours.
+    </p>
+    <h2 id="auto-41"><a id="sec-new"></a>8.<span style="margin-left: 1em"></span>New documents<span style="margin-left: 1em"></span></h2>
+    <p>
+      The following snippets go into <tt class="verbatim">my-init-buffer.scm</tt>. Since
+      that file is run for every document that is opened, they first check
+      that the document is new, using <tt class="verbatim scheme">(buffer-has-name?
+      (current-buffer))</tt>, and end with <tt class="verbatim scheme">buffer-pretend-saved</tt>,
+      so that an untouched new document is not considered modified.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-42"></a>
+      </div>
+      <h5>Add a style package to every new document.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        From the forum, for a package (<tt class="verbatim">no-solutions-in-html</tt>)
+        written by the user:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(when (not (buffer-has-name? (current-buffer)))
+  (add-style-package &quot;no-solutions-in-html&quot;)
+  (buffer-pretend-saved (current-buffer)))</pre>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-43"></a>
+      </div>
+      <h5>Default style, language and fonts.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Every new document is an article in British English, set in the TeX
+        Gyre Termes fonts at 11 points:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(when (not (buffer-has-name? (current-buffer)))
+  (init-style &quot;article&quot;)
+  (add-style-package &quot;british&quot;)
+  (init-font &quot;termes&quot; &quot;math-termes&quot;)
+  (init-env &quot;font-base-size&quot; &quot;11&quot;)
+  (buffer-pretend-saved (current-buffer)))</pre>
+    </div>
+    <p>
+      The manual of TeXmacs gives a similar example using a function <tt
+      class="verbatim">buffer-newly-created?</tt>; this function does not exist in
+      current versions, use <tt class="verbatim scheme">buffer-has-name?</tt> as above.
+    </p>
+    <h2 id="auto-44"><a id="sec-debug"></a>9.<span style="margin-left: 1em"></span>When something goes wrong<span
+    style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          Try your code in a Scheme session (<class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Session</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Scheme</class><a
+          id="auto-45"></a>) before putting it in an initialization file: you see
+          errors and results immediately.
+        </p>
+      </li>
+      <li>
+        <p>
+          Start TeXmacs from a terminal to see the messages printed during
+          startup, including errors in <tt class="verbatim">my-init-texmacs.scm</tt> (on
+          macOS, run <tt class="verbatim">/Applications/TeXmacs.app/Contents/MacOS/TeXmacs</tt>).
+          On Windows, standard output is not available this way (see the <a
+          href="windows-output-error.html">article on standard output on Windows</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          Enable <class class="tmweb-menu" style="font-family: sans-serif">Tools</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Debugging
+          tool</class><a id="auto-46"></a>: the <class class="tmweb-menu" style="font-family: sans-serif">Debug</class><a
+          id="auto-47"></a> menu gives access to the error console (<class class="tmweb-menu"
+          style="font-family: sans-serif">Debug</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Consoles</class><a
+          id="auto-48"></a>), and can open it automatically on errors.
+        </p>
+      </li>
+      <li>
+        <p>
+          A few useful questions to ask in a Scheme session:
+        </p>
+      </li>
+    </ul>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(defined? 'output-set-line-length)        ; is the function loaded?
+(procedure-sources kbd-control-enter)     ; all its definitions
+(with b (kbd-find-key-binding (kbd-pre-rewrite &quot;std s&quot;))
+  (and b (promise-source (car b))))      ; what does a key do?
+(debug-message &quot;std-warning&quot; &quot;my-init: reached line 42\n&quot;)</pre>
+    </div>
+    <p>
+      When you find the definition of a function you want to change, the
+      pattern is almost always the same: load its module with <tt class="verbatim scheme">import-from</tt>,
+      then redefine it with <tt class="verbatim scheme">tm-define</tt>, using a <tt class="verbatim scheme">:require</tt>
+      clause or <tt class="verbatim scheme">former</tt> to keep the original behaviour where
+      you do not need to change it.
+    </p>
+    <h2 id="auto-49"><a id="sec-corrections"></a>10.<span style="margin-left: 1em"></span>Corrections to older advice<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      While testing the snippets we found a few pieces of advice, in the forum
+      and in the official documentation, which are no longer accurate:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The function <tt class="verbatim">url-system</tt>, suggested in the thread,
+          does not exist; the conversion functions are <tt class="verbatim scheme">url-&gt;system</tt>,
+          <tt class="verbatim scheme">url-&gt;unix</tt>, <tt class="verbatim scheme">system-&gt;url</tt> and <tt
+          class="verbatim scheme">unix-&gt;url</tt>.
+        </p>
+      </li>
+      <li>
+        <p>
+          The import <tt class="verbatim scheme">(use-modules ((link link-extract) #:select
+          (tree-search)))</tt>, proposed for older versions, now raises an
+          error.
+        </p>
+      </li>
+      <li>
+        <p>
+          The example of <tt class="verbatim">my-init-buffer.scm</tt> in the manual uses
+          <tt class="verbatim">buffer-newly-created?</tt>, which does not exist.
+        </p>
+      </li>
+      <li>
+        <p>
+          The developer documentation on lazy loading states that
+          mode-specific keyboard bindings take precedence over general ones;
+          in current versions the binding defined last wins, whatever its
+          mode.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The forum thread is still open, and new snippets are welcome there or as
+      pull requests to the <a href="https://github.com/texmacs/notes">repository of this website</a>.
+    </p>
+  </body>
+</html>
