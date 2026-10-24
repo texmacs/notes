@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="TeXmacs">
+    <title>Behind the markup: internal macros of TeXmacs — Notes on TeXmacs</title>
+    <link href="../resources/notes-base.css" type="text/css" rel="stylesheet">
+    <link href="../resources/blog-icon.png" rel="icon">
+    <script src="../resources/highlight.pack.js" defer></script>
+    <script src="../resources/notes-base.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A guided tour of the internal macros and primitives that TeXmacs uses behind the scenes: the render-* hooks of the standard styles, footnotes, labels and the binding mechanism, loci and links, and the processing of title data. Each topic starts from how TeXmacs works and ends with examples you...">
+    <link rel="canonical" href="https://texmacs.github.io/notes/docs/internal-macros.html">
+    <link rel="alternate" type="application/atom+xml" title="Notes on TeXmacs" href="https://texmacs.github.io/notes/docs/notes.atom">
+  </head>
+  <body>
+    <div class="toggle" style="display: none">
+      <p>
+
+      </p>
+    </div>
+    <div class="notes-header">
+      <p>
+        <img class="image" src="../resources/texmacs-blog-transparent.png" width="28.116784" alt="Notes on TeXmacs logo" decoding="async" loading="lazy"><span style="margin-left: 2pt"></span><a href="./main.html">[main]</a><em
+        class="notes-header-name">Notes on TeXmacs</em>
+      </p>
+    </div>
+    <h1 id="auto-1">Behind the markup: internal macros of TeXmacs<span style="margin-left: 1em"></span></h1>
+    <div class="notes-abstract">
+      A guided tour of the internal macros and primitives that TeXmacs uses
+      behind the scenes: the <font class="tmweb-markup">render-*</font> hooks of the
+      standard styles, footnotes, labels and the binding mechanism, loci and
+      links, and the processing of title data. Each topic starts from how
+      TeXmacs works and ends with examples you can try.
+    </div>
+    <p>
+      [Version 1.0 of 24.10.2026. Based on the forum wiki thread <a href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224">Undocumented
+      internal macros in TeXmacs</a> and its contributors.]
+    </p>
+    <p>
+      This article grew out of a wiki thread on the TeXmacs forum, started in
+      2020 by <a href="http://forum.texmacs.cn/u/re4zuaFe">re4zuaFe</a> and extended over the years by <a href="http://forum.texmacs.cn/u/jeroen">jeroen</a>,
+      <a href="http://forum.texmacs.cn/u/jingkaimori">jingkaimori</a> and <a href="http://forum.texmacs.cn/u/sharkc">sharkc</a>, with suggestions by <a
+      href="http://forum.texmacs.cn/u/pireddag">pireddag</a> and <a href="http://forum.texmacs.cn/u/mgubi">mgubi</a>. The thread collected tags
+      that appear in documents and style files but are not (or only barely)
+      described in the manual. Here we reorganize that material, check it
+      against the source code and put it into the wider context of how TeXmacs
+      typesets a document, so that the individual tags stop looking like
+      magic.
+    </p>
+    <p>
+      All statements below refer to TeXmacs 2.1.4 and to the development
+      version (SVN trunk, revision 15370, October 2026); the relevant files
+      are identical in the two versions. Links to the sources point to the <a
+      href="https://github.com/texmacs/texmacs">GitHub mirror</a> of the official repository. All the examples
+      were tested with TeXmacs 2.1.4.
+    </p>
+    <p>
+      Examples of TeXmacs markup are shown as source code: tag names are
+      between angle brackets, and names in italics are macro arguments (like
+      <font color="brown"><i>body</i></font>) or environment variables (like <font
+      color="#008000"><i>font-size</i></font>). The easiest way to enter them is in
+      source mode (<class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class class="tmweb-menu"
+      style="font-family: sans-serif">Source</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Edit source
+      tree</class><a id="auto-2"></a>).
+    </p>
+    <h2 id="auto-3"><a id="sec-model"></a>1.<span style="margin-left: 1em"></span>How TeXmacs turns markup into
+    pages<span style="margin-left: 1em"></span></h2>
+    <p>
+      To understand internal macros we first need a picture of what a TeXmacs
+      document is and of what happens when it is displayed.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-4"></a>
+      </div>
+      <h5>Documents are trees.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        A TeXmacs document is a labelled tree. When you write a sentence with
+        a footnote, the editor stores something like
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="black">Some text</font><font color="black"><font color="blue">&lt;</font>footnote<font
+        color="blue">|</font><font color="black">A note.</font><font color="blue">&gt;</font></font><font
+        color="black"> and more text.</font>
+      </p>
+    </div>
+    <p>
+      which, seen from Scheme (for instance with <tt class="verbatim scheme">(tm-&gt;stree
+      (buffer-tree))</tt> in a Scheme session), is the tree
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(document
+  (concat &quot;Some text&quot; (footnote &quot;A note.&quot;) &quot; and more text.&quot;))</pre>
+    </div>
+    <p>
+      Every node has a label (<tt class="verbatim">concat</tt>, <tt class="verbatim">footnote</tt>,
+      &hellip;) and children. You can always see this structure in source mode
+      (<class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Source</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Edit source tree</class><a id="auto-5"></a>).
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-6"></a>
+      </div>
+      <h5>Primitives and macros.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Some labels are <em>primitives</em>: they are known to the C++
+        typesetter, which knows how to turn them into boxes. They are listed
+        in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/src/Kernel/Types/tree_label.hpp"><tt class="verbatim">src/Kernel/Types/tree_label.hpp</tt></a>, and
+        their arity and properties are declared in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/src/Data/Drd/drd_std.cpp"><tt class="verbatim">src/Data/Drd/drd_std.cpp</tt></a>.
+        Examples are <font class="tmweb-markup">concat</font>, <font class="tmweb-markup">with</font>,
+        <font class="tmweb-markup">macro</font>, <font class="tmweb-markup">locus</font> or <font class="tmweb-markup">set-binding</font>.
+        All other labels are <em>macros</em>, defined in style files and
+        packages (the <tt class="verbatim">.ts</tt> files under <tt class="verbatim">TeXmacs/packages</tt>)
+        with the <font class="tmweb-markup">assign</font> primitive:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>footnote-sep</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="black">. </font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      When the typesetter meets a tag which is not a primitive, it looks up
+      its name in the <em>environment</em>, finds a <font class="tmweb-markup">macro</font>
+      and typesets the body of the macro with the arguments substituted. So
+      <font class="tmweb-markup">footnote</font> is not built into TeXmacs: it is an
+      ordinary macro of the <tt class="verbatim">env-float</tt> package, and you can
+      read its definition.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-7"></a>
+      </div>
+      <h5>The environment.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The environment is a map from names to values which contains both
+        typesetting variables (like <font color="#008000"><i>font-size</i></font> or
+        <font color="#008000"><i>par-left</i></font>) and macros. <font class="tmweb-markup">assign</font>
+        changes a value from that point onwards, while <font class="tmweb-markup">with</font>
+        changes it locally:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>with<font color="blue">|</font><font color="#008000"><i>font-shape</i></font><font
+        color="blue">|</font><font color="black">italic</font><font color="blue">|</font><font
+        color="#008000"><i>footnote-sep</i></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>macro<font color="blue">|</font><font color="black">:
+        </font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+        color="black"><font color="brown"><i>body</i></font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      Since macros live in the same environment as variables, a style package,
+      a document preamble or even a <font class="tmweb-markup">with</font> can
+      <em>redefine</em> a macro of the standard styles. This is the basic
+      customization mechanism of TeXmacs, and it is the reason why internal
+      macros are worth knowing: they are the places where the standard styles
+      let you plug in your own behaviour.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-8"></a>
+      </div>
+      <h5>Some primitives are macros in disguise.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        A few tags that are documented as primitives, like <font class="tmweb-markup">label</font>,
+        <font class="tmweb-markup">reference</font>, <font class="tmweb-markup">pageref</font>, <font
+        class="tmweb-markup">hlink</font> and <font class="tmweb-markup">action</font>, are in fact
+        macros: they have tree labels in <tt class="verbatim">tree_label.hpp</tt>, but
+        the typesetter expands them from the environment, where their default
+        definitions are hard-coded in C++, in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/src/Typeset/Env/env_default.cpp"><tt class="verbatim">src/Typeset/Env/env_default.cpp</tt></a>.
+        They are typeset like any other macro and can therefore be redefined
+        from a document or a style file. We will see their definitions in
+        Sections <a href="#sec-bindings">4</a> and <a href="#sec-links">5</a>; they are written in terms
+        of the truly primitive tags discussed in this article.
+      </div>
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-9"></a>
+      </div>
+      <h5>How to look under the hood yourself.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The tools for exploring macros are all available from the editor:
+      </div>
+    </p>
+    <ul>
+      <li>
+        <p>
+          Put the cursor inside a tag and open the <class class="tmweb-menu" style="font-family: sans-serif">Preferences
+          for tag</class><a id="auto-10"></a> button of the focus toolbar (or <class
+          class="tmweb-menu" style="font-family: sans-serif">Focus</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Preferences</class><a
+          id="auto-11"></a>): for macros which can be edited, <class class="tmweb-menu" style="font-family: sans-serif">Edit
+          macro</class><a id="auto-12"></a> opens the definition of the current macro
+          in a macro editor, and <class class="tmweb-menu" style="font-family: sans-serif">Edit source</class><a
+          id="auto-13"></a> opens the preamble or the style package in which it is
+          defined. The <class class="tmweb-menu" style="font-family: sans-serif">Describe tag</class><a id="auto-14"></a>
+          button opens the documentation of the tag, when there is one.
+        </p>
+      </li>
+      <li>
+        <p>
+          The source mode (<class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Source</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Edit source
+          tree</class><a id="auto-15"></a>) shows the tree structure of the document.
+        </p>
+      </li>
+      <li>
+        <p>
+          <class class="tmweb-menu" style="font-family: sans-serif">Tools</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Developer
+          tool</class><a id="auto-16"></a> adds a <class class="tmweb-menu" style="font-family: sans-serif">Developer</class><a
+          id="auto-17"></a> menu; an <class class="tmweb-menu" style="font-family: sans-serif">Insert</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Session</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Scheme</class><a
+          id="auto-18"></a> session lets you inspect the document and call the
+          functions mentioned below.
+        </p>
+      </li>
+      <li>
+        <p>
+          The style packages themselves are in the <tt class="verbatim">packages</tt>
+          directory of your TeXmacs installation; searching them for <tt
+          class="verbatim">assign|name</tt> is often the fastest way to find a
+          definition.
+        </p>
+      </li>
+    </ul>
+    <h2 id="auto-19"><a id="sec-hooks"></a>2.<span style="margin-left: 1em"></span>The <font class="tmweb-markup">render-*</font>
+    hooks<span style="margin-left: 1em"></span></h2>
+    <p>
+      The standard styles follow a consistent pattern: a user-level macro
+      takes care of the logic (numbering, labels, table of contents entries,
+      &hellip;) and then delegates the visual layout to a separate macro,
+      whose name usually starts with <tt class="verbatim">render-</tt>. These
+      <em>rendering hooks</em> are internal: you normally do not insert them
+      in a document (an exception is <font class="tmweb-markup">render-code</font>, which
+      the <class class="tmweb-menu" style="font-family: sans-serif">Pseudo code</class><a id="auto-20"></a> menu entry
+      inserts), but redefining them changes the look of every instance of the
+      corresponding environment, without touching the numbering or the
+      references.
+    </p>
+    <p>
+      The most useful ones are:
+    </p>
+    <div style="margin-top: 1em; margin-bottom: 1em">
+      <table style="width: 100%">
+        <tbody><tr>
+          <td style="text-align: center; padding-left: 0em; padding-right: 0em"><table style="display: inline-table; vertical-align: middle">
+            <tbody><tr>
+              <td style="border-bottom: 1px solid"><strong>Hook</strong></td>
+              <td style="border-bottom: 1px solid"><strong>Used by</strong></td>
+              <td style="border-bottom: 1px solid"><strong>Defined in</strong></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-footnote</font>, <font class="tmweb-markup">render-footnote*</font></td>
+              <td><font class="tmweb-markup">footnote</font></td>
+              <td><tt class="verbatim">env-float.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-big-figure</font>, <font class="tmweb-markup">render-small-figure</font>,
+              <font class="tmweb-markup">render-caption</font></td>
+              <td><font class="tmweb-markup">big-figure</font>, <font class="tmweb-markup">small-figure</font>,
+              <font class="tmweb-markup">big-table</font>, &hellip;</td>
+              <td><tt class="verbatim">env-float.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-theorem</font></td>
+              <td><font class="tmweb-markup">theorem</font>, <font class="tmweb-markup">lemma</font>,
+              <font class="tmweb-markup">proposition</font>, &hellip;</td>
+              <td><tt class="verbatim">env-enunciation.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-enunciation</font></td>
+              <td><font class="tmweb-markup">render-theorem</font>, <font class="tmweb-markup">render-remark</font>,
+              &hellip;</td>
+              <td><tt class="verbatim">env-enunciation.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-remark</font>, <font class="tmweb-markup">render-proof</font>,
+              <font class="tmweb-markup">render-exercise</font></td>
+              <td><font class="tmweb-markup">remark</font>, <font class="tmweb-markup">proof</font>, <font
+              class="tmweb-markup">exercise</font>, &hellip;</td>
+              <td><tt class="verbatim">env-enunciation.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-item</font>, <font class="tmweb-markup">render-list</font></td>
+              <td><font class="tmweb-markup">item</font>, <font class="tmweb-markup">itemize</font>, <font
+              class="tmweb-markup">enumerate</font>, &hellip;</td>
+              <td><tt class="verbatim">std-list.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-abstract</font></td>
+              <td><font class="tmweb-markup">abstract</font></td>
+              <td><tt class="verbatim">title-base.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-code</font></td>
+              <td><font class="tmweb-markup">cpp-code</font>, <font class="tmweb-markup">scm-code</font>,
+              &hellip;</td>
+              <td><tt class="verbatim">env-program.ts</tt></td>
+            </tr><tr>
+              <td><font class="tmweb-markup">render-table-of-contents</font>, <font class="tmweb-markup">render-index</font></td>
+              <td><font class="tmweb-markup">table-of-contents</font>, <font class="tmweb-markup">the-index</font>,
+              &hellip;</td>
+              <td><tt class="verbatim">section-base.ts</tt></td>
+            </tr></tbody>
+          </table></td>
+        </tr><tr>
+          <td style="text-align: center; padding-left: 0em; padding-right: 0em; height: 0.5em"></td>
+        </tr><tr>
+          <td style="text-align: center; padding-left: 0em; padding-right: 0em; padding-left: 1.5em; padding-right: 1.5em"><div class="caption">
+            <font style="font-size: 90.0%"><p>
+              <b>Table 1. </b><a id="auto-21"></a>Some rendering hooks of the standard
+              styles.
+            </p></font>
+          </div></td>
+        </tr></tbody>
+      </table>
+    </div>
+    <p>
+      Not every hook follows the naming scheme. Short pieces of text have
+      their own small macros, for instance <font class="tmweb-markup">theorem-name</font>
+      and <font class="tmweb-markup">theorem-sep</font> (the style of the name of a theorem
+      and the separator after it), <font class="tmweb-markup">enunciation-name</font> and
+      <font class="tmweb-markup">enunciation-sep</font> (the same for all theorem-like
+      environments), <font class="tmweb-markup">proof-text</font> (the word
+      &ldquo;Proof&rdquo;), <font class="tmweb-markup">abstract-text</font> (the word
+      &ldquo;Abstract&rdquo;), <font class="tmweb-markup">figure-name</font> and <font
+      class="tmweb-markup">figure-sep</font>, <font class="tmweb-markup">footnote-sep</font>, and <font
+      class="tmweb-markup">item-vsep</font> and <font class="tmweb-markup">item-hsep</font> (the spacing
+      of lists). The titles of documents use <font class="tmweb-markup">doc-author</font>
+      and <font class="tmweb-markup">doc-authors</font> (Section <a href="#sec-title">6</a>).
+    </p>
+    <p>
+      The figure and theorem hooks, <font class="tmweb-markup">render-list</font>, the
+      section hooks <font class="tmweb-markup">render-table-of-contents</font> and <font
+      class="tmweb-markup">render-index</font>, and <font class="tmweb-markup">footnote-sep</font> are
+      documented in the section of the manual on customizing the standard
+      styles; the footnote, code, abstract and item hooks (<font class="tmweb-markup">render-item</font>,
+      <font class="tmweb-markup">item-vsep</font>, <font class="tmweb-markup">item-hsep</font>) are not.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-22"></a>
+      </div>
+      <h5>Example: theorems with a dash.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Put the following in the preamble of a document (<class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class
+        class="tmweb-menu" style="font-family: sans-serif">Part</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Create
+        preamble</class><a id="auto-23"></a>, or <class class="tmweb-menu" style="font-family: sans-serif">Show
+        preamble</class><a id="auto-24"></a> if it already exists), or in a style
+        package of your own:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>theorem-sep</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="black"> &ndash; </font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>render-theorem</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>which</i></font><font color="blue">|</font><font color="brown"><i>body</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>render-enunciation<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font color="blue">|</font><font
+        color="#008000"><i>color</i></font><font color="blue">|</font><font color="black">dark
+        blue</font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>theorem-name<font
+        color="blue">|</font><font color="#C68"><font color="black"><font color="brown"><i>which</i></font></font><font
+        color="black"><font color="blue">&lt;</font>theorem-sep<font color="blue">&gt;</font></font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+        color="black"><font color="brown"><i>body</i></font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>proof-text</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="black">Demonstration</font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      Theorems now read &ldquo;<font color="#000080"><strong>Theorem 1
+      &ndash;</strong></font> Every even number &hellip;&rdquo;, and since
+      <font class="tmweb-markup">lemma</font>, <font class="tmweb-markup">proposition</font> and the other
+      theorem-like environments are all created with <font class="tmweb-markup">new-theorem</font>,
+      which uses <font class="tmweb-markup">render-theorem</font>, they all change at once.
+      Proofs start with &ldquo;<em>Demonstration.</em>&rdquo;. Note that our
+      version of <font class="tmweb-markup">render-theorem</font> no longer sets the body in
+      italics: the original definition wraps <font color="brown"><i>body</i></font>
+      in <font color="blue">&lt;</font>with<font color="blue">|</font><font color="#008000"><i>font-shape</i></font><font
+      color="blue">|</font><font color="black">italic</font><font color="blue">|</font><font
+      color="black">&hellip;</font><font color="blue">&gt;</font>, and it is a good habit
+      to look at the original (with <class class="tmweb-menu" style="font-family: sans-serif">Edit macro</class><a
+      id="auto-25"></a>) before replacing it.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-26"></a>
+      </div>
+      <h5>Example: compact lists, renamed abstract.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Smaller hooks are just as easy:
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>item-vsep</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="black">0fn</font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>abstract-text</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="black">Summary</font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>enunciation-name</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>name</i></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>em<font color="blue">|</font><font color="#C68"><font color="brown"><i>name</i></font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      removes the vertical space between list items and around lists, renames
+      the abstract and sets the names of remarks, examples, theorems&hellip;
+      in italics.
+    </p>
+    <h2 id="auto-27"><a id="sec-footnotes"></a>3.<span style="margin-left: 1em"></span>Footnotes from the inside<span
+    style="margin-left: 1em"></span></h2>
+    <p>
+      The first two entries of the forum thread were <font class="tmweb-markup">render-footnote*</font>
+      and <font class="tmweb-markup">render-footnote</font>. Footnotes are a good example of
+      the whole machinery at work: a counter, a hook, a floating object, a
+      label, a binding and a reference. Here are the definitions from <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/packages/environment/env-float.ts"><tt
+      class="verbatim">TeXmacs/packages/environment/env-float.ts</tt></a>, slightly
+      simplified (we removed some purely presentational <font class="tmweb-markup">with</font>
+      and <font class="tmweb-markup">style-with</font> tags):
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>footnote</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>body</i></font><font color="blue">|</font><font color="black"><font
+        color="black"><font color="blue">&lt;</font>next-footnote<font color="blue">&gt;</font></font><font
+        color="black"><font color="blue">&lt;</font>render-footnote<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>the-footnote<font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>body</i></font></font><font
+        color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>space<font
+        color="blue">|</font><font color="#288">0spc</font><font color="blue">&gt;</font></font><font
+        color="black"><font color="blue">&lt;</font>label<font color="blue">|</font><font color="#228"><tt><font
+        color="blue">&lt;</font>merge<font color="blue">|</font><font color="black">footnr-</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>the-footnote<font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>rsup<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>reference<font
+        color="blue">|</font><font color="#228"><tt><font color="blue">&lt;</font>merge<font
+        color="blue">|</font><font color="black">footnote-</font><font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>the-footnote<font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>render-footnote</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>nr</i></font><font color="blue">|</font><font color="brown"><i>body</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>render-footnote*<font
+        color="blue">|</font><font color="black"><font color="brown"><i>nr</i></font></font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>nr</i></font></font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>body</i></font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>render-footnote*</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>sym</i></font><font color="blue">|</font><font color="brown"><i>nr</i></font><font
+        color="blue">|</font><font color="brown"><i>body</i></font><font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>float<font color="blue">|</font><font color="black">footnote</font><font
+        color="blue">|</font><font color="black"></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>smaller<font color="blue">|</font><font color="#C68"><font
+        color="blue">&lt;</font>surround<font color="blue">|</font><font color="black"><font
+        color="black"><font color="blue">&lt;</font>locus<font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt><font color="blue">&lt;</font>hard-id<font
+        color="blue">|</font><font color="black"><font color="brown"><i>body</i></font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>link<font color="blue">|</font><font
+        color="black">hyperlink</font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font
+        color="blue">|</font><font color="#228"><tt><font color="blue">&lt;</font>hard-id<font
+        color="blue">|</font><font color="black"><font color="brown"><i>body</i></font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>url<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>merge<font color="blue">|</font><font
+        color="black">#footnr-</font><font color="blue">|</font><font color="black"><font color="brown"><i>nr</i></font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="brown"><i>sym</i></font></font><font color="blue">&gt;</font></font><font
+        color="black"><font color="blue">&lt;</font>footnote-sep<font color="blue">&gt;</font></font></font><font
+        color="blue">|</font><font color="black"><font color="black"><font color="blue">&lt;</font>set-binding<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>merge<font color="blue">|</font><font
+        color="black">footnote-</font><font color="blue">|</font><font color="black"><font color="brown"><i>nr</i></font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="#008000"><i>the-label</i></font></font><font color="blue">|</font><font color="black">body</font><font
+        color="blue">&gt;</font></font><font color="black"><font color="blue">&lt;</font>right-flush<font
+        color="blue">&gt;</font></font></font><font color="blue">|</font><font color="black"><font
+        color="brown"><i>body</i></font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      Let us read them from the top.
+    </p>
+    <ol>
+      <li>
+        <p>
+          <font class="tmweb-markup">footnote</font> first calls <font class="tmweb-markup">next-footnote</font>,
+          which increments the footnote counter. Like every counter created
+          with <font class="tmweb-markup">new-counter</font>, it also stores the new number
+          in the environment variable <font color="#008000"><i>the-label</i></font>
+          (see Section <a href="#sec-bindings">4</a>).
+        </p>
+      </li>
+      <li>
+        <p>
+          It then calls the hook <font class="tmweb-markup">render-footnote</font> with the
+          displayed number <font class="tmweb-markup">the-footnote</font> and the text of
+          the note.
+        </p>
+      </li>
+      <li>
+        <p>
+          Back in the main text it places a <font class="tmweb-markup">label</font> called
+          <tt class="verbatim">footnr-1</tt> (for the first footnote) and, as a
+          superscript, a <font class="tmweb-markup">reference</font> to <tt class="verbatim">footnote-1</tt>.
+          The number you see in the text is therefore a reference, which is
+          why it is clickable.
+        </p>
+      </li>
+      <li>
+        <p>
+          <font class="tmweb-markup">render-footnote</font> simply calls <font class="tmweb-markup">render-footnote*</font>
+          with the number used twice, once as the symbol to display (<font
+          color="brown"><i>sym</i></font>) and once as the number used in the names
+          of the labels (<font color="brown"><i>nr</i></font>).
+        </p>
+      </li>
+      <li>
+        <p>
+          <font class="tmweb-markup">render-footnote*</font> creates a <font class="tmweb-markup">float</font>
+          of type <tt class="verbatim">footnote</tt>, which the page breaker moves to
+          the bottom of the page. Inside, the symbol is wrapped into a <font
+          class="tmweb-markup">locus</font> with a <tt class="verbatim">hyperlink</tt> to <tt class="verbatim">#footnr-1</tt>:
+          clicking the number in the footnote takes you back to the text. Then
+          comes <font class="tmweb-markup">footnote-sep</font> (by default a period and a
+          space) and finally a <font class="tmweb-markup">set-binding</font> which defines
+          <tt class="verbatim">footnote-1</tt> as the current value of <font color="#008000"><i>the-label</i></font>.
+        </p>
+      </li>
+    </ol>
+    <p>
+      This is more precise than the description in the forum thread (<a href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/1">post
+      1</a>): <tt class="verbatim">footnote-N</tt> is not created by a <font class="tmweb-markup">label</font>
+      but by a <font class="tmweb-markup">set-binding</font>, and the label <tt class="verbatim">footnr-N</tt>
+      is placed by <font class="tmweb-markup">footnote</font>, not by <font class="tmweb-markup">render-footnote*</font>.
+      The third argument of <font class="tmweb-markup">set-binding</font>, here the macro
+      argument name <tt class="verbatim">body</tt>, tells the typesetter where the
+      binding should point: references and page references to <tt class="verbatim">footnote-1</tt>
+      lead to the beginning of the text of the footnote.
+    </p>
+    <p>
+      The split between <font class="tmweb-markup">render-footnote</font> and <font class="tmweb-markup">render-footnote*</font>
+      presumably exists so that you can display a symbol different from the
+      number, for instance an asterisk or a dagger, while keeping numbered
+      labels.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-28"></a>
+      </div>
+      <h5>Example: footnotes with bracketed numbers.<span style="margin-left: 1em"></span></h5>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>footnote-sep</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="black">: </font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>render-footnote</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>nr</i></font><font color="blue">|</font><font color="brown"><i>body</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>render-footnote*<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>with<font color="blue">|</font><font
+        color="#008000"><i>font-series</i></font><font color="blue">|</font><font color="black">bold</font><font
+        color="blue">|</font><font color="black"><font color="black">[</font><font color="black"><font
+        color="brown"><i>nr</i></font></font><font color="black">]</font></font><font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>nr</i></font></font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>body</i></font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      With these definitions the footnotes read &ldquo;<strong>[1]</strong>:
+      Customized footnote body.&rdquo; Since the labels still exist, you can
+      refer to a note and to the place where it was called:
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="black">See note </font><font color="black"><font color="blue">&lt;</font>reference<font
+        color="blue">|</font><font color="#228"><tt>footnote-1</tt></font><font color="blue">&gt;</font></font><font
+        color="black"> on page </font><font color="black"><font color="blue">&lt;</font>pageref<font
+        color="blue">|</font><font color="#228"><tt>footnote-1</tt></font><font color="blue">&gt;</font></font><font
+        color="black">; it is called on page </font><font color="black"><font color="blue">&lt;</font>pageref<font
+        color="blue">|</font><font color="#228"><tt>footnr-1</tt></font><font color="blue">&gt;</font></font><font
+        color="black">.</font>
+      </p>
+    </div>
+    <p>
+      <div style="display: inline">
+        <a id="auto-29"></a>
+      </div>
+      <h5>A remark about HTML.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        The HTML exporter keeps only the body of a <font class="tmweb-markup">locus</font>
+        and ignores <font class="tmweb-markup">set-binding</font>. In the exported page the
+        footnote mark points to <tt class="verbatim">#footnote-1</tt>, but the footnote
+        itself gets no such anchor and there is no link back. The scripts
+        which generate this website add the missing anchor after the export.
+      </div>
+    </p>
+    <h2 id="auto-30"><a id="sec-bindings"></a>4.<span style="margin-left: 1em"></span>Labels, references and
+    bindings<span style="margin-left: 1em"></span></h2>
+    <p>
+      Footnotes have shown that references are based on a more general
+      mechanism: <em>bindings</em>. A binding associates a key with a value
+      (and with the page on which it was defined). It is created by the
+      primitive <font class="tmweb-markup">set-binding</font>, listed in the forum thread,
+      and read by <font class="tmweb-markup">get-binding</font>:
+    </p>
+    <dl>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>set-binding<font color="blue">|</font><font color="black">key</font><font
+          color="blue">|</font><font color="black">value</font><font color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            Binds <font color="brown"><i>key</i></font> to <font color="brown"><i>value</i></font>.
+            It produces no visible output. An optional third argument names a
+            macro argument whose position is used as the target of the
+            binding.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>set-binding<font color="blue">|</font><font color="black">value</font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            With a single argument, binds every key collected in the variable
+            <font color="#008000"><i>the-tags</i></font> (by enclosing <font class="tmweb-markup">tag</font>
+            macros) to <font color="brown"><i>value</i></font>, clears <font color="#008000"><i>the-tags</i></font>,
+            and sets <font color="#008000"><i>the-label</i></font> to <font color="brown"><i>value</i></font>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>get-binding<font color="blue">|</font><font color="#228"><tt>key</tt></font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            Returns the value bound to <font color="brown"><i>key</i></font>; <font
+            color="blue">&lt;</font>get-binding<font color="blue">|</font><font color="#228"><tt>key</tt></font><font
+            color="blue">|</font><font color="#848">1</font><font color="blue">&gt;</font>
+            returns the page number instead.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>has-binding<font color="blue">|</font><font color="#228"><tt>key</tt></font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            Returns <tt class="verbatim">true</tt> or <tt class="verbatim">false</tt>.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      Now we can read the default definitions of <font class="tmweb-markup">label</font> and
+      <font class="tmweb-markup">reference</font> in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/src/Typeset/Env/env_default.cpp"><tt class="verbatim">src/Typeset/Env/env_default.cpp</tt></a>.
+      In TeXmacs notation they are, up to some details,
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>label</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>Id</i></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>locus<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+        color="black"><font color="brown"><i>Id</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>link<font color="blue">|</font><font color="black">anchor</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>merge<font color="blue">|</font><font
+        color="black">#</font><font color="blue">|</font><font color="black"><font color="brown"><i>Id</i></font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>set-binding<font color="blue">|</font><font color="black"><font
+        color="brown"><i>Id</i></font></font><font color="blue">|</font><font color="black"><font
+        color="#008000"><i>the-label</i></font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>reference</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>Id</i></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>locus<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+        color="black"><font color="brown"><i>Id</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>link<font color="blue">|</font><font color="black">hyperlink</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+        color="black"><font color="brown"><i>Id</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>url<font color="blue">|</font><font color="#228"><tt><font
+        color="blue">&lt;</font>merge<font color="blue">|</font><font color="black">#</font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>Id</i></font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>get-binding<font color="blue">|</font><font color="#228"><tt><font
+        color="brown"><i>Id</i></font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      A <font class="tmweb-markup">label</font> binds its name to the current value of <font
+      color="#008000"><i>the-label</i></font>, and a <font class="tmweb-markup">reference</font>
+      displays the value bound to the name inside a link to it. Where does
+      <font color="#008000"><i>the-label</i></font> come from? From the counters. The
+      <font class="tmweb-markup">new-counter</font> macro of <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/packages/standard/std-counter.ts"><tt class="verbatim">TeXmacs/packages/standard/std-counter.ts</tt></a>
+      defines, for a counter <tt class="verbatim">X</tt>, a macro <font class="tmweb-markup">next-X</font>
+      which increments the counter and then executes <font color="blue">&lt;</font>set-binding<font
+      color="blue">|</font><font color="black"><font color="blue">&lt;</font>the-X<font color="blue">&gt;</font></font><font
+      color="blue">&gt;</font>, the one-argument form which sets <font color="#008000"><i>the-label</i></font>.
+      This is why a label placed after a numbered section, equation or
+      footnote picks up the right number.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-31"></a>
+      </div>
+      <h5>Example: playing with bindings.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Try the following in a document. The easiest way to enter it is in
+        source mode; in normal mode, typing <tt class="verbatim">\set-binding</tt> and
+        <tt class="verbatim">Return</tt> inserts the one-argument form, still inactive;
+        a second argument is added with <class class="tmweb-menu" style="font-family: sans-serif">Focus</class>&rarr;<class
+        class="tmweb-menu" style="font-family: sans-serif">Insert argument after</class><a id="auto-32"></a>, and <tt class="verbatim">Return</tt>
+        activates the tag.
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="black"><font color="blue">&lt;</font>set-binding<font color="blue">|</font><font
+        color="black">my-key</font><font color="blue">|</font><font color="black">Hello</font><font
+        color="blue">&gt;</font></font><font color="black">Value: </font><font color="black"><font
+        color="blue">&lt;</font>reference<font color="blue">|</font><font color="#228"><tt>my-key</tt></font><font
+        color="blue">&gt;</font></font><font color="black">, </font><font color="black"><font
+        color="blue">&lt;</font>get-binding<font color="blue">|</font><font color="#228"><tt>my-key</tt></font><font
+        color="blue">&gt;</font></font><font color="black">. Defined: </font><font color="black"><font
+        color="blue">&lt;</font>has-binding<font color="blue">|</font><font color="#228"><tt>my-key</tt></font><font
+        color="blue">&gt;</font></font><font color="black">, </font><font color="black"><font
+        color="blue">&lt;</font>has-binding<font color="blue">|</font><font color="#228"><tt>other</tt></font><font
+        color="blue">&gt;</font></font><font color="black">.</font>
+      </p>
+      <p>
+        <font color="black"><font color="blue">&lt;</font>set-binding<font color="blue">|</font><font
+        color="black">Alpha</font><font color="blue">&gt;</font></font><font color="black"><font
+        color="blue">&lt;</font>label<font color="blue">|</font><font color="#228"><tt>lab-b</tt></font><font
+        color="blue">&gt;</font></font><font color="black">See </font><font color="black"><font
+        color="blue">&lt;</font>reference<font color="blue">|</font><font color="#228"><tt>lab-b</tt></font><font
+        color="blue">&gt;</font></font><font color="black">.</font>
+      </p>
+      <p>
+        <font color="black"><font color="blue">&lt;</font>tag<font color="blue">|</font><font
+        color="black">tag-d</font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>set-binding<font
+        color="blue">|</font><font color="black">Delta</font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="black">See </font><font color="black"><font
+        color="blue">&lt;</font>reference<font color="blue">|</font><font color="#228"><tt>tag-d</tt></font><font
+        color="blue">&gt;</font></font><font color="black">.</font>
+      </p>
+    </div>
+    <p>
+      The output is &ldquo;Value: Hello, Hello. Defined: true, false.&rdquo;,
+      then &ldquo;See Alpha.&rdquo; and &ldquo;See Delta.&rdquo; The second
+      line shows that a label can be given any text as its value, not only a
+      number. The third uses <font class="tmweb-markup">tag</font>, which attaches a label
+      to the next one-argument <font class="tmweb-markup">set-binding</font> inside its
+      body.
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-33"></a>
+      </div>
+      <h5>Bindings need several passes.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        A reference can come before the corresponding label, so its value is
+        not known during the first typesetting. TeXmacs stores the bindings of
+        a document (you can see them in the <tt class="verbatim">&lt;references|&hellip;&gt;</tt>
+        section at the end of a saved <tt class="verbatim">.tm</tt> file) and uses the
+        values of the previous pass. <class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class
+        class="tmweb-menu" style="font-family: sans-serif">Update</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">All</class><a
+        id="auto-34"></a> regenerates the auxiliary data and typesets the document
+        again (once by default; the number of passes can be changed in the
+        preferences); repeat it if some references are still wrong. Undefined
+        references are displayed as &ldquo;?&rdquo;. From Scheme, you can
+        inspect the current bindings with <tt class="verbatim scheme">(list-references)</tt>
+        and <tt class="verbatim scheme">(get-reference &quot;my-key&quot;)</tt>, which returns
+        the value together with the page number.
+      </div>
+    </p>
+    <p>
+      <div style="display: inline">
+        <a id="auto-35"></a>
+      </div>
+      <h5>Redefining references.<span style="margin-left: 1em"></span></h5>
+      <div style="display: inline">
+        Since <font class="tmweb-markup">reference</font> is a macro, a document can
+        redefine it. The following puts every reference between brackets
+        (including the footnote marks, which are references too):
+      </div>
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>reference</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>Id</i></font><font color="blue">|</font><font color="black"><font color="blue">&lt;</font>locus<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+        color="black"><font color="brown"><i>Id</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>link<font color="blue">|</font><font color="black">hyperlink</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+        color="black"><font color="brown"><i>Id</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>url<font color="blue">|</font><font color="#228"><tt><font
+        color="blue">&lt;</font>merge<font color="blue">|</font><font color="black">#</font><font
+        color="blue">|</font><font color="black"><font color="brown"><i>Id</i></font></font><font
+        color="blue">&gt;</font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="black">[</font><font color="black"><font color="blue">&lt;</font>get-binding<font
+        color="blue">|</font><font color="#228"><tt><font color="brown"><i>Id</i></font></tt></font><font
+        color="blue">&gt;</font></font><font color="black">]</font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      The <tt class="verbatim">preview-ref</tt> package (in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/packages/utilities/preview-ref.ts"><tt class="verbatim">TeXmacs/packages/utilities/preview-ref.ts</tt></a>)
+      uses exactly this technique to show a preview of the target when the
+      mouse hovers over a reference.
+    </p>
+    <h2 id="auto-36"><a id="sec-links"></a>5.<span style="margin-left: 1em"></span>Loci, links and the linking
+    tool<span style="margin-left: 1em"></span></h2>
+    <p>
+      Most of the remaining tags of the forum thread (<font class="tmweb-markup">locus</font>,
+      <font class="tmweb-markup">id</font>, <font class="tmweb-markup">url</font>, <font class="tmweb-markup">link</font>,
+      <font class="tmweb-markup">observer</font>, <font class="tmweb-markup">script</font> and <font
+      class="tmweb-markup">hard-id</font>) belong to the <em>linking primitives</em>, a
+      general system for attaching identities to parts of documents and for
+      connecting them with typed links. Hyperlinks, references, footnote
+      back-links, actions and &ldquo;mirrors&rdquo; are all built on top of
+      it. This part of TeXmacs is almost entirely undocumented, so it deserves
+      a closer look.
+    </p>
+    <h3 id="auto-37">5.1.<span style="margin-left: 1em"></span>The tags<span style="margin-left: 1em"></span></h3>
+    <dl>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>locus<font color="blue">|</font><font color="black">item-1</font><font
+          color="blue">|</font><font color="black">&hellip;</font><font color="blue">|</font><font
+          color="black">item-n</font><font color="blue">|</font><font color="black">body</font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            A locus is a piece of the document, <font color="brown"><i>body</i></font>,
+            which can be the source or the target of links. The arguments
+            before the body are <font class="tmweb-markup">id</font>, <font class="tmweb-markup">link</font>
+            or <font class="tmweb-markup">observer</font> tags. When the locus is typeset,
+            its identifiers are registered in a global <em>link
+            repository</em> and the body is displayed in the <font color="#008000"><i>locus-color</i></font>
+            (or <font color="#008000"><i>visited-color</i></font> once it has been
+            followed). Clicking on a locus follows its links.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt>identifier</tt></font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            Gives an identifier to the surrounding locus. Several loci may
+            share the same identifier (for instance after a copy and paste);
+            they then behave as a single entity.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>link<font color="blue">|</font><font color="black">type</font><font
+          color="blue">|</font><font color="black">vertex-1</font><font color="blue">|</font><font
+          color="black">&hellip;</font><font color="blue">|</font><font color="black">vertex-n</font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            A link of a given type (<tt class="verbatim">hyperlink</tt>, <tt class="verbatim">action</tt>,
+            <tt class="verbatim">anchor</tt>, <tt class="verbatim">mouse-over</tt>, or any name
+            you like) between several <em>vertices</em>. A vertex is an <font
+            class="tmweb-markup">id</font> (another locus), an <font class="tmweb-markup">url</font> or a
+            <font class="tmweb-markup">script</font>.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>url<font color="blue">|</font><font color="#228"><tt>location</tt></font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            A vertex pointing to a document, a web page or an anchor (<tt
+            class="verbatim">#name</tt>) inside a document.
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>script<font color="blue">|</font><font color="#228"><tt>function</tt></font><font
+          color="blue">|</font><font color="black">arg-1</font><font color="blue">|</font><font
+          color="black">&hellip;</font><font color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            A vertex which runs a Scheme function when the link is followed.
+            Following such links is subject to the security settings of
+            TeXmacs. (Do not confuse this tag with the <tt class="verbatim">scripts</tt>
+            package (in <tt class="verbatim">packages/compute/scripts.ts</tt>) or with
+            mathematical sub- and superscripts.)
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>observer<font color="blue">|</font><font color="#228"><tt>identifier</tt></font><font
+          color="blue">|</font><font color="#228"><tt>callback</tt></font><font color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            Attaches a Scheme function to the locus, which is called when the
+            content of the locus changes. The callback is only registered if
+            it is declared secure (with <tt class="verbatim scheme">(:secure #t)</tt> in its
+            <tt class="verbatim scheme">tm-define</tt>) or if the document is in a secure
+            location (a directory listed in <tt class="verbatim">$TEXMACS_SECURE_PATH</tt>).
+          </p>
+        </dd>
+      </p>
+      <p>
+        <dt>
+          <font color="blue">&lt;</font>hard-id<font color="blue">|</font><font color="black">content</font><font
+          color="blue">&gt;</font>
+        </dt>
+        <dd>
+          <p>
+            Returns an identifier for <font color="brown"><i>content</i></font>,
+            valid during the current editing session. The argument is
+            optional.
+          </p>
+        </dd>
+      </p>
+    </dl>
+    <p>
+      As noted in the forum thread for <font class="tmweb-markup">id</font>, <font class="tmweb-markup">url</font>
+      and <font class="tmweb-markup">link</font> (and as we checked, also for <font class="tmweb-markup">script</font>
+      and <font class="tmweb-markup">observer</font>), these tags have no effect outside a
+      <font class="tmweb-markup">locus</font>: on their own they are just displayed as
+      inactive markup.
+    </p>
+    <p>
+      About <font class="tmweb-markup">hard-id</font> the thread (<a href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/1">post 1</a>) says
+      that it generates a hash from the given text. This is not quite right.
+      Its implementation (<tt class="verbatim">exec_hard_id</tt> in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/src/Typeset/Env/env_exec.cpp"><tt class="verbatim">src/Typeset/Env/env_exec.cpp</tt></a>)
+      returns a string built from the memory addresses of the typesetting
+      environment and of its argument, like <tt class="verbatim">%134FBF300-127B80</tt>;
+      a hash of the content is added only for arguments which do not come from
+      the document. Two <font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+      color="black">abc</font><font color="blue">&gt;</font> in the same document therefore
+      yield <em>different</em> values, and the values change from one session
+      to the next. On the other hand, the same argument tree always gives the
+      same value, which is why <font class="tmweb-markup">hlink</font> below can write <font
+      color="blue">&lt;</font>hard-id<font color="blue">|</font><font color="black"><font color="brown"><i>body</i></font></font><font
+      color="blue">&gt;</font> twice and obtain matching identifiers. The values are
+      never saved: <font class="tmweb-markup">hard-id</font> is meant to give an anonymous
+      identity to an object that only needs to be found again during the
+      current session, typically the locus of a hyperlink.
+    </p>
+    <h3 id="auto-38">5.2.<span style="margin-left: 1em"></span>Everyday links are loci<span style="margin-left: 1em"></span></h3>
+    <p>
+      The definition of <font class="tmweb-markup">hlink</font> in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/src/Typeset/Env/env_default.cpp"><tt class="verbatim">src/Typeset/Env/env_default.cpp</tt></a>
+      is
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>assign<font color="blue">|</font><font color="#008000"><i>hlink</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>macro<font color="blue">|</font><font
+        color="brown"><i>body</i></font><font color="blue">|</font><font color="brown"><i>destination</i></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>locus<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt><font
+        color="blue">&lt;</font>hard-id<font color="blue">|</font><font color="black"><font
+        color="brown"><i>body</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>link<font color="blue">|</font><font color="black">hyperlink</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt><font color="blue">&lt;</font>hard-id<font color="blue">|</font><font
+        color="black"><font color="brown"><i>body</i></font></font><font color="blue">&gt;</font></tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>url<font color="blue">|</font><font color="#228"><tt><font
+        color="brown"><i>destination</i></font></tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="brown"><i>body</i></font></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      This is the first structure described by <a href="http://forum.texmacs.cn/u/jingkaimori">jingkaimori</a> (<a
+      href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/7">post 7</a>): a locus with an anonymous identity and one link of
+      type <tt class="verbatim">hyperlink</tt> from that identity to the destination
+      URL. Similarly, <font class="tmweb-markup">action</font> creates a link of type <tt
+      class="verbatim">action</tt> to a <font class="tmweb-markup">script</font>, and we have already
+      seen that <font class="tmweb-markup">label</font>, <font class="tmweb-markup">reference</font> and
+      footnotes use loci too.
+    </p>
+    <p>
+      You can write such a locus by hand. In the following two lines, the
+      first locus has a link to an external page, the second has a link to a
+      third locus somewhere else in the document:
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>locus<font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt>+web1</tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>link<font color="blue">|</font><font color="black">hyperlink</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt>+web1</tt></font><font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>url<font color="blue">|</font><font
+        color="#228"><tt>https://www.texmacs.org</tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black">TeXmacs
+        site</font><font color="blue">&gt;</font>
+      </p>
+      <p>
+        <font color="black"><font color="blue">&lt;</font>locus<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt>+srcA</tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>link<font color="blue">|</font><font color="black">hyperlink</font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt>+srcA</tt></font><font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font
+        color="#228"><tt>+dstB</tt></font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black">go to
+        target</font><font color="blue">&gt;</font></font><font color="black"> &hellip;
+        </font><font color="black"><font color="blue">&lt;</font>locus<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt>+dstB</tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black">the
+        target</font><font color="blue">&gt;</font></font>
+      </p>
+    </div>
+    <p>
+      Clicking on &ldquo;go to target&rdquo; moves the cursor to &ldquo;the
+      target&rdquo;. The converse does not happen, because TeXmacs by default
+      does not follow links backwards (see <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Navigation options</class><a id="auto-39"></a>). Hand-made loci
+      work in the editor. In PDF output, loci whose link points to an <font
+      class="tmweb-markup">url</font> (including <tt class="verbatim">#label</tt>) become clickable,
+      while links between two loci only work in the editor; the HTML exporter
+      keeps only the body of a locus. For web pages, use <font class="tmweb-markup">hlink</font>.
+    </p>
+    <h3 id="auto-40">5.3.<span style="margin-left: 1em"></span>The linking tool<span style="margin-left: 1em"></span></h3>
+    <p>
+      Loci can also be created interactively. Enable <class class="tmweb-menu" style="font-family: sans-serif">Tools</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Linking tool</class><a id="auto-41"></a>; a <class class="tmweb-menu" style="font-family: sans-serif">Link</class><a
+      id="auto-42"></a> menu appears. The procedure found by <a href="http://forum.texmacs.cn/u/jeroen">jeroen</a> (<a
+      href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/8">post 8</a>) is:
+    </p>
+    <ol>
+      <li>
+        <p>
+          Insert a locus with <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">New locus</class><a id="auto-43"></a> and type some text in it.
+        </p>
+      </li>
+      <li>
+        <p>
+          With the cursor inside it, choose <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Source</class><a id="auto-44"></a>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Insert a second locus elsewhere and choose <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Target</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Locus</class><a
+          id="auto-45"></a> inside it. (<class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Target</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Url</class><a
+          id="auto-46"></a> and <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class class="tmweb-menu"
+          style="font-family: sans-serif">Target</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Script</class><a id="auto-47"></a>
+          set other kinds of targets.)
+        </p>
+      </li>
+      <li>
+        <p>
+          Create the link with <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+          class="tmweb-menu" style="font-family: sans-serif">Create link</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">hyperlink</class><a
+          id="auto-48"></a>, or choose <class class="tmweb-menu" style="font-family: sans-serif">Other</class><a id="auto-49"></a> to
+          give the link a type of your own.
+        </p>
+      </li>
+    </ol>
+    <p>
+      The <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Link
+      mode</class><a id="auto-50"></a> submenu decides where the link is stored. In the
+      default <class class="tmweb-menu" style="font-family: sans-serif">Bidirectional</class><a id="auto-51"></a> mode, the
+      same <font class="tmweb-markup">link</font> is inserted in both loci, so that the link
+      is known whichever of the two loci is loaded; <class class="tmweb-menu" style="font-family: sans-serif">Simple</class><a
+      id="auto-52"></a> stores it only in the source, and <class class="tmweb-menu" style="font-family: sans-serif">External</class><a
+      id="auto-53"></a> only in the locus which contains the cursor when the link is
+      created (possibly in a third document), so that links between files can
+      be kept separately. Other entries of the menu are <class class="tmweb-menu" style="font-family: sans-serif">Delete
+      link</class><a id="auto-54"></a>, <class class="tmweb-menu" style="font-family: sans-serif">Locus rendering</class><a
+      id="auto-55"></a>, <class class="tmweb-menu" style="font-family: sans-serif">Active link types</class><a id="auto-56"></a>
+      (which link types are followed on a click) and <class class="tmweb-menu" style="font-family: sans-serif">Extract</class><a
+      id="auto-57"></a>, whose entries <class class="tmweb-menu" style="font-family: sans-serif">Loci</class><a id="auto-58"></a> and
+      <class class="tmweb-menu" style="font-family: sans-serif">Constellation</class><a id="auto-59"></a> list the loci of
+      the document and the documents known to the link repository.
+    </p>
+    <p>
+      Two warnings. First, a user reported several crashes while experimenting
+      with the linking tool, so save your work before trying it. Second, while
+      writing this article we found that <class class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Delete link</class><a id="auto-60"></a> in bidirectional mode
+      removes the link only from the current locus and not from its partner:
+      inside <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/link/link-edit.scm"><tt class="verbatim">TeXmacs/progs/link/link-edit.scm</tt></a> a
+      local definition of <tt class="verbatim">link-vertices</tt> shadows the global one
+      used to find the other end of the link. The same shadowing breaks <tt
+      class="verbatim">link-source</tt> and <tt class="verbatim">link-target</tt>, so that in
+      <class class="tmweb-menu" style="font-family: sans-serif">Simple</class><a id="auto-61"></a> mode the <class class="tmweb-menu"
+      style="font-family: sans-serif">Delete link</class><a id="auto-62"></a> entry fails altogether (and
+      possibly the whole <class class="tmweb-menu" style="font-family: sans-serif">Link</class><a id="auto-63"></a> menu,
+      which uses the same function to decide whether to show it). Moreover,
+      the test which selects the links of the current locus in that mode
+      compares an identifier with a vertex <font color="blue">&lt;</font>id<font
+      color="blue">|</font><font color="#228"><tt>&hellip;</tt></font><font color="blue">&gt;</font>,
+      so it would fail even with the shadowing fixed.
+    </p>
+    <h3 id="auto-64">5.4.<span style="margin-left: 1em"></span>Loci from Scheme<span style="margin-left: 1em"></span></h3>
+    <p>
+      <a href="http://forum.texmacs.cn/u/jeroen">jeroen</a> also explored the Scheme interface to loci (<a href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/6">post
+      6</a>). The functions are defined in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/link/locus-edit.scm"><tt class="verbatim">TeXmacs/progs/link/locus-edit.scm</tt></a>,
+      <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/link/link-edit.scm"><tt class="verbatim">TeXmacs/progs/link/link-edit.scm</tt></a> and <a
+      href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/link/link-navigate.scm"><tt class="verbatim">TeXmacs/progs/link/link-navigate.scm</tt></a>, and in
+      the C++ glue. They are available globally. The functions which only read
+      or change loci by identifier can be tried in a Scheme session (in the
+      same window as the document, or with the document as the current
+      buffer). With the two loci <tt class="verbatim">+srcA</tt> and <tt class="verbatim">+dstB</tt>
+      of the example above in the current document:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(id-&gt;trees &quot;+dstB&quot;)          ; =&gt; the bodies of the loci with id +dstB
+(id-&gt;loci &quot;+dstB&quot;)           ; =&gt; the locus trees themselves
+(locus-id (car (id-&gt;loci &quot;+srcA&quot;)))       ; =&gt; &quot;+srcA&quot;
+(current-link-types)         ; =&gt; (&quot;hyperlink&quot;) : link types in use
+(map tm-&gt;stree (vertex-&gt;links '(id &quot;+srcA&quot;)))
+;; =&gt; ((link &quot;hyperlink&quot; (attr &quot;secure&quot; &quot;false&quot;) (id &quot;+srcA&quot;) (id &quot;+dstB&quot;)))
+(locus-set &quot;+dstB&quot; '(strong &quot;replaced&quot;))  ; change every +dstB locus</pre>
+    </div>
+    <p>
+      A few things to keep in mind:
+    </p>
+    <ul>
+      <li>
+        <p>
+          Loci are registered when they are typeset, so these functions only
+          see loci which have been displayed at least once.
+        </p>
+      </li>
+      <li>
+        <p>
+          <tt class="verbatim scheme">id-&gt;loci</tt> returns the locus trees, and <tt class="verbatim scheme">id-&gt;trees</tt>
+          their bodies (the contents).
+        </p>
+      </li>
+      <li>
+        <p>
+          Identifiers are not unique: if you copy a locus, both copies keep
+          the same identifier, and <tt class="verbatim scheme">locus-set</tt> changes all of
+          them. Use <tt class="verbatim scheme">(create-unique-id)</tt> to obtain fresh
+          identifiers like <tt class="verbatim">+1XmE6jQ4UQg</tt>, which is what <class
+          class="tmweb-menu" style="font-family: sans-serif">Link</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">New
+          locus</class><a id="auto-65"></a> does.
+        </p>
+      </li>
+      <li>
+        <p>
+          <tt class="verbatim scheme">(locus-link-types #t)</tt> and <tt class="verbatim scheme">(locus-link-follow)</tt>
+          work on the locus at the cursor, like the menu entries.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The menu actions themselves can be scripted, but since they act at the
+      cursor, they must run with the cursor in the document, not in a Scheme
+      session: put them in a function and bind it to a key (see the companion
+      article <a href="scheme-snippets.html">Customizing TeXmacs with Scheme</a>). The following
+      creates two loci at the cursor and a hyperlink between them, exactly as
+      the steps of the previous subsection:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(make-locus)          ; like Link -&gt; New locus
+(insert &quot;first&quot;)
+(link-set-locus 0)    ; like Link -&gt; Source
+;; &hellip; move the cursor elsewhere &hellip;
+(make-locus)
+(insert &quot;second&quot;)
+(link-set-locus 1)    ; like Link -&gt; Target -&gt; Locus
+(make-link &quot;hyperlink&quot;)</pre>
+    </div>
+    <h3 id="auto-66">5.5.<span style="margin-left: 1em"></span>Observers and mirrors<span style="margin-left: 1em"></span></h3>
+    <p>
+      The second structure described by <a href="http://forum.texmacs.cn/u/jingkaimori">jingkaimori</a> (<a href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/7">post
+      7</a>) uses an <font class="tmweb-markup">observer</font>. It is what the <font class="tmweb-markup">mirror</font>
+      tag of the <tt class="verbatim">relate</tt> package expands to (see <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/packages/utilities/relate.ts"><tt
+      class="verbatim">TeXmacs/packages/utilities/relate.ts</tt></a>):
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>locus<font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>id<font color="blue">|</font><font color="#228"><tt>channel</tt></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"><font
+        color="blue">&lt;</font>observer<font color="blue">|</font><font color="#228"><tt>unique-id</tt></font><font
+        color="blue">|</font><font color="#228"><tt>mirror-notify</tt></font><font color="blue">&gt;</font></font><font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>surround<font
+        color="blue">|</font><font color="black"><font color="blue">&lt;</font>hidden<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>extern<font color="blue">|</font><font color="#228"><tt>mirror-initialize</tt></font><font
+        color="blue">|</font><font color="black">&hellip;</font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">|</font><font color="black"></font><font
+        color="blue">|</font><font color="black">body</font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      Note that the identifier of the locus (a &ldquo;channel&rdquo;) and the
+      identifier of the observer (unique to each instance) are different. All
+      loci sharing the same channel identifier are kept synchronized: whenever
+      the body of one of them changes, the Scheme callback <tt class="verbatim">mirror-notify</tt>
+      (in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/part/part-shared.scm"><tt class="verbatim">TeXmacs/progs/part/part-shared.scm</tt></a>)
+      copies the new content into the others. To try it, add the <tt class="verbatim">relate</tt>
+      package to a document with <class class="tmweb-menu" style="font-family: sans-serif">Document</class>&rarr;<class
+      class="tmweb-menu" style="font-family: sans-serif">Style</class>&rarr;<class class="tmweb-menu" style="font-family: sans-serif">Add
+      package</class><a id="auto-67"></a>; a <class class="tmweb-menu" style="font-family: sans-serif">Relate</class><a id="auto-68"></a>
+      menu with a <class class="tmweb-menu" style="font-family: sans-serif">Mirror</class><a id="auto-69"></a> entry
+      appears. Insert a mirror (you are asked for the name of a channel),
+      insert a second mirror with the same channel name, or copy and paste the
+      first one, and edit one of the copies.
+    </p>
+    <h2 id="auto-70"><a id="sec-title"></a>6.<span style="margin-left: 1em"></span>Title data: <font class="tmweb-markup">doc-author</font>
+    and <font class="tmweb-markup">doc-authors</font><span style="margin-left: 1em"></span></h2>
+    <p>
+      The last entry of the thread concerns <font class="tmweb-markup">doc-authors</font>, a
+      macro which is easily confused with <font class="tmweb-markup">doc-author</font>. As
+      <a href="http://forum.texmacs.cn/u/sharkc">sharkc</a> explained (<a href="http://forum.texmacs.cn/t/undocumented-internal-macros-in-texmacs-wiki/224/10">post 10</a>), it is not meant to
+      be typed by the user. The title block of a document is a <font class="tmweb-markup">doc-data</font>
+      tag, whose children are the title, the authors, the date and so on:
+    </p>
+    <div class="tmweb-code">
+      <p>
+        <font color="blue">&lt;</font>doc-data<font color="blue">|</font><font color="#C68"><font
+        color="blue">&lt;</font>doc-title<font color="blue">|</font><font color="#C68">Two
+        authors</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>doc-author<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>author-data<font color="blue">|</font><font
+        color="#C68"><font color="blue">&lt;</font>author-name<font color="blue">|</font><font
+        color="black">Ada Lovelace</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>author-email<font color="blue">|</font><font
+        color="black">ada@example.org</font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>doc-author<font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>author-data<font color="blue">|</font><font
+        color="#C68"><font color="blue">&lt;</font>author-name<font color="blue">|</font><font
+        color="black">Alan Turing</font><font color="blue">&gt;</font></font><font color="blue">|</font><font
+        color="black"><font color="blue">&lt;</font>author-affiliation<font color="blue">|</font><font
+        color="black">Bletchley Park</font><font color="blue">&gt;</font></font><font
+        color="blue">&gt;</font></font><font color="blue">&gt;</font></font><font color="blue">&gt;</font>
+      </p>
+    </div>
+    <p>
+      This is what you get by inserting a title and then adding a second
+      author from the focus toolbar while the cursor is in the title. The
+      macro <font class="tmweb-markup">doc-data</font>, defined in <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/packages/header/title-base.ts"><tt class="verbatim">TeXmacs/packages/header/title-base.ts</tt></a>,
+      does not typeset its arguments directly. It is an <font class="tmweb-markup">xmacro</font>
+      which passes them, with <font class="tmweb-markup">extern</font>, to the Scheme
+      function <tt class="verbatim">doc-data</tt> of <a href="https://github.com/texmacs/texmacs/blob/svn_mirror/TeXmacs/progs/database/title-markup.scm"><tt class="verbatim">TeXmacs/progs/database/title-markup.scm</tt></a>.
+      That function applies the options of the title (abbreviated authors,
+      clustering by affiliation, &hellip;) and reorganizes the data; in
+      particular it groups two or more <font class="tmweb-markup">doc-author</font> children
+      into a single <font class="tmweb-markup">doc-authors</font>:
+    </p>
+    <div class="tmweb-code">
+      <pre class="verbatim scheme" xml:space="preserve">
+(tm-define (doc-data-main t)
+  `(document
+     ,@(select t '(doc-title))
+     ,@(select t '(doc-subtitle))
+     ,@(with authors (select t '(doc-author))
+         (if (&lt;= (length authors) 1) authors
+             (list `(doc-authors ,@authors))))
+     ,@(select t '(doc-date))
+     ,@(select t '(doc-misc))
+     ,@(select t '(doc-inactive))))</pre>
+    </div>
+    <p>
+      The resulting tree is then typeset. <font class="tmweb-markup">doc-authors</font> is
+      therefore a <em>rendering hook</em> in the sense of Section <a href="#sec-hooks">2</a>:
+      its role is to arrange several authors side by side, and a style can
+      redefine it to change that layout. To give a document several authors,
+      simply add several <font class="tmweb-markup">doc-author</font> entries; writing <font
+      class="tmweb-markup">doc-authors</font> yourself inside <font class="tmweb-markup">doc-data</font>
+      makes the authors disappear, because the Scheme code only looks for
+      <font class="tmweb-markup">doc-author</font> children. (The manual calls these hooks
+      <tt class="verbatim">render-doc-authors</tt> and <tt class="verbatim">render-doc-author</tt>
+      in its section on customizing titles; the first does not exist, and the
+      second only in the <tt class="verbatim">book</tt> and <tt class="verbatim">seminar</tt>
+      title styles. The macros used by the standard styles are <font class="tmweb-markup">doc-authors</font>
+      and <font class="tmweb-markup">doc-author</font>.)
+    </p>
+    <p>
+      The same pattern, a macro which delegates the structure to Scheme with
+      <font class="tmweb-markup">extern</font> and lets the result be typeset by ordinary
+      macros, is used elsewhere in TeXmacs. It explains why some tags cannot
+      be inserted manually with the expected effect: they are the
+      <em>output</em> of a Scheme transformation, not its input.
+    </p>
+    <h2 id="auto-71">7.<span style="margin-left: 1em"></span>Summary<span style="margin-left: 1em"></span></h2>
+    <ul>
+      <li>
+        <p>
+          Tags are either C++ primitives or macros stored in the environment;
+          macros, including some that look like primitives, can be redefined
+          by documents and style packages.
+        </p>
+      </li>
+      <li>
+        <p>
+          The standard styles separate logic from presentation: the <font
+          class="tmweb-markup">render-*</font> hooks and the small <font class="tmweb-markup">*-name</font>,
+          <font class="tmweb-markup">*-sep</font> and <font class="tmweb-markup">*-text</font> macros are
+          the intended places for customization.
+        </p>
+      </li>
+      <li>
+        <p>
+          Labels, references, counters and footnotes all rest on bindings,
+          created by <font class="tmweb-markup">set-binding</font> and read by <font class="tmweb-markup">get-binding</font>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Loci, identified by <font class="tmweb-markup">id</font> and connected by typed
+          <font class="tmweb-markup">link</font>s, implement hyperlinks, references, actions
+          and mirrors; the linking tool and a Scheme API let you build your
+          own.
+        </p>
+      </li>
+      <li>
+        <p>
+          Some macros, like <font class="tmweb-markup">doc-authors</font>, are produced by
+          Scheme code and should not be inserted by hand.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The forum thread remains open for further discoveries; corrections and
+      additions to this article are welcome as pull requests to the <a href="https://github.com/texmacs/notes">repository
+      of this website</a>.
+    </p>
+  </body>
+</html>

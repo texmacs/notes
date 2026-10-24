@@ -58,6 +58,11 @@
 
   <subsection*|Macros and Scheme>
 
+  <hlink|Behind the markup: internal macros of <TeXmacs>|./internal-macros.tm>
+
+  <hlink|Customizing <TeXmacs> with Scheme: a commented collection of
+  snippets|./scheme-snippets.tm>
+
   <hlink|The Macro Editor and Easy Macro Modification|macro-editor.tm>
 
   <hlink|New list types|./new-lists.tm>

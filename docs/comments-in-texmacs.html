@@ -279,7 +279,7 @@
          (mirror-id (create-unique-id))
          (by (buffer-get-metadata (current-buffer) &quot;author&quot;))
          (date (number-&gt;string (current-time))))
-    (insert-go-to &lsquo;(show-comment ,id ,mirror-id
+    (insert-go-to `(show-comment ,id ,mirror-id
                                  &quot;comment&quot; ,by ,date &quot;&quot;)
                    (list 5 0))))</pre>
     </div>
@@ -393,7 +393,7 @@
   (let* ((id (if (tm-atomic? (tm-ref t 0))
                  (string-append (tm-ref t 0) &quot;-edit&quot;)
                  (create-unique-id))))
-    &lsquo;(mirror-comment ,id ,@(cdr (tm-children t)))))
+    `(mirror-comment ,id ,@(cdr (tm-children t)))))
 
 (tmfs-load-handler (comments name)
   (let* ((u (tmfs-string-&gt;url name))
@@ -402,7 +402,7 @@
                 (lambda (t)
                   (let* ((l (tm-search t comment-context?))
                          (r (map mirror-comment l)))
-                    &lsquo;(body (document ,@r)))))))
+                    `(body (document ,@r)))))))
 
 (tm-define (open-comments-editor)
   (:applicable (comments-in-buffer))

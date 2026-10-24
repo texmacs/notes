@@ -717,7 +717,7 @@
 (tm-define (swap-numerator-denominator t)
   (:require (tree-is? t 'frac))
   (with p (tree-cursor-path t)
-    (tree-set! t &lsquo;(frac ,(tree-ref t 1) ,(tree-ref t 0)))
+    (tree-set! t `(frac ,(tree-ref t 1) ,(tree-ref t 0)))
     (tree-go-to t (cons (- 1 (car p)) (cdr p)))
     (tree-focus t)))</pre>
     </div>

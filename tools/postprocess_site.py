@@ -163,6 +163,17 @@ def anchor_footnotes(text: str) -> str:
     return re.sub(r'<div class="footnote">', replace, text)
 
 
+def literal_code_quotes(text: str) -> str:
+    # The exporter turns ` into a typographic quote even in code blocks,
+    # which breaks Scheme quasiquotes copied from the page.
+    return re.sub(
+        r"<pre\b.*?</pre>",
+        lambda match: match.group(0).replace("&lsquo;", "`"),
+        text,
+        flags=re.S,
+    )
+
+
 def transform(path: Path) -> str:
     relative = path.relative_to(DOCS).as_posix()
     text = path.read_bytes().decode("utf-8")
@@ -170,6 +181,7 @@ def transform(path: Path) -> str:
     text = modernize_head(text, relative, title)
     text = modernize_images(text, title)
     text = anchor_footnotes(text)
+    text = literal_code_quotes(text)
     return re.sub(r"[ \t]+(?=\n)", "", text)
 
 
