@@ -12,6 +12,53 @@
 
   <hrule>
 
+  <notes-entry|website-builder-dialog.tm|Adding a dialog to build websites|In
+  this article we document the construction of a user interface to the
+  website building facilities of <TeXmacs>.|23 Oct 2026>
+
+  <\notes-entry|texmacs-basics-of-typesetting.tm|From trees to boxes>
+    This document describes <TeXmacs> typesetter. We describe the state of
+    facts as per <verbatim|svn> revision <tt|r14561> (December 2024,
+    <tt|TeXmacs 2.14+>). Excerpts from the official documentation are
+    included for completeness.
+
+    \;
+  </notes-entry|23 Oct 2026>
+
+  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
+  the Scheme language implementation used in <TeXmacs>.|23 Oct 2026>
+
+  <notes-entry|overview.tm|An overview of <TeXmacs> from altitude|A rapid
+  overview/executive summary of the <TeXmacs> system.|23 Oct 2026>
+
+  <notes-entry|font-mechanics.tm|Font mechanics|We describe the various
+  mechanisms and features of TeXmacs font handling, from the user interface
+  at the level of the document to the inner workings of the various fonts
+  types at the level of the <verbatim|C++> source code. To support the use of
+  a wide variety of fonts in the typesetting of technical documents, TeXmacs
+  implements sophisticate algorithms to synthetize or replace the missing
+  glyphs.|23 Oct 2026>
+
+  <notes-entry|dev-notes.tm|Development resources and ideas|This page
+  contains idea and resources pertaining to the development of TeXmacs.|23
+  Oct 2026>
+
+  <notes-entry|contribution-guide.tm|Contribution guide|(no abstract)|23 Oct
+  2026>
+
+  <notes-entry|community.tm|Community links|We gather here links to websites
+  and blogs discussing <TeXmacs>.|23 Oct 2026>
+
+  <notes-entry|awesome-texmacs.tm|Awesome GNU TeXmacs|(no abstract)|23 Oct
+  2026>
+
+  <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
+  writing>
+    A blog post which presents the motivations behind the design of <TeXmacs>
+    from a personal perspective.<next-line>[by
+    <hlink|@maxgubi|https://twitter.com/maxgubi>]
+  </notes-entry|23 Oct 2026>
+
   <\notes-entry|texmacs-math-typesetting.tm|Mathematical typesetting in
   <TeXmacs>>
     This document describes how <TeXmacs> deals with the typesetting of
@@ -25,23 +72,6 @@
     \;
   </notes-entry|22 Jul 2025>
 
-  <\notes-entry|texmacs-basics-of-typesetting.tm|From trees to boxes>
-    This document describes <TeXmacs> typesetter. We describe the state of
-    facts as per <verbatim|svn> revision <tt|r14561> (December 2024,
-    <tt|TeXmacs 2.14+>). Excerpts from the official documentation are
-    included for completeness.
-
-    \;
-  </notes-entry|22 Jul 2025>
-
-  <notes-entry|font-mechanics.tm|Font mechanics|We describe the various
-  mechanisms and features of TeXmacs font handling, from the user interface
-  at the level of the document to the inner workings of the various fonts
-  types at the level of the <verbatim|C++> source code. To support the use of
-  a wide variety of fonts in the typesetting of technical documents, TeXmacs
-  implements sophisticate algorithms to synthetize or replace the missing
-  glyphs.|04 Jan 2025>
-
   <notes-entry|create-bibliography-style.tm|Creating a Bibliography Style for
   TeXmacs|This tutorial covers customizing one of the premade TeXmacs
   bibliography styles to use for your project. |08 Dec 2024>
@@ -50,18 +80,11 @@
   Microsoft Windows|We show how to see <TeXmacs>' standard output and
   standard error on Microsoft Windows.|27 Sep 2023>
 
-  <notes-entry|dev-notes.tm|Development resources and ideas|This page
-  contains idea and resources pertaining to the development of TeXmacs.|21
-  Apr 2023>
-
   <notes-entry|build-using-cmake-and-mxe-on-wsl.tm|Build <TeXmacs> using
   CMake and MXE on WSL for Windows |(no abstract)|17 Feb 2023>
 
   <notes-entry|new-lists.tm|New list types|How to define new list types in
   <TeXmacs>.|16 Feb 2023>
-
-  <notes-entry|community.tm|Community links|We gather here links to websites
-  and blogs discussing <TeXmacs>.|29 Oct 2022>
 
   <notes-entry|menu-shortcuts.tm|Keyboard shortcuts for menu items|How to
   write a keyboard shortcut for a menu item\Vand searching for text in
@@ -74,23 +97,10 @@
   <notes-entry|jolly-coders.tm|Jolly coders|This page gather informations on
   the activities of the TeXmacs hacking group.|05 Jun 2021>
 
-  <\notes-entry|art-of-math-writing.tm|<TeXmacs> and the art of mathematical
-  writing>
-    A blog post which presents the motivations behind the design of <TeXmacs>
-    from a personal perspective.<next-line>[by
-    <hlink|@maxgubi|https://twitter.com/maxgubi>]
-  </notes-entry|05 May 2021>
-
-  <notes-entry|scheming.tm|Scheming|We discuss some aspects of the choice of
-  the Scheme language implementation used in <TeXmacs>.|12 Apr 2021>
-
   <notes-entry|example-documents.tm|A list of documents created with
   <TeXmacs>|We gather here some examples of documents created with <TeXmacs>
   to showcase the daily usage of the system. We indicate when sources are
   included since looking at examples is a great way to learn. |08 Apr 2021>
-
-  <notes-entry|awesome-texmacs.tm|Awesome GNU TeXmacs|(no abstract)|08 Apr
-  2021>
 
   <notes-entry|macro-editor.tm|The Macro editor and easy macro
   modification|The Macro editor is a shortcut tool for examining and
@@ -150,10 +160,6 @@
   form. This wishlist must not be used for very broad and vague requests
   (e.g. ``make the program more versatile and powerful").|15 Nov 2020>
 
-  <notes-entry|website-builder-dialog.tm|Adding a dialog to build websites|In
-  this article we document the construction of a user interface to the
-  website building facilities of <TeXmacs>.|15 Nov 2020>
-
   <notes-entry|previews.tm|Implementing previews for link targets|(no
   abstract)|13 Nov 2020>
 
@@ -167,12 +173,6 @@
   typical notes/articles. You can use the tag <markup|notes-abstract> to
   provide a small summary of the content, as exemplified by this very
   text.|12 Nov 2020>
-
-  <notes-entry|overview.tm|An overview of <TeXmacs> from altitude|A rapid
-  overview/executive summary of the <TeXmacs> system.|12 Nov 2020>
-
-  <notes-entry|contribution-guide.tm|Contribution guide|(no abstract)|12 Nov
-  2020>
 
   <notes-entry|tetris.tm|Tetris with <TeXmacs> tables|(no abstract)|11 Nov
   2020>
